@@ -48,7 +48,7 @@
 
 //       <s.15>Administrator Password
 //       <i>Default: ""
-#define HTTP_SERVER_AUTH_PASS       ""
+#define HTTP_SERVER_AUTH_PASS       "admin"
 //     </e>
 //   </e>
 
