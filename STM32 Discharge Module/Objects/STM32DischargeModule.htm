@@ -3,7 +3,7 @@
 <title>Static Call Graph - [.\Objects\STM32DischargeModule.axf]</title></head>
 <body><HR>
 <H1>Static Call Graph for image .\Objects\STM32DischargeModule.axf</H1><HR>
-<BR><P>#&#060CALLGRAPH&#062# ARM Linker, 5060183: Last Updated: Thu Jul 28 15:15:42 2016
+<BR><P>#&#060CALLGRAPH&#062# ARM Linker, 5060183: Last Updated: Thu Aug 25 13:29:46 2016
 <BR><P>
 <H3>Maximum Stack Usage =        584 bytes + Unknown(Functions without stacksize, Cycles, Untraceable Function Pointers)</H3><H3>
 Call chain for Maximum Stack Depth:</H3>
@@ -777,9 +777,9 @@ Global Symbols
 <BR><BR>[Stack]<UL><LI>Max Depth = 320<LI>Call Chain = _fclose_internal &rArr; _fflush &rArr; _writebuf &rArr; _sys_write &rArr; __sys_write &rArr; fat_write &rArr; alloc_clus &rArr; alloc_table_write &rArr; cache_fat &rArr; fsj_write &rArr; SetBuf
 </UL>
 <BR>[Calls]<UL><LI><a href="#[c7]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;_sys_close
-<LI><a href="#[c6]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;_fflush
 <LI><a href="#[c8]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;free
 <LI><a href="#[c9]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_memclr4
+<LI><a href="#[c6]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;_fflush
 </UL>
 <BR>[Called By]<UL><LI><a href="#[ce]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;_freopen_locked
 <LI><a href="#[ca]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;fclose
@@ -828,9 +828,9 @@ Global Symbols
 <BR>[Calls]<UL><LI><a href="#[94]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;_mutex_release
 <LI><a href="#[d3]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;_mutex_initialize
 <LI><a href="#[93]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;_mutex_acquire
-<LI><a href="#[ce]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;_freopen_locked
 <LI><a href="#[d2]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;malloc
 <LI><a href="#[c9]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_memclr4
+<LI><a href="#[ce]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;_freopen_locked
 </UL>
 <BR>[Called By]<UL><LI><a href="#[7e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
 </UL>
@@ -878,9 +878,9 @@ Global Symbols
 <P><STRONG><a name="[d8]"></a>__aeabi_memcpy4</STRONG> (Thumb, 0 bytes, Stack size 8 bytes, rt_memcpy_w.o(.text))
 <BR><BR>[Stack]<UL><LI>Max Depth = 8<LI>Call Chain = __aeabi_memcpy4
 </UL>
-<BR>[Called By]<UL><LI><a href="#[d7]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__rt_memcpy
-<LI><a href="#[182]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;path_create
+<BR>[Called By]<UL><LI><a href="#[182]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;path_create
 <LI><a href="#[15f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;create_dot_entries
+<LI><a href="#[d7]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__rt_memcpy
 </UL>
 
 <P><STRONG><a name="[236]"></a>__aeabi_memcpy8</STRONG> (Thumb, 0 bytes, Stack size 8 bytes, rt_memcpy_w.o(.text), UNUSED)
@@ -898,13 +898,13 @@ Global Symbols
 <P><STRONG><a name="[109]"></a>__aeabi_memclr</STRONG> (Thumb, 0 bytes, Stack size 0 bytes, rt_memclr.o(.text))
 <BR><BR>[Called By]<UL><LI><a href="#[13d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;fat_seek
 <LI><a href="#[16a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;fat_format
-<LI><a href="#[125]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SetBuf
-<LI><a href="#[108]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;CheckJourn
 <LI><a href="#[16d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;mbr_write
 <LI><a href="#[16f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;label_write
 <LI><a href="#[169]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;fsinfo_write
 <LI><a href="#[157]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;clear_clus
 <LI><a href="#[154]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;bs_write
+<LI><a href="#[125]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SetBuf
+<LI><a href="#[108]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;CheckJourn
 </UL>
 
 <P><STRONG><a name="[db]"></a>__rt_memclr</STRONG> (Thumb, 68 bytes, Stack size 0 bytes, rt_memclr.o(.text), UNUSED)
@@ -963,8 +963,8 @@ Global Symbols
 </UL>
 <BR>[Calls]<UL><LI><a href="#[94]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;_mutex_release
 <LI><a href="#[93]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;_mutex_acquire
-<LI><a href="#[e1]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__Heap_Full
 <LI><a href="#[e0]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Heap1_SizeAdjust
+<LI><a href="#[e1]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__Heap_Full
 </UL>
 <BR>[Called By]<UL><LI><a href="#[d2]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;malloc
 </UL>
@@ -972,8 +972,8 @@ Global Symbols
 <P><STRONG><a name="[d2]"></a>malloc</STRONG> (Thumb, 20 bytes, Stack size 8 bytes, h1_alloc_mt.o(.text))
 <BR><BR>[Stack]<UL><LI>Max Depth = 72<LI>Call Chain = malloc &rArr; _malloc_internal &rArr; __Heap_Full &rArr; __Heap_ProvideMemory &rArr; _free_internal
 </UL>
-<BR>[Calls]<UL><LI><a href="#[e2]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__rt_heap_descriptor
-<LI><a href="#[df]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;_malloc_internal
+<BR>[Calls]<UL><LI><a href="#[df]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;_malloc_internal
+<LI><a href="#[e2]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__rt_heap_descriptor
 </UL>
 <BR>[Called By]<UL><LI><a href="#[d1]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;fopen
 <LI><a href="#[101]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__flsbuf
@@ -986,15 +986,15 @@ Global Symbols
 <BR>[Calls]<UL><LI><a href="#[94]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;_mutex_release
 <LI><a href="#[93]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;_mutex_acquire
 </UL>
-<BR>[Called By]<UL><LI><a href="#[f5]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__Heap_ProvideMemory
-<LI><a href="#[c8]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;free
+<BR>[Called By]<UL><LI><a href="#[c8]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;free
+<LI><a href="#[f5]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__Heap_ProvideMemory
 </UL>
 
 <P><STRONG><a name="[c8]"></a>free</STRONG> (Thumb, 20 bytes, Stack size 8 bytes, h1_free_mt.o(.text))
 <BR><BR>[Stack]<UL><LI>Max Depth = 24<LI>Call Chain = free &rArr; _free_internal
 </UL>
-<BR>[Calls]<UL><LI><a href="#[e2]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__rt_heap_descriptor
-<LI><a href="#[e3]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;_free_internal
+<BR>[Calls]<UL><LI><a href="#[e3]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;_free_internal
+<LI><a href="#[e2]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__rt_heap_descriptor
 </UL>
 <BR>[Called By]<UL><LI><a href="#[c5]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;_fclose_internal
 <LI><a href="#[a7]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;_terminateio
@@ -1109,10 +1109,10 @@ Global Symbols
 <BR><BR>[Stack]<UL><LI>Max Depth = 584<LI>Call Chain = _initio &rArr; freopen &rArr; _freopen_locked &rArr; _sys_open &rArr; __sys_open &rArr; fat_open &rArr; path_create &rArr; frec_find &rArr; entry_pos_inc &rArr; alloc_table_read &rArr; cache_fat &rArr; fsj_write &rArr; SetBuf
 </UL>
 <BR>[Calls]<UL><LI><a href="#[d3]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;_mutex_initialize
+<LI><a href="#[c9]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_memclr4
 <LI><a href="#[d0]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;freopen
 <LI><a href="#[f2]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__rt_SIGRTRED
 <LI><a href="#[f3]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;setvbuf
-<LI><a href="#[c9]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_memclr4
 </UL>
 <BR>[Called By]<UL><LI><a href="#[a4]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__rt_lib_init_stdio_2
 </UL>
@@ -1122,8 +1122,8 @@ Global Symbols
 </UL>
 <BR>[Calls]<UL><LI><a href="#[94]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;_mutex_release
 <LI><a href="#[93]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;_mutex_acquire
-<LI><a href="#[c5]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;_fclose_internal
 <LI><a href="#[c8]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;free
+<LI><a href="#[c5]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;_fclose_internal
 </UL>
 <BR>[Called By]<UL><LI><a href="#[a6]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__rt_lib_shutdown_stdio_2
 </UL>
@@ -1141,9 +1141,9 @@ Global Symbols
 </UL>
 <BR>[Calls]<UL><LI><a href="#[f4]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__user_perproc_libspace
 </UL>
-<BR>[Called By]<UL><LI><a href="#[a0]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;_init_alloc
-<LI><a href="#[c8]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;free
+<BR>[Called By]<UL><LI><a href="#[c8]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;free
 <LI><a href="#[d2]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;malloc
+<LI><a href="#[a0]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;_init_alloc
 </UL>
 
 <P><STRONG><a name="[23f]"></a>__use_no_heap</STRONG> (Thumb, 2 bytes, Stack size 0 bytes, hguard.o(.text), UNUSED)
@@ -1169,10 +1169,10 @@ Global Symbols
 <P><STRONG><a name="[a0]"></a>_init_alloc</STRONG> (Thumb, 94 bytes, Stack size 24 bytes, init_alloc.o(.text))
 <BR><BR>[Stack]<UL><LI>Max Depth = 56<LI>Call Chain = _init_alloc &rArr; __rt_SIGRTMEM &rArr; __rt_SIGRTMEM_inner &rArr; __default_signal_display
 </UL>
-<BR>[Calls]<UL><LI><a href="#[f5]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__Heap_ProvideMemory
+<BR>[Calls]<UL><LI><a href="#[f7]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__rt_SIGRTMEM
+<LI><a href="#[f5]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__Heap_ProvideMemory
 <LI><a href="#[f8]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__Heap_Initialize
 <LI><a href="#[e2]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__rt_heap_descriptor
-<LI><a href="#[f7]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__rt_SIGRTMEM
 </UL>
 <BR>[Called By]<UL><LI><a href="#[9f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__rt_lib_init_heap_2
 </UL>
@@ -1200,13 +1200,13 @@ Global Symbols
 
 <P><STRONG><a name="[fb]"></a>__filbuf</STRONG> (Thumb, 476 bytes, Stack size 32 bytes, filbuf.o(.text), UNUSED)
 <BR><BR>[Calls]<UL><LI><a href="#[ee]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;_sys_seek
+<LI><a href="#[d2]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;malloc
 <LI><a href="#[fc]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;_flushlinebuffered
 <LI><a href="#[fd]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;_seteof
 <LI><a href="#[f9]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;_readbuf
 <LI><a href="#[f0]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;_deferredlazyseek
 <LI><a href="#[c6]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;_fflush
 <LI><a href="#[ec]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;_seterr
-<LI><a href="#[d2]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;malloc
 </UL>
 
 <P><STRONG><a name="[18a]"></a>__filbuf_byte</STRONG> (Thumb, 0 bytes, Stack size 32 bytes, filbuf.o(.text))
@@ -1239,8 +1239,8 @@ Global Symbols
 <P><STRONG><a name="[f2]"></a>__rt_SIGRTRED</STRONG> (Thumb, 14 bytes, Stack size 8 bytes, defsig_rtred_outer.o(.text))
 <BR><BR>[Stack]<UL><LI>Max Depth = 32<LI>Call Chain = __rt_SIGRTRED &rArr; __rt_SIGRTRED_inner &rArr; __default_signal_display
 </UL>
-<BR>[Calls]<UL><LI><a href="#[ff]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__sig_exit
-<LI><a href="#[fe]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__rt_SIGRTRED_inner
+<BR>[Calls]<UL><LI><a href="#[fe]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__rt_SIGRTRED_inner
+<LI><a href="#[ff]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__sig_exit
 </UL>
 <BR>[Called By]<UL><LI><a href="#[a5]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;_initio
 </UL>
@@ -1281,10 +1281,10 @@ Global Symbols
 <P><STRONG><a name="[101]"></a>__flsbuf</STRONG> (Thumb, 470 bytes, Stack size 32 bytes, flsbuf.o(.text), UNUSED)
 <BR><BR>[Calls]<UL><LI><a href="#[e9]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;_sys_istty
 <LI><a href="#[eb]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;_sys_flen
+<LI><a href="#[d2]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;malloc
 <LI><a href="#[f0]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;_deferredlazyseek
 <LI><a href="#[ed]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;_writebuf
 <LI><a href="#[ec]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;_seterr
-<LI><a href="#[d2]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;malloc
 </UL>
 
 <P><STRONG><a name="[191]"></a>__flsbuf_byte</STRONG> (Thumb, 0 bytes, Stack size 32 bytes, flsbuf.o(.text))
@@ -1306,8 +1306,8 @@ Global Symbols
 <P><STRONG><a name="[ff]"></a>__sig_exit</STRONG> (Thumb, 10 bytes, Stack size 0 bytes, defsig_exit.o(.text))
 <BR><BR>[Calls]<UL><LI><a href="#[b3]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;_sys_exit
 </UL>
-<BR>[Called By]<UL><LI><a href="#[f2]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__rt_SIGRTRED
-<LI><a href="#[f7]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__rt_SIGRTMEM
+<BR>[Called By]<UL><LI><a href="#[f7]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__rt_SIGRTMEM
+<LI><a href="#[f2]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__rt_SIGRTRED
 </UL>
 
 <P><STRONG><a name="[fe]"></a>__rt_SIGRTRED_inner</STRONG> (Thumb, 14 bytes, Stack size 8 bytes, defsig_rtred_inner.o(.text))
@@ -1321,8 +1321,8 @@ Global Symbols
 <P><STRONG><a name="[f7]"></a>__rt_SIGRTMEM</STRONG> (Thumb, 14 bytes, Stack size 8 bytes, defsig_rtmem_outer.o(.text))
 <BR><BR>[Stack]<UL><LI>Max Depth = 32<LI>Call Chain = __rt_SIGRTMEM &rArr; __rt_SIGRTMEM_inner &rArr; __default_signal_display
 </UL>
-<BR>[Calls]<UL><LI><a href="#[ff]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__sig_exit
-<LI><a href="#[103]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__rt_SIGRTMEM_inner
+<BR>[Calls]<UL><LI><a href="#[103]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__rt_SIGRTMEM_inner
+<LI><a href="#[ff]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__sig_exit
 </UL>
 <BR>[Called By]<UL><LI><a href="#[a0]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;_init_alloc
 <LI><a href="#[f6]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__Heap_Broken
@@ -1434,8 +1434,8 @@ Global Symbols
 <P><STRONG><a name="[10a]"></a>HAL_GPIO_Init</STRONG> (Thumb, 476 bytes, Stack size 24 bytes, stm32f4xx_hal_gpio.o(i.HAL_GPIO_Init))
 <BR><BR>[Stack]<UL><LI>Max Depth = 24<LI>Call Chain = HAL_GPIO_Init
 </UL>
-<BR>[Called By]<UL><LI><a href="#[81]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Initialize
-<LI><a href="#[8a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Control
+<BR>[Called By]<UL><LI><a href="#[8a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Control
+<LI><a href="#[81]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Initialize
 </UL>
 
 <P><STRONG><a name="[123]"></a>HAL_GPIO_ReadPin</STRONG> (Thumb, 16 bytes, Stack size 0 bytes, stm32f4xx_hal_gpio.o(i.HAL_GPIO_ReadPin))
@@ -1480,9 +1480,9 @@ Global Symbols
 <P><STRONG><a name="[10b]"></a>HAL_NVIC_ClearPendingIRQ</STRONG> (Thumb, 30 bytes, Stack size 8 bytes, stm32f4xx_hal_cortex.o(i.HAL_NVIC_ClearPendingIRQ))
 <BR><BR>[Stack]<UL><LI>Max Depth = 8<LI>Call Chain = HAL_NVIC_ClearPendingIRQ
 </UL>
-<BR>[Called By]<UL><LI><a href="#[83]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;PowerControl
-<LI><a href="#[58]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;DMA2_Stream6_IRQHandler
+<BR>[Called By]<UL><LI><a href="#[58]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;DMA2_Stream6_IRQHandler
 <LI><a href="#[4e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;DMA2_Stream3_IRQHandler
+<LI><a href="#[83]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;PowerControl
 </UL>
 
 <P><STRONG><a name="[121]"></a>HAL_NVIC_DisableIRQ</STRONG> (Thumb, 30 bytes, Stack size 8 bytes, stm32f4xx_hal_cortex.o(i.HAL_NVIC_DisableIRQ))
@@ -1570,9 +1570,9 @@ Global Symbols
 <BR><BR>[Stack]<UL><LI>Max Depth = 176<LI>Call Chain = __sys_close &rArr; fat_close &rArr; fsinfo_write &rArr; write_cache &rArr; write_sector &rArr; fsj_write &rArr; SetBuf
 </UL>
 <BR>[Calls]<UL><LI><a href="#[12e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;efs_close
+<LI><a href="#[12d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;fat_close
 <LI><a href="#[12c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;osMutexWait
 <LI><a href="#[12f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;osMutexRelease
-<LI><a href="#[12d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;fat_close
 </UL>
 <BR>[Called By]<UL><LI><a href="#[c7]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;_sys_close
 </UL>
@@ -1581,9 +1581,9 @@ Global Symbols
 <BR><BR>[Stack]<UL><LI>Max Depth = 16<LI>Call Chain = __sys_flen
 </UL>
 <BR>[Calls]<UL><LI><a href="#[132]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;efs_flen
+<LI><a href="#[131]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;fat_flen
 <LI><a href="#[12c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;osMutexWait
 <LI><a href="#[12f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;osMutexRelease
-<LI><a href="#[131]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;fat_flen
 </UL>
 <BR>[Called By]<UL><LI><a href="#[eb]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;_sys_flen
 </UL>
@@ -1593,20 +1593,20 @@ Global Symbols
 </UL>
 <BR>[Calls]<UL><LI><a href="#[138]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;efs_open
 <LI><a href="#[137]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;efs_handle_get
-<LI><a href="#[12c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;osMutexWait
-<LI><a href="#[12f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;osMutexRelease
 <LI><a href="#[136]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;fat_open
 <LI><a href="#[135]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;fat_handle_get
 <LI><a href="#[134]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;fs_drive_id
+<LI><a href="#[12c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;osMutexWait
+<LI><a href="#[12f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;osMutexRelease
 </UL>
 <BR>[Called By]<UL><LI><a href="#[cf]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;_sys_open
 </UL>
 
 <P><STRONG><a name="[139]"></a>__sys_read</STRONG> (Thumb, 128 bytes, Stack size 24 bytes, fs_sys.o(i.__sys_read), UNUSED)
 <BR><BR>[Calls]<UL><LI><a href="#[13b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;efs_read
+<LI><a href="#[13a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;fat_read
 <LI><a href="#[12c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;osMutexWait
 <LI><a href="#[12f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;osMutexRelease
-<LI><a href="#[13a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;fat_read
 </UL>
 <BR>[Called By]<UL><LI><a href="#[fa]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;_sys_read
 </UL>
@@ -1615,9 +1615,9 @@ Global Symbols
 <BR><BR>[Stack]<UL><LI>Max Depth = 208<LI>Call Chain = __sys_seek &rArr; fat_seek &rArr; alloc_clus &rArr; alloc_table_write &rArr; cache_fat &rArr; fsj_write &rArr; SetBuf
 </UL>
 <BR>[Calls]<UL><LI><a href="#[13e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;efs_seek
+<LI><a href="#[13d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;fat_seek
 <LI><a href="#[12c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;osMutexWait
 <LI><a href="#[12f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;osMutexRelease
-<LI><a href="#[13d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;fat_seek
 </UL>
 <BR>[Called By]<UL><LI><a href="#[ee]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;_sys_seek
 </UL>
@@ -1626,9 +1626,9 @@ Global Symbols
 <BR><BR>[Stack]<UL><LI>Max Depth = 216<LI>Call Chain = __sys_write &rArr; fat_write &rArr; alloc_clus &rArr; alloc_table_write &rArr; cache_fat &rArr; fsj_write &rArr; SetBuf
 </UL>
 <BR>[Calls]<UL><LI><a href="#[141]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;efs_write
+<LI><a href="#[140]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;fat_write
 <LI><a href="#[12c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;osMutexWait
 <LI><a href="#[12f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;osMutexRelease
-<LI><a href="#[140]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;fat_write
 </UL>
 <BR>[Called By]<UL><LI><a href="#[ef]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;_sys_write
 </UL>
@@ -1653,18 +1653,18 @@ Global Symbols
 
 <P><STRONG><a name="[93]"></a>_mutex_acquire</STRONG> (Thumb, 22 bytes, Stack size 0 bytes, rtx_conf_cm.o(i._mutex_acquire))
 <BR><BR>[Called By]<UL><LI><a href="#[cd]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;$Super$$fflush
+<LI><a href="#[e3]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;_free_internal
+<LI><a href="#[df]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;_malloc_internal
 <LI><a href="#[d1]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;fopen
 <LI><a href="#[d0]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;freopen
 <LI><a href="#[ce]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;_freopen_locked
 <LI><a href="#[cb]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;_do_fflush
 <LI><a href="#[ca]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;fclose
+<LI><a href="#[bd]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;_printf_char_file
 <LI><a href="#[fc]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;_flushlinebuffered
 <LI><a href="#[f3]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;setvbuf
 <LI><a href="#[a7]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;_terminateio
 <LI><a href="#[c4]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;fgetc
-<LI><a href="#[e3]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;_free_internal
-<LI><a href="#[df]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;_malloc_internal
-<LI><a href="#[bd]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;_printf_char_file
 </UL>
 
 <P><STRONG><a name="[d3]"></a>_mutex_initialize</STRONG> (Thumb, 34 bytes, Stack size 8 bytes, rtx_conf_cm.o(i._mutex_initialize))
@@ -1679,18 +1679,18 @@ Global Symbols
 
 <P><STRONG><a name="[94]"></a>_mutex_release</STRONG> (Thumb, 18 bytes, Stack size 0 bytes, rtx_conf_cm.o(i._mutex_release))
 <BR><BR>[Called By]<UL><LI><a href="#[cd]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;$Super$$fflush
+<LI><a href="#[e3]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;_free_internal
+<LI><a href="#[df]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;_malloc_internal
 <LI><a href="#[d1]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;fopen
 <LI><a href="#[d0]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;freopen
 <LI><a href="#[ce]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;_freopen_locked
 <LI><a href="#[cb]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;_do_fflush
 <LI><a href="#[ca]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;fclose
+<LI><a href="#[bd]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;_printf_char_file
 <LI><a href="#[fc]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;_flushlinebuffered
 <LI><a href="#[f3]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;setvbuf
 <LI><a href="#[a7]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;_terminateio
 <LI><a href="#[c4]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;fgetc
-<LI><a href="#[e3]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;_free_internal
-<LI><a href="#[df]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;_malloc_internal
-<LI><a href="#[bd]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;_printf_char_file
 </UL>
 
 <P><STRONG><a name="[c7]"></a>_sys_close</STRONG> (Thumb, 42 bytes, Stack size 8 bytes, retarget_io.o(i._sys_close))
@@ -1839,9 +1839,7 @@ Global Symbols
 <P><STRONG><a name="[12d]"></a>fat_close</STRONG> (Thumb, 270 bytes, Stack size 40 bytes, fs_fat.o(i.fat_close))
 <BR><BR>[Stack]<UL><LI>Max Depth = 152<LI>Call Chain = fat_close &rArr; fsinfo_write &rArr; write_cache &rArr; write_sector &rArr; fsj_write &rArr; SetBuf
 </UL>
-<BR>[Calls]<UL><LI><a href="#[161]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;fs_get_time
-<LI><a href="#[168]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;fat_vol_chk
-<LI><a href="#[159]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;write_cache
+<BR>[Calls]<UL><LI><a href="#[159]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;write_cache
 <LI><a href="#[151]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;set_u32
 <LI><a href="#[150]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;set_u16
 <LI><a href="#[14e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;get_u16
@@ -1851,6 +1849,8 @@ Global Symbols
 <LI><a href="#[160]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;entry_read
 <LI><a href="#[164]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;entry_flush
 <LI><a href="#[14d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;cache_fat
+<LI><a href="#[161]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;fs_get_time
+<LI><a href="#[168]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;fat_vol_chk
 </UL>
 <BR>[Called By]<UL><LI><a href="#[12b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__sys_close
 </UL>
@@ -1864,11 +1864,6 @@ Global Symbols
 <LI>Call Chain = fat_format &rArr; fat_jour_init &rArr; j_init_fats &rArr; j_find_rsvd &rArr; j_chk_rsvd &rArr; alloc_table_read &rArr; cache_fat &rArr; fsj_write &rArr; SetBuf
 </UL>
 <BR>[Calls]<UL><LI><a href="#[172]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;elink_flush
-<LI><a href="#[16c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;fs_find_drv
-<LI><a href="#[16e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_uldivmod
-<LI><a href="#[170]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;fat_jour_prep
-<LI><a href="#[171]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;fat_jour_init
-<LI><a href="#[168]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;fat_vol_chk
 <LI><a href="#[159]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;write_cache
 <LI><a href="#[151]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;set_u32
 <LI><a href="#[16d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;mbr_write
@@ -1877,8 +1872,13 @@ Global Symbols
 <LI><a href="#[169]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;fsinfo_write
 <LI><a href="#[16b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;find_param
 <LI><a href="#[154]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;bs_write
+<LI><a href="#[16c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;fs_find_drv
 <LI><a href="#[109]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_memclr
 <LI><a href="#[d9]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_memset
+<LI><a href="#[16e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_uldivmod
+<LI><a href="#[170]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;fat_jour_prep
+<LI><a href="#[171]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;fat_jour_init
+<LI><a href="#[168]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;fat_vol_chk
 </UL>
 <BR>[Called By]<UL><LI><a href="#[15c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;fformat
 </UL>
@@ -1902,10 +1902,10 @@ Global Symbols
 <P><STRONG><a name="[171]"></a>fat_jour_init</STRONG> (Thumb, 86 bytes, Stack size 16 bytes, fs_fat.o(i.fat_jour_init))
 <BR><BR>[Stack]<UL><LI>Max Depth = 200<LI>Call Chain = fat_jour_init &rArr; j_init_fats &rArr; j_find_rsvd &rArr; j_chk_rsvd &rArr; alloc_table_read &rArr; cache_fat &rArr; fsj_write &rArr; SetBuf
 </UL>
-<BR>[Calls]<UL><LI><a href="#[170]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;fat_jour_prep
-<LI><a href="#[178]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;fsj_init
-<LI><a href="#[177]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;j_rep_space
+<BR>[Calls]<UL><LI><a href="#[177]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;j_rep_space
 <LI><a href="#[176]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;j_init_fats
+<LI><a href="#[170]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;fat_jour_prep
+<LI><a href="#[178]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;fsj_init
 </UL>
 <BR>[Called By]<UL><LI><a href="#[17b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;fat_mount
 <LI><a href="#[16a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;fat_format
@@ -1929,8 +1929,6 @@ Global Symbols
 <BR><BR>[Stack]<UL><LI>Max Depth = 232<LI>Call Chain = fat_mount &rArr; fat_jour_init &rArr; j_init_fats &rArr; j_find_rsvd &rArr; j_chk_rsvd &rArr; alloc_table_read &rArr; cache_fat &rArr; fsj_write &rArr; SetBuf
 </UL>
 <BR>[Calls]<UL><LI><a href="#[172]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;elink_flush
-<LI><a href="#[171]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;fat_jour_init
-<LI><a href="#[168]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;fat_vol_chk
 <LI><a href="#[153]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;read_sector
 <LI><a href="#[14f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;get_u32
 <LI><a href="#[14e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;get_u16
@@ -1940,6 +1938,8 @@ Global Symbols
 <LI><a href="#[15e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;count_free_clus
 <LI><a href="#[152]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;bs_read
 <LI><a href="#[c9]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_memclr4
+<LI><a href="#[171]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;fat_jour_init
+<LI><a href="#[168]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;fat_vol_chk
 </UL>
 <BR>[Called By]<UL><LI><a href="#[18f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;fmount
 </UL>
@@ -1947,10 +1947,7 @@ Global Symbols
 <P><STRONG><a name="[136]"></a>fat_open</STRONG> (Thumb, 444 bytes, Stack size 72 bytes, fs_fat.o(i.fat_open))
 <BR><BR>[Stack]<UL><LI>Max Depth = 472<LI>Call Chain = fat_open &rArr; path_create &rArr; frec_find &rArr; entry_pos_inc &rArr; alloc_table_read &rArr; cache_fat &rArr; fsj_write &rArr; SetBuf
 </UL>
-<BR>[Calls]<UL><LI><a href="#[161]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;fs_get_time
-<LI><a href="#[17d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;path_validate
-<LI><a href="#[168]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;fat_vol_chk
-<LI><a href="#[181]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;unlink_clus
+<BR>[Calls]<UL><LI><a href="#[181]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;unlink_clus
 <LI><a href="#[150]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;set_u16
 <LI><a href="#[17f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;path_open
 <LI><a href="#[17e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;path_init
@@ -1964,16 +1961,19 @@ Global Symbols
 <LI><a href="#[160]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;entry_read
 <LI><a href="#[166]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;entry_pos_inc
 <LI><a href="#[164]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;entry_flush
+<LI><a href="#[161]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;fs_get_time
+<LI><a href="#[17d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;path_validate
+<LI><a href="#[168]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;fat_vol_chk
 </UL>
 <BR>[Called By]<UL><LI><a href="#[133]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__sys_open
 </UL>
 
 <P><STRONG><a name="[13a]"></a>fat_read</STRONG> (Thumb, 264 bytes, Stack size 32 bytes, fs_fat.o(i.fat_read), UNUSED)
-<BR><BR>[Calls]<UL><LI><a href="#[184]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_memcpy
-<LI><a href="#[168]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;fat_vol_chk
-<LI><a href="#[183]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;read_cache
+<BR><BR>[Calls]<UL><LI><a href="#[183]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;read_cache
 <LI><a href="#[158]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;clus_to_sect
 <LI><a href="#[149]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;alloc_table_read
+<LI><a href="#[184]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_memcpy
+<LI><a href="#[168]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;fat_vol_chk
 </UL>
 <BR>[Called By]<UL><LI><a href="#[139]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__sys_read
 </UL>
@@ -2001,8 +2001,7 @@ Global Symbols
 <P><STRONG><a name="[13d]"></a>fat_seek</STRONG> (Thumb, 510 bytes, Stack size 48 bytes, fs_fat.o(i.fat_seek))
 <BR><BR>[Stack]<UL><LI>Max Depth = 184<LI>Call Chain = fat_seek &rArr; alloc_clus &rArr; alloc_table_write &rArr; cache_fat &rArr; fsj_write &rArr; SetBuf
 </UL>
-<BR>[Calls]<UL><LI><a href="#[168]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;fat_vol_chk
-<LI><a href="#[159]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;write_cache
+<BR>[Calls]<UL><LI><a href="#[159]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;write_cache
 <LI><a href="#[153]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;read_sector
 <LI><a href="#[188]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;link_clus
 <LI><a href="#[14a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;get_EOC
@@ -2011,6 +2010,7 @@ Global Symbols
 <LI><a href="#[149]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;alloc_table_read
 <LI><a href="#[148]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;alloc_clus
 <LI><a href="#[109]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_memclr
+<LI><a href="#[168]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;fat_vol_chk
 </UL>
 <BR>[Called By]<UL><LI><a href="#[13c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__sys_seek
 </UL>
@@ -2030,14 +2030,14 @@ Global Symbols
 <P><STRONG><a name="[140]"></a>fat_write</STRONG> (Thumb, 350 bytes, Stack size 56 bytes, fs_fat.o(i.fat_write))
 <BR><BR>[Stack]<UL><LI>Max Depth = 192<LI>Call Chain = fat_write &rArr; alloc_clus &rArr; alloc_table_write &rArr; cache_fat &rArr; fsj_write &rArr; SetBuf
 </UL>
-<BR>[Calls]<UL><LI><a href="#[184]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_memcpy
-<LI><a href="#[168]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;fat_vol_chk
-<LI><a href="#[159]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;write_cache
+<BR>[Calls]<UL><LI><a href="#[159]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;write_cache
 <LI><a href="#[153]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;read_sector
 <LI><a href="#[188]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;link_clus
 <LI><a href="#[158]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;clus_to_sect
 <LI><a href="#[149]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;alloc_table_read
 <LI><a href="#[148]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;alloc_clus
+<LI><a href="#[184]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_memcpy
+<LI><a href="#[168]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;fat_vol_chk
 </UL>
 <BR>[Called By]<UL><LI><a href="#[13f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__sys_write
 </UL>
@@ -2047,10 +2047,10 @@ Global Symbols
 <LI>Call Chain = fformat &rArr; fat_format &rArr; fat_jour_init &rArr; j_init_fats &rArr; j_find_rsvd &rArr; j_chk_rsvd &rArr; alloc_table_read &rArr; cache_fat &rArr; fsj_write &rArr; SetBuf
 </UL>
 <BR>[Calls]<UL><LI><a href="#[189]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;efs_format
-<LI><a href="#[12c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;osMutexWait
-<LI><a href="#[12f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;osMutexRelease
 <LI><a href="#[134]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;fs_drive_id
 <LI><a href="#[16a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;fat_format
+<LI><a href="#[12c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;osMutexWait
+<LI><a href="#[12f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;osMutexRelease
 </UL>
 <BR>[Called By]<UL><LI><a href="#[15a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;cmd_format
 </UL>
@@ -2068,11 +2068,11 @@ Global Symbols
 </UL>
 <BR>[Calls]<UL><LI><a href="#[18d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;fs_config
 <LI><a href="#[18e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;efs_init
-<LI><a href="#[12c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;osMutexWait
-<LI><a href="#[12f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;osMutexRelease
 <LI><a href="#[134]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;fs_drive_id
 <LI><a href="#[174]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;fat_init
 <LI><a href="#[18c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;fs_component_init
+<LI><a href="#[12c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;osMutexWait
+<LI><a href="#[12f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;osMutexRelease
 </UL>
 <BR>[Called By]<UL><LI><a href="#[1a1]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;init_filesystem
 </UL>
@@ -2081,10 +2081,10 @@ Global Symbols
 <BR><BR>[Stack]<UL><LI>Max Depth = 248<LI>Call Chain = fmount &rArr; fat_mount &rArr; fat_jour_init &rArr; j_init_fats &rArr; j_find_rsvd &rArr; j_chk_rsvd &rArr; alloc_table_read &rArr; cache_fat &rArr; fsj_write &rArr; SetBuf
 </UL>
 <BR>[Calls]<UL><LI><a href="#[190]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;efs_mount
-<LI><a href="#[12c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;osMutexWait
-<LI><a href="#[12f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;osMutexRelease
 <LI><a href="#[134]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;fs_drive_id
 <LI><a href="#[17b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;fat_mount
+<LI><a href="#[12c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;osMutexWait
+<LI><a href="#[12f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;osMutexRelease
 </UL>
 <BR>[Called By]<UL><LI><a href="#[1a1]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;init_filesystem
 </UL>
@@ -2168,11 +2168,11 @@ Global Symbols
 <P><STRONG><a name="[15d]"></a>fvol</STRONG> (Thumb, 100 bytes, Stack size 24 bytes, fs_mapi.o(i.fvol))
 <BR><BR>[Stack]<UL><LI>Max Depth = 184<LI>Call Chain = fvol &rArr; fat_read_label &rArr; entry_pos_inc &rArr; alloc_table_read &rArr; cache_fat &rArr; fsj_write &rArr; SetBuf
 </UL>
-<BR>[Calls]<UL><LI><a href="#[12c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;osMutexWait
-<LI><a href="#[12f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;osMutexRelease
-<LI><a href="#[134]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;fs_drive_id
+<BR>[Calls]<UL><LI><a href="#[134]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;fs_drive_id
 <LI><a href="#[187]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;fat_read_serial
 <LI><a href="#[185]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;fat_read_label
+<LI><a href="#[12c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;osMutexWait
+<LI><a href="#[12f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;osMutexRelease
 </UL>
 <BR>[Called By]<UL><LI><a href="#[15a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;cmd_format
 </UL>
@@ -2188,8 +2188,8 @@ Global Symbols
 <P><STRONG><a name="[1a4]"></a>isrMessagePut</STRONG> (Thumb, 44 bytes, Stack size 16 bytes, rt_cmsis.o(i.isrMessagePut))
 <BR><BR>[Stack]<UL><LI>Max Depth = 40<LI>Call Chain = isrMessagePut &rArr; isr_mbx_send &rArr; rt_psq_enq
 </UL>
-<BR>[Calls]<UL><LI><a href="#[1a6]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;isr_mbx_send
-<LI><a href="#[1a5]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;rt_mbx_check
+<BR>[Calls]<UL><LI><a href="#[1a5]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;rt_mbx_check
+<LI><a href="#[1a6]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;isr_mbx_send
 </UL>
 <BR>[Called By]<UL><LI><a href="#[1f8]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;sysTimerTick
 </UL>
@@ -2255,14 +2255,14 @@ Global Symbols
 <P><STRONG><a name="[1b2]"></a>mc_mci_Init</STRONG> (Thumb, 208 bytes, Stack size 16 bytes, fs_mc_mci.o(i.mc_mci_Init))
 <BR><BR>[Stack]<UL><LI>Max Depth = 216<LI>Call Chain = mc_mci_Init &rArr; mc_native_init &rArr; mc_control_lock &rArr; mc_set_block_len &rArr; mc_wfe
 </UL>
-<BR>[Calls]<UL><LI><a href="#[1bc]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;osDelay
-<LI><a href="#[1c7]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;mci_idle_clock
+<BR>[Calls]<UL><LI><a href="#[1c7]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;mci_idle_clock
 <LI><a href="#[1c4]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;mci_data_timeout
 <LI><a href="#[1c6]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;mci_card_power
 <LI><a href="#[1c2]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;mci_bus_width
 <LI><a href="#[1c3]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;mci_bus_speed_mode
 <LI><a href="#[1c5]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;mci_bus_speed
 <LI><a href="#[1c8]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;mc_native_init
+<LI><a href="#[1bc]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;osDelay
 </UL>
 <BR>[Called By]<UL><LI><a href="#[1b1]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;mc_mci_DevCtrl
 <LI><a href="#[8c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;mc0_Init
@@ -2421,10 +2421,10 @@ Global Symbols
 <BR>[Address Reference Count : 1]<UL><LI> rtx_conf_cm.o(.constdata)
 </UL>
 <P><STRONG><a name="[1eb]"></a>os_error</STRONG> (Thumb, 34 bytes, Stack size 0 bytes, rtx_conf_cm.o(i.os_error))
-<BR><BR>[Called By]<UL><LI><a href="#[1f8]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;sysTimerTick
-<LI><a href="#[1e9]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;rt_mbx_psh
+<BR><BR>[Called By]<UL><LI><a href="#[1e9]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;rt_mbx_psh
 <LI><a href="#[b7]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;rt_stk_check
 <LI><a href="#[1a7]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;rt_psq_enq
+<LI><a href="#[1f8]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;sysTimerTick
 </UL>
 
 <P><STRONG><a name="[7b]"></a>os_idle_demon</STRONG> (Thumb, 4 bytes, Stack size 0 bytes, rtx_conf_cm.o(i.os_idle_demon))
@@ -2457,10 +2457,10 @@ Global Symbols
 <P><STRONG><a name="[64]"></a>rt_alloc_box</STRONG> (Thumb, 26 bytes, Stack size 0 bytes, rt_membox.o(i.rt_alloc_box))
 <BR><BR>[Calls]<UL><LI><a href="#[64]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;rt_alloc_box
 </UL>
-<BR>[Called By]<UL><LI><a href="#[64]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;rt_alloc_box
-<LI><a href="#[1e9]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;rt_mbx_psh
+<BR>[Called By]<UL><LI><a href="#[1e9]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;rt_mbx_psh
 <LI><a href="#[1e7]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;rt_init_context
 <LI><a href="#[1f9]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;rt_tsk_create
+<LI><a href="#[64]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;rt_alloc_box
 </UL>
 <BR>[Address Reference Count : 1]<UL><LI> hal_cm4.o(.emb_text)
 </UL>
@@ -2582,12 +2582,12 @@ Global Symbols
 <BR><BR>[Stack]<UL><LI>Max Depth = 40<LI>Call Chain = rt_mbx_psh &rArr; rt_ret_val2
 </UL>
 <BR>[Calls]<UL><LI><a href="#[1eb]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;os_error
-<LI><a href="#[64]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;rt_alloc_box
 <LI><a href="#[1e6]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;rt_ret_val2
 <LI><a href="#[1e5]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;rt_rmv_dly
 <LI><a href="#[1ea]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;rt_ret_val
 <LI><a href="#[1df]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;rt_put_prio
 <LI><a href="#[1dc]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;rt_get_first
+<LI><a href="#[64]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;rt_alloc_box
 </UL>
 <BR>[Called By]<UL><LI><a href="#[b8]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;rt_pop_req
 </UL>
@@ -2768,10 +2768,10 @@ Global Symbols
 <P><STRONG><a name="[1f2]"></a>rt_sys_init</STRONG> (Thumb, 138 bytes, Stack size 16 bytes, rt_task.o(i.rt_sys_init))
 <BR><BR>[Stack]<UL><LI>Max Depth = 48<LI>Call Chain = rt_sys_init &rArr; rt_init_context &rArr; rt_init_stack
 </UL>
-<BR>[Calls]<UL><LI><a href="#[1f4]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;_init_box
-<LI><a href="#[1f5]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;rt_init_robin
+<BR>[Calls]<UL><LI><a href="#[1f5]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;rt_init_robin
 <LI><a href="#[1f3]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;dbg_init
 <LI><a href="#[1e7]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;rt_init_context
+<LI><a href="#[1f4]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;_init_box
 </UL>
 <BR>[Called By]<UL><LI><a href="#[70]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;svcKernelInitialize
 </UL>
@@ -2787,12 +2787,12 @@ Global Symbols
 <P><STRONG><a name="[b9]"></a>rt_systick</STRONG> (Thumb, 50 bytes, Stack size 8 bytes, rt_system.o(i.rt_systick))
 <BR><BR>[Stack]<UL><LI>Max Depth = 72<LI>Call Chain = rt_systick &rArr; sysTimerTick &rArr; isrMessagePut &rArr; isr_mbx_send &rArr; rt_psq_enq
 </UL>
-<BR>[Calls]<UL><LI><a href="#[1f8]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;sysTimerTick
-<LI><a href="#[1e0]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;rt_dec_dly
+<BR>[Calls]<UL><LI><a href="#[1e0]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;rt_dec_dly
 <LI><a href="#[1de]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;rt_chk_robin
 <LI><a href="#[1e2]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;rt_put_rdy_first
 <LI><a href="#[1dd]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;rt_switch_req
 <LI><a href="#[1dc]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;rt_get_first
+<LI><a href="#[1f8]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;sysTimerTick
 </UL>
 <BR>[Called By]<UL><LI><a href="#[ba]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;OS_Tick_Handler
 <LI><a href="#[12]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SysTick_Handler
@@ -2801,10 +2801,10 @@ Global Symbols
 <P><STRONG><a name="[1f9]"></a>rt_tsk_create</STRONG> (Thumb, 118 bytes, Stack size 24 bytes, rt_task.o(i.rt_tsk_create))
 <BR><BR>[Stack]<UL><LI>Max Depth = 56<LI>Call Chain = rt_tsk_create &rArr; rt_init_context &rArr; rt_init_stack
 </UL>
-<BR>[Calls]<UL><LI><a href="#[64]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;rt_alloc_box
-<LI><a href="#[1fa]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;dbg_task_notify
+<BR>[Calls]<UL><LI><a href="#[1fa]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;dbg_task_notify
 <LI><a href="#[1e7]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;rt_init_context
 <LI><a href="#[1e1]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;rt_dispatch
+<LI><a href="#[64]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;rt_alloc_box
 </UL>
 <BR>[Called By]<UL><LI><a href="#[77]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;svcThreadCreate
 </UL>
@@ -2845,18 +2845,18 @@ Global Symbols
 <P><STRONG><a name="[6f]"></a>svcDelay</STRONG> (Thumb, 18 bytes, Stack size 8 bytes, rt_cmsis.o(i.svcDelay))
 <BR><BR>[Stack]<UL><LI>Max Depth = 32<LI>Call Chain = svcDelay &rArr; rt_dly_wait &rArr; rt_block &rArr; rt_put_dly
 </UL>
-<BR>[Calls]<UL><LI><a href="#[200]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;rt_ms2tick
-<LI><a href="#[1e3]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;rt_dly_wait
+<BR>[Calls]<UL><LI><a href="#[1e3]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;rt_dly_wait
+<LI><a href="#[200]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;rt_ms2tick
 </UL>
 <BR>[Address Reference Count : 1]<UL><LI> rt_cmsis.o(i.osDelay)
 </UL>
 <P><STRONG><a name="[70]"></a>svcKernelInitialize</STRONG> (Thumb, 80 bytes, Stack size 8 bytes, rt_cmsis.o(i.svcKernelInitialize))
 <BR><BR>[Stack]<UL><LI>Max Depth = 80<LI>Call Chain = svcKernelInitialize &rArr; svcThreadCreate &rArr; rt_tsk_create &rArr; rt_init_context &rArr; rt_init_stack
 </UL>
-<BR>[Calls]<UL><LI><a href="#[77]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;svcThreadCreate
-<LI><a href="#[202]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;svcMessageCreate
-<LI><a href="#[1f2]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;rt_sys_init
+<BR>[Calls]<UL><LI><a href="#[1f2]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;rt_sys_init
 <LI><a href="#[201]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;rt_init_mem
+<LI><a href="#[77]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;svcThreadCreate
+<LI><a href="#[202]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;svcMessageCreate
 </UL>
 <BR>[Called By]<UL><LI><a href="#[b4]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;osKernelInitialize
 </UL>
@@ -2889,8 +2889,8 @@ Global Symbols
 <P><STRONG><a name="[73]"></a>svcMessageGet</STRONG> (Thumb, 58 bytes, Stack size 24 bytes, rt_cmsis.o(i.svcMessageGet))
 <BR><BR>[Stack]<UL><LI>Max Depth = 68<LI>Call Chain = svcMessageGet &rArr; rt_mbx_wait &rArr; rt_dispatch &rArr; rt_put_prio
 </UL>
-<BR>[Calls]<UL><LI><a href="#[200]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;rt_ms2tick
-<LI><a href="#[1ec]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;rt_mbx_wait
+<BR>[Calls]<UL><LI><a href="#[1ec]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;rt_mbx_wait
+<LI><a href="#[200]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;rt_ms2tick
 </UL>
 <BR>[Address Reference Count : 1]<UL><LI> rt_cmsis.o(i.osMessageGet)
 </UL>
@@ -2923,9 +2923,9 @@ Global Symbols
 <P><STRONG><a name="[77]"></a>svcThreadCreate</STRONG> (Thumb, 100 bytes, Stack size 16 bytes, rt_cmsis.o(i.svcThreadCreate))
 <BR><BR>[Stack]<UL><LI>Max Depth = 72<LI>Call Chain = svcThreadCreate &rArr; rt_tsk_create &rArr; rt_init_context &rArr; rt_init_stack
 </UL>
-<BR>[Calls]<UL><LI><a href="#[207]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;rt_alloc_mem
-<LI><a href="#[1f9]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;rt_tsk_create
+<BR>[Calls]<UL><LI><a href="#[1f9]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;rt_tsk_create
 <LI><a href="#[208]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;rt_free_mem
+<LI><a href="#[207]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;rt_alloc_mem
 </UL>
 <BR>[Called By]<UL><LI><a href="#[b5]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;osThreadCreate
 <LI><a href="#[70]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;svcKernelInitialize
@@ -2942,9 +2942,9 @@ Global Symbols
 <P><STRONG><a name="[79]"></a>svcThreadTerminate</STRONG> (Thumb, 50 bytes, Stack size 8 bytes, rt_cmsis.o(i.svcThreadTerminate))
 <BR><BR>[Stack]<UL><LI>Max Depth = 76<LI>Call Chain = svcThreadTerminate &rArr; rt_tsk_delete &rArr; rt_dispatch &rArr; rt_put_prio
 </UL>
-<BR>[Calls]<UL><LI><a href="#[209]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;rt_tid2ptcb
-<LI><a href="#[1fb]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;rt_tsk_delete
+<BR>[Calls]<UL><LI><a href="#[1fb]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;rt_tsk_delete
 <LI><a href="#[208]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;rt_free_mem
+<LI><a href="#[209]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;rt_tid2ptcb
 </UL>
 <BR>[Address Reference Count : 1]<UL><LI> rt_cmsis.o(i.osThreadExit)
 </UL>
@@ -3244,8 +3244,8 @@ Local Symbols
 <P><STRONG><a name="[1e7]"></a>rt_init_context</STRONG> (Thumb, 66 bytes, Stack size 16 bytes, rt_task.o(i.rt_init_context))
 <BR><BR>[Stack]<UL><LI>Max Depth = 32<LI>Call Chain = rt_init_context &rArr; rt_init_stack
 </UL>
-<BR>[Calls]<UL><LI><a href="#[64]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;rt_alloc_box
-<LI><a href="#[1e8]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;rt_init_stack
+<BR>[Calls]<UL><LI><a href="#[1e8]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;rt_init_stack
+<LI><a href="#[64]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;rt_alloc_box
 </UL>
 <BR>[Called By]<UL><LI><a href="#[1f9]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;rt_tsk_create
 <LI><a href="#[1f2]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;rt_sys_init
@@ -3268,8 +3268,8 @@ Local Symbols
 <BR>[Calls]<UL><LI><a href="#[1b9]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;mc_wfe
 <LI><a href="#[1b8]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;mc_set_block_len
 <LI><a href="#[1ba]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;mc_read_status
-<LI><a href="#[184]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_memcpy
 <LI><a href="#[c9]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_memclr4
+<LI><a href="#[184]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_memcpy
 </UL>
 <BR>[Called By]<UL><LI><a href="#[1b1]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;mc_mci_DevCtrl
 <LI><a href="#[1c8]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;mc_native_init
@@ -3278,9 +3278,9 @@ Local Symbols
 <P><STRONG><a name="[1bb]"></a>mc_control_sleep</STRONG> (Thumb, 124 bytes, Stack size 16 bytes, fs_mc_mci.o(i.mc_control_sleep))
 <BR><BR>[Stack]<UL><LI>Max Depth = 56<LI>Call Chain = mc_control_sleep &rArr; mc_sleep_awake &rArr; mc_wfe
 </UL>
-<BR>[Calls]<UL><LI><a href="#[1bc]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;osDelay
-<LI><a href="#[1bd]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;mc_sleep_awake
+<BR>[Calls]<UL><LI><a href="#[1bd]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;mc_sleep_awake
 <LI><a href="#[1ba]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;mc_read_status
+<LI><a href="#[1bc]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;osDelay
 </UL>
 <BR>[Called By]<UL><LI><a href="#[1b1]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;mc_mci_DevCtrl
 </UL>
@@ -3297,9 +3297,7 @@ Local Symbols
 <P><STRONG><a name="[1c8]"></a>mc_native_init</STRONG> (Thumb, 1112 bytes, Stack size 96 bytes, fs_mc_mci.o(i.mc_native_init))
 <BR><BR>[Stack]<UL><LI>Max Depth = 200<LI>Call Chain = mc_native_init &rArr; mc_control_lock &rArr; mc_set_block_len &rArr; mc_wfe
 </UL>
-<BR>[Calls]<UL><LI><a href="#[1ce]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;osKernelSysTick
-<LI><a href="#[1bc]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;osDelay
-<LI><a href="#[1cc]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;fs_mc_lock_unlock
+<BR>[Calls]<UL><LI><a href="#[1cc]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;fs_mc_lock_unlock
 <LI><a href="#[1b9]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;mc_wfe
 <LI><a href="#[1c7]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;mci_idle_clock
 <LI><a href="#[1c4]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;mci_data_timeout
@@ -3316,6 +3314,8 @@ Local Symbols
 <LI><a href="#[1b7]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;mc_control_lock
 <LI><a href="#[1cb]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;get_block_number
 <LI><a href="#[1c0]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;fill_cid
+<LI><a href="#[1ce]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;osKernelSysTick
+<LI><a href="#[1bc]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;osDelay
 </UL>
 <BR>[Called By]<UL><LI><a href="#[1b2]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;mc_mci_Init
 </UL>
@@ -3337,13 +3337,13 @@ Local Symbols
 <P><STRONG><a name="[1cf]"></a>mc_select_bus_width</STRONG> (Thumb, 226 bytes, Stack size 32 bytes, fs_mc_mci.o(i.mc_select_bus_width))
 <BR><BR>[Stack]<UL><LI>Max Depth = 72<LI>Call Chain = mc_select_bus_width &rArr; mc_switch &rArr; mc_wfe
 </UL>
-<BR>[Calls]<UL><LI><a href="#[1ce]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;osKernelSysTick
-<LI><a href="#[1bc]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;osDelay
-<LI><a href="#[1b9]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;mc_wfe
+<BR>[Calls]<UL><LI><a href="#[1b9]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;mc_wfe
 <LI><a href="#[1c2]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;mci_bus_width
 <LI><a href="#[1cd]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;mc_switch
 <LI><a href="#[1ba]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;mc_read_status
 <LI><a href="#[1be]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;mc_enable_acmd
+<LI><a href="#[1ce]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;osKernelSysTick
+<LI><a href="#[1bc]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;osDelay
 </UL>
 <BR>[Called By]<UL><LI><a href="#[1c8]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;mc_native_init
 </UL>
@@ -3363,10 +3363,10 @@ Local Symbols
 <P><STRONG><a name="[1c1]"></a>mc_select_tran_state</STRONG> (Thumb, 166 bytes, Stack size 24 bytes, fs_mc_mci.o(i.mc_select_tran_state))
 <BR><BR>[Stack]<UL><LI>Max Depth = 64<LI>Call Chain = mc_select_tran_state &rArr; mc_stop_transmission &rArr; mc_wfe
 </UL>
-<BR>[Calls]<UL><LI><a href="#[1ce]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;osKernelSysTick
-<LI><a href="#[1c9]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;mc_stop_transmission
+<BR>[Calls]<UL><LI><a href="#[1c9]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;mc_stop_transmission
 <LI><a href="#[1bf]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;mc_select_deselect
 <LI><a href="#[1ba]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;mc_read_status
+<LI><a href="#[1ce]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;osKernelSysTick
 </UL>
 <BR>[Called By]<UL><LI><a href="#[1b6]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;mc_mci_WriteSector
 <LI><a href="#[1b4]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;mc_mci_ReadSector
@@ -3553,9 +3553,9 @@ Local Symbols
 </UL>
 
 <P><STRONG><a name="[1d2]"></a>char_validate</STRONG> (Thumb, 96 bytes, Stack size 0 bytes, fs_fat.o(i.char_validate))
-<BR><BR>[Called By]<UL><LI><a href="#[17d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;path_validate
-<LI><a href="#[1d3]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;name_basis_gen
+<BR><BR>[Called By]<UL><LI><a href="#[1d3]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;name_basis_gen
 <LI><a href="#[1d1]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;name_analyse
+<LI><a href="#[17d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;path_validate
 </UL>
 
 <P><STRONG><a name="[157]"></a>clear_clus</STRONG> (Thumb, 68 bytes, Stack size 16 bytes, fs_fat.o(i.clear_clus))
@@ -3574,12 +3574,12 @@ Local Symbols
 <BR><BR>[Called By]<UL><LI><a href="#[140]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;fat_write
 <LI><a href="#[13d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;fat_seek
 <LI><a href="#[13a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;fat_read
-<LI><a href="#[170]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;fat_jour_prep
 <LI><a href="#[177]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;j_rep_space
 <LI><a href="#[1ad]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;j_find_rsvd
 <LI><a href="#[160]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;entry_read
 <LI><a href="#[164]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;entry_flush
 <LI><a href="#[157]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;clear_clus
+<LI><a href="#[170]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;fat_jour_prep
 </UL>
 
 <P><STRONG><a name="[15e]"></a>count_free_clus</STRONG> (Thumb, 48 bytes, Stack size 24 bytes, fs_fat.o(i.count_free_clus))
@@ -3593,13 +3593,13 @@ Local Symbols
 <P><STRONG><a name="[15f]"></a>create_dot_entries</STRONG> (Thumb, 200 bytes, Stack size 48 bytes, fs_fat.o(i.create_dot_entries))
 <BR><BR>[Stack]<UL><LI>Max Depth = 144<LI>Call Chain = create_dot_entries &rArr; entry_flush &rArr; write_sector &rArr; fsj_write &rArr; SetBuf
 </UL>
-<BR>[Calls]<UL><LI><a href="#[d8]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_memcpy4
-<LI><a href="#[161]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;fs_get_time
-<LI><a href="#[150]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;set_u16
+<BR>[Calls]<UL><LI><a href="#[150]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;set_u16
 <LI><a href="#[162]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;format_time
 <LI><a href="#[163]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;format_date
 <LI><a href="#[160]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;entry_read
 <LI><a href="#[164]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;entry_flush
+<LI><a href="#[d8]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_memcpy4
+<LI><a href="#[161]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;fs_get_time
 </UL>
 <BR>[Called By]<UL><LI><a href="#[182]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;path_create
 </UL>
@@ -3617,12 +3617,12 @@ Local Symbols
 <P><STRONG><a name="[167]"></a>create_sfn_entry</STRONG> (Thumb, 138 bytes, Stack size 40 bytes, fs_fat.o(i.create_sfn_entry))
 <BR><BR>[Stack]<UL><LI>Max Depth = 136<LI>Call Chain = create_sfn_entry &rArr; entry_flush &rArr; write_sector &rArr; fsj_write &rArr; SetBuf
 </UL>
-<BR>[Calls]<UL><LI><a href="#[161]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;fs_get_time
-<LI><a href="#[150]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;set_u16
+<BR>[Calls]<UL><LI><a href="#[150]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;set_u16
 <LI><a href="#[162]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;format_time
 <LI><a href="#[163]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;format_date
 <LI><a href="#[160]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;entry_read
 <LI><a href="#[164]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;entry_flush
+<LI><a href="#[161]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;fs_get_time
 </UL>
 <BR>[Called By]<UL><LI><a href="#[182]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;path_create
 </UL>
@@ -3738,7 +3738,6 @@ Local Symbols
 </UL>
 <BR>[Calls]<UL><LI><a href="#[19a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;elink_insert
 <LI><a href="#[193]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;elink_cmd
-<LI><a href="#[d5]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;strncasecmp
 <LI><a href="#[197]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;sn_chksum
 <LI><a href="#[199]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;short_ent_hash
 <LI><a href="#[198]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;sfn_extract
@@ -3747,6 +3746,7 @@ Local Symbols
 <LI><a href="#[160]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;entry_read
 <LI><a href="#[166]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;entry_pos_inc
 <LI><a href="#[194]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;entry_pos_comp
+<LI><a href="#[d5]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;strncasecmp
 </UL>
 <BR>[Called By]<UL><LI><a href="#[17f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;path_open
 <LI><a href="#[182]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;path_create
@@ -3898,16 +3898,16 @@ Local Symbols
 <LI><a href="#[14d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;cache_fat
 <LI><a href="#[14b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;alloc_table_write
 </UL>
-<BR>[Called By]<UL><LI><a href="#[170]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;fat_jour_prep
-<LI><a href="#[176]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;j_init_fats
+<BR>[Called By]<UL><LI><a href="#[176]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;j_init_fats
+<LI><a href="#[170]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;fat_jour_prep
 </UL>
 
 <P><STRONG><a name="[177]"></a>j_rep_space</STRONG> (Thumb, 46 bytes, Stack size 16 bytes, fs_fat.o(i.j_rep_space))
 <BR><BR>[Stack]<UL><LI>Max Depth = 16<LI>Call Chain = j_rep_space
 </UL>
-<BR>[Calls]<UL><LI><a href="#[1af]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;fsj_set_space
-<LI><a href="#[1ac]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;j_clus_cnt
+<BR>[Calls]<UL><LI><a href="#[1ac]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;j_clus_cnt
 <LI><a href="#[158]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;clus_to_sect
+<LI><a href="#[1af]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;fsj_set_space
 </UL>
 <BR>[Called By]<UL><LI><a href="#[170]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;fat_jour_prep
 <LI><a href="#[171]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;fat_jour_init
@@ -3916,12 +3916,12 @@ Local Symbols
 <P><STRONG><a name="[16f]"></a>label_write</STRONG> (Thumb, 106 bytes, Stack size 24 bytes, fs_fat.o(i.label_write))
 <BR><BR>[Stack]<UL><LI>Max Depth = 128<LI>Call Chain = label_write &rArr; write_cache &rArr; write_sector &rArr; fsj_write &rArr; SetBuf
 </UL>
-<BR>[Calls]<UL><LI><a href="#[161]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;fs_get_time
-<LI><a href="#[159]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;write_cache
+<BR>[Calls]<UL><LI><a href="#[159]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;write_cache
 <LI><a href="#[150]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;set_u16
 <LI><a href="#[162]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;format_time
 <LI><a href="#[163]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;format_date
 <LI><a href="#[109]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_memclr
+<LI><a href="#[161]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;fs_get_time
 </UL>
 <BR>[Called By]<UL><LI><a href="#[16a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;fat_format
 </UL>
@@ -3999,9 +3999,6 @@ Local Symbols
 </UL>
 <BR>[Calls]<UL><LI><a href="#[19a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;elink_insert
 <LI><a href="#[193]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;elink_cmd
-<LI><a href="#[d8]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_memcpy4
-<LI><a href="#[184]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_memcpy
-<LI><a href="#[1d8]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;strlen
 <LI><a href="#[197]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;sn_chksum
 <LI><a href="#[199]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;short_ent_hash
 <LI><a href="#[1d6]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;name_strip
@@ -4017,6 +4014,9 @@ Local Symbols
 <LI><a href="#[15f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;create_dot_entries
 <LI><a href="#[157]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;clear_clus
 <LI><a href="#[148]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;alloc_clus
+<LI><a href="#[d8]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_memcpy4
+<LI><a href="#[184]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_memcpy
+<LI><a href="#[1d8]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;strlen
 </UL>
 <BR>[Called By]<UL><LI><a href="#[136]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;fat_open
 </UL>
@@ -4044,8 +4044,8 @@ Local Symbols
 </UL>
 
 <P><STRONG><a name="[183]"></a>read_cache</STRONG> (Thumb, 122 bytes, Stack size 16 bytes, fs_fat.o(i.read_cache), UNUSED)
-<BR><BR>[Calls]<UL><LI><a href="#[184]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_memcpy
-<LI><a href="#[153]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;read_sector
+<BR><BR>[Calls]<UL><LI><a href="#[153]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;read_sector
+<LI><a href="#[184]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_memcpy
 </UL>
 <BR>[Called By]<UL><LI><a href="#[13a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;fat_read
 </UL>
@@ -4081,11 +4081,11 @@ Local Symbols
 <P><STRONG><a name="[151]"></a>set_u32</STRONG> (Thumb, 16 bytes, Stack size 0 bytes, fs_fat.o(i.set_u32))
 <BR><BR>[Called By]<UL><LI><a href="#[12d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;fat_close
 <LI><a href="#[16a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;fat_format
-<LI><a href="#[170]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;fat_jour_prep
 <LI><a href="#[16d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;mbr_write
 <LI><a href="#[169]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;fsinfo_write
 <LI><a href="#[154]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;bs_write
 <LI><a href="#[14b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;alloc_table_write
+<LI><a href="#[170]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;fat_jour_prep
 </UL>
 
 <P><STRONG><a name="[198]"></a>sfn_extract</STRONG> (Thumb, 72 bytes, Stack size 8 bytes, fs_fat.o(i.sfn_extract))
@@ -4131,8 +4131,8 @@ Local Symbols
 <P><STRONG><a name="[159]"></a>write_cache</STRONG> (Thumb, 174 bytes, Stack size 24 bytes, fs_fat.o(i.write_cache))
 <BR><BR>[Stack]<UL><LI>Max Depth = 104<LI>Call Chain = write_cache &rArr; write_sector &rArr; fsj_write &rArr; SetBuf
 </UL>
-<BR>[Calls]<UL><LI><a href="#[184]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_memcpy
-<LI><a href="#[155]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;write_sector
+<BR>[Calls]<UL><LI><a href="#[155]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;write_sector
+<LI><a href="#[184]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_memcpy
 </UL>
 <BR>[Called By]<UL><LI><a href="#[140]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;fat_write
 <LI><a href="#[13d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;fat_seek
@@ -4148,11 +4148,11 @@ Local Symbols
 </UL>
 <BR>[Calls]<UL><LI><a href="#[156]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;fsj_write
 </UL>
-<BR>[Called By]<UL><LI><a href="#[170]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;fat_jour_prep
-<LI><a href="#[159]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;write_cache
+<BR>[Called By]<UL><LI><a href="#[159]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;write_cache
 <LI><a href="#[16d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;mbr_write
 <LI><a href="#[164]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;entry_flush
 <LI><a href="#[154]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;bs_write
+<LI><a href="#[170]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;fat_jour_prep
 </UL>
 
 <P><STRONG><a name="[106]"></a>CheckJSect</STRONG> (Thumb, 80 bytes, Stack size 16 bytes, fs_journal.o(i.CheckJSect))
@@ -4166,8 +4166,8 @@ Local Symbols
 <P><STRONG><a name="[108]"></a>CheckJourn</STRONG> (Thumb, 220 bytes, Stack size 56 bytes, fs_journal.o(i.CheckJourn))
 <BR><BR>[Stack]<UL><LI>Max Depth = 72<LI>Call Chain = CheckJourn &rArr; CheckJSect
 </UL>
-<BR>[Calls]<UL><LI><a href="#[106]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;CheckJSect
-<LI><a href="#[109]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_memclr
+<BR>[Calls]<UL><LI><a href="#[109]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_memclr
+<LI><a href="#[106]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;CheckJSect
 </UL>
 <BR>[Called By]<UL><LI><a href="#[178]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;fsj_init
 </UL>
@@ -4175,8 +4175,8 @@ Local Symbols
 <P><STRONG><a name="[125]"></a>SetBuf</STRONG> (Thumb, 106 bytes, Stack size 24 bytes, fs_journal.o(i.SetBuf))
 <BR><BR>[Stack]<UL><LI>Max Depth = 24<LI>Call Chain = SetBuf
 </UL>
-<BR>[Calls]<UL><LI><a href="#[126]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;set_u32
-<LI><a href="#[109]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_memclr
+<BR>[Calls]<UL><LI><a href="#[109]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_memclr
+<LI><a href="#[126]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;set_u32
 </UL>
 <BR>[Called By]<UL><LI><a href="#[156]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;fsj_write
 </UL>

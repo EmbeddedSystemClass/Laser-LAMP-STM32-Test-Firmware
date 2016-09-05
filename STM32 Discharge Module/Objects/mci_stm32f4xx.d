@@ -45,6 +45,5 @@
 .\objects\mci_stm32f4xx.o: C:\Keil_v5\ARM\PACK\Keil\STM32F4xx_DFP\2.9.0\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_spi.h
 .\objects\mci_stm32f4xx.o: C:\Keil_v5\ARM\PACK\Keil\STM32F4xx_DFP\2.9.0\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_tim.h
 .\objects\mci_stm32f4xx.o: C:\Keil_v5\ARM\PACK\Keil\STM32F4xx_DFP\2.9.0\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_tim_ex.h
-.\objects\mci_stm32f4xx.o: C:\Keil_v5\ARM\PACK\Keil\STM32F4xx_DFP\2.9.0\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_usart.h
 .\objects\mci_stm32f4xx.o: C:\Users\FxSlava\Documents\Laser-LAMP-STM32-Test-Firmware\STM32 Discharge Module\RTE\Device\STM32F407VETx\RTE_Device.h
 .\objects\mci_stm32f4xx.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\string.h
