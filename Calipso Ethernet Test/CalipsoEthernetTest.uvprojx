@@ -383,9 +383,9 @@
               <FilePath>.\main.c</FilePath>
             </File>
             <File>
-              <FileName>DNS_Client.c</FileName>
+              <FileName>stm32f4xx_it.c</FileName>
               <FileType>1</FileType>
-              <FilePath>.\DNS_Client.c</FilePath>
+              <FilePath>.\stm32f4xx_it.c</FilePath>
             </File>
             <File>
               <FileName>stm32f4xx_hal_msp.c</FileName>
@@ -393,19 +393,49 @@
               <FilePath>.\stm32f4xx_hal_msp.c</FilePath>
             </File>
             <File>
+              <FileName>DNS_Client.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\DNS_Client.c</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
+          <GroupName>GUI</GroupName>
+          <Files>
+            <File>
+              <FileName>ServiceFrame.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\ServiceFrame.c</FilePath>
+            </File>
+            <File>
+              <FileName>PasswordFrame.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\PasswordFrame.c</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
+          <GroupName>Threads</GroupName>
+          <Files>
+            <File>
+              <FileName>MainThread.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\MainThread.c</FilePath>
+            </File>
+            <File>
               <FileName>SPIThread.c</FileName>
               <FileType>1</FileType>
               <FilePath>.\SPIThread.c</FilePath>
             </File>
+          </Files>
+        </Group>
+        <Group>
+          <GroupName>Periph</GroupName>
+          <Files>
             <File>
               <FileName>SolidStateLaser.c</FileName>
               <FileType>1</FileType>
               <FilePath>.\SolidStateLaser.c</FilePath>
-            </File>
-            <File>
-              <FileName>stm32f4xx_it.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>.\stm32f4xx_it.c</FilePath>
             </File>
             <File>
               <FileName>DGUS.c</FileName>

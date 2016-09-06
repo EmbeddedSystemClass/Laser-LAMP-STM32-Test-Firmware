@@ -43,7 +43,6 @@
 #include "main.h"
 #include <stdio.h>
 #include <rl_net.h>
-#include "SolidStateLaser.h"
 #include "Driver_USART.h"
 #include "DGUS.h"
 
@@ -77,15 +76,13 @@ uint32_t HAL_GetTick(void) {
 /* Private define ------------------------------------------------------------*/
 /* Private macro -------------------------------------------------------------*/
 /* Private variables ---------------------------------------------------------*/
-/* USART Driver */
-extern ARM_DRIVER_USART Driver_USART1;
-
 /* Private function prototypes -----------------------------------------------*/
 static void SystemClock_Config(void);
 static void Error_Handler(void);
 extern void resolve_host (void);
 extern void SetDACValue(float32_t value);
-extern int Init_MainSPI_Thread (void);
+extern int  Init_MainSPI_Thread (void);
+extern int  Init_Main_Thread (void);
 
 uint8_t rx_buffer[8];
 
@@ -153,94 +150,21 @@ int main(void)
 	}
 	
 	HAL_Init();
-	
-	Init_MainSPI_Thread();
-	
-	/*Initialize the USART driver */
-  Driver_USART1.Initialize(DWIN_USART_callback);
-  /*Power up the USART peripheral */
-  Driver_USART1.PowerControl(ARM_POWER_FULL);
-  /*Configure the USART to 115200 Bits/sec */
-  Driver_USART1.Control(ARM_USART_MODE_ASYNCHRONOUS |
-                      ARM_USART_DATA_BITS_8 |
-                      ARM_USART_PARITY_NONE |
-                      ARM_USART_STOP_BITS_1 |
-                      ARM_USART_FLOW_CONTROL_NONE, 115200);
-	
-	/* Enable Receiver and Transmitter lines */
-  Driver_USART1.Control (ARM_USART_CONTROL_TX, 1);
-  Driver_USART1.Control (ARM_USART_CONTROL_RX, 1);
-	
-	uint16_t pic_id = convert_w(5);
-	WriteRegister(0x03, &pic_id, 2);
+	HAL_Delay(1000); // Wait for display initialization
 
   /* Add your application code here
      */
 
 #ifdef RTE_CMSIS_RTOS                   // when using CMSIS RTOS
-  // create 'thread' functions that start executing,
-  // example: tid_name = osThreadCreate (osThread(name), NULL);
+	Init_MainSPI_Thread();
+	Init_Main_Thread();
 
   osKernelStart();                      // start thread execution 
 #endif
-	
-	SetDACValue(8.4f);
-	
-	HAL_Delay(10);
-	
-	int i = 0;
 
   /* Infinite loop */
   while (1)
   {
-		/*__SOLIDSTATELASER_DISCHARGEOFF();
-		__SOLIDSTATELASER_HVON();
-	
-		__SOLIDSTATELASER_SIMMERON();
-
-		LampControlPulseStart();
-		HAL_Delay(333);
-		for (i = 0; i < 29; i++)
-		{
-			LampControlPulseStart();
-			HAL_Delay(333);
-		}
-	
-		__SOLIDSTATELASER_SIMMEROFF();
-	
-		__SOLIDSTATELASER_HVOFF();
-		__SOLIDSTATELASER_DISCHARGEON();*/
-
-		
-		/*HAL_GPIO_TogglePin(GPIOB, GPIO_PIN_RELAY1);
-		HAL_Delay(1000);
-		
-		// Test optocouplers with relays
-		HAL_GPIO_WritePin(GPIOB, GPIO_PIN_RELAY1, GPIO_PIN_SET);
-		HAL_GPIO_WritePin(GPIOG, GPIO_PIN_G1, GPIO_PIN_SET);
-		HAL_Delay(1000);
-		HAL_GPIO_WritePin(GPIOB, GPIO_PIN_RELAY2, GPIO_PIN_SET);
-		HAL_GPIO_WritePin(GPIOG, GPIO_PIN_G2, GPIO_PIN_SET);
-		HAL_Delay(1000);
-		HAL_GPIO_WritePin(GPIOB, GPIO_PIN_RELAY3, GPIO_PIN_SET);
-		HAL_GPIO_WritePin(GPIOG, GPIO_PIN_G3, GPIO_PIN_SET);
-		HAL_Delay(1000);
-		HAL_GPIO_WritePin(GPIOB, GPIO_PIN_RELAY4, GPIO_PIN_SET);
-		HAL_GPIO_WritePin(GPIOG, GPIO_PIN_G4, GPIO_PIN_SET);
-		HAL_Delay(1000);
-		
-		HAL_GPIO_WritePin(GPIOB, GPIO_PIN_RELAY1, GPIO_PIN_RESET);
-		HAL_GPIO_WritePin(GPIOG, GPIO_PIN_G1, GPIO_PIN_RESET);
-		HAL_Delay(1000);
-		HAL_GPIO_WritePin(GPIOB, GPIO_PIN_RELAY2, GPIO_PIN_RESET);
-		HAL_GPIO_WritePin(GPIOG, GPIO_PIN_G2, GPIO_PIN_RESET);
-		HAL_Delay(1000);
-		HAL_GPIO_WritePin(GPIOB, GPIO_PIN_RELAY3, GPIO_PIN_RESET);
-		HAL_GPIO_WritePin(GPIOG, GPIO_PIN_G3, GPIO_PIN_RESET);
-		HAL_Delay(1000);
-		HAL_GPIO_WritePin(GPIOB, GPIO_PIN_RELAY4, GPIO_PIN_RESET);
-		HAL_GPIO_WritePin(GPIOG, GPIO_PIN_G4, GPIO_PIN_RESET);
-		HAL_Delay(1000);*/
   }
 }
 
