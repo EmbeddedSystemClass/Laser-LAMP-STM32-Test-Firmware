@@ -427,6 +427,11 @@
               <FileType>1</FileType>
               <FilePath>.\SPIThread.c</FilePath>
             </File>
+            <File>
+              <FileName>WiFiThread.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\WiFiThread.c</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>

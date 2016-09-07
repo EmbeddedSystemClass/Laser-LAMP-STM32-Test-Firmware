@@ -82,6 +82,7 @@ static void Error_Handler(void);
 extern void resolve_host (void);
 extern void SetDACValue(float32_t value);
 extern int  Init_MainSPI_Thread (void);
+extern int  Init_WiFi_Thread (void);
 extern int  Init_Main_Thread (void);
 
 uint8_t rx_buffer[8];
@@ -150,7 +151,7 @@ int main(void)
 	}
 	
 	HAL_Init();
-	HAL_Delay(1000); // Wait for display initialization
+	HAL_Delay(2000); // Wait for display initialization
 
   /* Add your application code here
      */
@@ -158,6 +159,7 @@ int main(void)
 #ifdef RTE_CMSIS_RTOS                   // when using CMSIS RTOS
 	Init_MainSPI_Thread();
 	Init_Main_Thread();
+	Init_WiFi_Thread();
 
   osKernelStart();                      // start thread execution 
 #endif
