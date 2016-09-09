@@ -5,4 +5,7 @@
 .\objects\wifithread.o: C:\Keil_v5\ARM\PACK\ARM\CMSIS\5.0.0-Beta4\CMSIS\Driver\Include\Driver_USART.h
 .\objects\wifithread.o: C:\Keil_v5\ARM\PACK\ARM\CMSIS\5.0.0-Beta4\CMSIS\Driver\Include\Driver_Common.h
 .\objects\wifithread.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdbool.h
+.\objects\wifithread.o: SPWF01.h
+.\objects\wifithread.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdlib.h
 .\objects\wifithread.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\string.h
+.\objects\wifithread.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdarg.h

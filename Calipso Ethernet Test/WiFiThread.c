@@ -1,8 +1,11 @@
 
 #include "cmsis_os.h"                                           // CMSIS RTOS header file
 #include "Driver_USART.h"
+#include "SPWF01.h"
 
+#include <stdlib.h>
 #include <string.h>
+#include <stdarg.h>
 
 /*----------------------------------------------------------------------------
  *      Thread 1 'Thread_Name': Sample thread
@@ -15,12 +18,15 @@ extern ARM_DRIVER_USART Driver_USART3;
 #define WIFI_EVENT_RECEIVE_TIMEOUT		0x10
 
 #define WIFI_EVENT_RECEIVE_STRING			0x20
+#define WIFI_EVENT_RECEIVE_WIND				0x40
 
 #define FRAME_SIZE	64
 #define BUFFER_SIZE 2048
 #define BUFFER_MASK 0x7ff
 
 char  ATRCV[BUFFER_SIZE];
+char  token[256];
+char* tokenPtr[10];
 char  buffer_rx[256];
 char* buffer_tx;
 uint16_t frame_offset;
@@ -34,87 +40,6 @@ osThreadId tid_WiFiThread;
 osThreadId tid_UserWiFiThread;
 osThreadDef (WiFiThread, osPriorityNormal, 1, 0);
 osThreadDef (UserWiFiThread, osPriorityNormal, 1, 0);
-
-// AT command list
-char AT                [] = "AT\r\n\0";
-char AT_CFUN           [] = "AT+CFUN\r\n\0";
-char AT_S_HELP         [] = "AT+S.HELP\r\n\0";
-char AT_S_GCFG         [] = "AT+S.GCFG";
-char AT_S_SCFG         [] = "AT+S.SCFG\r\n\0";
-char AT_S_SSIDTXT      [] = "AT+S.SSIDTXT\r\n\0";
-char AT_V              [] = "AT&V\r\n\0";
-char AT_F              [] = "AT&F\r\n\0";
-char AT_W              [] = "AT&W\r\n\0";
-char AT_S_NVW          [] = "AT+S.NVW\r\n\0";
-char AT_S_STS          [] = "AT+S.STS\r\n\0";
-char AT_S_PEERS        [] = "AT+S.PEERS\r\n\0";
-char AT_S_PING         [] = "AT+S.PING\r\n\0";
-char AT_S_SOCKON       [] = "AT+S.SOCKON\r\n\0";
-char AT_S_SOCKOS       [] = "AT+S.SOCKOS\r\n\0";
-char AT_S_SOCKW        [] = "AT+S.SOCKW\r\n\0";
-char AT_S_SOCKQ        [] = "AT+S.SOCKQ\r\n\0";
-char AT_S_SOCKR        [] = "AT+S.SOCKR\r\n\0";
-char AT_S_SOCKC        [] = "AT+S.SOCKC\r\n\0";
-char AT_S_SOCKD        [] = "AT+S.SOCKD\r\n\0";
-char AT_S_             [] = "AT+S.\r\n\0";
-char AT_S_HTTPGET      [] = "AT+S.HTTPGET\r\n\0";
-char AT_S_HTTPPOST     [] = "AT+S.HTTPPOST\r\n\0";
-char AT_S_FSC          [] = "AT+S.FSC\r\n\0";
-char AT_S_FSA          [] = "AT+S.FSA\r\n\0";
-char AT_S_FSD          [] = "AT+S.FSD\r\n\0";
-char AT_S_FSL          [] = "AT+S.FSL\r\n\0";
-char AT_S_FSP          [] = "AT+S.FSP\r\n\0";
-char AT_S_MFGTEST      [] = "AT+S.MFGTEST\r\n\0";
-char AT_S_PEMDATA      [] = "AT+S.PEMDATA\r\n\0";
-char AT_S_WIFI         [] = "AT+S.WIFI\r\n\0";
-char AT_S_ROAM         [] = "AT+S.ROAM\r\n\0";
-char AT_S_GPIOC        [] = "AT+S.GPIOC\r\n\0";
-char AT_S_GPIOR        [] = "AT+S.GPIOR\r\n\0";
-char AT_S_GPIOW        [] = "AT+S.GPIOW\r\n\0";
-char AT_S_FWUPDATE     [] = "AT+S.FWUPDATE\r\n\0";
-char AT_S_HTTPDFSUPDATE[] = "AT+S.HTTPDFSUPDATE\r\n\0";
-char AT_S_HTTPDFSERASE [] = "AT+S.HTTPDFSERASE \r\n\0";
-char AT_S_HTTPD        [] = "AT+S.HTTPD\r\n\0";
-char AT_S_SCAN         [] = "AT+S.SCAN\r\n\0";
-char AT_S_ADC          [] = "AT+S.ADC\r\n\0";
-char AT_S_DAC          [] = "AT+S.DAC\r\n\0";
-char AT_S_PWM          [] = "AT+S.PWM\r\n\0";
-char AT_S_TLSCERT      [] = "AT+S.TLSCERT\r\n\0";
-char AT_S_TLSCERT2     [] = "AT+S.TLSCERT2\r\n\0";
-char AT_S_TLSDOMAIN    [] = "AT+S.TLSDOMAIN\r\n\0";
-char AT_S_SETTIME      [] = "AT+S.SETTIME\r\n\0";
-char AT_S_RMPEER       [] = "AT+S.RMPEER\r\n\0";
-char AT_S_HTTPREQ      [] = "AT+S.HTTPREQ\r\n\0";
-char AT_S_FSR          [] = "AT+S.FSR\r\n\0";
-char AT_S_HTTPDFSWRITE [] = "AT+S.HTTPDFSWRITE \r\n\0";
-
-bool SkeepATStart()
-{
-	bool skip = false;
-	while (frame_read <= frame_write)
-	{
-		if ((ATRCV[frame_read & BUFFER_MASK] != '\n') && (ATRCV[frame_read & BUFFER_MASK] != '\r'))
-			return true;
-		frame_read++;
-	}
-	return false;
-}
-
-bool CopyWhileNotEnd(char* dst, uint16_t* pos)
-{
-	while (frame_read < frame_write)
-	{
-		if ((ATRCV[frame_read & BUFFER_MASK] == '\n') || (ATRCV[frame_read & BUFFER_MASK] == '\r'))
-		{
-			frame_read++;
-			return true;
-		}
-		dst[*pos] = ATRCV[frame_read & BUFFER_MASK];
-		(*pos)++;
-		frame_read++;
-	}
-	return false;
-}
 
 /* Private functions ---------------------------------------------------------*/
 void WIFI_USART_callback(uint32_t event)
@@ -194,6 +119,32 @@ int Init_WiFi_Thread (void) {
   return(0);
 }
 
+bool SkeepATStart()
+{
+	while (frame_read <= frame_write)
+	{
+		if ((ATRCV[frame_read & BUFFER_MASK] != '\n') && (ATRCV[frame_read & BUFFER_MASK] != '\r'))
+			return true;
+		frame_read++;
+	}
+	return false;
+}
+
+bool CopyWhileNotEnd(char* dst, uint16_t* pos)
+{
+	while (frame_read < frame_write)
+	{
+		if ((ATRCV[frame_read & BUFFER_MASK] == '\n') || (ATRCV[frame_read & BUFFER_MASK] == '\r'))
+		{
+			frame_read++;
+			return true;
+		}
+		dst[(*pos)++] = ATRCV[frame_read & BUFFER_MASK];
+		frame_read++;
+	}
+	return false;
+}
+
 bool GetStringFromWiFi(char* buffer, uint16_t *pos)
 {
 	osThreadYield ();
@@ -212,6 +163,7 @@ bool GetStringFromWiFi(char* buffer, uint16_t *pos)
 
 void WiFiThread (void const *argument) {
 	volatile uint16_t pos = 0;
+	uint16_t i;
 	Driver_USART3.Receive(ATRCV, FRAME_SIZE);
 	
   while (1) {
@@ -220,7 +172,24 @@ void WiFiThread (void const *argument) {
 		while (!GetStringFromWiFi(buffer_rx, (uint16_t*)&pos))
 			osThreadYield ();
 		buffer_rx[pos] = '\0';
-		osSignalSet(tid_UserWiFiThread, WIFI_EVENT_RECEIVE_STRING);
+		
+		if ((pos > 4) && (buffer_rx[0] == '+') &&	(buffer_rx[1] == 'W') && (buffer_rx[2] == 'I') &&	(buffer_rx[3] == 'N') && (buffer_rx[4] == 'D'))
+		{
+			i = 0;
+			tokenPtr[i]=strtok(buffer_rx, ":");
+			i++;
+
+			while (tokenPtr[i-1] != NULL)
+			{ 
+				tokenPtr[i] = strtok(NULL, ":");
+				i++;		
+			}
+			
+			osSignalSet(tid_UserWiFiThread, WIFI_EVENT_RECEIVE_WIND | WIFI_EVENT_RECEIVE_STRING);
+		}
+		else
+			osSignalSet(tid_UserWiFiThread, WIFI_EVENT_RECEIVE_STRING);
+		
     osThreadYield ();
   }
 }
@@ -228,31 +197,78 @@ void WiFiThread (void const *argument) {
 bool SendAT(char* str)
 {
 	Driver_USART3.Send(str, strlen(str));
-	osThreadYield (); // Receive "OK"
-	osSignalWait(WIFI_EVENT_RECEIVE_STRING, osWaitForever);
-	if (strcmp(buffer_rx, "OK") != 0)
-		return false;
-	return true;
+	osThreadYield (); // Wait "OK"
+	while (osSignalWait(WIFI_EVENT_RECEIVE_STRING, 1000).status != osEventTimeout)
+	{
+		if (strcmp(strtok(buffer_rx, ":\n\r"), "ERROR") == 0)
+			return false;
+		if (strcmp(buffer_rx, "OK") == 0)
+			return true;
+	}
+	return false;
+}
+
+void AsyncSendAT(char* str)
+{
+	Driver_USART3.Send(str, strlen(str));
+}
+
+int16_t GetID()
+{
+	if (osSignalWait(WIFI_EVENT_RECEIVE_STRING, 1000).status != osEventTimeout)
+	{
+		if (strcmp(strtok(buffer_rx, ":\n\r"), "ID") == 0)
+			return atol(strtok(NULL, ":\n\r"));
+	}
+	return -1;
+}
+
+bool WaitOK()
+{
+	while (osSignalWait(WIFI_EVENT_RECEIVE_STRING, 1000).status != osEventTimeout)
+	{
+		if (strcmp(strtok(buffer_rx, ":\n\r"), "ERROR") == 0)
+			return false;
+		if (strcmp(buffer_rx, "OK") == 0)
+			return true;
+	}
+	return false;
+}
+
+int16_t WaitForWINDCommands(uint16_t timeout, uint16_t argc, ...)
+{
+	va_list ap;
+	for (int i = 0; i < timeout; i++)
+	{
+		osEvent event = osSignalWait(WIFI_EVENT_RECEIVE_WIND, 3000);
+		
+		// if not timeout, check for input WIND command
+		if (event.status != osEventTimeout)
+		{			
+			uint16_t id = atol(tokenPtr[1]);
+			
+			va_start(ap, argc);
+			for (int j = 0; j < argc; j++)
+					if (id == va_arg(ap, int))
+					{
+						va_end(ap);
+						return id;
+					}
+					
+			va_end(ap);
+		}
+		
+		osThreadYield ();
+	}
+	
+	return -1;
 }
 
 void UserWiFiThread (void const *argument) {
-	// Test WiFi
-	Driver_USART3.Send(AT, strlen(AT));
-	
-	// Receive "OK"
-	osThreadYield ();
-	osSignalWait(WIFI_EVENT_RECEIVE_STRING, osWaitForever);
-	if (strcmp(buffer_rx, "OK") != 0)
-		return;
-	
-	// Get Host Name
-	buffer_tx = strcat(AT_S_GCFG, "=ip_hostname\r\n\0");
-	Driver_USART3.Send(buffer_tx, strlen(buffer_tx));
-	osThreadYield (); // Receive host name
-	osSignalWait(WIFI_EVENT_RECEIVE_STRING, osWaitForever);
-	osThreadYield (); // Receive "OK"
-	osSignalWait(WIFI_EVENT_RECEIVE_STRING, osWaitForever);
-	
+	if (!SendAT(AT)) return;
+
+	/*
+	// STA mode
 	SendAT("AT+S.SSIDTXT=ASUS\r\n");
 	SendAT("AT+S.SCFG=wifi_wpa_psk_text,host1234\r\n");
 	SendAT("AT+S.SCFG=wifi_priv_mode,2\r\n");
@@ -261,16 +277,59 @@ void UserWiFiThread (void const *argument) {
 	SendAT("AT&W\r\n");
 	SendAT("AT+CFUN=1\r\n");
 	
+	// Mini AP mode
+	SendAT("AT+S.SSIDTXT=Calipso\r\n");
+	SendAT("AT+S.SCFG=wifi_priv_mode,0\r\n");
+	SendAT("AT+S.SCFG=wifi_mode,3\r\n");
+	SendAT("AT+S.SCFG=ip_ipaddr,192.168.1.10\r\n");
+	SendAT("AT+S.SCFG=ip_gw,192.168.1.1\r\n");
+	SendAT("AT+S.SCFG=ip_dns,192.168.1.1\r\n");
+	SendAT("AT+S.SCFG=ip_netmask,255.255.255.0\r\n");
+	SendAT("AT+S.SCFG=ip_use_dhcp,1\r\n");
+	SendAT("AT&W\r\n");
+	SendAT("AT+CFUN=1\r\n");*/
+	
+	// Restart WiFi
+	AsyncSendAT("AT+CFUN=1\r\n");
+	
+	// Wait for link up
+	WaitForWINDCommands(10, 1, (int)WIND_MSG_WIFIUP);
+	
+	/*
+	// Connect to server
+	SendAT("AT+S.SOCKON=109.123.137.154,32000,t,ind\r\n");
+	GetID();
+	WaitOK();
+	
+	// Send to server
+	SendAT("AT+S.SOCKW=0,15\r\n");
+	
+	// Send data to client
+	Driver_USART3.Send("Hello client!\r\n", 15);
+	
+	// Wait OK
+	WaitOK();
+	
+	// Send to server
+	SendAT("AT+S.SOCKW=0,14\r\n");
+	
+	// Send data to client
+	Driver_USART3.Send("How are you!\r\n", 14);
+	
+	// Wait OK
+	WaitOK();*/
+		
+	/*// Listening on port 32000 using TCP
+	SendAT("AT+S.SOCKD=32000,t\r\n");
+	
+	// Wait for data mode input
+	WaitForWINDCommands(10, 1, (int)WIND_MSG_DATA_MODE);
+	
+	// Send data to client
+	Driver_USART3.Send("Hello client!\r\n", 15);*/
+	
   while (1) {
     ; // Insert thread code here...
-		
-		//Driver_USART3.Send(AT_S_SCAN, strlen(AT_S_SCAN));
-		osSignalWait(WIFI_EVENT_RECEIVE_STRING, 3000);
-		while (strcmp(buffer_rx, "OK") != 0)
-		{
-			osThreadYield ();
-			osSignalWait(WIFI_EVENT_RECEIVE_STRING, 3000);
-		}
     osThreadYield ();
   }
 }

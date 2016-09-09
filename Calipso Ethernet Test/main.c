@@ -150,16 +150,19 @@ int main(void)
 		resolve_host();
 	}
 	
-	HAL_Init();
-	HAL_Delay(2000); // Wait for display initialization
+	/*HAL_Init();
+	SystemClock_Config();
+	SystemCoreClockUpdate();*/
 
   /* Add your application code here
      */
 
 #ifdef RTE_CMSIS_RTOS                   // when using CMSIS RTOS
 	Init_MainSPI_Thread();
-	Init_Main_Thread();
 	Init_WiFi_Thread();
+	
+	HAL_Delay(3000); 											// Wait for display initialization
+	Init_Main_Thread();
 
   osKernelStart();                      // start thread execution 
 #endif
