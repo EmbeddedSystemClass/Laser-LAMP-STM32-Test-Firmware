@@ -2,6 +2,7 @@
 #include "cmsis_os.h"                                           // CMSIS RTOS header file
 #include "DGUS.h"
 #include "Driver_USART.h"
+#include "LaserMisc.h"
 
 #include <string.h>
 
@@ -49,11 +50,18 @@ int Init_Main_Thread (void) {
 }
 
 void MainThread (void const *argument) {
+	static uint16_t last_pic_id = 0;
 	uint16_t pic_id;
 
   while (1) {
     ; // Insert thread code here...
 		pic_id = GetPicId(100);
+		
+		if (pic_id == FRAME_PICID_SERVICE)
+			__MISC_RELAY2_ON();
+		else
+			__MISC_RELAY2_OFF();
+			
 		
 		// GUI Frames process
 		switch (pic_id)
@@ -69,6 +77,8 @@ void MainThread (void const *argument) {
 			default:
 				break;
 		}
+		
+		last_pic_id = pic_id;
 		
     osThreadYield ();                                           // suspend thread
   }

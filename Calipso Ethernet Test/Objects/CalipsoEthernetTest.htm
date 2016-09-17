@@ -3,7 +3,7 @@
 <title>Static Call Graph - [.\Objects\CalipsoEthernetTest.axf]</title></head>
 <body><HR>
 <H1>Static Call Graph for image .\Objects\CalipsoEthernetTest.axf</H1><HR>
-<BR><P>#&#060CALLGRAPH&#062# ARM Linker, 5060183: Last Updated: Thu Sep 08 15:51:01 2016
+<BR><P>#&#060CALLGRAPH&#062# ARM Linker, 5060183: Last Updated: Sat Sep 17 10:38:03 2016
 <BR><P>
 <H3>Maximum Stack Usage =        472 bytes + Unknown(Functions without stacksize, Cycles, Untraceable Function Pointers)</H3><H3>
 Call chain for Maximum Stack Depth:</H3>
@@ -1120,9 +1120,9 @@ Global Symbols
 <LI><a href="#[d7]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;net_eth_iface_init
 <LI><a href="#[e3]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;net_dns_client_init
 <LI><a href="#[298]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;net_ndp_init
+<LI><a href="#[118]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;_initio
 <LI><a href="#[179]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;_fopen$locked
 <LI><a href="#[167]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;_fclose_internal
-<LI><a href="#[118]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;_initio
 </UL>
 
 <P><STRONG><a name="[33a]"></a>__aeabi_memclr8</STRONG> (Thumb, 0 bytes, Stack size 4 bytes, rt_memclr_w.o(.text), UNUSED)
@@ -1411,10 +1411,10 @@ Global Symbols
 <BR><BR>[Stack]<UL><LI>Max Depth = 172<LI>Call Chain = _initio &rArr; freopen &rArr; _freopen_locked &rArr; _fclose_internal &rArr; _fflush &rArr; _writebuf &rArr; _sys_write &rArr; stdout_putchar
 </UL>
 <BR>[Calls]<UL><LI><a href="#[163]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;_mutex_initialize
-<LI><a href="#[164]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;freopen
-<LI><a href="#[166]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;setvbuf
 <LI><a href="#[162]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_memclr4
 <LI><a href="#[165]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__rt_SIGRTRED
+<LI><a href="#[164]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;freopen
+<LI><a href="#[166]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;setvbuf
 </UL>
 <BR>[Called By]<UL><LI><a href="#[117]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__rt_lib_init_stdio_2
 </UL>
@@ -1424,8 +1424,8 @@ Global Symbols
 </UL>
 <BR>[Calls]<UL><LI><a href="#[e8]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;_mutex_release
 <LI><a href="#[e7]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;_mutex_acquire
-<LI><a href="#[167]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;_fclose_internal
 <LI><a href="#[168]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;free
+<LI><a href="#[167]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;_fclose_internal
 </UL>
 <BR>[Called By]<UL><LI><a href="#[119]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__rt_lib_shutdown_stdio_2
 </UL>
@@ -1491,8 +1491,8 @@ Global Symbols
 <BR>[Calls]<UL><LI><a href="#[16b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;_free_internal
 <LI><a href="#[16c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__rt_heap_descriptor
 </UL>
-<BR>[Called By]<UL><LI><a href="#[167]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;_fclose_internal
-<LI><a href="#[11a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;_terminateio
+<BR>[Called By]<UL><LI><a href="#[11a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;_terminateio
+<LI><a href="#[167]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;_fclose_internal
 </UL>
 
 <P><STRONG><a name="[15f]"></a>_printf_fp_infnan</STRONG> (Thumb, 112 bytes, Stack size 24 bytes, _printf_fp_infnan.o(.text))
@@ -1539,8 +1539,8 @@ Global Symbols
 <LI><a href="#[162]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_memclr4
 <LI><a href="#[174]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;_fflush
 </UL>
-<BR>[Called By]<UL><LI><a href="#[176]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;_freopen_locked
-<LI><a href="#[11a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;_terminateio
+<BR>[Called By]<UL><LI><a href="#[11a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;_terminateio
+<LI><a href="#[176]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;_freopen_locked
 </UL>
 
 <P><STRONG><a name="[341]"></a>fclose</STRONG> (Thumb, 0 bytes, Stack size 32 bytes, fclose.o(.text), UNUSED)
@@ -1568,9 +1568,9 @@ Global Symbols
 <BR><BR>[Calls]<UL><LI><a href="#[e8]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;_mutex_release
 <LI><a href="#[163]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;_mutex_initialize
 <LI><a href="#[e7]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;_mutex_acquire
-<LI><a href="#[176]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;_freopen_locked
 <LI><a href="#[162]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_memclr4
 <LI><a href="#[172]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;malloc
+<LI><a href="#[176]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;_freopen_locked
 </UL>
 
 <P><STRONG><a name="[165]"></a>__rt_SIGRTRED</STRONG> (Thumb, 14 bytes, Stack size 8 bytes, defsig_rtred_outer.o(.text))
@@ -1640,8 +1640,8 @@ Global Symbols
 <BR><BR>[Calls]<UL><LI><a href="#[181]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;_malloc_internal
 <LI><a href="#[16c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__rt_heap_descriptor
 </UL>
-<BR>[Called By]<UL><LI><a href="#[179]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;_fopen$locked
-<LI><a href="#[16d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__flsbuf
+<BR>[Called By]<UL><LI><a href="#[16d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__flsbuf
+<LI><a href="#[179]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;_fopen$locked
 </UL>
 
 <P><STRONG><a name="[130]"></a>_printf_char_file</STRONG> (Thumb, 58 bytes, Stack size 24 bytes, _printf_char_file_locked.o(.text))
@@ -1691,8 +1691,8 @@ Global Symbols
 </UL>
 <BR>[Calls]<UL><LI><a href="#[173]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;_writebuf
 </UL>
-<BR>[Called By]<UL><LI><a href="#[167]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;_fclose_internal
-<LI><a href="#[16e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;_deferredlazyseek
+<BR>[Called By]<UL><LI><a href="#[16e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;_deferredlazyseek
+<LI><a href="#[167]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;_fclose_internal
 </UL>
 
 <P><STRONG><a name="[16e]"></a>_deferredlazyseek</STRONG> (Thumb, 60 bytes, Stack size 8 bytes, stdio.o(.text), UNUSED)
@@ -1984,6 +1984,7 @@ Global Symbols
 <P><STRONG><a name="[1a6]"></a>HAL_GPIO_WritePin</STRONG> (Thumb, 12 bytes, Stack size 0 bytes, stm32f4xx_hal_gpio.o(i.HAL_GPIO_WritePin))
 <BR><BR>[Called By]<UL><LI><a href="#[1c7]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;LampControlGPIOInit
 <LI><a href="#[6f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;MainSPI_callback
+<LI><a href="#[8e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;MainThread
 <LI><a href="#[1e6]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SetDACValue
 <LI><a href="#[1d1]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ServiceFrame_Process
 <LI><a href="#[1a2]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_MspInit
@@ -2326,7 +2327,7 @@ Global Symbols
 </UL>
 <BR>[Address Reference Count : 1]<UL><LI> spithread.o(i.Init_MainSPI_Thread)
 </UL>
-<P><STRONG><a name="[8e]"></a>MainThread</STRONG> (Thumb, 56 bytes, Stack size 0 bytes, mainthread.o(i.MainThread))
+<P><STRONG><a name="[8e]"></a>MainThread</STRONG> (Thumb, 86 bytes, Stack size 0 bytes, mainthread.o(i.MainThread))
 <BR><BR>[Stack]<UL><LI>Max Depth = 76<LI>Call Chain = MainThread &rArr; ServiceFrame_Process &rArr; WriteVariableConvert16 &rArr; convert_array_w
 </UL>
 <BR>[Calls]<UL><LI><a href="#[197]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;osThreadYield
@@ -2334,6 +2335,7 @@ Global Symbols
 <LI><a href="#[1cf]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SetPicId
 <LI><a href="#[1d0]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;PasswordFrame_Process
 <LI><a href="#[1d1]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ServiceFrame_Process
+<LI><a href="#[1a6]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_GPIO_WritePin
 </UL>
 <BR>[Address Reference Count : 1]<UL><LI> mainthread.o(.constdata)
 </UL>
@@ -2396,7 +2398,7 @@ Global Symbols
 <BR>[Called By]<UL><LI><a href="#[91]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;UserWiFiThread
 </UL>
 
-<P><STRONG><a name="[1d1]"></a>ServiceFrame_Process</STRONG> (Thumb, 320 bytes, Stack size 40 bytes, serviceframe.o(i.ServiceFrame_Process))
+<P><STRONG><a name="[1d1]"></a>ServiceFrame_Process</STRONG> (Thumb, 324 bytes, Stack size 40 bytes, serviceframe.o(i.ServiceFrame_Process))
 <BR><BR>[Stack]<UL><LI>Max Depth = 76<LI>Call Chain = ServiceFrame_Process &rArr; WriteVariableConvert16 &rArr; convert_array_w
 </UL>
 <BR>[Calls]<UL><LI><a href="#[194]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;osSignalWait
@@ -2574,14 +2576,14 @@ Global Symbols
 </UL>
 
 <P><STRONG><a name="[e7]"></a>_mutex_acquire</STRONG> (Thumb, 22 bytes, Stack size 0 bytes, rtx_conf_cm.o(i._mutex_acquire))
-<BR><BR>[Called By]<UL><LI><a href="#[179]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;_fopen$locked
-<LI><a href="#[164]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;freopen
-<LI><a href="#[176]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;_freopen_locked
-<LI><a href="#[166]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;setvbuf
-<LI><a href="#[16b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;_free_internal
+<BR><BR>[Called By]<UL><LI><a href="#[16b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;_free_internal
 <LI><a href="#[11a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;_terminateio
 <LI><a href="#[130]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;_printf_char_file
 <LI><a href="#[181]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;_malloc_internal
+<LI><a href="#[179]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;_fopen$locked
+<LI><a href="#[164]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;freopen
+<LI><a href="#[176]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;_freopen_locked
+<LI><a href="#[166]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;setvbuf
 </UL>
 
 <P><STRONG><a name="[163]"></a>_mutex_initialize</STRONG> (Thumb, 34 bytes, Stack size 8 bytes, rtx_conf_cm.o(i._mutex_initialize))
@@ -2589,20 +2591,20 @@ Global Symbols
 </UL>
 <BR>[Calls]<UL><LI><a href="#[205]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;rt_mut_init
 </UL>
-<BR>[Called By]<UL><LI><a href="#[179]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;_fopen$locked
-<LI><a href="#[118]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;_initio
+<BR>[Called By]<UL><LI><a href="#[118]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;_initio
 <LI><a href="#[180]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__Heap_Initialize
+<LI><a href="#[179]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;_fopen$locked
 </UL>
 
 <P><STRONG><a name="[e8]"></a>_mutex_release</STRONG> (Thumb, 18 bytes, Stack size 0 bytes, rtx_conf_cm.o(i._mutex_release))
-<BR><BR>[Called By]<UL><LI><a href="#[179]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;_fopen$locked
-<LI><a href="#[164]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;freopen
-<LI><a href="#[176]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;_freopen_locked
-<LI><a href="#[166]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;setvbuf
-<LI><a href="#[16b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;_free_internal
+<BR><BR>[Called By]<UL><LI><a href="#[16b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;_free_internal
 <LI><a href="#[11a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;_terminateio
 <LI><a href="#[130]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;_printf_char_file
 <LI><a href="#[181]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;_malloc_internal
+<LI><a href="#[179]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;_fopen$locked
+<LI><a href="#[164]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;freopen
+<LI><a href="#[176]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;_freopen_locked
+<LI><a href="#[166]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;setvbuf
 </UL>
 
 <P><STRONG><a name="[175]"></a>_sys_close</STRONG> (Thumb, 38 bytes, Stack size 0 bytes, retarget_io.o(i._sys_close))
@@ -2778,10 +2780,10 @@ Global Symbols
 <P><STRONG><a name="[d5]"></a>netCore_Thread</STRONG> (Thumb, 76 bytes, Stack size 0 bytes, net_sys.o(i.netCore_Thread))
 <BR><BR>[Calls]<UL><LI><a href="#[197]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;osThreadYield
 <LI><a href="#[194]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;osSignalWait
-<LI><a href="#[274]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;osSignalClear
 <LI><a href="#[273]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;sys_proc_tick
 <LI><a href="#[276]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;net_sys_unlock
 <LI><a href="#[275]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;net_sys_lock
+<LI><a href="#[274]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;osSignalClear
 </UL>
 <BR>[Address Reference Count : 1]<UL><LI> net_config.o(.constdata)
 </UL>
@@ -2850,7 +2852,6 @@ Global Symbols
 <LI>Call Chain = netInitialize &rArr; net_mem_init &rArr; net_dbg_info &rArr; __2printf &rArr; _printf_char_file &rArr; _printf_char_common &rArr; __printf
 </UL>
 <BR>[Calls]<UL><LI><a href="#[128]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;osThreadCreate
-<LI><a href="#[27d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;osMutexCreate
 <LI><a href="#[27e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;net_debug_init
 <LI><a href="#[20b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;net_dbg_info
 <LI><a href="#[209]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;net_dbg_error
@@ -2862,6 +2863,7 @@ Global Symbols
 <LI><a href="#[275]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;net_sys_lock
 <LI><a href="#[283]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;osTimerStart
 <LI><a href="#[282]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;osTimerCreate
+<LI><a href="#[27d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;osMutexCreate
 <LI><a href="#[162]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_memclr4
 </UL>
 <BR>[Called By]<UL><LI><a href="#[93]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
@@ -3379,7 +3381,6 @@ Global Symbols
 <LI>Call Chain = net_eth_iface_init &rArr; net_addr6_aton &rArr; __0sscanf &rArr; __vfscanf_char &rArr; __vfscanf &rArr; _scanf_int
 </UL>
 <BR>[Calls]<UL><LI><a href="#[128]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;osThreadCreate
-<LI><a href="#[29a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;osSemaphoreCreate
 <LI><a href="#[20b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;net_dbg_info
 <LI><a href="#[209]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;net_dbg_error
 <LI><a href="#[281]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;net_sys_error
@@ -3391,6 +3392,7 @@ Global Symbols
 <LI><a href="#[27c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;net_addr6_aton
 <LI><a href="#[27b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;net_addr4_aton
 <LI><a href="#[284]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;netMAC_aton
+<LI><a href="#[29a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;osSemaphoreCreate
 <LI><a href="#[162]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_memclr4
 </UL>
 <BR>[Address Reference Count : 1]<UL><LI> net_config.o(.constdata)
@@ -3839,8 +3841,8 @@ Global Symbols
 <BR><BR>[Stack]<UL><LI>Max Depth = 208 + Unknown Stack Size
 <LI>Call Chain = net_mem_init &rArr; net_dbg_info &rArr; __2printf &rArr; _printf_char_file &rArr; _printf_char_common &rArr; __printf
 </UL>
-<BR>[Calls]<UL><LI><a href="#[27d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;osMutexCreate
-<LI><a href="#[20b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;net_dbg_info
+<BR>[Calls]<UL><LI><a href="#[20b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;net_dbg_info
+<LI><a href="#[27d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;osMutexCreate
 </UL>
 <BR>[Called By]<UL><LI><a href="#[25b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;netInitialize
 </UL>
@@ -4218,13 +4220,13 @@ Global Symbols
 </UL>
 
 <P><STRONG><a name="[260]"></a>osMutexRelease</STRONG> (Thumb, 18 bytes, Stack size 0 bytes, rt_cmsis.o(i.osMutexRelease))
-<BR><BR>[Called By]<UL><LI><a href="#[25f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;mem_unlock
-<LI><a href="#[276]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;net_sys_unlock
+<BR><BR>[Called By]<UL><LI><a href="#[276]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;net_sys_unlock
+<LI><a href="#[25f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;mem_unlock
 </UL>
 
 <P><STRONG><a name="[25e]"></a>osMutexWait</STRONG> (Thumb, 18 bytes, Stack size 0 bytes, rt_cmsis.o(i.osMutexWait))
-<BR><BR>[Called By]<UL><LI><a href="#[25d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;mem_lock
-<LI><a href="#[275]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;net_sys_lock
+<BR><BR>[Called By]<UL><LI><a href="#[275]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;net_sys_lock
+<LI><a href="#[25d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;mem_lock
 </UL>
 
 <P><STRONG><a name="[29a]"></a>osSemaphoreCreate</STRONG> (Thumb, 38 bytes, Stack size 0 bytes, rt_cmsis.o(i.osSemaphoreCreate))
@@ -4319,8 +4321,8 @@ Global Symbols
 <P><STRONG><a name="[92]"></a>osTimerThread</STRONG> (Thumb, 38 bytes, Stack size 0 bytes, rt_cmsis.o(i.osTimerThread))
 <BR><BR>[Stack]<UL><LI>Max Depth = 40<LI>Call Chain = osTimerThread &rArr; osMessageGet &rArr; isrMessageGet &rArr; isr_mbx_receive &rArr; rt_psq_enq
 </UL>
-<BR>[Calls]<UL><LI><a href="#[2cf]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;osMessageGet
-<LI><a href="#[2d0]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;osTimerCall
+<BR>[Calls]<UL><LI><a href="#[2d0]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;osTimerCall
+<LI><a href="#[2cf]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;osMessageGet
 </UL>
 <BR>[Address Reference Count : 1]<UL><LI> rtx_conf_cm.o(.constdata)
 </UL>
@@ -6643,8 +6645,8 @@ Local Symbols
 <BR>[Calls]<UL><LI><a href="#[e8]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;_mutex_release
 <LI><a href="#[e7]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;_mutex_acquire
 <LI><a href="#[177]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;_sys_open
-<LI><a href="#[167]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;_fclose_internal
 <LI><a href="#[178]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;_fseek
+<LI><a href="#[167]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;_fclose_internal
 </UL>
 <BR>[Called By]<UL><LI><a href="#[179]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;_fopen$locked
 <LI><a href="#[164]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;freopen

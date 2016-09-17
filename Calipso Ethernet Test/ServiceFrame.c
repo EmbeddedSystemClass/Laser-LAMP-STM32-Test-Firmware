@@ -49,7 +49,7 @@ void ServiceFrame_Process(uint16_t pic_id)
 	
 	if (frameData_Service.duration_set == 0x01) 
 	{	
-		LampSetPulseDuration(frameData_Service.duration_value);
+		LampSetPulseDuration(frameData_Service.duration_value-75);
 		frameData_Service.duration_set = 0x00;
 		update = true;
 	}
