@@ -35,6 +35,7 @@ void ServiceFrame_Process(uint16_t pic_id)
 	bool update = false;
 	FRAMEDATA_SERVICE* value;
 	ReadVariable(FRAMEDATA_SERVICE_BASE, (void**)&value, sizeof(frameData_Service));
+	osSignalWait(DGUS_EVENT_SEND_COMPLETED, 100);
 	osSignalWait(DGUS_EVENT_RECEIVE_COMPLETED, 100);
 	
 	convert_array_w((uint16_t*)&frameData_Service, (uint16_t*)value, sizeof(frameData_Service) / 2);

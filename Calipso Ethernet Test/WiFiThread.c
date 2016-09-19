@@ -283,10 +283,9 @@ int16_t WaitForWINDCommands(uint16_t timeout, uint16_t argc, ...)
 
 void UserWiFiThread (void const *argument) {
 	HAL_GPIO_WritePin(GPIOG, GPIO_PIN_2, GPIO_PIN_SET);
-	if (!SendAT(AT)) return;
+	//if (!SendAT(AT)) return;
 
-	/*
-	// STA mode
+	/*// STA mode
 	SendAT("AT+S.SSIDTXT=ASUS\r\n");
 	SendAT("AT+S.SCFG=wifi_wpa_psk_text,host1234\r\n");
 	SendAT("AT+S.SCFG=wifi_priv_mode,2\r\n");

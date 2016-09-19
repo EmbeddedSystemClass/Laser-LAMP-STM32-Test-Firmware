@@ -157,7 +157,7 @@ int main(void)
 	
 	//HAL_Init();
 	//SystemClock_Config();
-	SystemCoreClockUpdate();
+	//SystemCoreClockUpdate();
 
   /* Add your application code here
      */

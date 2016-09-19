@@ -6,9 +6,9 @@
 #include <stdbool.h>
 #include "arm_math.h"
 
-void Init_DS18B20();
-bool DS18B20_Reset();
-void DS18B20_StartConvertion();
-uint16_t DS18B20_ReadData();
+void Init_DS18B20(void);
+bool DS18B20_Reset(void);
+void DS18B20_StartConvertion(void);
+uint16_t DS18B20_ReadData(void);
 
 #endif

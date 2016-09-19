@@ -69,7 +69,7 @@ void HAL_UART_TxCpltCallback(UART_HandleTypeDef *huart)
 {
 }*/
 
-void Init_DS18B20()
+void Init_DS18B20(void)
 {
 	/*Initialize the USART driver */
   Driver_USART6.Initialize(DS18B20_USART_callback);
@@ -109,7 +109,7 @@ void Init_DS18B20()
 	HAL_NVIC_EnableIRQ(USART6_IRQn);*/
 }
 
-bool DS18B20_Reset()
+bool DS18B20_Reset(void)
 {
 	uint8_t data_in = 0x00, data_out = 0xf0;
 	/*huart.Init = init_uart_9600;
@@ -154,7 +154,7 @@ bool DS18B20_Reset()
 	return (data_in != 0xf0);
 }
 
-void DS18B20_StartConvertion()
+void DS18B20_StartConvertion(void)
 {
 	recv_complete = false;
 	Driver_USART6.Send((void*)&convert_T, 16);
@@ -162,7 +162,7 @@ void DS18B20_StartConvertion()
 	while (!recv_complete);
 }
 
-uint16_t DS18B20_ReadData()
+uint16_t DS18B20_ReadData(void)
 {	
 	recv_complete = false;
 	Driver_USART6.Receive((void*)&t_buffer, 32);

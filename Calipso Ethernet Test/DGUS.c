@@ -15,7 +15,7 @@ uint16_t convert_w(uint16_t value)
 
 uint32_t convert_d(uint32_t value)
 {
-	return value;
+	return (value >> 24) || ((value & 0xff0000) >> 8) || ((value & 0xff00) << 8) || ((value & 0xff) << 24);
 }
 
 void convert_array_w(uint16_t* dst, uint16_t* src, uint16_t num)
@@ -35,6 +35,7 @@ void WriteRegister(uint8_t addr, void *data, uint8_t num)
 	
 	memcpy(dgus_buffer_tx + 5, data, num);
 	
+	osSignalClear(tid_MainThread, 0);
 	DGUS_USART_Driver->Send(dgus_buffer_tx, num + 5);
 }
 
@@ -49,6 +50,7 @@ void WriteVariable(uint16_t addr, void *data, uint8_t num)
 	
 	memcpy(dgus_buffer_tx + 6, data, num);
 	
+	osSignalClear(tid_MainThread, 0);
 	DGUS_USART_Driver->Send(dgus_buffer_tx, num + 6);
 }
 
@@ -63,6 +65,7 @@ void WriteVariableConvert16(uint16_t addr, void *data, uint8_t num)
 	
 	convert_array_w((uint16_t*)(dgus_buffer_tx + 6), (uint16_t*)data, num / 2);
 	
+	osSignalClear(tid_MainThread, 0);
 	DGUS_USART_Driver->Send(dgus_buffer_tx, num + 6);
 }
 
@@ -76,6 +79,7 @@ void ReadRegister(uint8_t  addr, void **data, uint8_t num)
 	header->addr   = addr;
 	header->num    = num;
 	
+	osSignalClear(tid_MainThread, 0);
 	DGUS_USART_Driver->Send(dgus_buffer_tx, 6);
 	DGUS_USART_Driver->Receive(dgus_buffer_rx, num + 6);
 	
@@ -92,6 +96,7 @@ void ReadVariable(uint16_t  addr, void **data, uint8_t num)
 	header->addr   = convert_w(addr);
 	header->num    = num;
 	
+	osSignalClear(tid_MainThread, 0);
 	DGUS_USART_Driver->Send(dgus_buffer_tx, 7);
 	DGUS_USART_Driver->Receive(dgus_buffer_rx, num*2 + 7);
 	
@@ -102,14 +107,16 @@ uint32_t GetPicId(uint32_t timeout)
 {
 	uint16_t* pvalue;
 	ReadRegister(REGISTER_ADDR_PICID, (void**)&pvalue, 2);
+	osSignalWait(DGUS_EVENT_SEND_COMPLETED, timeout);
 	osSignalWait(DGUS_EVENT_RECEIVE_COMPLETED, timeout);
 	return convert_w(*pvalue);
 }
 
-void SetPicId(uint16_t pic_id)
+void SetPicId(uint16_t pic_id, uint16_t timeout)
 {
 	uint16_t value = convert_w(pic_id);
 	WriteRegister(REGISTER_ADDR_PICID, &value, sizeof(value));
+	osSignalWait(DGUS_EVENT_SEND_COMPLETED, timeout);
 }
 
 /* Private functions ---------------------------------------------------------*/
@@ -141,4 +148,40 @@ void DWIN_USART_callback(uint32_t event)
         __breakpoint(0);  /* Error: Call debugger or replace with custom error handling */
         break;
     }
+}
+
+/* *************************************** Helper Laser Diode Data Functions ************************** */
+
+void conver_laserdata(DGUS_LASERDIODE* dst, DGUS_LASERDIODE* src)
+{
+	dst->state								  = convert_w(src->state);
+	dst->mode                   = convert_w(src->mode);
+	convert_array_w((uint16_t*)&dst->laserprofile, (uint16_t*)&src->laserprofile, sizeof(DGUS_LASERPROFILE));
+	convert_array_w((uint16_t*)&dst->lasersettings, (uint16_t*)&src->lasersettings, sizeof(PDGUS_LASERSETTINGS));
+	dst->PulseCounter           = convert_d(src->PulseCounter);
+	dst->melanin                = convert_w(src->melanin);
+	dst->phototype              = convert_w(src->phototype);
+	dst->temperature            = convert_w(src->temperature);
+	dst->cooling                = convert_w(src->cooling);
+	dst->flow                   = convert_w(src->flow);
+	convert_array_w((uint16_t*)&dst->timer, (uint16_t*)&src->timer, sizeof(DGUS_PREPARETIMER));
+	dst->DatabaseSelectionIndex = convert_w(src->coolIcon);
+	dst->SessionPulseCounter    = convert_d(src->SessionPulseCounter);
+	convert_array_w((uint16_t*)&dst->buttons, (uint16_t*)&src->buttons, sizeof(DGUS_LASERDIODE_CONTROLBTN));
+}
+
+void WriteLaserDiodeDataConvert16(uint16_t addr, DGUS_LASERDIODE *data)
+{
+	DWIN_HEADERDATA* header = (DWIN_HEADERDATA*)dgus_buffer_tx;
+	
+	uint16_t num = sizeof(DGUS_LASERDIODE);
+	
+	header->header = convert_w(HEADER_WORD);
+	header->length = num + 3;
+	header->cmd    = 0x82;
+	header->addr   = convert_w(addr);
+	
+	conver_laserdata((DGUS_LASERDIODE*)(dgus_buffer_tx + 6), data);
+	
+	DGUS_USART_Driver->Send(dgus_buffer_tx, num + 6);
 }

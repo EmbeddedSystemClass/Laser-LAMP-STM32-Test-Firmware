@@ -412,6 +412,16 @@
               <FileType>1</FileType>
               <FilePath>.\PasswordFrame.c</FilePath>
             </File>
+            <File>
+              <FileName>LaserDiodeInputFrame.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\LaserDiodeInputFrame.c</FilePath>
+            </File>
+            <File>
+              <FileName>LaserDiodePrepareFrame.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\LaserDiodePrepareFrame.c</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
