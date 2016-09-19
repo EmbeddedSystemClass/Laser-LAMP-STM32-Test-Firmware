@@ -45,6 +45,7 @@
 #include <rl_net.h>
 #include "Driver_USART.h"
 #include "DGUS.h"
+#include "DS18B20.h"
 
 #include <math.h>
 #include "arm_math.h"
@@ -55,6 +56,8 @@
 #ifdef RTE_CMSIS_RTOS                   // when RTE component CMSIS RTOS is used
 #include "cmsis_os.h"                   // CMSIS RTOS header file
 #endif
+
+#define WIFI_EVENT_TEMPERATURE_UPDATE 0x80
 
 #ifdef RTE_CMSIS_RTOS_RTX
 extern uint32_t os_time;
@@ -76,6 +79,7 @@ uint32_t HAL_GetTick(void) {
 /* Private define ------------------------------------------------------------*/
 /* Private macro -------------------------------------------------------------*/
 /* Private variables ---------------------------------------------------------*/
+extern osThreadId tid_WiFiThread;
 /* Private function prototypes -----------------------------------------------*/
 static void SystemClock_Config(void);
 static void Error_Handler(void);
@@ -86,6 +90,7 @@ extern int  Init_WiFi_Thread (void);
 extern int  Init_Main_Thread (void);
 
 uint8_t rx_buffer[8];
+volatile float32_t temperature = 0;
 
 // Process DCHP server information
 void netDHCP_Notify (uint32_t if_num, uint8_t option, const uint8_t *val, uint32_t len) {
@@ -150,26 +155,37 @@ int main(void)
 		resolve_host();
 	}
 	
-	/*HAL_Init();
-	SystemClock_Config();
-	SystemCoreClockUpdate();*/
+	//HAL_Init();
+	//SystemClock_Config();
+	SystemCoreClockUpdate();
 
   /* Add your application code here
      */
 
 #ifdef RTE_CMSIS_RTOS                   // when using CMSIS RTOS
+	osKernelStart();                      // start thread execution 
+	
 	Init_MainSPI_Thread();
 	Init_WiFi_Thread();
+	Init_DS18B20();
 	
 	HAL_Delay(3000); 											// Wait for display initialization
 	Init_Main_Thread();
-
-  osKernelStart();                      // start thread execution 
 #endif
 
   /* Infinite loop */
   while (1)
   {
+		DS18B20_Reset();
+		DS18B20_StartConvertion();
+	
+		HAL_Delay(750); // delay 750 ms
+	
+		DS18B20_Reset();
+		uint16_t tt = DS18B20_ReadData();
+		temperature = tt * 0.0625f;
+		
+		osSignalSet(tid_WiFiThread, WIFI_EVENT_TEMPERATURE_UPDATE);
   }
 }
 

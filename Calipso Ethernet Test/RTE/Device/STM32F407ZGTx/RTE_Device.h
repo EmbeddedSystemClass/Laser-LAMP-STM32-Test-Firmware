@@ -506,10 +506,10 @@
 
 // <e> USART6 (Universal synchronous asynchronous receiver transmitter) [Driver_USART6]
 // <i> Configuration settings for Driver_USART6 in component ::CMSIS Driver:USART
-#define RTE_USART6                      0
+#define RTE_USART6                      1
 
 //   <o> USART6_TX Pin <0=>PA11 <1=>PC6 <2=>PG14
-#define RTE_USART6_TX_ID                0
+#define RTE_USART6_TX_ID                1
 #if    (RTE_USART6_TX_ID == 0)
 #define RTE_USART6_TX_PORT              GPIOA
 #define RTE_USART6_TX_BIT               11
@@ -524,7 +524,7 @@
 #endif
 
 //   <o> USART6_RX Pin <0=>PA12 <1=>PC7 <2=>PG9
-#define RTE_USART6_RX_ID                0
+#define RTE_USART6_RX_ID                2
 #if    (RTE_USART6_RX_ID == 0)
 #define RTE_USART6_RX_PORT              GPIOA
 #define RTE_USART6_RX_BIT               12
@@ -596,7 +596,7 @@
 //     <o4> Priority <0=>Low <1=>Medium <2=>High <3=>Very High
 //     <i>  Selects DMA Priority
 //   </e>
-#define RTE_USART6_RX_DMA               0
+#define RTE_USART6_RX_DMA               1
 #define RTE_USART6_RX_DMA_NUMBER        2
 #define RTE_USART6_RX_DMA_STREAM        1
 #define RTE_USART6_RX_DMA_CHANNEL       5
@@ -612,7 +612,7 @@
 //     <o4> Priority <0=>Low <1=>Medium <2=>High <3=>Very High
 //     <i>  Selects DMA Priority
 //   </e>
-#define RTE_USART6_TX_DMA               0
+#define RTE_USART6_TX_DMA               1
 #define RTE_USART6_TX_DMA_NUMBER        2
 #define RTE_USART6_TX_DMA_STREAM        6
 #define RTE_USART6_TX_DMA_CHANNEL       5

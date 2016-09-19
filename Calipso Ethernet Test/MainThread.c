@@ -67,7 +67,7 @@ void MainThread (void const *argument) {
 		switch (pic_id)
 		{
 			case FRAME_PICID_LOGO:
-				SetPicId(FRAME_PICID_MAINMENU);
+				//SetPicId(FRAME_PICID_MAINMENU);
 				break;
 			
 			// Frames process

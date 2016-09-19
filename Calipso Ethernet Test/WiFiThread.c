@@ -1,11 +1,17 @@
 
 #include "cmsis_os.h"                                           // CMSIS RTOS header file
+#include "stm32f4xx_hal.h"
 #include "Driver_USART.h"
 #include "SPWF01.h"
+#include "DGUS.h"
 
 #include <stdlib.h>
+#include <stdio.h>
 #include <string.h>
 #include <stdarg.h>
+
+#include <math.h>
+#include "arm_math.h"
 
 /*----------------------------------------------------------------------------
  *      Thread 1 'Thread_Name': Sample thread
@@ -19,10 +25,15 @@ extern ARM_DRIVER_USART Driver_USART3;
 
 #define WIFI_EVENT_RECEIVE_STRING			0x20
 #define WIFI_EVENT_RECEIVE_WIND				0x40
+#define WIFI_EVENT_TEMPERATURE_UPDATE	0x80
 
 #define FRAME_SIZE	64
 #define BUFFER_SIZE 2048
 #define BUFFER_MASK 0x7ff
+
+extern float32_t temperature;
+
+bool  WiFi_State_CommandMode = true;
 
 char  ATRCV[BUFFER_SIZE];
 char  token[256];
@@ -82,7 +93,7 @@ void WIFI_USART_callback(uint32_t event)
  
     case ARM_USART_EVENT_RX_OVERFLOW:
     case ARM_USART_EVENT_TX_UNDERFLOW:
-        __breakpoint(0);  /* Error: Call debugger or replace with custom error handling */
+        //__breakpoint(0);  /* Error: Call debugger or replace with custom error handling */
         break;
     }
 }
@@ -185,6 +196,12 @@ void WiFiThread (void const *argument) {
 				i++;		
 			}
 			
+			uint16_t id = atol(tokenPtr[1]);
+			if (id == WIND_MSG_COMMAND_MODE)
+				WiFi_State_CommandMode = true;
+			if (id == WIND_MSG_DATA_MODE)
+				WiFi_State_CommandMode = false;
+			
 			osSignalSet(tid_UserWiFiThread, WIFI_EVENT_RECEIVE_WIND | WIFI_EVENT_RECEIVE_STRING);
 		}
 		else
@@ -265,6 +282,7 @@ int16_t WaitForWINDCommands(uint16_t timeout, uint16_t argc, ...)
 }
 
 void UserWiFiThread (void const *argument) {
+	HAL_GPIO_WritePin(GPIOG, GPIO_PIN_2, GPIO_PIN_SET);
 	if (!SendAT(AT)) return;
 
 	/*
@@ -287,13 +305,22 @@ void UserWiFiThread (void const *argument) {
 	SendAT("AT+S.SCFG=ip_netmask,255.255.255.0\r\n");
 	SendAT("AT+S.SCFG=ip_use_dhcp,1\r\n");
 	SendAT("AT&W\r\n");
-	SendAT("AT+CFUN=1\r\n");*/
+	SendAT("AT+CFUN=1\r\n");
+	
+	// STA mode
+	SendAT("AT+S.SSIDTXT=ELTEX-40C0\r\n");
+	SendAT("AT+S.SCFG=wifi_wpa_psk_text,GP21167802\r\n");
+	SendAT("AT+S.SCFG=wifi_priv_mode,2\r\n");
+	SendAT("AT+S.SCFG=wifi_mode,1\r\n");
+	SendAT("AT+S.SCFG=ip_use_dhcp,1\r\n");
+	SendAT("AT&W\r\n");*/
 	
 	// Restart WiFi
 	AsyncSendAT("AT+CFUN=1\r\n");
 	
 	// Wait for link up
 	WaitForWINDCommands(10, 1, (int)WIND_MSG_WIFIUP);
+	HAL_GPIO_WritePin(GPIOG, GPIO_PIN_2, GPIO_PIN_RESET);
 	
 	/*
 	// Connect to server
@@ -319,17 +346,29 @@ void UserWiFiThread (void const *argument) {
 	// Wait OK
 	WaitOK();*/
 		
-	/*// Listening on port 32000 using TCP
+	// Listening on port 32000 using TCP
 	SendAT("AT+S.SOCKD=32000,t\r\n");
 	
 	// Wait for data mode input
 	WaitForWINDCommands(10, 1, (int)WIND_MSG_DATA_MODE);
 	
-	// Send data to client
-	Driver_USART3.Send("Hello client!\r\n", 15);*/
-	
   while (1) {
-    ; // Insert thread code here...
+    char str[256];
+		if (!WiFi_State_CommandMode)
+		{
+			sprintf(str, "%f C\n", temperature);
+		
+			osSignalWait(WIFI_EVENT_TEMPERATURE_UPDATE, 2000);
+		
+			// Send data to client
+			Driver_USART3.Send(str, strlen(str));
+		}
+		else
+		{
+			// Wait for data mode input
+			WaitForWINDCommands(1, 1, (int)WIND_MSG_DATA_MODE);
+		}
+		
     osThreadYield ();
   }
 }

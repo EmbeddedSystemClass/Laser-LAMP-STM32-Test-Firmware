@@ -222,6 +222,13 @@ void EXTI15_10_IRQHandler(void)
 	HAL_GPIO_EXTI_IRQHandler(GPIO_PIN_15); // LMP Ready
 }
 
+extern UART_HandleTypeDef huart;
+
+/*void USART6_IRQHandler(void)
+{
+	HAL_UART_IRQHandler(&huart);
+}*/
+
 /**
   * @}
   */ 
