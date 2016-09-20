@@ -397,6 +397,11 @@
               <FileType>1</FileType>
               <FilePath>.\DNS_Client.c</FilePath>
             </File>
+            <File>
+              <FileName>GlobalVariables.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\GlobalVariables.c</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
@@ -422,6 +427,26 @@
               <FileType>1</FileType>
               <FilePath>.\LaserDiodePrepareFrame.c</FilePath>
             </File>
+            <File>
+              <FileName>LaserDiodeWorkFrame.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\LaserDiodeWorkFrame.c</FilePath>
+            </File>
+            <File>
+              <FileName>SolidStateLaserInputFrame.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\SolidStateLaserInputFrame.c</FilePath>
+            </File>
+            <File>
+              <FileName>SolidStateLaserPrepareFrame.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\SolidStateLaserPrepareFrame.c</FilePath>
+            </File>
+            <File>
+              <FileName>SolidStateLaserWorkFrame.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\SolidStateLaserWorkFrame.c</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
@@ -441,6 +466,11 @@
               <FileName>WiFiThread.c</FileName>
               <FileType>1</FileType>
               <FilePath>.\WiFiThread.c</FilePath>
+            </File>
+            <File>
+              <FileName>LaserTimer.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\LaserTimer.c</FilePath>
             </File>
           </Files>
         </Group>

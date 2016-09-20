@@ -7,7 +7,7 @@
 .\objects\mainthread.o: C:\Keil_v5\ARM\PACK\ARM\CMSIS\5.0.0-Beta4\CMSIS\Driver\Include\Driver_USART.h
 .\objects\mainthread.o: C:\Keil_v5\ARM\PACK\ARM\CMSIS\5.0.0-Beta4\CMSIS\Driver\Include\Driver_Common.h
 .\objects\mainthread.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdbool.h
-.\objects\mainthread.o: LaserMisc.h
+.\objects\mainthread.o: GlobalVariables.h
 .\objects\mainthread.o: C:\Keil_v5\ARM\PACK\Keil\STM32F4xx_DFP\2.9.0\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal.h
 .\objects\mainthread.o: C:\Users\FxSlava\Documents\Laser-LAMP-STM32-Test-Firmware\Calipso Ethernet Test\RTE\Device\STM32F407ZGTx\stm32f4xx_hal_conf.h
 .\objects\mainthread.o: C:\Keil_v5\ARM\PACK\Keil\STM32F4xx_DFP\2.9.0\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_rcc.h
@@ -42,4 +42,5 @@
 .\objects\mainthread.o: C:\Keil_v5\ARM\PACK\ARM\CMSIS\5.0.0-Beta4\CMSIS\Include\arm_math.h
 .\objects\mainthread.o: C:\Keil_v5\ARM\PACK\ARM\CMSIS\5.0.0-Beta4\CMSIS\Include\core_cm4.h
 .\objects\mainthread.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\string.h
+.\objects\mainthread.o: LaserMisc.h
 .\objects\mainthread.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdlib.h

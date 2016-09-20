@@ -47,7 +47,28 @@
 #define FRAMEDATA_VARADDR_DATAOFFS							0x0018 // Deprecated
 #define FRAMEDATA_VARADDR_DATAINDEX							0x0019 // Deprecated
 
+/***************************************************************/
+#define FRAMEDATA_SSVARADDR_STATE								0x0100
+#define FRAMEDATA_SSVARADDR_MODE								0x0101
+#define FRAMEDATA_SSVARADDR_FREQ								0x0102
+#define FRAMEDATA_SSVARADDR_RESERVED1						0x0103 // Reserved
+#define FRAMEDATA_SSVARADDR_ENERGYSTP						0x0104
+#define FRAMEDATA_SSVARADDR_RESERVED2						0x0105 // Reserved
+#define FRAMEDATA_SSVARADDR_RESERVED3						0x0106 // Reserved
+#define FRAMEDATA_SSVARADDR_ENERGY							0x0107 // Energy
+#define FRAMEDATA_SSVARADDR_LASERCNT						0x0108
+#define FRAMEDATA_SSVARADDR_SESSNCNT						0x0110
+// Laser Diode Control Buttons
+#define FRAMEDATA_SSVARADDR_BTNINPUT						0x0112
+#define FRAMEDATA_SSVARADDR_BTNSIMMER						0x0113
+#define FRAMEDATA_SSVARADDR_BTNSTART						0x0114
+#define FRAMEDATA_SSVARADDR_BTNSTOP 						0x0115
+
+#define FRAMEDATA_SSVARADDR_CONNECTOR 					0x0116
+
+/* ************************** DGUS DATA STRUCT **************************** */
 #define FRAMEDATA_LASERDIODE_BASE								0x0000
+#define FRAMEDATA_SOLIDSTATELASER_BASE					0x0100
 #define FRAMEDATA_TIMER_BASE										0x000e
 #define FRAMEDATA_LASERSTATE_BASE								0x000b
 
@@ -65,12 +86,20 @@
 #define FRAME_PICID_SERVICE_WIFIAUTHENTICATION	17			// Process
 #define FRAME_PICID_LASERDIODE_INPUT						19			// Process
 #define FRAME_PICID_LASERDIODE_NUMPAD						20		
-#define FRAME_PICID_LASERDIODE_TEMPERATUREOUT		22			// Process
-#define FRAME_PICID_LASERDIODE_PREPARETIMER			23			// Process
-#define FRAME_PICID_LASERDIODE_READY						24			// Process
-#define FRAME_PICID_LASERDIODE_START						26			// Process
-#define FRAME_PICID_LASERDIODE_STARTED					28			// Process
-#define FRAME_PICID_LASERDIODE_PHOTOTYPE				30			// Process
+#define FRAME_PICID_LASERDIODE_TEMPERATUREOUT		23			// Process
+#define FRAME_PICID_LASERDIODE_PREPARETIMER			24			// Process
+#define FRAME_PICID_LASERDIODE_FLOWERROR				25			// Process
+#define FRAME_PICID_LASERDIODE_READY						26			// Process
+#define FRAME_PICID_LASERDIODE_START						28			// Process
+#define FRAME_PICID_LASERDIODE_STARTED					30			// Process
+#define FRAME_PICID_LASERDIODE_PHOTOTYPE				32			// Process
+#define FRAME_PICID_REMOTECONTROL								34			// Process
+
+#define FRAME_PICID_SOLIDSTATE_INPUT						35			// Process
+#define FRAME_PICID_SOLIDSTATE_SIMMERSTART			37
+#define FRAME_PICID_SOLIDSTATE_SIMMER						39			// Process
+#define FRAME_PICID_SOLIDSTATE_START						40			// Process
+#define FRAME_PICID_SOLIDSTATE_WORK							42			// Process
 
 /* ************************** LASER DIODE CONTROL ************************* */
 
@@ -150,6 +179,39 @@ typedef struct __attribute__((__packed__)) DGUS_LASERDIODE_STRUCT
 	uint16_t DatabaseSelectionIndex;		// database control data
 } DGUS_LASERDIODE, *PDGUS_LASERDIODE;
 
+/* ************************** SOLID STATE LASER CONTROL ******************* */
+
+typedef struct __attribute__((__packed__)) DGUS_SOLIDSTATELASER_CONTROLBTN_STRUCT {
+	uint16_t onInputBtn;	// on input  pressed (1) else (0)
+	uint16_t onSimmerBtn;	// on simmer pressed (1) else (0)
+	uint16_t onStartBtn;	// on start  pressed (1) else (0)
+	uint16_t onStopBtn;		// on stop   pressed (1) else (0)
+} DGUS_SOLIDSTATELASER_CONTROLBTN, *PDGUS_SOLIDSTATELASER_CONTROLBTN;
+
+typedef struct __attribute__((__packed__)) DGUS_SOLIDSTATELASER_STRUCT
+{
+	// Application state
+	uint16_t state;
+	
+	// Laser mode
+	uint16_t mode;
+	
+	// Basic laser settings
+	DGUS_LASERPROFILE laserprofile;
+	
+	// Service settings
+	DGUS_LASERSETTINGS lasersettings;
+	
+	// Pulse counter
+	uint32_t PulseCounter;							// Dynamic data when work
+	uint32_t SessionPulseCounter;				// Dynamic data when work
+	
+	// Control buttons
+	DGUS_SOLIDSTATELASER_CONTROLBTN buttons;	// State control data
+	
+	uint16_t connector;
+} DGUS_SOLIDSTATELASER, *PDGUS_SOLIDSTATELASER;
+
 /* ************************** DGUS CONTROL STRUCT ************************* */
 
 typedef struct __attribute__((__packed__)) DWIN_HEADERDATA_REQ_STRUCT
@@ -188,10 +250,13 @@ typedef struct __attribute__((__packed__)) DWIN_HEADERREG_STRUCT
 
 uint16_t convert_w(uint16_t value);
 uint32_t convert_d(uint32_t value);
-void conver_laserdata(DGUS_LASERDIODE* dst, DGUS_LASERDIODE* src);
+
+void convert_laserdata_ss(DGUS_SOLIDSTATELASER* dst, DGUS_SOLIDSTATELASER* src);
+void convert_laserdata(DGUS_LASERDIODE* dst, DGUS_LASERDIODE* src);
 void convert_array_w(uint16_t* dst, uint16_t* src, uint16_t num);
 
 void WriteLaserDiodeDataConvert16(uint16_t addr, DGUS_LASERDIODE *data);
+void WriteSolidStateLaserDataConvert16(uint16_t addr, DGUS_SOLIDSTATELASER *data);
 void WriteRegister(uint8_t  addr, void  *data, uint8_t num);
 void WriteVariable(uint16_t addr, void  *data, uint8_t num);
 void ReadRegister (uint8_t  addr, void **data, uint8_t num);

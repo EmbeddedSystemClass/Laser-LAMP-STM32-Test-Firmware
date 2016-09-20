@@ -46,6 +46,8 @@
 #include "Driver_USART.h"
 #include "DGUS.h"
 #include "DS18B20.h"
+#include "LaserMisc.h"
+#include "GlobalVariables.h"
 
 #include <math.h>
 #include "arm_math.h"
@@ -75,6 +77,7 @@ uint32_t HAL_GetTick(void) {
   * @{
   */
 
+/* Global variables ----------------------------------------------------------*/
 /* Private typedef -----------------------------------------------------------*/
 /* Private define ------------------------------------------------------------*/
 /* Private macro -------------------------------------------------------------*/
@@ -88,9 +91,9 @@ extern void SetDACValue(float32_t value);
 extern int  Init_MainSPI_Thread (void);
 extern int  Init_WiFi_Thread (void);
 extern int  Init_Main_Thread (void);
+extern void Init_Timers (void);
 
 uint8_t rx_buffer[8];
-volatile float32_t temperature = 0;
 
 // Process DCHP server information
 void netDHCP_Notify (uint32_t if_num, uint8_t option, const uint8_t *val, uint32_t len) {
@@ -168,6 +171,7 @@ int main(void)
 	Init_MainSPI_Thread();
 	Init_WiFi_Thread();
 	Init_DS18B20();
+	Init_Timers();
 	
 	HAL_Delay(3000); 											// Wait for display initialization
 	Init_Main_Thread();
@@ -185,7 +189,13 @@ int main(void)
 		uint16_t tt = DS18B20_ReadData();
 		temperature = tt * 0.0625f;
 		
-		osSignalSet(tid_WiFiThread, WIFI_EVENT_TEMPERATURE_UPDATE);
+		if (temperature > temperature_cool_on)
+			__MISC_RELAY1_ON();
+		
+		if (temperature < temperature_cool_off)
+			__MISC_RELAY1_OFF();
+		
+		//osSignalSet(tid_WiFiThread, WIFI_EVENT_TEMPERATURE_UPDATE);
   }
 }
 

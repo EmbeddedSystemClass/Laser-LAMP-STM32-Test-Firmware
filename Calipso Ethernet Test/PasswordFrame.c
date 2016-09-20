@@ -2,6 +2,7 @@
 #include "DGUS.h"
 #include "Driver_USART.h"
 #include "SolidStateLaser.h"
+#include "GlobalVariables.h"
 
 #define FRAMEDDATA_PASSWORD_BASE		0x0010
 
@@ -16,6 +17,6 @@ void PasswordFrame_Process(uint16_t pic_id)
 	memcpy(frameData_Password, value, 5);
 	frameData_Password[5] = 0;
 	
-	if (strcmp(frameData_Password, "78965") == 0)
+	if (strcmp(frameData_Password, password) == 0)
 		SetPicId(FRAME_PICID_SERVICE, 100);
 }

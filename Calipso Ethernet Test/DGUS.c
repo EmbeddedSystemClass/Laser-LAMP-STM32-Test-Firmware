@@ -152,7 +152,7 @@ void DWIN_USART_callback(uint32_t event)
 
 /* *************************************** Helper Laser Diode Data Functions ************************** */
 
-void conver_laserdata(DGUS_LASERDIODE* dst, DGUS_LASERDIODE* src)
+void convert_laserdata(DGUS_LASERDIODE* dst, DGUS_LASERDIODE* src)
 {
 	dst->state								  = convert_w(src->state);
 	dst->mode                   = convert_w(src->mode);
@@ -165,9 +165,21 @@ void conver_laserdata(DGUS_LASERDIODE* dst, DGUS_LASERDIODE* src)
 	dst->cooling                = convert_w(src->cooling);
 	dst->flow                   = convert_w(src->flow);
 	convert_array_w((uint16_t*)&dst->timer, (uint16_t*)&src->timer, sizeof(DGUS_PREPARETIMER));
-	dst->DatabaseSelectionIndex = convert_w(src->coolIcon);
+	dst->coolIcon								= convert_w(src->coolIcon);
 	dst->SessionPulseCounter    = convert_d(src->SessionPulseCounter);
 	convert_array_w((uint16_t*)&dst->buttons, (uint16_t*)&src->buttons, sizeof(DGUS_LASERDIODE_CONTROLBTN));
+}
+
+void convert_laserdata_ss(DGUS_SOLIDSTATELASER* dst, DGUS_SOLIDSTATELASER* src)
+{
+	dst->state								  = convert_w(src->state);
+	dst->mode                   = convert_w(src->mode);
+	convert_array_w((uint16_t*)&dst->laserprofile, (uint16_t*)&src->laserprofile, sizeof(DGUS_LASERPROFILE));
+	convert_array_w((uint16_t*)&dst->lasersettings, (uint16_t*)&src->lasersettings, sizeof(PDGUS_LASERSETTINGS));
+	dst->PulseCounter           = convert_d(src->PulseCounter);
+	dst->SessionPulseCounter    = convert_d(src->SessionPulseCounter);
+	convert_array_w((uint16_t*)&dst->buttons, (uint16_t*)&src->buttons, sizeof(DGUS_SOLIDSTATELASER_CONTROLBTN));
+	dst->connector              = convert_w(src->connector);
 }
 
 void WriteLaserDiodeDataConvert16(uint16_t addr, DGUS_LASERDIODE *data)
@@ -181,7 +193,23 @@ void WriteLaserDiodeDataConvert16(uint16_t addr, DGUS_LASERDIODE *data)
 	header->cmd    = 0x82;
 	header->addr   = convert_w(addr);
 	
-	conver_laserdata((DGUS_LASERDIODE*)(dgus_buffer_tx + 6), data);
+	convert_laserdata((DGUS_LASERDIODE*)(dgus_buffer_tx + 6), data);
+	
+	DGUS_USART_Driver->Send(dgus_buffer_tx, num + 6);
+}
+
+void WriteSolidStateLaserDataConvert16(uint16_t addr, DGUS_SOLIDSTATELASER *data)
+{
+	DWIN_HEADERDATA* header = (DWIN_HEADERDATA*)dgus_buffer_tx;
+	
+	uint16_t num = sizeof(DGUS_LASERDIODE);
+	
+	header->header = convert_w(HEADER_WORD);
+	header->length = num + 3;
+	header->cmd    = 0x82;
+	header->addr   = convert_w(addr);
+	
+	convert_laserdata_ss((DGUS_SOLIDSTATELASER*)(dgus_buffer_tx + 6), data);
 	
 	DGUS_USART_Driver->Send(dgus_buffer_tx, num + 6);
 }
