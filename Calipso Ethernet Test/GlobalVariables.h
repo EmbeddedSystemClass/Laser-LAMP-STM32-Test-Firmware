@@ -34,6 +34,7 @@ extern uint16_t pic_id;
 extern bool peltier_en;
 extern bool prepare;
 extern bool RemoteControl;
+extern bool LaserStarted;
 extern volatile float32_t temperature;
 extern volatile float32_t flow;
 extern DGUS_LASERDIODE frameData_LaserDiode;

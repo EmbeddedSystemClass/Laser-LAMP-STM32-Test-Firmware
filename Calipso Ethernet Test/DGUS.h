@@ -2,6 +2,8 @@
 #define __DGUS_H
 
 #include <stdint.h>
+#include "stm32f4xx_hal.h"
+#include "stm32f4xx_hal_uart.h"
 
 #ifdef _RTE_
 #include "RTE_Components.h"             /* Component selection */
@@ -10,8 +12,13 @@
 #include "cmsis_os.h"                   // CMSIS RTOS header file
 #endif
 
+//#define CRC_CHECK
+#define USE_DGUS_DRIVER
+
 #define HEADER_WORD 0xAACC
 #define BUFFER_NUM	1024
+
+extern UART_HandleTypeDef huart1;
 
 #define DGUS_EVENT_RECEIVE_COMPLETED	0x01
 #define DGUS_EVENT_SEND_COMPLETED			0x02
@@ -57,14 +64,14 @@
 #define FRAMEDATA_SSVARADDR_RESERVED3						0x0106 // Reserved
 #define FRAMEDATA_SSVARADDR_ENERGY							0x0107 // Energy
 #define FRAMEDATA_SSVARADDR_LASERCNT						0x0108
-#define FRAMEDATA_SSVARADDR_SESSNCNT						0x0110
+#define FRAMEDATA_SSVARADDR_SESSNCNT						0x010a
 // Laser Diode Control Buttons
-#define FRAMEDATA_SSVARADDR_BTNINPUT						0x0112
-#define FRAMEDATA_SSVARADDR_BTNSIMMER						0x0113
-#define FRAMEDATA_SSVARADDR_BTNSTART						0x0114
-#define FRAMEDATA_SSVARADDR_BTNSTOP 						0x0115
+#define FRAMEDATA_SSVARADDR_BTNINPUT						0x010c
+#define FRAMEDATA_SSVARADDR_BTNSIMMER						0x010d
+#define FRAMEDATA_SSVARADDR_BTNSTART						0x010e
+#define FRAMEDATA_SSVARADDR_BTNSTOP 						0x010f
 
-#define FRAMEDATA_SSVARADDR_CONNECTOR 					0x0116
+#define FRAMEDATA_SSVARADDR_CONNECTOR 					0x0110
 
 /* ************************** DGUS DATA STRUCT **************************** */
 #define FRAMEDATA_LASERDIODE_BASE								0x0000
@@ -264,9 +271,11 @@ void ReadVariable (uint16_t addr, void **data, uint8_t num);
 
 void WriteVariableConvert16(uint16_t addr, void  *data, uint8_t num);
 
-uint32_t GetPicId(uint32_t timeout);
+uint16_t GetPicId(uint32_t timeout, uint16_t pic_id);
 void SetPicId(uint16_t pic_id, uint16_t timeout);
 
 void DWIN_USART_callback(uint32_t event);
+
+void Initialize_DGUS(void);
 
 #endif

@@ -13,8 +13,10 @@
  *---------------------------------------------------------------------------*/
  
  /* USART Driver */
+#ifdef USE_DGUS_DRIVER
 extern ARM_DRIVER_USART Driver_USART1;
 extern ARM_DRIVER_USART* DGUS_USART_Driver;
+#endif
  
 void MainThread (void const *argument);                             // thread function
 osThreadId tid_MainThread;                                          // thread id
@@ -36,6 +38,7 @@ int Init_Main_Thread (void) {
   tid_MainThread = osThreadCreate (osThread(MainThread), NULL);
   if (!tid_MainThread) return(-1);
 	
+#ifdef USE_DGUS_DRIVER
 	/*Initialize the USART driver */
   Driver_USART1.Initialize(DWIN_USART_callback);
   /*Power up the USART peripheral */
@@ -54,6 +57,7 @@ int Init_Main_Thread (void) {
 	
 	/* Set DGUS driver */
 	DGUS_USART_Driver = &Driver_USART1;
+#endif
 	
   return(0);
 }
@@ -61,7 +65,8 @@ int Init_Main_Thread (void) {
 void UpdateLaserState(uint16_t pic_id)
 {
 	// Switch to Solid State Laser
-	if (pic_id == FRAME_PICID_SERVICE_SOLIDSTATELASER)
+	if ((pic_id == FRAME_PICID_SERVICE_SOLIDSTATELASER) || 
+			((pic_id >= 35) && (pic_id <= 42)))
 		__MISC_RELAY2_ON();
 	else
 		__MISC_RELAY2_OFF();
@@ -116,7 +121,7 @@ void MainThread (void const *argument) {
 
   while (1) {
     ; // Insert thread code here...
-		pic_id = GetPicId(100);		
+		pic_id = GetPicId(100, pic_id);		
 		UpdateLaserState(pic_id);
 		
 		// GUI Frames process
@@ -188,6 +193,9 @@ void MainThread (void const *argument) {
 		
 		if (RemoteControl)
 			SetPicId(FRAME_PICID_REMOTECONTROL, 100);
+		else
+			if (pic_id == FRAME_PICID_REMOTECONTROL)
+				SetPicId(FRAME_PICID_MAINMENU, 100);
 		
 		last_pic_id = pic_id;
 		

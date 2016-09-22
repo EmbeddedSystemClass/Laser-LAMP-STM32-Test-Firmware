@@ -45,6 +45,7 @@
 #include "main.h"
 #include "stm32f4xx_it.h"
 #include "stm32f4xx_hal_tim.h"
+#include "DGUS.h"
 
 #ifdef _RTE_
 #include "RTE_Components.h"             /* Component selection */
@@ -224,10 +225,12 @@ void EXTI15_10_IRQHandler(void)
 
 extern UART_HandleTypeDef huart;
 
-/*void USART6_IRQHandler(void)
+#ifndef USE_DGUS_DRIVER
+void USART1_IRQHandler(void)
 {
-	HAL_UART_IRQHandler(&huart);
-}*/
+	HAL_UART_IRQHandler(&huart1);
+}
+#endif
 
 /**
   * @}

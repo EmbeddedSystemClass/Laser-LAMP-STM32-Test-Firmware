@@ -15,10 +15,10 @@ void SolidStateLaserPrepare_Process(uint16_t pic_id)
 	bool update = false;
 	DGUS_SOLIDSTATELASER* value;
 	ReadVariable(FRAMEDATA_SOLIDSTATELASER_BASE, (void**)&value, sizeof(frameData_SolidStateLaser));
-	osSignalWait(DGUS_EVENT_SEND_COMPLETED, 100);
-	osSignalWait(DGUS_EVENT_RECEIVE_COMPLETED, 100);
-	
-	convert_laserdata_ss(&frameData_SolidStateLaser, value);
+	if ((osSignalWait(DGUS_EVENT_SEND_COMPLETED, 100).status != osEventTimeout) && (osSignalWait(DGUS_EVENT_RECEIVE_COMPLETED, 100).status != osEventTimeout))
+			convert_laserdata_ss(&frameData_SolidStateLaser, value);
+	else 
+		return;
 	
 	/*if (frameData_SolidStateLaser.buttons.onSimmerBtn != 0)
 	{

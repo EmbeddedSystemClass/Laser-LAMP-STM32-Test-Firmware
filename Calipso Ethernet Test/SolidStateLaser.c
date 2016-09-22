@@ -4,6 +4,7 @@
 #include "stm32f4xx_hal_tim.h"
 #include "stm32f4xx_hal_rcc.h"
 #include "stm32f4xx_hal_gpio.h"
+#include "GlobalVariables.h"
 
 TIM_HandleTypeDef hTIM9;
 TIM_HandleTypeDef hTIM10;
@@ -182,6 +183,8 @@ void LampControlInit(void)
 
 void LampControlPulseStart(void)
 {
+	LaserStarted = true;
+	
 	//HAL_TIM_OC_Start_IT(&hTIM9, TIM_CHANNEL_2);
 	__HAL_TIM_ENABLE_IT(&hTIM9, TIM_IT_UPDATE);
 	
@@ -197,25 +200,27 @@ void LampControlPulseStart(void)
 
 void LampControlPulseStop(void)
 {	
+	LaserStarted = false;
+	
 	// Start frequency counter
 	HAL_TIM_OC_Stop(&hTIM10, TIM_CHANNEL_1);
 }
 
 void LampSetPulseDuration(uint16_t duration)
-{
-	__HAL_TIM_DISABLE(&hTIM9);
+{	
+	if (LaserStarted) __HAL_TIM_DISABLE(&hTIM9);
 	__HAL_TIM_SET_COUNTER(&hTIM9, 0);
 	__HAL_TIM_SET_COMPARE(&hTIM9, TIM_CHANNEL_2, 42000 - duration * 42);
-	__HAL_TIM_ENABLE(&hTIM9);
+	if (LaserStarted) __HAL_TIM_ENABLE(&hTIM9);
 }
 
 void LampSetPulseFrequency(float32_t frequency)
 {
 	uint16_t period = 42000.0f / frequency;
 	
-	__HAL_TIM_DISABLE(&hTIM10);
+	if (LaserStarted) __HAL_TIM_DISABLE(&hTIM10);
 	__HAL_TIM_SET_COUNTER(&hTIM10, 0);
 	__HAL_TIM_SET_AUTORELOAD(&hTIM10, period);
-	__HAL_TIM_ENABLE(&hTIM10);
+	if (LaserStarted) __HAL_TIM_ENABLE(&hTIM10);
 }
 

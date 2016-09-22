@@ -149,6 +149,8 @@ int main(void)
   SystemClock_Config();
 	SystemCoreClockUpdate();
 	
+	Initialize_DGUS();
+	
 	netStatus status = netInitialize();
 	
 	if (status == netOK)
@@ -169,7 +171,7 @@ int main(void)
 	osKernelStart();                      // start thread execution 
 	
 	Init_MainSPI_Thread();
-	Init_WiFi_Thread();
+	//Init_WiFi_Thread();
 	Init_DS18B20();
 	Init_Timers();
 	

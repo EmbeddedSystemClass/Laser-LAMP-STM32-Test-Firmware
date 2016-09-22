@@ -15,10 +15,12 @@ void SolidStateLaserWork_Process(uint16_t pic_id)
 	bool update = false;
 	DGUS_SOLIDSTATELASER* value;
 	ReadVariable(FRAMEDATA_SOLIDSTATELASER_BASE, (void**)&value, sizeof(frameData_SolidStateLaser));
-	osSignalWait(DGUS_EVENT_SEND_COMPLETED, 100);
-	osSignalWait(DGUS_EVENT_RECEIVE_COMPLETED, 100);
+	if ((osSignalWait(DGUS_EVENT_SEND_COMPLETED, 100).status != osEventTimeout) && (osSignalWait(DGUS_EVENT_RECEIVE_COMPLETED, 100).status != osEventTimeout))
+		convert_laserdata_ss(&frameData_SolidStateLaser, value);
+	else 
+		return;
 	
-	convert_laserdata_ss(&frameData_SolidStateLaser, value);
+	osDelay(50);
 	
 	__SOLIDSTATELASER_DISCHARGEOFF();
 	
@@ -68,10 +70,9 @@ void SolidStateLaserWork_Process(uint16_t pic_id)
 		LampControlPulseStop();
 		__SOLIDSTATELASER_HVOFF();
 		__SOLIDSTATELASER_SIMMEROFF();
+		SetDACValue(0.0f);
 		
 		SetPicId(FRAME_PICID_SOLIDSTATE_INPUT, 100);
-		
-		return;
 		
 		update = true;
 	}
@@ -80,5 +81,8 @@ void SolidStateLaserWork_Process(uint16_t pic_id)
 	{
 		WriteSolidStateLaserDataConvert16(FRAMEDATA_SOLIDSTATELASER_BASE, &frameData_SolidStateLaser);
 		osSignalWait(DGUS_EVENT_SEND_COMPLETED, 100);
+		osDelay(50);
+		/*while (osSignalWait(DGUS_EVENT_SEND_COMPLETED, 100).status == osEventTimeout)
+			WriteSolidStateLaserDataConvert16(FRAMEDATA_SOLIDSTATELASER_BASE, &frameData_SolidStateLaser);*/
 	}
 }

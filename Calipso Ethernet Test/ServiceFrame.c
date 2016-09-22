@@ -35,10 +35,12 @@ void ServiceFrame_Process(uint16_t pic_id)
 	bool update = false;
 	FRAMEDATA_SERVICE* value;
 	ReadVariable(FRAMEDATA_SERVICE_BASE, (void**)&value, sizeof(frameData_Service));
-	osSignalWait(DGUS_EVENT_SEND_COMPLETED, 100);
-	osSignalWait(DGUS_EVENT_RECEIVE_COMPLETED, 100);
+	if ((osSignalWait(DGUS_EVENT_SEND_COMPLETED, 100).status != osEventTimeout) && (osSignalWait(DGUS_EVENT_RECEIVE_COMPLETED, 100).status != osEventTimeout))
+		convert_array_w((uint16_t*)&frameData_Service, (uint16_t*)value, sizeof(frameData_Service));
+	else 
+		return;
 	
-	convert_array_w((uint16_t*)&frameData_Service, (uint16_t*)value, sizeof(frameData_Service) / 2);
+	osDelay(50);
 	
 	if (frameData_Service.HV_set == 0x01) 
 	{	
@@ -95,5 +97,8 @@ void ServiceFrame_Process(uint16_t pic_id)
 	{
 		WriteVariableConvert16(FRAMEDATA_SERVICE_BASE, &frameData_Service, sizeof(frameData_Service));
 		osSignalWait(DGUS_EVENT_SEND_COMPLETED, 100);
+		osDelay(50);
+		/*while (osSignalWait(DGUS_EVENT_SEND_COMPLETED, 100).status == osEventTimeout)
+			WriteVariableConvert16(FRAMEDATA_SERVICE_BASE, &frameData_Service, sizeof(frameData_Service));*/
 	}
 }

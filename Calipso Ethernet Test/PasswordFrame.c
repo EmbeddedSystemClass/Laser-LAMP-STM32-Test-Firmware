@@ -11,10 +11,11 @@ char frameData_Password[6];
 void PasswordFrame_Process(uint16_t pic_id)
 {
 	char* value;
-	ReadVariable(FRAMEDDATA_PASSWORD_BASE, (void**)&value, 5);
-	osSignalWait(DGUS_EVENT_SEND_COMPLETED, 100);
-	osSignalWait(DGUS_EVENT_RECEIVE_COMPLETED, 100);
-	memcpy(frameData_Password, value, 5);
+	ReadVariable(FRAMEDDATA_PASSWORD_BASE, (void**)&value, 6);
+	if ((osSignalWait(DGUS_EVENT_SEND_COMPLETED, 100).status != osEventTimeout) && (osSignalWait(DGUS_EVENT_RECEIVE_COMPLETED, 100).status != osEventTimeout))
+		memcpy(frameData_Password, value, 5);
+	else 
+		return;
 	frameData_Password[5] = 0;
 	
 	if (strcmp(frameData_Password, password) == 0)

@@ -2,14 +2,9 @@
 .\objects\laserdiodeinputframe.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\string.h
 .\objects\laserdiodeinputframe.o: DGUS.h
 .\objects\laserdiodeinputframe.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdint.h
-.\objects\laserdiodeinputframe.o: C:\Users\FxSlava\Documents\Laser-LAMP-STM32-Test-Firmware\Calipso Ethernet Test\RTE\RTE_Components.h
-.\objects\laserdiodeinputframe.o: C:\Keil_v5\ARM\PACK\ARM\CMSIS\5.0.0-Beta4\CMSIS\RTOS\RTX\INC\cmsis_os.h
-.\objects\laserdiodeinputframe.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stddef.h
-.\objects\laserdiodeinputframe.o: C:\Keil_v5\ARM\PACK\ARM\CMSIS\5.0.0-Beta4\CMSIS\Driver\Include\Driver_USART.h
-.\objects\laserdiodeinputframe.o: C:\Keil_v5\ARM\PACK\ARM\CMSIS\5.0.0-Beta4\CMSIS\Driver\Include\Driver_Common.h
-.\objects\laserdiodeinputframe.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdbool.h
 .\objects\laserdiodeinputframe.o: C:\Keil_v5\ARM\PACK\Keil\STM32F4xx_DFP\2.9.0\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal.h
 .\objects\laserdiodeinputframe.o: C:\Users\FxSlava\Documents\Laser-LAMP-STM32-Test-Firmware\Calipso Ethernet Test\RTE\Device\STM32F407ZGTx\stm32f4xx_hal_conf.h
+.\objects\laserdiodeinputframe.o: C:\Users\FxSlava\Documents\Laser-LAMP-STM32-Test-Firmware\Calipso Ethernet Test\RTE\RTE_Components.h
 .\objects\laserdiodeinputframe.o: C:\Keil_v5\ARM\PACK\Keil\STM32F4xx_DFP\2.9.0\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_rcc.h
 .\objects\laserdiodeinputframe.o: C:\Keil_v5\ARM\PACK\Keil\STM32F4xx_DFP\2.9.0\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_def.h
 .\objects\laserdiodeinputframe.o: C:\Keil_v5\ARM\PACK\Keil\STM32F4xx_DFP\2.9.0\Drivers\CMSIS\Device\ST\STM32F4xx\Include\stm32f4xx.h
@@ -38,6 +33,11 @@
 .\objects\laserdiodeinputframe.o: C:\Keil_v5\ARM\PACK\Keil\STM32F4xx_DFP\2.9.0\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_tim_ex.h
 .\objects\laserdiodeinputframe.o: C:\Keil_v5\ARM\PACK\Keil\STM32F4xx_DFP\2.9.0\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_uart.h
 .\objects\laserdiodeinputframe.o: C:\Keil_v5\ARM\PACK\Keil\STM32F4xx_DFP\2.9.0\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_usart.h
+.\objects\laserdiodeinputframe.o: C:\Keil_v5\ARM\PACK\ARM\CMSIS\5.0.0-Beta4\CMSIS\RTOS\RTX\INC\cmsis_os.h
+.\objects\laserdiodeinputframe.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stddef.h
+.\objects\laserdiodeinputframe.o: C:\Keil_v5\ARM\PACK\ARM\CMSIS\5.0.0-Beta4\CMSIS\Driver\Include\Driver_USART.h
+.\objects\laserdiodeinputframe.o: C:\Keil_v5\ARM\PACK\ARM\CMSIS\5.0.0-Beta4\CMSIS\Driver\Include\Driver_Common.h
+.\objects\laserdiodeinputframe.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdbool.h
 .\objects\laserdiodeinputframe.o: SolidStateLaser.h
 .\objects\laserdiodeinputframe.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\math.h
 .\objects\laserdiodeinputframe.o: C:\Keil_v5\ARM\PACK\ARM\CMSIS\5.0.0-Beta4\CMSIS\Include\arm_math.h

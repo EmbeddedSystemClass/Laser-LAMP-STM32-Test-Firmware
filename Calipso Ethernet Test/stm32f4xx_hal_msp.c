@@ -84,6 +84,7 @@ void HAL_MspInit(void)
             modified by the user
    */ 
 	
+	__GPIOA_CLK_ENABLE();
 	__GPIOB_CLK_ENABLE();
 	__GPIOG_CLK_ENABLE();
 	__GPIOE_CLK_ENABLE();
@@ -91,7 +92,7 @@ void HAL_MspInit(void)
 	__GPIOG_CLK_ENABLE();
 	__USART6_CLK_ENABLE();
 	
-	//  ************************* UART ********************************
+	//  ************************* UART 6 ******************************
 	GPIO_InitTypeDef uart = {0};
 	
 	uart.Pin   = GPIO_PIN_6;
@@ -109,6 +110,25 @@ void HAL_MspInit(void)
 	uart.Alternate = GPIO_AF8_USART6;
 	
 	HAL_GPIO_Init(GPIOG, &uart);
+	
+	//  ************************* UART 1 ******************************
+	GPIO_InitTypeDef uart1 = {0};
+	
+	uart1.Pin   = GPIO_PIN_10;
+	uart1.Mode  = GPIO_MODE_AF_PP;
+	uart1.Pull  = GPIO_NOPULL;
+	uart1.Speed = GPIO_SPEED_FREQ_LOW;
+	uart1.Alternate = GPIO_AF7_USART1;
+	
+	HAL_GPIO_Init(GPIOA, &uart1);
+	
+	uart1.Pin   = GPIO_PIN_9;
+	uart1.Mode  = GPIO_MODE_AF_PP;
+	uart1.Pull  = GPIO_PULLUP;
+	uart1.Speed = GPIO_SPEED_FREQ_LOW;
+	uart1.Alternate = GPIO_AF7_USART1;
+	
+	HAL_GPIO_Init(GPIOA, &uart1);
 	
 	//  ************************* GPIO ********************************
 	GPIO_InitTypeDef relays_gpio = {0};

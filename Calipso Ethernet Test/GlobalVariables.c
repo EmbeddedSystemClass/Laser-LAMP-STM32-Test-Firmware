@@ -25,6 +25,7 @@ uint16_t pic_id = 0;
 bool peltier_en = false;
 bool prepare = false;   
 bool RemoteControl = false;
+bool LaserStarted = false;
 volatile float32_t temperature = 0;
 volatile float32_t flow = 9.0f;
 DGUS_LASERDIODE frameData_LaserDiode;

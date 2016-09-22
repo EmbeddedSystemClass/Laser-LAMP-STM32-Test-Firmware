@@ -36,3 +36,8 @@
 .\objects\solidstatelaser.o: C:\Keil_v5\ARM\PACK\ARM\CMSIS\5.0.0-Beta4\CMSIS\Include\arm_math.h
 .\objects\solidstatelaser.o: C:\Keil_v5\ARM\PACK\ARM\CMSIS\5.0.0-Beta4\CMSIS\Include\core_cm4.h
 .\objects\solidstatelaser.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\string.h
+.\objects\solidstatelaser.o: GlobalVariables.h
+.\objects\solidstatelaser.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdbool.h
+.\objects\solidstatelaser.o: DGUS.h
+.\objects\solidstatelaser.o: C:\Keil_v5\ARM\PACK\ARM\CMSIS\5.0.0-Beta4\CMSIS\RTOS\RTX\INC\cmsis_os.h
+.\objects\solidstatelaser.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stddef.h

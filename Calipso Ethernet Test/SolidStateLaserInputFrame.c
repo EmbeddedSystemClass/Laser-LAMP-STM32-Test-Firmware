@@ -15,33 +15,41 @@ void SolidStateLaserInput_Process(uint16_t pic_id)
 	bool update = false;
 	DGUS_SOLIDSTATELASER* value;
 	ReadVariable(FRAMEDATA_SOLIDSTATELASER_BASE, (void**)&value, sizeof(frameData_SolidStateLaser));
-	osSignalWait(DGUS_EVENT_SEND_COMPLETED, 100);
-	osSignalWait(DGUS_EVENT_RECEIVE_COMPLETED, 100);
+	if ((osSignalWait(DGUS_EVENT_SEND_COMPLETED, 100).status != osEventTimeout) && (osSignalWait(DGUS_EVENT_RECEIVE_COMPLETED, 100).status != osEventTimeout))
+		convert_laserdata_ss(&frameData_SolidStateLaser, value);
+	else 
+		return;
 	
-	convert_laserdata_ss(&frameData_SolidStateLaser, value);
-	frameData_SolidStateLaser.lasersettings.Energy = frameData_SolidStateLaser.laserprofile.EnergyCnt; // deprecated
+	LampSetPulseFrequency(frameData_SolidStateLaser.laserprofile.Frequency);
+	LampSetPulseDuration(frameData_SolidStateLaser.lasersettings.Energy * 20);
+	
+	if (frameData_SolidStateLaser.lasersettings.Energy != frameData_SolidStateLaser.laserprofile.EnergyCnt)
+	{
+		frameData_SolidStateLaser.lasersettings.Energy = frameData_SolidStateLaser.laserprofile.EnergyCnt; // deprecated
+		update = true;
+	}
+
+	__SOLIDSTATELASER_DISCHARGEON();
 	
 	if (frameData_SolidStateLaser.buttons.onInputBtn != 0)
 	{
 		// On Input Pressed
 		frameData_SolidStateLaser.buttons.onInputBtn = 0;
 		
-		SetPicId(FRAME_PICID_SOLIDSTATE_SIMMER, 100);
+		SetPicId(FRAME_PICID_SOLIDSTATE_SIMMERSTART, 100);
 		
-		SetDACValue(10.0f);
+		SetDACValue(9.0f);
 		
 		__SOLIDSTATELASER_DISCHARGEOFF();
 		
-		return;
-		
 		update = true;
 	}
-	
-	__SOLIDSTATELASER_DISCHARGEON();
 	
 	if (update)
 	{
 		WriteSolidStateLaserDataConvert16(FRAMEDATA_SOLIDSTATELASER_BASE, &frameData_SolidStateLaser);
 		osSignalWait(DGUS_EVENT_SEND_COMPLETED, 100);
+		/*while (osSignalWait(DGUS_EVENT_SEND_COMPLETED, 100).status == osEventTimeout)
+			WriteSolidStateLaserDataConvert16(FRAMEDATA_SOLIDSTATELASER_BASE, &frameData_SolidStateLaser);*/
 	}
 }
