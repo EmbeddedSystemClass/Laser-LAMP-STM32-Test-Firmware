@@ -42,3 +42,5 @@
 .\objects\serviceframe.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\math.h
 .\objects\serviceframe.o: C:\Keil_v5\ARM\PACK\ARM\CMSIS\5.0.0-Beta4\CMSIS\Include\arm_math.h
 .\objects\serviceframe.o: C:\Keil_v5\ARM\PACK\ARM\CMSIS\5.0.0-Beta4\CMSIS\Include\core_cm4.h
+.\objects\serviceframe.o: LaserMisc.h
+.\objects\serviceframe.o: GlobalVariables.h

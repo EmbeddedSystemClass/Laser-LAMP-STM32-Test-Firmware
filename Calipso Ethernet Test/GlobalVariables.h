@@ -29,14 +29,22 @@ extern float32_t flow_normal;
 // Service menu password
 extern char password[6];
 
+// Global state variables
+extern volatile float32_t temperature;
+extern volatile float32_t flow;
+extern volatile float32_t VoltageMonitor;
+extern volatile float32_t CurrentMonitor;
+
 // Private variables
 extern uint16_t pic_id;
 extern bool peltier_en;
 extern bool prepare;
 extern bool RemoteControl;
 extern bool LaserStarted;
-extern volatile float32_t temperature;
-extern volatile float32_t flow;
+extern volatile bool footswitch_en;
+extern volatile bool footswitch_on;
+extern volatile uint16_t switch_filter;
+extern uint16_t switch_filter_threshold;
 extern DGUS_LASERDIODE frameData_LaserDiode;
 extern DGUS_SOLIDSTATELASER frameData_SolidStateLaser;
 

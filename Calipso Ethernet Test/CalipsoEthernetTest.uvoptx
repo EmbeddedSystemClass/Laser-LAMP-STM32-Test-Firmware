@@ -206,18 +206,18 @@
         <Bp>
           <Number>0</Number>
           <Type>0</Type>
-          <LineNumber>125</LineNumber>
+          <LineNumber>159</LineNumber>
           <EnabledFlag>1</EnabledFlag>
-          <Address>134242264</Address>
+          <Address>134236740</Address>
           <ByteObject>0</ByteObject>
           <HtxType>0</HtxType>
           <ManyObjects>0</ManyObjects>
           <SizeOfObject>0</SizeOfObject>
           <BreakByAccess>0</BreakByAccess>
           <BreakIfRCount>1</BreakIfRCount>
-          <Filename>.\MainThread.c</Filename>
+          <Filename>.\stm32f4xx_hal_msp.c</Filename>
           <ExecCommand></ExecCommand>
-          <Expression>\\CalipsoEthernetTest\MainThread.c\125</Expression>
+          <Expression>\\CalipsoEthernetTest\stm32f4xx_hal_msp.c\159</Expression>
         </Bp>
       </Breakpoint>
       <WatchWindow1>
@@ -235,6 +235,11 @@
           <count>2</count>
           <WinNumber>1</WinNumber>
           <ItemText>num,0x0A</ItemText>
+        </Ww>
+        <Ww>
+          <count>3</count>
+          <WinNumber>1</WinNumber>
+          <ItemText>frameData_Service</ItemText>
         </Ww>
       </WatchWindow1>
       <WatchWindow2>
@@ -262,6 +267,11 @@
           <count>4</count>
           <WinNumber>2</WinNumber>
           <ItemText>dgus_buffer_tx</ItemText>
+        </Ww>
+        <Ww>
+          <count>5</count>
+          <WinNumber>2</WinNumber>
+          <ItemText>switch_filter,0x0A</ItemText>
         </Ww>
       </WatchWindow2>
       <MemoryWindow1>

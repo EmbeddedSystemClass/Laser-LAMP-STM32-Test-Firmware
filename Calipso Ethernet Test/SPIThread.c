@@ -10,6 +10,8 @@
 #include <math.h>
 #include "arm_math.h"
 
+#include "GlobalVariables.h"
+
 #define GPIO_PIN_VoltageMonitor_nCS	GPIO_PIN_0 // PORT GPIOG
 #define GPIO_PIN_CurrentMonitor_nCS GPIO_PIN_1 // PORT GPIOG
 #define GPIO_PIN_CurrentProgram_nCS GPIO_PIN_7 // PORT GPIOE
@@ -111,9 +113,6 @@ void MainSPI_Thread (void const *argument) {
 	volatile uint16_t datain;
 		
   while (1) {
-		x += 0.01f;
-		float32_t y = 5.0f + 5.0f * arm_cos_f32(x);
-		/*SetDACValue(y);
 		
 		uint16_t datainv;
 		// Read ADC1 value
@@ -122,6 +121,8 @@ void MainSPI_Thread (void const *argument) {
 		
 		SPIdrv->Receive((void*)&datainv, 1);
 		datain = ~datainv;
+		
+		VoltageMonitor = 10.0f * (float32_t)datain / 4096.0f;
 		
 		while (wait);
 		wait = true;
@@ -134,10 +135,12 @@ void MainSPI_Thread (void const *argument) {
 		SPIdrv->Receive((void*)&datainv, 1);
 		datain = ~datainv;
 		
+		CurrentMonitor = 10.0f * (float32_t)datain / 4096.0f;
+		
 		while (wait);
 		wait = true;
 		adc2_cs = false;
 		
-    osThreadYield ();*/
+    osThreadYield ();
   }
 }

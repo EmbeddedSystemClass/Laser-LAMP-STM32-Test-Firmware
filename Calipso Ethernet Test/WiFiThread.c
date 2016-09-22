@@ -374,7 +374,6 @@ void UserWiFiThread (void const *argument) {
 		if (!WiFi_State_CommandMode)
 		{
 			RemoteControl = true;
-			SetPicId(FRAME_PICID_REMOTECONTROL, 100);
 			__SOLIDSTATELASER_HVON();
 		
 			osEvent event = osSignalWait(0, 1000);
@@ -394,14 +393,12 @@ void UserWiFiThread (void const *argument) {
 					{
 						LampControlPulseStop();
 					}
-					if (strcmp(tokenPtr[2], "SIMMER=OFF") == 0)
-					{
-						__SOLIDSTATELASER_SIMMEROFF();
-					}
-					if (strcmp(tokenPtr[2], "SIMMER=ON") == 0)
-					{
-						__SOLIDSTATELASER_SIMMERON();
-					}
+					if (strcmp(tokenPtr[2], "SIMMER") == 0)
+						if (strcmp(tokenPtr[3], "OFF"))
+							__SOLIDSTATELASER_SIMMEROFF();
+					if (strcmp(tokenPtr[2], "SIMMER") == 0)
+						if (strcmp(tokenPtr[3], "ON"))
+							__SOLIDSTATELASER_SIMMERON();
 					if (strcmp(tokenPtr[2], "DURATION") == 0)
 					{
 						uint16_t value = atol(tokenPtr[3]);

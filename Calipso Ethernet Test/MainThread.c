@@ -49,7 +49,7 @@ int Init_Main_Thread (void) {
 												ARM_USART_DATA_BITS_8 |
 												ARM_USART_PARITY_NONE |
 												ARM_USART_STOP_BITS_1 |
-												ARM_USART_FLOW_CONTROL_NONE, 115200);
+												ARM_USART_FLOW_CONTROL_NONE, DGUS_BAUDRATE);
 	
 	/* Enable Receiver and Transmitter lines */
   Driver_USART1.Control (ARM_USART_CONTROL_TX, 1);
@@ -64,8 +64,18 @@ int Init_Main_Thread (void) {
 
 void UpdateLaserState(uint16_t pic_id)
 {
+	if ((pic_id == FRAME_PICID_LASERDIODE_STARTED) || 
+			(pic_id == FRAME_PICID_SOLIDSTATE_WORK) ||
+			(pic_id == FRAME_PICID_REMOTECONTROL) ||
+			(pic_id == FRAME_PICID_SERVICE_SOLIDSTATELASER) ||
+			(pic_id == FRAME_PICID_SERVICE_LASERDIODE))
+		footswitch_en = true;
+	else
+		footswitch_en = false;
+	
 	// Switch to Solid State Laser
 	if ((pic_id == FRAME_PICID_SERVICE_SOLIDSTATELASER) || 
+			(pic_id == FRAME_PICID_REMOTECONTROL) ||
 			((pic_id >= 35) && (pic_id <= 42)))
 		__MISC_RELAY2_ON();
 	else
@@ -78,6 +88,7 @@ void UpdateLaserState(uint16_t pic_id)
 	else
 		__MISC_RELAY3_OFF();
 	
+	// Check for diode laser
 	if ((pic_id >= 19) && (pic_id <= 32))
 	{
 		// Check temperature
@@ -191,11 +202,15 @@ void MainThread (void const *argument) {
 				break;
 		}
 		
+		// Remote control
 		if (RemoteControl)
 			SetPicId(FRAME_PICID_REMOTECONTROL, 100);
 		else
 			if (pic_id == FRAME_PICID_REMOTECONTROL)
+			{
 				SetPicId(FRAME_PICID_MAINMENU, 100);
+				//pic_id = FRAME_PICID_MAINMENU;
+			}
 		
 		last_pic_id = pic_id;
 		

@@ -50,12 +50,16 @@ void DS18B20_USART_callback(uint32_t event)
  
     case ARM_USART_EVENT_RX_TIMEOUT:
 				recv_complete = true;
-        //__breakpoint(0);  /* Error: Call debugger or replace with custom error handling */
+#ifdef DEBUG_BRK
+         __breakpoint(0);  /* Error: Call debugger or replace with custom error handling */
+#endif
         break;
  
     case ARM_USART_EVENT_RX_OVERFLOW:
     case ARM_USART_EVENT_TX_UNDERFLOW:
-        __breakpoint(0);  /* Error: Call debugger or replace with custom error handling */
+#ifdef DEBUG_BRK
+         __breakpoint(0);  /* Error: Call debugger or replace with custom error handling */
+#endif
         break;
     }
 }

@@ -3,14 +3,16 @@
 #include "Driver_USART.h"
 #include "stm32f4xx_hal.h"
 #include "SolidStateLaser.h"
+#include "LaserMisc.h"
+#include "GlobalVariables.h"
 
 #include <math.h>
 #include "arm_math.h"
 
-#define FRAMEDATA_SERVICE_BASE		0x0020
+#define FRAMEDATA_SERVICE_BASE				0x0020
+#define FRAMEDATA_SERVICESTATE_BASE		0x002B
 
-typedef struct FRAMEDATA_SERVICE_STRUCT
-{
+typedef struct FRAMEDATA_SERVICE_STRUCT {
 	// control
 	uint16_t simmer_en;
 	uint16_t HV_set;
@@ -24,7 +26,28 @@ typedef struct FRAMEDATA_SERVICE_STRUCT
 	uint16_t HV_value;
 	uint16_t duration_value;
 	uint16_t frequency_value;
+	
+	// states
+	uint16_t simmer_ready;
+	uint16_t HV_ready;
+	uint16_t HV_On;
+	uint16_t OV;
+	uint16_t OVH;
+	uint16_t Fault;
 } FRAMEDATA_SERVICE;
+
+typedef struct FRAMEDATA_SERVICESTATE_STRUCT {
+	// states
+	uint16_t simmer_ready;
+	uint16_t HV_ready;
+	uint16_t HV_On;
+	uint16_t OV;
+	uint16_t OVH;
+	uint16_t Fault;
+	
+	// Write only
+	uint16_t HV_monitor;
+} FRAMEDATA_SERVICESTATE;
 
 FRAMEDATA_SERVICE frameData_Service;
 
@@ -39,8 +62,6 @@ void ServiceFrame_Process(uint16_t pic_id)
 		convert_array_w((uint16_t*)&frameData_Service, (uint16_t*)value, sizeof(frameData_Service));
 	else 
 		return;
-	
-	osDelay(50);
 	
 	if (frameData_Service.HV_set == 0x01) 
 	{	
@@ -97,8 +118,17 @@ void ServiceFrame_Process(uint16_t pic_id)
 	{
 		WriteVariableConvert16(FRAMEDATA_SERVICE_BASE, &frameData_Service, sizeof(frameData_Service));
 		osSignalWait(DGUS_EVENT_SEND_COMPLETED, 100);
-		osDelay(50);
-		/*while (osSignalWait(DGUS_EVENT_SEND_COMPLETED, 100).status == osEventTimeout)
-			WriteVariableConvert16(FRAMEDATA_SERVICE_BASE, &frameData_Service, sizeof(frameData_Service));*/
 	}
+	
+	FRAMEDATA_SERVICESTATE state;
+	if (__MISC_GETSIMMERSENSOR()					) state.simmer_ready = 1;	else state.simmer_ready = 0;
+	if (__MISC_GETCHARGEMODULEPOWERSTATE()) state.HV_On = 1;				else state.HV_On = 0;
+	if (__MISC_GETCHARGEMODULEFAULTSTATE()) state.Fault = 1;				else state.Fault = 0;
+	if (__MISC_GETCHARGEMODULEOVSTATE()		) state.OV = 1;						else state.OV = 0;
+	if (__MISC_GETCHARGEMODULEOVHSTATE()	) state.OVH = 1;					else state.OVH = 0;
+	if (__MISC_GETCHARGEMODULEREADYSTATE()) state.HV_ready = 1;			else state.HV_ready = 0;
+	state.HV_monitor = (uint16_t)(VoltageMonitor * 45.0f);
+	
+	WriteVariableConvert16(FRAMEDATA_SERVICESTATE_BASE, &state, sizeof(state));
+	osSignalWait(DGUS_EVENT_SEND_COMPLETED, 100);
 }

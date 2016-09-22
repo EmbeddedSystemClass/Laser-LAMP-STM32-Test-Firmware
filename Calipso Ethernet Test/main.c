@@ -149,7 +149,9 @@ int main(void)
   SystemClock_Config();
 	SystemCoreClockUpdate();
 	
+#ifndef USE_DGUS_DRIVER
 	Initialize_DGUS();
+#endif
 	
 	netStatus status = netInitialize();
 	
@@ -171,7 +173,7 @@ int main(void)
 	osKernelStart();                      // start thread execution 
 	
 	Init_MainSPI_Thread();
-	//Init_WiFi_Thread();
+	Init_WiFi_Thread();
 	Init_DS18B20();
 	Init_Timers();
 	

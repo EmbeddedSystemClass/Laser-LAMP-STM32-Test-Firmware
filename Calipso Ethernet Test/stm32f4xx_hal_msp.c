@@ -49,6 +49,7 @@
 #include "stm32f4xx_hal.h"
 #include "stm32f4xx_hal_gpio.h"
 #include "SolidStateLaser.h"
+#include "LaserMisc.h"
 
 /** @addtogroup STM32F4xx_HAL_Driver
   * @{
@@ -61,9 +62,6 @@
 
 /* Private typedef -----------------------------------------------------------*/
 /* Private define ------------------------------------------------------------*/
-#define GPIO_PIN_VoltageMonitor_nCS	GPIO_PIN_0 // PORT GPIOG
-#define GPIO_PIN_CurrentMonitor_nCS GPIO_PIN_1 // PORT GPIOG
-#define GPIO_PIN_CurrentProgram_nCS GPIO_PIN_7 // PORT GPIOE
 /* Private macro -------------------------------------------------------------*/
 /* Private variables ---------------------------------------------------------*/
 /* Private function prototypes -----------------------------------------------*/
@@ -86,9 +84,9 @@ void HAL_MspInit(void)
 	
 	__GPIOA_CLK_ENABLE();
 	__GPIOB_CLK_ENABLE();
-	__GPIOG_CLK_ENABLE();
-	__GPIOE_CLK_ENABLE();
 	__GPIOC_CLK_ENABLE();
+	__GPIOE_CLK_ENABLE();
+	__GPIOF_CLK_ENABLE();
 	__GPIOG_CLK_ENABLE();
 	__USART6_CLK_ENABLE();
 	
@@ -130,7 +128,7 @@ void HAL_MspInit(void)
 	
 	HAL_GPIO_Init(GPIOA, &uart1);
 	
-	//  ************************* GPIO ********************************
+	//  ************************* GPIO, SPI ********************************
 	GPIO_InitTypeDef relays_gpio = {0};
 	relays_gpio.Pin   = GPIO_PIN_4 | GPIO_PIN_5 | GPIO_PIN_6 | GPIO_PIN_7;
 	relays_gpio.Mode  = GPIO_MODE_OUTPUT_PP;
@@ -148,7 +146,7 @@ void HAL_MspInit(void)
 	HAL_GPIO_Init(GPIOG, &gpio);
 	
 	GPIO_InitTypeDef gpio_E = {0};
-	gpio_E.Pin   = GPIO_PIN_7;
+	gpio_E.Pin   = GPIO_PIN_7 | GPIO_PIN_LaserDiode_Pulse;
 	gpio_E.Mode  = GPIO_MODE_OUTPUT_PP;
 	gpio_E.Pull  = GPIO_NOPULL;
 	gpio_E.Speed = GPIO_SPEED_FREQ_LOW;
@@ -157,7 +155,26 @@ void HAL_MspInit(void)
 	
 	HAL_GPIO_WritePin(GPIOG, GPIO_PIN_2 | GPIO_PIN_3 | GPIO_PIN_4 | GPIO_PIN_5, GPIO_PIN_RESET);
 	HAL_GPIO_WritePin(GPIOG, GPIO_PIN_CurrentMonitor_nCS | GPIO_PIN_CurrentMonitor_nCS, GPIO_PIN_SET);
-	HAL_GPIO_WritePin(GPIOE, GPIO_PIN_7, GPIO_PIN_SET);
+	HAL_GPIO_WritePin(GPIOE, GPIO_PIN_CurrentProgram_nCS, GPIO_PIN_SET);
+	HAL_GPIO_WritePin(GPIOE, GPIO_PIN_LaserDiode_Pulse, GPIO_PIN_SET);
+	
+	//  ************************* Lamp control ********************************
+	
+	GPIO_InitTypeDef gpio_F = {0};
+	gpio_F.Pin   = GPIO_PIN_SimmerSensor | GPIO_PIN_ChargeModuleOn | GPIO_PIN_ChargeModuleFault | GPIO_PIN_ChargeModuleOvervoltage;
+	gpio_F.Mode  = GPIO_MODE_INPUT;
+	gpio_F.Pull  = GPIO_NOPULL;
+	gpio_F.Speed = GPIO_SPEED_FREQ_LOW;
+	
+	HAL_GPIO_Init(GPIOF, &gpio_F);
+	
+	GPIO_InitTypeDef gpio_C = {0};
+	gpio_C.Pin   = GPIO_PIN_ChargeModuleOverheating | GPIO_PIN_ChargeModuleReady;
+	gpio_C.Mode  = GPIO_MODE_INPUT;
+	gpio_C.Pull  = GPIO_NOPULL;
+	gpio_C.Speed = GPIO_SPEED_FREQ_LOW;
+	
+	HAL_GPIO_Init(GPIOC, &gpio_C);
 	
 	LampControlInit();
 }
@@ -173,13 +190,17 @@ void HAL_MspDeInit(void)
             modified by the user
    */
 	
-	HAL_GPIO_DeInit(GPIOB, GPIO_PIN_4 | GPIO_PIN_5 | GPIO_PIN_6 | GPIO_PIN_7);
-	HAL_GPIO_DeInit(GPIOG, GPIO_PIN_2 | GPIO_PIN_3 | GPIO_PIN_4 | GPIO_PIN_5 | GPIO_PIN_CurrentMonitor_nCS | GPIO_PIN_CurrentMonitor_nCS);
-	HAL_GPIO_DeInit(GPIOE, GPIO_PIN_CurrentProgram_nCS);
+	HAL_GPIO_DeInit(GPIOG, GPIO_PIN_2 | GPIO_PIN_3 | GPIO_PIN_4 | GPIO_PIN_5);
+	HAL_GPIO_DeInit(GPIOG, GPIO_PIN_CurrentMonitor_nCS | GPIO_PIN_CurrentMonitor_nCS);
+	HAL_GPIO_DeInit(GPIOE, GPIO_PIN_CurrentProgram_nCS | GPIO_PIN_Laser_ID0 | GPIO_PIN_Laser_ID0);
 	
+	__GPIOA_CLK_DISABLE();
 	__GPIOB_CLK_DISABLE();
-	__GPIOG_CLK_DISABLE();
+	__GPIOC_CLK_DISABLE();
 	__GPIOE_CLK_DISABLE();
+	__GPIOF_CLK_DISABLE();
+	__GPIOG_CLK_DISABLE();
+	__USART6_CLK_DISABLE();
 }
 
 /**

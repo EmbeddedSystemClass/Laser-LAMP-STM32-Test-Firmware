@@ -12,8 +12,10 @@
 #include "cmsis_os.h"                   // CMSIS RTOS header file
 #endif
 
-//#define CRC_CHECK
+//#define DEBUG_BRK
+#define CRC_CHECK
 #define USE_DGUS_DRIVER
+#define DGUS_BAUDRATE	9600
 
 #define HEADER_WORD 0xAACC
 #define BUFFER_NUM	1024

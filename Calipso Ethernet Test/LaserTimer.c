@@ -16,6 +16,26 @@ static osTimerDef (Timer2, LaserTimer_Callback);
  
 // Periodic Timer Example
 static void LaserTimer_Callback(void const *arg) {
+	if (footswitch_on && footswitch_en)
+	{
+		switch_filter++;
+		if (switch_filter > switch_filter_threshold * 2)
+			switch_filter = switch_filter_threshold * 2;
+	}
+	else
+	{
+		if (switch_filter > 0)
+			switch_filter--;
+	}
+	
+	if (footswitch_en)
+	{
+		if (switch_filter > switch_filter_threshold)
+			LampControlPulseStart();
+		else
+			LampControlPulseStop();
+	}
+	
   // add user code here
 	if (peltier_en)
 	{

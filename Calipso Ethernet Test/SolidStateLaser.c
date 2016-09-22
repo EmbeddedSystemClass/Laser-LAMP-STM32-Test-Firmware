@@ -13,22 +13,29 @@ void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin)
 {
 	switch (GPIO_Pin)
 	{
-		case GPIO_PIN_LAMP_Ready:	
+		case GPIO_PIN_15:	
 			HAL_GPIO_ReadPin(GPIOC, GPIO_PIN_LAMP_Ready);
+			if (footswitch_en)
+			{
+				if (HAL_GPIO_ReadPin(GPIOF, GPIO_PIN_FOOTSWITCH) == GPIO_PIN_RESET)
+					footswitch_on = true;
+				else
+					footswitch_on = false;
+			}
 			break;
-		case GPIO_PIN_LAMP_HVOn:	
+		case GPIO_PIN_3:	
 			HAL_GPIO_ReadPin(GPIOF, GPIO_PIN_LAMP_HVOn);
 			break;
-		case GPIO_PIN_LAMP_Fault:	
+		case GPIO_PIN_1:	
 			HAL_GPIO_ReadPin(GPIOF, GPIO_PIN_LAMP_Fault);
 			break;
-		case GPIO_PIN_LAMP_OV:	
+		case GPIO_PIN_0:	
 			HAL_GPIO_ReadPin(GPIOF, GPIO_PIN_LAMP_OV);
 			break;
-		case GPIO_PIN_LAMP_OT:	
+		case GPIO_PIN_14:	
 			HAL_GPIO_ReadPin(GPIOC, GPIO_PIN_LAMP_OT);
 			break;
-		case GPIO_PIN_LAMP_SIMMERSEN:	
+		case GPIO_PIN_4:	
 			HAL_GPIO_ReadPin(GPIOF, GPIO_PIN_LAMP_SIMMERSEN);
 			break;
 		default:
@@ -52,7 +59,7 @@ void LampControlGPIOInit(void)
 	
 	GPIO_InitTypeDef gpio_c = {0};
 	gpio_c.Pin   = GPIO_PIN_LAMP_Ready | GPIO_PIN_LAMP_OT;
-	gpio_c.Mode  = GPIO_MODE_IT_RISING;
+	gpio_c.Mode  = GPIO_MODE_IT_RISING_FALLING;
 	gpio_c.Pull  = GPIO_NOPULL;
 	gpio_c.Speed = GPIO_SPEED_FREQ_LOW;
 	
@@ -64,8 +71,8 @@ void LampControlGPIOInit(void)
 	HAL_GPIO_Init(GPIOC, &gpio_c);
 	
 	GPIO_InitTypeDef gpio_f = {0};
-	gpio_f.Pin   = GPIO_PIN_LAMP_HVOn | GPIO_PIN_LAMP_Fault | GPIO_PIN_LAMP_OV | GPIO_PIN_LAMP_SIMMERSEN;
-	gpio_f.Mode  = GPIO_MODE_IT_RISING;
+	gpio_f.Pin   = GPIO_PIN_LAMP_HVOn | GPIO_PIN_LAMP_Fault | GPIO_PIN_LAMP_OV | GPIO_PIN_LAMP_SIMMERSEN | GPIO_PIN_FOOTSWITCH;
+	gpio_f.Mode  = GPIO_MODE_IT_RISING_FALLING;
 	gpio_f.Pull  = GPIO_NOPULL;
 	gpio_f.Speed = GPIO_SPEED_FREQ_LOW;
 	
@@ -183,19 +190,22 @@ void LampControlInit(void)
 
 void LampControlPulseStart(void)
 {
-	LaserStarted = true;
+	if (!LaserStarted)
+	{
+		LaserStarted = true;
+		
+		//HAL_TIM_OC_Start_IT(&hTIM9, TIM_CHANNEL_2);
+		__HAL_TIM_ENABLE_IT(&hTIM9, TIM_IT_UPDATE);
+		
+		/* Enable the Output compare channel */
+		TIM_CCxChannelCmd(hTIM9.Instance, TIM_CHANNEL_2, TIM_CCx_ENABLE);
 	
-	//HAL_TIM_OC_Start_IT(&hTIM9, TIM_CHANNEL_2);
-	__HAL_TIM_ENABLE_IT(&hTIM9, TIM_IT_UPDATE);
-	
-	/* Enable the Output compare channel */
-  TIM_CCxChannelCmd(hTIM9.Instance, TIM_CHANNEL_2, TIM_CCx_ENABLE);
-
-  /* Enable the Peripheral */
-  __HAL_TIM_ENABLE(&hTIM9);
-	
-	// Start frequency counter
-	HAL_TIM_OC_Start(&hTIM10, TIM_CHANNEL_1);
+		/* Enable the Peripheral */
+		__HAL_TIM_ENABLE(&hTIM9);
+		
+		// Start frequency counter
+		HAL_TIM_OC_Start(&hTIM10, TIM_CHANNEL_1);
+	}
 }
 
 void LampControlPulseStop(void)

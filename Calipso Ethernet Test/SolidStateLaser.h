@@ -5,6 +5,8 @@
 #include <math.h>
 #include "arm_math.h"
 
+#define GPIO_PIN_FOOTSWITCH				GPIO_PIN_15 // PORT GPIOF, IN
+
 #define GPIO_PIN_LAMP_Ready				GPIO_PIN_15 // PORT GPIOC, IN
 #define GPIO_PIN_LAMP_HVINH				GPIO_PIN_13 // PORT GPIOC, OUT
 #define GPIO_PIN_LAMP_HVOn				GPIO_PIN_3  // PORT GPIOF, IN

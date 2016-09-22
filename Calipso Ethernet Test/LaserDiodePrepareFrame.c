@@ -13,6 +13,8 @@ extern void SetDACValue(float32_t value);
 void LaserDiodePrepare_Process(uint16_t pic_id)
 {
 	bool update = false;
+	uint16_t new_pic_id = pic_id;
+	
 	DGUS_LASERDIODE* value;
 	ReadVariable(FRAMEDATA_LASERDIODE_BASE, (void**)&value, sizeof(frameData_LaserDiode));
 	if ((osSignalWait(DGUS_EVENT_SEND_COMPLETED, 100).status != osEventTimeout) && (osSignalWait(DGUS_EVENT_RECEIVE_COMPLETED, 100).status != osEventTimeout))
@@ -30,10 +32,12 @@ void LaserDiodePrepare_Process(uint16_t pic_id)
 				if (!prepare)
 				{
 					frameData_LaserDiode.state = 1;
-					SetPicId(FRAME_PICID_LASERDIODE_READY, 100);
+					//SetPicId(FRAME_PICID_LASERDIODE_READY, 100);
+					new_pic_id = FRAME_PICID_LASERDIODE_READY;
 				}
 				else
-					SetPicId(FRAME_PICID_LASERDIODE_PREPARETIMER, 100);
+					//SetPicId(FRAME_PICID_LASERDIODE_PREPARETIMER, 100);
+					new_pic_id = FRAME_PICID_LASERDIODE_PREPARETIMER;
 			}
 			update = true;
 			break;
@@ -46,10 +50,14 @@ void LaserDiodePrepare_Process(uint16_t pic_id)
 				if (!prepare)
 				{
 					frameData_LaserDiode.state = 1;
-					SetPicId(FRAME_PICID_LASERDIODE_READY, 100);
+					//SetPicId(FRAME_PICID_LASERDIODE_READY, 100);
+					new_pic_id = FRAME_PICID_LASERDIODE_READY;
 				}
 				else
-					SetPicId(FRAME_PICID_LASERDIODE_PREPARETIMER, 100);
+				{
+					//SetPicId(FRAME_PICID_LASERDIODE_PREPARETIMER, 100);
+					new_pic_id = FRAME_PICID_LASERDIODE_PREPARETIMER;
+				}
 			}
 			update = true;
 			break;
@@ -59,7 +67,8 @@ void LaserDiodePrepare_Process(uint16_t pic_id)
 			if (!prepare)
 			{
 				frameData_LaserDiode.state = 1;
-				SetPicId(FRAME_PICID_LASERDIODE_READY, 100);
+				//SetPicId(FRAME_PICID_LASERDIODE_READY, 100);
+				new_pic_id = FRAME_PICID_LASERDIODE_READY;
 			}
 			update = true;
 			break;
@@ -70,4 +79,7 @@ void LaserDiodePrepare_Process(uint16_t pic_id)
 		WriteLaserDiodeDataConvert16(FRAMEDATA_LASERDIODE_BASE, &frameData_LaserDiode);
 		osSignalWait(DGUS_EVENT_SEND_COMPLETED, 100);
 	}
+	
+	if (pic_id != new_pic_id && update)
+		SetPicId(new_pic_id, 100);
 }
