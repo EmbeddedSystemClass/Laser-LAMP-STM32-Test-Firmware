@@ -109,7 +109,6 @@ void MainSPI_Thread (void const *argument) {
 
 	ARM_DRIVER_SPI* SPIdrv = &Driver_SPI2;
 	
-	float32_t x = 0.0f;
 	volatile uint16_t datain;
 		
   while (1) {

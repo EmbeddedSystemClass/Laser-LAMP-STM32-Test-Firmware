@@ -49,4 +49,6 @@
 #define __MISC_GETCHARGEMODULEOVHSTATE()		HAL_GPIO_ReadPin(GPIOC, GPIO_PIN_ChargeModuleOverheating) == GPIO_PIN_RESET
 #define __MISC_GETCHARGEMODULEREADYSTATE()	HAL_GPIO_ReadPin(GPIOC, GPIO_PIN_ChargeModuleReady) == GPIO_PIN_RESET
 
+void FlowInit(void);
+
 #endif

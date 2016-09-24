@@ -4,6 +4,7 @@
 #include "stm32f4xx_hal.h"
 #include "SolidStateLaser.h"
 #include "GlobalVariables.h"
+#include "LaserMisc.h"
 
 #include <math.h>
 #include "arm_math.h"
@@ -17,10 +18,12 @@ void SolidStateLaserWork_Process(uint16_t pic_id)
 	
 	DGUS_SOLIDSTATELASER* value;
 	ReadVariable(FRAMEDATA_SOLIDSTATELASER_BASE, (void**)&value, sizeof(frameData_SolidStateLaser));
-	if ((osSignalWait(DGUS_EVENT_SEND_COMPLETED, 100).status != osEventTimeout) && (osSignalWait(DGUS_EVENT_RECEIVE_COMPLETED, 100).status != osEventTimeout))
+	if ((osSignalWait(DGUS_EVENT_SEND_COMPLETED, g_wDGUSTimeout).status != osEventTimeout) && (osSignalWait(DGUS_EVENT_RECEIVE_COMPLETED, g_wDGUSTimeout).status != osEventTimeout))
 		convert_laserdata_ss(&frameData_SolidStateLaser, value);
 	else 
 		return;
+	
+	uint16_t state = frameData_SolidStateLaser.state;
 	
 	osDelay(50);
 	
@@ -36,25 +39,33 @@ void SolidStateLaserWork_Process(uint16_t pic_id)
 	else
 		__SOLIDSTATELASER_SIMMEROFF();
 	
+	frameData_SolidStateLaser.state = 0;
+	
+	// Input pressed
 	if (frameData_SolidStateLaser.buttons.onSimmerBtn != 0)
-	{
-		// On Input Pressed
-		frameData_SolidStateLaser.buttons.onSimmerBtn = 0;
-		
+	{		
 		new_pic_id = FRAME_PICID_SOLIDSTATE_SIMMER;
 		
+		frameData_SolidStateLaser.state = 2;
+		
+		// On Input Pressed
+		frameData_SolidStateLaser.buttons.onSimmerBtn = 0;
 		update = true;
 	}
 	
+	// Simmer wait
 	if (pic_id == FRAME_PICID_SOLIDSTATE_SIMMER)
 	{
-		osDelay(1000);
-		SetPicId(FRAME_PICID_SOLIDSTATE_START, 100);
+		frameData_SolidStateLaser.state = 2;
+		
+		if (__MISC_GETSIMMERSENSOR())
+			SetPicId(FRAME_PICID_SOLIDSTATE_START, g_wDGUSTimeout);
 	}
 	
+	// Start pressed
 	if (frameData_SolidStateLaser.buttons.onStartBtn != 0)
 	{
-		// On Input Pressed
+		// On Start Pressed
 		frameData_SolidStateLaser.buttons.onStartBtn = 0;
 		
 		//LampControlPulseStart();
@@ -79,12 +90,15 @@ void SolidStateLaserWork_Process(uint16_t pic_id)
 		update = true;
 	}
 	
+	if (state != frameData_SolidStateLaser.state)
+		update = true;
+	
 	if (update)
 	{
 		WriteSolidStateLaserDataConvert16(FRAMEDATA_SOLIDSTATELASER_BASE, &frameData_SolidStateLaser);
-		osSignalWait(DGUS_EVENT_SEND_COMPLETED, 100);
+		osSignalWait(DGUS_EVENT_SEND_COMPLETED, g_wDGUSTimeout);
 	}
 	
 	if (pic_id != new_pic_id && update)
-		SetPicId(new_pic_id, 100);
+		SetPicId(new_pic_id, g_wDGUSTimeout);
 }

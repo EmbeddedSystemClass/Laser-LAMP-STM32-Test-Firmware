@@ -1,6 +1,7 @@
 #include "DGUS.h"
 #include <string.h>
 #include "Driver_USART.h"
+#include "GlobalVariables.h"
 
 #include "stm32f4xx_hal_uart.h"
 #include <stdbool.h>

@@ -202,24 +202,7 @@
           <Name>UL2CM3(-S0 -C0 -P0 )  -FN1 -FC1000 -FD20000000 -FF0STM32F4xx_1024 -FL0100000 -FS08000000 -FP0($$Device:STM32F407ZGTx$CMSIS\Flash\STM32F4xx_1024.FLM)</Name>
         </SetRegEntry>
       </TargetDriverDllRegistry>
-      <Breakpoint>
-        <Bp>
-          <Number>0</Number>
-          <Type>0</Type>
-          <LineNumber>159</LineNumber>
-          <EnabledFlag>1</EnabledFlag>
-          <Address>134236740</Address>
-          <ByteObject>0</ByteObject>
-          <HtxType>0</HtxType>
-          <ManyObjects>0</ManyObjects>
-          <SizeOfObject>0</SizeOfObject>
-          <BreakByAccess>0</BreakByAccess>
-          <BreakIfRCount>1</BreakIfRCount>
-          <Filename>.\stm32f4xx_hal_msp.c</Filename>
-          <ExecCommand></ExecCommand>
-          <Expression>\\CalipsoEthernetTest\stm32f4xx_hal_msp.c\159</Expression>
-        </Bp>
-      </Breakpoint>
+      <Breakpoint/>
       <WatchWindow1>
         <Ww>
           <count>0</count>
@@ -272,6 +255,16 @@
           <count>5</count>
           <WinNumber>2</WinNumber>
           <ItemText>switch_filter,0x0A</ItemText>
+        </Ww>
+        <Ww>
+          <count>6</count>
+          <WinNumber>2</WinNumber>
+          <ItemText>flow1</ItemText>
+        </Ww>
+        <Ww>
+          <count>7</count>
+          <WinNumber>2</WinNumber>
+          <ItemText>flow2</ItemText>
         </Ww>
       </WatchWindow2>
       <MemoryWindow1>
@@ -331,6 +324,10 @@
       <Lin2ConfigFile></Lin2ConfigFile>
       <bLin2Auto>0</bLin2Auto>
       <SystemViewers>
+        <Entry>
+          <Name>System Viewer\TIM8</Name>
+          <WinId>35903</WinId>
+        </Entry>
         <Entry>
           <Name>System Viewer\USART1</Name>
           <WinId>35904</WinId>
@@ -616,6 +613,18 @@
       <bDave2>0</bDave2>
       <PathWithFileName>.\DS18B20.c</PathWithFileName>
       <FilenameWithoutPath>DS18B20.c</FilenameWithoutPath>
+      <RteFlg>0</RteFlg>
+      <bShared>0</bShared>
+    </File>
+    <File>
+      <GroupNumber>4</GroupNumber>
+      <FileNumber>21</FileNumber>
+      <FileType>1</FileType>
+      <tvExp>0</tvExp>
+      <tvExpOptDlg>0</tvExpOptDlg>
+      <bDave2>0</bDave2>
+      <PathWithFileName>.\LaserMisc.c</PathWithFileName>
+      <FilenameWithoutPath>LaserMisc.c</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
     </File>

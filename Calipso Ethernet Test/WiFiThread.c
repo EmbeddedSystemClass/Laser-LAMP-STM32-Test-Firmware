@@ -420,7 +420,19 @@ void UserWiFiThread (void const *argument) {
 			//if ((event.value.signals & WIFI_EVENT_TEMPERATURE_UPDATE) != 0)
 			{
 				// Send data to client
-				sprintf(str, "%f C\n", temperature);
+				sprintf(str, "T=%f C\n", temperature);
+				Driver_USART3.Send(str, strlen(str));
+				
+				sprintf(str, "F1=%f l/m\n", flow1);
+				Driver_USART3.Send(str, strlen(str));
+				
+				sprintf(str, "F2=%f l/m\n", flow2);
+				Driver_USART3.Send(str, strlen(str));
+				
+				sprintf(str, "VM=%f V\n", VoltageMonitor);
+				Driver_USART3.Send(str, strlen(str));
+				
+				sprintf(str, "CM=%f V\n", CurrentMonitor);
 				Driver_USART3.Send(str, strlen(str));
 			}
 		}

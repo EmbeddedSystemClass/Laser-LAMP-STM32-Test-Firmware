@@ -492,6 +492,11 @@
               <FileType>1</FileType>
               <FilePath>.\DS18B20.c</FilePath>
             </File>
+            <File>
+              <FileName>LaserMisc.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\LaserMisc.c</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
@@ -674,6 +679,12 @@
         </targetInfos>
       </component>
       <component Cclass="Device" Cgroup="STM32Cube HAL" Csub="DMA" Cvendor="Keil" Cversion="1.5.0" condition="STM32F4 HAL">
+        <package name="STM32F4xx_DFP" schemaVersion="1.3" url="http://www.keil.com/pack" vendor="Keil" version="2.9.0"/>
+        <targetInfos>
+          <targetInfo name="EthernetTest"/>
+        </targetInfos>
+      </component>
+      <component Cclass="Device" Cgroup="STM32Cube HAL" Csub="Flash" Cvendor="Keil" Cversion="1.5.0" condition="STM32F4 HAL">
         <package name="STM32F4xx_DFP" schemaVersion="1.3" url="http://www.keil.com/pack" vendor="Keil" version="2.9.0"/>
         <targetInfos>
           <targetInfo name="EthernetTest"/>

@@ -2,10 +2,14 @@
 #include "cmsis_os.h"                                           // CMSIS RTOS header file
 #include <stdbool.h>
 #include "GlobalVariables.h"
+#include "SolidStateLaser.h"
 
 /*----------------------------------------------------------------------------
  *      Timer: Sample timer functions
  *---------------------------------------------------------------------------*/
+ 
+ extern TIM_HandleTypeDef htim_flow1;
+ extern TIM_HandleTypeDef htim_flow2;
 
 
 /*----- Periodic Timer Example -----*/
@@ -82,6 +86,22 @@ static void LaserTimer_Callback(void const *arg) {
 			m_wMillSec = 0; // Every 10 ms
 		}
 		if (m_wMillSec < 1000)	m_wMillSec += 10;
+	}
+	
+	static int cnt = 0;
+	cnt++;
+	
+	if (cnt > 10)
+	{
+		HAL_TIM_Base_Stop(&htim_flow1);
+		HAL_TIM_Base_Stop(&htim_flow2);
+		flow1 = (float32_t)(__HAL_TIM_GET_COUNTER(&htim_flow1)) * 600.0f / 1500.0f;
+		flow2 = (float32_t)(__HAL_TIM_GET_COUNTER(&htim_flow2)) * 600.0f / 1500.0f;
+		__HAL_TIM_SET_COUNTER(&htim_flow1, 0);
+		__HAL_TIM_SET_COUNTER(&htim_flow2, 0);
+		HAL_TIM_Base_Start(&htim_flow1);
+		HAL_TIM_Base_Start(&htim_flow2);
+		cnt = 0;
 	}
 }
 

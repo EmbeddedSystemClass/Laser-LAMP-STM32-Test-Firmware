@@ -17,7 +17,7 @@ void LaserDiodeWork_Process(uint16_t pic_id)
 	
 	DGUS_LASERDIODE* value;
 	ReadVariable(FRAMEDATA_LASERDIODE_BASE, (void**)&value, sizeof(frameData_LaserDiode));
-	if ((osSignalWait(DGUS_EVENT_SEND_COMPLETED, 100).status != osEventTimeout) && (osSignalWait(DGUS_EVENT_RECEIVE_COMPLETED, 100).status != osEventTimeout))
+	if ((osSignalWait(DGUS_EVENT_SEND_COMPLETED, g_wDGUSTimeout).status != osEventTimeout) && (osSignalWait(DGUS_EVENT_RECEIVE_COMPLETED, g_wDGUSTimeout).status != osEventTimeout))
 		convert_laserdata(&frameData_LaserDiode, value);
 	else 
 		return;
@@ -62,9 +62,9 @@ void LaserDiodeWork_Process(uint16_t pic_id)
 	if (update)
 	{
 		WriteLaserDiodeDataConvert16(FRAMEDATA_LASERDIODE_BASE, &frameData_LaserDiode);
-		osSignalWait(DGUS_EVENT_SEND_COMPLETED, 100);
+		osSignalWait(DGUS_EVENT_SEND_COMPLETED, g_wDGUSTimeout);
 	}
 	
 	if (pic_id != new_pic_id && update)
-		SetPicId(new_pic_id, 100);
+		SetPicId(new_pic_id, g_wDGUSTimeout);
 }

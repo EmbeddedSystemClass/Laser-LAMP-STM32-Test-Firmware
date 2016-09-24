@@ -25,6 +25,8 @@ osThreadDef (MainThread, osPriorityNormal, 1, 0);                   // thread ob
 //----------------------------- GUI FRAMES ----------------------------------
 extern void     PasswordFrame_Process(uint16_t pic_id);
 extern void      ServiceFrame_Process(uint16_t pic_id);
+
+extern void   LaserDiodeInput_Init   (uint16_t pic_id);
 extern void   LaserDiodeInput_Process(uint16_t pic_id);
 extern void LaserDiodePrepare_Process(uint16_t pic_id);
 extern void    LaserDiodeWork_Process(uint16_t pic_id);
@@ -93,11 +95,11 @@ void UpdateLaserState(uint16_t pic_id)
 	{
 		// Check temperature
 		if (temperature > temperature_overheat)
-			SetPicId(FRAME_PICID_LASERDIODE_TEMPERATUREOUT, 100);
+			SetPicId(FRAME_PICID_LASERDIODE_TEMPERATUREOUT, g_wDGUSTimeout);
 		
 		// Check flow
-		if (flow < flow_low)
-			SetPicId(FRAME_PICID_LASERDIODE_FLOWERROR, 100);
+		if (flow1 < flow_low)
+			SetPicId(FRAME_PICID_LASERDIODE_FLOWERROR, g_wDGUSTimeout);
 		
 		// Check is working
 		if ((pic_id == FRAME_PICID_LASERDIODE_INPUT) || 
@@ -112,6 +114,22 @@ void UpdateLaserState(uint16_t pic_id)
 		// Peltier off
 		peltier_en = false;
 	}
+	
+	// Check for solid state laser
+	if ((pic_id >= 35) && (pic_id <= 43))
+	{
+		// Check temperature
+		if (temperature > temperature_overheat)
+			SetPicId(FRAME_PICID_SOLIDSTATE_OVERHEATING, g_wDGUSTimeout);
+		
+		// Check flow
+		if (flow1 < flow_low)
+			SetPicId(FRAME_PICID_SOLIDSTATE_FLOWERROR, g_wDGUSTimeout);
+		
+		// Fault check
+		if (__MISC_GETCHARGEMODULEFAULTSTATE())
+			SetPicId(FRAME_PICID_SOLIDSTATE_FAULT, g_wDGUSTimeout);
+	}
 }
 
 DGUS_LASERDIODE_STATE laser_state;
@@ -124,22 +142,24 @@ void UpdateLaserStatus()
 	laser_state.flow = 10;
 	
 	WriteVariableConvert16(FRAMEDATA_LASERSTATE_BASE, &laser_state, sizeof(laser_state));
-	osSignalWait(DGUS_EVENT_SEND_COMPLETED, 100);
+	osSignalWait(DGUS_EVENT_SEND_COMPLETED, g_wDGUSTimeout);
 }
 
 void MainThread (void const *argument) {
 	static uint16_t last_pic_id = 0;
+	
+	LaserDiodeInput_Init(pic_id);
 
   while (1) {
     ; // Insert thread code here...
-		pic_id = GetPicId(100, pic_id);		
+		pic_id = GetPicId(g_wDGUSTimeout, pic_id);		
 		UpdateLaserState(pic_id);
 		
 		// GUI Frames process
 		switch (pic_id)
 		{
 			case FRAME_PICID_LOGO:
-				SetPicId(FRAME_PICID_MAINMENU, 100);
+				SetPicId(FRAME_PICID_MAINMENU, g_wDGUSTimeout);
 				break;
 			
 			// Frames process
@@ -198,17 +218,17 @@ void MainThread (void const *argument) {
 				break;
 			
 			default:
-				SetPicId(FRAME_PICID_MAINMENU, 100);
+				SetPicId(FRAME_PICID_MAINMENU, g_wDGUSTimeout);
 				break;
 		}
 		
 		// Remote control
 		if (RemoteControl)
-			SetPicId(FRAME_PICID_REMOTECONTROL, 100);
+			SetPicId(FRAME_PICID_REMOTECONTROL, g_wDGUSTimeout);
 		else
 			if (pic_id == FRAME_PICID_REMOTECONTROL)
 			{
-				SetPicId(FRAME_PICID_MAINMENU, 100);
+				SetPicId(FRAME_PICID_MAINMENU, g_wDGUSTimeout);
 				//pic_id = FRAME_PICID_MAINMENU;
 			}
 		

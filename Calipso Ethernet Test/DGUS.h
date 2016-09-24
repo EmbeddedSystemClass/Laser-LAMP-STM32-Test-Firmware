@@ -14,8 +14,8 @@
 
 //#define DEBUG_BRK
 #define CRC_CHECK
-#define USE_DGUS_DRIVER
-#define DGUS_BAUDRATE	9600
+//#define USE_DGUS_DRIVER
+#define DGUS_BAUDRATE	115200
 
 #define HEADER_WORD 0xAACC
 #define BUFFER_NUM	1024
@@ -109,6 +109,9 @@ extern UART_HandleTypeDef huart1;
 #define FRAME_PICID_SOLIDSTATE_SIMMER						39			// Process
 #define FRAME_PICID_SOLIDSTATE_START						40			// Process
 #define FRAME_PICID_SOLIDSTATE_WORK							42			// Process
+#define FRAME_PICID_SOLIDSTATE_FLOWERROR				44			// Process
+#define FRAME_PICID_SOLIDSTATE_OVERHEATING			45			// Process
+#define FRAME_PICID_SOLIDSTATE_FAULT						46			// Process
 
 /* ************************** LASER DIODE CONTROL ************************* */
 

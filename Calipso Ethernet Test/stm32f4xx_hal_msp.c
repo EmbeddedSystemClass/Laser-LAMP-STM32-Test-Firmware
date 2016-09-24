@@ -90,6 +90,28 @@ void HAL_MspInit(void)
 	__GPIOG_CLK_ENABLE();
 	__USART6_CLK_ENABLE();
 	
+	//  ************************* FLOW   ******************************
+	
+	GPIO_InitTypeDef flow1 = {0};
+	
+	flow1.Pin   = GPIO_PIN_0;
+	flow1.Mode  = GPIO_MODE_AF_PP;
+	flow1.Pull  = GPIO_NOPULL;
+	flow1.Speed = GPIO_SPEED_FREQ_LOW;
+	flow1.Alternate = GPIO_AF3_TIM8;
+	
+	HAL_GPIO_Init(GPIOA, &flow1);
+	
+	GPIO_InitTypeDef flow2 = {0};
+	
+	flow2.Pin   = GPIO_PIN_0;
+	flow2.Mode  = GPIO_MODE_AF_PP;
+	flow2.Pull  = GPIO_NOPULL;
+	flow2.Speed = GPIO_SPEED_FREQ_LOW;
+	flow2.Alternate = GPIO_AF2_TIM4;
+	
+	HAL_GPIO_Init(GPIOE, &flow2);
+	
 	//  ************************* UART 6 ******************************
 	GPIO_InitTypeDef uart = {0};
 	
@@ -177,6 +199,7 @@ void HAL_MspInit(void)
 	HAL_GPIO_Init(GPIOC, &gpio_C);
 	
 	LampControlInit();
+	FlowInit();
 }
 
 /**
