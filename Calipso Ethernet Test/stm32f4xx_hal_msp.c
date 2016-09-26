@@ -175,6 +175,13 @@ void HAL_MspInit(void)
 	
 	HAL_GPIO_Init(GPIOE, &gpio_E);
 	
+	gpio_E.Pin   = GPIO_PIN_Laser_ID0 | GPIO_PIN_Laser_ID1;
+	gpio_E.Mode  = GPIO_MODE_INPUT;
+	gpio_E.Pull  = GPIO_NOPULL;
+	gpio_E.Speed = GPIO_SPEED_FREQ_LOW;
+	
+	HAL_GPIO_Init(GPIOE, &gpio_E);
+	
 	HAL_GPIO_WritePin(GPIOG, GPIO_PIN_2 | GPIO_PIN_3 | GPIO_PIN_4 | GPIO_PIN_5, GPIO_PIN_RESET);
 	HAL_GPIO_WritePin(GPIOG, GPIO_PIN_CurrentMonitor_nCS | GPIO_PIN_CurrentMonitor_nCS, GPIO_PIN_SET);
 	HAL_GPIO_WritePin(GPIOE, GPIO_PIN_CurrentProgram_nCS, GPIO_PIN_SET);
@@ -198,8 +205,17 @@ void HAL_MspInit(void)
 	
 	HAL_GPIO_Init(GPIOC, &gpio_C);
 	
+	//  ************************* Diode control ******************************
+	gpio_F.Pin   = GPIO_PIN_LaserDiodeEnable;
+	gpio_F.Mode  = GPIO_MODE_OUTPUT_PP;
+	gpio_F.Pull  = GPIO_NOPULL;
+	gpio_F.Speed = GPIO_SPEED_FREQ_LOW;
+	
+	HAL_GPIO_Init(GPIOF, &gpio_F);
+	
 	LampControlInit();
 	FlowInit();
+	CoolInit();
 }
 
 /**

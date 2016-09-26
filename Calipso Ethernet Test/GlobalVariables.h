@@ -9,6 +9,8 @@
 
 #include "DGUS.h"
 
+#include "LaserMisc.h"
+
 // DGUS control variables
 extern uint16_t g_wDGUSTimeout;
 
@@ -39,11 +41,16 @@ extern volatile float32_t flow2;
 extern volatile float32_t VoltageMonitor;
 extern volatile float32_t CurrentMonitor;
 
+// Laser ID
+extern LASER_ID LaserID;
+
 // Private variables
 extern uint16_t pic_id;
 extern bool peltier_en;
 extern bool prepare;
 extern bool RemoteControl;
+extern bool SolidStateLaser_en;
+extern bool DiodeLaser_en;
 extern bool LaserStarted;
 extern volatile bool footswitch_en;
 extern volatile bool footswitch_on;

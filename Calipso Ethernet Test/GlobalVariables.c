@@ -30,13 +30,18 @@ volatile float32_t flow2 = 9.0f;
 volatile float32_t VoltageMonitor = 0.0f;
 volatile float32_t CurrentMonitor = 0.0f;
 
+// Laser ID
+LASER_ID LaserID = LASER_ID_SOLIDSTATE;
+
 // Private variables
 uint16_t pic_id = 0;
 bool peltier_en = false;
 bool prepare = false;   
 bool RemoteControl = false;
 bool LaserStarted = false;
-uint16_t switch_filter_threshold = 20;
+bool SolidStateLaser_en = false;
+bool DiodeLaser_en = false;
+uint16_t switch_filter_threshold = 40;
 volatile uint16_t switch_filter = 0;
 volatile bool footswitch_en = false;
 volatile bool footswitch_on = false;

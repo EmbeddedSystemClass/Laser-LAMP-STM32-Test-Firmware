@@ -447,6 +447,11 @@
               <FileType>1</FileType>
               <FilePath>.\SolidStateLaserWorkFrame.c</FilePath>
             </File>
+            <File>
+              <FileName>ServiceFrameDiodeLaser.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\ServiceFrameDiodeLaser.c</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>

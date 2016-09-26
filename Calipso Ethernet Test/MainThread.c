@@ -25,6 +25,7 @@ osThreadDef (MainThread, osPriorityNormal, 1, 0);                   // thread ob
 //----------------------------- GUI FRAMES ----------------------------------
 extern void     PasswordFrame_Process(uint16_t pic_id);
 extern void      ServiceFrame_Process(uint16_t pic_id);
+extern void ServiceDiodeFrame_Process(uint16_t pic_id);
 
 extern void   LaserDiodeInput_Init   (uint16_t pic_id);
 extern void   LaserDiodeInput_Process(uint16_t pic_id);
@@ -88,7 +89,11 @@ void UpdateLaserState(uint16_t pic_id)
 			((pic_id >= 19) && (pic_id <= 32)))
 		__MISC_RELAY3_ON();
 	else
+	{
+		__MISC_LASERDIODE_OFF();
+		osDelay(100);
 		__MISC_RELAY3_OFF();
+	}
 	
 	// Check for diode laser
 	if ((pic_id >= 19) && (pic_id <= 32))
@@ -111,6 +116,7 @@ void UpdateLaserState(uint16_t pic_id)
 	}
 	else
 	{
+		CoolOff();
 		// Peltier off
 		peltier_en = false;
 	}
@@ -155,6 +161,8 @@ void MainThread (void const *argument) {
 		pic_id = GetPicId(g_wDGUSTimeout, pic_id);		
 		UpdateLaserState(pic_id);
 		
+		LaserID = GetLaserID();
+		
 		// GUI Frames process
 		switch (pic_id)
 		{
@@ -169,7 +177,9 @@ void MainThread (void const *argument) {
 			case FRAME_PICID_SERVICE_SOLIDSTATELASER:		
 				ServiceFrame_Process(pic_id);	
 				break;
-			case FRAME_PICID_SERVICE_LASERDIODE:				break; // Blank picture, for future release
+			case FRAME_PICID_SERVICE_LASERDIODE:				
+				ServiceDiodeFrame_Process(pic_id);
+				break;
 			case FRAME_PICID_SERVICE_BASICSETTINGS:			break; // Blank picture, for future release
 			
 			// Laser Diode control
@@ -212,6 +222,10 @@ void MainThread (void const *argument) {
 			case FRAME_PICID_SOLIDSTATE_WORK:
 				SolidStateLaserWork_Process(pic_id);
 				UpdateLaserStatus();
+				break;
+			case FRAME_PICID_SOLIDSTATE_FLOWERROR:
+			case FRAME_PICID_SOLIDSTATE_OVERHEATING:
+			case FRAME_PICID_SOLIDSTATE_FAULT:
 				break;
 			
 			case FRAME_PICID_REMOTECONTROL:

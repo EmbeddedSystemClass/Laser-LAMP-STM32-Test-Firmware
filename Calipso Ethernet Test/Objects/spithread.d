@@ -42,3 +42,4 @@
 .\objects\spithread.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\string.h
 .\objects\spithread.o: GlobalVariables.h
 .\objects\spithread.o: DGUS.h
+.\objects\spithread.o: LaserMisc.h

@@ -5,6 +5,7 @@
 #include "stm32f4xx_hal_flash.h"
 #include "SolidStateLaser.h"
 #include "GlobalVariables.h" 
+#include "LaserMisc.h"
 
 #include <math.h>
 #include "arm_math.h"
@@ -207,6 +208,8 @@ void LaserDiodeInput_Process(uint16_t pic_id)
 			update = true;
 		}
 	
+	CoolOn();
+	CoolSet((frameData_LaserDiode.cooling + 1) * 16);
 	if (frameData_LaserDiode.buttons.onInputBtn != 0)
 	{
 		// On Input Pressed

@@ -39,6 +39,11 @@ void SolidStateLaserWork_Process(uint16_t pic_id)
 	else
 		__SOLIDSTATELASER_SIMMEROFF();
 	
+	if (pic_id == FRAME_PICID_SOLIDSTATE_WORK)
+		SolidStateLaser_en = true;
+	else
+		SolidStateLaser_en = false;
+	
 	frameData_SolidStateLaser.state = 0;
 	
 	// Input pressed

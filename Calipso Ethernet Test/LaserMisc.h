@@ -5,6 +5,13 @@
 #include <math.h>
 #include "arm_math.h"
 
+typedef enum LASER_ID_ENUM {
+	LASER_ID_SOLIDSTATE = 0x00,
+	LASER_ID_DIODELASER = 0x01,
+	LASER_ID_LONGPULSE  = 0x02,
+	LASER_ID_FRACTIONAL = 0x03
+} LASER_ID;
+
 // Relays
 #define MISC_GPIO_RELAY1									GPIO_PIN_4	// relay 1
 #define MISC_GPIO_RELAY2									GPIO_PIN_5	// relay 2
@@ -15,6 +22,8 @@
 #define GPIO_PIN_VoltageMonitor_nCS				GPIO_PIN_0 	// PORT GPIOG
 #define GPIO_PIN_CurrentMonitor_nCS				GPIO_PIN_1 	// PORT GPIOG
 #define GPIO_PIN_CurrentProgram_nCS				GPIO_PIN_7 	// PORT GPIOE
+//#define GPIO_PIN_LaserDiodeLock											// Not Used
+#define GPIO_PIN_LaserDiodeEnable					GPIO_PIN_14	// PORT GPIOF
 
 // Inputs
 #define GPIO_PIN_Laser_ID0								GPIO_PIN_3 	// PORT GPIOE
@@ -26,6 +35,7 @@
 #define GPIO_PIN_ChargeModuleOvervoltage	GPIO_PIN_0 	// PORT GPIOF
 #define GPIO_PIN_ChargeModuleOverheating	GPIO_PIN_14 // PORT GPIOC
 #define GPIO_PIN_ChargeModuleReady				GPIO_PIN_15 // PORT GPIOC
+#define GPIO_PIN_LaserDiodeFault					GPIO_PIN_13	// PORT GPIOF
 
 // set outputs
 #define __MISC_RELAY1_ON()	HAL_GPIO_WritePin(GPIOB, MISC_GPIO_RELAY1, GPIO_PIN_SET)
@@ -33,11 +43,15 @@
 #define __MISC_RELAY3_ON()	HAL_GPIO_WritePin(GPIOB, MISC_GPIO_RELAY3, GPIO_PIN_SET)
 #define __MISC_RELAY4_ON()	HAL_GPIO_WritePin(GPIOB, MISC_GPIO_RELAY4, GPIO_PIN_SET)
 
+#define __MISC_LASERDIODE_ON()	HAL_GPIO_WritePin(GPIOF, GPIO_PIN_LaserDiodeEnable, GPIO_PIN_SET)
+
 // reset outputs
 #define __MISC_RELAY1_OFF()	HAL_GPIO_WritePin(GPIOB, MISC_GPIO_RELAY1, GPIO_PIN_RESET)
 #define __MISC_RELAY2_OFF()	HAL_GPIO_WritePin(GPIOB, MISC_GPIO_RELAY2, GPIO_PIN_RESET)
 #define __MISC_RELAY3_OFF()	HAL_GPIO_WritePin(GPIOB, MISC_GPIO_RELAY3, GPIO_PIN_RESET)
 #define __MISC_RELAY4_OFF()	HAL_GPIO_WritePin(GPIOB, MISC_GPIO_RELAY4, GPIO_PIN_RESET)
+
+#define __MISC_LASERDIODE_OFF()	HAL_GPIO_WritePin(GPIOF, GPIO_PIN_LaserDiodeEnable, GPIO_PIN_RESET)
 
 // get inputs
 #define __MISC_LASER_ID0()									HAL_GPIO_ReadPin(GPIOE, GPIO_PIN_Laser_ID0)
@@ -49,6 +63,14 @@
 #define __MISC_GETCHARGEMODULEOVHSTATE()		HAL_GPIO_ReadPin(GPIOC, GPIO_PIN_ChargeModuleOverheating) == GPIO_PIN_RESET
 #define __MISC_GETCHARGEMODULEREADYSTATE()	HAL_GPIO_ReadPin(GPIOC, GPIO_PIN_ChargeModuleReady) == GPIO_PIN_RESET
 
+#define __MISC_GETLASERDIODEFAULTSTATE()		HAL_GPIO_ReadPin(GPIOF, GPIO_PIN_LaserDiodeFault) == GPIO_PIN_RESET
+
 void FlowInit(void);
+void CoolInit(void);
+void CoolOn(void);
+void CoolOff(void);
+void CoolSet(uint16_t cool);
+
+LASER_ID GetLaserID(void);
 
 #endif

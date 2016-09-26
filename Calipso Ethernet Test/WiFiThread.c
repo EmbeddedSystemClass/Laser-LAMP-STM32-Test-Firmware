@@ -402,12 +402,12 @@ void UserWiFiThread (void const *argument) {
 					if (strcmp(tokenPtr[2], "DURATION") == 0)
 					{
 						uint16_t value = atol(tokenPtr[3]);
-						LampSetPulseDuration(value);
+						SetPulseDuration_us(value);
 					}
 					if (strcmp(tokenPtr[2], "FREQUENCY") == 0)
 					{
 						uint16_t value = atol(tokenPtr[3]);
-						LampSetPulseFrequency(value);
+						SetPulseFrequency(value);
 					}
 					if (strcmp(tokenPtr[2], "ENERGY") == 0)
 					{

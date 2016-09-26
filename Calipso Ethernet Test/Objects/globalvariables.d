@@ -40,3 +40,4 @@
 .\objects\globalvariables.o: DGUS.h
 .\objects\globalvariables.o: C:\Keil_v5\ARM\PACK\ARM\CMSIS\5.0.0-Beta4\CMSIS\RTOS\RTX\INC\cmsis_os.h
 .\objects\globalvariables.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stddef.h
+.\objects\globalvariables.o: LaserMisc.h

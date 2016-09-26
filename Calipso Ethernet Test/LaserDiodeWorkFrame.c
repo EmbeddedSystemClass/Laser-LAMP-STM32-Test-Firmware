@@ -22,6 +22,11 @@ void LaserDiodeWork_Process(uint16_t pic_id)
 	else 
 		return;
 	
+	if (pic_id == FRAME_PICID_LASERDIODE_STARTED)
+		DiodeLaser_en = true;
+	else
+		DiodeLaser_en = false;
+	
 	if (frameData_LaserDiode.buttons.onReadyBtn != 0)
 	{
 		// On Ready Pressed

@@ -73,14 +73,14 @@ void ServiceFrame_Process(uint16_t pic_id)
 	
 	if (frameData_Service.duration_set == 0x01) 
 	{	
-		LampSetPulseDuration(frameData_Service.duration_value-75);
+		SetPulseDuration_us(frameData_Service.duration_value-75);
 		frameData_Service.duration_set = 0x00;
 		update = true;
 	}
 	
 	if (frameData_Service.frequency_set == 0x01) 
 	{
-		LampSetPulseFrequency(frameData_Service.frequency_value);
+		SetPulseFrequency(frameData_Service.frequency_value);
 		frameData_Service.frequency_set = 0x00;
 		update = true;
 	}
@@ -89,6 +89,7 @@ void ServiceFrame_Process(uint16_t pic_id)
 	{	
 		LampControlPulseStart();
 		frameData_Service.btn_start = 0x00;
+		SolidStateLaser_en = true;
 		update = true;
 	}
 	
@@ -96,6 +97,7 @@ void ServiceFrame_Process(uint16_t pic_id)
 	{	
 		LampControlPulseStop();
 		frameData_Service.btn_stop = 0x00;
+		SolidStateLaser_en = false;
 		update = true;
 	}
 	

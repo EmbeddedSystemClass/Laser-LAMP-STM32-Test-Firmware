@@ -25,8 +25,8 @@ void SolidStateLaserInput_Process(uint16_t pic_id)
 	
 	uint16_t state = frameData_SolidStateLaser.state;
 	
-	LampSetPulseFrequency(frameData_SolidStateLaser.laserprofile.Frequency);
-	LampSetPulseDuration(frameData_SolidStateLaser.lasersettings.Energy * 20);
+	SetPulseFrequency(frameData_SolidStateLaser.laserprofile.Frequency);
+	SetPulseDuration_us(frameData_SolidStateLaser.lasersettings.Energy * 20);
 	
 	if (frameData_SolidStateLaser.lasersettings.Energy != frameData_SolidStateLaser.laserprofile.EnergyCnt)
 	{
@@ -37,6 +37,8 @@ void SolidStateLaserInput_Process(uint16_t pic_id)
 	__SOLIDSTATELASER_DISCHARGEON();
 	
 	frameData_SolidStateLaser.state = 0;
+	
+	CoolOn();
 	
 	if (frameData_SolidStateLaser.buttons.onInputBtn != 0)
 	{

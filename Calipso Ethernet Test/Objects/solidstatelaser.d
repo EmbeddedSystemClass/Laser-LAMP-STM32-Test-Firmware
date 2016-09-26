@@ -41,3 +41,4 @@
 .\objects\solidstatelaser.o: DGUS.h
 .\objects\solidstatelaser.o: C:\Keil_v5\ARM\PACK\ARM\CMSIS\5.0.0-Beta4\CMSIS\RTOS\RTX\INC\cmsis_os.h
 .\objects\solidstatelaser.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stddef.h
+.\objects\solidstatelaser.o: LaserMisc.h

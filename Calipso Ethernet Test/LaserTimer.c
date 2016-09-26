@@ -34,10 +34,21 @@ static void LaserTimer_Callback(void const *arg) {
 	
 	if (footswitch_en)
 	{
-		if (switch_filter > switch_filter_threshold)
-			LampControlPulseStart();
-		else
-			LampControlPulseStop();
+		if (SolidStateLaser_en)
+		{
+			if (switch_filter > switch_filter_threshold)
+				LampControlPulseStart();
+			else
+				LampControlPulseStop();
+		}
+		
+		if (DiodeLaser_en)
+		{
+			if (switch_filter > switch_filter_threshold)
+				DiodeControlPulseStart();
+			else
+				DiodeControlPulseStop();
+		}
 	}
 	
   // add user code here
@@ -95,8 +106,8 @@ static void LaserTimer_Callback(void const *arg) {
 	{
 		HAL_TIM_Base_Stop(&htim_flow1);
 		HAL_TIM_Base_Stop(&htim_flow2);
-		flow1 = (float32_t)(__HAL_TIM_GET_COUNTER(&htim_flow1)) * 600.0f / 1500.0f;
-		flow2 = (float32_t)(__HAL_TIM_GET_COUNTER(&htim_flow2)) * 600.0f / 1500.0f;
+		flow1 = (float32_t)(__HAL_TIM_GET_COUNTER(&htim_flow1)) * 600.0f / 480.0f;
+		flow2 = (float32_t)(__HAL_TIM_GET_COUNTER(&htim_flow2)) * 600.0f / 480.0f;
 		__HAL_TIM_SET_COUNTER(&htim_flow1, 0);
 		__HAL_TIM_SET_COUNTER(&htim_flow2, 0);
 		HAL_TIM_Base_Start(&htim_flow1);
