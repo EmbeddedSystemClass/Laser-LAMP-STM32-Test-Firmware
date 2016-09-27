@@ -66,7 +66,7 @@ void ServiceDiodeFrame_Process(uint16_t pic_id)
 	
 	if (frameData_ServiceDiode.duration_set == 0x01) 
 	{	
-		SetPulseDuration_ms(frameData_ServiceDiode.duration_value);
+		SetPulseDuration_ms(frameData_ServiceDiode.duration_value, frameData_ServiceDiode.duration_value * 2);
 		frameData_ServiceDiode.duration_set = 0x00;
 		update = true;
 	}

@@ -6,9 +6,9 @@ uint16_t g_wDGUSTimeout = 200;
 // Timer global variables
 int16_t m_wMillSec = 0;
 int16_t m_wSeconds = 10;
-int16_t m_wMinutes = 2;
+int16_t m_wMinutes = 0;
 int16_t m_wSetSec  = 10;
-int16_t m_wSetMin  = 2;
+int16_t m_wSetMin  = 0;
 
 // Cooling global variables
 float32_t temperature_cool_on = 26.5f;
@@ -35,12 +35,17 @@ LASER_ID LaserID = LASER_ID_SOLIDSTATE;
 
 // Private variables
 uint16_t pic_id = 0;
-bool peltier_en = false;
+bool g_peltier_en = false;
 bool prepare = false;   
 bool RemoteControl = false;
 bool LaserStarted = false;
 bool SolidStateLaser_en = false;
 bool DiodeLaser_en = false;
+bool DiodeLaserOnePulse_en = false;
+uint16_t subFlushes = 0;
+uint16_t subFlushesCount = 1;
+uint32_t Flushes = 0;
+uint32_t FlushesCount = 1000000;
 uint16_t switch_filter_threshold = 40;
 volatile uint16_t switch_filter = 0;
 volatile bool footswitch_en = false;

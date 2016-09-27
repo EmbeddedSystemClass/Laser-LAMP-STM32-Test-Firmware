@@ -49,10 +49,31 @@ static void LaserTimer_Callback(void const *arg) {
 			else
 				DiodeControlPulseStop();
 		}
+		
+		if (DiodeLaserOnePulse_en)
+			if (switch_filter > switch_filter_threshold)
+				DiodeControlOnePulseStart();
+	}
+	
+		static int cnt = 0;
+	cnt++;
+	
+	// Flow measure
+	if (cnt > 10)
+	{
+		HAL_TIM_Base_Stop(&htim_flow1);
+		HAL_TIM_Base_Stop(&htim_flow2);
+		flow1 = (float32_t)(__HAL_TIM_GET_COUNTER(&htim_flow1)) * 600.0f / 480.0f;
+		flow2 = (float32_t)(__HAL_TIM_GET_COUNTER(&htim_flow2)) * 600.0f / 480.0f;
+		__HAL_TIM_SET_COUNTER(&htim_flow1, 0);
+		__HAL_TIM_SET_COUNTER(&htim_flow2, 0);
+		HAL_TIM_Base_Start(&htim_flow1);
+		HAL_TIM_Base_Start(&htim_flow2);
+		cnt = 0;
 	}
 	
   // add user code here
-	if (peltier_en)
+	if (g_peltier_en)
 	{
 		if (m_wMillSec == 0)
 		{			
@@ -73,7 +94,7 @@ static void LaserTimer_Callback(void const *arg) {
 		if (m_wMillSec > 0)	m_wMillSec-=10;
 	}
 	
-	if (!peltier_en)
+	if (!g_peltier_en)
 	{
 		if (m_wMillSec >= 700)
 		{
@@ -97,22 +118,6 @@ static void LaserTimer_Callback(void const *arg) {
 			m_wMillSec = 0; // Every 10 ms
 		}
 		if (m_wMillSec < 1000)	m_wMillSec += 10;
-	}
-	
-	static int cnt = 0;
-	cnt++;
-	
-	if (cnt > 10)
-	{
-		HAL_TIM_Base_Stop(&htim_flow1);
-		HAL_TIM_Base_Stop(&htim_flow2);
-		flow1 = (float32_t)(__HAL_TIM_GET_COUNTER(&htim_flow1)) * 600.0f / 480.0f;
-		flow2 = (float32_t)(__HAL_TIM_GET_COUNTER(&htim_flow2)) * 600.0f / 480.0f;
-		__HAL_TIM_SET_COUNTER(&htim_flow1, 0);
-		__HAL_TIM_SET_COUNTER(&htim_flow2, 0);
-		HAL_TIM_Base_Start(&htim_flow1);
-		HAL_TIM_Base_Start(&htim_flow2);
-		cnt = 0;
 	}
 }
 

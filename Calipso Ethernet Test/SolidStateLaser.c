@@ -48,8 +48,25 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
 	//__HAL_TIM_DISABLE(&hTIM9);
 	if (htim == &hTIM9)
 	{
-		hTIM9.Instance->CR1 &= ~(TIM_CR1_CEN);
-		__HAL_TIM_SET_COUNTER(&hTIM9, 0);
+		subFlushes++;
+		if (subFlushes == subFlushesCount)
+		{
+			hTIM9.Instance->CR1 &= ~(TIM_CR1_CEN);
+			__HAL_TIM_SET_COUNTER(&hTIM9, 0);
+			subFlushes = 0;
+		}
+	}
+	
+	if (htim == &hTIM10)
+	{
+		Flushes++;
+		if (Flushes == FlushesCount)
+		{
+			hTIM10.Instance->CR1 &= ~(TIM_CR1_CEN);
+			__HAL_TIM_SET_COUNTER(&hTIM10, 0);
+			Flushes = 0;
+			//LaserStarted = false;
+		}
 	}
 	//HAL_TIM_OC_Stop_IT(&hTIM9, TIM_CHANNEL_2);
 	//__HAL_TIM_DISABLE_IT(&hTIM9, TIM_IT_UPDATE);
@@ -152,6 +169,10 @@ void LampControlTIMInit(void)
 	HAL_TIM_OC_ConfigChannel(&hTIM10, &tim10_oc_init, TIM_CHANNEL_1);
 	HAL_TIMEx_MasterConfigSynchronization(&hTIM10, &tim10_master_init); 
 	
+	HAL_NVIC_SetPriority(TIM1_UP_TIM10_IRQn, 0, 1);
+	HAL_NVIC_ClearPendingIRQ(TIM1_UP_TIM10_IRQn);
+	HAL_NVIC_EnableIRQ(TIM1_UP_TIM10_IRQn);
+	
 	// One pulse timer
 	TIM_Base_InitTypeDef tim9_init = {0};
 	tim9_init.Period = 42000; // 1ms period
@@ -184,6 +205,8 @@ void LampControlTIMInit(void)
 	HAL_NVIC_SetPriority(TIM1_BRK_TIM9_IRQn, 0, 1);
 	HAL_NVIC_ClearPendingIRQ(TIM1_BRK_TIM9_IRQn);
 	HAL_NVIC_EnableIRQ(TIM1_BRK_TIM9_IRQn);
+	
+	//TIM1_UP_TIM10_IRQn
 }
 
 void LampControlInit(void)
@@ -198,17 +221,21 @@ void LampControlPulseStart(void)
 	{
 		LaserStarted = true;
 		
+		Flushes = 0;
+		subFlushes = 0;
+		
 		__HAL_TIM_SET_COUNTER(&hTIM10, 0);
 		__HAL_TIM_SET_COUNTER(&hTIM9, 0);
 		
 		// Start frequency counter
 		HAL_TIM_OC_Start(&hTIM10, TIM_CHANNEL_1);
+		__HAL_TIM_ENABLE_IT(&hTIM10, TIM_IT_UPDATE);
 		
 		//HAL_TIM_OC_Start_IT(&hTIM9, TIM_CHANNEL_2);
 		__HAL_TIM_ENABLE_IT(&hTIM9, TIM_IT_UPDATE);
 	
 		/* Enable the Peripheral */
-		__HAL_TIM_ENABLE(&hTIM9);
+		//__HAL_TIM_ENABLE(&hTIM9);
 		
 		/* Enable the Output compare channel */
 		TIM_CCxChannelCmd(hTIM9.Instance, TIM_CHANNEL_2, TIM_CCx_ENABLE);
@@ -224,6 +251,7 @@ void LampControlPulseStop(void)
 	
 	/* Enable the Output compare channel */
 	TIM_CCxChannelCmd(hTIM9.Instance, TIM_CHANNEL_2, TIM_CCx_DISABLE);
+	__HAL_TIM_DISABLE(&hTIM9);
 }
 
 void DiodeControlPulseStart(void)
@@ -232,11 +260,34 @@ void DiodeControlPulseStart(void)
 	{
 		LaserStarted = true;
 		
+		Flushes = 0;
+		subFlushes = 0;
+		
 		__HAL_TIM_SET_COUNTER(&hTIM10, 0);
 		__HAL_TIM_SET_COUNTER(&hTIM9, 0);
 		
 		// Start frequency counter
 		HAL_TIM_OC_Start(&hTIM10, TIM_CHANNEL_1);
+		__HAL_TIM_ENABLE_IT(&hTIM10, TIM_IT_UPDATE);
+		
+		//HAL_TIM_OC_Start_IT(&hTIM9, TIM_CHANNEL_2);
+		__HAL_TIM_ENABLE_IT(&hTIM9, TIM_IT_UPDATE);
+	
+		/* Enable the Peripheral */
+		//__HAL_TIM_ENABLE(&hTIM9);
+		
+		/* Enable the Output compare channel */
+		TIM_CCxChannelCmd(hTIM9.Instance, TIM_CHANNEL_1, TIM_CCx_ENABLE);
+	}
+}
+
+void DiodeControlOnePulseStart(void)
+{
+	if (!LaserStarted)
+	{
+		LaserStarted = true;
+		
+		__HAL_TIM_SET_COUNTER(&hTIM9, 0);
 		
 		//HAL_TIM_OC_Start_IT(&hTIM9, TIM_CHANNEL_2);
 		__HAL_TIM_ENABLE_IT(&hTIM9, TIM_IT_UPDATE);
@@ -258,6 +309,7 @@ void DiodeControlPulseStop(void)
 	
 	/* Enable the Output compare channel */
 	TIM_CCxChannelCmd(hTIM9.Instance, TIM_CHANNEL_1, TIM_CCx_DISABLE);
+	__HAL_TIM_DISABLE(&hTIM9);
 }
 
 void SetPulseDuration_us(uint16_t duration)
@@ -275,17 +327,17 @@ void SetPulseDuration_us(uint16_t duration)
 	if (LaserStarted) __HAL_TIM_ENABLE(&hTIM10);
 }
 
-void SetPulseDuration_ms(uint16_t duration)
+void SetPulseDuration_ms(uint16_t duration, uint16_t period)
 {	
 	if (LaserStarted) __HAL_TIM_DISABLE(&hTIM9);
 	if (LaserStarted) __HAL_TIM_DISABLE(&hTIM10);
 	__HAL_TIM_SET_PRESCALER(&hTIM9, 4000-1);
 	__HAL_TIM_SET_COUNTER(&hTIM9, 0);
-	__HAL_TIM_SET_AUTORELOAD(&hTIM9, duration * 42 * 2); // 50% duty cycle
+	__HAL_TIM_SET_AUTORELOAD(&hTIM9, period * 42); // 50% duty cycle
 	//__HAL_TIM_URS_ENABLE(&hTIM9);
 	hTIM9.Instance->EGR |= TIM_EGR_UG;
-	__HAL_TIM_SET_COMPARE(&hTIM9, TIM_CHANNEL_1, duration * 42);
-	__HAL_TIM_SET_COMPARE(&hTIM9, TIM_CHANNEL_2, duration * 42);
+	__HAL_TIM_SET_COMPARE(&hTIM9, TIM_CHANNEL_1, (period-duration) * 42);
+	__HAL_TIM_SET_COMPARE(&hTIM9, TIM_CHANNEL_2, (period-duration) * 42);
 	if (LaserStarted) __HAL_TIM_ENABLE(&hTIM9);
 	if (LaserStarted) __HAL_TIM_ENABLE(&hTIM10);
 }

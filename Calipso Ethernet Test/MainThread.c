@@ -4,6 +4,7 @@
 #include "Driver_USART.h"
 #include "GlobalVariables.h"
 #include "LaserMisc.h"
+#include "SolidStateLaser.h"
 
 #include <string.h>
 #include <stdlib.h>
@@ -65,8 +66,60 @@ int Init_Main_Thread (void) {
   return(0);
 }
 
+void DiodeLaserOff()
+{
+	// Diode Laser Off
+	DiodeLaser_en = false;
+	DiodeControlPulseStop();
+	osDelay(100);
+	__MISC_LASERDIODE_OFF();
+	osDelay(100);
+}
+
+void SolidStateLaserOff()
+{
+	// Solid State Laser Off
+	SolidStateLaser_en = false;
+	LampControlPulseStop();
+	osDelay(100);
+	__SOLIDSTATELASER_SIMMEROFF();
+	osDelay(100);
+	__SOLIDSTATELASER_HVOFF();
+	osDelay(100);
+	__SOLIDSTATELASER_DISCHARGEON();
+}
+
+void StopIfRunning(uint16_t pic_id)
+{
+	// If laser diode running
+	if (((pic_id >= 19) && (pic_id <= 32)) || (pic_id == FRAME_PICID_SERVICE_LASERDIODE))
+	{
+		frameData_LaserDiode.buttons.onInputBtn = 0x00;
+		frameData_LaserDiode.buttons.onReadyBtn = 0x00;
+		frameData_LaserDiode.buttons.onStartBtn = 0x00;
+		frameData_LaserDiode.buttons.onStopBtn  = 0x00;
+		WriteLaserDiodeDataConvert16(FRAMEDATA_LASERDIODE_BASE, &frameData_LaserDiode);
+		osSignalWait(DGUS_EVENT_SEND_COMPLETED, g_wDGUSTimeout);
+		
+		DiodeLaserOff();
+	}
+	
+	if (((pic_id >= 35) && (pic_id <= 43)) || (pic_id == FRAME_PICID_SERVICE_SOLIDSTATELASER) || (pic_id == FRAME_PICID_REMOTECONTROL))
+	{
+		frameData_SolidStateLaser.buttons.onInputBtn = 0x00;
+		frameData_SolidStateLaser.buttons.onSimmerBtn = 0x00;
+		frameData_SolidStateLaser.buttons.onStartBtn = 0x00;
+		frameData_SolidStateLaser.buttons.onStopBtn = 0x00;
+		WriteSolidStateLaserDataConvert16(FRAMEDATA_SOLIDSTATELASER_BASE, &frameData_SolidStateLaser);
+		osSignalWait(DGUS_EVENT_SEND_COMPLETED, g_wDGUSTimeout);
+		
+		SolidStateLaserOff();
+	}
+}
+
 void UpdateLaserState(uint16_t pic_id)
 {
+	// Enable footswitch when work
 	if ((pic_id == FRAME_PICID_LASERDIODE_STARTED) || 
 			(pic_id == FRAME_PICID_SOLIDSTATE_WORK) ||
 			(pic_id == FRAME_PICID_REMOTECONTROL) ||
@@ -77,6 +130,7 @@ void UpdateLaserState(uint16_t pic_id)
 		footswitch_en = false;
 	
 	// Switch to Solid State Laser
+#ifdef OLD_STYLE_LASER_SW
 	if ((pic_id == FRAME_PICID_SERVICE_SOLIDSTATELASER) || 
 			(pic_id == FRAME_PICID_REMOTECONTROL) ||
 			((pic_id >= 35) && (pic_id <= 42)))
@@ -94,47 +148,72 @@ void UpdateLaserState(uint16_t pic_id)
 		osDelay(100);
 		__MISC_RELAY3_OFF();
 	}
+#else
+	if (GetLaserID() == LASER_ID_DIODELASER)
+		__MISC_RELAY3_ON();
+	else
+		__MISC_RELAY3_OFF();
 	
-	// Check for diode laser
+	if (GetLaserID() == LASER_ID_SOLIDSTATE)
+		__MISC_RELAY2_ON();
+	else
+		__MISC_RELAY2_OFF();
+#endif
+	
+	// Check for error state of diode laser
 	if ((pic_id >= 19) && (pic_id <= 32))
 	{
 		// Check temperature
 		if (temperature > temperature_overheat)
+		{
+			DiodeLaserOff();
 			SetPicId(FRAME_PICID_LASERDIODE_TEMPERATUREOUT, g_wDGUSTimeout);
+		}
 		
 		// Check flow
 		if (flow1 < flow_low)
+		{
+			DiodeLaserOff();
 			SetPicId(FRAME_PICID_LASERDIODE_FLOWERROR, g_wDGUSTimeout);
+		}
 		
 		// Check is working
 		if ((pic_id == FRAME_PICID_LASERDIODE_INPUT) || 
 			  (pic_id == FRAME_PICID_LASERDIODE_PHOTOTYPE))
 		{
 			// Peltier off
-			peltier_en = false;
+			CoolOff();
 		}
 	}
 	else
 	{
-		CoolOff();
 		// Peltier off
-		peltier_en = false;
+		CoolOff();
 	}
 	
-	// Check for solid state laser
+	// Check for errors of solid state laser
 	if ((pic_id >= 35) && (pic_id <= 43))
 	{
 		// Check temperature
 		if (temperature > temperature_overheat)
+		{
+			SolidStateLaserOff();
 			SetPicId(FRAME_PICID_SOLIDSTATE_OVERHEATING, g_wDGUSTimeout);
+		}
 		
 		// Check flow
 		if (flow1 < flow_low)
+		{
+			SolidStateLaserOff();
 			SetPicId(FRAME_PICID_SOLIDSTATE_FLOWERROR, g_wDGUSTimeout);
+		}
 		
 		// Fault check
 		if (__MISC_GETCHARGEMODULEFAULTSTATE())
+		{
+			SolidStateLaserOff();
 			SetPicId(FRAME_PICID_SOLIDSTATE_FAULT, g_wDGUSTimeout);
+		}
 	}
 }
 
@@ -184,7 +263,10 @@ void MainThread (void const *argument) {
 			
 			// Laser Diode control
 			case FRAME_PICID_LASERDIODE_INPUT:
-				LaserDiodeInput_Process(pic_id);
+				if (GetLaserID() == LASER_ID_DIODELASER)
+					LaserDiodeInput_Process(pic_id);
+				else
+					SetPicId(FRAME_PICID_WRONG_EMMITER, g_wDGUSTimeout);
 				UpdateLaserStatus();
 				break;
 			case FRAME_PICID_LASERDIODE_TEMPERATUREOUT:
@@ -207,13 +289,17 @@ void MainThread (void const *argument) {
 			
 			// App idle user state
 			case FRAME_PICID_MAINMENU:
+				StopIfRunning(last_pic_id);
 			case FRAME_PICID_SERVICE:
 			case FRAME_PICID_LANGMENU:
 				// nothing to do
 				break;
 			
-			case FRAME_PICID_SOLIDSTATE_INPUT:		
-				SolidStateLaserInput_Process(pic_id);
+			case FRAME_PICID_SOLIDSTATE_INPUT:	
+				if (GetLaserID() == LASER_ID_SOLIDSTATE)				
+					SolidStateLaserInput_Process(pic_id);
+				else
+					SetPicId(FRAME_PICID_WRONG_EMMITER, g_wDGUSTimeout);
 				UpdateLaserStatus();
 				break;
 			case FRAME_PICID_SOLIDSTATE_SIMMERSTART:
@@ -226,6 +312,13 @@ void MainThread (void const *argument) {
 			case FRAME_PICID_SOLIDSTATE_FLOWERROR:
 			case FRAME_PICID_SOLIDSTATE_OVERHEATING:
 			case FRAME_PICID_SOLIDSTATE_FAULT:
+				SolidStateLaserPrepare_Process(pic_id);
+				UpdateLaserStatus();
+				break;
+			
+			case FRAME_PICID_WRONG_EMMITER:
+				osDelay(2000);
+				SetPicId(FRAME_PICID_MAINMENU, g_wDGUSTimeout);
 				break;
 			
 			case FRAME_PICID_REMOTECONTROL:
@@ -238,7 +331,10 @@ void MainThread (void const *argument) {
 		
 		// Remote control
 		if (RemoteControl)
-			SetPicId(FRAME_PICID_REMOTECONTROL, g_wDGUSTimeout);
+		{
+			if (pic_id == FRAME_PICID_MAINMENU)
+				SetPicId(FRAME_PICID_REMOTECONTROL, g_wDGUSTimeout);
+		}
 		else
 			if (pic_id == FRAME_PICID_REMOTECONTROL)
 			{

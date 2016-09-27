@@ -23,16 +23,27 @@ void LaserDiodeWork_Process(uint16_t pic_id)
 		return;
 	
 	if (pic_id == FRAME_PICID_LASERDIODE_STARTED)
+	{
+		if (Profile == PROFILE_SINGLE)
+		{
+			FlushesCount = 1;
+		}
+		else
+			FlushesCount = 1000000;
 		DiodeLaser_en = true;
+	}
 	else
+	{
 		DiodeLaser_en = false;
+		DiodeLaserOnePulse_en = false;
+	}
 	
 	if (frameData_LaserDiode.buttons.onReadyBtn != 0)
 	{
 		// On Ready Pressed
 		frameData_LaserDiode.buttons.onReadyBtn = 0;
-		//SetPicId(FRAME_PICID_LASERDIODE_START, 100);
 		new_pic_id = FRAME_PICID_LASERDIODE_START;
+		__MISC_LASERDIODE_ON();
 		update = true;
 	}
 	
@@ -40,8 +51,8 @@ void LaserDiodeWork_Process(uint16_t pic_id)
 	{
 		// On Start Pressed
 		frameData_LaserDiode.buttons.onStartBtn = 0;
-		//SetPicId(FRAME_PICID_LASERDIODE_STARTED, 100);
 		new_pic_id = FRAME_PICID_LASERDIODE_STARTED;
+		DiodeLaser_en = true;
 		update = true;
 	}
 	
@@ -49,18 +60,23 @@ void LaserDiodeWork_Process(uint16_t pic_id)
 	{
 		// On Stop Pressed
 		frameData_LaserDiode.buttons.onStopBtn = 0;
-		//SetPicId(FRAME_PICID_LASERDIODE_INPUT, 100);
 		new_pic_id = FRAME_PICID_LASERDIODE_INPUT;
+		DiodeControlPulseStop();
+		__MISC_LASERDIODE_OFF();
+		SetDACValue(0.0f);
 		update = true;
 	}
 	
 	switch (pic_id)
 	{
 		case FRAME_PICID_LASERDIODE_READY:
+			//__MISC_LASERDIODE_OFF();
 			break;
 		case FRAME_PICID_LASERDIODE_START:
+			//__MISC_LASERDIODE_ON();
 			break;
 		case FRAME_PICID_LASERDIODE_STARTED:
+			//__MISC_LASERDIODE_ON();
 			break;
 	}
 	

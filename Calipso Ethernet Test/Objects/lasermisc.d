@@ -36,3 +36,8 @@
 .\objects\lasermisc.o: C:\Keil_v5\ARM\PACK\ARM\CMSIS\5.0.0-Beta4\CMSIS\Include\arm_math.h
 .\objects\lasermisc.o: C:\Keil_v5\ARM\PACK\ARM\CMSIS\5.0.0-Beta4\CMSIS\Include\core_cm4.h
 .\objects\lasermisc.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\string.h
+.\objects\lasermisc.o: GlobalVariables.h
+.\objects\lasermisc.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdbool.h
+.\objects\lasermisc.o: DGUS.h
+.\objects\lasermisc.o: C:\Keil_v5\ARM\PACK\ARM\CMSIS\5.0.0-Beta4\CMSIS\RTOS\RTX\INC\cmsis_os.h
+.\objects\lasermisc.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stddef.h

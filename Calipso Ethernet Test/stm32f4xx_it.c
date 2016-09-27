@@ -64,6 +64,7 @@
 /* Private macro -------------------------------------------------------------*/
 /* Private variables ---------------------------------------------------------*/
 extern TIM_HandleTypeDef hTIM9;
+extern TIM_HandleTypeDef hTIM10;
 /* Private function prototypes -----------------------------------------------*/
 /* Private functions ---------------------------------------------------------*/
 
@@ -194,6 +195,11 @@ void SysTick_Handler(void)
 void TIM1_BRK_TIM9_IRQHandler(void)
 {
 	HAL_TIM_IRQHandler(&hTIM9);	
+}
+
+void TIM1_UP_TIM10_IRQHandler(void)
+{
+	HAL_TIM_IRQHandler(&hTIM10);
 }
 
 void EXTI0_IRQHandler(void)

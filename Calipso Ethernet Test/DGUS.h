@@ -12,6 +12,7 @@
 #include "cmsis_os.h"                   // CMSIS RTOS header file
 #endif
 
+//#define OLD_STYLE_LASER_SW
 //#define DEBUG_BRK
 #define CRC_CHECK
 //#define USE_DGUS_DRIVER
@@ -53,8 +54,9 @@ extern UART_HandleTypeDef huart1;
 #define FRAMEDATA_VARADDR_BTNSTART							0x0016
 #define FRAMEDATA_VARADDR_BTNSTOP 							0x0017
 // database control
+/*
 #define FRAMEDATA_VARADDR_DATAOFFS							0x0018 // Deprecated
-#define FRAMEDATA_VARADDR_DATAINDEX							0x0019 // Deprecated
+#define FRAMEDATA_VARADDR_DATAINDEX							0x0019 // Deprecated*/
 
 /***************************************************************/
 #define FRAMEDATA_SSVARADDR_STATE								0x0100
@@ -63,7 +65,7 @@ extern UART_HandleTypeDef huart1;
 #define FRAMEDATA_SSVARADDR_RESERVED1						0x0103 // Reserved
 #define FRAMEDATA_SSVARADDR_ENERGYSTP						0x0104
 #define FRAMEDATA_SSVARADDR_RESERVED2						0x0105 // Reserved
-#define FRAMEDATA_SSVARADDR_RESERVED3						0x0106 // Reserved
+#define FRAMEDATA_SSVARADDR_ENERGYINT						0x0106 // Energy int
 #define FRAMEDATA_SSVARADDR_ENERGY							0x0107 // Energy
 #define FRAMEDATA_SSVARADDR_LASERCNT						0x0108
 #define FRAMEDATA_SSVARADDR_SESSNCNT						0x010a
@@ -113,6 +115,8 @@ extern UART_HandleTypeDef huart1;
 #define FRAME_PICID_SOLIDSTATE_OVERHEATING			45			// Process
 #define FRAME_PICID_SOLIDSTATE_FAULT						46			// Process
 
+#define FRAME_PICID_WRONG_EMMITER								47			// Process
+
 /* ************************** LASER DIODE CONTROL ************************* */
 
 typedef struct __attribute__((__packed__)) DGUS_PREPARETIMER_STRUCT
@@ -136,6 +140,14 @@ typedef struct __attribute__((__packed__)) DGUS_LASERSETTINGS_STRUCT
 	uint16_t Duration;		// Duty cycle	
 	uint16_t Energy;		// Energy in J
 } DGUS_LASERSETTINGS, *PDGUS_LASERSETTINGS;
+
+typedef struct __attribute__((__packed__)) DGUS_SSLASERSETTINGS_STRUCT
+{
+	// Service settings
+	uint16_t FlushesLimit;	// Power of laser light depricated
+	uint16_t EnergyInt;		// Duty cycle	
+	uint16_t Energy;		// Energy in J
+} DGUS_SSLASERSETTINGS, *PDGUS_SSLASERSETTINGS;
 
 typedef struct __attribute__((__packed__)) DGUS_LASERDIODE_CONTROLBTN_STRUCT {
 	uint16_t onInputBtn;	// on input pressed (1) else (0)
@@ -186,9 +198,12 @@ typedef struct __attribute__((__packed__)) DGUS_LASERDIODE_STRUCT
 	// Control buttons
 	DGUS_LASERDIODE_CONTROLBTN buttons;	// State control data
 	
+	/*
 	// Database variables
 	uint16_t DatabasePageOffset;				// database control data
 	uint16_t DatabaseSelectionIndex;		// database control data
+	*/
+	uint16_t FlushesLimitIcon;
 } DGUS_LASERDIODE, *PDGUS_LASERDIODE;
 
 /* ************************** SOLID STATE LASER CONTROL ******************* */
@@ -212,7 +227,7 @@ typedef struct __attribute__((__packed__)) DGUS_SOLIDSTATELASER_STRUCT
 	DGUS_LASERPROFILE laserprofile;
 	
 	// Service settings
-	DGUS_LASERSETTINGS lasersettings;
+	DGUS_SSLASERSETTINGS lasersettings;
 	
 	// Pulse counter
 	uint32_t PulseCounter;							// Dynamic data when work

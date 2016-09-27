@@ -44,7 +44,7 @@ void SolidStateLaserWork_Process(uint16_t pic_id)
 	else
 		SolidStateLaser_en = false;
 	
-	frameData_SolidStateLaser.state = 0;
+	//frameData_SolidStateLaser.state = 0;
 	
 	// Input pressed
 	if (frameData_SolidStateLaser.buttons.onSimmerBtn != 0)
@@ -63,8 +63,14 @@ void SolidStateLaserWork_Process(uint16_t pic_id)
 	{
 		frameData_SolidStateLaser.state = 2;
 		
-		if (__MISC_GETSIMMERSENSOR())
-			SetPicId(FRAME_PICID_SOLIDSTATE_START, g_wDGUSTimeout);
+#ifdef DEBUG_SOLID_STATE_LASER
+		if (__MISC_GETSIMMERSENSOR()) 
+#endif
+		{
+			frameData_SolidStateLaser.state = 3;
+			new_pic_id = FRAME_PICID_SOLIDSTATE_START;
+			update = true;
+		}
 	}
 	
 	// Start pressed
@@ -89,6 +95,8 @@ void SolidStateLaserWork_Process(uint16_t pic_id)
 		__SOLIDSTATELASER_HVOFF();
 		__SOLIDSTATELASER_SIMMEROFF();
 		SetDACValue(0.0f);
+		
+		frameData_SolidStateLaser.state = 0;
 		
 		new_pic_id = FRAME_PICID_SOLIDSTATE_INPUT;
 		

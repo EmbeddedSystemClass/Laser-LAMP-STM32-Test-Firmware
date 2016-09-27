@@ -46,8 +46,8 @@ void LaserDiodeInput_Init(uint16_t pic_id)
 	frameData_LaserDiode.temperature = temperature;
 	frameData_LaserDiode.cooling = 3;
 	frameData_LaserDiode.flow = 0;
-	frameData_LaserDiode.DatabasePageOffset = 0;
-	frameData_LaserDiode.DatabaseSelectionIndex = 13;
+	//frameData_LaserDiode.DatabasePageOffset = 0;
+	//frameData_LaserDiode.DatabaseSelectionIndex = 13;
 	frameData_LaserDiode.SessionPulseCounter = 0;
 	
 	// Preset hardware to FAST mode
@@ -64,6 +64,7 @@ void LaserDiodeInput_Process(uint16_t pic_id)
 {
 	bool update = false;
 	uint16_t new_pic_id = pic_id;
+	float32_t power = 0.0f;
 	
 	// Old code ***************************************************************************************** >
 	uint16_t melanin      = frameData_LaserDiode.melanin;
@@ -96,11 +97,25 @@ void LaserDiodeInput_Process(uint16_t pic_id)
 		if (Profile == PROFILE_FAST)
 		{
 			if (frameData_LaserDiode.lasersettings.FlushesLimit == 3) frameData_LaserDiode.lasersettings.FlushesLimit = 0;
-			//laserLimitMode = frameData_LaserDiode.lasersettings.FlushesLimit;
+			uint16_t laserLimitMode = frameData_LaserDiode.lasersettings.FlushesLimit;
+			switch (laserLimitMode)
+			{
+				case 0:
+					FlushesCount = 300;
+					break;
+				case 1:
+					FlushesCount = 400;
+					break;
+				case 2:
+					FlushesCount = 500;
+					break;
+			}
 			update = true;
 			goto update;
 		}
 	}
+	else
+		FlushesCount = 1000000;
 	
 	if (phototype != frameData_LaserDiode.phototype)
 	{
@@ -197,33 +212,50 @@ void LaserDiodeInput_Process(uint16_t pic_id)
 	{
 		memcpy((void*)&m_structLaserProfile [Profile], (void*)&frameData_LaserDiode.laserprofile , sizeof(frameData_LaserDiode.laserprofile));
 		memcpy((void*)&m_structLaserSettings[Profile], (void*)&frameData_LaserDiode.lasersettings, sizeof(frameData_LaserDiode.lasersettings));
+	}	
+	// Old code ***************************************************************************************** >
+	
+	// Set laser settings
+	DiodeControlPulseStop();
+	if (Profile == PROFILE_MEDIUM)
+	{
+		if (freq > 2)
+			SetPulseDuration_ms(duration, duration/2 + 15);
+		else
+			SetPulseDuration_ms(duration, duration/2 + 20);
+		subFlushesCount = 2;
+	}
+	else
+	{
+		SetPulseDuration_ms(duration, duration * 2);
+		subFlushesCount = 1;
 	}
 	
-	// Old code ***************************************************************************************** >
+	SetPulseFrequency(freq);
+	power = ((float32_t)energy * 1440.0f) / (float32_t)(duration);
+	if (power > 500.0f) power = 500.0f;
+	SetDACValue(power * 10.0f / 500.0f);
 	
 	// State - input data
 	if (frameData_LaserDiode.state != 0)
-		{
-			frameData_LaserDiode.state = 0;
-			update = true;
-		}
+	{
+		frameData_LaserDiode.state = 0;
+		update = true;
+	}
 	
+	// Control peltier cooling
 	CoolOn();
-	CoolSet((frameData_LaserDiode.cooling + 1) * 16);
+	CoolSet((frameData_LaserDiode.cooling + 1) * 17);
+		
 	if (frameData_LaserDiode.buttons.onInputBtn != 0)
 	{
 		// On Input Pressed
 		frameData_LaserDiode.buttons.onInputBtn = 0;
 		
-		prepare = true;
-		peltier_en = true;
-		
-		if (temperature > 29.0f)
-			new_pic_id = FRAME_PICID_LASERDIODE_TEMPERATUREOUT;
-		else
-			new_pic_id = FRAME_PICID_LASERDIODE_PREPARETIMER;
-		
+		prepare = true; // Start prepare timer
 		update = true;
+		
+		new_pic_id = FRAME_PICID_LASERDIODE_PREPARETIMER;
 	}
 	
 update:

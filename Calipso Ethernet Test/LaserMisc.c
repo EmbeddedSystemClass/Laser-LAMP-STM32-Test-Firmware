@@ -1,5 +1,6 @@
 #include "LaserMisc.h"
 #include "stm32f4xx_hal_tim.h"
+#include "GlobalVariables.h"
 
 TIM_HandleTypeDef htim_flow1 = {0};
 TIM_HandleTypeDef htim_flow2 = {0};
@@ -79,18 +80,22 @@ void CoolInit(void)
 
 void CoolOn(void)
 {
+	g_peltier_en = true;
 	//HAL_TIM_OC_Start(&htim_cool, TIM_CHANNEL_1);
 }
 
 void CoolOff(void)
 {
+	g_peltier_en = false;
 	__HAL_TIM_SetCompare(&htim_cool, TIM_CHANNEL_1, 0);
 	//HAL_TIM_OC_Stop(&htim_cool, TIM_CHANNEL_1);
 }
 
 void CoolSet(uint16_t cool)
 {
-	__HAL_TIM_SetCompare(&htim_cool, TIM_CHANNEL_1, cool * 420);
+	uint16_t duty_cycle = cool * 420;
+	if (duty_cycle > 42000) duty_cycle = 42000;
+	__HAL_TIM_SetCompare(&htim_cool, TIM_CHANNEL_1, duty_cycle);
 }
 
 LASER_ID GetLaserID()

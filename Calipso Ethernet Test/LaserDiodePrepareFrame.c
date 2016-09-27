@@ -32,7 +32,7 @@ void LaserDiodePrepare_Process(uint16_t pic_id)
 				if (!prepare)
 				{
 					frameData_LaserDiode.state = 1;
-					new_pic_id = FRAME_PICID_LASERDIODE_READY;
+					new_pic_id = FRAME_PICID_LASERDIODE_INPUT;
 				}
 				else
 					new_pic_id = FRAME_PICID_LASERDIODE_PREPARETIMER;
@@ -48,7 +48,7 @@ void LaserDiodePrepare_Process(uint16_t pic_id)
 				if (!prepare)
 				{
 					frameData_LaserDiode.state = 1;
-					new_pic_id = FRAME_PICID_LASERDIODE_READY;
+					new_pic_id = FRAME_PICID_LASERDIODE_INPUT;
 				}
 				else
 					new_pic_id = FRAME_PICID_LASERDIODE_PREPARETIMER;

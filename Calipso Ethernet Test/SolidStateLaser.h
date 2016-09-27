@@ -29,11 +29,12 @@
 void LampControlInit(void);
 void LampControlPulseStart(void);
 void LampControlPulseStop(void);
+void DiodeControlOnePulseStart(void);
 void DiodeControlPulseStart(void);
 void DiodeControlPulseStop(void);
 
 void SetPulseDuration_us(uint16_t duration);
-void SetPulseDuration_ms(uint16_t duration);
+void SetPulseDuration_ms(uint16_t duration, uint16_t period);
 void SetPulseFrequency(float32_t frequency);
 
 #endif

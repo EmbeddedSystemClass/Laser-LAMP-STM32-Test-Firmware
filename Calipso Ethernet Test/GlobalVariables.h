@@ -11,6 +11,8 @@
 
 #include "LaserMisc.h"
 
+#define DEBUG_SOLID_STATE_LASER
+
 // DGUS control variables
 extern uint16_t g_wDGUSTimeout;
 
@@ -43,15 +45,20 @@ extern volatile float32_t CurrentMonitor;
 
 // Laser ID
 extern LASER_ID LaserID;
-
+                                              
 // Private variables
 extern uint16_t pic_id;
-extern bool peltier_en;
+extern bool g_peltier_en;
 extern bool prepare;
 extern bool RemoteControl;
 extern bool SolidStateLaser_en;
 extern bool DiodeLaser_en;
+extern bool DiodeLaserOnePulse_en;
 extern bool LaserStarted;
+extern uint16_t subFlushes;
+extern uint16_t subFlushesCount;
+extern uint32_t Flushes;
+extern uint32_t FlushesCount;
 extern volatile bool footswitch_en;
 extern volatile bool footswitch_on;
 extern volatile uint16_t switch_filter;
