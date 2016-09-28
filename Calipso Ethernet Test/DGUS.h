@@ -53,6 +53,7 @@ extern UART_HandleTypeDef huart1;
 #define FRAMEDATA_VARADDR_BTNREADY							0x0015
 #define FRAMEDATA_VARADDR_BTNSTART							0x0016
 #define FRAMEDATA_VARADDR_BTNSTOP 							0x0017
+#define FRAMEDATA_VARADDR_BTNCANCEL							0x0018
 // database control
 /*
 #define FRAMEDATA_VARADDR_DATAOFFS							0x0018 // Deprecated
@@ -74,8 +75,9 @@ extern UART_HandleTypeDef huart1;
 #define FRAMEDATA_SSVARADDR_BTNSIMMER						0x010d
 #define FRAMEDATA_SSVARADDR_BTNSTART						0x010e
 #define FRAMEDATA_SSVARADDR_BTNSTOP 						0x010f
+#define FRAMEDATA_SSVARADDR_BTNCANCEL						0x0110
 
-#define FRAMEDATA_SSVARADDR_CONNECTOR 					0x0110
+#define FRAMEDATA_SSVARADDR_CONNECTOR 					0x0111
 
 /* ************************** DGUS DATA STRUCT **************************** */
 #define FRAMEDATA_LASERDIODE_BASE								0x0000
@@ -150,10 +152,11 @@ typedef struct __attribute__((__packed__)) DGUS_SSLASERSETTINGS_STRUCT
 } DGUS_SSLASERSETTINGS, *PDGUS_SSLASERSETTINGS;
 
 typedef struct __attribute__((__packed__)) DGUS_LASERDIODE_CONTROLBTN_STRUCT {
-	uint16_t onInputBtn;	// on input pressed (1) else (0)
-	uint16_t onReadyBtn;	// on ready pressed (1) else (0)
-	uint16_t onStartBtn;	// on start pressed (1) else (0)
-	uint16_t onStopBtn;		// on stop  pressed (1) else (0)
+	uint16_t onInputBtn;	// on input  pressed (1) else (0)
+	uint16_t onReadyBtn;	// on ready  pressed (1) else (0)
+	uint16_t onStartBtn;	// on start  pressed (1) else (0)
+	uint16_t onStopBtn;		// on stop   pressed (1) else (0)
+	uint16_t onCancelBtn;	// on cancel pressed (1) else (0)
 } DGUS_LASERDIODE_CONTROLBTN, *PDGUS_LASERDIODE_CONTROLBTN;
 
 typedef struct __attribute__((__packed__)) DGUS_LASERDIODE_STATE_STRUCT {
@@ -203,7 +206,7 @@ typedef struct __attribute__((__packed__)) DGUS_LASERDIODE_STRUCT
 	uint16_t DatabasePageOffset;				// database control data
 	uint16_t DatabaseSelectionIndex;		// database control data
 	*/
-	uint16_t FlushesLimitIcon;
+	//uint16_t FlushesLimitIcon;
 } DGUS_LASERDIODE, *PDGUS_LASERDIODE;
 
 /* ************************** SOLID STATE LASER CONTROL ******************* */
@@ -213,6 +216,7 @@ typedef struct __attribute__((__packed__)) DGUS_SOLIDSTATELASER_CONTROLBTN_STRUC
 	uint16_t onSimmerBtn;	// on simmer pressed (1) else (0)
 	uint16_t onStartBtn;	// on start  pressed (1) else (0)
 	uint16_t onStopBtn;		// on stop   pressed (1) else (0)
+	uint16_t onCancelBtn;	// on cancel pressed (1) else (0)
 } DGUS_SOLIDSTATELASER_CONTROLBTN, *PDGUS_SOLIDSTATELASER_CONTROLBTN;
 
 typedef struct __attribute__((__packed__)) DGUS_SOLIDSTATELASER_STRUCT

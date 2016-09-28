@@ -8,35 +8,27 @@
 
 #include <math.h>
 #include "arm_math.h"
+														
+uint16_t modeDurationTable[10] = {200, 200, 200, 200, 300, 300, 400, 500, 500, 500};
+uint16_t modeVoltageTable[10] = {410, 415, 420, 430, 415, 435, 420, 415, 425, 440};
+//uint16_t modeEnergyTable[10] = {180, 230, 270, 520, 715, 910, 1100, 1267, 1430, 1625}; //true values
 
-uint16_t durationTable[5] = {200, 300, 400, 500};
-//uint16_t voltageTable[5] = {410 , 420 , 430 , 440 , 450 };
-uint16_t modeTable[3] = {0, 1, 3};
-
-uint16_t energyTable[25] = {230 , 235 , 240 , 420 , 425 ,
-														460 , 670 , 680 , 900 , 920 ,
-														850 , 900 , 1100, 1144, 1235,
-														1300, 1325, 1350, 1600, 1700}; 
-
-uint16_t voltageTableClb[25] = 
-														{410, 420, 430, 440, 450,
-														 410, 420, 430, 440, 450,
-														 410, 420, 430, 440, 450,
-														 410, 420, 430, 440, 450}; 
+//uint16_t modeEnergyTable[10] = {180, 230, 270, 598, 822, 1046, 1265, 1457, 1644, 1868}; //updated
+uint16_t modeEnergyTable[10] = {180, 230, 270, 598, 822, 1100, 1265, 1457, 1644, 1868};
 
 extern void SetDACValue(float32_t value);
 														 
 float32_t programI = 0.0f;
 float32_t chargingVoltage = 0.0f;
 														 
-uint16_t SetLaserSettings(uint16_t mode, uint16_t energy_index)
+uint16_t SetLaserSettings(uint16_t energy_index)
 {
 	uint16_t index = energy_index;
-	if (index > 4) index = 4;
+	if (index > 9) index = 9;
 	
-	uint16_t energy = energyTable[modeTable[mode] * 5 + index];
-	uint16_t voltageClb = voltageTableClb[modeTable[mode] * 5 + index];
-	uint16_t duration = durationTable[modeTable[mode]];
+	uint16_t energy = modeEnergyTable[index];
+	uint16_t voltageClb = modeVoltageTable[index];
+	uint16_t duration = modeDurationTable[index];
 	
 	SetPulseDuration_us(duration);
 	
@@ -45,13 +37,37 @@ uint16_t SetLaserSettings(uint16_t mode, uint16_t energy_index)
 	
 	return energy;
 }
+void SolidStateLaserInput_Init(uint16_t pic_id)
+{
+	uint16_t energy = SetLaserSettings(frameData_SolidStateLaser.laserprofile.EnergyCnt);
+	frameData_SolidStateLaser.laserprofile.Frequency = 1;
+	frameData_SolidStateLaser.laserprofile.EnergyCnt = 0;
+	frameData_SolidStateLaser.lasersettings.EnergyInt = energy / 1000;
+	frameData_SolidStateLaser.lasersettings.Energy = (energy / 10) % 100;
+	frameData_SolidStateLaser.mode = 0;
+	frameData_SolidStateLaser.state = 0;
+	frameData_SolidStateLaser.connector = 0;
+	frameData_SolidStateLaser.PulseCounter = 0;
+	frameData_SolidStateLaser.SessionPulseCounter = 0;
+	
+	// Reset button states
+	frameData_SolidStateLaser.buttons.onInputBtn = 0;
+	frameData_SolidStateLaser.buttons.onSimmerBtn = 0;
+	frameData_SolidStateLaser.buttons.onStartBtn = 0;
+	frameData_SolidStateLaser.buttons.onStopBtn = 0;
+}
 
 void SolidStateLaserInput_Process(uint16_t pic_id)
 {
 	bool update = false;
 	uint16_t new_pic_id = pic_id;
 	
+	// Reset session flushes
+	FlushesSessionSS = 0;
+	
+	uint16_t frequency = frameData_SolidStateLaser.laserprofile.Frequency;
 	uint16_t energyCnt = frameData_SolidStateLaser.laserprofile.EnergyCnt;
+	uint16_t connector = frameData_SolidStateLaser.connector;
 	uint16_t mode = frameData_SolidStateLaser.mode;
 	
 	DGUS_SOLIDSTATELASER* value;
@@ -63,18 +79,79 @@ void SolidStateLaserInput_Process(uint16_t pic_id)
 	
 	uint16_t state = frameData_SolidStateLaser.state;
 	
-	uint16_t energy = SetLaserSettings(frameData_SolidStateLaser.mode, frameData_SolidStateLaser.laserprofile.EnergyCnt);
-	SetPulseFrequency(frameData_SolidStateLaser.laserprofile.Frequency);
-	
 	FlushesCount = 1000000;
 	subFlushesCount = 1;
 	
+	if (frameData_SolidStateLaser.mode == 0)
+	{
+		if (frameData_SolidStateLaser.laserprofile.EnergyCnt > 2) 
+		{
+			frameData_SolidStateLaser.laserprofile.EnergyCnt = 2;
+			update = true;
+		}
+	}
+	else
+	{
+		if (frameData_SolidStateLaser.laserprofile.EnergyCnt < 3) 
+		{
+			frameData_SolidStateLaser.laserprofile.EnergyCnt = 3;
+			update = true;
+		}
+	}
+	
 	if (mode != frameData_SolidStateLaser.mode)
 	{
-		frameData_SolidStateLaser.lasersettings.EnergyInt = energy / 1000;
-		frameData_SolidStateLaser.lasersettings.Energy = (energy / 10) % 100;
+		if (frameData_SolidStateLaser.mode == 1)
+		{
+			if (frameData_SolidStateLaser.laserprofile.EnergyCnt > 6)
+			{
+				frameData_SolidStateLaser.laserprofile.EnergyCnt = 6;
+				update = true;
+			}
+		}
+		if (frameData_SolidStateLaser.mode == 2)
+		{
+			if (frameData_SolidStateLaser.laserprofile.EnergyCnt < 7)
+			{
+				frameData_SolidStateLaser.laserprofile.EnergyCnt = 7;
+				update = true;
+			}
+		}
+		
 		update = true;
 	}
+	
+	if ((frameData_SolidStateLaser.laserprofile.EnergyCnt >= 0) && (frameData_SolidStateLaser.laserprofile.EnergyCnt <= 2))
+		frameData_SolidStateLaser.mode = 0;		
+	
+	if ((frameData_SolidStateLaser.laserprofile.EnergyCnt >= 3) && (frameData_SolidStateLaser.laserprofile.EnergyCnt <= 6))
+		frameData_SolidStateLaser.mode = 1;
+	
+	if ((frameData_SolidStateLaser.laserprofile.EnergyCnt >= 7) && (frameData_SolidStateLaser.laserprofile.EnergyCnt <= 9))
+		frameData_SolidStateLaser.mode = 2;
+	
+	if (mode != frameData_SolidStateLaser.mode)		update = true;
+	if (connector != frameData_SolidStateLaser.connector) update = true;
+	
+	uint16_t energy = SetLaserSettings(frameData_SolidStateLaser.laserprofile.EnergyCnt);
+	
+	if (frameData_SolidStateLaser.connector == 1)	energy = (uint16_t)((float32_t)(energy) * 0.35f);
+	
+	if (frameData_SolidStateLaser.mode == 2) 
+	{
+		if (frameData_SolidStateLaser.laserprofile.Frequency > 6)
+		{
+			frameData_SolidStateLaser.laserprofile.Frequency = 6;
+			update = true;
+		}
+	}
+	
+	SetPulseFrequency(frameData_SolidStateLaser.laserprofile.Frequency);
+	
+	//if (frameData_SolidStateLaser.mode != 0) energy = (uint16_t)((float32_t)(energy) * 1.15f);
+	
+	frameData_SolidStateLaser.lasersettings.EnergyInt = energy / 1000;
+	frameData_SolidStateLaser.lasersettings.Energy = (energy / 10) % 100;
 	
 	if (energyCnt != frameData_SolidStateLaser.laserprofile.EnergyCnt)
 	{
@@ -100,7 +177,7 @@ void SolidStateLaserInput_Process(uint16_t pic_id)
 		if (__MISC_GETCHARGEMODULEREADYSTATE())
 #endif
 		{
-			frameData_SolidStateLaser.state = 1; // Ready
+			frameData_SolidStateLaser.state = 3; // Ready
 			
 			// On Input Pressed
 			frameData_SolidStateLaser.buttons.onInputBtn = 0;
@@ -114,6 +191,13 @@ void SolidStateLaserInput_Process(uint16_t pic_id)
 	
 	if (state != frameData_SolidStateLaser.state)
 		update = true;
+	
+	if (frameData_SolidStateLaser.PulseCounter != FlushesGlobalSS)
+	{
+		frameData_SolidStateLaser.PulseCounter = FlushesGlobalSS;
+		frameData_SolidStateLaser.SessionPulseCounter = FlushesSessionSS;
+		update = true;
+	}
 	
 	if (update)
 	{

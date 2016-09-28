@@ -96,7 +96,7 @@ uint16_t convert_w(uint16_t value)
 
 uint32_t convert_d(uint32_t value)
 {
-	return (value >> 24) || ((value & 0xff0000) >> 8) || ((value & 0xff00) << 8) || ((value & 0xff) << 24);
+	return (value >> 24) | ((value & 0xff0000) >> 8) | ((value & 0xff00) << 8) | ((value & 0xff) << 24);
 }
 
 void convert_array_w(uint16_t* dst, uint16_t* src, uint16_t num)

@@ -18,6 +18,7 @@ void LaserDiodeInput_Init(uint16_t pic_id)
 	uint16_t duration = 37;
 	uint16_t energy = 13;
 	
+	// Old presets. Now read from flash !!!
 	// Fast profile
 	LaserPreset(&freq, &duration, &energy, PROFILE_FAST);
 	// Medium profile
@@ -40,7 +41,7 @@ void LaserDiodeInput_Init(uint16_t pic_id)
 	memcpy((void*)&frameData_LaserDiode.lasersettings, (void*)&m_structLaserSettings[PROFILE_FAST], sizeof(DGUS_LASERSETTINGS));
 	frameData_LaserDiode.timer.timer_minutes = m_wSetMin;
 	frameData_LaserDiode.timer.timer_seconds = m_wSetSec;
-	//frameData_LaserDiode.PulseCounter = swap32(laserCounter);
+	frameData_LaserDiode.PulseCounter = FlushesGlobalLD;
 	frameData_LaserDiode.melanin = 0;
 	frameData_LaserDiode.phototype = 1;
 	frameData_LaserDiode.temperature = temperature;
@@ -50,6 +51,7 @@ void LaserDiodeInput_Init(uint16_t pic_id)
 	//frameData_LaserDiode.DatabaseSelectionIndex = 13;
 	frameData_LaserDiode.SessionPulseCounter = 0;
 	
+	// Old presets. Now read from flash !!!
 	// Preset hardware to FAST mode
 	freq = 10;
 	duration = 40;
@@ -65,6 +67,9 @@ void LaserDiodeInput_Process(uint16_t pic_id)
 	bool update = false;
 	uint16_t new_pic_id = pic_id;
 	float32_t power = 0.0f;
+	
+	// Reset session flushes
+	FlushesSessionLD = 0;
 	
 	// Old code ***************************************************************************************** >
 	uint16_t melanin      = frameData_LaserDiode.melanin;
@@ -97,21 +102,25 @@ void LaserDiodeInput_Process(uint16_t pic_id)
 		if (Profile == PROFILE_FAST)
 		{
 			if (frameData_LaserDiode.lasersettings.FlushesLimit == 3) frameData_LaserDiode.lasersettings.FlushesLimit = 0;
-			uint16_t laserLimitMode = frameData_LaserDiode.lasersettings.FlushesLimit;
-			switch (laserLimitMode)
-			{
-				case 0:
-					FlushesCount = 300;
-					break;
-				case 1:
-					FlushesCount = 400;
-					break;
-				case 2:
-					FlushesCount = 500;
-					break;
-			}
 			update = true;
 			goto update;
+		}
+	}
+	
+	if (Profile == PROFILE_FAST)
+	{
+		uint16_t laserLimitMode = frameData_LaserDiode.lasersettings.FlushesLimit;
+		switch (laserLimitMode)
+		{
+			case 0:
+				FlushesCount = 300;
+				break;
+			case 1:
+				FlushesCount = 400;
+				break;
+			case 2:
+				FlushesCount = 500;
+				break;
 		}
 	}
 	else
@@ -216,13 +225,13 @@ void LaserDiodeInput_Process(uint16_t pic_id)
 	// Old code ***************************************************************************************** >
 	
 	// Set laser settings
-	DiodeControlPulseStop();
+	//DiodeControlPulseStop();
 	if (Profile == PROFILE_MEDIUM)
 	{
 		if (freq > 2)
-			SetPulseDuration_ms(duration, duration/2 + 15);
+			SetPulseDuration_ms(duration/2, duration/2 + 15);
 		else
-			SetPulseDuration_ms(duration, duration/2 + 20);
+			SetPulseDuration_ms(duration/2, duration/2 + 20);
 		subFlushesCount = 2;
 	}
 	else
@@ -259,6 +268,13 @@ void LaserDiodeInput_Process(uint16_t pic_id)
 	}
 	
 update:
+	if (frameData_LaserDiode.PulseCounter != FlushesGlobalLD)
+	{
+		frameData_LaserDiode.PulseCounter = FlushesGlobalLD;
+		frameData_LaserDiode.SessionPulseCounter = FlushesSessionLD;
+		update = true;
+	}
+	
 	if (update)
 	{
 		WriteLaserDiodeDataConvert16(FRAMEDATA_LASERDIODE_BASE, &frameData_LaserDiode);

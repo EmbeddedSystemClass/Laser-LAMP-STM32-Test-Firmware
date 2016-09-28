@@ -28,7 +28,7 @@ void LaserDiodeWork_Process(uint16_t pic_id)
 		{
 			FlushesCount = 1;
 		}
-		else
+		if ((Profile != PROFILE_SINGLE) && (Profile != PROFILE_FAST))
 			FlushesCount = 1000000;
 		DiodeLaser_en = true;
 	}
@@ -61,10 +61,27 @@ void LaserDiodeWork_Process(uint16_t pic_id)
 		// On Stop Pressed
 		frameData_LaserDiode.buttons.onStopBtn = 0;
 		new_pic_id = FRAME_PICID_LASERDIODE_INPUT;
+		DiodeLaser_en = false;
 		DiodeControlPulseStop();
 		__MISC_LASERDIODE_OFF();
 		SetDACValue(0.0f);
 		update = true;
+		
+		StoreGlobalVariables();
+	}
+	
+	if (frameData_LaserDiode.buttons.onCancelBtn != 0)
+	{
+		// On Stop Pressed
+		frameData_LaserDiode.buttons.onCancelBtn = 0;
+		new_pic_id = FRAME_PICID_LASERDIODE_INPUT;
+		DiodeLaser_en = false;
+		DiodeControlPulseStop();
+		__MISC_LASERDIODE_OFF();
+		SetDACValue(0.0f);
+		update = true;
+		
+		//StoreGlobalVariables();
 	}
 	
 	switch (pic_id)
@@ -78,6 +95,13 @@ void LaserDiodeWork_Process(uint16_t pic_id)
 		case FRAME_PICID_LASERDIODE_STARTED:
 			//__MISC_LASERDIODE_ON();
 			break;
+	}
+	
+	if (frameData_LaserDiode.PulseCounter != FlushesGlobalLD)
+	{
+		frameData_LaserDiode.PulseCounter = FlushesGlobalLD;
+		frameData_LaserDiode.SessionPulseCounter = FlushesSessionLD;
+		update = true;
 	}
 	
 	if (update)

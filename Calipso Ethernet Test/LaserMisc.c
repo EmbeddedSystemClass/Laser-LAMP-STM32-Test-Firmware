@@ -1,5 +1,6 @@
 #include "LaserMisc.h"
 #include "stm32f4xx_hal_tim.h"
+#include "stm32f4xx_hal_flash.h"
 #include "GlobalVariables.h"
 
 TIM_HandleTypeDef htim_flow1 = {0};

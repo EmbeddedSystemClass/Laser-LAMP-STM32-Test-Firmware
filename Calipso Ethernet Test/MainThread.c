@@ -33,8 +33,9 @@ extern void   LaserDiodeInput_Process(uint16_t pic_id);
 extern void LaserDiodePrepare_Process(uint16_t pic_id);
 extern void    LaserDiodeWork_Process(uint16_t pic_id);
 
-extern void SolidStateLaserPrepare_Process(uint16_t pic_id);
+extern void   SolidStateLaserInput_Init   (uint16_t pic_id);
 extern void   SolidStateLaserInput_Process(uint16_t pic_id);
+extern void SolidStateLaserPrepare_Process(uint16_t pic_id);
 extern void    SolidStateLaserWork_Process(uint16_t pic_id);
 
 int Init_Main_Thread (void) {
@@ -195,7 +196,7 @@ void UpdateLaserState(uint16_t pic_id)
 	if ((pic_id >= 35) && (pic_id <= 43))
 	{
 		// Check temperature
-		if (temperature > temperature_overheat)
+		if (temperature > temperature_overheat_solidstate)
 		{
 			SolidStateLaserOff();
 			SetPicId(FRAME_PICID_SOLIDSTATE_OVERHEATING, g_wDGUSTimeout);
@@ -234,6 +235,7 @@ void MainThread (void const *argument) {
 	static uint16_t last_pic_id = 0;
 	
 	LaserDiodeInput_Init(pic_id);
+	SolidStateLaserInput_Init(pic_id);
 
   while (1) {
     ; // Insert thread code here...

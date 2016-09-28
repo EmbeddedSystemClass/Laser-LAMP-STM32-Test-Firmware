@@ -91,20 +91,42 @@ void SolidStateLaserWork_Process(uint16_t pic_id)
 		// On Input Pressed
 		frameData_SolidStateLaser.buttons.onStopBtn = 0;
 		
+		SolidStateLaser_en = false;
 		LampControlPulseStop();
 		__SOLIDSTATELASER_HVOFF();
 		__SOLIDSTATELASER_SIMMEROFF();
 		SetDACValue(0.0f);
-		
 		frameData_SolidStateLaser.state = 0;
-		
 		new_pic_id = FRAME_PICID_SOLIDSTATE_INPUT;
-		
 		update = true;
+		StoreGlobalVariables();
+	}
+	
+	if (frameData_SolidStateLaser.buttons.onCancelBtn != 0)
+	{
+		// On Input Pressed
+		frameData_SolidStateLaser.buttons.onCancelBtn = 0;
+		
+		SolidStateLaser_en = false;
+		LampControlPulseStop();
+		__SOLIDSTATELASER_HVOFF();
+		__SOLIDSTATELASER_SIMMEROFF();
+		SetDACValue(0.0f);
+		frameData_SolidStateLaser.state = 0;
+		new_pic_id = FRAME_PICID_SOLIDSTATE_INPUT;
+		update = true;
+		//StoreGlobalVariables();
 	}
 	
 	if (state != frameData_SolidStateLaser.state)
 		update = true;
+	
+	if (frameData_SolidStateLaser.PulseCounter != FlushesGlobalSS)
+	{
+		frameData_SolidStateLaser.PulseCounter = FlushesGlobalSS;
+		frameData_SolidStateLaser.SessionPulseCounter = FlushesSessionSS;
+		update = true;
+	}
 	
 	if (update)
 	{

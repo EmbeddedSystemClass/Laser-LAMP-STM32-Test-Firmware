@@ -11,6 +11,8 @@
 
 #include "LaserMisc.h"
 
+#define FLASH_LASERDATA_BASE 0x080E0000
+
 #define DEBUG_SOLID_STATE_LASER
 
 // DGUS control variables
@@ -27,6 +29,7 @@ extern int16_t m_wSetMin;
 extern float32_t temperature_cool_on;
 extern float32_t temperature_cool_off;
 extern float32_t temperature_overheat;
+extern float32_t temperature_overheat_solidstate;
 extern float32_t temperature_normal;
 
 // Flow global variable
@@ -59,6 +62,10 @@ extern uint16_t subFlushes;
 extern uint16_t subFlushesCount;
 extern uint32_t Flushes;
 extern uint32_t FlushesCount;
+extern uint32_t FlushesSessionLD;
+extern uint32_t FlushesGlobalLD;
+extern uint32_t FlushesSessionSS;
+extern uint32_t FlushesGlobalSS;
 extern volatile bool footswitch_en;
 extern volatile bool footswitch_on;
 extern volatile uint16_t switch_filter;
@@ -103,6 +110,17 @@ extern GUI_PRESET pstGUI[5];
 extern volatile DGUS_LASERPROFILE	m_structLaserProfile [5];
 extern volatile DGUS_LASERSETTINGS	m_structLaserSettings[5];
 
+typedef struct FLASH_GLOBAL_DATA_STRUCT
+{
+	// Laser counters presed
+	uint32_t LaserDiodePulseCounter;
+	uint32_t SolidStatePulseCounter;
+	
+	// GUI preset
+	DGUS_LASERPROFILE	m_structLaserProfile [5];
+	DGUS_LASERSETTINGS m_structLaserSettings[5];
+} FLASH_GLOBAL_DATA, *PFLASH_GLOBAL_DATA;
+
 void NormalizeStep(uint16_t *min, uint16_t *max, uint16_t *step, uint16_t threshold_numsteps, uint16_t step_tbl[]);
 
 // Old laser code for laser diode
@@ -121,5 +139,11 @@ void LaserPreset(uint16_t *freq, uint16_t *duration, uint16_t *energy, APP_PROFI
 
 void MelaninPreset(uint16_t melanin);
 void PhototypePreset(uint16_t phototype);
+
+void LoadGlobalVariables(void);
+void StoreGlobalVariables(void);
+
+// Flash data
+extern PFLASH_GLOBAL_DATA global_flash_data;
 
 #endif

@@ -60,6 +60,32 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
 	if (htim == &hTIM10)
 	{
 		Flushes++;
+		
+		if (DiodeLaser_en) 
+		{
+			/*uint32_t count = convert_d(frameData_LaserDiode.PulseCounter);
+			count++;
+			frameData_LaserDiode.PulseCounter = convert_d(count);*/
+			FlushesSessionLD++;
+			FlushesGlobalLD++;
+			
+			if (((FlushesSessionLD % FlushesCount) == 0) && (FlushesSessionLD > 0))
+			{
+				hTIM10.Instance->CR1 &= ~(TIM_CR1_CEN);
+				__HAL_TIM_SET_COUNTER(&hTIM10, 0);
+				Flushes = 0;
+				//LaserStarted = false;
+			}
+		}
+		if (SolidStateLaser_en) 
+		{
+			/*uint32_t count = convert_d(frameData_SolidStateLaser.PulseCounter);
+			count++;
+			frameData_SolidStateLaser.PulseCounter = convert_d(count);*/
+			FlushesSessionSS++;
+			FlushesGlobalSS++;
+		}
+		
 		if (Flushes == FlushesCount)
 		{
 			hTIM10.Instance->CR1 &= ~(TIM_CR1_CEN);
@@ -302,14 +328,17 @@ void DiodeControlOnePulseStart(void)
 
 void DiodeControlPulseStop(void)
 {	
-	LaserStarted = false;
-	
-	// Start frequency counter
-	HAL_TIM_OC_Stop(&hTIM10, TIM_CHANNEL_1);
-	
-	/* Enable the Output compare channel */
-	TIM_CCxChannelCmd(hTIM9.Instance, TIM_CHANNEL_1, TIM_CCx_DISABLE);
-	__HAL_TIM_DISABLE(&hTIM9);
+	if (LaserStarted)
+	{
+		LaserStarted = false;
+		
+		// Start frequency counter
+		HAL_TIM_OC_Stop(&hTIM10, TIM_CHANNEL_1);
+		
+		/* Enable the Output compare channel */
+		TIM_CCxChannelCmd(hTIM9.Instance, TIM_CHANNEL_1, TIM_CCx_DISABLE);
+		__HAL_TIM_DISABLE(&hTIM9);
+	}
 }
 
 void SetPulseDuration_us(uint16_t duration)

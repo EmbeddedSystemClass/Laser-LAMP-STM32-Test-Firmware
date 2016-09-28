@@ -1,20 +1,26 @@
 #include "GlobalVariables.h"
+#include "stm32f4xx_hal_flash.h"
+#include <string.h>
+
+// Flash data
+PFLASH_GLOBAL_DATA global_flash_data = (PFLASH_GLOBAL_DATA)FLASH_LASERDATA_BASE;
 
 // DGUS Control variables
 uint16_t g_wDGUSTimeout = 200;
 
 // Timer global variables
-int16_t m_wMillSec = 0;
+int16_t m_wMillSec = 2;
 int16_t m_wSeconds = 10;
-int16_t m_wMinutes = 0;
+int16_t m_wMinutes = 2;
 int16_t m_wSetSec  = 10;
 int16_t m_wSetMin  = 0;
 
 // Cooling global variables
 float32_t temperature_cool_on = 26.5f;
-float32_t temperature_cool_off = 26.0f;
-float32_t temperature_overheat = 29.0f;
-float32_t temperature_normal = 27.0f;
+float32_t temperature_cool_off = 25.0f;
+float32_t temperature_overheat = 29.5f;
+float32_t temperature_overheat_solidstate = 32.0f;
+float32_t temperature_normal = 27.5f;
 
 // Flow global variable
 float32_t flow_low = 0.0f;
@@ -46,7 +52,11 @@ uint16_t subFlushes = 0;
 uint16_t subFlushesCount = 1;
 uint32_t Flushes = 0;
 uint32_t FlushesCount = 1000000;
-uint16_t switch_filter_threshold = 40;
+uint32_t FlushesSessionLD = 0;
+uint32_t FlushesGlobalLD = 1000;
+uint32_t FlushesSessionSS = 0;
+uint32_t FlushesGlobalSS = 0;
+uint16_t switch_filter_threshold = 10;
 volatile uint16_t switch_filter = 0;
 volatile bool footswitch_en = false;
 volatile bool footswitch_on = false;
@@ -541,6 +551,64 @@ void PhototypePreset(uint16_t phototype)
 	LaserPreset(&freq, &duration, &energy, Profile);
 }
 
-void InitializeGlobalVariables()
+void LoadGlobalVariables(void)
 {
+	// Copy counters
+	memcpy((void*)&FlushesGlobalLD, (void*)&global_flash_data->LaserDiodePulseCounter, sizeof(uint32_t));
+	memcpy((void*)&FlushesGlobalSS, (void*)&global_flash_data->SolidStatePulseCounter, sizeof(uint32_t));
+	
+	// Copy profile states
+	memcpy((void*)&m_structLaserProfile, (void*)&global_flash_data->m_structLaserProfile, sizeof(m_structLaserProfile));
+	memcpy((void*)&m_structLaserSettings, (void*)&global_flash_data->m_structLaserSettings, sizeof(m_structLaserSettings));
+}
+
+void fmemcpy(uint8_t* dst, uint8_t* src, uint16_t len)
+{
+	FLASH_WaitForLastOperation((uint32_t)50000U);
+	
+	for (uint16_t i = 0; i < len; i++)
+	{
+		CLEAR_BIT(FLASH->CR, FLASH_CR_PSIZE);
+		FLASH->CR |= FLASH_PSIZE_BYTE;
+		FLASH->CR |= FLASH_CR_PG;
+		
+		dst[i] = src[i];
+		
+		FLASH_WaitForLastOperation((uint32_t)50000U);
+		FLASH->CR &= (~FLASH_CR_PG);
+	}
+}
+
+void StoreGlobalVariables(void)
+{
+	FLASH_EraseInitTypeDef flash_erase = {0};
+	
+	flash_erase.TypeErase = FLASH_TYPEERASE_SECTORS;
+	flash_erase.Banks = FLASH_BANK_1;
+	flash_erase.Sector = FLASH_SECTOR_11;
+	flash_erase.NbSectors = 1;
+	flash_erase.VoltageRange = FLASH_VOLTAGE_RANGE_3;
+	
+	uint32_t sector_error = 0;
+	
+	while (HAL_FLASH_Unlock() != HAL_OK);
+	HAL_FLASHEx_Erase(&flash_erase, &sector_error);
+	
+	FLASH_WaitForLastOperation((uint32_t)50000U);
+	HAL_FLASH_Lock();
+	
+	while (HAL_FLASH_Unlock() != HAL_OK);
+	
+	/*HAL_FLASH_Program(FLASH_TYPEPROGRAM_WORD, FLASH_LASERDATA_BASE, frameData_LaserDiode.PulseCounter);
+	HAL_FLASH_Program(FLASH_TYPEPROGRAM_WORD, FLASH_LASERDATA_BASE + 4, frameData_SolidStateLaser.PulseCounter);*/
+	
+	// Copy persets
+	fmemcpy((void*)&global_flash_data->LaserDiodePulseCounter, (void*)&FlushesGlobalLD, sizeof(uint32_t));
+	fmemcpy((void*)&global_flash_data->SolidStatePulseCounter, (void*)&FlushesGlobalSS, sizeof(uint32_t));
+	
+	// Copy profile states
+	fmemcpy((void*)&global_flash_data->m_structLaserProfile, (void*)&m_structLaserProfile, sizeof(m_structLaserProfile));
+	fmemcpy((void*)&global_flash_data->m_structLaserSettings, (void*)&m_structLaserSettings, sizeof(m_structLaserSettings));
+	
+	HAL_FLASH_Lock();
 }
