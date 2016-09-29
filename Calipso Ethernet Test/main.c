@@ -42,7 +42,7 @@
 /* Includes ------------------------------------------------------------------*/
 #include "main.h"
 #include <stdio.h>
-#include <rl_net.h>
+//#include <rl_net.h>
 #include "Driver_USART.h"
 #include "DGUS.h"
 #include "DS18B20.h"
@@ -95,6 +95,7 @@ extern void Init_Timers (void);
 
 uint8_t rx_buffer[8];
 
+/*
 // Process DCHP server information
 void netDHCP_Notify (uint32_t if_num, uint8_t option, const uint8_t *val, uint32_t len) {
   char ip_ascii[16];
@@ -120,7 +121,7 @@ void netDHCP_Notify (uint32_t if_num, uint8_t option, const uint8_t *val, uint32
       printf ("Boot File: %s\n", val);
       break;
   }   
-}
+}*/
 
 /**
   * @brief  Main program
@@ -155,15 +156,17 @@ int main(void)
 #ifndef USE_DGUS_DRIVER
 	Initialize_DGUS();
 #endif
+
+	SpeakerInit();
 	
-	netStatus status = netInitialize();
+	/*netStatus status = netInitialize();
 	
 	if (status == netOK)
 	{
 		printf("Network initialize: OK!\n");
 		
 		resolve_host();
-	}
+	}*/
 	
 	//HAL_Init();
 	//SystemClock_Config();

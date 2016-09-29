@@ -887,13 +887,12 @@ t Test\RTE" -I"C:\Users\FxSlava\Documents\Laser-LAMP-STM32-Test-Firmware\Calips
 o Ethernet Test\RTE\Device\STM32F407ZGTx" -IC:\Keil_v5\ARM\PACK\ARM\CMSIS\5.0.0
 -Beta4\CMSIS\Driver\Include -IC:\Keil_v5\ARM\PACK\ARM\CMSIS\5.0.0-Beta4\CMSIS\I
 nclude -IC:\Keil_v5\ARM\PACK\ARM\CMSIS\5.0.0-Beta4\CMSIS\RTOS\RTX\INC -IC:\Keil
-_v5\ARM\PACK\Keil\ARM_Compiler\1.1.1\Include -IC:\Keil_v5\ARM\PACK\Keil\MDK-Mid
-dleware\7.1.0\Network\Include -IC:\Keil_v5\ARM\PACK\Keil\STM32F4xx_DFP\2.9.0\Dr
-ivers\CMSIS\Device\ST\STM32F4xx\Include -IC:\Keil_v5\ARM\PACK\Keil\STM32F4xx_DF
-P\2.9.0\Drivers\STM32F4xx_HAL_Driver\Inc --predefine="__RTX SETA 1" --predefine
-="__UVISION_VERSION SETA 520" --predefine="_RTE_ SETA 1" --predefine="STM32F407
-xx SETA 1" --list=.\listings\startup_stm32f407xx.lst RTE\Device\STM32F407ZGTx\s
-tartup_stm32f407xx.s
+_v5\ARM\PACK\Keil\ARM_Compiler\1.1.1\Include -IC:\Keil_v5\ARM\PACK\Keil\STM32F4
+xx_DFP\2.9.0\Drivers\CMSIS\Device\ST\STM32F4xx\Include -IC:\Keil_v5\ARM\PACK\Ke
+il\STM32F4xx_DFP\2.9.0\Drivers\STM32F4xx_HAL_Driver\Inc --predefine="__RTX SETA
+ 1" --predefine="__UVISION_VERSION SETA 520" --predefine="_RTE_ SETA 1" --prede
+fine="STM32F407xx SETA 1" --list=.\listings\startup_stm32f407xx.lst RTE\Device\
+STM32F407ZGTx\startup_stm32f407xx.s
 
 
 

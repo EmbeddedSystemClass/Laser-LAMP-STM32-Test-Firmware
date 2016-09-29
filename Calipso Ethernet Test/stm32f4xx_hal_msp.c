@@ -213,6 +213,14 @@ void HAL_MspInit(void)
 	
 	HAL_GPIO_Init(GPIOF, &gpio_F);
 	
+	GPIO_InitTypeDef gpio_A = {0};
+	gpio_A.Pin   = GPIO_PIN_LaserLED;
+	gpio_A.Mode  = GPIO_MODE_OUTPUT_PP;
+	gpio_A.Pull  = GPIO_NOPULL;
+	gpio_A.Speed = GPIO_SPEED_FREQ_LOW;
+	
+	HAL_GPIO_Init(GPIOA, &gpio_A);
+	
 	LampControlInit();
 	FlowInit();
 	CoolInit();

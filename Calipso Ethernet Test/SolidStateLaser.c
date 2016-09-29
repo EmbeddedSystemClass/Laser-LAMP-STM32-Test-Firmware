@@ -43,11 +43,25 @@ void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin)
 	}
 }
 
+void HAL_TIM_OC_DelayElapsedCallback(TIM_HandleTypeDef *htim)
+{
+	if (htim == &hTIM9)
+	{
+		if (DiodeLaser_en) 
+			__MISC_LASERLED_ON();
+		SoundOn();
+	}
+}
+
 void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
 {
 	//__HAL_TIM_DISABLE(&hTIM9);
 	if (htim == &hTIM9)
 	{
+		if (DiodeLaser_en) 
+			__MISC_LASERLED_OFF();
+		SoundOff();
+		
 		subFlushes++;
 		if (subFlushes == subFlushesCount)
 		{
@@ -247,6 +261,8 @@ void LampControlPulseStart(void)
 	{
 		LaserStarted = true;
 		
+		__MISC_LASERLED_ON();
+		
 		Flushes = 0;
 		subFlushes = 0;
 		
@@ -259,6 +275,7 @@ void LampControlPulseStart(void)
 		
 		//HAL_TIM_OC_Start_IT(&hTIM9, TIM_CHANNEL_2);
 		__HAL_TIM_ENABLE_IT(&hTIM9, TIM_IT_UPDATE);
+		__HAL_TIM_ENABLE_IT(&hTIM9, TIM_IT_CC2);
 	
 		/* Enable the Peripheral */
 		//__HAL_TIM_ENABLE(&hTIM9);
@@ -266,18 +283,6 @@ void LampControlPulseStart(void)
 		/* Enable the Output compare channel */
 		TIM_CCxChannelCmd(hTIM9.Instance, TIM_CHANNEL_2, TIM_CCx_ENABLE);
 	}
-}
-
-void LampControlPulseStop(void)
-{	
-	LaserStarted = false;
-	
-	// Start frequency counter
-	HAL_TIM_OC_Stop(&hTIM10, TIM_CHANNEL_1);
-	
-	/* Enable the Output compare channel */
-	TIM_CCxChannelCmd(hTIM9.Instance, TIM_CHANNEL_2, TIM_CCx_DISABLE);
-	__HAL_TIM_DISABLE(&hTIM9);
 }
 
 void DiodeControlPulseStart(void)
@@ -298,6 +303,7 @@ void DiodeControlPulseStart(void)
 		
 		//HAL_TIM_OC_Start_IT(&hTIM9, TIM_CHANNEL_2);
 		__HAL_TIM_ENABLE_IT(&hTIM9, TIM_IT_UPDATE);
+		__HAL_TIM_ENABLE_IT(&hTIM9, TIM_IT_CC1);
 	
 		/* Enable the Peripheral */
 		//__HAL_TIM_ENABLE(&hTIM9);
@@ -307,6 +313,7 @@ void DiodeControlPulseStart(void)
 	}
 }
 
+// Deprecated
 void DiodeControlOnePulseStart(void)
 {
 	if (!LaserStarted)
@@ -319,10 +326,27 @@ void DiodeControlOnePulseStart(void)
 		__HAL_TIM_ENABLE_IT(&hTIM9, TIM_IT_UPDATE);
 	
 		/* Enable the Peripheral */
-		__HAL_TIM_ENABLE(&hTIM9);
+		//__HAL_TIM_ENABLE(&hTIM9);
 		
 		/* Enable the Output compare channel */
 		TIM_CCxChannelCmd(hTIM9.Instance, TIM_CHANNEL_1, TIM_CCx_ENABLE);
+	}
+}
+
+void LampControlPulseStop(void)
+{	
+	if (LaserStarted)
+	{
+		LaserStarted = false;
+		
+		// Start frequency counter
+		HAL_TIM_OC_Stop(&hTIM10, TIM_CHANNEL_1);
+		
+		/* Disable the Output compare channel */
+		TIM_CCxChannelCmd(hTIM9.Instance, TIM_CHANNEL_2, TIM_CCx_DISABLE);
+		__HAL_TIM_DISABLE(&hTIM9);
+		__MISC_LASERLED_OFF();
+		SoundOff();
 	}
 }
 
@@ -335,9 +359,11 @@ void DiodeControlPulseStop(void)
 		// Start frequency counter
 		HAL_TIM_OC_Stop(&hTIM10, TIM_CHANNEL_1);
 		
-		/* Enable the Output compare channel */
+		/* Disable the Output compare channel */
 		TIM_CCxChannelCmd(hTIM9.Instance, TIM_CHANNEL_1, TIM_CCx_DISABLE);
 		__HAL_TIM_DISABLE(&hTIM9);
+		__MISC_LASERLED_OFF();
+		SoundOff();
 	}
 }
 

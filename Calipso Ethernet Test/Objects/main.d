@@ -32,12 +32,10 @@
 .\objects\main.o: C:\Keil_v5\ARM\PACK\Keil\STM32F4xx_DFP\2.9.0\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_tim_ex.h
 .\objects\main.o: C:\Keil_v5\ARM\PACK\Keil\STM32F4xx_DFP\2.9.0\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_uart.h
 .\objects\main.o: C:\Keil_v5\ARM\PACK\Keil\STM32F4xx_DFP\2.9.0\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_usart.h
-.\objects\main.o: C:\Keil_v5\ARM\PACK\Keil\MDK-Middleware\7.1.0\Network\Include\rl_net.h
-.\objects\main.o: C:\Keil_v5\ARM\PACK\Keil\MDK-Middleware\7.1.0\Network\Include\rl_net_ds.h
-.\objects\main.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdbool.h
-.\objects\main.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stddef.h
 .\objects\main.o: C:\Keil_v5\ARM\PACK\ARM\CMSIS\5.0.0-Beta4\CMSIS\Driver\Include\Driver_USART.h
 .\objects\main.o: C:\Keil_v5\ARM\PACK\ARM\CMSIS\5.0.0-Beta4\CMSIS\Driver\Include\Driver_Common.h
+.\objects\main.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stddef.h
+.\objects\main.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdbool.h
 .\objects\main.o: DGUS.h
 .\objects\main.o: C:\Keil_v5\ARM\PACK\ARM\CMSIS\5.0.0-Beta4\CMSIS\RTOS\RTX\INC\cmsis_os.h
 .\objects\main.o: DS18B20.h
