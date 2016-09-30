@@ -1,3 +1,3 @@
 #include <stdint.h>
 
-extern uint16_t sound_seample[4096];
+extern uint16_t sound_seample[64];

@@ -65,6 +65,7 @@
 /* Private variables ---------------------------------------------------------*/
 extern TIM_HandleTypeDef hTIM9;
 extern TIM_HandleTypeDef hTIM10;
+extern TIM_HandleTypeDef hTIM11;
 /* Private function prototypes -----------------------------------------------*/
 /* Private functions ---------------------------------------------------------*/
 
@@ -200,6 +201,11 @@ void TIM1_BRK_TIM9_IRQHandler(void)
 void TIM1_UP_TIM10_IRQHandler(void)
 {
 	HAL_TIM_IRQHandler(&hTIM10);
+}
+
+void TIM1_TRG_COM_TIM11_IRQHandler(void)
+{
+	HAL_TIM_IRQHandler(&hTIM11);
 }
 
 void EXTI0_IRQHandler(void)

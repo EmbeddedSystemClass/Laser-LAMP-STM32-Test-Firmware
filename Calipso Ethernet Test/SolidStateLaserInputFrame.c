@@ -27,7 +27,8 @@ uint16_t SetLaserSettings(uint16_t energy_index)
 	if (index > 9) index = 9;
 	
 	uint16_t energy = modeEnergyTable[index];
-	uint16_t voltageClb = modeVoltageTable[index];
+	uint16_t voltageClb = modeVoltageTable[index] + (FlushesGlobalSS / 100000);
+	if (voltageClb >= 449)	voltageClb = 449;
 	uint16_t duration = modeDurationTable[index];
 	
 	SetPulseDuration_us(duration);
@@ -145,6 +146,14 @@ void SolidStateLaserInput_Process(uint16_t pic_id)
 			update = true;
 		}
 	}
+	else
+	{
+		if (frameData_SolidStateLaser.laserprofile.Frequency > 10)
+		{
+			frameData_SolidStateLaser.laserprofile.Frequency = 10;
+			update = true;
+		}
+	}
 	
 	SetPulseFrequency(frameData_SolidStateLaser.laserprofile.Frequency);
 	
@@ -187,6 +196,22 @@ void SolidStateLaserInput_Process(uint16_t pic_id)
 			SetDACValue(programI);
 		}
 		update = true;
+	}
+	
+	if (frameData_SolidStateLaser.buttons.onCancelBtn != 0)
+	{
+		// On Input Pressed
+		frameData_SolidStateLaser.buttons.onCancelBtn = 0;
+		
+		SolidStateLaser_en = false;
+		LampControlPulseStop();
+		__SOLIDSTATELASER_HVOFF();
+		__SOLIDSTATELASER_SIMMEROFF();
+		SetDACValue(0.0f);
+		frameData_SolidStateLaser.state = 0;
+		new_pic_id = FRAME_PICID_SOLIDSTATE_INPUT;
+		update = true;
+		StoreGlobalVariables();
 	}
 	
 	if (state != frameData_SolidStateLaser.state)

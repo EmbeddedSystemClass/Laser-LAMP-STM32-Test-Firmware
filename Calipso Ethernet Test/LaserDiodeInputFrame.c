@@ -267,6 +267,20 @@ void LaserDiodeInput_Process(uint16_t pic_id)
 		new_pic_id = FRAME_PICID_LASERDIODE_PREPARETIMER;
 	}
 	
+	if (frameData_LaserDiode.buttons.onCancelBtn != 0)
+	{
+		// On Stop Pressed
+		frameData_LaserDiode.buttons.onCancelBtn = 0;
+		new_pic_id = FRAME_PICID_LASERDIODE_INPUT;
+		DiodeLaser_en = false;
+		DiodeControlPulseStop();
+		__MISC_LASERDIODE_OFF();
+		SetDACValue(0.0f);
+		update = true;
+		
+		StoreGlobalVariables();
+	}
+	
 update:
 	if (frameData_LaserDiode.PulseCounter != FlushesGlobalLD)
 	{

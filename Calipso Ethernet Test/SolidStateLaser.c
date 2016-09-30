@@ -8,6 +8,7 @@
 
 TIM_HandleTypeDef hTIM9;
 TIM_HandleTypeDef hTIM10;
+TIM_HandleTypeDef hTIM11; // Sound timer
 
 void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin)
 {
@@ -48,8 +49,16 @@ void HAL_TIM_OC_DelayElapsedCallback(TIM_HandleTypeDef *htim)
 	if (htim == &hTIM9)
 	{
 		if (DiodeLaser_en) 
+		{
 			__MISC_LASERLED_ON();
-		SoundOn();
+			
+			if (Profile == PROFILE_SINGLE)
+			{
+				FlushesSessionLD++;
+				FlushesGlobalLD++;
+			}
+		}
+		//SoundOn();
 	}
 }
 
@@ -60,7 +69,7 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
 	{
 		if (DiodeLaser_en) 
 			__MISC_LASERLED_OFF();
-		SoundOff();
+		//SoundOff();
 		
 		subFlushes++;
 		if (subFlushes == subFlushesCount)
@@ -80,15 +89,34 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
 			/*uint32_t count = convert_d(frameData_LaserDiode.PulseCounter);
 			count++;
 			frameData_LaserDiode.PulseCounter = convert_d(count);*/
-			FlushesSessionLD++;
-			FlushesGlobalLD++;
+			
+			if (Profile != PROFILE_SINGLE)
+			{
+				FlushesSessionLD++;
+				FlushesGlobalLD++;
+			}
 			
 			if (((FlushesSessionLD % FlushesCount) == 0) && (FlushesSessionLD > 0))
 			{
 				hTIM10.Instance->CR1 &= ~(TIM_CR1_CEN);
 				__HAL_TIM_SET_COUNTER(&hTIM10, 0);
 				Flushes = 0;
+				if (Profile != PROFILE_SINGLE)
+				{
+					SoundOn();
+					__HAL_TIM_SET_AUTORELOAD(&hTIM11, 42000);
+					HAL_TIM_Base_Start_IT(&hTIM11);
+				}
 				//LaserStarted = false;
+			}
+			else
+			{
+				if (Profile != PROFILE_SINGLE)
+				{
+					SoundOn();
+					__HAL_TIM_SET_AUTORELOAD(&hTIM11, 2041);//2100); // 0.05
+					HAL_TIM_Base_Start_IT(&hTIM11);
+				}
 			}
 		}
 		if (SolidStateLaser_en) 
@@ -98,6 +126,10 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
 			frameData_SolidStateLaser.PulseCounter = convert_d(count);*/
 			FlushesSessionSS++;
 			FlushesGlobalSS++;
+			
+			SoundOn();
+			__HAL_TIM_SET_AUTORELOAD(&hTIM11, 2100);
+			HAL_TIM_Base_Start_IT(&hTIM11);
 		}
 		
 		if (Flushes == FlushesCount)
@@ -110,6 +142,12 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
 	}
 	//HAL_TIM_OC_Stop_IT(&hTIM9, TIM_CHANNEL_2);
 	//__HAL_TIM_DISABLE_IT(&hTIM9, TIM_IT_UPDATE);
+	
+	if (htim == &hTIM11)
+	{
+		HAL_TIM_Base_Stop(&hTIM11);
+		SoundOff();
+	}
 }
 
 void LampControlGPIOInit(void)
@@ -172,6 +210,7 @@ void LampControlTIMInit(void)
 {
 	__TIM9_CLK_ENABLE();
 	__TIM10_CLK_ENABLE();
+	__TIM11_CLK_ENABLE();
 	__GPIOE_CLK_ENABLE();
 	
 	GPIO_InitTypeDef gpio_e = {0};
@@ -182,6 +221,23 @@ void LampControlTIMInit(void)
 	gpio_e.Alternate = GPIO_AF3_TIM9;
 	
 	HAL_GPIO_Init(GPIOE, &gpio_e);
+	
+	// Sound timer
+	TIM_Base_InitTypeDef tim11_init = {0};
+	tim11_init.Period = 2100; // 0.05s period
+	tim11_init.Prescaler = 3999;
+	tim11_init.ClockDivision = TIM_CLOCKDIVISION_DIV1;
+	tim11_init.CounterMode = TIM_COUNTERMODE_UP;
+	tim11_init.RepetitionCounter = 0;
+	
+	hTIM11.Init = tim11_init;
+	hTIM11.Instance = TIM11;
+	
+	HAL_TIM_Base_Init(&hTIM11);
+	
+	HAL_NVIC_SetPriority(TIM1_TRG_COM_TIM11_IRQn, 0, 1);
+	HAL_NVIC_ClearPendingIRQ(TIM1_TRG_COM_TIM11_IRQn);
+	HAL_NVIC_EnableIRQ(TIM1_TRG_COM_TIM11_IRQn);
 	
 	// Master timer
 	TIM_Base_InitTypeDef tim10_init = {0};
@@ -261,7 +317,7 @@ void LampControlPulseStart(void)
 	{
 		LaserStarted = true;
 		
-		__MISC_LASERLED_ON();
+		//__MISC_LASERLED_ON();
 		
 		Flushes = 0;
 		subFlushes = 0;
@@ -304,6 +360,19 @@ void DiodeControlPulseStart(void)
 		//HAL_TIM_OC_Start_IT(&hTIM9, TIM_CHANNEL_2);
 		__HAL_TIM_ENABLE_IT(&hTIM9, TIM_IT_UPDATE);
 		__HAL_TIM_ENABLE_IT(&hTIM9, TIM_IT_CC1);
+		
+		if (Profile == PROFILE_SINGLE)
+		{
+			SoundOn();
+			__HAL_TIM_SET_AUTORELOAD(&hTIM11, 4200);
+			HAL_TIM_Base_Start_IT(&hTIM11);
+		}
+		else
+		{
+			SoundOn();
+			__HAL_TIM_SET_AUTORELOAD(&hTIM11, 2100);
+			HAL_TIM_Base_Start_IT(&hTIM11);
+		}
 	
 		/* Enable the Peripheral */
 		//__HAL_TIM_ENABLE(&hTIM9);
@@ -345,7 +414,8 @@ void LampControlPulseStop(void)
 		/* Disable the Output compare channel */
 		TIM_CCxChannelCmd(hTIM9.Instance, TIM_CHANNEL_2, TIM_CCx_DISABLE);
 		__HAL_TIM_DISABLE(&hTIM9);
-		__MISC_LASERLED_OFF();
+		
+		//__MISC_LASERLED_OFF();
 		SoundOff();
 	}
 }
@@ -362,6 +432,7 @@ void DiodeControlPulseStop(void)
 		/* Disable the Output compare channel */
 		TIM_CCxChannelCmd(hTIM9.Instance, TIM_CHANNEL_1, TIM_CCx_DISABLE);
 		__HAL_TIM_DISABLE(&hTIM9);
+		
 		__MISC_LASERLED_OFF();
 		SoundOff();
 	}

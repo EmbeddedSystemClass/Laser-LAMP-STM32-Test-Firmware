@@ -225,7 +225,7 @@ void UpdateLaserStatus()
 {
 	laser_state.temperature = (uint16_t)(temperature * 10.0f);
 	laser_state.coolIcon = 1;
-	laser_state.flow = 10;
+	laser_state.flow = flow1 * 10;
 	
 	WriteVariableConvert16(FRAMEDATA_LASERSTATE_BASE, &laser_state, sizeof(laser_state));
 	osSignalWait(DGUS_EVENT_SEND_COMPLETED, g_wDGUSTimeout);

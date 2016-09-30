@@ -81,7 +81,7 @@ void LaserDiodeWork_Process(uint16_t pic_id)
 		SetDACValue(0.0f);
 		update = true;
 		
-		//StoreGlobalVariables();
+		StoreGlobalVariables();
 	}
 	
 	switch (pic_id)

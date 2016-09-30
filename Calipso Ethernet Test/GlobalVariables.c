@@ -9,11 +9,11 @@ PFLASH_GLOBAL_DATA global_flash_data = (PFLASH_GLOBAL_DATA)FLASH_LASERDATA_BASE;
 uint16_t g_wDGUSTimeout = 200;
 
 // Timer global variables
-int16_t m_wMillSec = 2;
+int16_t m_wMillSec = 0;
 int16_t m_wSeconds = 10;
 int16_t m_wMinutes = 2;
 int16_t m_wSetSec  = 10;
-int16_t m_wSetMin  = 0;
+int16_t m_wSetMin  = 2;
 
 // Cooling global variables
 float32_t temperature_cool_on = 26.5f;
@@ -23,8 +23,8 @@ float32_t temperature_overheat_solidstate = 32.0f;
 float32_t temperature_normal = 27.5f;
 
 // Flow global variable
-float32_t flow_low = 0.0f;
-float32_t flow_normal = 8.0f;
+float32_t flow_low = 3.0f;
+float32_t flow_normal = 4.0f;
 
 // Service menu password
 char password[6] = "78965\0";

@@ -46,11 +46,30 @@ uint16_t sine_sound_256[256] = {
 	79	,	82	,	85	,	88	,	91	,	94	,	97	,	100,
 	103,	106,	109,	112,	116,	119,	122,	125, };
 
-uint16_t sine_sound_64[64] = 
+/*uint16_t sine_sound_64[64] = 
 	{	128,	140,	153,	165,	177,	188,	199,	209,	218,	226,	234,	240,	245,	250,	253,	254,
 		255,	254,	253,	250,	245,	240,	234,	226,	218,	209,	199,	188,	177,	165,	153,	140,
 		128,	116,	103,	91,		79,		68,		57,		47,		38,		30,		22,		16,		11,		6,		3,		2,	
-		1,		2,		3,		6,		11,		16,		22,		30,		38,		47,		57,		68,		79,		91,		103,	116};
+		1,		2,		3,		6,		11,		16,		22,		30,		38,		47,		57,		68,		79,		91,		103,	116};*/
+	
+const uint16_t sine_sound_128[128] = {
+	256,	268,	280,	293,	305,	317,	329,	341,	353,	364,	376,	387,	397,	407,	417,	427,
+	436,	444,	453,	460,	467,	474,	480,	486,	491,	496,	499,	503,	506,	508,	509,	510,
+	510,	510,	509,	508,	506,	503,	500,	496,	491,	486,	481,	474,	468,	460,	453,	445,
+	436,	427,	418,	408,	397,	387,	376,	365,	353,	342,	330,	318,	306,	293,	281,	268,
+	256,	243,	231,	219,	206,	194,	182,	170,	158,	147,	136,	125,	114,	104,	94,	85,
+	76,	67,	59,	51,	44,	37,	31,	25,	20,	16,	12,	8,	6,	3,	2,	1,
+	1,	1,	2,	3,	5,	8,	11,	15,	20,	25,	30,	36,	43,	50,	58,	66,
+	75,	84,	93,	103,	113,	124,	135,	146,	157,	169,	181,	193,	205,	217,	230,	242,
+};
+
+const uint16_t sine_sound_64[64] = {
+	256,	280,	305,	329,	353,	376,	397,	417,	436,	453,	467,	480,	491,	499,	506,	509,
+	510,	509,	506,	500,	491,	481,	468,	453,	436,	418,	397,	376,	353,	330,	306,	281,
+	256,	231,	206,	182,	158,	136,	114,	94,	76,	59,	44,	31,	20,	12,	6,	2,
+	1,	2,	5,	11,	20,	30,	43,	58,	75,	93,	113,	135,	157,	181,	205,	230,
+};
+
 
 void FlowInit(void)
 {
@@ -149,6 +168,7 @@ void SpeakerDMA(void)
 	
 	//HAL_DMA_Start(&hdma_speaker, (uint32_t)&sine_sound[0], (uint32_t) &TIM3->CCR1, SOUND_BUFFER);
 }
+void SoundGhostOn(void);
 
 void SpeakerInit(void)
 {
@@ -166,8 +186,8 @@ void SpeakerInit(void)
 	HAL_GPIO_Init(GPIOA, &speaker);
 	
 	TIM_Base_InitTypeDef tim3_init = {0};
-	tim3_init.Period = 512; // 42 kHz PWM
-	tim3_init.Prescaler = 1;
+	tim3_init.Period = 1904; // 44100 kHz PWM
+	tim3_init.Prescaler = 0;
 	tim3_init.ClockDivision = TIM_CLOCKDIVISION_DIV1;
 	tim3_init.CounterMode = TIM_COUNTERMODE_UP;
 	tim3_init.RepetitionCounter = 0;
@@ -187,7 +207,28 @@ void SpeakerInit(void)
 	SpeakerDMA();
 	htim_speaker.hdma[TIM_DMA_ID_CC1] = &hdma_speaker;
 	
+	/*SoundGhostOn();
+	
+	HAL_Delay(3000);*/
+	
 	SoundOff();
+}
+
+void SoundGhostOn(void)
+{
+	GPIO_InitTypeDef speaker = {0};
+	
+	speaker.Pin   = GPIO_PIN_6; // PWM1
+	speaker.Mode  = GPIO_MODE_AF_PP;
+	speaker.Pull  = GPIO_NOPULL;
+	speaker.Speed = GPIO_SPEED_FREQ_HIGH;
+	speaker.Alternate = GPIO_AF2_TIM3;
+	
+	HAL_GPIO_Init(GPIOA, &speaker);
+	
+	__HAL_DMA_SET_COUNTER(&hdma_speaker, 0);
+	
+	HAL_TIM_OC_Start_DMA(&htim_speaker, TIM_CHANNEL_1, (uint32_t*)&sound_seample[0], 64000);
 }
 
 void SoundOn(void)
@@ -201,6 +242,8 @@ void SoundOn(void)
 	speaker.Alternate = GPIO_AF2_TIM3;
 	
 	HAL_GPIO_Init(GPIOA, &speaker);
+	
+	__HAL_DMA_SET_COUNTER(&hdma_speaker, 0);
 	
 	HAL_TIM_OC_Start_DMA(&htim_speaker, TIM_CHANNEL_1, (uint32_t*)&sine_sound_64[0], 64);
 }

@@ -3,15 +3,66 @@
 #include <fstream> 
 #include <stdio.h>
 
-
 using namespace std;
 
+short *pData = NULL;
+DWORD dwDataSize = 0;
+
+void data_16()
+{
+	FILE* fp;
+	fopen_s(&fp, "laser.txt", "w");
+	int Size = dwDataSize / 2;
+
+	fprintf(fp, "const uint16_t sound_seample[%d] = {\n", Size);
+	for (int i = 0; i < Size / 16; i++)
+	{
+		for (int j = 0; j < 16; j++)
+			fprintf(fp, "\t%d,", (32768 + pData[i * 16 + j]) >> 6);
+		fprintf(fp, "\n");
+	}
+	fprintf(fp, "};\n");
+
+	fclose(fp);
+
+	fopen_s(&fp, "data.txt", "w");
+	for (int i = 0; i < Size; i++)
+	{
+		fprintf(fp, "%d\n", (32768 + pData[i]) >> 8);
+	}
+}
+
+void data_8()
+{
+	unsigned char* pdata = (unsigned char*)pData;
+
+	FILE* fp;
+	fopen_s(&fp, "laser.txt", "w");
+	int Size = dwDataSize;
+
+	fprintf(fp, "const uint16_t sound_seample[%d] = {\n", Size);
+	for (int i = 0; i < Size / 16; i++)
+	{
+		for (int j = 0; j < 16; j++)
+			fprintf(fp, "\t%d,", pdata[i * 16 + j] * 8);
+		fprintf(fp, "\n");
+	}
+	fprintf(fp, "};\n");
+
+	fclose(fp);
+
+	fopen_s(&fp, "data.txt", "w");
+	for (int i = 0; i < Size; i++)
+	{
+		fprintf(fp, "%d\n", pdata[i]);
+	}
+}
 
 void main(void)
 {
 	setlocale(LC_ALL, "Russian"); //Локаль
 	
-	ifstream file("laser.wav", ios::beg | ios::in | ios::binary); //Наша wav'ка
+	ifstream file("ghost.wav", ios::beg | ios::in | ios::binary); //Наша wav'ка
 	if (!file) cout << "Не удалось открыть файл" << endl;
 
 
@@ -68,34 +119,29 @@ void main(void)
 		cout << "Не найдена секция data" << endl;
 
 	}
-	DWORD dwDataSize = 0;
 	file.read((char*)&dwDataSize, 4); //Прочитаем ее размер
-	short *pData = new short[dwDataSize/2]; //Динамически выделим переменную типа char[размер звуковых данных]
+	pData = new short[dwDataSize/2]; //Динамически выделим переменную типа char[размер звуковых данных]
 
 
 	file.read((char*)pData, dwDataSize); //Прочитаем в нее все звуковые данные
 	file.close(); //Закроем файл, он нам уже не нужен, у нас есть pData
 
-	FILE* fp;
-	fopen_s(&fp, "laser.txt", "w");
-	int Size = dwDataSize / 2;
+	data_8();
 
-	fprintf(fp, "uint16_t laser_wav[%d] = {\n", Size);
+	FILE* fp = 0;
+	fopen_s(&fp, "wave.txt", "w");
+	int Size = 64;
+	fprintf(fp, "const uint16_t sound_seample[%d] = {\n", Size);
 	for (int i = 0; i < Size / 16; i++)
 	{
 		for (int j = 0; j < 16; j++)
-			fprintf(fp, "\t%d,", (32768 + pData[i * 16 + j]) >> 8);
+		{
+			float y = 256.0f + 255.0f * sin(2.0f * 3.14f * float(i * 16 + j) / float(Size));
+			fprintf(fp, "\t%d,", uint16_t(y));
+		}
 		fprintf(fp, "\n");
 	}
 	fprintf(fp, "};\n");
-
-	fclose(fp);
-
-	fopen_s(&fp, "data.txt", "w");
-	for (int i = 0; i < Size; i++)
-	{
-		fprintf(fp, "%d\n", (32768 + pData[i]) >> 8);
-	}
 
 	fclose(fp);
 }

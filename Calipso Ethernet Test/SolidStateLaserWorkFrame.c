@@ -80,6 +80,7 @@ void SolidStateLaserWork_Process(uint16_t pic_id)
 		frameData_SolidStateLaser.buttons.onStartBtn = 0;
 		
 		//LampControlPulseStart();
+		__MISC_LASERLED_ON();
 		
 		new_pic_id = FRAME_PICID_SOLIDSTATE_WORK;
 		
@@ -90,6 +91,8 @@ void SolidStateLaserWork_Process(uint16_t pic_id)
 	{
 		// On Input Pressed
 		frameData_SolidStateLaser.buttons.onStopBtn = 0;
+		
+		__MISC_LASERLED_OFF();
 		
 		SolidStateLaser_en = false;
 		LampControlPulseStop();
@@ -115,7 +118,7 @@ void SolidStateLaserWork_Process(uint16_t pic_id)
 		frameData_SolidStateLaser.state = 0;
 		new_pic_id = FRAME_PICID_SOLIDSTATE_INPUT;
 		update = true;
-		//StoreGlobalVariables();
+		StoreGlobalVariables();
 	}
 	
 	if (state != frameData_SolidStateLaser.state)
