@@ -16,7 +16,7 @@
 //#define DEBUG_BRK
 #define CRC_CHECK
 //#define USE_DGUS_DRIVER
-#define DGUS_BAUDRATE	115200
+#define DGUS_BAUDRATE	9600
 
 #define HEADER_WORD 0xAACC
 #define BUFFER_NUM	1024

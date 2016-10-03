@@ -10,18 +10,49 @@
 #include "arm_math.h"
 
 extern void SetDACValue(float32_t value);
+extern TIM_HandleTypeDef hTIM11;
 
 void SolidStateLaserWork_Process(uint16_t pic_id)
 {
 	bool update = false;
 	uint16_t new_pic_id = pic_id;
+	static int timeout_cnt = 0;
 	
 	DGUS_SOLIDSTATELASER* value;
 	ReadVariable(FRAMEDATA_SOLIDSTATELASER_BASE, (void**)&value, sizeof(frameData_SolidStateLaser));
 	if ((osSignalWait(DGUS_EVENT_SEND_COMPLETED, g_wDGUSTimeout).status != osEventTimeout) && (osSignalWait(DGUS_EVENT_RECEIVE_COMPLETED, g_wDGUSTimeout).status != osEventTimeout))
+	{
 		convert_laserdata_ss(&frameData_SolidStateLaser, value);
+		timeout_cnt = 0;
+	}
 	else 
+	{
+		timeout_cnt++;
+		if (timeout_cnt > 2)
+		{
+			timeout_cnt = 0;
+			
+			// Solid State Laser Off
+			footswitch_en = false;
+			SolidStateLaser_en = false;
+			LampControlPulseStop();
+			osDelay(100);
+			__SOLIDSTATELASER_SIMMEROFF();
+			osDelay(100);
+			__SOLIDSTATELASER_HVOFF();
+			osDelay(100);
+			__SOLIDSTATELASER_DISCHARGEON();
+			
+			new_pic_id = FRAME_PICID_SOLIDSTATE_INPUT;
+			
+			SoundOn();
+			__HAL_TIM_SET_AUTORELOAD(&hTIM11, 42000);
+			HAL_TIM_Base_Start_IT(&hTIM11);
+			
+			update = true;
+		}
 		return;
+	}
 	
 	uint16_t state = frameData_SolidStateLaser.state;
 	

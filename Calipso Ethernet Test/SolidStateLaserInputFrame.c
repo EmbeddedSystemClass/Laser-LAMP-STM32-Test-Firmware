@@ -38,6 +38,7 @@ uint16_t SetLaserSettings(uint16_t energy_index)
 	
 	return energy;
 }
+
 void SolidStateLaserInput_Init(uint16_t pic_id)
 {
 	uint16_t energy = SetLaserSettings(frameData_SolidStateLaser.laserprofile.EnergyCnt);
@@ -56,6 +57,9 @@ void SolidStateLaserInput_Init(uint16_t pic_id)
 	frameData_SolidStateLaser.buttons.onSimmerBtn = 0;
 	frameData_SolidStateLaser.buttons.onStartBtn = 0;
 	frameData_SolidStateLaser.buttons.onStopBtn = 0;
+	
+	WriteSolidStateLaserDataConvert16(FRAMEDATA_SOLIDSTATELASER_BASE, &frameData_SolidStateLaser);
+	osSignalWait(DGUS_EVENT_SEND_COMPLETED, g_wDGUSTimeout);
 }
 
 void SolidStateLaserInput_Process(uint16_t pic_id)

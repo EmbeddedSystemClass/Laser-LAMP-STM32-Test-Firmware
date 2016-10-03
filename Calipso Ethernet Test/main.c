@@ -123,6 +123,11 @@ void netDHCP_Notify (uint32_t if_num, uint8_t option, const uint8_t *val, uint32
   }   
 }*/
 
+float32_t absf(float32_t x)
+{
+	if (x < 0.0f) return x;
+}
+
 /**
   * @brief  Main program
   * @param  None
@@ -190,14 +195,18 @@ int main(void)
   /* Infinite loop */
   while (1)
   {
-		DS18B20_Reset();
-		DS18B20_StartConvertion();
+		if (DS18B20_Reset())
+			DS18B20_StartConvertion();
 	
 		HAL_Delay(750); // delay 750 ms
 	
-		DS18B20_Reset();
-		uint16_t tt = DS18B20_ReadData();
-		temperature = tt * 0.0625f;
+		if (DS18B20_Reset())
+		{
+			uint16_t tt = DS18B20_ReadData();
+			float32_t t = tt * 0.0625f;
+			if ((absf(t - temperature) < 100) && (t < 100.0f) && (t > 0.0f))
+				temperature = t;
+		}
 		
 		if (temperature > temperature_cool_on)
 			__MISC_RELAY1_ON();

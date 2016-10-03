@@ -70,6 +70,7 @@ int Init_Main_Thread (void) {
 void DiodeLaserOff()
 {
 	// Diode Laser Off
+	footswitch_en = false;
 	DiodeLaser_en = false;
 	DiodeControlPulseStop();
 	osDelay(100);
@@ -80,6 +81,7 @@ void DiodeLaserOff()
 void SolidStateLaserOff()
 {
 	// Solid State Laser Off
+	footswitch_en = false;
 	SolidStateLaser_en = false;
 	LampControlPulseStop();
 	osDelay(100);
@@ -224,7 +226,16 @@ extern volatile float32_t temperature;
 void UpdateLaserStatus()
 {
 	laser_state.temperature = (uint16_t)(temperature * 10.0f);
-	laser_state.coolIcon = 1;
+	
+	if (flow1 < 3)
+		laser_state.coolIcon = 1;
+	else
+	if (flow1 < 4)
+		laser_state.coolIcon = 2;
+	else
+	if (flow1 < 7)
+		laser_state.coolIcon = 3;
+	
 	laser_state.flow = flow1 * 10;
 	
 	WriteVariableConvert16(FRAMEDATA_LASERSTATE_BASE, &laser_state, sizeof(laser_state));
