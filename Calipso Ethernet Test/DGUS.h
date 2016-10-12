@@ -85,6 +85,25 @@ extern UART_HandleTypeDef huart1;
 #define FRAMEDATA_TIMER_BASE										0x000e
 #define FRAMEDATA_LASERSTATE_BASE								0x000b
 
+/* ************************** WIFI SCANNING DATA STRUCT ******************* */
+#define FRAMEDATA_WIFISCANNING_LINE0_BASE				0x0200						
+#define FRAMEDATA_WIFISCANNING_LINE1_BASE				0x0300
+#define FRAMEDATA_WIFISCANNING_LINE2_BASE				0x0400
+#define FRAMEDATA_WIFISCANNING_LINE3_BASE				0x0500
+#define FRAMEDATA_WIFISCANNING_LINE4_BASE				0x0600
+#define FRAMEDATA_WIFISCANNING_LINE5_BASE				0x0700
+#define FRAMEDATA_WIFISCANNING_LINE6_BASE				0x0800
+#define FRAMEDATA_WIFISCANNING_LINE7_BASE				0x0900
+#define FRAMEDATA_WIFISCANNING_LINE8_BASE				0x0A00
+#define FRAMEDATA_WIFISCANNING_LINE9_BASE				0x0B00
+#define FRAMEDATA_WIFISCANNING_LINE10_BASE			0x0C00
+#define FRAMEDATA_WIFISCANNING_LINE11_BASE			0x0D00
+
+// WIFI Authentication
+#define FRAMEDATA_WIFIAUTHENTICATION_SSID				0x0E00
+#define FRAMEDATA_WIFIAUTHENTICATION_PASSWORD		0x0E10
+#define FRAMEDATA_WIFISCANNINGSSID_INDEX				0x0E20
+
 /* ************************** DGUS PIC IDs ******************************** */
 
 #define FRAME_PICID_LOGO												0
@@ -118,6 +137,16 @@ extern UART_HandleTypeDef huart1;
 #define FRAME_PICID_SOLIDSTATE_FAULT						46			// Process
 
 #define FRAME_PICID_WRONG_EMMITER								47			// Process
+
+/* ************************** WIFI SCANNING DATA ************************** */
+
+typedef struct __attribute__((__packed__)) DGUS_WIFISCANNINGLINE_STRUCT {
+	uint16_t channel;
+	char SSID[32];
+	uint16_t RSSI;
+	uint16_t WPA;
+	uint16_t WPA2;
+} DGUS_WIFISCANNINGLINE, *PDGUS_WIFISCANNINGLINE;
 
 /* ************************** LASER DIODE CONTROL ************************* */
 
@@ -282,10 +311,12 @@ typedef struct __attribute__((__packed__)) DWIN_HEADERREG_STRUCT
 uint16_t convert_w(uint16_t value);
 uint32_t convert_d(uint32_t value);
 
+void convert_wifinetdata(DGUS_WIFISCANNINGLINE* dst, DGUS_WIFISCANNINGLINE* src);
 void convert_laserdata_ss(DGUS_SOLIDSTATELASER* dst, DGUS_SOLIDSTATELASER* src);
 void convert_laserdata(DGUS_LASERDIODE* dst, DGUS_LASERDIODE* src);
 void convert_array_w(uint16_t* dst, uint16_t* src, uint16_t num);
 
+void WriteWifiNetDataConvert16(uint16_t addr, DGUS_WIFISCANNINGLINE *data);
 void WriteLaserDiodeDataConvert16(uint16_t addr, DGUS_LASERDIODE *data);
 void WriteSolidStateLaserDataConvert16(uint16_t addr, DGUS_SOLIDSTATELASER *data);
 void WriteRegister(uint8_t  addr, void  *data, uint8_t num);

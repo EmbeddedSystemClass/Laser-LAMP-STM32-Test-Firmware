@@ -14,32 +14,28 @@
 
 #include <math.h>
 #include "arm_math.h"
-
-/*----------------------------------------------------------------------------
- *      Thread 1 'Thread_Name': Sample thread
- *---------------------------------------------------------------------------*/
+#include "WiFiThread.h"
  
 extern ARM_DRIVER_USART Driver_USART3;
 
-#define WIFI_EVENT_RECEIVE_COMPLETED	0x004
-#define WIFI_EVENT_SEND_COMPLETED			0x008
-#define WIFI_EVENT_RECEIVE_TIMEOUT		0x010
-
-#define WIFI_EVENT_RECEIVE_STRING			0x020
-#define WIFI_EVENT_RECEIVE_WIND				0x040
-#define WIFI_EVENT_TEMPERATURE_UPDATE	0x080
-
-#define WIFI_EVENT_REMOTECONTROL			0x100
-
-#define FRAME_SIZE	64
-#define BUFFER_SIZE 2048
-#define BUFFER_MASK 0x7ff
-
+/*----------------------------------------------------------------------------
+ *      WiFi Module Global Variables
+ *---------------------------------------------------------------------------*/
 bool  WiFi_State_CommandMode = true;
+bool  WiFi_State_ScanningMode = false;
+WIFI_AP WiFi_APs[12];
 
+// RTOS Variables
+osThreadId tid_WiFiThread;
+osThreadId tid_UserWiFiThread;
+osMessageQId qid_WiFiCMDQueue;
+
+/*----------------------------------------------------------------------------
+ *      WiFi Module Local Variables
+ *---------------------------------------------------------------------------*/
 char  ATRCV[BUFFER_SIZE];
 char  token[256];
-char* tokenPtr[10];
+char* tokenPtr[32];
 char  buffer_rx[256];
 char* buffer_tx;
 uint16_t frame_offset;
@@ -49,10 +45,13 @@ uint32_t frame_write;
  
 void WiFiThread (void const *argument);
 void UserWiFiThread (void const *argument);
-osThreadId tid_WiFiThread;
-osThreadId tid_UserWiFiThread;
+
+/*----------------------------------------------------------------------------
+ *      WiFi Module OS Variables
+ *---------------------------------------------------------------------------*/
 osThreadDef (WiFiThread, osPriorityNormal, 1, 0);
 osThreadDef (UserWiFiThread, osPriorityNormal, 1, 0);
+osMessageQDef(WiFiCMDQueue, 16, uint32_t);
 
 /* Private functions ---------------------------------------------------------*/
 void WIFI_USART_callback(uint32_t event)
@@ -107,6 +106,9 @@ int Init_WiFi_Thread (void) {
 	
 	tid_UserWiFiThread = osThreadCreate (osThread(UserWiFiThread), NULL);
   if (!tid_UserWiFiThread) return(-1);
+	
+	qid_WiFiCMDQueue = osMessageCreate(osMessageQ(WiFiCMDQueue), NULL);
+	if (!qid_WiFiCMDQueue) return(-1);
 	
 	//Initialize the USART driver 
   Driver_USART3.Initialize(WIFI_USART_callback);
@@ -298,6 +300,156 @@ int16_t WaitForWINDCommands(uint16_t timeout, uint16_t argc, ...)
 	return -1;
 }
 
+void WiFiThread_Idle()
+{
+	if (!WiFi_State_CommandMode)
+	{
+		RemoteControl = true;
+		__SOLIDSTATELASER_HVON();
+	
+		osEvent event = osSignalWait(0, 1000);
+		
+		// Remote control
+		if ((event.value.signals & WIFI_EVENT_REMOTECONTROL) != 0)
+		{
+			uint16_t las_id = atol(tokenPtr[1]);
+			
+			if (las_id == 0)
+			{
+				if (strcmp(tokenPtr[2], "START") == 0)
+				{
+					LampControlPulseStart();
+				}
+				if (strcmp(tokenPtr[2], "STOP") == 0)
+				{
+					LampControlPulseStop();
+				}
+				if (strcmp(tokenPtr[2], "SIMMER") == 0)
+					if (strcmp(tokenPtr[3], "OFF") == 0)
+						__SOLIDSTATELASER_SIMMEROFF();
+					
+				if (strcmp(tokenPtr[2], "SIMMER") == 0)
+					if (strcmp(tokenPtr[3], "ON") == 0)
+						__SOLIDSTATELASER_SIMMERON();
+					
+				if (strcmp(tokenPtr[2], "DURATION") == 0)
+				{
+					uint16_t value = atol(tokenPtr[3]);
+					SetPulseDuration_us(value);
+				}
+				if (strcmp(tokenPtr[2], "FREQUENCY") == 0)
+				{
+					uint16_t value = atol(tokenPtr[3]);
+					SetPulseFrequency(value);
+				}
+				if (strcmp(tokenPtr[2], "ENERGY") == 0)
+				{
+					uint16_t value = atol(tokenPtr[3]);
+				}
+			}
+		}
+	
+		char str[256];
+		
+		if (strcmp(tokenPtr[2], "GET") == 0)
+		{
+			// Send data to client
+			if (strcmp(tokenPtr[3], "T1") == 0)
+			{
+				sprintf(str, "T=%f C\n", temperature);
+				Driver_USART3.Send(str, strlen(str));
+			}
+			
+			if (strcmp(tokenPtr[3], "FLOW1") == 0)
+			{
+				sprintf(str, "F1=%f l/m\n", flow1);
+				Driver_USART3.Send(str, strlen(str));
+			}
+			
+			if (strcmp(tokenPtr[3], "FLOW2") == 0)
+			{
+				sprintf(str, "F2=%f l/m\n", flow2);
+				Driver_USART3.Send(str, strlen(str));
+			}
+			
+			if (strcmp(tokenPtr[3], "VOLTAGE1") == 0)
+			{
+				sprintf(str, "VM=%f V\n", VoltageMonitor);
+				Driver_USART3.Send(str, strlen(str));
+			}
+			
+			if (strcmp(tokenPtr[3], "VOLTAGE2") == 0)
+			{
+				sprintf(str, "CM=%f V\n", CurrentMonitor);
+				Driver_USART3.Send(str, strlen(str));
+			}
+		}
+		
+		tokenPtr[2] = "\0";
+		tokenPtr[3] = "\0";
+	}
+	else
+	{
+		if (RemoteControl)
+		{
+			RemoteControl = false;
+			__SOLIDSTATELASER_HVOFF();
+		}
+		// Wait for data mode input
+		WaitForWINDCommands(1, 1, (int)WIND_MSG_DATA_MODE);
+	}
+}
+
+void WiFiThread_Scan()
+{
+	bool stop = false;
+	uint16_t cnt = 0;
+	WiFi_State_ScanningMode = true;
+	
+	if (!SendAT("AT+S.SCAN\r\n")) 
+	{
+		WiFi_State_ScanningMode = false;
+		return;
+	}
+	
+	while (!stop)
+	{
+		osEvent event = osSignalWait(WIFI_EVENT_RECEIVE_STRING, 5000);
+		
+		// if not timeout, check for input WIND command
+		if (event.status != osEventTimeout)
+		{
+			uint16_t i = 0;
+			
+			if (strcmp(buffer_rx, "OK") == 0)
+			{
+				buffer_rx[0] = '\0';
+				stop = true;
+				continue;
+			}
+			
+			tokenPtr[i]=strtok(buffer_rx, ":= ");
+			i++;
+	
+			while (tokenPtr[i-1] != NULL)
+			{ 
+				tokenPtr[i] = strtok(NULL, "\t ");
+				i++;		
+			}
+			
+			cnt = atol(tokenPtr[0]) - 1;
+			if (cnt > 11) cnt = 11;
+			WiFi_APs[cnt].Channel = atol(tokenPtr[4]);
+			WiFi_APs[cnt].RSSI		= atol(tokenPtr[6]);
+			memcpy(WiFi_APs[cnt].SSID, tokenPtr[8], strlen(tokenPtr[8])+1);
+			WiFi_APs[cnt].wpa2 = (tokenPtr[11] != NULL);
+			WiFi_APs[cnt].wps = (tokenPtr[12] != NULL);
+		}
+	}
+	
+	WiFi_State_ScanningMode = false;
+}
+
 void UserWiFiThread (void const *argument) {
 	RemoteControl = false;
 	HAL_GPIO_WritePin(GPIOG, GPIO_PIN_2, GPIO_PIN_SET);
@@ -367,84 +519,23 @@ void UserWiFiThread (void const *argument) {
 	SendAT("AT+S.SOCKD=32000,t\r\n");
 	
 	// Wait for data mode input
-	WaitForWINDCommands(10, 1, (int)WIND_MSG_DATA_MODE);
+	//WaitForWINDCommands(10, 1, (int)WIND_MSG_DATA_MODE);
 	
   while (1) {
-    char str[256];
-		if (!WiFi_State_CommandMode)
-		{
-			RemoteControl = true;
-			__SOLIDSTATELASER_HVON();
+		osEvent event = osMessageGet(qid_WiFiCMDQueue, 3000);
 		
-			osEvent event = osSignalWait(0, 1000);
-			
-			// Remote control
-			if ((event.value.signals & WIFI_EVENT_REMOTECONTROL) != 0)
-			{
-				uint16_t las_id = atol(tokenPtr[1]);
-				
-				if (las_id == 0)
-				{
-					if (strcmp(tokenPtr[2], "START") == 0)
-					{
-						LampControlPulseStart();
-					}
-					if (strcmp(tokenPtr[2], "STOP") == 0)
-					{
-						LampControlPulseStop();
-					}
-					if (strcmp(tokenPtr[2], "SIMMER") == 0)
-						if (strcmp(tokenPtr[3], "OFF"))
-							__SOLIDSTATELASER_SIMMEROFF();
-					if (strcmp(tokenPtr[2], "SIMMER") == 0)
-						if (strcmp(tokenPtr[3], "ON"))
-							__SOLIDSTATELASER_SIMMERON();
-					if (strcmp(tokenPtr[2], "DURATION") == 0)
-					{
-						uint16_t value = atol(tokenPtr[3]);
-						SetPulseDuration_us(value);
-					}
-					if (strcmp(tokenPtr[2], "FREQUENCY") == 0)
-					{
-						uint16_t value = atol(tokenPtr[3]);
-						SetPulseFrequency(value);
-					}
-					if (strcmp(tokenPtr[2], "ENERGY") == 0)
-					{
-						uint16_t value = atol(tokenPtr[3]);
-					}
-				}
-			}
-		
-			// Temperature update
-			//if ((event.value.signals & WIFI_EVENT_TEMPERATURE_UPDATE) != 0)
-			{
-				// Send data to client
-				sprintf(str, "T=%f C\n", temperature);
-				Driver_USART3.Send(str, strlen(str));
-				
-				sprintf(str, "F1=%f l/m\n", flow1);
-				Driver_USART3.Send(str, strlen(str));
-				
-				sprintf(str, "F2=%f l/m\n", flow2);
-				Driver_USART3.Send(str, strlen(str));
-				
-				sprintf(str, "VM=%f V\n", VoltageMonitor);
-				Driver_USART3.Send(str, strlen(str));
-				
-				sprintf(str, "CM=%f V\n", CurrentMonitor);
-				Driver_USART3.Send(str, strlen(str));
-			}
-		}
+		if (event.status == osEventTimeout)
+			WiFiThread_Idle();
 		else
+		if (event.status == osEventMessage)
 		{
-			if (RemoteControl)
+			uint32_t cmd = event.value.v;
+			switch (cmd)
 			{
-				RemoteControl = false;
-				__SOLIDSTATELASER_HVOFF();
+				case WIFI_CMD_STARTSCANNING:
+					WiFiThread_Scan();
+					break;
 			}
-			// Wait for data mode input
-			WaitForWINDCommands(1, 1, (int)WIND_MSG_DATA_MODE);
 		}
 		
     osThreadYield ();

@@ -45,3 +45,6 @@
 .\objects\main.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\string.h
 .\objects\main.o: LaserMisc.h
 .\objects\main.o: GlobalVariables.h
+.\objects\main.o: SDCard.h
+.\objects\main.o: C:\Keil_v5\ARM\PACK\Keil\MDK-Middleware\7.1.0\FileSystem\Include\rl_fs.h
+.\objects\main.o: WiFiThread.h

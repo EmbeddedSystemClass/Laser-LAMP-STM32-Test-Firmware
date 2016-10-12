@@ -38,6 +38,8 @@ extern void   SolidStateLaserInput_Process(uint16_t pic_id);
 extern void SolidStateLaserPrepare_Process(uint16_t pic_id);
 extern void    SolidStateLaserWork_Process(uint16_t pic_id);
 
+extern void 		 WifiScanningFrame_Process(uint16_t pic_id);
+
 int Init_Main_Thread (void) {
 
   tid_MainThread = osThreadCreate (osThread(MainThread), NULL);
@@ -297,7 +299,9 @@ void MainThread (void const *argument) {
 				break;
 			
 			// WiFi features
-			case FRAME_PICID_SERVICE_WIFISCANNING:			break; // Blank picture, for future release
+			case FRAME_PICID_SERVICE_WIFISCANNING:			
+				WifiScanningFrame_Process(pic_id);
+				break;
 			case FRAME_PICID_SERVICE_WIFIAUTHENTICATION:break; // Blank picture, for future release
 			
 			// App idle user state

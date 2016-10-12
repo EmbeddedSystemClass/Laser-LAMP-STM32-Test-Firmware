@@ -614,7 +614,7 @@
 //   </e>
 #define RTE_USART6_TX_DMA               1
 #define RTE_USART6_TX_DMA_NUMBER        2
-#define RTE_USART6_TX_DMA_STREAM        6
+#define RTE_USART6_TX_DMA_STREAM        7
 #define RTE_USART6_TX_DMA_CHANNEL       5
 #define RTE_USART6_TX_DMA_PRIORITY      0
 
@@ -1561,7 +1561,7 @@
 
 // <e> SDIO (Secure Digital Input/Output) [Driver_MCI0]
 // <i> Configuration settings for Driver_MCI0 in component ::CMSIS Driver:MCI
-#define RTE_SDIO                        0
+#define RTE_SDIO                        1
 
 //   <h> SDIO Peripheral Bus
 //     <o> SDIO_CK Pin <0=>PC12 <1=>PB15
@@ -1690,7 +1690,7 @@
 //     <o3> Bit <0-15>
 //     <i>  Selects Port Bit
 //   </e>
-#define RTE_SDIO_CD_PIN_EN              1
+#define RTE_SDIO_CD_PIN_EN              0
 #define RTE_SDIO_CD_ACTIVE              0
 #define RTE_SDIO_CD_PORT                GPIO_PORT(7)
 #define RTE_SDIO_CD_PIN                 15

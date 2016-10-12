@@ -602,7 +602,7 @@ void StoreGlobalVariables(void)
 	/*HAL_FLASH_Program(FLASH_TYPEPROGRAM_WORD, FLASH_LASERDATA_BASE, frameData_LaserDiode.PulseCounter);
 	HAL_FLASH_Program(FLASH_TYPEPROGRAM_WORD, FLASH_LASERDATA_BASE + 4, frameData_SolidStateLaser.PulseCounter);*/
 	
-	// Copy persets
+	// Copy presets
 	fmemcpy((void*)&global_flash_data->LaserDiodePulseCounter, (void*)&FlushesGlobalLD, sizeof(uint32_t));
 	fmemcpy((void*)&global_flash_data->SolidStatePulseCounter, (void*)&FlushesGlobalSS, sizeof(uint32_t));
 	

@@ -42,12 +42,13 @@
 /* Includes ------------------------------------------------------------------*/
 #include "main.h"
 #include <stdio.h>
-//#include <rl_net.h>
 #include "Driver_USART.h"
 #include "DGUS.h"
 #include "DS18B20.h"
 #include "LaserMisc.h"
 #include "GlobalVariables.h"
+#include "SDCard.h"
+#include "WiFiThread.h"
 
 #include <math.h>
 #include "arm_math.h"
@@ -58,8 +59,6 @@
 #ifdef RTE_CMSIS_RTOS                   // when RTE component CMSIS RTOS is used
 #include "cmsis_os.h"                   // CMSIS RTOS header file
 #endif
-
-#define WIFI_EVENT_TEMPERATURE_UPDATE 0x80
 
 #ifdef RTE_CMSIS_RTOS_RTX
 extern uint32_t os_time;
@@ -95,37 +94,10 @@ extern void Init_Timers (void);
 
 uint8_t rx_buffer[8];
 
-/*
-// Process DCHP server information
-void netDHCP_Notify (uint32_t if_num, uint8_t option, const uint8_t *val, uint32_t len) {
-  char ip_ascii[16];
-  uint32_t idx;
-  
-  switch (option)  {
-    case NET_DHCP_OPTION_IP_ADDRESS:           // IP address has changed
-      netIP_ntoa (NET_ADDR_IP4, &val[0], ip_ascii, sizeof(ip_ascii));
-      printf ("IP address assigned by the DHCP server: %s\n", ip_ascii);
-      break;
-  
-    case NET_DHCP_OPTION_NTP_SERVERS:          // List of NTP Server IP addresses
-      printf ("NTP Server IP address list:\n");
-      idx = 0;
-      while ((idx+3) < len) {
-        netIP_ntoa (NET_ADDR_IP4, &val[idx], ip_ascii, sizeof(ip_ascii));
-        printf ("IP address: %s\n", ip_ascii);
-        idx += 4;
-      }
-      break;
-  
-    case NET_DHCP_OPTION_BOOTFILE_NAME:        // DCHP server boot file
-      printf ("Boot File: %s\n", val);
-      break;
-  }   
-}*/
-
 float32_t absf(float32_t x)
 {
-	if (x < 0.0f) return x;
+	if (x < 0.0f) return -x;
+	return x;
 }
 
 /**
@@ -164,14 +136,7 @@ int main(void)
 
 	SpeakerInit();
 	
-	/*netStatus status = netInitialize();
-	
-	if (status == netOK)
-	{
-		printf("Network initialize: OK!\n");
-		
-		resolve_host();
-	}*/
+	init_filesystem();
 	
 	//HAL_Init();
 	//SystemClock_Config();

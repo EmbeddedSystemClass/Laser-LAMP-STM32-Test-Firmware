@@ -372,6 +372,15 @@ void HAL_UART_ErrorCallback(UART_HandleTypeDef *huart)
 
 /* *************************************** Helper Laser Diode Data Functions ************************** */
 
+void convert_wifinetdata(DGUS_WIFISCANNINGLINE* dst, DGUS_WIFISCANNINGLINE* src)
+{
+	dst->channel							  = convert_w(src->channel);
+	dst->RSSI                   = convert_w(src->RSSI);
+	memcpy((uint16_t*)&dst->SSID, (uint16_t*)&src->SSID, strlen(src->SSID)+1);
+	dst->WPA					          = convert_d(src->WPA);
+	dst->WPA2		                = convert_w(src->WPA2);
+}
+
 void convert_laserdata(DGUS_LASERDIODE* dst, DGUS_LASERDIODE* src)
 {
 	dst->state								  = convert_w(src->state);
@@ -482,6 +491,47 @@ void WriteSolidStateLaserDataConvert16(uint16_t addr, DGUS_SOLIDSTATELASER *data
 #endif
 #endif
 }
+
+void WriteWifiNetDataConvert16(uint16_t addr, DGUS_WIFISCANNINGLINE *data)
+{
+	DWIN_HEADERDATA* header = (DWIN_HEADERDATA*)dgus_buffer_tx;
+	
+	uint16_t num = sizeof(DGUS_WIFISCANNINGLINE);
+	
+	header->header = convert_w(HEADER_WORD);
+	header->length = num + 3;
+	header->cmd    = 0x82;
+	header->addr   = convert_w(addr);
+	
+#ifdef CRC_CHECK
+	header->length = num + 5;
+#endif
+	
+	convert_wifinetdata((DGUS_WIFISCANNINGLINE*)(dgus_buffer_tx + 6), data);
+	
+#ifdef CRC_CHECK
+	uint16_t crc = 0xffff;
+	for (uint16_t i = 3; i < num + 6; i++)
+		crc = crc16_update(crc, dgus_buffer_tx[i]); //_crc16_update
+	dgus_buffer_tx[num + 6] = crc & 0xff;
+	dgus_buffer_tx[num + 7] = crc >> 8;
+	
+	osSignalClear(tid_MainThread, 0);
+#ifdef USE_DGUS_DRIVER
+	DGUS_USART_Driver->Send(dgus_buffer_tx, num + 8);
+#else
+	HAL_UART_Transmit_ITMY(&huart1, dgus_buffer_tx, num + 8);
+#endif
+#else	
+	osSignalClear(tid_MainThread, 0);
+#ifdef USE_DGUS_DRIVER
+	DGUS_USART_Driver->Send(dgus_buffer_tx, num + 6);
+#else
+	HAL_UART_Transmit_ITMY(&huart1, dgus_buffer_tx, num + 6);
+#endif
+#endif
+}
+
 
 void Initialize_DGUS()
 {

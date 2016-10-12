@@ -47,3 +47,4 @@
 .\objects\wifithread.o: LaserMisc.h
 .\objects\wifithread.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdlib.h
 .\objects\wifithread.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdarg.h
+.\objects\wifithread.o: WiFiThread.h
