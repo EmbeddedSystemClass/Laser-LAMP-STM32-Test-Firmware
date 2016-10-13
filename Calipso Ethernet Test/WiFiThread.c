@@ -17,15 +17,20 @@
 #include "WiFiThread.h"
  
 extern ARM_DRIVER_USART Driver_USART3;
+extern osThreadId tid_MainThread;
 
 /*----------------------------------------------------------------------------
  *      WiFi Module Global Variables
  *---------------------------------------------------------------------------*/
 bool  WiFi_State_CommandMode = true;
 bool  WiFi_State_ScanningMode = false;
-WIFI_AP WiFi_APs[12];
+PWIFI_AP WiFi_APs[16];
+char WiFi_NetworkPassword[32];
+char WiFi_NetworkSSID[32];
 
 // RTOS Variables
+osPoolId pid_WiFi_APs_Pool;
+osTimerId tid_WiFiTimer;
 osThreadId tid_WiFiThread;
 osThreadId tid_UserWiFiThread;
 osMessageQId qid_WiFiCMDQueue;
@@ -43,17 +48,38 @@ uint32_t frame_pos;
 uint16_t frame_read;
 uint32_t frame_write;
  
+void WiFiTimer_Callback(void const *arg);
 void WiFiThread (void const *argument);
 void UserWiFiThread (void const *argument);
 
 /*----------------------------------------------------------------------------
  *      WiFi Module OS Variables
  *---------------------------------------------------------------------------*/
+osPoolDef(WiFi_APs_Pool, 16, WIFI_AP);
+osTimerDef (WiFiTimer, WiFiTimer_Callback);
 osThreadDef (WiFiThread, osPriorityNormal, 1, 0);
 osThreadDef (UserWiFiThread, osPriorityNormal, 1, 0);
 osMessageQDef(WiFiCMDQueue, 16, uint32_t);
 
 /* Private functions ---------------------------------------------------------*/
+void WiFiTimer_Callback(void const *arg) 
+{
+	for (uint16_t i = 0; i < 16; i++)
+	{
+		if (WiFi_APs[i]->live == 0)
+		{
+			memset(WiFi_APs[i], 0, sizeof(WIFI_AP));
+			
+			for (uint16_t j = i; j < 15; j++)
+				memcpy(WiFi_APs[j], WiFi_APs[j+1], sizeof(WIFI_AP));
+			
+			memset(WiFi_APs[15], 0, sizeof(WIFI_AP));
+		}
+		else
+			WiFi_APs[i]->live--;
+	}
+}
+
 void WIFI_USART_callback(uint32_t event)
 {
 		uint16_t num = 0;
@@ -109,6 +135,24 @@ int Init_WiFi_Thread (void) {
 	
 	qid_WiFiCMDQueue = osMessageCreate(osMessageQ(WiFiCMDQueue), NULL);
 	if (!qid_WiFiCMDQueue) return(-1);
+	
+	// Create periodic timer
+  tid_WiFiTimer = osTimerCreate(osTimer(WiFiTimer), osTimerPeriodic, NULL);
+  if (tid_WiFiTimer != NULL) {    // Periodic timer created
+    // start timer with periodic 10ms interval
+    osStatus status = osTimerStart (tid_WiFiTimer, 1000);            
+    if (status != osOK) {
+      // Timer could not be started
+    }
+  }
+	
+	pid_WiFi_APs_Pool = osPoolCreate(osPool(WiFi_APs_Pool));
+	if (pid_WiFi_APs_Pool != NULL)
+		for (uint16_t i = 0; i < 16; i++)
+		{
+			WiFi_APs[i] = (PWIFI_AP)osPoolCAlloc(pid_WiFi_APs_Pool);
+			memset(WiFi_APs[i], 0, sizeof(WIFI_AP));
+		}
 	
 	//Initialize the USART driver 
   Driver_USART3.Initialize(WIFI_USART_callback);
@@ -406,11 +450,7 @@ void WiFiThread_Scan()
 	uint16_t cnt = 0;
 	WiFi_State_ScanningMode = true;
 	
-	if (!SendAT("AT+S.SCAN\r\n")) 
-	{
-		WiFi_State_ScanningMode = false;
-		return;
-	}
+	AsyncSendAT("AT+S.SCAN\r\n");
 	
 	while (!stop)
 	{
@@ -423,31 +463,99 @@ void WiFiThread_Scan()
 			
 			if (strcmp(buffer_rx, "OK") == 0)
 			{
-				buffer_rx[0] = '\0';
 				stop = true;
 				continue;
 			}
 			
-			tokenPtr[i]=strtok(buffer_rx, ":= ");
+			tokenPtr[i]=strtok(buffer_rx, "\t ");
 			i++;
 	
 			while (tokenPtr[i-1] != NULL)
-			{ 
-				tokenPtr[i] = strtok(NULL, "\t ");
+			{
+				if (i == 8)
+					tokenPtr[i] = strtok(NULL, "'");
+				else
+					tokenPtr[i] = strtok(NULL, "\t ");
 				i++;		
 			}
 			
+			/*
 			cnt = atol(tokenPtr[0]) - 1;
-			if (cnt > 11) cnt = 11;
-			WiFi_APs[cnt].Channel = atol(tokenPtr[4]);
-			WiFi_APs[cnt].RSSI		= atol(tokenPtr[6]);
-			memcpy(WiFi_APs[cnt].SSID, tokenPtr[8], strlen(tokenPtr[8])+1);
-			WiFi_APs[cnt].wpa2 = (tokenPtr[11] != NULL);
-			WiFi_APs[cnt].wps = (tokenPtr[12] != NULL);
+			if (cnt > 16) cnt = 16;*/
+			
+			char ssid[32];
+			
+			if (strcmp(tokenPtr[7], "SSID:") == 0)
+			{
+				memcpy(ssid, tokenPtr[8], strlen(tokenPtr[8])+1);
+				
+				for (cnt = 0; cnt < 16; cnt++)
+				{
+					if (WiFi_APs[cnt]->SSID[0]==0) break;
+					if (strcmp(WiFi_APs[cnt]->SSID, ssid)==0) break;
+				}
+			
+				{
+					if (strcmp(tokenPtr[7], "SSID:") == 0)
+						memcpy(WiFi_APs[cnt]->SSID, tokenPtr[8], strlen(tokenPtr[8])+1);
+					
+					if (strcmp(tokenPtr[3], "CHAN:") == 0)
+						WiFi_APs[cnt]->Channel = atol(tokenPtr[4]);
+					
+					if (strcmp(tokenPtr[5], "RSSI:") == 0)
+						WiFi_APs[cnt]->RSSI		= atol(tokenPtr[6]);
+					
+					if (strcmp(tokenPtr[9], "CAPS:") == 0)
+					{
+						WiFi_APs[cnt]->wpa2 = (tokenPtr[11] != NULL);
+						WiFi_APs[cnt]->wps = (tokenPtr[12] != NULL);
+					}
+					WiFi_APs[cnt]->live = 2;
+				}
+			}
+		}
+		else
+		{
+			WiFi_State_ScanningMode = false;
+			osSignalSet(tid_MainThread, WIFI_EVENT_SCANNINGCOMPLETE);
+			return;
 		}
 	}
 	
 	WiFi_State_ScanningMode = false;
+	osSignalSet(tid_MainThread, WIFI_EVENT_SCANNINGCOMPLETE);
+}
+
+void WiFiThread_Link()
+{
+	char str_ssid[256];
+	char str_pass[256];
+	
+	HAL_GPIO_WritePin(GPIOG, GPIO_PIN_2, GPIO_PIN_SET);
+	
+	sprintf(str_ssid, "AT+S.SSIDTXT=%s\r\n", WiFi_NetworkSSID, 256);
+	SendAT(str_ssid); //"AT+S.SSIDTXT=ASUS\r\n");
+	
+	sprintf(str_pass, "AT+S.SCFG=wifi_wpa_psk_text,%s\r\n", WiFi_NetworkPassword, 256);
+	SendAT(str_pass); //"AT+S.SCFG=wifi_wpa_psk_text,host1234\r\n");
+	
+	SendAT("AT+S.SCFG=wifi_priv_mode,2\r\n");
+	SendAT("AT+S.SCFG=wifi_mode,1\r\n");
+	SendAT("AT+S.SCFG=ip_use_dhcp,1\r\n");
+	SendAT("AT&W\r\n");
+	SendAT("AT+CFUN=1\r\n");
+	
+	// Restart WiFi
+	AsyncSendAT("AT+CFUN=1\r\n");
+	
+	// Wait for link up
+	if (WaitForWINDCommands(10, 1, (int)WIND_MSG_WIFIUP))
+	{
+		HAL_GPIO_WritePin(GPIOG, GPIO_PIN_2, GPIO_PIN_RESET);
+		osSignalSet(tid_MainThread, WIFI_EVENT_LINKCOMPLETE);
+		
+		SendAT("AT+S.SOCKD=32000,t\r\n");
+	}
 }
 
 void UserWiFiThread (void const *argument) {
@@ -455,16 +563,7 @@ void UserWiFiThread (void const *argument) {
 	HAL_GPIO_WritePin(GPIOG, GPIO_PIN_2, GPIO_PIN_SET);
 	//if (!SendAT(AT)) return;
 
-	/*// STA mode
-	SendAT("AT+S.SSIDTXT=ASUS\r\n");
-	SendAT("AT+S.SCFG=wifi_wpa_psk_text,host1234\r\n");
-	SendAT("AT+S.SCFG=wifi_priv_mode,2\r\n");
-	SendAT("AT+S.SCFG=wifi_mode,1\r\n");
-	SendAT("AT+S.SCFG=ip_use_dhcp,1\r\n");
-	SendAT("AT&W\r\n");
-	SendAT("AT+CFUN=1\r\n");
-	
-	// Mini AP mode
+	/*// Mini AP mode
 	SendAT("AT+S.SSIDTXT=Calipso\r\n");
 	SendAT("AT+S.SCFG=wifi_priv_mode,0\r\n");
 	SendAT("AT+S.SCFG=wifi_mode,3\r\n");
@@ -476,20 +575,29 @@ void UserWiFiThread (void const *argument) {
 	SendAT("AT&W\r\n");
 	SendAT("AT+CFUN=1\r\n");
 	
-	// STA mode
+	// STA mode (Work)
+	SendAT("AT+S.SSIDTXT=ASUS\r\n");
+	SendAT("AT+S.SCFG=wifi_wpa_psk_text,host1234\r\n");
+	SendAT("AT+S.SCFG=wifi_priv_mode,2\r\n");
+	SendAT("AT+S.SCFG=wifi_mode,1\r\n");
+	SendAT("AT+S.SCFG=ip_use_dhcp,1\r\n");
+	SendAT("AT&W\r\n");
+	SendAT("AT+CFUN=1\r\n");
+	
+	// STA mode (Home network)
 	SendAT("AT+S.SSIDTXT=ELTEX-40C0\r\n");
 	SendAT("AT+S.SCFG=wifi_wpa_psk_text,GP21167802\r\n");
 	SendAT("AT+S.SCFG=wifi_priv_mode,2\r\n");
 	SendAT("AT+S.SCFG=wifi_mode,1\r\n");
 	SendAT("AT+S.SCFG=ip_use_dhcp,1\r\n");
-	SendAT("AT&W\r\n");*/
+	SendAT("AT&W\r\n");
 	
 	// Restart WiFi
 	AsyncSendAT("AT+CFUN=1\r\n");
 	
 	// Wait for link up
 	WaitForWINDCommands(10, 1, (int)WIND_MSG_WIFIUP);
-	HAL_GPIO_WritePin(GPIOG, GPIO_PIN_2, GPIO_PIN_RESET);
+	HAL_GPIO_WritePin(GPIOG, GPIO_PIN_2, GPIO_PIN_RESET);*/
 	
 	/*
 	// Connect to server
@@ -534,6 +642,9 @@ void UserWiFiThread (void const *argument) {
 			{
 				case WIFI_CMD_STARTSCANNING:
 					WiFiThread_Scan();
+					break;
+				case WIFI_CMD_STARTLINKING:
+					WiFiThread_Link();
 					break;
 			}
 		}

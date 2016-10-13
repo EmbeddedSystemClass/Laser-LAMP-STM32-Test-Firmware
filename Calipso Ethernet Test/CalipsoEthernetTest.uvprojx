@@ -452,6 +452,11 @@
               <FileType>1</FileType>
               <FilePath>.\WiFiScanningFrame.c</FilePath>
             </File>
+            <File>
+              <FileName>WiFiAuthenticationFrame.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\WiFiAuthenticationFrame.c</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>

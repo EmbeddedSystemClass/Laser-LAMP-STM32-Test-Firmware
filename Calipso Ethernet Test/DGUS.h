@@ -138,6 +138,8 @@ extern UART_HandleTypeDef huart1;
 
 #define FRAME_PICID_WRONG_EMMITER								47			// Process
 
+#define FRAME_PICID_WIFI_LINKING								50			// Process
+
 /* ************************** WIFI SCANNING DATA ************************** */
 
 typedef struct __attribute__((__packed__)) DGUS_WIFISCANNINGLINE_STRUCT {

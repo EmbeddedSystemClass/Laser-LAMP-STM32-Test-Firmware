@@ -13,6 +13,7 @@
 ".\objects\solidstatelaserworkframe.o"
 ".\objects\serviceframediodelaser.o"
 ".\objects\wifiscanningframe.o"
+".\objects\wifiauthenticationframe.o"
 ".\objects\mainthread.o"
 ".\objects\spithread.o"
 ".\objects\wifithread.o"

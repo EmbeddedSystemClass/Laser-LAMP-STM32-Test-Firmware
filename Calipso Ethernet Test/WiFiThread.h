@@ -16,8 +16,12 @@
 
 #define WIFI_EVENT_REMOTECONTROL			0x100
 
+#define WIFI_EVENT_SCANNINGCOMPLETE		0x200
+#define WIFI_EVENT_LINKCOMPLETE				0x400
+
 // WiFi CMD
 #define WIFI_CMD_STARTSCANNING				1
+#define WIFI_CMD_STARTLINKING					2
 
 #define FRAME_SIZE	64
 #define BUFFER_SIZE 2048
@@ -37,8 +41,9 @@ typedef struct WIFI_AP_STRUCT
 	int16_t		RSSI;
 	bool wpa2;
 	bool wps;
+	uint16_t	live;
 } WIFI_AP, *PWIFI_AP;
 
-extern WIFI_AP WiFi_APs[12];
+extern PWIFI_AP WiFi_APs[16];
 
 #endif

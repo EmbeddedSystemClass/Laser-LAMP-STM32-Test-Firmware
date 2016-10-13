@@ -125,6 +125,16 @@ int main(void)
        - Low Level Initialization
      */
 	HAL_Init();
+	
+	if (GetLaserID() == LASER_ID_DIODELASER)
+		__MISC_RELAY3_ON();
+	else
+		__MISC_RELAY3_OFF();
+	
+	if (GetLaserID() == LASER_ID_SOLIDSTATE)
+		__MISC_RELAY2_ON();
+	else
+		__MISC_RELAY2_OFF();
 
   /* Configure the system clock to 168 MHz */
   SystemClock_Config();

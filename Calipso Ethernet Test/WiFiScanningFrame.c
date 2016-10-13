@@ -13,35 +13,83 @@
 #include "cmsis_os.h"
 
 extern void SetDACValue(float32_t value);
+extern char WiFi_NetworkSSID[32];
 
 DGUS_WIFISCANNINGLINE frameData_WiFiScanning[12];
+uint16_t frameData_NetworkIndex;
 
 void WifiScanningFrame_Process(uint16_t pic_id)
 {
-	uint16_t i = 0;
+	bool update = false;
+	uint16_t* value;
+	ReadVariable(FRAMEDATA_WIFISCANNINGSSID_INDEX, (void**)&value, 6);
+	if ((osSignalWait(DGUS_EVENT_SEND_COMPLETED, g_wDGUSTimeout).status != osEventTimeout) && (osSignalWait(DGUS_EVENT_RECEIVE_COMPLETED, g_wDGUSTimeout).status != osEventTimeout))
+		frameData_NetworkIndex = convert_w(*value);
+	else 
+		return;
 	
+	if (frameData_NetworkIndex > 0)
+	{
+		frameData_NetworkIndex = 0;
+		update = true;
+		
+		memcpy(WiFi_NetworkSSID, WiFi_APs[frameData_NetworkIndex]->SSID, 32);
+		WriteVariable(FRAMEDATA_WIFIAUTHENTICATION_SSID, WiFi_NetworkSSID, 32);
+		osSignalWait(DGUS_EVENT_SEND_COMPLETED, g_wDGUSTimeout);
+		
+		SetPicId(FRAME_PICID_SERVICE_WIFIAUTHENTICATION, g_wDGUSTimeout);
+	}
+	
+	if (update)
+	{
+		WriteVariableConvert16(FRAMEDATA_WIFISCANNINGSSID_INDEX, &frameData_NetworkIndex, 2);
+		osSignalWait(DGUS_EVENT_SEND_COMPLETED, g_wDGUSTimeout);
+	}
+	
+	// Send message to wifi thread to start scanning wifi network
 	osStatus status = osMessagePut(qid_WiFiCMDQueue, WIFI_CMD_STARTSCANNING, 3000);
-	
 	if (status != osEventTimeout)
 	{
-		WiFi_State_ScanningMode = true;
-		while (WiFi_State_ScanningMode);
-		
-		for (i = 0; i < 12; i++)
+		// Wait for wifi network scanning complete
+		osEvent event = osSignalWait(WIFI_EVENT_SCANNINGCOMPLETE, 3000);
+		if (event.status != osEventTimeout)
 		{
-			frameData_WiFiScanning[i].channel = WiFi_APs[i].Channel;
-			frameData_WiFiScanning[i].RSSI = WiFi_APs[i].RSSI;
-			memcpy(frameData_WiFiScanning[i].SSID, WiFi_APs[i].SSID, 32);
-			frameData_WiFiScanning[i].WPA2 = WiFi_APs[i].wpa2;
-			frameData_WiFiScanning[i].WPA = WiFi_APs[i].wps;
-		}
-		
-		i = 0;
-		for (i = 0; i < 12; i++)
-		if (frameData_WiFiScanning[i].SSID[0] != '\0')
-		{
-			WriteWifiNetDataConvert16(FRAMEDATA_WIFISCANNING_LINE0_BASE + 0x100 * i, &frameData_WiFiScanning[i]);
-			osSignalWait(DGUS_EVENT_SEND_COMPLETED, g_wDGUSTimeout);
+			// Update network list for DGUS display
+			uint16_t i = 0;
+			for (i = 0; i < 12; i++)
+			{
+				frameData_WiFiScanning[i].channel = WiFi_APs[i]->Channel;
+				frameData_WiFiScanning[i].RSSI = WiFi_APs[i]->RSSI;
+				memcpy(frameData_WiFiScanning[i].SSID, WiFi_APs[i]->SSID, 32);
+				frameData_WiFiScanning[i].WPA2 = WiFi_APs[i]->wpa2;
+				frameData_WiFiScanning[i].WPA = WiFi_APs[i]->wps;
+			}
+			
+			i = 0;
+			for (i = 0; i < 12; i++)
+			{
+				WriteWifiNetDataConvert16(FRAMEDATA_WIFISCANNING_LINE0_BASE + 0x100 * i, &frameData_WiFiScanning[i]);
+				osSignalWait(DGUS_EVENT_SEND_COMPLETED, g_wDGUSTimeout);
+			}
 		}
 	}
+}
+
+void WiFiLinkFrame_Process()
+{
+	// Send message to wifi thread to start scanning wifi network
+	osStatus status = osMessagePut(qid_WiFiCMDQueue, WIFI_CMD_STARTLINKING, 3000);
+	if (status != osEventTimeout)
+	{
+		// Wait for wifi network scanning complete
+		osEvent event = osSignalWait(WIFI_EVENT_LINKCOMPLETE, 10000);
+		if (event.status != osEventTimeout)
+		{
+			SetPicId(FRAME_PICID_MAINMENU, g_wDGUSTimeout);
+		}
+		else
+			SetPicId(FRAME_PICID_SERVICE_WIFISCANNING, g_wDGUSTimeout);
+	}
+	else
+		SetPicId(FRAME_PICID_SERVICE_WIFISCANNING, g_wDGUSTimeout);
 }
