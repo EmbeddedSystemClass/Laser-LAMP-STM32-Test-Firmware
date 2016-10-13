@@ -448,7 +448,7 @@ void WiFiThread_Scan()
 {
 	bool stop = false;
 	uint16_t cnt = 0;
-	WiFi_State_ScanningMode = true;
+	//WiFi_State_ScanningMode = true;
 	
 	AsyncSendAT("AT+S.SCAN\r\n");
 	
@@ -510,19 +510,19 @@ void WiFiThread_Scan()
 						WiFi_APs[cnt]->wpa2 = (tokenPtr[11] != NULL);
 						WiFi_APs[cnt]->wps = (tokenPtr[12] != NULL);
 					}
-					WiFi_APs[cnt]->live = 2;
+					WiFi_APs[cnt]->live = 10;
 				}
 			}
 		}
 		else
 		{
-			WiFi_State_ScanningMode = false;
+			//WiFi_State_ScanningMode = false;
 			osSignalSet(tid_MainThread, WIFI_EVENT_SCANNINGCOMPLETE);
 			return;
 		}
 	}
 	
-	WiFi_State_ScanningMode = false;
+	//WiFi_State_ScanningMode = false;
 	osSignalSet(tid_MainThread, WIFI_EVENT_SCANNINGCOMPLETE);
 }
 
@@ -559,6 +559,7 @@ void WiFiThread_Link()
 }
 
 void UserWiFiThread (void const *argument) {
+	WiFi_State_ScanningMode = false;
 	RemoteControl = false;
 	HAL_GPIO_WritePin(GPIOG, GPIO_PIN_2, GPIO_PIN_SET);
 	//if (!SendAT(AT)) return;

@@ -63,7 +63,7 @@ extern UART_HandleTypeDef huart1;
 #define FRAMEDATA_SSVARADDR_STATE								0x0100
 #define FRAMEDATA_SSVARADDR_MODE								0x0101
 #define FRAMEDATA_SSVARADDR_FREQ								0x0102
-#define FRAMEDATA_SSVARADDR_RESERVED1						0x0103 // Reserved
+#define FRAMEDATA_SSVARADDR_DURATION						0x0103 // Reserved
 #define FRAMEDATA_SSVARADDR_ENERGYSTP						0x0104
 #define FRAMEDATA_SSVARADDR_RESERVED2						0x0105 // Reserved
 #define FRAMEDATA_SSVARADDR_ENERGYINT						0x0106 // Energy int
@@ -139,6 +139,15 @@ extern UART_HandleTypeDef huart1;
 #define FRAME_PICID_WRONG_EMMITER								47			// Process
 
 #define FRAME_PICID_WIFI_LINKING								50			// Process
+
+#define FRAME_PICID_LONGPULSE_INPUT						  51			// Process
+#define FRAME_PICID_LONGPULSE_SIMMERSTART			  53
+#define FRAME_PICID_LONGPULSE_SIMMER					  55			// Process
+#define FRAME_PICID_LONGPULSE_START						  56			// Process
+#define FRAME_PICID_LONGPULSE_WORK						  58			// Process
+#define FRAME_PICID_LONGPULSE_FLOWERROR				  60			// Process
+#define FRAME_PICID_LONGPULSE_OVERHEATING			  61			// Process
+#define FRAME_PICID_LONGPULSE_FAULT						  62			// Process
 
 /* ************************** WIFI SCANNING DATA ************************** */
 

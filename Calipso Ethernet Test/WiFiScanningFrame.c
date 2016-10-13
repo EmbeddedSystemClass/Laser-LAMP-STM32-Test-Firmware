@@ -46,33 +46,39 @@ void WifiScanningFrame_Process(uint16_t pic_id)
 		osSignalWait(DGUS_EVENT_SEND_COMPLETED, g_wDGUSTimeout);
 	}
 	
-	// Send message to wifi thread to start scanning wifi network
-	osStatus status = osMessagePut(qid_WiFiCMDQueue, WIFI_CMD_STARTSCANNING, 3000);
-	if (status != osEventTimeout)
+	static uint16_t cnt = 0;
+	
+	if ((cnt % 10) == 0)
 	{
-		// Wait for wifi network scanning complete
-		osEvent event = osSignalWait(WIFI_EVENT_SCANNINGCOMPLETE, 3000);
-		if (event.status != osEventTimeout)
+		// Send message to wifi thread to start scanning wifi network
+		osStatus status = osMessagePut(qid_WiFiCMDQueue, WIFI_CMD_STARTSCANNING, 3000);
+		if (status != osEventTimeout)
 		{
-			// Update network list for DGUS display
-			uint16_t i = 0;
-			for (i = 0; i < 12; i++)
+			// Wait for wifi network scanning complete
+			osEvent event = osSignalWait(WIFI_EVENT_SCANNINGCOMPLETE, 3000);
+			if (event.status != osEventTimeout)
 			{
-				frameData_WiFiScanning[i].channel = WiFi_APs[i]->Channel;
-				frameData_WiFiScanning[i].RSSI = WiFi_APs[i]->RSSI;
-				memcpy(frameData_WiFiScanning[i].SSID, WiFi_APs[i]->SSID, 32);
-				frameData_WiFiScanning[i].WPA2 = WiFi_APs[i]->wpa2;
-				frameData_WiFiScanning[i].WPA = WiFi_APs[i]->wps;
-			}
-			
-			i = 0;
-			for (i = 0; i < 12; i++)
-			{
-				WriteWifiNetDataConvert16(FRAMEDATA_WIFISCANNING_LINE0_BASE + 0x100 * i, &frameData_WiFiScanning[i]);
-				osSignalWait(DGUS_EVENT_SEND_COMPLETED, g_wDGUSTimeout);
+				// Update network list for DGUS display
+				uint16_t i = 0;
+				for (i = 0; i < 12; i++)
+				{
+					frameData_WiFiScanning[i].channel = WiFi_APs[i]->Channel;
+					frameData_WiFiScanning[i].RSSI = WiFi_APs[i]->RSSI;
+					memcpy(frameData_WiFiScanning[i].SSID, WiFi_APs[i]->SSID, 32);
+					frameData_WiFiScanning[i].WPA2 = WiFi_APs[i]->wpa2;
+					frameData_WiFiScanning[i].WPA = WiFi_APs[i]->wps;
+				}
+				
+				i = 0;
+				for (i = 0; i < 12; i++)
+				{
+					WriteWifiNetDataConvert16(FRAMEDATA_WIFISCANNING_LINE0_BASE + 0x100 * i, &frameData_WiFiScanning[i]);
+					osSignalWait(DGUS_EVENT_SEND_COMPLETED, g_wDGUSTimeout);
+				}
 			}
 		}
 	}
+	cnt++;
 }
 
 void WiFiLinkFrame_Process()

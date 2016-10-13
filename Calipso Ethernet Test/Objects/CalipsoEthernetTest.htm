@@ -3,7 +3,7 @@
 <title>Static Call Graph - [.\Objects\CalipsoEthernetTest.axf]</title></head>
 <body><HR>
 <H1>Static Call Graph for image .\Objects\CalipsoEthernetTest.axf</H1><HR>
-<BR><P>#&#060CALLGRAPH&#062# ARM Linker, 5060183: Last Updated: Thu Oct 13 14:06:53 2016
+<BR><P>#&#060CALLGRAPH&#062# ARM Linker, 5060183: Last Updated: Thu Oct 13 16:30:52 2016
 <BR><P>
 <H3>Maximum Stack Usage =        680 bytes + Unknown(Functions without stacksize, Cycles, Untraceable Function Pointers)</H3><H3>
 Call chain for Maximum Stack Depth:</H3>
@@ -3203,7 +3203,7 @@ Global Symbols
 </UL>
 <BR>[Address Reference Count : 1]<UL><LI> startup_stm32f407xx.o(RESET)
 </UL>
-<P><STRONG><a name="[92]"></a>UserWiFiThread</STRONG> (Thumb, 96 bytes, Stack size 16 bytes, wifithread.o(i.UserWiFiThread))
+<P><STRONG><a name="[92]"></a>UserWiFiThread</STRONG> (Thumb, 100 bytes, Stack size 16 bytes, wifithread.o(i.UserWiFiThread))
 <BR><BR>[Stack]<UL><LI>Max Depth = 680 + Unknown Stack Size
 <LI>Call Chain = UserWiFiThread &rArr; WiFiThread_Link &rArr; WaitForWINDCommands &rArr; atol &rArr; strtol &rArr; _strtoul &rArr; __aeabi_errno_addr &rArr; __user_perthread_libspace
 </UL>
@@ -3290,7 +3290,7 @@ Global Symbols
 <BR>[Called By]<UL><LI><a href="#[92]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;UserWiFiThread
 </UL>
 
-<P><STRONG><a name="[23b]"></a>WiFiThread_Scan</STRONG> (Thumb, 428 bytes, Stack size 64 bytes, wifithread.o(i.WiFiThread_Scan))
+<P><STRONG><a name="[23b]"></a>WiFiThread_Scan</STRONG> (Thumb, 410 bytes, Stack size 64 bytes, wifithread.o(i.WiFiThread_Scan))
 <BR><BR>[Stack]<UL><LI>Max Depth = 160<LI>Call Chain = WiFiThread_Scan &rArr; atol &rArr; strtol &rArr; _strtoul &rArr; __aeabi_errno_addr &rArr; __user_perthread_libspace
 </UL>
 <BR>[Calls]<UL><LI><a href="#[187]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;osSignalWait
@@ -3323,7 +3323,7 @@ Global Symbols
 <BR>[Called By]<UL><LI><a href="#[8e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;MainThread
 </UL>
 
-<P><STRONG><a name="[1f8]"></a>WifiScanningFrame_Process</STRONG> (Thumb, 394 bytes, Stack size 48 bytes, wifiscanningframe.o(i.WifiScanningFrame_Process))
+<P><STRONG><a name="[1f8]"></a>WifiScanningFrame_Process</STRONG> (Thumb, 424 bytes, Stack size 48 bytes, wifiscanningframe.o(i.WifiScanningFrame_Process))
 <BR><BR>[Stack]<UL><LI>Max Depth = 120<LI>Call Chain = WifiScanningFrame_Process &rArr; SetPicId &rArr; WriteRegister &rArr; HAL_UART_Transmit_ITMY
 </UL>
 <BR>[Calls]<UL><LI><a href="#[1ec]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SetPicId
