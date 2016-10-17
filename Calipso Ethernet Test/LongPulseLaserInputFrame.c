@@ -8,40 +8,19 @@
 
 #include <math.h>
 #include "arm_math.h"
-														
-uint16_t modeDurationTable[10] = {200, 200, 200, 200, 300, 300, 400, 500, 500, 500};
-uint16_t modeVoltageTable[10] = {410, 415, 420, 430, 415, 435, 420, 415, 425, 440};
-//uint16_t modeEnergyTable[10] = {180, 230, 270, 520, 715, 910, 1100, 1267, 1430, 1625}; //true values
-
-//uint16_t modeEnergyTable[10] = {180, 230, 270, 598, 822, 1046, 1265, 1457, 1644, 1868}; //updated
-uint16_t modeEnergyTable[10] = {180, 230, 270, 598, 822, 1100, 1265, 1457, 1644, 1868};
 
 extern void SetDACValue(float32_t value);
+
+float32_t _programI;
 														 
-float32_t programI = 0.0f;
-float32_t chargingVoltage = 0.0f;
-														 
-uint16_t SetLaserSettings(uint16_t energy_index)
-{
-	uint16_t index = energy_index;
-	if (index > 9) index = 9;
-	
-	uint16_t energy = modeEnergyTable[index];
-	uint16_t voltageClb = modeVoltageTable[index] + (FlushesGlobalSS / 100000);
-	if (voltageClb >= 449)	voltageClb = 449;
-	uint16_t duration = modeDurationTable[index];
-	
-	SetPulseDuration_us(duration);
-	
-	chargingVoltage = (float32_t)(voltageClb);
-	programI = ((float32_t)(voltageClb) / 450.0f) * 10.0f;
-	
-	return energy;
+uint16_t SetLongPulseLaserSettings(uint16_t energy_index)
+{	
+	return 0;
 }
 
-void SolidStateLaserInput_Init(uint16_t pic_id)
+void LongPulseLaserInput_Init(uint16_t pic_id)
 {
-	uint16_t energy = SetLaserSettings(frameData_SolidStateLaser.laserprofile.EnergyCnt);
+	uint16_t energy = SetLongPulseLaserSettings(frameData_SolidStateLaser.laserprofile.EnergyCnt);
 	frameData_SolidStateLaser.laserprofile.Frequency = 1;
 	frameData_SolidStateLaser.laserprofile.EnergyCnt = 0;
 	frameData_SolidStateLaser.lasersettings.EnergyInt = energy / 1000;
@@ -62,7 +41,7 @@ void SolidStateLaserInput_Init(uint16_t pic_id)
 	osSignalWait(DGUS_EVENT_SEND_COMPLETED, g_wDGUSTimeout);
 }
 
-void SolidStateLaserInput_Process(uint16_t pic_id)
+void LongPulseLaserInput_Process(uint16_t pic_id)
 {
 	bool update = false;
 	uint16_t new_pic_id = pic_id;
@@ -138,7 +117,7 @@ void SolidStateLaserInput_Process(uint16_t pic_id)
 	if (mode != frameData_SolidStateLaser.mode)		update = true;
 	if (connector != frameData_SolidStateLaser.connector) update = true;
 	
-	uint16_t energy = SetLaserSettings(frameData_SolidStateLaser.laserprofile.EnergyCnt);
+	uint16_t energy = SetLongPulseLaserSettings(frameData_SolidStateLaser.laserprofile.EnergyCnt);
 	
 	if (frameData_SolidStateLaser.connector == 1)	energy = (uint16_t)((float32_t)(energy) * 0.35f);
 	
@@ -195,10 +174,16 @@ void SolidStateLaserInput_Process(uint16_t pic_id)
 			// On Input Pressed
 			frameData_SolidStateLaser.buttons.onInputBtn = 0;
 		
-			new_pic_id = FRAME_PICID_SOLIDSTATE_SIMMERSTART;
+			new_pic_id = FRAME_PICID_LONGPULSE_SIMMERSTART;
 		
-			SetDACValue(programI);
+			SetDACValue(_programI);
 		}
+#ifdef DEBUG_SOLID_STATE_LASER
+		else
+		{
+			frameData_SolidStateLaser.mode = mode;
+		}
+#endif
 		update = true;
 	}
 	
@@ -213,7 +198,7 @@ void SolidStateLaserInput_Process(uint16_t pic_id)
 		__SOLIDSTATELASER_SIMMEROFF();
 		SetDACValue(0.0f);
 		frameData_SolidStateLaser.state = 0;
-		new_pic_id = FRAME_PICID_SOLIDSTATE_INPUT;
+		new_pic_id = FRAME_PICID_LONGPULSE_INPUT;
 		update = true;
 		StoreGlobalVariables();
 	}

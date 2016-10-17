@@ -23,7 +23,7 @@ float32_t temperature_overheat_solidstate = 32.0f;
 float32_t temperature_normal = 27.5f;
 
 // Flow global variable
-float32_t flow_low = 3.0f;
+float32_t flow_low = 0.0f;
 float32_t flow_normal = 4.0f;
 
 // Service menu password
@@ -53,7 +53,7 @@ uint16_t subFlushesCount = 1;
 uint32_t Flushes = 0;
 uint32_t FlushesCount = 1000000;
 uint32_t FlushesSessionLD = 0;
-uint32_t FlushesGlobalLD = 1000;
+uint32_t FlushesGlobalLD = 0;
 uint32_t FlushesSessionSS = 0;
 uint32_t FlushesGlobalSS = 0;
 uint16_t switch_filter_threshold = 10;
@@ -555,7 +555,10 @@ void LoadGlobalVariables(void)
 {
 	// Copy counters
 	memcpy((void*)&FlushesGlobalLD, (void*)&global_flash_data->LaserDiodePulseCounter, sizeof(uint32_t));
-	memcpy((void*)&FlushesGlobalSS, (void*)&global_flash_data->SolidStatePulseCounter, sizeof(uint32_t));
+	if (GetLaserID() == LASER_ID_SOLIDSTATE)
+		memcpy((void*)&FlushesGlobalSS, (void*)&global_flash_data->SolidStatePulseCounter, sizeof(uint32_t));
+	if (GetLaserID() == LASER_ID_LONGPULSE)
+		memcpy((void*)&FlushesGlobalSS, (void*)&global_flash_data->LongPulsePulseCounter, sizeof(uint32_t));
 	
 	// Copy profile states
 	memcpy((void*)&m_structLaserProfile, (void*)&global_flash_data->m_structLaserProfile, sizeof(m_structLaserProfile));
@@ -604,7 +607,10 @@ void StoreGlobalVariables(void)
 	
 	// Copy presets
 	fmemcpy((void*)&global_flash_data->LaserDiodePulseCounter, (void*)&FlushesGlobalLD, sizeof(uint32_t));
-	fmemcpy((void*)&global_flash_data->SolidStatePulseCounter, (void*)&FlushesGlobalSS, sizeof(uint32_t));
+	if (GetLaserID() == LASER_ID_SOLIDSTATE)
+		fmemcpy((void*)&global_flash_data->SolidStatePulseCounter, (void*)&FlushesGlobalSS, sizeof(uint32_t));
+	if (GetLaserID() == LASER_ID_LONGPULSE)
+		fmemcpy((void*)&global_flash_data->LongPulsePulseCounter, (void*)&FlushesGlobalSS, sizeof(uint32_t));
 	
 	// Copy profile states
 	fmemcpy((void*)&global_flash_data->m_structLaserProfile, (void*)&m_structLaserProfile, sizeof(m_structLaserProfile));

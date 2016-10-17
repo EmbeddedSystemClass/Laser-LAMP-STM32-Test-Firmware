@@ -457,6 +457,21 @@
               <FileType>1</FileType>
               <FilePath>.\WiFiAuthenticationFrame.c</FilePath>
             </File>
+            <File>
+              <FileName>LongPulseLaserInputFrame.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\LongPulseLaserInputFrame.c</FilePath>
+            </File>
+            <File>
+              <FileName>LongPulseLaserPrepareFrame.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\LongPulseLaserPrepareFrame.c</FilePath>
+            </File>
+            <File>
+              <FileName>LongPulseLaserWorkFrame.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\LongPulseLaserWorkFrame.c</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>

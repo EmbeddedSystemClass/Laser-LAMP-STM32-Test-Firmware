@@ -106,6 +106,7 @@ float32_t absf(float32_t x)
   * @retval None
   */
 int main(void)
+
 {
 
 #ifdef RTE_CMSIS_RTOS                   // when using CMSIS RTOS

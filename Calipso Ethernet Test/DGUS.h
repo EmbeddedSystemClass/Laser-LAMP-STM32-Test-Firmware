@@ -149,6 +149,10 @@ extern UART_HandleTypeDef huart1;
 #define FRAME_PICID_LONGPULSE_OVERHEATING			  61			// Process
 #define FRAME_PICID_LONGPULSE_FAULT						  62			// Process
 
+#define IS_LASERDIODE(pic_id) (pic_id >= 19 && pic_id <= 32)
+#define IS_SOLIDSTATE(pic_id) (pic_id >= 37 && pic_id <= 42)
+#define IS_LONGPULSE (pic_id) (pic_id >= 53 && pic_id <= 62)
+
 /* ************************** WIFI SCANNING DATA ************************** */
 
 typedef struct __attribute__((__packed__)) DGUS_WIFISCANNINGLINE_STRUCT {

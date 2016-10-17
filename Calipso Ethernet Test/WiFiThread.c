@@ -631,7 +631,7 @@ void UserWiFiThread (void const *argument) {
 	//WaitForWINDCommands(10, 1, (int)WIND_MSG_DATA_MODE);
 	
   while (1) {
-		osEvent event = osMessageGet(qid_WiFiCMDQueue, 3000);
+		osEvent event = osMessageGet(qid_WiFiCMDQueue, 1000);
 		
 		if (event.status == osEventTimeout)
 			WiFiThread_Idle();

@@ -38,6 +38,11 @@ extern void   SolidStateLaserInput_Process(uint16_t pic_id);
 extern void SolidStateLaserPrepare_Process(uint16_t pic_id);
 extern void    SolidStateLaserWork_Process(uint16_t pic_id);
 
+extern void    LongPulseLaserInput_Init   (uint16_t pic_id);
+extern void    LongPulseLaserInput_Process(uint16_t pic_id);
+extern void  LongPulseLaserPrepare_Process(uint16_t pic_id);
+extern void     LongPulseLaserWork_Process(uint16_t pic_id);
+
 extern void  		  WifiScanningFrame_Process(uint16_t pic_id);
 extern void WifiAuthenticationFrame_Process(uint16_t pic_id);
 extern void WiFiLinkFrame_Process();
@@ -251,6 +256,7 @@ void MainThread (void const *argument) {
 	
 	LaserDiodeInput_Init(pic_id);
 	SolidStateLaserInput_Init(pic_id);
+	LongPulseLaserInput_Init(pic_id);
 
   while (1) {
     ; // Insert thread code here...
@@ -319,6 +325,7 @@ void MainThread (void const *argument) {
 				// nothing to do
 				break;
 			
+			// Solid State Laser
 			case FRAME_PICID_SOLIDSTATE_INPUT:	
 				if (GetLaserID() == LASER_ID_SOLIDSTATE)				
 					SolidStateLaserInput_Process(pic_id);
@@ -337,6 +344,28 @@ void MainThread (void const *argument) {
 			case FRAME_PICID_SOLIDSTATE_OVERHEATING:
 			case FRAME_PICID_SOLIDSTATE_FAULT:
 				SolidStateLaserPrepare_Process(pic_id);
+				UpdateLaserStatus();
+				break;
+			
+			// Long Pulse Laser
+			case FRAME_PICID_LONGPULSE_INPUT:	
+				if (GetLaserID() == LASER_ID_LONGPULSE)				
+					LongPulseLaserInput_Process(pic_id);
+				else
+					SetPicId(FRAME_PICID_WRONG_EMMITER, g_wDGUSTimeout);
+				UpdateLaserStatus();
+				break;
+			case FRAME_PICID_LONGPULSE_SIMMERSTART:
+			case FRAME_PICID_LONGPULSE_SIMMER:
+			case FRAME_PICID_LONGPULSE_START:
+			case FRAME_PICID_LONGPULSE_WORK:
+				LongPulseLaserWork_Process(pic_id);
+				UpdateLaserStatus();
+				break;
+			case FRAME_PICID_LONGPULSE_FLOWERROR:
+			case FRAME_PICID_LONGPULSE_OVERHEATING:
+			case FRAME_PICID_LONGPULSE_FAULT:
+				LongPulseLaserPrepare_Process(pic_id);
 				UpdateLaserStatus();
 				break;
 			
