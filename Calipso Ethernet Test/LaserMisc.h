@@ -6,10 +6,10 @@
 #include "arm_math.h"
 
 typedef enum LASER_ID_ENUM {
-	LASER_ID_SOLIDSTATE = 0x00,
-	LASER_ID_DIODELASER = 0x01,
-	LASER_ID_LONGPULSE  = 0x02,
-	LASER_ID_FRACTIONAL = 0x03
+	LASER_ID_DIODELASER  = 0x00,
+	LASER_ID_SOLIDSTATE  = 0x01,
+	LASER_ID_SOLIDSTATE2 = 0x02,
+	LASER_ID_LONGPULSE   = 0x03,
 } LASER_ID;
 
 // Relays
@@ -25,6 +25,7 @@ typedef enum LASER_ID_ENUM {
 //#define GPIO_PIN_LaserDiodeLock											// Not Used
 #define GPIO_PIN_LaserDiodeEnable					GPIO_PIN_14	// PORT GPIOF
 #define GPIO_PIN_LaserLED									GPIO_PIN_3	// PORT GPIOA
+#define GPIO_PIN_LaserLED2								GPIO_PIN_11	// PORT GPIOB
 
 // Inputs
 #define GPIO_PIN_Laser_ID0								GPIO_PIN_3 	// PORT GPIOE
@@ -46,6 +47,7 @@ typedef enum LASER_ID_ENUM {
 
 #define __MISC_LASERDIODE_ON()	HAL_GPIO_WritePin(GPIOF, GPIO_PIN_LaserDiodeEnable, GPIO_PIN_SET)
 #define __MISC_LASERLED_ON()		HAL_GPIO_WritePin(GPIOA, GPIO_PIN_LaserLED,         GPIO_PIN_SET)
+#define __MISC_LASERLED2_ON()		HAL_GPIO_WritePin(GPIOA, GPIO_PIN_LaserLED2,        GPIO_PIN_SET)
 
 // reset outputs
 #define __MISC_RELAY1_OFF()	HAL_GPIO_WritePin(GPIOB, MISC_GPIO_RELAY1, GPIO_PIN_RESET)
@@ -55,6 +57,7 @@ typedef enum LASER_ID_ENUM {
 
 #define __MISC_LASERDIODE_OFF()	HAL_GPIO_WritePin(GPIOF, GPIO_PIN_LaserDiodeEnable, GPIO_PIN_RESET)
 #define __MISC_LASERLED_OFF()		HAL_GPIO_WritePin(GPIOA, GPIO_PIN_LaserLED,         GPIO_PIN_RESET)
+#define __MISC_LASERLED2_OFF()	HAL_GPIO_WritePin(GPIOA, GPIO_PIN_LaserLED2,        GPIO_PIN_RESET)
 
 // get inputs
 #define __MISC_LASER_ID0()									HAL_GPIO_ReadPin(GPIOE, GPIO_PIN_Laser_ID0)

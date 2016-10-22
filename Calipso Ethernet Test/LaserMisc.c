@@ -289,22 +289,22 @@ LASER_ID GetLaserID()
 	{
 		if (__MISC_LASER_ID1() == GPIO_PIN_SET)
 		{			
-			return LASER_ID_SOLIDSTATE;
+			return LASER_ID_DIODELASER;
 		}
 		else
 		{
-			return LASER_ID_DIODELASER;
+			return LASER_ID_SOLIDSTATE;
 		}
 	}
 	else
 	{
 		if (__MISC_LASER_ID1() == GPIO_PIN_SET)
 		{
-			return LASER_ID_LONGPULSE;
+			return LASER_ID_SOLIDSTATE2;
 		}
 		else
 		{
-			return LASER_ID_FRACTIONAL;
+			return LASER_ID_LONGPULSE;
 		}
 	}
 }

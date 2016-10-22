@@ -221,6 +221,15 @@ void HAL_MspInit(void)
 	
 	HAL_GPIO_Init(GPIOA, &gpio_A);
 	
+	//  ************************* Solid state laser LED **********************
+	GPIO_InitTypeDef gpio_B = {0};
+	gpio_A.Pin   = GPIO_PIN_LaserLED2;
+	gpio_A.Mode  = GPIO_MODE_OUTPUT_PP;
+	gpio_A.Pull  = GPIO_NOPULL;
+	gpio_A.Speed = GPIO_SPEED_FREQ_LOW;
+	
+	HAL_GPIO_Init(GPIOB, &gpio_B);
+	
 	LampControlInit();
 	FlowInit();
 	CoolInit();

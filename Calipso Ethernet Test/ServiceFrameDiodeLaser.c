@@ -107,7 +107,7 @@ void ServiceDiodeFrame_Process(uint16_t pic_id)
 	
 	FRAMEDATA_SERVICEDIODESTATE state;
 	if (__MISC_GETLASERDIODEFAULTSTATE()) state.Fault = 1;	else state.Fault = 0;
-	state.Voltage_monitor = (uint16_t)(CurrentMonitor * 2.0f);
+	state.Voltage_monitor = (uint16_t)(CurrentMonitor * 20.0f);
 	
 	WriteVariableConvert16(FRAMEDATA_SERVICEDIODESTATE_BASE, &state, sizeof(state));
 	osSignalWait(DGUS_EVENT_SEND_COMPLETED, g_wDGUSTimeout);

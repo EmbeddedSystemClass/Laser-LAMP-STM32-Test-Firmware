@@ -11,6 +11,7 @@
 
 extern void SetDACValue(float32_t value);
 extern TIM_HandleTypeDef hTIM11;
+extern bool eneable_temp_sensor;
 
 void SolidStateLaserWork_Process(uint16_t pic_id)
 {

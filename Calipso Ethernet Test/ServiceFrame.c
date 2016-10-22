@@ -73,7 +73,7 @@ void ServiceFrame_Process(uint16_t pic_id)
 	
 	if (frameData_Service.duration_set == 0x01) 
 	{	
-		SetPulseDuration_us(frameData_Service.duration_value-75);
+		SetPulseDuration_us(frameData_Service.duration_value-25);
 		frameData_Service.duration_set = 0x00;
 		update = true;
 	}

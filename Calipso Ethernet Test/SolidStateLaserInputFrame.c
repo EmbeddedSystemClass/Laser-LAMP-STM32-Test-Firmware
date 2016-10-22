@@ -36,6 +36,12 @@ uint16_t SetLaserSettings(uint16_t energy_index)
 	chargingVoltage = (float32_t)(voltageClb);
 	programI = ((float32_t)(voltageClb) / 450.0f) * 10.0f;
 	
+	if (LaserID == LASER_ID_SOLIDSTATE)
+		return energy;
+	
+	if (LaserID == LASER_ID_SOLIDSTATE2)
+		return (energy * 25) / 10;
+	
 	return energy;
 }
 
@@ -49,8 +55,8 @@ void SolidStateLaserInput_Init(uint16_t pic_id)
 	frameData_SolidStateLaser.mode = 0;
 	frameData_SolidStateLaser.state = 0;
 	frameData_SolidStateLaser.connector = 0;
-	frameData_SolidStateLaser.PulseCounter = 0;
-	frameData_SolidStateLaser.SessionPulseCounter = 0;
+	frameData_SolidStateLaser.PulseCounter = FlushesGlobalSS;
+	frameData_SolidStateLaser.SessionPulseCounter = FlushesSessionSS;
 	
 	// Reset button states
 	frameData_SolidStateLaser.buttons.onInputBtn = 0;

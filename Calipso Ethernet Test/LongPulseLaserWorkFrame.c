@@ -60,12 +60,12 @@ void LongPulseLaserWork_Process(uint16_t pic_id)
 	
 	__SOLIDSTATELASER_DISCHARGEOFF();
 	
-	if (pic_id >= 53 && pic_id <= 62)
+	if (pic_id >= 51 && pic_id <= 62 && pic_id != 55 && pic_id != 53)
 		__SOLIDSTATELASER_HVON();
 	else
 		__SOLIDSTATELASER_HVOFF();
 	
-	if (pic_id >= 53 && pic_id <= 62)
+	if (pic_id >= 51 && pic_id <= 62 && pic_id != 53)
 		__SOLIDSTATELASER_SIMMERON();
 	else
 		__SOLIDSTATELASER_SIMMEROFF();
@@ -89,6 +89,26 @@ void LongPulseLaserWork_Process(uint16_t pic_id)
 		update = true;
 	}
 	
+#ifdef DEBUG_SOLID_STATE_LASER
+	if (!(__MISC_GETSIMMERSENSOR()) && pic_id != 55 && pic_id != 53) 
+	{
+		new_pic_id = FRAME_PICID_LONGPULSE_SIMMERSTART;
+		
+		// Solid State Laser Off
+		footswitch_en = false;
+		SolidStateLaser_en = false;
+		LampControlPulseStop();
+		osDelay(1000);
+		__SOLIDSTATELASER_HVOFF();
+		osDelay(1000);
+		__SOLIDSTATELASER_SIMMEROFF();
+		osDelay(1000);
+		__SOLIDSTATELASER_DISCHARGEON();
+		
+		update = true;
+	}
+#endif
+	
 	// Simmer wait
 	if (pic_id == FRAME_PICID_LONGPULSE_SIMMER)
 	{
@@ -99,7 +119,7 @@ void LongPulseLaserWork_Process(uint16_t pic_id)
 #endif
 		{
 			frameData_SolidStateLaser.state = 3;
-			new_pic_id = FRAME_PICID_LONGPULSE_START;
+			new_pic_id = FRAME_PICID_LONGPULSE_INPUT;
 			update = true;
 		}
 	}
@@ -128,7 +148,7 @@ void LongPulseLaserWork_Process(uint16_t pic_id)
 		SolidStateLaser_en = false;
 		LampControlPulseStop();
 		__SOLIDSTATELASER_HVOFF();
-		__SOLIDSTATELASER_SIMMEROFF();
+		//__SOLIDSTATELASER_SIMMEROFF();
 		SetDACValue(0.0f);
 		frameData_SolidStateLaser.state = 0;
 		new_pic_id = FRAME_PICID_LONGPULSE_INPUT;
@@ -144,7 +164,7 @@ void LongPulseLaserWork_Process(uint16_t pic_id)
 		SolidStateLaser_en = false;
 		LampControlPulseStop();
 		__SOLIDSTATELASER_HVOFF();
-		__SOLIDSTATELASER_SIMMEROFF();
+		//__SOLIDSTATELASER_SIMMEROFF();
 		SetDACValue(0.0f);
 		frameData_SolidStateLaser.state = 0;
 		new_pic_id = FRAME_PICID_LONGPULSE_INPUT;

@@ -77,7 +77,8 @@ extern UART_HandleTypeDef huart1;
 #define FRAMEDATA_SSVARADDR_BTNSTOP 						0x010f
 #define FRAMEDATA_SSVARADDR_BTNCANCEL						0x0110
 
-#define FRAMEDATA_SSVARADDR_CONNECTOR 					0x0111
+#define FRAMEDATA_SSVARADDR_CONNECTOR 					0x0111 // duration dot
+#define FRAMEDATA_SSVARADDR_FREQDOT		 					0x0112
 
 /* ************************** DGUS DATA STRUCT **************************** */
 #define FRAMEDATA_LASERDIODE_BASE								0x0000

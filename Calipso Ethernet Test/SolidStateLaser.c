@@ -51,6 +51,7 @@ void HAL_TIM_OC_DelayElapsedCallback(TIM_HandleTypeDef *htim)
 		if (DiodeLaser_en) 
 		{
 			__MISC_LASERLED_ON();
+			__MISC_LASERLED2_ON();
 			
 			if (Profile == PROFILE_SINGLE)
 			{
@@ -68,7 +69,10 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
 	if (htim == &hTIM9)
 	{
 		if (DiodeLaser_en) 
+		{
 			__MISC_LASERLED_OFF();
+			__MISC_LASERLED2_OFF();
+		}
 		//SoundOff();
 		
 		subFlushes++;
@@ -442,13 +446,13 @@ void SetPulseDuration_us(uint16_t duration)
 {	
 	if (LaserStarted) __HAL_TIM_DISABLE(&hTIM9);
 	if (LaserStarted) __HAL_TIM_DISABLE(&hTIM10);
-	__HAL_TIM_SET_PRESCALER(&hTIM9, 4-1);
+	__HAL_TIM_SET_PRESCALER(&hTIM9, 8-1);
 	__HAL_TIM_SET_COUNTER(&hTIM9, 0);
-	__HAL_TIM_SET_AUTORELOAD(&hTIM9, duration * 42 * 2); // 50% duty cycle
+	__HAL_TIM_SET_AUTORELOAD(&hTIM9, duration * 21 * 2); // 50% duty cycle
 	//__HAL_TIM_URS_ENABLE(&hTIM9);
 	hTIM9.Instance->EGR |= TIM_EGR_UG;
-	__HAL_TIM_SET_COMPARE(&hTIM9, TIM_CHANNEL_1, duration * 42);
-	__HAL_TIM_SET_COMPARE(&hTIM9, TIM_CHANNEL_2, duration * 42);
+	__HAL_TIM_SET_COMPARE(&hTIM9, TIM_CHANNEL_1, duration * 21);
+	__HAL_TIM_SET_COMPARE(&hTIM9, TIM_CHANNEL_2, duration * 21);
 	if (LaserStarted) __HAL_TIM_ENABLE(&hTIM9);
 	if (LaserStarted) __HAL_TIM_ENABLE(&hTIM10);
 }
@@ -471,6 +475,17 @@ void SetPulseDuration_ms(uint16_t duration, uint16_t period)
 void SetPulseFrequency(float32_t frequency)
 {
 	uint16_t period = 42000.0f / frequency;
+	
+	if (LaserStarted) __HAL_TIM_DISABLE(&hTIM10);
+	__HAL_TIM_SET_COUNTER(&hTIM10, 0);
+	__HAL_TIM_SET_AUTORELOAD(&hTIM10, period);
+	hTIM10.Instance->EGR |= TIM_EGR_UG;
+	if (LaserStarted) __HAL_TIM_ENABLE(&hTIM10);
+}
+
+void SetPulseFrequency_(float32_t frequency)
+{
+	uint16_t period = 420000.0f / frequency;
 	
 	if (LaserStarted) __HAL_TIM_DISABLE(&hTIM10);
 	__HAL_TIM_SET_COUNTER(&hTIM10, 0);

@@ -127,6 +127,18 @@ void StopIfRunning(uint16_t pic_id)
 		
 		SolidStateLaserOff();
 	}
+	
+	if (((pic_id >= 51) && (pic_id <= 62)))
+	{
+		frameData_SolidStateLaser.buttons.onInputBtn = 0x00;
+		frameData_SolidStateLaser.buttons.onSimmerBtn = 0x00;
+		frameData_SolidStateLaser.buttons.onStartBtn = 0x00;
+		frameData_SolidStateLaser.buttons.onStopBtn = 0x00;
+		WriteSolidStateLaserDataConvert16(FRAMEDATA_SOLIDSTATELASER_BASE, &frameData_SolidStateLaser);
+		osSignalWait(DGUS_EVENT_SEND_COMPLETED, g_wDGUSTimeout);
+		
+		SolidStateLaserOff();
+	}
 }
 
 void UpdateLaserState(uint16_t pic_id)
@@ -134,6 +146,7 @@ void UpdateLaserState(uint16_t pic_id)
 	// Enable footswitch when work
 	if ((pic_id == FRAME_PICID_LASERDIODE_STARTED) || 
 			(pic_id == FRAME_PICID_SOLIDSTATE_WORK) ||
+			(pic_id == FRAME_PICID_LONGPULSE_WORK) ||
 			(pic_id == FRAME_PICID_REMOTECONTROL) ||
 			(pic_id == FRAME_PICID_SERVICE_SOLIDSTATELASER) ||
 			(pic_id == FRAME_PICID_SERVICE_LASERDIODE))
@@ -236,13 +249,13 @@ void UpdateLaserStatus()
 {
 	laser_state.temperature = (uint16_t)(temperature * 10.0f);
 	
-	if (flow1 < 3)
+	if (flow1 < flow_low)
 		laser_state.coolIcon = 1;
 	else
-	if (flow1 < 4)
+	if (flow1 < flow_normal)
 		laser_state.coolIcon = 2;
 	else
-	if (flow1 < 7)
+	//if (flow1 < 7)
 		laser_state.coolIcon = 3;
 	
 	laser_state.flow = flow1 * 10;
@@ -286,10 +299,13 @@ void MainThread (void const *argument) {
 			
 			// Laser Diode control
 			case FRAME_PICID_LASERDIODE_INPUT:
-				if (GetLaserID() == LASER_ID_DIODELASER)
+				if (last_pic_id != pic_id)
+					LaserDiodeInput_Init(pic_id);
+				LaserDiodeInput_Process(pic_id);
+				/*if (GetLaserID() == LASER_ID_DIODELASER)
 					LaserDiodeInput_Process(pic_id);
 				else
-					SetPicId(FRAME_PICID_WRONG_EMMITER, g_wDGUSTimeout);
+					SetPicId(FRAME_PICID_WRONG_EMMITER, g_wDGUSTimeout);*/
 				UpdateLaserStatus();
 				break;
 			case FRAME_PICID_LASERDIODE_TEMPERATUREOUT:
@@ -327,7 +343,9 @@ void MainThread (void const *argument) {
 			
 			// Solid State Laser
 			case FRAME_PICID_SOLIDSTATE_INPUT:	
-				if (GetLaserID() == LASER_ID_SOLIDSTATE)				
+				if (last_pic_id != pic_id)
+					SolidStateLaserInput_Init(pic_id);
+				if (GetLaserID() == LASER_ID_SOLIDSTATE || GetLaserID() == LASER_ID_SOLIDSTATE2)				
 					SolidStateLaserInput_Process(pic_id);
 				else
 					SetPicId(FRAME_PICID_WRONG_EMMITER, g_wDGUSTimeout);
@@ -349,6 +367,8 @@ void MainThread (void const *argument) {
 			
 			// Long Pulse Laser
 			case FRAME_PICID_LONGPULSE_INPUT:	
+				if (last_pic_id != pic_id)
+					LongPulseLaserInput_Init(pic_id);
 				if (GetLaserID() == LASER_ID_LONGPULSE)				
 					LongPulseLaserInput_Process(pic_id);
 				else

@@ -13,7 +13,7 @@
 
 #define FLASH_LASERDATA_BASE 0x080E0000
 
-//#define DEBUG_SOLID_STATE_LASER
+#define DEBUG_SOLID_STATE_LASER
 
 // DGUS control variables
 extern uint16_t g_wDGUSTimeout;
@@ -115,8 +115,8 @@ typedef struct FLASH_GLOBAL_DATA_STRUCT
 	// Laser counters presed
 	uint32_t LaserDiodePulseCounter;
 	uint32_t SolidStatePulseCounter;
+	uint32_t SolidStatePulseCounter2;
 	uint32_t LongPulsePulseCounter;
-	uint32_t FractionalPulseCounter;
 	
 	// GUI preset
 	DGUS_LASERPROFILE	m_structLaserProfile [5];

@@ -100,6 +100,8 @@ float32_t absf(float32_t x)
 	return x;
 }
 
+bool eneable_temp_sensor = true;
+
 /**
   * @brief  Main program
   * @param  None
@@ -112,9 +114,6 @@ int main(void)
 #ifdef RTE_CMSIS_RTOS                   // when using CMSIS RTOS
   osKernelInitialize();                 // initialize CMSIS-RTOS
 #endif
-
-	// Load global variables from flash
-	LoadGlobalVariables();
 	
   /* STM32F4xx HAL library initialization:
        - Configure the Flash prefetch, Flash preread and Buffer caches
@@ -126,6 +125,11 @@ int main(void)
        - Low Level Initialization
      */
 	HAL_Init();
+	
+	HAL_Delay(10);
+	
+	// Load global variables from flash
+	LoadGlobalVariables();
 	
 	if (GetLaserID() == LASER_ID_DIODELASER)
 		__MISC_RELAY3_ON();
@@ -164,6 +168,18 @@ int main(void)
 	Init_DS18B20();
 	Init_Timers();
 	
+	if (DS18B20_Reset())
+		DS18B20_StartConvertion();
+		
+	HAL_Delay(750); // delay 750 ms
+		
+	if (DS18B20_Reset())
+	{
+		uint16_t tt = DS18B20_ReadData();
+		float32_t t = tt * 0.0625f;
+		temperature = t;
+	}
+	
 	HAL_Delay(3000); 											// Wait for display initialization
 	Init_Main_Thread();
 #endif
@@ -171,17 +187,20 @@ int main(void)
   /* Infinite loop */
   while (1)
   {
-		if (DS18B20_Reset())
-			DS18B20_StartConvertion();
-	
-		HAL_Delay(750); // delay 750 ms
-	
-		if (DS18B20_Reset())
+		if (eneable_temp_sensor)
 		{
-			uint16_t tt = DS18B20_ReadData();
-			float32_t t = tt * 0.0625f;
-			if ((absf(t - temperature) < 100) && (t < 100.0f) && (t > 0.0f))
-				temperature = t;
+			if (DS18B20_Reset())
+				DS18B20_StartConvertion();
+		
+			HAL_Delay(750); // delay 750 ms
+		
+			if (DS18B20_Reset())
+			{
+				uint16_t tt = DS18B20_ReadData();
+				float32_t t = tt * 0.0625f;
+				if ((absf(t - temperature) < 10) && (t < 100.0f) && (t > 0.0f))
+					temperature = t;
+			}
 		}
 		
 		if (temperature > temperature_cool_on)

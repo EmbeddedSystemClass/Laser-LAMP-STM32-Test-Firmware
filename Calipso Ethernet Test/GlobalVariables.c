@@ -557,6 +557,8 @@ void LoadGlobalVariables(void)
 	memcpy((void*)&FlushesGlobalLD, (void*)&global_flash_data->LaserDiodePulseCounter, sizeof(uint32_t));
 	if (GetLaserID() == LASER_ID_SOLIDSTATE)
 		memcpy((void*)&FlushesGlobalSS, (void*)&global_flash_data->SolidStatePulseCounter, sizeof(uint32_t));
+	if (GetLaserID() == LASER_ID_SOLIDSTATE2)
+		memcpy((void*)&FlushesGlobalSS, (void*)&global_flash_data->SolidStatePulseCounter2, sizeof(uint32_t));
 	if (GetLaserID() == LASER_ID_LONGPULSE)
 		memcpy((void*)&FlushesGlobalSS, (void*)&global_flash_data->LongPulsePulseCounter, sizeof(uint32_t));
 	
@@ -571,6 +573,7 @@ void fmemcpy(uint8_t* dst, uint8_t* src, uint16_t len)
 	
 	for (uint16_t i = 0; i < len; i++)
 	{
+		
 		CLEAR_BIT(FLASH->CR, FLASH_CR_PSIZE);
 		FLASH->CR |= FLASH_PSIZE_BYTE;
 		FLASH->CR |= FLASH_CR_PG;
@@ -609,6 +612,8 @@ void StoreGlobalVariables(void)
 	fmemcpy((void*)&global_flash_data->LaserDiodePulseCounter, (void*)&FlushesGlobalLD, sizeof(uint32_t));
 	if (GetLaserID() == LASER_ID_SOLIDSTATE)
 		fmemcpy((void*)&global_flash_data->SolidStatePulseCounter, (void*)&FlushesGlobalSS, sizeof(uint32_t));
+	if (GetLaserID() == LASER_ID_SOLIDSTATE2)
+		fmemcpy((void*)&global_flash_data->SolidStatePulseCounter2, (void*)&FlushesGlobalSS, sizeof(uint32_t));
 	if (GetLaserID() == LASER_ID_LONGPULSE)
 		fmemcpy((void*)&global_flash_data->LongPulsePulseCounter, (void*)&FlushesGlobalSS, sizeof(uint32_t));
 	

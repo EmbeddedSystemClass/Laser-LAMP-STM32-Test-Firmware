@@ -92,7 +92,7 @@ int Init_MainSPI_Thread (void) {
 
 void SetDACValue(float32_t value)
 {
-	uint16_t data = ~(uint16_t)((value / 10.0f) * 1024.0f);
+	uint16_t data = ~(uint16_t)((value / 10.0f) * 1024.0f); // calibration
 	
 	// Set DAC value
 	dac_cs = true;
