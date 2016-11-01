@@ -15,6 +15,9 @@ void LaserDiodePrepare_Process(uint16_t pic_id)
 	bool update = false;
 	uint16_t new_pic_id = pic_id;
 	
+	uint16_t timer_minutes = frameData_LaserDiode.timer.timer_minutes;
+	uint16_t timer_seconds = frameData_LaserDiode.timer.timer_seconds;
+	
 	DGUS_LASERDIODE* value;
 	ReadVariable(FRAMEDATA_LASERDIODE_BASE, (void**)&value, sizeof(frameData_LaserDiode));
 	if ((osSignalWait(DGUS_EVENT_SEND_COMPLETED, g_wDGUSTimeout).status != osEventTimeout) && (osSignalWait(DGUS_EVENT_RECEIVE_COMPLETED, g_wDGUSTimeout).status != osEventTimeout))
@@ -37,12 +40,12 @@ void LaserDiodePrepare_Process(uint16_t pic_id)
 				else
 					new_pic_id = FRAME_PICID_LASERDIODE_PREPARETIMER;
 			}
-			update = true;
+			//update = true;
 			break;
 		case FRAME_PICID_LASERDIODE_TEMPERATUREOUT:
 			frameData_LaserDiode.timer.timer_minutes = (uint16_t)temperature;
 			frameData_LaserDiode.timer.timer_seconds = (uint16_t)(temperature * 10.0f) % 10;
-			frameData_LaserDiode.coolIcon = 1;
+			//frameData_LaserDiode.coolIcon = 1;
 			if (temperature < temperature_normal)
 			{
 				if (!prepare)
@@ -53,7 +56,7 @@ void LaserDiodePrepare_Process(uint16_t pic_id)
 				else
 					new_pic_id = FRAME_PICID_LASERDIODE_PREPARETIMER;
 			}
-			update = true;
+			//update = true;
 			break;
 		case FRAME_PICID_LASERDIODE_PREPARETIMER:
 			frameData_LaserDiode.timer.timer_minutes = m_wMinutes;
@@ -63,9 +66,13 @@ void LaserDiodePrepare_Process(uint16_t pic_id)
 				frameData_LaserDiode.state = 1;
 				new_pic_id = FRAME_PICID_LASERDIODE_READY;
 			}
-			update = true;
+			//update = true;
 			break;
 	}
+	
+	if (timer_minutes != frameData_LaserDiode.timer.timer_minutes ||
+			timer_seconds != frameData_LaserDiode.timer.timer_seconds)
+		update = true;
 	
 	if (frameData_LaserDiode.buttons.onCancelBtn != 0)
 	{

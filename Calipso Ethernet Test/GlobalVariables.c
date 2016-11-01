@@ -38,6 +38,7 @@ volatile float32_t CurrentMonitor = 0.0f;
 
 // Laser ID
 LASER_ID LaserID = LASER_ID_SOLIDSTATE;
+MENU_ID MenuID = MENU_ID_SOLIDSTATE;
 
 // Private variables
 uint16_t pic_id = 0;

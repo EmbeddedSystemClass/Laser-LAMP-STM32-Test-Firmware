@@ -45,7 +45,7 @@ void LaserDiodeInput_Init(uint16_t pic_id)
 	frameData_LaserDiode.melanin = 0;
 	frameData_LaserDiode.phototype = 1;
 	frameData_LaserDiode.temperature = temperature;
-	frameData_LaserDiode.cooling = 3;
+	frameData_LaserDiode.cooling = 5;
 	frameData_LaserDiode.flow = 0;
 	//frameData_LaserDiode.DatabasePageOffset = 0;
 	//frameData_LaserDiode.DatabaseSelectionIndex = 13;

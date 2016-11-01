@@ -48,6 +48,7 @@ extern volatile float32_t CurrentMonitor;
 
 // Laser ID
 extern LASER_ID LaserID;
+extern MENU_ID MenuID;
                                               
 // Private variables
 extern uint16_t pic_id;

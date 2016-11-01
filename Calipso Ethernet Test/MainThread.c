@@ -185,9 +185,13 @@ void UpdateLaserState(uint16_t pic_id)
 		__MISC_RELAY2_OFF();
 #endif
 	
+	MenuID = MENU_ID_MENU;
+	
 	// Check for error state of diode laser
 	if ((pic_id >= 19) && (pic_id <= 32))
 	{
+		//MenuID = MENU_ID_DIODELASER;
+		
 		// Check temperature
 		if (temperature > temperature_overheat)
 		{
@@ -219,6 +223,12 @@ void UpdateLaserState(uint16_t pic_id)
 	// Check for errors of solid state laser
 	if ((pic_id >= 35) && (pic_id <= 43))
 	{
+		if (GetLaserID() == LASER_ID_SOLIDSTATE)
+			MenuID = MENU_ID_SOLIDSTATE;
+		
+		if (GetLaserID() == LASER_ID_SOLIDSTATE2)
+			MenuID = MENU_ID_SOLIDSTATE2;
+		
 		// Check temperature
 		if (temperature > temperature_overheat_solidstate)
 		{
@@ -238,6 +248,33 @@ void UpdateLaserState(uint16_t pic_id)
 		{
 			SolidStateLaserOff();
 			SetPicId(FRAME_PICID_SOLIDSTATE_FAULT, g_wDGUSTimeout);
+		}
+	}
+	
+	// Check for errors of solid state laser long pulse
+	if ((pic_id >= 51) && (pic_id <= 58))
+	{
+		MenuID = MENU_ID_LONGPULSE;
+		
+		// Check temperature
+		if (temperature > temperature_overheat_solidstate)
+		{
+			SolidStateLaserOff();
+			SetPicId(FRAME_PICID_LONGPULSE_OVERHEATING, g_wDGUSTimeout);
+		}
+		
+		// Check flow
+		if (flow1 < flow_low)
+		{
+			SolidStateLaserOff();
+			SetPicId(FRAME_PICID_LONGPULSE_FLOWERROR, g_wDGUSTimeout);
+		}
+		
+		// Fault check
+		if (__MISC_GETCHARGEMODULEFAULTSTATE())
+		{
+			SolidStateLaserOff();
+			SetPicId(FRAME_PICID_LONGPULSE_FAULT, g_wDGUSTimeout);
 		}
 	}
 }
@@ -266,6 +303,7 @@ void UpdateLaserStatus()
 
 void MainThread (void const *argument) {
 	static uint16_t last_pic_id = 0;
+	static MENU_ID last_menu_id = MENU_ID_MENU;
 	
 	LaserDiodeInput_Init(pic_id);
 	SolidStateLaserInput_Init(pic_id);
@@ -274,6 +312,8 @@ void MainThread (void const *argument) {
   while (1) {
     ; // Insert thread code here...
 		pic_id = GetPicId(g_wDGUSTimeout, pic_id);		
+		
+		last_menu_id = MenuID;
 		UpdateLaserState(pic_id);
 		
 		LaserID = GetLaserID();
@@ -299,7 +339,7 @@ void MainThread (void const *argument) {
 			
 			// Laser Diode control
 			case FRAME_PICID_LASERDIODE_INPUT:
-				if (last_pic_id != pic_id)
+				if (last_pic_id != pic_id && last_menu_id != MenuID)
 					LaserDiodeInput_Init(pic_id);
 				LaserDiodeInput_Process(pic_id);
 				/*if (GetLaserID() == LASER_ID_DIODELASER)
@@ -343,7 +383,7 @@ void MainThread (void const *argument) {
 			
 			// Solid State Laser
 			case FRAME_PICID_SOLIDSTATE_INPUT:	
-				if (last_pic_id != pic_id)
+				if (last_pic_id != pic_id && last_menu_id != MenuID)
 					SolidStateLaserInput_Init(pic_id);
 				if (GetLaserID() == LASER_ID_SOLIDSTATE || GetLaserID() == LASER_ID_SOLIDSTATE2)				
 					SolidStateLaserInput_Process(pic_id);
@@ -367,16 +407,24 @@ void MainThread (void const *argument) {
 			
 			// Long Pulse Laser
 			case FRAME_PICID_LONGPULSE_INPUT:	
-				if (last_pic_id != pic_id)
+				if (last_pic_id != pic_id && last_menu_id != MenuID)
 					LongPulseLaserInput_Init(pic_id);
+				LongPulseLaserInput_Process(pic_id);
+				UpdateLaserStatus();
+				/*
 				if (GetLaserID() == LASER_ID_LONGPULSE)				
 					LongPulseLaserInput_Process(pic_id);
+				else
+					SetPicId(FRAME_PICID_WRONG_EMMITER, g_wDGUSTimeout);*/
+				break;
+			case FRAME_PICID_LONGPULSE_SIMMERSTART:
+			case FRAME_PICID_LONGPULSE_SIMMER:
+				if (GetLaserID() == LASER_ID_LONGPULSE)				
+					LongPulseLaserWork_Process(pic_id);
 				else
 					SetPicId(FRAME_PICID_WRONG_EMMITER, g_wDGUSTimeout);
 				UpdateLaserStatus();
 				break;
-			case FRAME_PICID_LONGPULSE_SIMMERSTART:
-			case FRAME_PICID_LONGPULSE_SIMMER:
 			case FRAME_PICID_LONGPULSE_START:
 			case FRAME_PICID_LONGPULSE_WORK:
 				LongPulseLaserWork_Process(pic_id);
@@ -390,7 +438,7 @@ void MainThread (void const *argument) {
 				break;
 			
 			case FRAME_PICID_WRONG_EMMITER:
-				osDelay(2000);
+				osDelay(200);
 				SetPicId(FRAME_PICID_MAINMENU, g_wDGUSTimeout);
 				break;
 			

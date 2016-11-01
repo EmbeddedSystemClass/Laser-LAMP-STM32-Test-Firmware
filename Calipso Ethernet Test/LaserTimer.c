@@ -20,7 +20,7 @@ static osTimerDef (Timer2, LaserTimer_Callback);
  
 // Periodic Timer Example
 static void LaserTimer_Callback(void const *arg) {
-	if (footswitch_on && footswitch_en)
+	if (footswitch_on /*&& footswitch_en*/)
 	{
 		switch_filter++;
 		if (switch_filter > switch_filter_threshold * 2)
