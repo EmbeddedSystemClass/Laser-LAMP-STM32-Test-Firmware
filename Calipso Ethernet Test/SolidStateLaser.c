@@ -44,6 +44,78 @@ void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin)
 	}
 }
 
+void SolidStateLaserPulseReset(LASER_ID laser_id)
+{
+	switch (laser_id)
+	{
+		case LASER_ID_SOLIDSTATE:
+			FlushesSessionSS = 0;
+			break;
+		case LASER_ID_SOLIDSTATE2:
+			FlushesSessionSS2 = 0;
+			break;
+		case LASER_ID_LONGPULSE:
+			FlushesSessionLP = 0;
+			break;
+		case LASER_ID_DIODELASER:
+			break;
+	}		
+}
+
+void SolidStateLaserPulseInc(LASER_ID laser_id)
+{
+	switch (laser_id)
+	{
+		case LASER_ID_SOLIDSTATE:
+			FlushesSessionSS++;
+			FlushesGlobalSS++;
+			break;
+		case LASER_ID_SOLIDSTATE2:
+			FlushesSessionSS2++;
+			FlushesGlobalSS2++;
+			break;
+		case LASER_ID_LONGPULSE:
+			FlushesSessionLP++;
+			FlushesGlobalLP++;
+			break;
+		case LASER_ID_DIODELASER:
+			break;
+	}		
+}
+
+uint32_t GetSolidStateGlobalPulse(LASER_ID laser_id)
+{
+	switch (laser_id)
+	{
+		case LASER_ID_SOLIDSTATE:
+			return FlushesGlobalSS;
+		case LASER_ID_SOLIDSTATE2:
+			return FlushesGlobalSS2;
+		case LASER_ID_LONGPULSE:
+			return FlushesGlobalLP;
+			break;
+		case LASER_ID_DIODELASER:
+			return FlushesGlobalLD;
+	}		
+	return 0;
+}
+uint32_t GetSolidStateSessionPulse(LASER_ID laser_id)
+{
+	switch (laser_id)
+	{
+		case LASER_ID_SOLIDSTATE:
+			return FlushesSessionSS;
+		case LASER_ID_SOLIDSTATE2:
+			return FlushesSessionSS2;
+		case LASER_ID_LONGPULSE:
+			return FlushesSessionLP;
+			break;
+		case LASER_ID_DIODELASER:
+			return FlushesSessionLD;
+	}	
+	return 0;
+}
+
 void HAL_TIM_OC_DelayElapsedCallback(TIM_HandleTypeDef *htim)
 {
 	if (htim == &hTIM9)
@@ -58,8 +130,20 @@ void HAL_TIM_OC_DelayElapsedCallback(TIM_HandleTypeDef *htim)
 				FlushesSessionLD++;
 				FlushesGlobalLD++;
 			}
+			
 		}
-		//SoundOn();
+		
+		if (SolidStateLaser_en) 
+		{
+			/*uint32_t count = convert_d(frameData_SolidStateLaser.PulseCounter);
+			count++;
+			frameData_SolidStateLaser.PulseCounter = convert_d(count);*/
+			SolidStateLaserPulseInc(LaserID);
+			
+			SoundOn();
+			__HAL_TIM_SET_AUTORELOAD(&hTIM11, 2100);
+			HAL_TIM_Base_Start_IT(&hTIM11);
+		}
 	}
 }
 
@@ -89,11 +173,7 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
 		Flushes++;
 		
 		if (DiodeLaser_en) 
-		{
-			/*uint32_t count = convert_d(frameData_LaserDiode.PulseCounter);
-			count++;
-			frameData_LaserDiode.PulseCounter = convert_d(count);*/
-			
+		{			
 			if (Profile != PROFILE_SINGLE)
 			{
 				FlushesSessionLD++;
@@ -123,18 +203,14 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
 				}
 			}
 		}
-		if (SolidStateLaser_en) 
+		/*if (SolidStateLaser_en) 
 		{
-			/*uint32_t count = convert_d(frameData_SolidStateLaser.PulseCounter);
-			count++;
-			frameData_SolidStateLaser.PulseCounter = convert_d(count);*/
-			FlushesSessionSS++;
-			FlushesGlobalSS++;
+			SolidStateLaserPulseInc(LaserID);
 			
 			SoundOn();
 			__HAL_TIM_SET_AUTORELOAD(&hTIM11, 2100);
 			HAL_TIM_Base_Start_IT(&hTIM11);
-		}
+		}*/
 		
 		if (Flushes == FlushesCount)
 		{

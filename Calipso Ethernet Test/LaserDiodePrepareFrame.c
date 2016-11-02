@@ -39,8 +39,8 @@ void LaserDiodePrepare_Process(uint16_t pic_id)
 				}
 				else
 					new_pic_id = FRAME_PICID_LASERDIODE_PREPARETIMER;
+				update = true;
 			}
-			//update = true;
 			break;
 		case FRAME_PICID_LASERDIODE_TEMPERATUREOUT:
 			frameData_LaserDiode.timer.timer_minutes = (uint16_t)temperature;
@@ -55,8 +55,8 @@ void LaserDiodePrepare_Process(uint16_t pic_id)
 				}
 				else
 					new_pic_id = FRAME_PICID_LASERDIODE_PREPARETIMER;
+				update = true;
 			}
-			//update = true;
 			break;
 		case FRAME_PICID_LASERDIODE_PREPARETIMER:
 			frameData_LaserDiode.timer.timer_minutes = m_wMinutes;
@@ -65,8 +65,8 @@ void LaserDiodePrepare_Process(uint16_t pic_id)
 			{
 				frameData_LaserDiode.state = 1;
 				new_pic_id = FRAME_PICID_LASERDIODE_READY;
+				update = true;
 			}
-			//update = true;
 			break;
 	}
 	

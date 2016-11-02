@@ -43,9 +43,10 @@ extern void    LongPulseLaserInput_Process(uint16_t pic_id);
 extern void  LongPulseLaserPrepare_Process(uint16_t pic_id);
 extern void     LongPulseLaserWork_Process(uint16_t pic_id);
 
+extern void       WifiScanningFrame_Init   (uint16_t pic_id);
 extern void  		  WifiScanningFrame_Process(uint16_t pic_id);
 extern void WifiAuthenticationFrame_Process(uint16_t pic_id);
-extern void WiFiLinkFrame_Process();
+extern void WiFiLinkFrame_Process(void);
 
 int Init_Main_Thread (void) {
 
@@ -363,6 +364,9 @@ void MainThread (void const *argument) {
 				break;
 			
 			// WiFi features
+			case FRAME_PICID_SERVICE_WIFISCANNINGINIT:
+				WifiScanningFrame_Init(pic_id);
+				break;
 			case FRAME_PICID_SERVICE_WIFISCANNING:			
 				WifiScanningFrame_Process(pic_id);
 				break;
@@ -375,6 +379,12 @@ void MainThread (void const *argument) {
 			
 			// App idle user state
 			case FRAME_PICID_MAINMENU:
+				if (ip_addr_updated)
+				{
+					WriteVariable(FRAMEDATA_WIFIUP_IPADDR, ip_addr, 16);
+					osSignalWait(DGUS_EVENT_SEND_COMPLETED, g_wDGUSTimeout);
+					ip_addr_updated = false;
+				}
 				StopIfRunning(last_pic_id);
 			case FRAME_PICID_SERVICE:
 			case FRAME_PICID_LANGMENU:

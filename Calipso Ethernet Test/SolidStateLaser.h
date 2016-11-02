@@ -4,6 +4,7 @@
 #include "stm32f4xx_hal.h"
 #include <math.h>
 #include "arm_math.h"
+#include "LaserMisc.h"
 
 #define GPIO_PIN_FOOTSWITCH				GPIO_PIN_15 // PORT GPIOF, IN
 
@@ -37,5 +38,11 @@ void SetPulseDuration_us(uint16_t duration);
 void SetPulseDuration_ms(uint16_t duration, uint16_t period);
 void SetPulseFrequency(float32_t frequency);
 void SetPulseFrequency_(float32_t frequency);
+
+void SolidStateLaserPulseReset(LASER_ID laser_id);
+void SolidStateLaserPulseInc(LASER_ID laser_id);
+uint32_t GetSolidStateGlobalPulse(LASER_ID laser_id);
+uint32_t GetSolidStateSessionPulse(LASER_ID laser_id);
+
 
 #endif

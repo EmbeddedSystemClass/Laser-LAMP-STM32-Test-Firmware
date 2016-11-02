@@ -249,6 +249,11 @@ void WiFiThread (void const *argument) {
 				WiFi_State_CommandMode = true;
 			if (id == WIND_MSG_DATA_MODE)
 				WiFi_State_CommandMode = false;
+			if (id == WIND_MSG_WIFIUP)
+			{
+				ip_addr_updated = true;
+				memcpy(ip_addr, tokenPtr[3], strlen(tokenPtr[3])+1);
+			}
 			
 			osSignalSet(tid_UserWiFiThread, WIFI_EVENT_RECEIVE_WIND | WIFI_EVENT_RECEIVE_STRING);
 		}
@@ -363,10 +368,12 @@ void WiFiThread_Idle()
 				if (strcmp(tokenPtr[2], "START") == 0)
 				{
 					LampControlPulseStart();
+					SolidStateLaser_en = true;
 				}
 				if (strcmp(tokenPtr[2], "STOP") == 0)
 				{
 					LampControlPulseStop();
+					SolidStateLaser_en = false;
 				}
 				if (strcmp(tokenPtr[2], "SIMMER") == 0)
 					if (strcmp(tokenPtr[3], "OFF") == 0)

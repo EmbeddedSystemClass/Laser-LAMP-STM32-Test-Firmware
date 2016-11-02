@@ -13,7 +13,7 @@
 
 #define FLASH_LASERDATA_BASE 0x080E0000
 
-#define DEBUG_SOLID_STATE_LASER
+//#define DEBUG_SOLID_STATE_LASER
 
 // DGUS control variables
 extern uint16_t g_wDGUSTimeout;
@@ -38,6 +38,8 @@ extern float32_t flow_normal;
 
 // Service menu password
 extern char password[6];
+extern char ip_addr[16];
+extern bool ip_addr_updated;
 
 // Global state variables
 extern volatile float32_t temperature;
@@ -67,6 +69,10 @@ extern uint32_t FlushesSessionLD;
 extern uint32_t FlushesGlobalLD;
 extern uint32_t FlushesSessionSS;
 extern uint32_t FlushesGlobalSS;
+extern uint32_t FlushesSessionSS2;
+extern uint32_t FlushesGlobalSS2;
+extern uint32_t FlushesSessionLP;
+extern uint32_t FlushesGlobalLP;
 extern volatile bool footswitch_en;
 extern volatile bool footswitch_on;
 extern volatile uint16_t switch_filter;

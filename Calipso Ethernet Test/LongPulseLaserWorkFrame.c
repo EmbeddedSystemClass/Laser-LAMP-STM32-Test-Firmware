@@ -175,10 +175,10 @@ void LongPulseLaserWork_Process(uint16_t pic_id)
 	if (state != frameData_SolidStateLaser.state)
 		update = true;
 	
-	if (frameData_SolidStateLaser.PulseCounter != FlushesGlobalSS)
+	if (frameData_SolidStateLaser.PulseCounter != GetSolidStateGlobalPulse(LaserID))
 	{
-		frameData_SolidStateLaser.PulseCounter = FlushesGlobalSS;
-		frameData_SolidStateLaser.SessionPulseCounter = FlushesSessionSS;
+		frameData_SolidStateLaser.PulseCounter = GetSolidStateGlobalPulse(LaserID);
+		frameData_SolidStateLaser.SessionPulseCounter = GetSolidStateSessionPulse(LaserID);
 		update = true;
 	}
 	

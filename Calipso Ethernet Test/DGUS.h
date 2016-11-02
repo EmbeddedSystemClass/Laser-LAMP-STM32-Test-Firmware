@@ -104,6 +104,7 @@ extern UART_HandleTypeDef huart1;
 #define FRAMEDATA_WIFIAUTHENTICATION_SSID				0x0E00
 #define FRAMEDATA_WIFIAUTHENTICATION_PASSWORD		0x0E10
 #define FRAMEDATA_WIFISCANNINGSSID_INDEX				0x0E20
+#define FRAMEDATA_WIFIUP_IPADDR									0x0E30
 
 /* ************************** DGUS PIC IDs ******************************** */
 
@@ -116,6 +117,7 @@ extern UART_HandleTypeDef huart1;
 #define FRAME_PICID_SERVICE_LASERDIODE					11			// Process
 #define FRAME_PICID_SERVICE_BASICSETTINGS				13			// Process
 #define FRAME_PICID_SERVICE_WIFISCANNING				15			// Process
+#define FRAME_PICID_SERVICE_WIFISCANNINGINIT		16			// Process
 #define FRAME_PICID_SERVICE_WIFIAUTHENTICATION	17			// Process
 #define FRAME_PICID_LASERDIODE_INPUT						19			// Process
 #define FRAME_PICID_LASERDIODE_NUMPAD						20		

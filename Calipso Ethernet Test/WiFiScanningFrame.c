@@ -18,6 +18,16 @@ extern char WiFi_NetworkSSID[32];
 DGUS_WIFISCANNINGLINE frameData_WiFiScanning[12];
 uint16_t frameData_NetworkIndex;
 
+void WifiScanningFrame_Init(uint16_t pic_id)
+{
+	frameData_NetworkIndex = 0;
+	
+	WriteVariableConvert16(FRAMEDATA_WIFISCANNINGSSID_INDEX, &frameData_NetworkIndex, 2);
+	osSignalWait(DGUS_EVENT_SEND_COMPLETED, g_wDGUSTimeout);
+	
+	SetPicId(FRAME_PICID_SERVICE_WIFISCANNING, g_wDGUSTimeout);
+}
+
 void WifiScanningFrame_Process(uint16_t pic_id)
 {
 	bool update = false;
@@ -29,13 +39,13 @@ void WifiScanningFrame_Process(uint16_t pic_id)
 		return;
 	
 	if (frameData_NetworkIndex > 0)
-	{
-		frameData_NetworkIndex = 0;
-		update = true;
-		
-		memcpy(WiFi_NetworkSSID, WiFi_APs[frameData_NetworkIndex]->SSID, 32);
+	{		
+		memcpy(WiFi_NetworkSSID, WiFi_APs[frameData_NetworkIndex-1]->SSID, 32);
 		WriteVariable(FRAMEDATA_WIFIAUTHENTICATION_SSID, WiFi_NetworkSSID, 32);
 		osSignalWait(DGUS_EVENT_SEND_COMPLETED, g_wDGUSTimeout);
+		
+		frameData_NetworkIndex = 0;
+		update = true;
 		
 		SetPicId(FRAME_PICID_SERVICE_WIFIAUTHENTICATION, g_wDGUSTimeout);
 	}

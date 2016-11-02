@@ -20,6 +20,11 @@ static osTimerDef (Timer2, LaserTimer_Callback);
  
 // Periodic Timer Example
 static void LaserTimer_Callback(void const *arg) {
+	if (HAL_GPIO_ReadPin(GPIOF, GPIO_PIN_FOOTSWITCH) == GPIO_PIN_RESET)
+		footswitch_on = true;
+	else
+		footswitch_on = false;
+				
 	if (footswitch_on /*&& footswitch_en*/)
 	{
 		switch_filter++;

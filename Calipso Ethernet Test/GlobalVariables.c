@@ -28,6 +28,8 @@ float32_t flow_normal = 4.0f;
 
 // Service menu password
 char password[6] = "78965\0";
+char ip_addr[16] = "\0";
+bool ip_addr_updated = false;
 
 // Global State Variables
 volatile float32_t temperature = 0;
@@ -57,6 +59,10 @@ uint32_t FlushesSessionLD = 0;
 uint32_t FlushesGlobalLD = 0;
 uint32_t FlushesSessionSS = 0;
 uint32_t FlushesGlobalSS = 0;
+uint32_t FlushesSessionSS2 = 0;
+uint32_t FlushesGlobalSS2 = 0;
+uint32_t FlushesSessionLP = 0;
+uint32_t FlushesGlobalLP = 0;
 uint16_t switch_filter_threshold = 10;
 volatile uint16_t switch_filter = 0;
 volatile bool footswitch_en = false;
@@ -556,12 +562,9 @@ void LoadGlobalVariables(void)
 {
 	// Copy counters
 	memcpy((void*)&FlushesGlobalLD, (void*)&global_flash_data->LaserDiodePulseCounter, sizeof(uint32_t));
-	if (GetLaserID() == LASER_ID_SOLIDSTATE)
-		memcpy((void*)&FlushesGlobalSS, (void*)&global_flash_data->SolidStatePulseCounter, sizeof(uint32_t));
-	if (GetLaserID() == LASER_ID_SOLIDSTATE2)
-		memcpy((void*)&FlushesGlobalSS, (void*)&global_flash_data->SolidStatePulseCounter2, sizeof(uint32_t));
-	if (GetLaserID() == LASER_ID_LONGPULSE)
-		memcpy((void*)&FlushesGlobalSS, (void*)&global_flash_data->LongPulsePulseCounter, sizeof(uint32_t));
+	memcpy((void*)&FlushesGlobalSS, (void*)&global_flash_data->SolidStatePulseCounter, sizeof(uint32_t));
+	memcpy((void*)&FlushesGlobalSS2,(void*)&global_flash_data->SolidStatePulseCounter2, sizeof(uint32_t));
+	memcpy((void*)&FlushesGlobalLP, (void*)&global_flash_data->LongPulsePulseCounter, sizeof(uint32_t));
 	
 	// Copy profile states
 	memcpy((void*)&m_structLaserProfile, (void*)&global_flash_data->m_structLaserProfile, sizeof(m_structLaserProfile));
@@ -611,12 +614,9 @@ void StoreGlobalVariables(void)
 	
 	// Copy presets
 	fmemcpy((void*)&global_flash_data->LaserDiodePulseCounter, (void*)&FlushesGlobalLD, sizeof(uint32_t));
-	if (GetLaserID() == LASER_ID_SOLIDSTATE)
-		fmemcpy((void*)&global_flash_data->SolidStatePulseCounter, (void*)&FlushesGlobalSS, sizeof(uint32_t));
-	if (GetLaserID() == LASER_ID_SOLIDSTATE2)
-		fmemcpy((void*)&global_flash_data->SolidStatePulseCounter2, (void*)&FlushesGlobalSS, sizeof(uint32_t));
-	if (GetLaserID() == LASER_ID_LONGPULSE)
-		fmemcpy((void*)&global_flash_data->LongPulsePulseCounter, (void*)&FlushesGlobalSS, sizeof(uint32_t));
+	fmemcpy((void*)&global_flash_data->SolidStatePulseCounter, (void*)&FlushesGlobalSS, sizeof(uint32_t));
+	fmemcpy((void*)&global_flash_data->SolidStatePulseCounter2, (void*)&FlushesGlobalSS2, sizeof(uint32_t));
+	fmemcpy((void*)&global_flash_data->LongPulsePulseCounter, (void*)&FlushesGlobalLP, sizeof(uint32_t));
 	
 	// Copy profile states
 	fmemcpy((void*)&global_flash_data->m_structLaserProfile, (void*)&m_structLaserProfile, sizeof(m_structLaserProfile));
