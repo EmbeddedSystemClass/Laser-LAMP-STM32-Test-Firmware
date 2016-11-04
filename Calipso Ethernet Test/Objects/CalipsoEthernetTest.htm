@@ -3,7 +3,7 @@
 <title>Static Call Graph - [.\Objects\CalipsoEthernetTest.axf]</title></head>
 <body><HR>
 <H1>Static Call Graph for image .\Objects\CalipsoEthernetTest.axf</H1><HR>
-<BR><P>#&#060CALLGRAPH&#062# ARM Linker, 5060183: Last Updated: Wed Nov 02 17:45:08 2016
+<BR><P>#&#060CALLGRAPH&#062# ARM Linker, 5060183: Last Updated: Fri Nov 04 15:36:30 2016
 <BR><P>
 <H3>Maximum Stack Usage =        680 bytes + Unknown(Functions without stacksize, Cycles, Untraceable Function Pointers)</H3><H3>
 Call chain for Maximum Stack Depth:</H3>
@@ -1991,12 +1991,16 @@ Global Symbols
 </UL>
 
 <P><STRONG><a name="[184]"></a>HAL_GPIO_ReadPin</STRONG> (Thumb, 16 bytes, Stack size 0 bytes, stm32f4xx_hal_gpio.o(i.HAL_GPIO_ReadPin))
-<BR><BR>[Called By]<UL><LI><a href="#[201]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ServiceFrame_Process
+<BR><BR>[Called By]<UL><LI><a href="#[20a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SolidStateLaserInput_Process
+<LI><a href="#[201]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ServiceFrame_Process
 <LI><a href="#[183]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;GetLaserID
 <LI><a href="#[197]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_GPIO_EXTI_Callback
 <LI><a href="#[93]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;LaserTimer_Callback
 <LI><a href="#[1ff]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;UpdateLaserState
+<LI><a href="#[1fc]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;LongPulseLaserWork_Process
+<LI><a href="#[1f6]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;LongPulseLaserInput_Process
 <LI><a href="#[202]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ServiceDiodeFrame_Process
+<LI><a href="#[20b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SolidStateLaserWork_Process
 <LI><a href="#[231]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;USART_GetModemStatus
 </UL>
 
@@ -2666,7 +2670,7 @@ Global Symbols
 <BR>[Called By]<UL><LI><a href="#[8e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;MainThread
 </UL>
 
-<P><STRONG><a name="[1f6]"></a>LongPulseLaserInput_Process</STRONG> (Thumb, 816 bytes, Stack size 72 bytes, longpulselaserinputframe.o(i.LongPulseLaserInput_Process))
+<P><STRONG><a name="[1f6]"></a>LongPulseLaserInput_Process</STRONG> (Thumb, 924 bytes, Stack size 72 bytes, longpulselaserinputframe.o(i.LongPulseLaserInput_Process))
 <BR><BR>[Stack]<UL><LI>Max Depth = 144<LI>Call Chain = LongPulseLaserInput_Process &rArr; SetPicId &rArr; WriteRegister &rArr; HAL_UART_Transmit_ITMY
 </UL>
 <BR>[Calls]<UL><LI><a href="#[1f8]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;convert_laserdata_ss
@@ -2682,9 +2686,11 @@ Global Symbols
 <LI><a href="#[1e9]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SetDACValue
 <LI><a href="#[1e1]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ReadVariable
 <LI><a href="#[1db]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;LampControlPulseStop
+<LI><a href="#[184]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_GPIO_ReadPin
 <LI><a href="#[1ec]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;StoreGlobalVariables
 <LI><a href="#[177]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_GPIO_WritePin
 <LI><a href="#[1f9]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SetPulseFrequency_
+<LI><a href="#[17a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;osDelay
 </UL>
 <BR>[Called By]<UL><LI><a href="#[8e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;MainThread
 </UL>
@@ -2701,7 +2707,7 @@ Global Symbols
 <BR>[Called By]<UL><LI><a href="#[8e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;MainThread
 </UL>
 
-<P><STRONG><a name="[1fc]"></a>LongPulseLaserWork_Process</STRONG> (Thumb, 592 bytes, Stack size 48 bytes, longpulselaserworkframe.o(i.LongPulseLaserWork_Process))
+<P><STRONG><a name="[1fc]"></a>LongPulseLaserWork_Process</STRONG> (Thumb, 696 bytes, Stack size 48 bytes, longpulselaserworkframe.o(i.LongPulseLaserWork_Process))
 <BR><BR>[Stack]<UL><LI>Max Depth = 140<LI>Call Chain = LongPulseLaserWork_Process &rArr; SoundOn &rArr; HAL_TIM_OC_Start_DMA &rArr; HAL_DMA_Start_IT &rArr; DMA_SetConfig
 </UL>
 <BR>[Calls]<UL><LI><a href="#[1f8]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;convert_laserdata_ss
@@ -2713,6 +2719,7 @@ Global Symbols
 <LI><a href="#[1e9]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SetDACValue
 <LI><a href="#[1e1]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ReadVariable
 <LI><a href="#[1db]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;LampControlPulseStop
+<LI><a href="#[184]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_GPIO_ReadPin
 <LI><a href="#[1ec]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;StoreGlobalVariables
 <LI><a href="#[177]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_GPIO_WritePin
 <LI><a href="#[17a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;osDelay
@@ -2737,7 +2744,7 @@ Global Symbols
 </UL>
 <BR>[Address Reference Count : 1]<UL><LI> spithread.o(i.Init_MainSPI_Thread)
 </UL>
-<P><STRONG><a name="[8e]"></a>MainThread</STRONG> (Thumb, 696 bytes, Stack size 16 bytes, mainthread.o(i.MainThread))
+<P><STRONG><a name="[8e]"></a>MainThread</STRONG> (Thumb, 724 bytes, Stack size 16 bytes, mainthread.o(i.MainThread))
 <BR><BR>[Stack]<UL><LI>Max Depth = 224<LI>Call Chain = MainThread &rArr; LaserDiodeInput_Process &rArr; PhototypePreset &rArr; LaserPreset &rArr; CalculateAllSteps &rArr; NormalizeStep
 </UL>
 <BR>[Calls]<UL><LI><a href="#[20a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SolidStateLaserInput_Process
@@ -3018,7 +3025,7 @@ Global Symbols
 <BR>[Called By]<UL><LI><a href="#[8e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;MainThread
 </UL>
 
-<P><STRONG><a name="[20a]"></a>SolidStateLaserInput_Process</STRONG> (Thumb, 716 bytes, Stack size 64 bytes, solidstatelaserinputframe.o(i.SolidStateLaserInput_Process))
+<P><STRONG><a name="[20a]"></a>SolidStateLaserInput_Process</STRONG> (Thumb, 728 bytes, Stack size 64 bytes, solidstatelaserinputframe.o(i.SolidStateLaserInput_Process))
 <BR><BR>[Stack]<UL><LI>Max Depth = 136<LI>Call Chain = SolidStateLaserInput_Process &rArr; SetPicId &rArr; WriteRegister &rArr; HAL_UART_Transmit_ITMY
 </UL>
 <BR>[Calls]<UL><LI><a href="#[1f8]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;convert_laserdata_ss
@@ -3034,6 +3041,7 @@ Global Symbols
 <LI><a href="#[1e9]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SetDACValue
 <LI><a href="#[1e1]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ReadVariable
 <LI><a href="#[1db]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;LampControlPulseStop
+<LI><a href="#[184]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_GPIO_ReadPin
 <LI><a href="#[1ec]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;StoreGlobalVariables
 <LI><a href="#[177]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_GPIO_WritePin
 </UL>
@@ -3072,7 +3080,7 @@ Global Symbols
 <LI><a href="#[1f6]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;LongPulseLaserInput_Process
 </UL>
 
-<P><STRONG><a name="[20b]"></a>SolidStateLaserWork_Process</STRONG> (Thumb, 600 bytes, Stack size 48 bytes, solidstatelaserworkframe.o(i.SolidStateLaserWork_Process))
+<P><STRONG><a name="[20b]"></a>SolidStateLaserWork_Process</STRONG> (Thumb, 612 bytes, Stack size 48 bytes, solidstatelaserworkframe.o(i.SolidStateLaserWork_Process))
 <BR><BR>[Stack]<UL><LI>Max Depth = 140<LI>Call Chain = SolidStateLaserWork_Process &rArr; SoundOn &rArr; HAL_TIM_OC_Start_DMA &rArr; HAL_DMA_Start_IT &rArr; DMA_SetConfig
 </UL>
 <BR>[Calls]<UL><LI><a href="#[1f8]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;convert_laserdata_ss
@@ -3084,6 +3092,7 @@ Global Symbols
 <LI><a href="#[1e9]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SetDACValue
 <LI><a href="#[1e1]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ReadVariable
 <LI><a href="#[1db]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;LampControlPulseStop
+<LI><a href="#[184]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_GPIO_ReadPin
 <LI><a href="#[1ec]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;StoreGlobalVariables
 <LI><a href="#[177]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_GPIO_WritePin
 <LI><a href="#[17a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;osDelay
@@ -3298,7 +3307,7 @@ Global Symbols
 <BR>[Called By]<UL><LI><a href="#[af]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;USART6_TX_DMA_Complete
 </UL>
 
-<P><STRONG><a name="[1ff]"></a>UpdateLaserState</STRONG> (Thumb, 444 bytes, Stack size 8 bytes, mainthread.o(i.UpdateLaserState))
+<P><STRONG><a name="[1ff]"></a>UpdateLaserState</STRONG> (Thumb, 460 bytes, Stack size 8 bytes, mainthread.o(i.UpdateLaserState))
 <BR><BR>[Stack]<UL><LI>Max Depth = 80<LI>Call Chain = UpdateLaserState &rArr; SetPicId &rArr; WriteRegister &rArr; HAL_UART_Transmit_ITMY
 </UL>
 <BR>[Calls]<UL><LI><a href="#[1ed]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SetPicId
@@ -3394,8 +3403,8 @@ Global Symbols
 </UL>
 <BR>[Address Reference Count : 1]<UL><LI> wifithread.o(.constdata)
 </UL>
-<P><STRONG><a name="[245]"></a>WiFiThread_Idle</STRONG> (Thumb, 652 bytes, Stack size 288 bytes, wifithread.o(i.WiFiThread_Idle))
-<BR><BR>[Stack]<UL><LI>Max Depth = 432 + Unknown Stack Size
+<P><STRONG><a name="[245]"></a>WiFiThread_Idle</STRONG> (Thumb, 1840 bytes, Stack size 304 bytes, wifithread.o(i.WiFiThread_Idle))
+<BR><BR>[Stack]<UL><LI>Max Depth = 448 + Unknown Stack Size
 <LI>Call Chain = WiFiThread_Idle &rArr; WaitForWINDCommands &rArr; atol &rArr; strtol &rArr; _strtoul &rArr; __aeabi_errno_addr &rArr; __user_perthread_libspace
 </UL>
 <BR>[Calls]<UL><LI><a href="#[187]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;osSignalWait
@@ -4461,6 +4470,7 @@ Global Symbols
 <LI><a href="#[8e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;MainThread
 <LI><a href="#[179]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;DiodeLaserOff
 <LI><a href="#[1fc]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;LongPulseLaserWork_Process
+<LI><a href="#[1f6]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;LongPulseLaserInput_Process
 <LI><a href="#[20b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SolidStateLaserWork_Process
 <LI><a href="#[2ce]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;mc_mci_Init
 <LI><a href="#[2e1]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;mci_card_power

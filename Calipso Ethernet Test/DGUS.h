@@ -13,6 +13,7 @@
 #endif
 
 //#define OLD_STYLE_LASER_SW
+#define LASERIDCHECK_LASERDIODE
 //#define DEBUG_BRK
 #define CRC_CHECK
 //#define USE_DGUS_DRIVER
@@ -106,6 +107,19 @@ extern UART_HandleTypeDef huart1;
 #define FRAMEDATA_WIFISCANNINGSSID_INDEX				0x0E20
 #define FRAMEDATA_WIFIUP_IPADDR									0x0E30
 
+// Cooling service menu
+#define FRAMEDATA_COOLONT												0x0F00
+#define FRAMEDATA_COOLOFFT											0x0F01
+#define FRAMEDATA_DIODEOVERHEATING							0x0F02
+#define FRAMEDATA_SSOVERHEATING									0x0F03
+#define FRAMEDATA_FLOWLOW												0x0F04
+#define FRAMEDATA_FLOWNORMAL										0x0F05
+// Cooling state
+#define FRAMEDATA_TEMPERATUREREADY							0x0F06
+#define FRAMEDATA_OVERHEATING										0x0F07
+#define FRAMEDATA_LOWFLOW												0x0F08
+#define FRAMEDATA_LOWREADY											0x0F09
+
 /* ************************** DGUS PIC IDs ******************************** */
 
 #define FRAME_PICID_LOGO												0
@@ -151,6 +165,8 @@ extern UART_HandleTypeDef huart1;
 #define FRAME_PICID_LONGPULSE_FLOWERROR				  60			// Process
 #define FRAME_PICID_LONGPULSE_OVERHEATING			  61			// Process
 #define FRAME_PICID_LONGPULSE_FAULT						  62			// Process
+
+#define FRAME_PICID_SERVICECOOLING						  63			// Process
 
 #define IS_LASERDIODE(pic_id) (pic_id >= 19 && pic_id <= 32)
 #define IS_SOLIDSTATE(pic_id) (pic_id >= 37 && pic_id <= 42)

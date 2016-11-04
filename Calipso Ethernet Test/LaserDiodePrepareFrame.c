@@ -65,7 +65,7 @@ void LaserDiodePrepare_Process(uint16_t pic_id)
 			{
 				frameData_LaserDiode.state = 1;
 				new_pic_id = FRAME_PICID_LASERDIODE_READY;
-				update = true;
+				update = true;0
 			}
 			break;
 	}

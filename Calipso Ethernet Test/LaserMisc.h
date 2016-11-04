@@ -55,7 +55,7 @@ typedef enum MENU_ID_ENUM {
 
 #define __MISC_LASERDIODE_ON()	HAL_GPIO_WritePin(GPIOF, GPIO_PIN_LaserDiodeEnable, GPIO_PIN_SET)
 #define __MISC_LASERLED_ON()		HAL_GPIO_WritePin(GPIOA, GPIO_PIN_LaserLED,         GPIO_PIN_SET)
-#define __MISC_LASERLED2_ON()		HAL_GPIO_WritePin(GPIOA, GPIO_PIN_LaserLED2,        GPIO_PIN_SET)
+#define __MISC_LASERLED2_ON()		HAL_GPIO_WritePin(GPIOB, GPIO_PIN_LaserLED2,        GPIO_PIN_SET)
 
 // reset outputs
 #define __MISC_RELAY1_OFF()	HAL_GPIO_WritePin(GPIOB, MISC_GPIO_RELAY1, GPIO_PIN_RESET)
@@ -65,7 +65,7 @@ typedef enum MENU_ID_ENUM {
 
 #define __MISC_LASERDIODE_OFF()	HAL_GPIO_WritePin(GPIOF, GPIO_PIN_LaserDiodeEnable, GPIO_PIN_RESET)
 #define __MISC_LASERLED_OFF()		HAL_GPIO_WritePin(GPIOA, GPIO_PIN_LaserLED,         GPIO_PIN_RESET)
-#define __MISC_LASERLED2_OFF()	HAL_GPIO_WritePin(GPIOA, GPIO_PIN_LaserLED2,        GPIO_PIN_RESET)
+#define __MISC_LASERLED2_OFF()	HAL_GPIO_WritePin(GPIOB, GPIO_PIN_LaserLED2,        GPIO_PIN_RESET)
 
 // get inputs
 #define __MISC_LASER_ID0()									HAL_GPIO_ReadPin(GPIOE, GPIO_PIN_Laser_ID0)

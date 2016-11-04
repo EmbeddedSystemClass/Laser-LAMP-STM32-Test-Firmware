@@ -180,7 +180,7 @@ void UpdateLaserState(uint16_t pic_id)
 	else
 		__MISC_RELAY3_OFF();
 	
-	if (GetLaserID() == LASER_ID_SOLIDSTATE)
+	if (GetLaserID() == LASER_ID_SOLIDSTATE || GetLaserID() == LASER_ID_SOLIDSTATE2 || GetLaserID() == LASER_ID_LONGPULSE)
 		__MISC_RELAY2_ON();
 	else
 		__MISC_RELAY2_OFF();
@@ -337,16 +337,26 @@ void MainThread (void const *argument) {
 				ServiceDiodeFrame_Process(pic_id);
 				break;
 			case FRAME_PICID_SERVICE_BASICSETTINGS:			break; // Blank picture, for future release
+			case FRAME_PICID_SERVICECOOLING:
+				UpdateLaserStatus();
+				break;
 			
 			// Laser Diode control
 			case FRAME_PICID_LASERDIODE_INPUT:
+#ifdef LASERIDCHECK_LASERDIODE
+				if (GetLaserID() == LASER_ID_DIODELASER)
+				{
+					if (last_pic_id != pic_id && last_menu_id != MenuID)
+						LaserDiodeInput_Init(pic_id);
+					LaserDiodeInput_Process(pic_id);
+				}
+				else
+					SetPicId(FRAME_PICID_WRONG_EMMITER, g_wDGUSTimeout);
+#else
 				if (last_pic_id != pic_id && last_menu_id != MenuID)
 					LaserDiodeInput_Init(pic_id);
 				LaserDiodeInput_Process(pic_id);
-				/*if (GetLaserID() == LASER_ID_DIODELASER)
-					LaserDiodeInput_Process(pic_id);
-				else
-					SetPicId(FRAME_PICID_WRONG_EMMITER, g_wDGUSTimeout);*/
+#endif
 				UpdateLaserStatus();
 				break;
 			case FRAME_PICID_LASERDIODE_TEMPERATUREOUT:

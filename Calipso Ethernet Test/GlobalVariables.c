@@ -23,7 +23,7 @@ float32_t temperature_overheat_solidstate = 32.0f;
 float32_t temperature_normal = 27.5f;
 
 // Flow global variable
-float32_t flow_low = 0.0f;
+float32_t flow_low = 2.0f;
 float32_t flow_normal = 4.0f;
 
 // Service menu password

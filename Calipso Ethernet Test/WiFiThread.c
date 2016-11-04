@@ -404,35 +404,119 @@ void WiFiThread_Idle()
 		
 		if (strcmp(tokenPtr[2], "GET") == 0)
 		{
+			bool print_all = (strcmp(tokenPtr[3], "ALL") == 0);
+				
 			// Send data to client
-			if (strcmp(tokenPtr[3], "T1") == 0)
+			if (strcmp(tokenPtr[3], "T1") == 0 || print_all)
 			{
-				sprintf(str, "T=%f C\n", temperature);
+				sprintf(str, "T1=%f C\n", temperature);
 				Driver_USART3.Send(str, strlen(str));
+				osSignalWait(WIFI_EVENT_SEND_COMPLETED, 100);
 			}
 			
-			if (strcmp(tokenPtr[3], "FLOW1") == 0)
+			if (strcmp(tokenPtr[3], "FLOW1") == 0 || print_all)
 			{
-				sprintf(str, "F1=%f l/m\n", flow1);
+				sprintf(str, "F1=%f l/min\n", flow1);
 				Driver_USART3.Send(str, strlen(str));
+				osSignalWait(WIFI_EVENT_SEND_COMPLETED, 100);
 			}
 			
-			if (strcmp(tokenPtr[3], "FLOW2") == 0)
+			if (strcmp(tokenPtr[3], "FLOW2") == 0 || print_all)
 			{
-				sprintf(str, "F2=%f l/m\n", flow2);
+				sprintf(str, "F2=%f l/min\n", flow2);
 				Driver_USART3.Send(str, strlen(str));
+				osSignalWait(WIFI_EVENT_SEND_COMPLETED, 100);
 			}
 			
-			if (strcmp(tokenPtr[3], "VOLTAGE1") == 0)
+			if (strcmp(tokenPtr[3], "VOLTAGE1") == 0 || print_all)
 			{
 				sprintf(str, "VM=%f V\n", VoltageMonitor);
 				Driver_USART3.Send(str, strlen(str));
+				osSignalWait(WIFI_EVENT_SEND_COMPLETED, 100);
 			}
 			
-			if (strcmp(tokenPtr[3], "VOLTAGE2") == 0)
+			if (strcmp(tokenPtr[3], "VOLTAGE2") == 0 || print_all)
 			{
 				sprintf(str, "CM=%f V\n", CurrentMonitor);
 				Driver_USART3.Send(str, strlen(str));
+				osSignalWait(WIFI_EVENT_SEND_COMPLETED, 100);
+			}
+			
+			if (strcmp(tokenPtr[3], "COOLON") == 0 || print_all)
+			{
+				sprintf(str, "COOLON=%f C\n", temperature_cool_on);
+				Driver_USART3.Send(str, strlen(str));
+				osSignalWait(WIFI_EVENT_SEND_COMPLETED, 100);
+			}
+			
+			if (strcmp(tokenPtr[3], "COOLOFF") == 0 || print_all)
+			{
+				sprintf(str, "COOLOFF=%f C\n", temperature_cool_off);
+				Driver_USART3.Send(str, strlen(str));
+				osSignalWait(WIFI_EVENT_SEND_COMPLETED, 100);
+			}
+			
+			if (strcmp(tokenPtr[3], "OVERHEAT1") == 0 || print_all)
+			{
+				sprintf(str, "OVERHEAT1=%f C\n", temperature_overheat);
+				Driver_USART3.Send(str, strlen(str));
+				osSignalWait(WIFI_EVENT_SEND_COMPLETED, 100);
+			}
+			
+			if (strcmp(tokenPtr[3], "OVERHEAT2") == 0 || print_all)
+			{
+				sprintf(str, "OVERHEAT2=%f C\n", temperature_overheat_solidstate);
+				Driver_USART3.Send(str, strlen(str));
+				osSignalWait(WIFI_EVENT_SEND_COMPLETED, 100);
+			}
+			
+			if (strcmp(tokenPtr[3], "T1NORMAL") == 0 || print_all)
+			{
+				sprintf(str, "T1NORMAL=%f C\n", temperature_normal);
+				Driver_USART3.Send(str, strlen(str));
+				osSignalWait(WIFI_EVENT_SEND_COMPLETED, 100);
+			}
+			
+			if (strcmp(tokenPtr[3], "FLOWLOW") == 0 || print_all)
+			{
+				sprintf(str, "FLOWLOW=%f l/min\n", flow_low);
+				Driver_USART3.Send(str, strlen(str));
+				osSignalWait(WIFI_EVENT_SEND_COMPLETED, 100);
+			}
+			
+			if (strcmp(tokenPtr[3], "FLOWNORMAL") == 0 || print_all)
+			{
+				sprintf(str, "FLOWNORMAL=%f l/min\n", flow_normal);
+				Driver_USART3.Send(str, strlen(str));
+				osSignalWait(WIFI_EVENT_SEND_COMPLETED, 100);
+			}
+			
+			if (strcmp(tokenPtr[3], "LDCOUNTER") == 0 || print_all)
+			{
+				sprintf(str, "LDCOUNTER=%d\n", FlushesGlobalLD);
+				Driver_USART3.Send(str, strlen(str));
+				osSignalWait(WIFI_EVENT_SEND_COMPLETED, 1000);
+			}
+			
+			if (strcmp(tokenPtr[3], "SSCOUNTER") == 0 || print_all)
+			{
+				sprintf(str, "SSCOUNTER=%d\n", FlushesGlobalSS);
+				Driver_USART3.Send(str, strlen(str));
+				osSignalWait(WIFI_EVENT_SEND_COMPLETED, 1000);
+			}
+			
+			if (strcmp(tokenPtr[3], "SS2COUNTER") == 0 || print_all)
+			{
+				sprintf(str, "SS2COUNTER=%d\n", FlushesGlobalSS2);
+				Driver_USART3.Send(str, strlen(str));
+				osSignalWait(WIFI_EVENT_SEND_COMPLETED, 1000);
+			}
+			
+			if (strcmp(tokenPtr[3], "LPCOUNTER") == 0 || print_all)
+			{
+				sprintf(str, "LPCOUNTER=%d\n", FlushesGlobalLP);
+				Driver_USART3.Send(str, strlen(str));
+				osSignalWait(WIFI_EVENT_SEND_COMPLETED, 1000);
 			}
 		}
 		

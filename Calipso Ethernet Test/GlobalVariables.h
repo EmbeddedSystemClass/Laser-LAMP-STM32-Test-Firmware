@@ -13,7 +13,7 @@
 
 #define FLASH_LASERDATA_BASE 0x080E0000
 
-//#define DEBUG_SOLID_STATE_LASER
+#define DEBUG_SOLID_STATE_LASER
 
 // DGUS control variables
 extern uint16_t g_wDGUSTimeout;
