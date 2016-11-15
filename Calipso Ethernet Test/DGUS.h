@@ -13,7 +13,7 @@
 #endif
 
 //#define OLD_STYLE_LASER_SW
-#define LASERIDCHECK_LASERDIODE
+//#define LASERIDCHECK_LASERDIODE
 //#define DEBUG_BRK
 #define CRC_CHECK
 //#define USE_DGUS_DRIVER

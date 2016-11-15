@@ -90,7 +90,18 @@ void LongPulseLaserWork_Process(uint16_t pic_id)
 	}
 	
 #ifdef DEBUG_SOLID_STATE_LASER
-	if (!(__MISC_GETSIMMERSENSOR()) && pic_id != 55 && pic_id != 53) 
+	static int16_t simmer_off_cnt = 0;
+	if (!(__MISC_GETSIMMERSENSOR()))
+	{
+		simmer_off_cnt++;
+		if (simmer_off_cnt > 10) simmer_off_cnt = 10;
+	}
+	else
+	{
+		simmer_off_cnt--;
+		if (simmer_off_cnt < 0) simmer_off_cnt = 0;
+	}
+	if ((simmer_off_cnt > 5) && pic_id != 55 && pic_id != 53) 
 	{
 		new_pic_id = FRAME_PICID_LONGPULSE_SIMMERSTART;
 		

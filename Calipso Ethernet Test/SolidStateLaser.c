@@ -330,7 +330,7 @@ void LampControlTIMInit(void)
 	
 	TIM_OC_InitTypeDef tim10_oc_init = {0};
 	tim10_oc_init.OCMode = TIM_OCMODE_PWM2;
-	tim10_oc_init.Pulse = 1000;
+	tim10_oc_init.Pulse = 200;
 	tim10_oc_init.OCPolarity = TIM_OCPOLARITY_HIGH;
 	tim10_oc_init.OCFastMode = TIM_OCFAST_ENABLE;
 	
@@ -522,13 +522,13 @@ void SetPulseDuration_us(uint16_t duration)
 {	
 	if (LaserStarted) __HAL_TIM_DISABLE(&hTIM9);
 	if (LaserStarted) __HAL_TIM_DISABLE(&hTIM10);
-	__HAL_TIM_SET_PRESCALER(&hTIM9, 8-1);
+	__HAL_TIM_SET_PRESCALER(&hTIM9, 16-1);
 	__HAL_TIM_SET_COUNTER(&hTIM9, 0);
-	__HAL_TIM_SET_AUTORELOAD(&hTIM9, duration * 21 * 2); // 50% duty cycle
+	__HAL_TIM_SET_AUTORELOAD(&hTIM9, duration * 21); // 50% duty cycle
 	//__HAL_TIM_URS_ENABLE(&hTIM9);
 	hTIM9.Instance->EGR |= TIM_EGR_UG;
-	__HAL_TIM_SET_COMPARE(&hTIM9, TIM_CHANNEL_1, duration * 21);
-	__HAL_TIM_SET_COMPARE(&hTIM9, TIM_CHANNEL_2, duration * 21);
+	__HAL_TIM_SET_COMPARE(&hTIM9, TIM_CHANNEL_1, (duration * 21)/2);
+	__HAL_TIM_SET_COMPARE(&hTIM9, TIM_CHANNEL_2, (duration * 21)/2);
 	if (LaserStarted) __HAL_TIM_ENABLE(&hTIM9);
 	if (LaserStarted) __HAL_TIM_ENABLE(&hTIM10);
 }
@@ -553,20 +553,26 @@ void SetPulseFrequency(float32_t frequency)
 	uint16_t period = 42000.0f / frequency;
 	
 	if (LaserStarted) __HAL_TIM_DISABLE(&hTIM10);
+	if (LaserStarted) __HAL_TIM_DISABLE(&hTIM9);
+	__HAL_TIM_SET_PRESCALER(&hTIM10, 3999);
 	__HAL_TIM_SET_COUNTER(&hTIM10, 0);
 	__HAL_TIM_SET_AUTORELOAD(&hTIM10, period);
 	hTIM10.Instance->EGR |= TIM_EGR_UG;
 	if (LaserStarted) __HAL_TIM_ENABLE(&hTIM10);
+	if (LaserStarted) __HAL_TIM_ENABLE(&hTIM9);
 }
 
 void SetPulseFrequency_(float32_t frequency)
 {
-	uint16_t period = 420000.0f / frequency;
+	uint16_t period = 42000.0f / frequency; // 10s period
 	
 	if (LaserStarted) __HAL_TIM_DISABLE(&hTIM10);
+	if (LaserStarted) __HAL_TIM_DISABLE(&hTIM10);
+	__HAL_TIM_SET_PRESCALER(&hTIM10, 39999);
 	__HAL_TIM_SET_COUNTER(&hTIM10, 0);
 	__HAL_TIM_SET_AUTORELOAD(&hTIM10, period);
 	hTIM10.Instance->EGR |= TIM_EGR_UG;
 	if (LaserStarted) __HAL_TIM_ENABLE(&hTIM10);
+	if (LaserStarted) __HAL_TIM_ENABLE(&hTIM9);
 }
 

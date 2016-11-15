@@ -95,7 +95,7 @@ void SolidStateLaserWork_Process(uint16_t pic_id)
 	{
 		frameData_SolidStateLaser.state = 2;
 		
-#ifdef DEBUG_SOLID_STATE_LASER
+#ifdef DEBUG_SOLID_STATE_LASER		
 		if (__MISC_GETSIMMERSENSOR()) 
 #endif
 		{

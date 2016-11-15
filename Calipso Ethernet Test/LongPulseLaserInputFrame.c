@@ -9,6 +9,11 @@
 #include <math.h>
 #include "arm_math.h"
 
+#define SHORT_DURATIONS_NUM	10
+#define STDRD_DURATIONS_NUM	9
+#define LONGP_DURATIONS_NUM	10
+#define VOLTAGES_NUM 8
+
 extern void SetDACValue(float32_t value);
 
 float32_t _programI;
@@ -16,46 +21,57 @@ float32_t _programI;
 uint16_t duration;
 uint16_t voltage;
 
-uint16_t duration_short[6] = {20, 40, 60, 80, 100, 120};
-uint16_t duration_stdrt[6] = {5, 10, 15, 20, 25, 30};
-uint16_t duration_long[6]	=	{40, 50, 60, 70, 80, 90};
+uint16_t duration_short[SHORT_DURATIONS_NUM]   = {20, 40, 60, 80, 100, 120, 140, 160, 180, 200};
+uint16_t duration_stdrt[STDRD_DURATIONS_NUM+1] = { 2,  3,  4,  5,   6,   7,   8,   9,  10,  10};
+uint16_t duration_long [LONGP_DURATIONS_NUM]   = {10, 12, 14, 16,  18,  20,  22,  24,  26,  28};
 
-/*uint16_t energy_short[5] = {1,	2,	3,	4,	5};
-uint16_t energy_stdrt[5] = {10,	15,	20,	25,	30};
-uint16_t energy_long [5] = {50,	60,	70,	80,	90};*/
 
-uint16_t energy_tbl[5*18] = 
-	{	1,	17, 34, 51,	68,
-		12,	14, 16,	18,	20,
-		22,	24,	25,	27,	28,
-		25,	28,	30,	33,	35,
-		31,	35,	38,	42,	45,
-		40,	43,	45,	48,	50,
+uint16_t energy_tbl[VOLTAGES_NUM*SHORT_DURATIONS_NUM*3] = 
+/*	350,	360,	370,	380,	390, 	400,	410,	420 - Voltages	*/
+	{	1		,2		,3		,4		,5		,6		,7		,8	,  //	200
+		7		,8		,9		,10		,11		,13		,14		,15	,  //	400
+		11	,14		,17		,20		,23		,26		,28		,31 ,  //	600
+		15	,19		,24		,28		,31		,35		,38		,41 ,  //	800
+		20	,25		,31		,36		,39		,43		,46		,49 ,  //	1000
+		27	,32		,36		,41		,48		,54		,61		,67 ,  //	1200
+		35	,39		,43		,47		,54		,61		,67		,74 ,  //	1400
+		42	,45		,49		,52		,58		,65		,71		,77 ,  //	1600
+		47	,52		,57		,62		,69		,76		,83		,90 ,  //	1800
+		50	,59		,68		,77		,84		,91		,98		,105,  //	2000
+			
+/*	330,	340,	350,	360,	370, 	380,	390,	400 - Voltages	*/
+		20		,30		,40		,50		,60		,70		,80		,90  ,  //	2
+		50		,60		,70		,80		,90		,100		,110		,120 ,  //	3
+		90		,100		,110		,120		,130		,140		,150		,160 ,  //	4
+		110	,120		,130		,140		,150		,160		,170		,180 ,  //	5
+		120	,140		,160		,180		,190		,200		,210		,220 ,  //	6
+		130	,150		,180		,200		,210		,230		,240		,250 ,  //	7
+		140	,170		,200		,230		,250		,270		,280		,300 ,  //	8
+		180	,200		,230		,250		,280		,310		,330		,360 ,  //	9
+		200	,230		,250		,280		,310		,340		,370		,400 ,  //	10
+    200	,230		,250		,280		,310		,340		,370		,400	,  //	--
 		
-		210,	225,	240,	255,	260,
-		350,	375,	400, 	425,	450,
-		470,	485,	500,	510,	520,
-		500,	525,	550,	875,	600,
-		550,	575,	600,	625,	650,
-		600,	620, 	640, 	660,	680,
-		
-		600,	630,	660,	690,	720,
-		700,	740,	780,	815,	850,
-		700,	745,	790,	830,	870,
-		700,	750,	800,	850,	900,
-		700,	750,	800,	850,	900,
-		700,	750,	800,	850,	900};
+		210	,230		,260		,280		,310		,330		,360		,380 ,  //	10
+		240	,260		,270		,290		,340		,380		,430		,470 ,  //	12
+		270	,280		,290		,300		,350		,410		,460		,510 ,  //	14
+		290	,300		,320		,330		,390		,440		,500		,550 ,  //	16
+		330	,340		,340		,350		,410		,480		,540		,600 ,  //	18
+		350	,360		,370		,380		,450		,510		,580		,640 ,  //	20
+		370	,390		,410		,430		,500		,570		,630		,700 ,  //	22
+		400	,420		,450		,470		,530		,590		,640		,700 ,  //	24
+		400	,430		,470		,500		,550		,600		,650		,700 ,  //	26
+		400	,430		,470		,500		,550		,600		,650		,700};  //	28
 		
 
-uint16_t voltage_short[5] = {380, 390, 400, 410, 420};
-uint16_t voltage_other[5] = {360, 370, 380, 390, 400};
+uint16_t voltage_short[VOLTAGES_NUM] = {350, 360, 370, 380, 390, 400, 410, 420};
+uint16_t voltage_other[VOLTAGES_NUM] = {330, 340, 350, 360, 370, 380, 390, 400};
 
 void LongPulseLaserInput_Init(uint16_t pic_id)
 {
 	frameData_SolidStateLaser.laserprofile.Frequency = 10;
 	frameData_SolidStateLaser.laserprofile.EnergyCnt = 0;
 	frameData_SolidStateLaser.lasersettings.EnergyInt = duration_short[frameData_SolidStateLaser.laserprofile.DurationCnt];
-	frameData_SolidStateLaser.lasersettings.Energy = energy_tbl[frameData_SolidStateLaser.laserprofile.EnergyCnt + frameData_SolidStateLaser.laserprofile.DurationCnt*5];
+	frameData_SolidStateLaser.lasersettings.Energy = energy_tbl[frameData_SolidStateLaser.laserprofile.EnergyCnt + frameData_SolidStateLaser.laserprofile.DurationCnt*VOLTAGES_NUM];
 	frameData_SolidStateLaser.mode = 0;
 	frameData_SolidStateLaser.state = 0;
 	frameData_SolidStateLaser.connector = 0;
@@ -98,33 +114,35 @@ void LongPulseLaserInput_Process(uint16_t pic_id)
 	FlushesCount = 1000000;
 	subFlushesCount = 1;
 	
-	/*if (frameData_SolidStateLaser.mode == 0)
+	if (frameData_SolidStateLaser.laserprofile.EnergyCnt > VOLTAGES_NUM-1) 
 	{
-		if (frameData_SolidStateLaser.laserprofile.EnergyCnt > 4) 
-		{
-			frameData_SolidStateLaser.laserprofile.EnergyCnt = 4;
-			update = true;
-		}
-	}
-	else
-	{
-		if (frameData_SolidStateLaser.laserprofile.EnergyCnt > 7) 
-		{
-			frameData_SolidStateLaser.laserprofile.EnergyCnt = 7;
-			update = true;
-		}
-	}*/
-	
-	if (frameData_SolidStateLaser.laserprofile.EnergyCnt > 4) 
-	{
-		frameData_SolidStateLaser.laserprofile.EnergyCnt = 4;
+		frameData_SolidStateLaser.laserprofile.EnergyCnt = VOLTAGES_NUM-1;
 		update = true;
 	}
 	
-	if (frameData_SolidStateLaser.laserprofile.DurationCnt > 5)
+	switch (frameData_SolidStateLaser.mode)
 	{
-		frameData_SolidStateLaser.laserprofile.DurationCnt = 5;
-		update = true;
+		case 0:
+			if (frameData_SolidStateLaser.laserprofile.DurationCnt > SHORT_DURATIONS_NUM-1)
+			{
+				frameData_SolidStateLaser.laserprofile.DurationCnt = SHORT_DURATIONS_NUM-1;
+				update = true;
+			}
+			break;
+		case 1:
+			if (frameData_SolidStateLaser.laserprofile.DurationCnt > STDRD_DURATIONS_NUM-1)
+			{
+				frameData_SolidStateLaser.laserprofile.DurationCnt = STDRD_DURATIONS_NUM-1;
+				update = true;
+			}
+			break;
+		case 2:
+			if (frameData_SolidStateLaser.laserprofile.DurationCnt > LONGP_DURATIONS_NUM-1)
+			{
+				frameData_SolidStateLaser.laserprofile.DurationCnt = LONGP_DURATIONS_NUM-1;
+				update = true;
+			}
+			break;
 	}
 	
 	if (frameData_SolidStateLaser.mode == 0)
@@ -163,11 +181,6 @@ void LongPulseLaserInput_Process(uint16_t pic_id)
 	
 	SetPulseFrequency_(frameData_SolidStateLaser.laserprofile.Frequency);
 	
-	//if (frameData_SolidStateLaser.mode != 0) energy = (uint16_t)((float32_t)(energy) * 1.15f);
-	
-	/*frameData_SolidStateLaser.lasersettings.EnergyInt = energy / 1000;
-	frameData_SolidStateLaser.lasersettings.Energy = (energy / 10) % 100;*/
-	
 	bool update_val = false;
 	if (mode != frameData_SolidStateLaser.mode)		{ update = true; update_val = true; };
 	switch (frameData_SolidStateLaser.mode)
@@ -175,7 +188,7 @@ void LongPulseLaserInput_Process(uint16_t pic_id)
 		case 0:
 			frameData_SolidStateLaser.lasersettings.EnergyInt = duration_short[frameData_SolidStateLaser.laserprofile.DurationCnt];
 			duration = frameData_SolidStateLaser.lasersettings.EnergyInt;
-			frameData_SolidStateLaser.lasersettings.Energy = energy_tbl[frameData_SolidStateLaser.laserprofile.EnergyCnt + frameData_SolidStateLaser.laserprofile.DurationCnt*5];
+			frameData_SolidStateLaser.lasersettings.Energy = energy_tbl[frameData_SolidStateLaser.laserprofile.EnergyCnt + frameData_SolidStateLaser.laserprofile.DurationCnt*VOLTAGES_NUM];
 		
 			voltage = voltage_short[frameData_SolidStateLaser.laserprofile.EnergyCnt];
 			break;
@@ -183,7 +196,7 @@ void LongPulseLaserInput_Process(uint16_t pic_id)
 		case 1:
 			frameData_SolidStateLaser.lasersettings.EnergyInt = duration_stdrt[frameData_SolidStateLaser.laserprofile.DurationCnt];
 			duration = frameData_SolidStateLaser.lasersettings.EnergyInt;
-			frameData_SolidStateLaser.lasersettings.Energy = energy_tbl[frameData_SolidStateLaser.laserprofile.EnergyCnt + frameData_SolidStateLaser.laserprofile.DurationCnt*5 + 30];
+			frameData_SolidStateLaser.lasersettings.Energy = energy_tbl[frameData_SolidStateLaser.laserprofile.EnergyCnt + frameData_SolidStateLaser.laserprofile.DurationCnt*VOLTAGES_NUM + SHORT_DURATIONS_NUM*VOLTAGES_NUM];
 		
 			voltage = voltage_other[frameData_SolidStateLaser.laserprofile.EnergyCnt];
 			break;
@@ -191,7 +204,7 @@ void LongPulseLaserInput_Process(uint16_t pic_id)
 		case 2:
 			frameData_SolidStateLaser.lasersettings.EnergyInt = duration_long[frameData_SolidStateLaser.laserprofile.DurationCnt];
 			duration = frameData_SolidStateLaser.lasersettings.EnergyInt;
-		frameData_SolidStateLaser.lasersettings.Energy = energy_tbl[frameData_SolidStateLaser.laserprofile.EnergyCnt + frameData_SolidStateLaser.laserprofile.DurationCnt*5 + 60];
+			frameData_SolidStateLaser.lasersettings.Energy = energy_tbl[frameData_SolidStateLaser.laserprofile.EnergyCnt + frameData_SolidStateLaser.laserprofile.DurationCnt*VOLTAGES_NUM + SHORT_DURATIONS_NUM*VOLTAGES_NUM*2];
 		
 			voltage = voltage_other[frameData_SolidStateLaser.laserprofile.EnergyCnt];
 			break;

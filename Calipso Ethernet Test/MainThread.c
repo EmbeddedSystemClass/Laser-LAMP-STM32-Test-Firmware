@@ -458,7 +458,7 @@ void MainThread (void const *argument) {
 				break;
 			
 			case FRAME_PICID_WRONG_EMMITER:
-				osDelay(200);
+				osDelay(800);
 				SetPicId(FRAME_PICID_MAINMENU, g_wDGUSTimeout);
 				break;
 			
