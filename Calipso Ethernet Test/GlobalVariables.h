@@ -149,6 +149,7 @@ void LaserPreset(uint16_t *freq, uint16_t *duration, uint16_t *energy, APP_PROFI
 void MelaninPreset(uint16_t melanin);
 void PhototypePreset(uint16_t phototype);
 
+void ClearGlobalVariables(void);
 void LoadGlobalVariables(void);
 void StoreGlobalVariables(void);
 

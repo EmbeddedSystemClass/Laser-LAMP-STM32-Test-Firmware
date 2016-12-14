@@ -122,7 +122,7 @@ void HAL_TIM_OC_DelayElapsedCallback(TIM_HandleTypeDef *htim)
 	{
 		if (DiodeLaser_en) 
 		{
-			__MISC_LASERLED_ON();
+			//__MISC_LASERLED_ON();
 			__MISC_LASERLED2_ON();
 			
 			if (Profile == PROFILE_SINGLE)
@@ -154,7 +154,7 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
 	{
 		if (DiodeLaser_en) 
 		{
-			__MISC_LASERLED_OFF();
+			//__MISC_LASERLED_OFF();
 			__MISC_LASERLED2_OFF();
 		}
 		//SoundOff();

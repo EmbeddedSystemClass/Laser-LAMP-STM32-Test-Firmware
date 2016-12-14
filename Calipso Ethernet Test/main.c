@@ -129,6 +129,7 @@ int main(void)
 	HAL_Delay(10);
 	
 	// Load global variables from flash
+	//ClearGlobalVariables();
 	LoadGlobalVariables();
 	
 	if (GetLaserID() == LASER_ID_DIODELASER)

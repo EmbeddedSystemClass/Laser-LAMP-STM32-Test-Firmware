@@ -3,7 +3,7 @@
 <title>Static Call Graph - [.\Objects\CalipsoEthernetTest.axf]</title></head>
 <body><HR>
 <H1>Static Call Graph for image .\Objects\CalipsoEthernetTest.axf</H1><HR>
-<BR><P>#&#060CALLGRAPH&#062# ARM Linker, 5060183: Last Updated: Sat Nov 26 12:34:43 2016
+<BR><P>#&#060CALLGRAPH&#062# ARM Linker, 5060183: Last Updated: Wed Dec 14 14:53:13 2016
 <BR><P>
 <H3>Maximum Stack Usage =        680 bytes + Unknown(Functions without stacksize, Cycles, Untraceable Function Pointers)</H3><H3>
 Call chain for Maximum Stack Depth:</H3>
@@ -759,8 +759,8 @@ Global Symbols
 <P><STRONG><a name="[107]"></a>atol</STRONG> (Thumb, 26 bytes, Stack size 16 bytes, atol.o(.text))
 <BR><BR>[Stack]<UL><LI>Max Depth = 96<LI>Call Chain = atol &rArr; strtol &rArr; _strtoul &rArr; __aeabi_errno_addr &rArr; __user_perthread_libspace
 </UL>
-<BR>[Calls]<UL><LI><a href="#[108]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_errno_addr
-<LI><a href="#[109]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;strtol
+<BR>[Calls]<UL><LI><a href="#[109]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;strtol
+<LI><a href="#[108]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_errno_addr
 </UL>
 <BR>[Called By]<UL><LI><a href="#[246]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;WiFiThread_Scan
 <LI><a href="#[245]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;WiFiThread_Idle
@@ -916,11 +916,11 @@ Global Symbols
 <LI><a href="#[1d9]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;LampControlTIMInit
 <LI><a href="#[1d8]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;LampControlGPIOInit
 <LI><a href="#[173]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SoundOn
-<LI><a href="#[217]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SPI_Initialize
 <LI><a href="#[213]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SPI_Control
 <LI><a href="#[98]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Initialize
 <LI><a href="#[226]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SpeakerDMA
 <LI><a href="#[236]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;USART_Initialize
+<LI><a href="#[217]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SPI_Initialize
 <LI><a href="#[257]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;fat_handle_get
 <LI><a href="#[2d3]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;mc_control_lock
 <LI><a href="#[298]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;fat_mount
@@ -1034,9 +1034,9 @@ Global Symbols
 <P><STRONG><a name="[109]"></a>strtol</STRONG> (Thumb, 112 bytes, Stack size 32 bytes, strtol.o(.text))
 <BR><BR>[Stack]<UL><LI>Max Depth = 80<LI>Call Chain = strtol &rArr; _strtoul &rArr; __aeabi_errno_addr &rArr; __user_perthread_libspace
 </UL>
-<BR>[Calls]<UL><LI><a href="#[108]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_errno_addr
-<LI><a href="#[129]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;_strtoul
+<BR>[Calls]<UL><LI><a href="#[129]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;_strtoul
 <LI><a href="#[11c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__rt_ctype_table
+<LI><a href="#[108]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_errno_addr
 </UL>
 <BR>[Called By]<UL><LI><a href="#[107]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;atol
 </UL>
@@ -1188,8 +1188,8 @@ Global Symbols
 <P><STRONG><a name="[129]"></a>_strtoul</STRONG> (Thumb, 158 bytes, Stack size 40 bytes, _strtoul.o(.text))
 <BR><BR>[Stack]<UL><LI>Max Depth = 48<LI>Call Chain = _strtoul &rArr; __aeabi_errno_addr &rArr; __user_perthread_libspace
 </UL>
-<BR>[Calls]<UL><LI><a href="#[108]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_errno_addr
-<LI><a href="#[13f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;_chval
+<BR>[Calls]<UL><LI><a href="#[13f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;_chval
+<LI><a href="#[108]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_errno_addr
 </UL>
 <BR>[Called By]<UL><LI><a href="#[109]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;strtol
 </UL>
@@ -1983,11 +1983,11 @@ Global Symbols
 <LI><a href="#[1d9]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;LampControlTIMInit
 <LI><a href="#[1d8]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;LampControlGPIOInit
 <LI><a href="#[173]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SoundOn
-<LI><a href="#[217]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SPI_Initialize
 <LI><a href="#[213]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SPI_Control
 <LI><a href="#[98]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Initialize
 <LI><a href="#[a1]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Control
 <LI><a href="#[22f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;USART_Control
+<LI><a href="#[217]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SPI_Initialize
 </UL>
 
 <P><STRONG><a name="[184]"></a>HAL_GPIO_ReadPin</STRONG> (Thumb, 16 bytes, Stack size 0 bytes, stm32f4xx_hal_gpio.o(i.HAL_GPIO_ReadPin))
@@ -2272,7 +2272,7 @@ Global Symbols
 <LI><a href="#[1d9]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;LampControlTIMInit
 </UL>
 
-<P><STRONG><a name="[1ad]"></a>HAL_TIM_OC_DelayElapsedCallback</STRONG> (Thumb, 106 bytes, Stack size 8 bytes, solidstatelaser.o(i.HAL_TIM_OC_DelayElapsedCallback))
+<P><STRONG><a name="[1ad]"></a>HAL_TIM_OC_DelayElapsedCallback</STRONG> (Thumb, 96 bytes, Stack size 8 bytes, solidstatelaser.o(i.HAL_TIM_OC_DelayElapsedCallback))
 <BR><BR>[Stack]<UL><LI>Max Depth = 100<LI>Call Chain = HAL_TIM_OC_DelayElapsedCallback &rArr; SoundOn &rArr; HAL_TIM_OC_Start_DMA &rArr; HAL_DMA_Start_IT &rArr; DMA_SetConfig
 </UL>
 <BR>[Calls]<UL><LI><a href="#[177]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_GPIO_WritePin
@@ -2339,7 +2339,7 @@ Global Symbols
 <LI><a href="#[6c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;TIM_DMADelayPulseCplt
 </UL>
 
-<P><STRONG><a name="[1af]"></a>HAL_TIM_PeriodElapsedCallback</STRONG> (Thumb, 316 bytes, Stack size 8 bytes, solidstatelaser.o(i.HAL_TIM_PeriodElapsedCallback))
+<P><STRONG><a name="[1af]"></a>HAL_TIM_PeriodElapsedCallback</STRONG> (Thumb, 306 bytes, Stack size 8 bytes, solidstatelaser.o(i.HAL_TIM_PeriodElapsedCallback))
 <BR><BR>[Stack]<UL><LI>Max Depth = 100<LI>Call Chain = HAL_TIM_PeriodElapsedCallback &rArr; SoundOn &rArr; HAL_TIM_OC_Start_DMA &rArr; HAL_DMA_Start_IT &rArr; DMA_SetConfig
 </UL>
 <BR>[Calls]<UL><LI><a href="#[177]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_GPIO_WritePin
@@ -5555,8 +5555,8 @@ Local Symbols
 <P><STRONG><a name="[21e]"></a>Enable_GPIO_Clock</STRONG> (Thumb, 346 bytes, Stack size 8 bytes, spi_stm32f4xx.o(i.Enable_GPIO_Clock))
 <BR><BR>[Stack]<UL><LI>Max Depth = 8<LI>Call Chain = Enable_GPIO_Clock
 </UL>
-<BR>[Called By]<UL><LI><a href="#[217]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SPI_Initialize
-<LI><a href="#[213]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SPI_Control
+<BR>[Called By]<UL><LI><a href="#[213]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SPI_Control
+<LI><a href="#[217]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SPI_Initialize
 </UL>
 
 <P><STRONG><a name="[ad]"></a>SPI2_Control</STRONG> (Thumb, 18 bytes, Stack size 16 bytes, spi_stm32f4xx.o(i.SPI2_Control))
@@ -5670,8 +5670,8 @@ Local Symbols
 <P><STRONG><a name="[218]"></a>SPI_PowerControl</STRONG> (Thumb, 408 bytes, Stack size 16 bytes, spi_stm32f4xx.o(i.SPI_PowerControl))
 <BR><BR>[Stack]<UL><LI>Max Depth = 24<LI>Call Chain = SPI_PowerControl &rArr; HAL_NVIC_DisableIRQ
 </UL>
-<BR>[Calls]<UL><LI><a href="#[21f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SPI_PeripheralReset
-<LI><a href="#[20e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_NVIC_DisableIRQ
+<BR>[Calls]<UL><LI><a href="#[20e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_NVIC_DisableIRQ
+<LI><a href="#[21f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SPI_PeripheralReset
 </UL>
 <BR>[Called By]<UL><LI><a href="#[a8]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SPI2_PowerControl
 </UL>

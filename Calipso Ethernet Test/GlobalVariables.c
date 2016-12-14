@@ -589,6 +589,47 @@ void fmemcpy(uint8_t* dst, uint8_t* src, uint16_t len)
 	}
 }
 
+void ClearGlobalVariables(void)
+{
+	FLASH_EraseInitTypeDef flash_erase = {0};
+	
+	flash_erase.TypeErase = FLASH_TYPEERASE_SECTORS;
+	flash_erase.Banks = FLASH_BANK_1;
+	flash_erase.Sector = FLASH_SECTOR_11;
+	flash_erase.NbSectors = 1;
+	flash_erase.VoltageRange = FLASH_VOLTAGE_RANGE_3;
+	
+	uint32_t sector_error = 0;
+	
+	while (HAL_FLASH_Unlock() != HAL_OK);
+	HAL_FLASHEx_Erase(&flash_erase, &sector_error);
+	
+	FLASH_WaitForLastOperation((uint32_t)50000U);
+	HAL_FLASH_Lock();
+	
+	while (HAL_FLASH_Unlock() != HAL_OK);
+	
+	/*HAL_FLASH_Program(FLASH_TYPEPROGRAM_WORD, FLASH_LASERDATA_BASE, frameData_LaserDiode.PulseCounter);
+	HAL_FLASH_Program(FLASH_TYPEPROGRAM_WORD, FLASH_LASERDATA_BASE + 4, frameData_SolidStateLaser.PulseCounter);*/
+	
+	FlushesGlobalLD = 0;
+	FlushesGlobalSS = 0;
+	FlushesGlobalSS2 = 0;
+	FlushesGlobalLP = 0;
+	
+	// Copy presets
+	fmemcpy((void*)&global_flash_data->LaserDiodePulseCounter, (void*)&FlushesGlobalLD, sizeof(uint32_t));
+	fmemcpy((void*)&global_flash_data->SolidStatePulseCounter, (void*)&FlushesGlobalSS, sizeof(uint32_t));
+	fmemcpy((void*)&global_flash_data->SolidStatePulseCounter2, (void*)&FlushesGlobalSS2, sizeof(uint32_t));
+	fmemcpy((void*)&global_flash_data->LongPulsePulseCounter, (void*)&FlushesGlobalLP, sizeof(uint32_t));
+	
+	// Copy profile states
+	fmemcpy((void*)&global_flash_data->m_structLaserProfile, (void*)&m_structLaserProfile, sizeof(m_structLaserProfile));
+	fmemcpy((void*)&global_flash_data->m_structLaserSettings, (void*)&m_structLaserSettings, sizeof(m_structLaserSettings));
+	
+	HAL_FLASH_Lock();
+}
+
 void StoreGlobalVariables(void)
 {
 	FLASH_EraseInitTypeDef flash_erase = {0};
