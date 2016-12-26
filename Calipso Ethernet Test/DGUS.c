@@ -301,6 +301,36 @@ void ReadVariable(uint16_t  addr, void **data, uint8_t num)
 #endif
 }
 
+static inline int bcd_decimal(uint8_t hex)
+{
+    int dec = ((hex & 0xF0) >> 4) * 10 + (hex & 0x0F);
+    return dec;
+}  
+
+static inline int bcd_decimal16(uint16_t hex)
+{
+    int dec = ((hex & 0xF000) >> 12) * 1000 + ((hex & 0xF00) >> 8) * 100 + ((hex & 0xF0) >> 4) * 10 + (hex & 0x0F);
+    return dec;
+}  
+
+void GetDateTime(uint32_t timeout, DWIN_TIMEDATE* datetime)
+{
+	DWIN_TIMEDATE* pvalue;
+	ReadRegister(0x20, (void**)&pvalue, 16);
+	
+	if (osSignalWait(DGUS_EVENT_SEND_COMPLETED, timeout).status != osEventTimeout)
+		if (osSignalWait(DGUS_EVENT_RECEIVE_COMPLETED, timeout).status != osEventTimeout)
+		{
+			//convert_array_w((uint16_t*)datetime, (uint16_t*)pvalue, 16);
+			datetime->seconds = bcd_decimal(pvalue->seconds);			
+			datetime->minutes = bcd_decimal(pvalue->minutes);
+			datetime->hours   = bcd_decimal(pvalue->hours);
+			datetime->day     = bcd_decimal(pvalue->day);
+			datetime->week    = bcd_decimal(pvalue->week);
+			datetime->year    = bcd_decimal(pvalue->year);
+		}
+}
+
 uint16_t GetPicId(uint32_t timeout, uint16_t pic_id)
 {
 	uint16_t* pvalue;

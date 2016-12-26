@@ -472,6 +472,11 @@
               <FileType>1</FileType>
               <FilePath>.\LongPulseLaserWorkFrame.c</FilePath>
             </File>
+            <File>
+              <FileName>CoolingServiceFrame.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\CoolingServiceFrame.c</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>

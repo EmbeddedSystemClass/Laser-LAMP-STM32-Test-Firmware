@@ -27,12 +27,12 @@ Project File Date:  11/22/2016
 <h2>Output:</h2>
 *** Using Compiler 'V5.06 update 2 (build 183)', folder: 'C:\Keil_v5\ARM\ARMCC\Bin'
 Build target 'EthernetTest'
-compiling CoolingServiceFrame.c...
-CoolingServiceFrame.c(90): warning:  #550-D: variable "ready" was set but never used
-  	uint16_t ready;
-CoolingServiceFrame.c: 1 warning, 0 errors
+compiling DGUS.c...
+DGUS.c(310): warning:  #177-D: function "bcd_decimal16" was declared but never referenced
+  static inline int bcd_decimal16(uint16_t hex)
+DGUS.c: 1 warning, 0 errors
 linking...
-Program Size: Code=88064 RO-data=3356 RW-data=2024 ZI-data=67208  
+Program Size: Code=88220 RO-data=3356 RW-data=2024 ZI-data=67224  
 ".\Objects\CalipsoEthernetTest.axf" - 0 Error(s), 1 Warning(s).
 
 <h2>Software Packages used:</h2>
@@ -242,7 +242,7 @@ Package Vendor: Keil
 
    * Component: Keil::CMSIS Driver:SPI:2.8
       Source file:   CMSIS\Driver\SPI_STM32F4xx.c
-Build Time Elapsed:  00:00:02
+Build Time Elapsed:  00:00:01
 </pre>
 </body>
 </html>

@@ -307,6 +307,7 @@ void UpdateLaserStatus()
 void MainThread (void const *argument) {
 	static uint16_t last_pic_id = 0;
 	static MENU_ID last_menu_id = MENU_ID_MENU;
+	static DWIN_TIMEDATE datetime = {0};
 	
 	LaserDiodeInput_Init(pic_id);
 	SolidStateLaserInput_Init(pic_id);
@@ -315,6 +316,7 @@ void MainThread (void const *argument) {
   while (1) {
     ; // Insert thread code here...
 		pic_id = GetPicId(g_wDGUSTimeout, pic_id);		
+		GetDateTime(g_wDGUSTimeout, &datetime);
 		
 		last_menu_id = MenuID;
 		UpdateLaserState(pic_id);
@@ -459,6 +461,11 @@ void MainThread (void const *argument) {
 				LongPulseLaserPrepare_Process(pic_id);
 				UpdateLaserStatus();
 				break;
+			
+			case FRAME_PICID_BASICSETTINGS:
+				UpdateLaserStatus();
+				break;
+				
 			
 			case FRAME_PICID_WRONG_EMMITER:
 				osDelay(800);

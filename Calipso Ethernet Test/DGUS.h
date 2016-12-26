@@ -168,6 +168,8 @@ extern UART_HandleTypeDef huart1;
 
 #define FRAME_PICID_SERVICECOOLING						  63			// Process
 
+#define FRAME_PICID_BASICSETTINGS							  64			// Process
+
 #define IS_LASERDIODE(pic_id) (pic_id >= 19 && pic_id <= 32)
 #define IS_SOLIDSTATE(pic_id) (pic_id >= 37 && pic_id <= 42)
 #define IS_LONGPULSE (pic_id) (pic_id >= 53 && pic_id <= 62)
@@ -366,6 +368,18 @@ typedef struct __attribute__((__packed__)) DWIN_HEADERREG_STRUCT
 	uint8_t		addr;
 } DWIN_HEADERREG;
 
+typedef struct __attribute__((__packed__)) DWIN_TIMEDATE_STRUCT
+{
+	uint8_t		year;
+	uint8_t	  month;
+	uint8_t		day;
+	uint8_t		week;
+	uint8_t		hours;
+	uint8_t		minutes;
+	uint8_t		seconds;
+	uint8_t		data[9];
+} DWIN_TIMEDATE;
+
 uint16_t convert_w(uint16_t value);
 uint32_t convert_d(uint32_t value);
 
@@ -384,6 +398,7 @@ void ReadVariable (uint16_t addr, void **data, uint8_t num);
 
 void WriteVariableConvert16(uint16_t addr, void  *data, uint8_t num);
 
+void GetDateTime(uint32_t timeout, DWIN_TIMEDATE* datetime);
 uint16_t GetPicId(uint32_t timeout, uint16_t pic_id);
 void SetPicId(uint16_t pic_id, uint16_t timeout);
 
