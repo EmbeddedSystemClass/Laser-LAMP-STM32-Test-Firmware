@@ -17,6 +17,7 @@
 ".\objects\longpulselaserinputframe.o"
 ".\objects\longpulselaserprepareframe.o"
 ".\objects\longpulselaserworkframe.o"
+".\objects\coolingserviceframe.o"
 ".\objects\mainthread.o"
 ".\objects\spithread.o"
 ".\objects\wifithread.o"

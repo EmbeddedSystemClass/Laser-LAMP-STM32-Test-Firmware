@@ -321,6 +321,15 @@ typedef struct __attribute__((__packed__)) DGUS_COOLINGSETTINGS_STRUCT
 	uint16_t FlowReady;
 } DGUS_COOLINGSETTINGS, *PDGUS_COOLINGSETTINGS_STRUCT;
 
+typedef struct __attribute__((__packed__)) DGUS_COOLINGSETTINGSSTATE_STRUCT
+{	
+	// Cooling state
+	uint16_t TemperatureReady;
+	uint16_t Overheating;
+	uint16_t FlowLow;
+	uint16_t FlowReady;
+} DGUS_COOLINGSETTINGSSTATE, *PDGUS_COOLINGSETTINGSSTATE_STRUCT;
+
 /* ************************** DGUS CONTROL STRUCT ************************* */
 
 typedef struct __attribute__((__packed__)) DWIN_HEADERDATA_REQ_STRUCT

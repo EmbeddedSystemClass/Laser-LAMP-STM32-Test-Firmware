@@ -48,6 +48,8 @@ extern void  		  WifiScanningFrame_Process(uint16_t pic_id);
 extern void WifiAuthenticationFrame_Process(uint16_t pic_id);
 extern void WiFiLinkFrame_Process(void);
 
+extern void CoolingServiceFrame_Process(uint16_t pic_id);
+
 int Init_Main_Thread (void) {
 
   tid_MainThread = osThreadCreate (osThread(MainThread), NULL);
@@ -338,6 +340,7 @@ void MainThread (void const *argument) {
 				break;
 			case FRAME_PICID_SERVICE_BASICSETTINGS:			break; // Blank picture, for future release
 			case FRAME_PICID_SERVICECOOLING:
+				CoolingServiceFrame_Process(pic_id);
 				UpdateLaserStatus();
 				break;
 			
