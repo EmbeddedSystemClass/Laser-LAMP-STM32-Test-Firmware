@@ -59,6 +59,8 @@ void LaserDiodePrepare_Process(uint16_t pic_id)
 			}
 			break;
 		case FRAME_PICID_LASERDIODE_PREPARETIMER:
+			CoolSet((frameData_LaserDiode.cooling + 1) * 17);
+		
 			frameData_LaserDiode.timer.timer_minutes = m_wMinutes;
 			frameData_LaserDiode.timer.timer_seconds = m_wSeconds;
 			if (!prepare)

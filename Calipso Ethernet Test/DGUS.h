@@ -306,6 +306,21 @@ typedef struct __attribute__((__packed__)) DGUS_SOLIDSTATELASER_STRUCT
 	uint16_t connector;
 } DGUS_SOLIDSTATELASER, *PDGUS_SOLIDSTATELASER;
 
+typedef struct __attribute__((__packed__)) DGUS_COOLINGSETTINGS_STRUCT
+{
+	uint16_t CoolOnT;
+	uint16_t CoolOffT;
+	uint16_t DiodeOverheatingT;
+	uint16_t SSOverheatingT;
+	uint16_t FlowLowThreshold;
+	uint16_t FlowNormalThreshold;
+	// Cooling state
+	uint16_t TemperatureReady;
+	uint16_t Overheating;
+	uint16_t FlowLow;
+	uint16_t FlowReady;
+} DGUS_COOLINGSETTINGS, *PDGUS_COOLINGSETTINGS_STRUCT;
+
 /* ************************** DGUS CONTROL STRUCT ************************* */
 
 typedef struct __attribute__((__packed__)) DWIN_HEADERDATA_REQ_STRUCT

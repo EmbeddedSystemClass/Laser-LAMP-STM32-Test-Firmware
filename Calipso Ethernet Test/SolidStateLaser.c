@@ -21,7 +21,11 @@ void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin)
 				if (HAL_GPIO_ReadPin(GPIOF, GPIO_PIN_FOOTSWITCH) == GPIO_PIN_RESET)
 					footswitch_on = true;
 				else
+				{
 					footswitch_on = false;
+					__MISC_LASERLED2_OFF();
+					__MISC_LASERLED_OFF();
+				}
 			}
 			break;
 		case GPIO_PIN_3:	
@@ -132,6 +136,8 @@ void HAL_TIM_OC_DelayElapsedCallback(TIM_HandleTypeDef *htim)
 			}
 			
 		}
+		else 
+			__MISC_LASERLED2_OFF();
 		
 		if (SolidStateLaser_en) 
 		{

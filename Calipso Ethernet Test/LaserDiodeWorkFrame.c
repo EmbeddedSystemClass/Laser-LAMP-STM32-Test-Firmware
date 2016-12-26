@@ -38,6 +38,10 @@ void LaserDiodeWork_Process(uint16_t pic_id)
 		DiodeLaserOnePulse_en = false;
 	}
 	
+	// Control peltier cooling
+	CoolOn();
+	CoolSet((frameData_LaserDiode.cooling + 1) * 17);
+	
 	if (frameData_LaserDiode.buttons.onReadyBtn != 0)
 	{
 		// On Ready Pressed

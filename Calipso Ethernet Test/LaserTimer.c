@@ -44,7 +44,11 @@ static void LaserTimer_Callback(void const *arg) {
 			if (switch_filter > switch_filter_threshold)
 				LampControlPulseStart();
 			else
+			{
 				LampControlPulseStop();
+				__MISC_LASERLED2_OFF();
+				__MISC_LASERLED_OFF();
+			}
 		}
 		
 		if (DiodeLaser_en)
@@ -52,7 +56,11 @@ static void LaserTimer_Callback(void const *arg) {
 			if (switch_filter > switch_filter_threshold)
 				DiodeControlPulseStart();
 			else
+			{
 				DiodeControlPulseStop();
+				__MISC_LASERLED2_OFF();
+				__MISC_LASERLED_OFF();
+			}
 		}
 		
 		if (DiodeLaserOnePulse_en)
