@@ -2,6 +2,9 @@
 #include "stm32f4xx_hal_flash.h"
 #include <string.h>
 
+//Date & time
+DWIN_TIMEDATE datetime = {0};
+
 // Flash data
 PFLASH_GLOBAL_DATA global_flash_data = (PFLASH_GLOBAL_DATA)FLASH_LASERDATA_BASE;
 

@@ -44,4 +44,6 @@
 .\objects\mainthread.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\string.h
 .\objects\mainthread.o: LaserMisc.h
 .\objects\mainthread.o: SolidStateLaser.h
+.\objects\mainthread.o: SDCard.h
+.\objects\mainthread.o: C:\Keil_v5\ARM\PACK\Keil\MDK-Middleware\7.1.0\FileSystem\Include\rl_fs.h
 .\objects\mainthread.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdlib.h

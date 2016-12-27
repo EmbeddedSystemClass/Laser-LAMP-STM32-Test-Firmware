@@ -204,11 +204,19 @@ int main(void)
 			}
 		}
 		
+		log_out(datetime, "Temperature:%.2f\r\n", temperature);
+		
 		if (temperature > temperature_cool_on)
+		{
+			log_out(datetime, "Cooling on\r\n");
 			__MISC_RELAY1_ON();
+		}
 		
 		if (temperature < temperature_cool_off)
+		{
+			log_out(datetime, "Cooling off\r\n");
 			__MISC_RELAY1_OFF();
+		}
 		
 		//osSignalSet(tid_WiFiThread, WIFI_EVENT_TEMPERATURE_UPDATE);
   }

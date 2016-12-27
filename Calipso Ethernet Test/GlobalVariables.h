@@ -15,6 +15,9 @@
 
 #define DEBUG_SOLID_STATE_LASER
 
+//Date & time
+extern DWIN_TIMEDATE datetime;
+
 // DGUS control variables
 extern uint16_t g_wDGUSTimeout;
 
@@ -79,6 +82,30 @@ extern volatile uint16_t switch_filter;
 extern uint16_t switch_filter_threshold;
 extern DGUS_LASERDIODE frameData_LaserDiode;
 extern DGUS_SOLIDSTATELASER frameData_SolidStateLaser;
+
+// Log Structures
+typedef struct LOG_EVENT_STRUCT
+{
+	DWIN_TIMEDATE time;
+	uint16_t cmd;
+	uint16_t pic_id;
+	
+	uint16_t isstart; // on/off
+	uint16_t laser_id;
+	uint16_t freq;
+	uint16_t duration;
+	uint16_t power;
+	
+	float32_t temperature;
+	uint16_t flow;
+	uint16_t cooling; // on/off
+	uint16_t pump; // on/off
+	uint16_t relays;
+	
+	uint32_t pulse_counter;
+	
+	uint16_t log_idx;
+} LOG_EVENT, *PLOG_EVENT;
 
 // Laser Diode Data Structures
 

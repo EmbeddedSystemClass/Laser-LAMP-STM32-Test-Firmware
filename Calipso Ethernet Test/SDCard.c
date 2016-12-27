@@ -2,6 +2,11 @@
 
 #include "rl_fs.h"
 #include <stdio.h>
+#include <stdarg.h>
+
+FILE* flog;
+bool sdcard_ready = false;
+bool start_logging = false;
 
 /*-----------------------------------------------------------------------------
  *        Extract drive specification from the input string
@@ -51,10 +56,12 @@ static void cmd_format (char *par) {
     }
     else {
       printf ("Formatting failed.\n");
+			sdcard_ready = false;
     }
   }
   else {
     printf ("Formatting canceled.\n");
+		sdcard_ready = false;
   }
 }
 
@@ -70,6 +77,7 @@ void init_filesystem (void)
     stat = fmount ("M0:");
     if (stat == fsOK) {
       printf ("Drive M0 ready!\n");
+			sdcard_ready = true;
     }
     else if (stat == fsNoFileSystem) {
       /* Format the drive */
@@ -78,9 +86,48 @@ void init_filesystem (void)
     }
     else {
       printf ("Drive M0 mount failed with error code %d\n", stat);
+			sdcard_ready = false;
     }
   }
   else {
     printf ("Drive M0 initialization failed!\n");
+		sdcard_ready = false;
   }
+}
+
+bool start_log(DWIN_TIMEDATE date)
+{
+	if (sdcard_ready)
+	{
+		flog = fopen("log.txt", "ab");
+		if (flog == NULL) return false;
+		fprintf(flog, "20%02d:%02d:%02d\t%02d:%02d:%02d\tSystem start\n\r", date.year, date.month, date.day, date.hours, date.minutes, date.seconds);
+		fclose(flog);
+		
+		start_logging = true;
+		
+		return true;
+	}
+	else
+		return false;
+}
+
+bool log_out(DWIN_TIMEDATE date, char* format, ...)
+{
+	if (sdcard_ready && start_logging)
+	{
+		flog = fopen("log.txt", "ab");
+		if (flog == NULL) return false;
+		fprintf(flog, "20%02d:%02d:%02d\t%02d:%02d:%02d\t", date.year, date.month, date.day, date.hours, date.minutes, date.seconds);
+		
+		va_list argptr;
+		va_start(argptr, format);
+		fprintf(flog, format, argptr);
+		va_end(argptr);
+		
+		fclose(flog);
+		return true;
+	}
+	else
+		return false;
 }
