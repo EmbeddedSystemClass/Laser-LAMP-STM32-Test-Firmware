@@ -1,5 +1,5 @@
 Dependencies for Project 'CalipsoEthernetTest', Target 'EthernetTest': (DO NOT MODIFY !)
-F (.\main.c)(0x5861DBA7)(-c --cpu Cortex-M4.fp -D__RTX -g -O0 --apcs=interwork --split_sections-I "C:\Users\FxSlava\Documents\Laser-LAMP-STM32-Test-Firmware\Calipso Ethernet Test\RTE"-I "C:\Users\FxSlava\Documents\Laser-LAMP-STM32-Test-Firmware\Calipso Ethernet Test\RTE\Device\STM32F407ZGTx"-I C:\Keil_v5\ARM\PACK\ARM\CMSIS\5.0.0-Beta4\CMSIS\Driver\Include-I C:\Keil_v5\ARM\PACK\ARM\CMSIS\5.0.0-Beta4\CMSIS\Include-I C:\Keil_v5\ARM\PACK\ARM\CMSIS\5.0.0-Beta4\CMSIS\RTOS\RTX\INC-I C:\Keil_v5\ARM\PACK\Keil\ARM_Compiler\1.1.1\Include-I C:\Keil_v5\ARM\PACK\Keil\MDK-Middleware\7.1.0\FileSystem\Include-I C:\Keil_v5\ARM\PACK\Keil\STM32F4xx_DFP\2.9.0\Drivers\CMSIS\Device\ST\STM32F4xx\Include-I C:\Keil_v5\ARM\PACK\Keil\STM32F4xx_DFP\2.9.0\Drivers\STM32F4xx_HAL_Driver\Inc-D__UVISION_VERSION="520" -D_RTE_ -DSTM32F407xx -DARM_MATH_CM4 --C99-o .\objects\main.o --omf_browse .\objects\main.crf --depend .\objects\main.d)
+F (.\main.c)(0x586234E8)(-c --cpu Cortex-M4.fp -D__RTX -g -O0 --apcs=interwork --split_sections-I "C:\Users\FxSlava\Documents\Laser-LAMP-STM32-Test-Firmware\Calipso Ethernet Test\RTE"-I "C:\Users\FxSlava\Documents\Laser-LAMP-STM32-Test-Firmware\Calipso Ethernet Test\RTE\Device\STM32F407ZGTx"-I C:\Keil_v5\ARM\PACK\ARM\CMSIS\5.0.0-Beta4\CMSIS\Driver\Include-I C:\Keil_v5\ARM\PACK\ARM\CMSIS\5.0.0-Beta4\CMSIS\Include-I C:\Keil_v5\ARM\PACK\ARM\CMSIS\5.0.0-Beta4\CMSIS\RTOS\RTX\INC-I C:\Keil_v5\ARM\PACK\Keil\ARM_Compiler\1.1.1\Include-I C:\Keil_v5\ARM\PACK\Keil\MDK-Middleware\7.1.0\FileSystem\Include-I C:\Keil_v5\ARM\PACK\Keil\STM32F4xx_DFP\2.9.0\Drivers\CMSIS\Device\ST\STM32F4xx\Include-I C:\Keil_v5\ARM\PACK\Keil\STM32F4xx_DFP\2.9.0\Drivers\STM32F4xx_HAL_Driver\Inc-D__UVISION_VERSION="520" -D_RTE_ -DSTM32F407xx -DARM_MATH_CM4 --C99-o .\objects\main.o --omf_browse .\objects\main.crf --depend .\objects\main.d)
 I (main.h)(0x57C5370E)
 I (C:\Keil_v5\ARM\PACK\Keil\STM32F4xx_DFP\2.9.0\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal.h)(0x57307F7E)
 I (C:\Users\FxSlava\Documents\Laser-LAMP-STM32-Test-Firmware\Calipso Ethernet Test\RTE\Device\STM32F407ZGTx\stm32f4xx_hal_conf.h)(0x57BFF41B)
@@ -37,15 +37,15 @@ I (C:\Keil_v5\ARM\PACK\ARM\CMSIS\5.0.0-Beta4\CMSIS\Driver\Include\Driver_USART.h
 I (C:\Keil_v5\ARM\PACK\ARM\CMSIS\5.0.0-Beta4\CMSIS\Driver\Include\Driver_Common.h)(0x57354AC8)
 I (C:\Keil_v5\ARM\ARMCC\include\stddef.h)(0x56FE5EFE)
 I (C:\Keil_v5\ARM\ARMCC\include\stdbool.h)(0x56FE5EFC)
-I (DGUS.h)(0x58610656)
+I (DGUS.h)(0x58623512)
 I (C:\Keil_v5\ARM\PACK\ARM\CMSIS\5.0.0-Beta4\CMSIS\RTOS\RTX\INC\cmsis_os.h)(0x5735B1C0)
 I (DS18B20.h)(0x57DFA6CC)
 I (C:\Keil_v5\ARM\ARMCC\include\math.h)(0x56FE5EF6)
 I (C:\Keil_v5\ARM\PACK\ARM\CMSIS\5.0.0-Beta4\CMSIS\Include\arm_math.h)(0x57354AC8)
 I (C:\Keil_v5\ARM\ARMCC\include\string.h)(0x56FE5EFE)
 I (LaserMisc.h)(0x582ADE8A)
-I (GlobalVariables.h)(0x5861EA1B)
-I (SDCard.h)(0x5861D9A5)
+I (GlobalVariables.h)(0x58623512)
+I (SDCard.h)(0x586234E8)
 I (C:\Keil_v5\ARM\PACK\Keil\MDK-Middleware\7.1.0\FileSystem\Include\rl_fs.h)(0x5704BAFE)
 I (WiFiThread.h)(0x582AD38A)
 F (.\stm32f4xx_it.c)(0x582AD38A)(-c --cpu Cortex-M4.fp -D__RTX -g -O0 --apcs=interwork --split_sections-I "C:\Users\FxSlava\Documents\Laser-LAMP-STM32-Test-Firmware\Calipso Ethernet Test\RTE"-I "C:\Users\FxSlava\Documents\Laser-LAMP-STM32-Test-Firmware\Calipso Ethernet Test\RTE\Device\STM32F407ZGTx"-I C:\Keil_v5\ARM\PACK\ARM\CMSIS\5.0.0-Beta4\CMSIS\Driver\Include-I C:\Keil_v5\ARM\PACK\ARM\CMSIS\5.0.0-Beta4\CMSIS\Include-I C:\Keil_v5\ARM\PACK\ARM\CMSIS\5.0.0-Beta4\CMSIS\RTOS\RTX\INC-I C:\Keil_v5\ARM\PACK\Keil\ARM_Compiler\1.1.1\Include-I C:\Keil_v5\ARM\PACK\Keil\MDK-Middleware\7.1.0\FileSystem\Include-I C:\Keil_v5\ARM\PACK\Keil\STM32F4xx_DFP\2.9.0\Drivers\CMSIS\Device\ST\STM32F4xx\Include-I C:\Keil_v5\ARM\PACK\Keil\STM32F4xx_DFP\2.9.0\Drivers\STM32F4xx_HAL_Driver\Inc-D__UVISION_VERSION="520" -D_RTE_ -DSTM32F407xx -DARM_MATH_CM4 --C99-o .\objects\stm32f4xx_it.o --omf_browse .\objects\stm32f4xx_it.crf --depend .\objects\stm32f4xx_it.d)
@@ -83,7 +83,7 @@ I (C:\Keil_v5\ARM\PACK\Keil\STM32F4xx_DFP\2.9.0\Drivers\STM32F4xx_HAL_Driver\Inc
 I (C:\Keil_v5\ARM\PACK\Keil\STM32F4xx_DFP\2.9.0\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_uart.h)(0x57307F80)
 I (C:\Keil_v5\ARM\PACK\Keil\STM32F4xx_DFP\2.9.0\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_usart.h)(0x57307F80)
 I (stm32f4xx_it.h)(0x574BFC6E)
-I (DGUS.h)(0x58610656)
+I (DGUS.h)(0x58623512)
 I (C:\Keil_v5\ARM\PACK\ARM\CMSIS\5.0.0-Beta4\CMSIS\RTOS\RTX\INC\cmsis_os.h)(0x5735B1C0)
 I (C:\Keil_v5\ARM\ARMCC\include\stddef.h)(0x56FE5EFE)
 F (.\stm32f4xx_hal_msp.c)(0x582ADE8A)(-c --cpu Cortex-M4.fp -D__RTX -g -O0 --apcs=interwork --split_sections-I "C:\Users\FxSlava\Documents\Laser-LAMP-STM32-Test-Firmware\Calipso Ethernet Test\RTE"-I "C:\Users\FxSlava\Documents\Laser-LAMP-STM32-Test-Firmware\Calipso Ethernet Test\RTE\Device\STM32F407ZGTx"-I C:\Keil_v5\ARM\PACK\ARM\CMSIS\5.0.0-Beta4\CMSIS\Driver\Include-I C:\Keil_v5\ARM\PACK\ARM\CMSIS\5.0.0-Beta4\CMSIS\Include-I C:\Keil_v5\ARM\PACK\ARM\CMSIS\5.0.0-Beta4\CMSIS\RTOS\RTX\INC-I C:\Keil_v5\ARM\PACK\Keil\ARM_Compiler\1.1.1\Include-I C:\Keil_v5\ARM\PACK\Keil\MDK-Middleware\7.1.0\FileSystem\Include-I C:\Keil_v5\ARM\PACK\Keil\STM32F4xx_DFP\2.9.0\Drivers\CMSIS\Device\ST\STM32F4xx\Include-I C:\Keil_v5\ARM\PACK\Keil\STM32F4xx_DFP\2.9.0\Drivers\STM32F4xx_HAL_Driver\Inc-D__UVISION_VERSION="520" -D_RTE_ -DSTM32F407xx -DARM_MATH_CM4 --C99-o .\objects\stm32f4xx_hal_msp.o --omf_browse .\objects\stm32f4xx_hal_msp.crf --depend .\objects\stm32f4xx_hal_msp.d)
@@ -124,8 +124,8 @@ I (C:\Keil_v5\ARM\ARMCC\include\math.h)(0x56FE5EF6)
 I (C:\Keil_v5\ARM\PACK\ARM\CMSIS\5.0.0-Beta4\CMSIS\Include\arm_math.h)(0x57354AC8)
 I (C:\Keil_v5\ARM\ARMCC\include\string.h)(0x56FE5EFE)
 I (LaserMisc.h)(0x582ADE8A)
-F (.\GlobalVariables.c)(0x5861D9E5)(-c --cpu Cortex-M4.fp -D__RTX -g -O0 --apcs=interwork --split_sections-I "C:\Users\FxSlava\Documents\Laser-LAMP-STM32-Test-Firmware\Calipso Ethernet Test\RTE"-I "C:\Users\FxSlava\Documents\Laser-LAMP-STM32-Test-Firmware\Calipso Ethernet Test\RTE\Device\STM32F407ZGTx"-I C:\Keil_v5\ARM\PACK\ARM\CMSIS\5.0.0-Beta4\CMSIS\Driver\Include-I C:\Keil_v5\ARM\PACK\ARM\CMSIS\5.0.0-Beta4\CMSIS\Include-I C:\Keil_v5\ARM\PACK\ARM\CMSIS\5.0.0-Beta4\CMSIS\RTOS\RTX\INC-I C:\Keil_v5\ARM\PACK\Keil\ARM_Compiler\1.1.1\Include-I C:\Keil_v5\ARM\PACK\Keil\MDK-Middleware\7.1.0\FileSystem\Include-I C:\Keil_v5\ARM\PACK\Keil\STM32F4xx_DFP\2.9.0\Drivers\CMSIS\Device\ST\STM32F4xx\Include-I C:\Keil_v5\ARM\PACK\Keil\STM32F4xx_DFP\2.9.0\Drivers\STM32F4xx_HAL_Driver\Inc-D__UVISION_VERSION="520" -D_RTE_ -DSTM32F407xx -DARM_MATH_CM4 --C99-o .\objects\globalvariables.o --omf_browse .\objects\globalvariables.crf --depend .\objects\globalvariables.d)
-I (GlobalVariables.h)(0x5861EA1B)
+F (.\GlobalVariables.c)(0x586234E7)(-c --cpu Cortex-M4.fp -D__RTX -g -O0 --apcs=interwork --split_sections-I "C:\Users\FxSlava\Documents\Laser-LAMP-STM32-Test-Firmware\Calipso Ethernet Test\RTE"-I "C:\Users\FxSlava\Documents\Laser-LAMP-STM32-Test-Firmware\Calipso Ethernet Test\RTE\Device\STM32F407ZGTx"-I C:\Keil_v5\ARM\PACK\ARM\CMSIS\5.0.0-Beta4\CMSIS\Driver\Include-I C:\Keil_v5\ARM\PACK\ARM\CMSIS\5.0.0-Beta4\CMSIS\Include-I C:\Keil_v5\ARM\PACK\ARM\CMSIS\5.0.0-Beta4\CMSIS\RTOS\RTX\INC-I C:\Keil_v5\ARM\PACK\Keil\ARM_Compiler\1.1.1\Include-I C:\Keil_v5\ARM\PACK\Keil\MDK-Middleware\7.1.0\FileSystem\Include-I C:\Keil_v5\ARM\PACK\Keil\STM32F4xx_DFP\2.9.0\Drivers\CMSIS\Device\ST\STM32F4xx\Include-I C:\Keil_v5\ARM\PACK\Keil\STM32F4xx_DFP\2.9.0\Drivers\STM32F4xx_HAL_Driver\Inc-D__UVISION_VERSION="520" -D_RTE_ -DSTM32F407xx -DARM_MATH_CM4 --C99-o .\objects\globalvariables.o --omf_browse .\objects\globalvariables.crf --depend .\objects\globalvariables.d)
+I (GlobalVariables.h)(0x58623512)
 I (C:\Keil_v5\ARM\ARMCC\include\stdbool.h)(0x56FE5EFC)
 I (C:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x56FE5EFE)
 I (C:\Keil_v5\ARM\PACK\Keil\STM32F4xx_DFP\2.9.0\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal.h)(0x57307F7E)
@@ -162,13 +162,13 @@ I (C:\Keil_v5\ARM\PACK\Keil\STM32F4xx_DFP\2.9.0\Drivers\STM32F4xx_HAL_Driver\Inc
 I (C:\Keil_v5\ARM\ARMCC\include\math.h)(0x56FE5EF6)
 I (C:\Keil_v5\ARM\PACK\ARM\CMSIS\5.0.0-Beta4\CMSIS\Include\arm_math.h)(0x57354AC8)
 I (C:\Keil_v5\ARM\ARMCC\include\string.h)(0x56FE5EFE)
-I (DGUS.h)(0x58610656)
+I (DGUS.h)(0x58623512)
 I (C:\Keil_v5\ARM\PACK\ARM\CMSIS\5.0.0-Beta4\CMSIS\RTOS\RTX\INC\cmsis_os.h)(0x5735B1C0)
 I (C:\Keil_v5\ARM\ARMCC\include\stddef.h)(0x56FE5EFE)
 I (LaserMisc.h)(0x582ADE8A)
 F (.\ServiceFrame.c)(0x582AD38A)(-c --cpu Cortex-M4.fp -D__RTX -g -O0 --apcs=interwork --split_sections-I "C:\Users\FxSlava\Documents\Laser-LAMP-STM32-Test-Firmware\Calipso Ethernet Test\RTE"-I "C:\Users\FxSlava\Documents\Laser-LAMP-STM32-Test-Firmware\Calipso Ethernet Test\RTE\Device\STM32F407ZGTx"-I C:\Keil_v5\ARM\PACK\ARM\CMSIS\5.0.0-Beta4\CMSIS\Driver\Include-I C:\Keil_v5\ARM\PACK\ARM\CMSIS\5.0.0-Beta4\CMSIS\Include-I C:\Keil_v5\ARM\PACK\ARM\CMSIS\5.0.0-Beta4\CMSIS\RTOS\RTX\INC-I C:\Keil_v5\ARM\PACK\Keil\ARM_Compiler\1.1.1\Include-I C:\Keil_v5\ARM\PACK\Keil\MDK-Middleware\7.1.0\FileSystem\Include-I C:\Keil_v5\ARM\PACK\Keil\STM32F4xx_DFP\2.9.0\Drivers\CMSIS\Device\ST\STM32F4xx\Include-I C:\Keil_v5\ARM\PACK\Keil\STM32F4xx_DFP\2.9.0\Drivers\STM32F4xx_HAL_Driver\Inc-D__UVISION_VERSION="520" -D_RTE_ -DSTM32F407xx -DARM_MATH_CM4 --C99-o .\objects\serviceframe.o --omf_browse .\objects\serviceframe.crf --depend .\objects\serviceframe.d)
 I (C:\Keil_v5\ARM\ARMCC\include\string.h)(0x56FE5EFE)
-I (DGUS.h)(0x58610656)
+I (DGUS.h)(0x58623512)
 I (C:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x56FE5EFE)
 I (C:\Keil_v5\ARM\PACK\Keil\STM32F4xx_DFP\2.9.0\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal.h)(0x57307F7E)
 I (C:\Users\FxSlava\Documents\Laser-LAMP-STM32-Test-Firmware\Calipso Ethernet Test\RTE\Device\STM32F407ZGTx\stm32f4xx_hal_conf.h)(0x57BFF41B)
@@ -210,10 +210,10 @@ I (SolidStateLaser.h)(0x582ADE8A)
 I (C:\Keil_v5\ARM\ARMCC\include\math.h)(0x56FE5EF6)
 I (C:\Keil_v5\ARM\PACK\ARM\CMSIS\5.0.0-Beta4\CMSIS\Include\arm_math.h)(0x57354AC8)
 I (LaserMisc.h)(0x582ADE8A)
-I (GlobalVariables.h)(0x5861EA1B)
+I (GlobalVariables.h)(0x58623512)
 F (.\PasswordFrame.c)(0x57E5E75D)(-c --cpu Cortex-M4.fp -D__RTX -g -O0 --apcs=interwork --split_sections-I "C:\Users\FxSlava\Documents\Laser-LAMP-STM32-Test-Firmware\Calipso Ethernet Test\RTE"-I "C:\Users\FxSlava\Documents\Laser-LAMP-STM32-Test-Firmware\Calipso Ethernet Test\RTE\Device\STM32F407ZGTx"-I C:\Keil_v5\ARM\PACK\ARM\CMSIS\5.0.0-Beta4\CMSIS\Driver\Include-I C:\Keil_v5\ARM\PACK\ARM\CMSIS\5.0.0-Beta4\CMSIS\Include-I C:\Keil_v5\ARM\PACK\ARM\CMSIS\5.0.0-Beta4\CMSIS\RTOS\RTX\INC-I C:\Keil_v5\ARM\PACK\Keil\ARM_Compiler\1.1.1\Include-I C:\Keil_v5\ARM\PACK\Keil\MDK-Middleware\7.1.0\FileSystem\Include-I C:\Keil_v5\ARM\PACK\Keil\STM32F4xx_DFP\2.9.0\Drivers\CMSIS\Device\ST\STM32F4xx\Include-I C:\Keil_v5\ARM\PACK\Keil\STM32F4xx_DFP\2.9.0\Drivers\STM32F4xx_HAL_Driver\Inc-D__UVISION_VERSION="520" -D_RTE_ -DSTM32F407xx -DARM_MATH_CM4 --C99-o .\objects\passwordframe.o --omf_browse .\objects\passwordframe.crf --depend .\objects\passwordframe.d)
 I (C:\Keil_v5\ARM\ARMCC\include\string.h)(0x56FE5EFE)
-I (DGUS.h)(0x58610656)
+I (DGUS.h)(0x58623512)
 I (C:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x56FE5EFE)
 I (C:\Keil_v5\ARM\PACK\Keil\STM32F4xx_DFP\2.9.0\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal.h)(0x57307F7E)
 I (C:\Users\FxSlava\Documents\Laser-LAMP-STM32-Test-Firmware\Calipso Ethernet Test\RTE\Device\STM32F407ZGTx\stm32f4xx_hal_conf.h)(0x57BFF41B)
@@ -255,10 +255,10 @@ I (SolidStateLaser.h)(0x582ADE8A)
 I (C:\Keil_v5\ARM\ARMCC\include\math.h)(0x56FE5EF6)
 I (C:\Keil_v5\ARM\PACK\ARM\CMSIS\5.0.0-Beta4\CMSIS\Include\arm_math.h)(0x57354AC8)
 I (LaserMisc.h)(0x582ADE8A)
-I (GlobalVariables.h)(0x5861EA1B)
-F (.\LaserDiodePrepareFrame.c)(0x58609F68)(-c --cpu Cortex-M4.fp -D__RTX -g -O0 --apcs=interwork --split_sections-I "C:\Users\FxSlava\Documents\Laser-LAMP-STM32-Test-Firmware\Calipso Ethernet Test\RTE"-I "C:\Users\FxSlava\Documents\Laser-LAMP-STM32-Test-Firmware\Calipso Ethernet Test\RTE\Device\STM32F407ZGTx"-I C:\Keil_v5\ARM\PACK\ARM\CMSIS\5.0.0-Beta4\CMSIS\Driver\Include-I C:\Keil_v5\ARM\PACK\ARM\CMSIS\5.0.0-Beta4\CMSIS\Include-I C:\Keil_v5\ARM\PACK\ARM\CMSIS\5.0.0-Beta4\CMSIS\RTOS\RTX\INC-I C:\Keil_v5\ARM\PACK\Keil\ARM_Compiler\1.1.1\Include-I C:\Keil_v5\ARM\PACK\Keil\MDK-Middleware\7.1.0\FileSystem\Include-I C:\Keil_v5\ARM\PACK\Keil\STM32F4xx_DFP\2.9.0\Drivers\CMSIS\Device\ST\STM32F4xx\Include-I C:\Keil_v5\ARM\PACK\Keil\STM32F4xx_DFP\2.9.0\Drivers\STM32F4xx_HAL_Driver\Inc-D__UVISION_VERSION="520" -D_RTE_ -DSTM32F407xx -DARM_MATH_CM4 --C99-o .\objects\laserdiodeprepareframe.o --omf_browse .\objects\laserdiodeprepareframe.crf --depend .\objects\laserdiodeprepareframe.d)
+I (GlobalVariables.h)(0x58623512)
+F (.\LaserDiodePrepareFrame.c)(0x586234E7)(-c --cpu Cortex-M4.fp -D__RTX -g -O0 --apcs=interwork --split_sections-I "C:\Users\FxSlava\Documents\Laser-LAMP-STM32-Test-Firmware\Calipso Ethernet Test\RTE"-I "C:\Users\FxSlava\Documents\Laser-LAMP-STM32-Test-Firmware\Calipso Ethernet Test\RTE\Device\STM32F407ZGTx"-I C:\Keil_v5\ARM\PACK\ARM\CMSIS\5.0.0-Beta4\CMSIS\Driver\Include-I C:\Keil_v5\ARM\PACK\ARM\CMSIS\5.0.0-Beta4\CMSIS\Include-I C:\Keil_v5\ARM\PACK\ARM\CMSIS\5.0.0-Beta4\CMSIS\RTOS\RTX\INC-I C:\Keil_v5\ARM\PACK\Keil\ARM_Compiler\1.1.1\Include-I C:\Keil_v5\ARM\PACK\Keil\MDK-Middleware\7.1.0\FileSystem\Include-I C:\Keil_v5\ARM\PACK\Keil\STM32F4xx_DFP\2.9.0\Drivers\CMSIS\Device\ST\STM32F4xx\Include-I C:\Keil_v5\ARM\PACK\Keil\STM32F4xx_DFP\2.9.0\Drivers\STM32F4xx_HAL_Driver\Inc-D__UVISION_VERSION="520" -D_RTE_ -DSTM32F407xx -DARM_MATH_CM4 --C99-o .\objects\laserdiodeprepareframe.o --omf_browse .\objects\laserdiodeprepareframe.crf --depend .\objects\laserdiodeprepareframe.d)
 I (C:\Keil_v5\ARM\ARMCC\include\string.h)(0x56FE5EFE)
-I (DGUS.h)(0x58610656)
+I (DGUS.h)(0x58623512)
 I (C:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x56FE5EFE)
 I (C:\Keil_v5\ARM\PACK\Keil\STM32F4xx_DFP\2.9.0\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal.h)(0x57307F7E)
 I (C:\Users\FxSlava\Documents\Laser-LAMP-STM32-Test-Firmware\Calipso Ethernet Test\RTE\Device\STM32F407ZGTx\stm32f4xx_hal_conf.h)(0x57BFF41B)
@@ -300,10 +300,10 @@ I (SolidStateLaser.h)(0x582ADE8A)
 I (C:\Keil_v5\ARM\ARMCC\include\math.h)(0x56FE5EF6)
 I (C:\Keil_v5\ARM\PACK\ARM\CMSIS\5.0.0-Beta4\CMSIS\Include\arm_math.h)(0x57354AC8)
 I (LaserMisc.h)(0x582ADE8A)
-I (GlobalVariables.h)(0x5861EA1B)
-F (.\LaserDiodeInputFrame.c)(0x58609EC1)(-c --cpu Cortex-M4.fp -D__RTX -g -O0 --apcs=interwork --split_sections-I "C:\Users\FxSlava\Documents\Laser-LAMP-STM32-Test-Firmware\Calipso Ethernet Test\RTE"-I "C:\Users\FxSlava\Documents\Laser-LAMP-STM32-Test-Firmware\Calipso Ethernet Test\RTE\Device\STM32F407ZGTx"-I C:\Keil_v5\ARM\PACK\ARM\CMSIS\5.0.0-Beta4\CMSIS\Driver\Include-I C:\Keil_v5\ARM\PACK\ARM\CMSIS\5.0.0-Beta4\CMSIS\Include-I C:\Keil_v5\ARM\PACK\ARM\CMSIS\5.0.0-Beta4\CMSIS\RTOS\RTX\INC-I C:\Keil_v5\ARM\PACK\Keil\ARM_Compiler\1.1.1\Include-I C:\Keil_v5\ARM\PACK\Keil\MDK-Middleware\7.1.0\FileSystem\Include-I C:\Keil_v5\ARM\PACK\Keil\STM32F4xx_DFP\2.9.0\Drivers\CMSIS\Device\ST\STM32F4xx\Include-I C:\Keil_v5\ARM\PACK\Keil\STM32F4xx_DFP\2.9.0\Drivers\STM32F4xx_HAL_Driver\Inc-D__UVISION_VERSION="520" -D_RTE_ -DSTM32F407xx -DARM_MATH_CM4 --C99-o .\objects\laserdiodeinputframe.o --omf_browse .\objects\laserdiodeinputframe.crf --depend .\objects\laserdiodeinputframe.d)
+I (GlobalVariables.h)(0x58623512)
+F (.\LaserDiodeInputFrame.c)(0x586234E7)(-c --cpu Cortex-M4.fp -D__RTX -g -O0 --apcs=interwork --split_sections-I "C:\Users\FxSlava\Documents\Laser-LAMP-STM32-Test-Firmware\Calipso Ethernet Test\RTE"-I "C:\Users\FxSlava\Documents\Laser-LAMP-STM32-Test-Firmware\Calipso Ethernet Test\RTE\Device\STM32F407ZGTx"-I C:\Keil_v5\ARM\PACK\ARM\CMSIS\5.0.0-Beta4\CMSIS\Driver\Include-I C:\Keil_v5\ARM\PACK\ARM\CMSIS\5.0.0-Beta4\CMSIS\Include-I C:\Keil_v5\ARM\PACK\ARM\CMSIS\5.0.0-Beta4\CMSIS\RTOS\RTX\INC-I C:\Keil_v5\ARM\PACK\Keil\ARM_Compiler\1.1.1\Include-I C:\Keil_v5\ARM\PACK\Keil\MDK-Middleware\7.1.0\FileSystem\Include-I C:\Keil_v5\ARM\PACK\Keil\STM32F4xx_DFP\2.9.0\Drivers\CMSIS\Device\ST\STM32F4xx\Include-I C:\Keil_v5\ARM\PACK\Keil\STM32F4xx_DFP\2.9.0\Drivers\STM32F4xx_HAL_Driver\Inc-D__UVISION_VERSION="520" -D_RTE_ -DSTM32F407xx -DARM_MATH_CM4 --C99-o .\objects\laserdiodeinputframe.o --omf_browse .\objects\laserdiodeinputframe.crf --depend .\objects\laserdiodeinputframe.d)
 I (C:\Keil_v5\ARM\ARMCC\include\string.h)(0x56FE5EFE)
-I (DGUS.h)(0x58610656)
+I (DGUS.h)(0x58623512)
 I (C:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x56FE5EFE)
 I (C:\Keil_v5\ARM\PACK\Keil\STM32F4xx_DFP\2.9.0\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal.h)(0x57307F7E)
 I (C:\Users\FxSlava\Documents\Laser-LAMP-STM32-Test-Firmware\Calipso Ethernet Test\RTE\Device\STM32F407ZGTx\stm32f4xx_hal_conf.h)(0x57BFF41B)
@@ -345,10 +345,10 @@ I (SolidStateLaser.h)(0x582ADE8A)
 I (C:\Keil_v5\ARM\ARMCC\include\math.h)(0x56FE5EF6)
 I (C:\Keil_v5\ARM\PACK\ARM\CMSIS\5.0.0-Beta4\CMSIS\Include\arm_math.h)(0x57354AC8)
 I (LaserMisc.h)(0x582ADE8A)
-I (GlobalVariables.h)(0x5861EA1B)
-F (.\LaserDiodeWorkFrame.c)(0x58609D7E)(-c --cpu Cortex-M4.fp -D__RTX -g -O0 --apcs=interwork --split_sections-I "C:\Users\FxSlava\Documents\Laser-LAMP-STM32-Test-Firmware\Calipso Ethernet Test\RTE"-I "C:\Users\FxSlava\Documents\Laser-LAMP-STM32-Test-Firmware\Calipso Ethernet Test\RTE\Device\STM32F407ZGTx"-I C:\Keil_v5\ARM\PACK\ARM\CMSIS\5.0.0-Beta4\CMSIS\Driver\Include-I C:\Keil_v5\ARM\PACK\ARM\CMSIS\5.0.0-Beta4\CMSIS\Include-I C:\Keil_v5\ARM\PACK\ARM\CMSIS\5.0.0-Beta4\CMSIS\RTOS\RTX\INC-I C:\Keil_v5\ARM\PACK\Keil\ARM_Compiler\1.1.1\Include-I C:\Keil_v5\ARM\PACK\Keil\MDK-Middleware\7.1.0\FileSystem\Include-I C:\Keil_v5\ARM\PACK\Keil\STM32F4xx_DFP\2.9.0\Drivers\CMSIS\Device\ST\STM32F4xx\Include-I C:\Keil_v5\ARM\PACK\Keil\STM32F4xx_DFP\2.9.0\Drivers\STM32F4xx_HAL_Driver\Inc-D__UVISION_VERSION="520" -D_RTE_ -DSTM32F407xx -DARM_MATH_CM4 --C99-o .\objects\laserdiodeworkframe.o --omf_browse .\objects\laserdiodeworkframe.crf --depend .\objects\laserdiodeworkframe.d)
+I (GlobalVariables.h)(0x58623512)
+F (.\LaserDiodeWorkFrame.c)(0x586234E7)(-c --cpu Cortex-M4.fp -D__RTX -g -O0 --apcs=interwork --split_sections-I "C:\Users\FxSlava\Documents\Laser-LAMP-STM32-Test-Firmware\Calipso Ethernet Test\RTE"-I "C:\Users\FxSlava\Documents\Laser-LAMP-STM32-Test-Firmware\Calipso Ethernet Test\RTE\Device\STM32F407ZGTx"-I C:\Keil_v5\ARM\PACK\ARM\CMSIS\5.0.0-Beta4\CMSIS\Driver\Include-I C:\Keil_v5\ARM\PACK\ARM\CMSIS\5.0.0-Beta4\CMSIS\Include-I C:\Keil_v5\ARM\PACK\ARM\CMSIS\5.0.0-Beta4\CMSIS\RTOS\RTX\INC-I C:\Keil_v5\ARM\PACK\Keil\ARM_Compiler\1.1.1\Include-I C:\Keil_v5\ARM\PACK\Keil\MDK-Middleware\7.1.0\FileSystem\Include-I C:\Keil_v5\ARM\PACK\Keil\STM32F4xx_DFP\2.9.0\Drivers\CMSIS\Device\ST\STM32F4xx\Include-I C:\Keil_v5\ARM\PACK\Keil\STM32F4xx_DFP\2.9.0\Drivers\STM32F4xx_HAL_Driver\Inc-D__UVISION_VERSION="520" -D_RTE_ -DSTM32F407xx -DARM_MATH_CM4 --C99-o .\objects\laserdiodeworkframe.o --omf_browse .\objects\laserdiodeworkframe.crf --depend .\objects\laserdiodeworkframe.d)
 I (C:\Keil_v5\ARM\ARMCC\include\string.h)(0x56FE5EFE)
-I (DGUS.h)(0x58610656)
+I (DGUS.h)(0x58623512)
 I (C:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x56FE5EFE)
 I (C:\Keil_v5\ARM\PACK\Keil\STM32F4xx_DFP\2.9.0\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal.h)(0x57307F7E)
 I (C:\Users\FxSlava\Documents\Laser-LAMP-STM32-Test-Firmware\Calipso Ethernet Test\RTE\Device\STM32F407ZGTx\stm32f4xx_hal_conf.h)(0x57BFF41B)
@@ -390,10 +390,10 @@ I (SolidStateLaser.h)(0x582ADE8A)
 I (C:\Keil_v5\ARM\ARMCC\include\math.h)(0x56FE5EF6)
 I (C:\Keil_v5\ARM\PACK\ARM\CMSIS\5.0.0-Beta4\CMSIS\Include\arm_math.h)(0x57354AC8)
 I (LaserMisc.h)(0x582ADE8A)
-I (GlobalVariables.h)(0x5861EA1B)
+I (GlobalVariables.h)(0x58623512)
 F (.\SolidStateLaserInputFrame.c)(0x582ADE8A)(-c --cpu Cortex-M4.fp -D__RTX -g -O0 --apcs=interwork --split_sections-I "C:\Users\FxSlava\Documents\Laser-LAMP-STM32-Test-Firmware\Calipso Ethernet Test\RTE"-I "C:\Users\FxSlava\Documents\Laser-LAMP-STM32-Test-Firmware\Calipso Ethernet Test\RTE\Device\STM32F407ZGTx"-I C:\Keil_v5\ARM\PACK\ARM\CMSIS\5.0.0-Beta4\CMSIS\Driver\Include-I C:\Keil_v5\ARM\PACK\ARM\CMSIS\5.0.0-Beta4\CMSIS\Include-I C:\Keil_v5\ARM\PACK\ARM\CMSIS\5.0.0-Beta4\CMSIS\RTOS\RTX\INC-I C:\Keil_v5\ARM\PACK\Keil\ARM_Compiler\1.1.1\Include-I C:\Keil_v5\ARM\PACK\Keil\MDK-Middleware\7.1.0\FileSystem\Include-I C:\Keil_v5\ARM\PACK\Keil\STM32F4xx_DFP\2.9.0\Drivers\CMSIS\Device\ST\STM32F4xx\Include-I C:\Keil_v5\ARM\PACK\Keil\STM32F4xx_DFP\2.9.0\Drivers\STM32F4xx_HAL_Driver\Inc-D__UVISION_VERSION="520" -D_RTE_ -DSTM32F407xx -DARM_MATH_CM4 --C99-o .\objects\solidstatelaserinputframe.o --omf_browse .\objects\solidstatelaserinputframe.crf --depend .\objects\solidstatelaserinputframe.d)
 I (C:\Keil_v5\ARM\ARMCC\include\string.h)(0x56FE5EFE)
-I (DGUS.h)(0x58610656)
+I (DGUS.h)(0x58623512)
 I (C:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x56FE5EFE)
 I (C:\Keil_v5\ARM\PACK\Keil\STM32F4xx_DFP\2.9.0\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal.h)(0x57307F7E)
 I (C:\Users\FxSlava\Documents\Laser-LAMP-STM32-Test-Firmware\Calipso Ethernet Test\RTE\Device\STM32F407ZGTx\stm32f4xx_hal_conf.h)(0x57BFF41B)
@@ -435,10 +435,10 @@ I (SolidStateLaser.h)(0x582ADE8A)
 I (C:\Keil_v5\ARM\ARMCC\include\math.h)(0x56FE5EF6)
 I (C:\Keil_v5\ARM\PACK\ARM\CMSIS\5.0.0-Beta4\CMSIS\Include\arm_math.h)(0x57354AC8)
 I (LaserMisc.h)(0x582ADE8A)
-I (GlobalVariables.h)(0x5861EA1B)
+I (GlobalVariables.h)(0x58623512)
 F (.\SolidStateLaserPrepareFrame.c)(0x58047F68)(-c --cpu Cortex-M4.fp -D__RTX -g -O0 --apcs=interwork --split_sections-I "C:\Users\FxSlava\Documents\Laser-LAMP-STM32-Test-Firmware\Calipso Ethernet Test\RTE"-I "C:\Users\FxSlava\Documents\Laser-LAMP-STM32-Test-Firmware\Calipso Ethernet Test\RTE\Device\STM32F407ZGTx"-I C:\Keil_v5\ARM\PACK\ARM\CMSIS\5.0.0-Beta4\CMSIS\Driver\Include-I C:\Keil_v5\ARM\PACK\ARM\CMSIS\5.0.0-Beta4\CMSIS\Include-I C:\Keil_v5\ARM\PACK\ARM\CMSIS\5.0.0-Beta4\CMSIS\RTOS\RTX\INC-I C:\Keil_v5\ARM\PACK\Keil\ARM_Compiler\1.1.1\Include-I C:\Keil_v5\ARM\PACK\Keil\MDK-Middleware\7.1.0\FileSystem\Include-I C:\Keil_v5\ARM\PACK\Keil\STM32F4xx_DFP\2.9.0\Drivers\CMSIS\Device\ST\STM32F4xx\Include-I C:\Keil_v5\ARM\PACK\Keil\STM32F4xx_DFP\2.9.0\Drivers\STM32F4xx_HAL_Driver\Inc-D__UVISION_VERSION="520" -D_RTE_ -DSTM32F407xx -DARM_MATH_CM4 --C99-o .\objects\solidstatelaserprepareframe.o --omf_browse .\objects\solidstatelaserprepareframe.crf --depend .\objects\solidstatelaserprepareframe.d)
 I (C:\Keil_v5\ARM\ARMCC\include\string.h)(0x56FE5EFE)
-I (DGUS.h)(0x58610656)
+I (DGUS.h)(0x58623512)
 I (C:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x56FE5EFE)
 I (C:\Keil_v5\ARM\PACK\Keil\STM32F4xx_DFP\2.9.0\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal.h)(0x57307F7E)
 I (C:\Users\FxSlava\Documents\Laser-LAMP-STM32-Test-Firmware\Calipso Ethernet Test\RTE\Device\STM32F407ZGTx\stm32f4xx_hal_conf.h)(0x57BFF41B)
@@ -480,10 +480,10 @@ I (SolidStateLaser.h)(0x582ADE8A)
 I (C:\Keil_v5\ARM\ARMCC\include\math.h)(0x56FE5EF6)
 I (C:\Keil_v5\ARM\PACK\ARM\CMSIS\5.0.0-Beta4\CMSIS\Include\arm_math.h)(0x57354AC8)
 I (LaserMisc.h)(0x582ADE8A)
-I (GlobalVariables.h)(0x5861EA1B)
+I (GlobalVariables.h)(0x58623512)
 F (.\SolidStateLaserWorkFrame.c)(0x585BADDA)(-c --cpu Cortex-M4.fp -D__RTX -g -O0 --apcs=interwork --split_sections-I "C:\Users\FxSlava\Documents\Laser-LAMP-STM32-Test-Firmware\Calipso Ethernet Test\RTE"-I "C:\Users\FxSlava\Documents\Laser-LAMP-STM32-Test-Firmware\Calipso Ethernet Test\RTE\Device\STM32F407ZGTx"-I C:\Keil_v5\ARM\PACK\ARM\CMSIS\5.0.0-Beta4\CMSIS\Driver\Include-I C:\Keil_v5\ARM\PACK\ARM\CMSIS\5.0.0-Beta4\CMSIS\Include-I C:\Keil_v5\ARM\PACK\ARM\CMSIS\5.0.0-Beta4\CMSIS\RTOS\RTX\INC-I C:\Keil_v5\ARM\PACK\Keil\ARM_Compiler\1.1.1\Include-I C:\Keil_v5\ARM\PACK\Keil\MDK-Middleware\7.1.0\FileSystem\Include-I C:\Keil_v5\ARM\PACK\Keil\STM32F4xx_DFP\2.9.0\Drivers\CMSIS\Device\ST\STM32F4xx\Include-I C:\Keil_v5\ARM\PACK\Keil\STM32F4xx_DFP\2.9.0\Drivers\STM32F4xx_HAL_Driver\Inc-D__UVISION_VERSION="520" -D_RTE_ -DSTM32F407xx -DARM_MATH_CM4 --C99-o .\objects\solidstatelaserworkframe.o --omf_browse .\objects\solidstatelaserworkframe.crf --depend .\objects\solidstatelaserworkframe.d)
 I (C:\Keil_v5\ARM\ARMCC\include\string.h)(0x56FE5EFE)
-I (DGUS.h)(0x58610656)
+I (DGUS.h)(0x58623512)
 I (C:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x56FE5EFE)
 I (C:\Keil_v5\ARM\PACK\Keil\STM32F4xx_DFP\2.9.0\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal.h)(0x57307F7E)
 I (C:\Users\FxSlava\Documents\Laser-LAMP-STM32-Test-Firmware\Calipso Ethernet Test\RTE\Device\STM32F407ZGTx\stm32f4xx_hal_conf.h)(0x57BFF41B)
@@ -525,10 +525,10 @@ I (SolidStateLaser.h)(0x582ADE8A)
 I (C:\Keil_v5\ARM\ARMCC\include\math.h)(0x56FE5EF6)
 I (C:\Keil_v5\ARM\PACK\ARM\CMSIS\5.0.0-Beta4\CMSIS\Include\arm_math.h)(0x57354AC8)
 I (LaserMisc.h)(0x582ADE8A)
-I (GlobalVariables.h)(0x5861EA1B)
+I (GlobalVariables.h)(0x58623512)
 F (.\ServiceFrameDiodeLaser.c)(0x582AD38A)(-c --cpu Cortex-M4.fp -D__RTX -g -O0 --apcs=interwork --split_sections-I "C:\Users\FxSlava\Documents\Laser-LAMP-STM32-Test-Firmware\Calipso Ethernet Test\RTE"-I "C:\Users\FxSlava\Documents\Laser-LAMP-STM32-Test-Firmware\Calipso Ethernet Test\RTE\Device\STM32F407ZGTx"-I C:\Keil_v5\ARM\PACK\ARM\CMSIS\5.0.0-Beta4\CMSIS\Driver\Include-I C:\Keil_v5\ARM\PACK\ARM\CMSIS\5.0.0-Beta4\CMSIS\Include-I C:\Keil_v5\ARM\PACK\ARM\CMSIS\5.0.0-Beta4\CMSIS\RTOS\RTX\INC-I C:\Keil_v5\ARM\PACK\Keil\ARM_Compiler\1.1.1\Include-I C:\Keil_v5\ARM\PACK\Keil\MDK-Middleware\7.1.0\FileSystem\Include-I C:\Keil_v5\ARM\PACK\Keil\STM32F4xx_DFP\2.9.0\Drivers\CMSIS\Device\ST\STM32F4xx\Include-I C:\Keil_v5\ARM\PACK\Keil\STM32F4xx_DFP\2.9.0\Drivers\STM32F4xx_HAL_Driver\Inc-D__UVISION_VERSION="520" -D_RTE_ -DSTM32F407xx -DARM_MATH_CM4 --C99-o .\objects\serviceframediodelaser.o --omf_browse .\objects\serviceframediodelaser.crf --depend .\objects\serviceframediodelaser.d)
 I (C:\Keil_v5\ARM\ARMCC\include\string.h)(0x56FE5EFE)
-I (DGUS.h)(0x58610656)
+I (DGUS.h)(0x58623512)
 I (C:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x56FE5EFE)
 I (C:\Keil_v5\ARM\PACK\Keil\STM32F4xx_DFP\2.9.0\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal.h)(0x57307F7E)
 I (C:\Users\FxSlava\Documents\Laser-LAMP-STM32-Test-Firmware\Calipso Ethernet Test\RTE\Device\STM32F407ZGTx\stm32f4xx_hal_conf.h)(0x57BFF41B)
@@ -570,10 +570,10 @@ I (SolidStateLaser.h)(0x582ADE8A)
 I (C:\Keil_v5\ARM\ARMCC\include\math.h)(0x56FE5EF6)
 I (C:\Keil_v5\ARM\PACK\ARM\CMSIS\5.0.0-Beta4\CMSIS\Include\arm_math.h)(0x57354AC8)
 I (LaserMisc.h)(0x582ADE8A)
-I (GlobalVariables.h)(0x5861EA1B)
-F (.\WiFiScanningFrame.c)(0x582ADE8A)(-c --cpu Cortex-M4.fp -D__RTX -g -O0 --apcs=interwork --split_sections-I "C:\Users\FxSlava\Documents\Laser-LAMP-STM32-Test-Firmware\Calipso Ethernet Test\RTE"-I "C:\Users\FxSlava\Documents\Laser-LAMP-STM32-Test-Firmware\Calipso Ethernet Test\RTE\Device\STM32F407ZGTx"-I C:\Keil_v5\ARM\PACK\ARM\CMSIS\5.0.0-Beta4\CMSIS\Driver\Include-I C:\Keil_v5\ARM\PACK\ARM\CMSIS\5.0.0-Beta4\CMSIS\Include-I C:\Keil_v5\ARM\PACK\ARM\CMSIS\5.0.0-Beta4\CMSIS\RTOS\RTX\INC-I C:\Keil_v5\ARM\PACK\Keil\ARM_Compiler\1.1.1\Include-I C:\Keil_v5\ARM\PACK\Keil\MDK-Middleware\7.1.0\FileSystem\Include-I C:\Keil_v5\ARM\PACK\Keil\STM32F4xx_DFP\2.9.0\Drivers\CMSIS\Device\ST\STM32F4xx\Include-I C:\Keil_v5\ARM\PACK\Keil\STM32F4xx_DFP\2.9.0\Drivers\STM32F4xx_HAL_Driver\Inc-D__UVISION_VERSION="520" -D_RTE_ -DSTM32F407xx -DARM_MATH_CM4 --C99-o .\objects\wifiscanningframe.o --omf_browse .\objects\wifiscanningframe.crf --depend .\objects\wifiscanningframe.d)
+I (GlobalVariables.h)(0x58623512)
+F (.\WiFiScanningFrame.c)(0x58622F67)(-c --cpu Cortex-M4.fp -D__RTX -g -O0 --apcs=interwork --split_sections-I "C:\Users\FxSlava\Documents\Laser-LAMP-STM32-Test-Firmware\Calipso Ethernet Test\RTE"-I "C:\Users\FxSlava\Documents\Laser-LAMP-STM32-Test-Firmware\Calipso Ethernet Test\RTE\Device\STM32F407ZGTx"-I C:\Keil_v5\ARM\PACK\ARM\CMSIS\5.0.0-Beta4\CMSIS\Driver\Include-I C:\Keil_v5\ARM\PACK\ARM\CMSIS\5.0.0-Beta4\CMSIS\Include-I C:\Keil_v5\ARM\PACK\ARM\CMSIS\5.0.0-Beta4\CMSIS\RTOS\RTX\INC-I C:\Keil_v5\ARM\PACK\Keil\ARM_Compiler\1.1.1\Include-I C:\Keil_v5\ARM\PACK\Keil\MDK-Middleware\7.1.0\FileSystem\Include-I C:\Keil_v5\ARM\PACK\Keil\STM32F4xx_DFP\2.9.0\Drivers\CMSIS\Device\ST\STM32F4xx\Include-I C:\Keil_v5\ARM\PACK\Keil\STM32F4xx_DFP\2.9.0\Drivers\STM32F4xx_HAL_Driver\Inc-D__UVISION_VERSION="520" -D_RTE_ -DSTM32F407xx -DARM_MATH_CM4 --C99-o .\objects\wifiscanningframe.o --omf_browse .\objects\wifiscanningframe.crf --depend .\objects\wifiscanningframe.d)
 I (C:\Keil_v5\ARM\ARMCC\include\string.h)(0x56FE5EFE)
-I (DGUS.h)(0x58610656)
+I (DGUS.h)(0x58623512)
 I (C:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x56FE5EFE)
 I (C:\Keil_v5\ARM\PACK\Keil\STM32F4xx_DFP\2.9.0\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal.h)(0x57307F7E)
 I (C:\Users\FxSlava\Documents\Laser-LAMP-STM32-Test-Firmware\Calipso Ethernet Test\RTE\Device\STM32F407ZGTx\stm32f4xx_hal_conf.h)(0x57BFF41B)
@@ -616,10 +616,10 @@ I (C:\Keil_v5\ARM\ARMCC\include\math.h)(0x56FE5EF6)
 I (C:\Keil_v5\ARM\PACK\ARM\CMSIS\5.0.0-Beta4\CMSIS\Include\arm_math.h)(0x57354AC8)
 I (LaserMisc.h)(0x582ADE8A)
 I (WiFiThread.h)(0x582AD38A)
-I (GlobalVariables.h)(0x5861EA1B)
+I (GlobalVariables.h)(0x58623512)
 F (.\WiFiAuthenticationFrame.c)(0x582AD38A)(-c --cpu Cortex-M4.fp -D__RTX -g -O0 --apcs=interwork --split_sections-I "C:\Users\FxSlava\Documents\Laser-LAMP-STM32-Test-Firmware\Calipso Ethernet Test\RTE"-I "C:\Users\FxSlava\Documents\Laser-LAMP-STM32-Test-Firmware\Calipso Ethernet Test\RTE\Device\STM32F407ZGTx"-I C:\Keil_v5\ARM\PACK\ARM\CMSIS\5.0.0-Beta4\CMSIS\Driver\Include-I C:\Keil_v5\ARM\PACK\ARM\CMSIS\5.0.0-Beta4\CMSIS\Include-I C:\Keil_v5\ARM\PACK\ARM\CMSIS\5.0.0-Beta4\CMSIS\RTOS\RTX\INC-I C:\Keil_v5\ARM\PACK\Keil\ARM_Compiler\1.1.1\Include-I C:\Keil_v5\ARM\PACK\Keil\MDK-Middleware\7.1.0\FileSystem\Include-I C:\Keil_v5\ARM\PACK\Keil\STM32F4xx_DFP\2.9.0\Drivers\CMSIS\Device\ST\STM32F4xx\Include-I C:\Keil_v5\ARM\PACK\Keil\STM32F4xx_DFP\2.9.0\Drivers\STM32F4xx_HAL_Driver\Inc-D__UVISION_VERSION="520" -D_RTE_ -DSTM32F407xx -DARM_MATH_CM4 --C99-o .\objects\wifiauthenticationframe.o --omf_browse .\objects\wifiauthenticationframe.crf --depend .\objects\wifiauthenticationframe.d)
 I (C:\Keil_v5\ARM\ARMCC\include\string.h)(0x56FE5EFE)
-I (DGUS.h)(0x58610656)
+I (DGUS.h)(0x58623512)
 I (C:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x56FE5EFE)
 I (C:\Keil_v5\ARM\PACK\Keil\STM32F4xx_DFP\2.9.0\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal.h)(0x57307F7E)
 I (C:\Users\FxSlava\Documents\Laser-LAMP-STM32-Test-Firmware\Calipso Ethernet Test\RTE\Device\STM32F407ZGTx\stm32f4xx_hal_conf.h)(0x57BFF41B)
@@ -662,10 +662,10 @@ I (C:\Keil_v5\ARM\ARMCC\include\math.h)(0x56FE5EF6)
 I (C:\Keil_v5\ARM\PACK\ARM\CMSIS\5.0.0-Beta4\CMSIS\Include\arm_math.h)(0x57354AC8)
 I (LaserMisc.h)(0x582ADE8A)
 I (WiFiThread.h)(0x582AD38A)
-I (GlobalVariables.h)(0x5861EA1B)
+I (GlobalVariables.h)(0x58623512)
 F (.\LongPulseLaserInputFrame.c)(0x58391EEC)(-c --cpu Cortex-M4.fp -D__RTX -g -O0 --apcs=interwork --split_sections-I "C:\Users\FxSlava\Documents\Laser-LAMP-STM32-Test-Firmware\Calipso Ethernet Test\RTE"-I "C:\Users\FxSlava\Documents\Laser-LAMP-STM32-Test-Firmware\Calipso Ethernet Test\RTE\Device\STM32F407ZGTx"-I C:\Keil_v5\ARM\PACK\ARM\CMSIS\5.0.0-Beta4\CMSIS\Driver\Include-I C:\Keil_v5\ARM\PACK\ARM\CMSIS\5.0.0-Beta4\CMSIS\Include-I C:\Keil_v5\ARM\PACK\ARM\CMSIS\5.0.0-Beta4\CMSIS\RTOS\RTX\INC-I C:\Keil_v5\ARM\PACK\Keil\ARM_Compiler\1.1.1\Include-I C:\Keil_v5\ARM\PACK\Keil\MDK-Middleware\7.1.0\FileSystem\Include-I C:\Keil_v5\ARM\PACK\Keil\STM32F4xx_DFP\2.9.0\Drivers\CMSIS\Device\ST\STM32F4xx\Include-I C:\Keil_v5\ARM\PACK\Keil\STM32F4xx_DFP\2.9.0\Drivers\STM32F4xx_HAL_Driver\Inc-D__UVISION_VERSION="520" -D_RTE_ -DSTM32F407xx -DARM_MATH_CM4 --C99-o .\objects\longpulselaserinputframe.o --omf_browse .\objects\longpulselaserinputframe.crf --depend .\objects\longpulselaserinputframe.d)
 I (C:\Keil_v5\ARM\ARMCC\include\string.h)(0x56FE5EFE)
-I (DGUS.h)(0x58610656)
+I (DGUS.h)(0x58623512)
 I (C:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x56FE5EFE)
 I (C:\Keil_v5\ARM\PACK\Keil\STM32F4xx_DFP\2.9.0\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal.h)(0x57307F7E)
 I (C:\Users\FxSlava\Documents\Laser-LAMP-STM32-Test-Firmware\Calipso Ethernet Test\RTE\Device\STM32F407ZGTx\stm32f4xx_hal_conf.h)(0x57BFF41B)
@@ -707,10 +707,10 @@ I (SolidStateLaser.h)(0x582ADE8A)
 I (C:\Keil_v5\ARM\ARMCC\include\math.h)(0x56FE5EF6)
 I (C:\Keil_v5\ARM\PACK\ARM\CMSIS\5.0.0-Beta4\CMSIS\Include\arm_math.h)(0x57354AC8)
 I (LaserMisc.h)(0x582ADE8A)
-I (GlobalVariables.h)(0x5861EA1B)
+I (GlobalVariables.h)(0x58623512)
 F (.\LongPulseLaserPrepareFrame.c)(0x582AD38A)(-c --cpu Cortex-M4.fp -D__RTX -g -O0 --apcs=interwork --split_sections-I "C:\Users\FxSlava\Documents\Laser-LAMP-STM32-Test-Firmware\Calipso Ethernet Test\RTE"-I "C:\Users\FxSlava\Documents\Laser-LAMP-STM32-Test-Firmware\Calipso Ethernet Test\RTE\Device\STM32F407ZGTx"-I C:\Keil_v5\ARM\PACK\ARM\CMSIS\5.0.0-Beta4\CMSIS\Driver\Include-I C:\Keil_v5\ARM\PACK\ARM\CMSIS\5.0.0-Beta4\CMSIS\Include-I C:\Keil_v5\ARM\PACK\ARM\CMSIS\5.0.0-Beta4\CMSIS\RTOS\RTX\INC-I C:\Keil_v5\ARM\PACK\Keil\ARM_Compiler\1.1.1\Include-I C:\Keil_v5\ARM\PACK\Keil\MDK-Middleware\7.1.0\FileSystem\Include-I C:\Keil_v5\ARM\PACK\Keil\STM32F4xx_DFP\2.9.0\Drivers\CMSIS\Device\ST\STM32F4xx\Include-I C:\Keil_v5\ARM\PACK\Keil\STM32F4xx_DFP\2.9.0\Drivers\STM32F4xx_HAL_Driver\Inc-D__UVISION_VERSION="520" -D_RTE_ -DSTM32F407xx -DARM_MATH_CM4 --C99-o .\objects\longpulselaserprepareframe.o --omf_browse .\objects\longpulselaserprepareframe.crf --depend .\objects\longpulselaserprepareframe.d)
 I (C:\Keil_v5\ARM\ARMCC\include\string.h)(0x56FE5EFE)
-I (DGUS.h)(0x58610656)
+I (DGUS.h)(0x58623512)
 I (C:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x56FE5EFE)
 I (C:\Keil_v5\ARM\PACK\Keil\STM32F4xx_DFP\2.9.0\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal.h)(0x57307F7E)
 I (C:\Users\FxSlava\Documents\Laser-LAMP-STM32-Test-Firmware\Calipso Ethernet Test\RTE\Device\STM32F407ZGTx\stm32f4xx_hal_conf.h)(0x57BFF41B)
@@ -752,10 +752,10 @@ I (SolidStateLaser.h)(0x582ADE8A)
 I (C:\Keil_v5\ARM\ARMCC\include\math.h)(0x56FE5EF6)
 I (C:\Keil_v5\ARM\PACK\ARM\CMSIS\5.0.0-Beta4\CMSIS\Include\arm_math.h)(0x57354AC8)
 I (LaserMisc.h)(0x582ADE8A)
-I (GlobalVariables.h)(0x5861EA1B)
+I (GlobalVariables.h)(0x58623512)
 F (.\LongPulseLaserWorkFrame.c)(0x58478DFB)(-c --cpu Cortex-M4.fp -D__RTX -g -O0 --apcs=interwork --split_sections-I "C:\Users\FxSlava\Documents\Laser-LAMP-STM32-Test-Firmware\Calipso Ethernet Test\RTE"-I "C:\Users\FxSlava\Documents\Laser-LAMP-STM32-Test-Firmware\Calipso Ethernet Test\RTE\Device\STM32F407ZGTx"-I C:\Keil_v5\ARM\PACK\ARM\CMSIS\5.0.0-Beta4\CMSIS\Driver\Include-I C:\Keil_v5\ARM\PACK\ARM\CMSIS\5.0.0-Beta4\CMSIS\Include-I C:\Keil_v5\ARM\PACK\ARM\CMSIS\5.0.0-Beta4\CMSIS\RTOS\RTX\INC-I C:\Keil_v5\ARM\PACK\Keil\ARM_Compiler\1.1.1\Include-I C:\Keil_v5\ARM\PACK\Keil\MDK-Middleware\7.1.0\FileSystem\Include-I C:\Keil_v5\ARM\PACK\Keil\STM32F4xx_DFP\2.9.0\Drivers\CMSIS\Device\ST\STM32F4xx\Include-I C:\Keil_v5\ARM\PACK\Keil\STM32F4xx_DFP\2.9.0\Drivers\STM32F4xx_HAL_Driver\Inc-D__UVISION_VERSION="520" -D_RTE_ -DSTM32F407xx -DARM_MATH_CM4 --C99-o .\objects\longpulselaserworkframe.o --omf_browse .\objects\longpulselaserworkframe.crf --depend .\objects\longpulselaserworkframe.d)
 I (C:\Keil_v5\ARM\ARMCC\include\string.h)(0x56FE5EFE)
-I (DGUS.h)(0x58610656)
+I (DGUS.h)(0x58623512)
 I (C:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x56FE5EFE)
 I (C:\Keil_v5\ARM\PACK\Keil\STM32F4xx_DFP\2.9.0\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal.h)(0x57307F7E)
 I (C:\Users\FxSlava\Documents\Laser-LAMP-STM32-Test-Firmware\Calipso Ethernet Test\RTE\Device\STM32F407ZGTx\stm32f4xx_hal_conf.h)(0x57BFF41B)
@@ -797,10 +797,10 @@ I (SolidStateLaser.h)(0x582ADE8A)
 I (C:\Keil_v5\ARM\ARMCC\include\math.h)(0x56FE5EF6)
 I (C:\Keil_v5\ARM\PACK\ARM\CMSIS\5.0.0-Beta4\CMSIS\Include\arm_math.h)(0x57354AC8)
 I (LaserMisc.h)(0x582ADE8A)
-I (GlobalVariables.h)(0x5861EA1B)
-F (.\CoolingServiceFrame.c)(0x5860D742)(-c --cpu Cortex-M4.fp -D__RTX -g -O0 --apcs=interwork --split_sections-I "C:\Users\FxSlava\Documents\Laser-LAMP-STM32-Test-Firmware\Calipso Ethernet Test\RTE"-I "C:\Users\FxSlava\Documents\Laser-LAMP-STM32-Test-Firmware\Calipso Ethernet Test\RTE\Device\STM32F407ZGTx"-I C:\Keil_v5\ARM\PACK\ARM\CMSIS\5.0.0-Beta4\CMSIS\Driver\Include-I C:\Keil_v5\ARM\PACK\ARM\CMSIS\5.0.0-Beta4\CMSIS\Include-I C:\Keil_v5\ARM\PACK\ARM\CMSIS\5.0.0-Beta4\CMSIS\RTOS\RTX\INC-I C:\Keil_v5\ARM\PACK\Keil\ARM_Compiler\1.1.1\Include-I C:\Keil_v5\ARM\PACK\Keil\MDK-Middleware\7.1.0\FileSystem\Include-I C:\Keil_v5\ARM\PACK\Keil\STM32F4xx_DFP\2.9.0\Drivers\CMSIS\Device\ST\STM32F4xx\Include-I C:\Keil_v5\ARM\PACK\Keil\STM32F4xx_DFP\2.9.0\Drivers\STM32F4xx_HAL_Driver\Inc-D__UVISION_VERSION="520" -D_RTE_ -DSTM32F407xx -DARM_MATH_CM4 --C99-o .\objects\coolingserviceframe.o --omf_browse .\objects\coolingserviceframe.crf --depend .\objects\coolingserviceframe.d)
+I (GlobalVariables.h)(0x58623512)
+F (.\CoolingServiceFrame.c)(0x586234E7)(-c --cpu Cortex-M4.fp -D__RTX -g -O0 --apcs=interwork --split_sections-I "C:\Users\FxSlava\Documents\Laser-LAMP-STM32-Test-Firmware\Calipso Ethernet Test\RTE"-I "C:\Users\FxSlava\Documents\Laser-LAMP-STM32-Test-Firmware\Calipso Ethernet Test\RTE\Device\STM32F407ZGTx"-I C:\Keil_v5\ARM\PACK\ARM\CMSIS\5.0.0-Beta4\CMSIS\Driver\Include-I C:\Keil_v5\ARM\PACK\ARM\CMSIS\5.0.0-Beta4\CMSIS\Include-I C:\Keil_v5\ARM\PACK\ARM\CMSIS\5.0.0-Beta4\CMSIS\RTOS\RTX\INC-I C:\Keil_v5\ARM\PACK\Keil\ARM_Compiler\1.1.1\Include-I C:\Keil_v5\ARM\PACK\Keil\MDK-Middleware\7.1.0\FileSystem\Include-I C:\Keil_v5\ARM\PACK\Keil\STM32F4xx_DFP\2.9.0\Drivers\CMSIS\Device\ST\STM32F4xx\Include-I C:\Keil_v5\ARM\PACK\Keil\STM32F4xx_DFP\2.9.0\Drivers\STM32F4xx_HAL_Driver\Inc-D__UVISION_VERSION="520" -D_RTE_ -DSTM32F407xx -DARM_MATH_CM4 --C99-o .\objects\coolingserviceframe.o --omf_browse .\objects\coolingserviceframe.crf --depend .\objects\coolingserviceframe.d)
 I (C:\Keil_v5\ARM\ARMCC\include\string.h)(0x56FE5EFE)
-I (DGUS.h)(0x58610656)
+I (DGUS.h)(0x58623512)
 I (C:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x56FE5EFE)
 I (C:\Keil_v5\ARM\PACK\Keil\STM32F4xx_DFP\2.9.0\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal.h)(0x57307F7E)
 I (C:\Users\FxSlava\Documents\Laser-LAMP-STM32-Test-Firmware\Calipso Ethernet Test\RTE\Device\STM32F407ZGTx\stm32f4xx_hal_conf.h)(0x57BFF41B)
@@ -842,12 +842,12 @@ I (SolidStateLaser.h)(0x582ADE8A)
 I (C:\Keil_v5\ARM\ARMCC\include\math.h)(0x56FE5EF6)
 I (C:\Keil_v5\ARM\PACK\ARM\CMSIS\5.0.0-Beta4\CMSIS\Include\arm_math.h)(0x57354AC8)
 I (LaserMisc.h)(0x582ADE8A)
-I (GlobalVariables.h)(0x5861EA1B)
-F (.\MainThread.c)(0x5861DA3C)(-c --cpu Cortex-M4.fp -D__RTX -g -O0 --apcs=interwork --split_sections-I "C:\Users\FxSlava\Documents\Laser-LAMP-STM32-Test-Firmware\Calipso Ethernet Test\RTE"-I "C:\Users\FxSlava\Documents\Laser-LAMP-STM32-Test-Firmware\Calipso Ethernet Test\RTE\Device\STM32F407ZGTx"-I C:\Keil_v5\ARM\PACK\ARM\CMSIS\5.0.0-Beta4\CMSIS\Driver\Include-I C:\Keil_v5\ARM\PACK\ARM\CMSIS\5.0.0-Beta4\CMSIS\Include-I C:\Keil_v5\ARM\PACK\ARM\CMSIS\5.0.0-Beta4\CMSIS\RTOS\RTX\INC-I C:\Keil_v5\ARM\PACK\Keil\ARM_Compiler\1.1.1\Include-I C:\Keil_v5\ARM\PACK\Keil\MDK-Middleware\7.1.0\FileSystem\Include-I C:\Keil_v5\ARM\PACK\Keil\STM32F4xx_DFP\2.9.0\Drivers\CMSIS\Device\ST\STM32F4xx\Include-I C:\Keil_v5\ARM\PACK\Keil\STM32F4xx_DFP\2.9.0\Drivers\STM32F4xx_HAL_Driver\Inc-D__UVISION_VERSION="520" -D_RTE_ -DSTM32F407xx -DARM_MATH_CM4 --C99-o .\objects\mainthread.o --omf_browse .\objects\mainthread.crf --depend .\objects\mainthread.d)
+I (GlobalVariables.h)(0x58623512)
+F (.\MainThread.c)(0x586234E7)(-c --cpu Cortex-M4.fp -D__RTX -g -O0 --apcs=interwork --split_sections-I "C:\Users\FxSlava\Documents\Laser-LAMP-STM32-Test-Firmware\Calipso Ethernet Test\RTE"-I "C:\Users\FxSlava\Documents\Laser-LAMP-STM32-Test-Firmware\Calipso Ethernet Test\RTE\Device\STM32F407ZGTx"-I C:\Keil_v5\ARM\PACK\ARM\CMSIS\5.0.0-Beta4\CMSIS\Driver\Include-I C:\Keil_v5\ARM\PACK\ARM\CMSIS\5.0.0-Beta4\CMSIS\Include-I C:\Keil_v5\ARM\PACK\ARM\CMSIS\5.0.0-Beta4\CMSIS\RTOS\RTX\INC-I C:\Keil_v5\ARM\PACK\Keil\ARM_Compiler\1.1.1\Include-I C:\Keil_v5\ARM\PACK\Keil\MDK-Middleware\7.1.0\FileSystem\Include-I C:\Keil_v5\ARM\PACK\Keil\STM32F4xx_DFP\2.9.0\Drivers\CMSIS\Device\ST\STM32F4xx\Include-I C:\Keil_v5\ARM\PACK\Keil\STM32F4xx_DFP\2.9.0\Drivers\STM32F4xx_HAL_Driver\Inc-D__UVISION_VERSION="520" -D_RTE_ -DSTM32F407xx -DARM_MATH_CM4 --C99-o .\objects\mainthread.o --omf_browse .\objects\mainthread.crf --depend .\objects\mainthread.d)
 I (C:\Keil_v5\ARM\PACK\ARM\CMSIS\5.0.0-Beta4\CMSIS\RTOS\RTX\INC\cmsis_os.h)(0x5735B1C0)
 I (C:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x56FE5EFE)
 I (C:\Keil_v5\ARM\ARMCC\include\stddef.h)(0x56FE5EFE)
-I (DGUS.h)(0x58610656)
+I (DGUS.h)(0x58623512)
 I (C:\Keil_v5\ARM\PACK\Keil\STM32F4xx_DFP\2.9.0\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal.h)(0x57307F7E)
 I (C:\Users\FxSlava\Documents\Laser-LAMP-STM32-Test-Firmware\Calipso Ethernet Test\RTE\Device\STM32F407ZGTx\stm32f4xx_hal_conf.h)(0x57BFF41B)
 I (C:\Users\FxSlava\Documents\Laser-LAMP-STM32-Test-Firmware\Calipso Ethernet Test\RTE\RTE_Components.h)(0x582AD38A)
@@ -882,13 +882,13 @@ I (C:\Keil_v5\ARM\PACK\Keil\STM32F4xx_DFP\2.9.0\Drivers\STM32F4xx_HAL_Driver\Inc
 I (C:\Keil_v5\ARM\PACK\ARM\CMSIS\5.0.0-Beta4\CMSIS\Driver\Include\Driver_USART.h)(0x57354AC8)
 I (C:\Keil_v5\ARM\PACK\ARM\CMSIS\5.0.0-Beta4\CMSIS\Driver\Include\Driver_Common.h)(0x57354AC8)
 I (C:\Keil_v5\ARM\ARMCC\include\stdbool.h)(0x56FE5EFC)
-I (GlobalVariables.h)(0x5861EA1B)
+I (GlobalVariables.h)(0x58623512)
 I (C:\Keil_v5\ARM\ARMCC\include\math.h)(0x56FE5EF6)
 I (C:\Keil_v5\ARM\PACK\ARM\CMSIS\5.0.0-Beta4\CMSIS\Include\arm_math.h)(0x57354AC8)
 I (C:\Keil_v5\ARM\ARMCC\include\string.h)(0x56FE5EFE)
 I (LaserMisc.h)(0x582ADE8A)
 I (SolidStateLaser.h)(0x582ADE8A)
-I (SDCard.h)(0x5861D9A5)
+I (SDCard.h)(0x586234E8)
 I (C:\Keil_v5\ARM\PACK\Keil\MDK-Middleware\7.1.0\FileSystem\Include\rl_fs.h)(0x5704BAFE)
 I (C:\Keil_v5\ARM\ARMCC\include\stdlib.h)(0x56FE5EFE)
 F (.\SPIThread.c)(0x585CF048)(-c --cpu Cortex-M4.fp -D__RTX -g -O0 --apcs=interwork --split_sections-I "C:\Users\FxSlava\Documents\Laser-LAMP-STM32-Test-Firmware\Calipso Ethernet Test\RTE"-I "C:\Users\FxSlava\Documents\Laser-LAMP-STM32-Test-Firmware\Calipso Ethernet Test\RTE\Device\STM32F407ZGTx"-I C:\Keil_v5\ARM\PACK\ARM\CMSIS\5.0.0-Beta4\CMSIS\Driver\Include-I C:\Keil_v5\ARM\PACK\ARM\CMSIS\5.0.0-Beta4\CMSIS\Include-I C:\Keil_v5\ARM\PACK\ARM\CMSIS\5.0.0-Beta4\CMSIS\RTOS\RTX\INC-I C:\Keil_v5\ARM\PACK\Keil\ARM_Compiler\1.1.1\Include-I C:\Keil_v5\ARM\PACK\Keil\MDK-Middleware\7.1.0\FileSystem\Include-I C:\Keil_v5\ARM\PACK\Keil\STM32F4xx_DFP\2.9.0\Drivers\CMSIS\Device\ST\STM32F4xx\Include-I C:\Keil_v5\ARM\PACK\Keil\STM32F4xx_DFP\2.9.0\Drivers\STM32F4xx_HAL_Driver\Inc-D__UVISION_VERSION="520" -D_RTE_ -DSTM32F407xx -DARM_MATH_CM4 --C99-o .\objects\spithread.o --omf_browse .\objects\spithread.crf --depend .\objects\spithread.d)
@@ -932,10 +932,10 @@ I (C:\Keil_v5\ARM\PACK\Keil\STM32F4xx_DFP\2.9.0\Drivers\STM32F4xx_HAL_Driver\Inc
 I (C:\Keil_v5\ARM\ARMCC\include\math.h)(0x56FE5EF6)
 I (C:\Keil_v5\ARM\PACK\ARM\CMSIS\5.0.0-Beta4\CMSIS\Include\arm_math.h)(0x57354AC8)
 I (C:\Keil_v5\ARM\ARMCC\include\string.h)(0x56FE5EFE)
-I (GlobalVariables.h)(0x5861EA1B)
-I (DGUS.h)(0x58610656)
+I (GlobalVariables.h)(0x58623512)
+I (DGUS.h)(0x58623512)
 I (LaserMisc.h)(0x582ADE8A)
-F (.\WiFiThread.c)(0x582ADE8A)(-c --cpu Cortex-M4.fp -D__RTX -g -O0 --apcs=interwork --split_sections-I "C:\Users\FxSlava\Documents\Laser-LAMP-STM32-Test-Firmware\Calipso Ethernet Test\RTE"-I "C:\Users\FxSlava\Documents\Laser-LAMP-STM32-Test-Firmware\Calipso Ethernet Test\RTE\Device\STM32F407ZGTx"-I C:\Keil_v5\ARM\PACK\ARM\CMSIS\5.0.0-Beta4\CMSIS\Driver\Include-I C:\Keil_v5\ARM\PACK\ARM\CMSIS\5.0.0-Beta4\CMSIS\Include-I C:\Keil_v5\ARM\PACK\ARM\CMSIS\5.0.0-Beta4\CMSIS\RTOS\RTX\INC-I C:\Keil_v5\ARM\PACK\Keil\ARM_Compiler\1.1.1\Include-I C:\Keil_v5\ARM\PACK\Keil\MDK-Middleware\7.1.0\FileSystem\Include-I C:\Keil_v5\ARM\PACK\Keil\STM32F4xx_DFP\2.9.0\Drivers\CMSIS\Device\ST\STM32F4xx\Include-I C:\Keil_v5\ARM\PACK\Keil\STM32F4xx_DFP\2.9.0\Drivers\STM32F4xx_HAL_Driver\Inc-D__UVISION_VERSION="520" -D_RTE_ -DSTM32F407xx -DARM_MATH_CM4 --C99-o .\objects\wifithread.o --omf_browse .\objects\wifithread.crf --depend .\objects\wifithread.d)
+F (.\WiFiThread.c)(0x58624DF3)(-c --cpu Cortex-M4.fp -D__RTX -g -O0 --apcs=interwork --split_sections-I "C:\Users\FxSlava\Documents\Laser-LAMP-STM32-Test-Firmware\Calipso Ethernet Test\RTE"-I "C:\Users\FxSlava\Documents\Laser-LAMP-STM32-Test-Firmware\Calipso Ethernet Test\RTE\Device\STM32F407ZGTx"-I C:\Keil_v5\ARM\PACK\ARM\CMSIS\5.0.0-Beta4\CMSIS\Driver\Include-I C:\Keil_v5\ARM\PACK\ARM\CMSIS\5.0.0-Beta4\CMSIS\Include-I C:\Keil_v5\ARM\PACK\ARM\CMSIS\5.0.0-Beta4\CMSIS\RTOS\RTX\INC-I C:\Keil_v5\ARM\PACK\Keil\ARM_Compiler\1.1.1\Include-I C:\Keil_v5\ARM\PACK\Keil\MDK-Middleware\7.1.0\FileSystem\Include-I C:\Keil_v5\ARM\PACK\Keil\STM32F4xx_DFP\2.9.0\Drivers\CMSIS\Device\ST\STM32F4xx\Include-I C:\Keil_v5\ARM\PACK\Keil\STM32F4xx_DFP\2.9.0\Drivers\STM32F4xx_HAL_Driver\Inc-D__UVISION_VERSION="520" -D_RTE_ -DSTM32F407xx -DARM_MATH_CM4 --C99-o .\objects\wifithread.o --omf_browse .\objects\wifithread.crf --depend .\objects\wifithread.d)
 I (C:\Keil_v5\ARM\PACK\ARM\CMSIS\5.0.0-Beta4\CMSIS\RTOS\RTX\INC\cmsis_os.h)(0x5735B1C0)
 I (C:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x56FE5EFE)
 I (C:\Keil_v5\ARM\ARMCC\include\stddef.h)(0x56FE5EFE)
@@ -974,22 +974,22 @@ I (C:\Keil_v5\ARM\PACK\ARM\CMSIS\5.0.0-Beta4\CMSIS\Driver\Include\Driver_USART.h
 I (C:\Keil_v5\ARM\PACK\ARM\CMSIS\5.0.0-Beta4\CMSIS\Driver\Include\Driver_Common.h)(0x57354AC8)
 I (C:\Keil_v5\ARM\ARMCC\include\stdbool.h)(0x56FE5EFC)
 I (SPWF01.h)(0x57D105B4)
-I (DGUS.h)(0x58610656)
+I (DGUS.h)(0x58623512)
 I (SolidStateLaser.h)(0x582ADE8A)
 I (C:\Keil_v5\ARM\ARMCC\include\math.h)(0x56FE5EF6)
 I (C:\Keil_v5\ARM\PACK\ARM\CMSIS\5.0.0-Beta4\CMSIS\Include\arm_math.h)(0x57354AC8)
 I (C:\Keil_v5\ARM\ARMCC\include\string.h)(0x56FE5EFE)
 I (LaserMisc.h)(0x582ADE8A)
-I (GlobalVariables.h)(0x5861EA1B)
+I (GlobalVariables.h)(0x58623512)
 I (C:\Keil_v5\ARM\ARMCC\include\stdlib.h)(0x56FE5EFE)
 I (C:\Keil_v5\ARM\ARMCC\include\stdarg.h)(0x56FE5F00)
 I (WiFiThread.h)(0x582AD38A)
-F (.\LaserTimer.c)(0x5860AE54)(-c --cpu Cortex-M4.fp -D__RTX -g -O0 --apcs=interwork --split_sections-I "C:\Users\FxSlava\Documents\Laser-LAMP-STM32-Test-Firmware\Calipso Ethernet Test\RTE"-I "C:\Users\FxSlava\Documents\Laser-LAMP-STM32-Test-Firmware\Calipso Ethernet Test\RTE\Device\STM32F407ZGTx"-I C:\Keil_v5\ARM\PACK\ARM\CMSIS\5.0.0-Beta4\CMSIS\Driver\Include-I C:\Keil_v5\ARM\PACK\ARM\CMSIS\5.0.0-Beta4\CMSIS\Include-I C:\Keil_v5\ARM\PACK\ARM\CMSIS\5.0.0-Beta4\CMSIS\RTOS\RTX\INC-I C:\Keil_v5\ARM\PACK\Keil\ARM_Compiler\1.1.1\Include-I C:\Keil_v5\ARM\PACK\Keil\MDK-Middleware\7.1.0\FileSystem\Include-I C:\Keil_v5\ARM\PACK\Keil\STM32F4xx_DFP\2.9.0\Drivers\CMSIS\Device\ST\STM32F4xx\Include-I C:\Keil_v5\ARM\PACK\Keil\STM32F4xx_DFP\2.9.0\Drivers\STM32F4xx_HAL_Driver\Inc-D__UVISION_VERSION="520" -D_RTE_ -DSTM32F407xx -DARM_MATH_CM4 --C99-o .\objects\lasertimer.o --omf_browse .\objects\lasertimer.crf --depend .\objects\lasertimer.d)
+F (.\LaserTimer.c)(0x586234E7)(-c --cpu Cortex-M4.fp -D__RTX -g -O0 --apcs=interwork --split_sections-I "C:\Users\FxSlava\Documents\Laser-LAMP-STM32-Test-Firmware\Calipso Ethernet Test\RTE"-I "C:\Users\FxSlava\Documents\Laser-LAMP-STM32-Test-Firmware\Calipso Ethernet Test\RTE\Device\STM32F407ZGTx"-I C:\Keil_v5\ARM\PACK\ARM\CMSIS\5.0.0-Beta4\CMSIS\Driver\Include-I C:\Keil_v5\ARM\PACK\ARM\CMSIS\5.0.0-Beta4\CMSIS\Include-I C:\Keil_v5\ARM\PACK\ARM\CMSIS\5.0.0-Beta4\CMSIS\RTOS\RTX\INC-I C:\Keil_v5\ARM\PACK\Keil\ARM_Compiler\1.1.1\Include-I C:\Keil_v5\ARM\PACK\Keil\MDK-Middleware\7.1.0\FileSystem\Include-I C:\Keil_v5\ARM\PACK\Keil\STM32F4xx_DFP\2.9.0\Drivers\CMSIS\Device\ST\STM32F4xx\Include-I C:\Keil_v5\ARM\PACK\Keil\STM32F4xx_DFP\2.9.0\Drivers\STM32F4xx_HAL_Driver\Inc-D__UVISION_VERSION="520" -D_RTE_ -DSTM32F407xx -DARM_MATH_CM4 --C99-o .\objects\lasertimer.o --omf_browse .\objects\lasertimer.crf --depend .\objects\lasertimer.d)
 I (C:\Keil_v5\ARM\PACK\ARM\CMSIS\5.0.0-Beta4\CMSIS\RTOS\RTX\INC\cmsis_os.h)(0x5735B1C0)
 I (C:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x56FE5EFE)
 I (C:\Keil_v5\ARM\ARMCC\include\stddef.h)(0x56FE5EFE)
 I (C:\Keil_v5\ARM\ARMCC\include\stdbool.h)(0x56FE5EFC)
-I (GlobalVariables.h)(0x5861EA1B)
+I (GlobalVariables.h)(0x58623512)
 I (C:\Keil_v5\ARM\PACK\Keil\STM32F4xx_DFP\2.9.0\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal.h)(0x57307F7E)
 I (C:\Users\FxSlava\Documents\Laser-LAMP-STM32-Test-Firmware\Calipso Ethernet Test\RTE\Device\STM32F407ZGTx\stm32f4xx_hal_conf.h)(0x57BFF41B)
 I (C:\Users\FxSlava\Documents\Laser-LAMP-STM32-Test-Firmware\Calipso Ethernet Test\RTE\RTE_Components.h)(0x582AD38A)
@@ -1024,10 +1024,10 @@ I (C:\Keil_v5\ARM\PACK\Keil\STM32F4xx_DFP\2.9.0\Drivers\STM32F4xx_HAL_Driver\Inc
 I (C:\Keil_v5\ARM\ARMCC\include\math.h)(0x56FE5EF6)
 I (C:\Keil_v5\ARM\PACK\ARM\CMSIS\5.0.0-Beta4\CMSIS\Include\arm_math.h)(0x57354AC8)
 I (C:\Keil_v5\ARM\ARMCC\include\string.h)(0x56FE5EFE)
-I (DGUS.h)(0x58610656)
+I (DGUS.h)(0x58623512)
 I (LaserMisc.h)(0x582ADE8A)
 I (SolidStateLaser.h)(0x582ADE8A)
-F (.\SolidStateLaser.c)(0x5860AD3D)(-c --cpu Cortex-M4.fp -D__RTX -g -O0 --apcs=interwork --split_sections-I "C:\Users\FxSlava\Documents\Laser-LAMP-STM32-Test-Firmware\Calipso Ethernet Test\RTE"-I "C:\Users\FxSlava\Documents\Laser-LAMP-STM32-Test-Firmware\Calipso Ethernet Test\RTE\Device\STM32F407ZGTx"-I C:\Keil_v5\ARM\PACK\ARM\CMSIS\5.0.0-Beta4\CMSIS\Driver\Include-I C:\Keil_v5\ARM\PACK\ARM\CMSIS\5.0.0-Beta4\CMSIS\Include-I C:\Keil_v5\ARM\PACK\ARM\CMSIS\5.0.0-Beta4\CMSIS\RTOS\RTX\INC-I C:\Keil_v5\ARM\PACK\Keil\ARM_Compiler\1.1.1\Include-I C:\Keil_v5\ARM\PACK\Keil\MDK-Middleware\7.1.0\FileSystem\Include-I C:\Keil_v5\ARM\PACK\Keil\STM32F4xx_DFP\2.9.0\Drivers\CMSIS\Device\ST\STM32F4xx\Include-I C:\Keil_v5\ARM\PACK\Keil\STM32F4xx_DFP\2.9.0\Drivers\STM32F4xx_HAL_Driver\Inc-D__UVISION_VERSION="520" -D_RTE_ -DSTM32F407xx -DARM_MATH_CM4 --C99-o .\objects\solidstatelaser.o --omf_browse .\objects\solidstatelaser.crf --depend .\objects\solidstatelaser.d)
+F (.\SolidStateLaser.c)(0x586234E8)(-c --cpu Cortex-M4.fp -D__RTX -g -O0 --apcs=interwork --split_sections-I "C:\Users\FxSlava\Documents\Laser-LAMP-STM32-Test-Firmware\Calipso Ethernet Test\RTE"-I "C:\Users\FxSlava\Documents\Laser-LAMP-STM32-Test-Firmware\Calipso Ethernet Test\RTE\Device\STM32F407ZGTx"-I C:\Keil_v5\ARM\PACK\ARM\CMSIS\5.0.0-Beta4\CMSIS\Driver\Include-I C:\Keil_v5\ARM\PACK\ARM\CMSIS\5.0.0-Beta4\CMSIS\Include-I C:\Keil_v5\ARM\PACK\ARM\CMSIS\5.0.0-Beta4\CMSIS\RTOS\RTX\INC-I C:\Keil_v5\ARM\PACK\Keil\ARM_Compiler\1.1.1\Include-I C:\Keil_v5\ARM\PACK\Keil\MDK-Middleware\7.1.0\FileSystem\Include-I C:\Keil_v5\ARM\PACK\Keil\STM32F4xx_DFP\2.9.0\Drivers\CMSIS\Device\ST\STM32F4xx\Include-I C:\Keil_v5\ARM\PACK\Keil\STM32F4xx_DFP\2.9.0\Drivers\STM32F4xx_HAL_Driver\Inc-D__UVISION_VERSION="520" -D_RTE_ -DSTM32F407xx -DARM_MATH_CM4 --C99-o .\objects\solidstatelaser.o --omf_browse .\objects\solidstatelaser.crf --depend .\objects\solidstatelaser.d)
 I (SolidStateLaser.h)(0x582ADE8A)
 I (C:\Keil_v5\ARM\PACK\Keil\STM32F4xx_DFP\2.9.0\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal.h)(0x57307F7E)
 I (C:\Users\FxSlava\Documents\Laser-LAMP-STM32-Test-Firmware\Calipso Ethernet Test\RTE\Device\STM32F407ZGTx\stm32f4xx_hal_conf.h)(0x57BFF41B)
@@ -1065,13 +1065,13 @@ I (C:\Keil_v5\ARM\ARMCC\include\math.h)(0x56FE5EF6)
 I (C:\Keil_v5\ARM\PACK\ARM\CMSIS\5.0.0-Beta4\CMSIS\Include\arm_math.h)(0x57354AC8)
 I (C:\Keil_v5\ARM\ARMCC\include\string.h)(0x56FE5EFE)
 I (LaserMisc.h)(0x582ADE8A)
-I (GlobalVariables.h)(0x5861EA1B)
+I (GlobalVariables.h)(0x58623512)
 I (C:\Keil_v5\ARM\ARMCC\include\stdbool.h)(0x56FE5EFC)
-I (DGUS.h)(0x58610656)
+I (DGUS.h)(0x58623512)
 I (C:\Keil_v5\ARM\PACK\ARM\CMSIS\5.0.0-Beta4\CMSIS\RTOS\RTX\INC\cmsis_os.h)(0x5735B1C0)
 I (C:\Keil_v5\ARM\ARMCC\include\stddef.h)(0x56FE5EFE)
-F (.\DGUS.c)(0x58610662)(-c --cpu Cortex-M4.fp -D__RTX -g -O0 --apcs=interwork --split_sections-I "C:\Users\FxSlava\Documents\Laser-LAMP-STM32-Test-Firmware\Calipso Ethernet Test\RTE"-I "C:\Users\FxSlava\Documents\Laser-LAMP-STM32-Test-Firmware\Calipso Ethernet Test\RTE\Device\STM32F407ZGTx"-I C:\Keil_v5\ARM\PACK\ARM\CMSIS\5.0.0-Beta4\CMSIS\Driver\Include-I C:\Keil_v5\ARM\PACK\ARM\CMSIS\5.0.0-Beta4\CMSIS\Include-I C:\Keil_v5\ARM\PACK\ARM\CMSIS\5.0.0-Beta4\CMSIS\RTOS\RTX\INC-I C:\Keil_v5\ARM\PACK\Keil\ARM_Compiler\1.1.1\Include-I C:\Keil_v5\ARM\PACK\Keil\MDK-Middleware\7.1.0\FileSystem\Include-I C:\Keil_v5\ARM\PACK\Keil\STM32F4xx_DFP\2.9.0\Drivers\CMSIS\Device\ST\STM32F4xx\Include-I C:\Keil_v5\ARM\PACK\Keil\STM32F4xx_DFP\2.9.0\Drivers\STM32F4xx_HAL_Driver\Inc-D__UVISION_VERSION="520" -D_RTE_ -DSTM32F407xx -DARM_MATH_CM4 --C99-o .\objects\dgus.o --omf_browse .\objects\dgus.crf --depend .\objects\dgus.d)
-I (DGUS.h)(0x58610656)
+F (.\DGUS.c)(0x586234E7)(-c --cpu Cortex-M4.fp -D__RTX -g -O0 --apcs=interwork --split_sections-I "C:\Users\FxSlava\Documents\Laser-LAMP-STM32-Test-Firmware\Calipso Ethernet Test\RTE"-I "C:\Users\FxSlava\Documents\Laser-LAMP-STM32-Test-Firmware\Calipso Ethernet Test\RTE\Device\STM32F407ZGTx"-I C:\Keil_v5\ARM\PACK\ARM\CMSIS\5.0.0-Beta4\CMSIS\Driver\Include-I C:\Keil_v5\ARM\PACK\ARM\CMSIS\5.0.0-Beta4\CMSIS\Include-I C:\Keil_v5\ARM\PACK\ARM\CMSIS\5.0.0-Beta4\CMSIS\RTOS\RTX\INC-I C:\Keil_v5\ARM\PACK\Keil\ARM_Compiler\1.1.1\Include-I C:\Keil_v5\ARM\PACK\Keil\MDK-Middleware\7.1.0\FileSystem\Include-I C:\Keil_v5\ARM\PACK\Keil\STM32F4xx_DFP\2.9.0\Drivers\CMSIS\Device\ST\STM32F4xx\Include-I C:\Keil_v5\ARM\PACK\Keil\STM32F4xx_DFP\2.9.0\Drivers\STM32F4xx_HAL_Driver\Inc-D__UVISION_VERSION="520" -D_RTE_ -DSTM32F407xx -DARM_MATH_CM4 --C99-o .\objects\dgus.o --omf_browse .\objects\dgus.crf --depend .\objects\dgus.d)
+I (DGUS.h)(0x58623512)
 I (C:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x56FE5EFE)
 I (C:\Keil_v5\ARM\PACK\Keil\STM32F4xx_DFP\2.9.0\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal.h)(0x57307F7E)
 I (C:\Users\FxSlava\Documents\Laser-LAMP-STM32-Test-Firmware\Calipso Ethernet Test\RTE\Device\STM32F407ZGTx\stm32f4xx_hal_conf.h)(0x57BFF41B)
@@ -1110,7 +1110,7 @@ I (C:\Keil_v5\ARM\ARMCC\include\string.h)(0x56FE5EFE)
 I (C:\Keil_v5\ARM\PACK\ARM\CMSIS\5.0.0-Beta4\CMSIS\Driver\Include\Driver_USART.h)(0x57354AC8)
 I (C:\Keil_v5\ARM\PACK\ARM\CMSIS\5.0.0-Beta4\CMSIS\Driver\Include\Driver_Common.h)(0x57354AC8)
 I (C:\Keil_v5\ARM\ARMCC\include\stdbool.h)(0x56FE5EFC)
-I (GlobalVariables.h)(0x5861EA1B)
+I (GlobalVariables.h)(0x58623512)
 I (C:\Keil_v5\ARM\ARMCC\include\math.h)(0x56FE5EF6)
 I (C:\Keil_v5\ARM\PACK\ARM\CMSIS\5.0.0-Beta4\CMSIS\Include\arm_math.h)(0x57354AC8)
 I (LaserMisc.h)(0x582ADE8A)
@@ -1155,7 +1155,7 @@ I (C:\Keil_v5\ARM\ARMCC\include\string.h)(0x56FE5EFE)
 I (C:\Keil_v5\ARM\PACK\ARM\CMSIS\5.0.0-Beta4\CMSIS\Driver\Include\Driver_USART.h)(0x57354AC8)
 I (C:\Keil_v5\ARM\PACK\ARM\CMSIS\5.0.0-Beta4\CMSIS\Driver\Include\Driver_Common.h)(0x57354AC8)
 I (C:\Keil_v5\ARM\ARMCC\include\stddef.h)(0x56FE5EFE)
-F (.\LaserMisc.c)(0x58609DE0)(-c --cpu Cortex-M4.fp -D__RTX -g -O0 --apcs=interwork --split_sections-I "C:\Users\FxSlava\Documents\Laser-LAMP-STM32-Test-Firmware\Calipso Ethernet Test\RTE"-I "C:\Users\FxSlava\Documents\Laser-LAMP-STM32-Test-Firmware\Calipso Ethernet Test\RTE\Device\STM32F407ZGTx"-I C:\Keil_v5\ARM\PACK\ARM\CMSIS\5.0.0-Beta4\CMSIS\Driver\Include-I C:\Keil_v5\ARM\PACK\ARM\CMSIS\5.0.0-Beta4\CMSIS\Include-I C:\Keil_v5\ARM\PACK\ARM\CMSIS\5.0.0-Beta4\CMSIS\RTOS\RTX\INC-I C:\Keil_v5\ARM\PACK\Keil\ARM_Compiler\1.1.1\Include-I C:\Keil_v5\ARM\PACK\Keil\MDK-Middleware\7.1.0\FileSystem\Include-I C:\Keil_v5\ARM\PACK\Keil\STM32F4xx_DFP\2.9.0\Drivers\CMSIS\Device\ST\STM32F4xx\Include-I C:\Keil_v5\ARM\PACK\Keil\STM32F4xx_DFP\2.9.0\Drivers\STM32F4xx_HAL_Driver\Inc-D__UVISION_VERSION="520" -D_RTE_ -DSTM32F407xx -DARM_MATH_CM4 --C99-o .\objects\lasermisc.o --omf_browse .\objects\lasermisc.crf --depend .\objects\lasermisc.d)
+F (.\LaserMisc.c)(0x586234E7)(-c --cpu Cortex-M4.fp -D__RTX -g -O0 --apcs=interwork --split_sections-I "C:\Users\FxSlava\Documents\Laser-LAMP-STM32-Test-Firmware\Calipso Ethernet Test\RTE"-I "C:\Users\FxSlava\Documents\Laser-LAMP-STM32-Test-Firmware\Calipso Ethernet Test\RTE\Device\STM32F407ZGTx"-I C:\Keil_v5\ARM\PACK\ARM\CMSIS\5.0.0-Beta4\CMSIS\Driver\Include-I C:\Keil_v5\ARM\PACK\ARM\CMSIS\5.0.0-Beta4\CMSIS\Include-I C:\Keil_v5\ARM\PACK\ARM\CMSIS\5.0.0-Beta4\CMSIS\RTOS\RTX\INC-I C:\Keil_v5\ARM\PACK\Keil\ARM_Compiler\1.1.1\Include-I C:\Keil_v5\ARM\PACK\Keil\MDK-Middleware\7.1.0\FileSystem\Include-I C:\Keil_v5\ARM\PACK\Keil\STM32F4xx_DFP\2.9.0\Drivers\CMSIS\Device\ST\STM32F4xx\Include-I C:\Keil_v5\ARM\PACK\Keil\STM32F4xx_DFP\2.9.0\Drivers\STM32F4xx_HAL_Driver\Inc-D__UVISION_VERSION="520" -D_RTE_ -DSTM32F407xx -DARM_MATH_CM4 --C99-o .\objects\lasermisc.o --omf_browse .\objects\lasermisc.crf --depend .\objects\lasermisc.d)
 I (LaserMisc.h)(0x582ADE8A)
 I (C:\Keil_v5\ARM\PACK\Keil\STM32F4xx_DFP\2.9.0\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal.h)(0x57307F7E)
 I (C:\Users\FxSlava\Documents\Laser-LAMP-STM32-Test-Firmware\Calipso Ethernet Test\RTE\Device\STM32F407ZGTx\stm32f4xx_hal_conf.h)(0x57BFF41B)
@@ -1192,18 +1192,18 @@ I (C:\Keil_v5\ARM\PACK\Keil\STM32F4xx_DFP\2.9.0\Drivers\STM32F4xx_HAL_Driver\Inc
 I (C:\Keil_v5\ARM\ARMCC\include\math.h)(0x56FE5EF6)
 I (C:\Keil_v5\ARM\PACK\ARM\CMSIS\5.0.0-Beta4\CMSIS\Include\arm_math.h)(0x57354AC8)
 I (C:\Keil_v5\ARM\ARMCC\include\string.h)(0x56FE5EFE)
-I (GlobalVariables.h)(0x5861EA1B)
+I (GlobalVariables.h)(0x58623512)
 I (C:\Keil_v5\ARM\ARMCC\include\stdbool.h)(0x56FE5EFC)
-I (DGUS.h)(0x58610656)
+I (DGUS.h)(0x58623512)
 I (C:\Keil_v5\ARM\PACK\ARM\CMSIS\5.0.0-Beta4\CMSIS\RTOS\RTX\INC\cmsis_os.h)(0x5735B1C0)
 I (C:\Keil_v5\ARM\ARMCC\include\stddef.h)(0x56FE5EFE)
 I (SoundLib.h)(0x582AD38A)
-F (.\SDCard.c)(0x5861DC14)(-c --cpu Cortex-M4.fp -D__RTX -g -O0 --apcs=interwork --split_sections-I "C:\Users\FxSlava\Documents\Laser-LAMP-STM32-Test-Firmware\Calipso Ethernet Test\RTE"-I "C:\Users\FxSlava\Documents\Laser-LAMP-STM32-Test-Firmware\Calipso Ethernet Test\RTE\Device\STM32F407ZGTx"-I C:\Keil_v5\ARM\PACK\ARM\CMSIS\5.0.0-Beta4\CMSIS\Driver\Include-I C:\Keil_v5\ARM\PACK\ARM\CMSIS\5.0.0-Beta4\CMSIS\Include-I C:\Keil_v5\ARM\PACK\ARM\CMSIS\5.0.0-Beta4\CMSIS\RTOS\RTX\INC-I C:\Keil_v5\ARM\PACK\Keil\ARM_Compiler\1.1.1\Include-I C:\Keil_v5\ARM\PACK\Keil\MDK-Middleware\7.1.0\FileSystem\Include-I C:\Keil_v5\ARM\PACK\Keil\STM32F4xx_DFP\2.9.0\Drivers\CMSIS\Device\ST\STM32F4xx\Include-I C:\Keil_v5\ARM\PACK\Keil\STM32F4xx_DFP\2.9.0\Drivers\STM32F4xx_HAL_Driver\Inc-D__UVISION_VERSION="520" -D_RTE_ -DSTM32F407xx -DARM_MATH_CM4 --C99-o .\objects\sdcard.o --omf_browse .\objects\sdcard.crf --depend .\objects\sdcard.d)
-I (SDCard.h)(0x5861D9A5)
+F (.\SDCard.c)(0x586234E8)(-c --cpu Cortex-M4.fp -D__RTX -g -O0 --apcs=interwork --split_sections-I "C:\Users\FxSlava\Documents\Laser-LAMP-STM32-Test-Firmware\Calipso Ethernet Test\RTE"-I "C:\Users\FxSlava\Documents\Laser-LAMP-STM32-Test-Firmware\Calipso Ethernet Test\RTE\Device\STM32F407ZGTx"-I C:\Keil_v5\ARM\PACK\ARM\CMSIS\5.0.0-Beta4\CMSIS\Driver\Include-I C:\Keil_v5\ARM\PACK\ARM\CMSIS\5.0.0-Beta4\CMSIS\Include-I C:\Keil_v5\ARM\PACK\ARM\CMSIS\5.0.0-Beta4\CMSIS\RTOS\RTX\INC-I C:\Keil_v5\ARM\PACK\Keil\ARM_Compiler\1.1.1\Include-I C:\Keil_v5\ARM\PACK\Keil\MDK-Middleware\7.1.0\FileSystem\Include-I C:\Keil_v5\ARM\PACK\Keil\STM32F4xx_DFP\2.9.0\Drivers\CMSIS\Device\ST\STM32F4xx\Include-I C:\Keil_v5\ARM\PACK\Keil\STM32F4xx_DFP\2.9.0\Drivers\STM32F4xx_HAL_Driver\Inc-D__UVISION_VERSION="520" -D_RTE_ -DSTM32F407xx -DARM_MATH_CM4 --C99-o .\objects\sdcard.o --omf_browse .\objects\sdcard.crf --depend .\objects\sdcard.d)
+I (SDCard.h)(0x586234E8)
 I (C:\Keil_v5\ARM\PACK\Keil\MDK-Middleware\7.1.0\FileSystem\Include\rl_fs.h)(0x5704BAFE)
 I (C:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x56FE5EFE)
 I (C:\Keil_v5\ARM\ARMCC\include\stdbool.h)(0x56FE5EFC)
-I (DGUS.h)(0x58610656)
+I (DGUS.h)(0x58623512)
 I (C:\Keil_v5\ARM\PACK\Keil\STM32F4xx_DFP\2.9.0\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal.h)(0x57307F7E)
 I (C:\Users\FxSlava\Documents\Laser-LAMP-STM32-Test-Firmware\Calipso Ethernet Test\RTE\Device\STM32F407ZGTx\stm32f4xx_hal_conf.h)(0x57BFF41B)
 I (C:\Users\FxSlava\Documents\Laser-LAMP-STM32-Test-Firmware\Calipso Ethernet Test\RTE\RTE_Components.h)(0x582AD38A)

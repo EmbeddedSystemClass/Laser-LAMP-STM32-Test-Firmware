@@ -50,6 +50,7 @@ uint32_t frame_write;
  
 void WiFiTimer_Callback(void const *arg);
 void WiFiThread (void const *argument);
+void LogThread (void const *argument);
 void UserWiFiThread (void const *argument);
 
 /*----------------------------------------------------------------------------
@@ -61,7 +62,35 @@ osThreadDef (WiFiThread, osPriorityNormal, 1, 0);
 osThreadDef (UserWiFiThread, osPriorityNormal, 1, 0);
 osMessageQDef(WiFiCMDQueue, 16, uint32_t);
 
+// Log
+osPoolDef(Log_Events_Pool, 16, LOG_EVENT);
+osPoolId pid_Log_Events_Pool;
+
+osMessageQDef(Log_Queue, 16, uint32_t);
+osMessageQId qid_Log_Queue;
+
+osThreadId tid_LogThread;
+osThreadDef (LogThread, osPriorityNormal, 1, 0);
+
+/* Public functions ----------------------------------------------------------*/
+
+void QueuePutLog(LOG_EVENT event)
+{
+	LOG_EVENT* pevent;
+	
+	pevent = osPoolAlloc(pid_Log_Events_Pool);
+	memcpy(pevent, &event, sizeof(event));
+	
+	osMessagePut(qid_Log_Queue, (uint32_t)pevent, g_wDGUSTimeout);
+}
+
 /* Private functions ---------------------------------------------------------*/
+
+void LogThread (void const *argument) 
+{
+	LOG_EVENT* event;
+}
+	
 void WiFiTimer_Callback(void const *arg) 
 {
 	for (uint16_t i = 0; i < 16; i++)
@@ -153,6 +182,13 @@ int Init_WiFi_Thread (void) {
 			WiFi_APs[i] = (PWIFI_AP)osPoolCAlloc(pid_WiFi_APs_Pool);
 			memset(WiFi_APs[i], 0, sizeof(WIFI_AP));
 		}
+		
+	// Create Log queue
+	qid_Log_Queue = osMessageCreate(osMessageQ(Log_Queue), NULL);
+	if (!qid_Log_Queue) return(-1);
+		
+	// Create Log Pool
+	pid_Log_Events_Pool = osPoolCreate(osPool(Log_Events_Pool));
 	
 	//Initialize the USART driver 
   Driver_USART3.Initialize(WIFI_USART_callback);

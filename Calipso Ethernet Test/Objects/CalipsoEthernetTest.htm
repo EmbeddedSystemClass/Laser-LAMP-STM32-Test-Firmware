@@ -3,7 +3,7 @@
 <title>Static Call Graph - [.\Objects\CalipsoEthernetTest.axf]</title></head>
 <body><HR>
 <H1>Static Call Graph for image .\Objects\CalipsoEthernetTest.axf</H1><HR>
-<BR><P>#&#060CALLGRAPH&#062# ARM Linker, 5060183: Last Updated: Tue Dec 27 11:12:21 2016
+<BR><P>#&#060CALLGRAPH&#062# ARM Linker, 5060183: Last Updated: Tue Dec 27 18:18:19 2016
 <BR><P>
 <H3>Maximum Stack Usage =        680 bytes + Unknown(Functions without stacksize, Cycles, Untraceable Function Pointers)</H3><H3>
 Call chain for Maximum Stack Depth:</H3>
@@ -1085,8 +1085,8 @@ Global Symbols
 <LI><a href="#[191]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;CoolInit
 <LI><a href="#[254]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SpeakerInit
 <LI><a href="#[205]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Initialize_DGUS
-<LI><a href="#[208]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;LampControlTIMInit
 <LI><a href="#[253]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SpeakerDMA
+<LI><a href="#[208]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;LampControlTIMInit
 <LI><a href="#[2cc]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;path_create
 <LI><a href="#[2ae]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;create_dot_entries
 <LI><a href="#[144]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__rt_memcpy
@@ -1133,12 +1133,12 @@ Global Symbols
 <LI><a href="#[1ca]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_MspInit
 <LI><a href="#[254]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SpeakerInit
 <LI><a href="#[205]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Initialize_DGUS
-<LI><a href="#[208]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;LampControlTIMInit
-<LI><a href="#[207]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;LampControlGPIOInit
 <LI><a href="#[1a1]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SoundOn
 <LI><a href="#[98]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Initialize
 <LI><a href="#[253]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SpeakerDMA
 <LI><a href="#[1a6]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SoundOff
+<LI><a href="#[208]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;LampControlTIMInit
+<LI><a href="#[207]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;LampControlGPIOInit
 <LI><a href="#[263]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;USART_Initialize
 <LI><a href="#[246]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SPI_Initialize
 <LI><a href="#[242]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SPI_Control
@@ -2357,12 +2357,12 @@ Global Symbols
 <BR>[Called By]<UL><LI><a href="#[191]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;CoolInit
 <LI><a href="#[1ca]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_MspInit
 <LI><a href="#[254]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SpeakerInit
-<LI><a href="#[208]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;LampControlTIMInit
-<LI><a href="#[207]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;LampControlGPIOInit
 <LI><a href="#[1a1]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SoundOn
 <LI><a href="#[98]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Initialize
 <LI><a href="#[a1]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Control
 <LI><a href="#[1a6]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SoundOff
+<LI><a href="#[208]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;LampControlTIMInit
+<LI><a href="#[207]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;LampControlGPIOInit
 <LI><a href="#[25c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;USART_Control
 <LI><a href="#[246]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SPI_Initialize
 <LI><a href="#[242]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SPI_Control
@@ -2392,8 +2392,6 @@ Global Symbols
 <LI><a href="#[230]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ServiceFrame_Process
 <LI><a href="#[1ca]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_MspInit
 <LI><a href="#[95]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
-<LI><a href="#[207]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;LampControlGPIOInit
-<LI><a href="#[1de]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_TIM_PeriodElapsedCallback
 <LI><a href="#[1dc]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_TIM_OC_DelayElapsedCallback
 <LI><a href="#[1c6]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_GPIO_EXTI_Callback
 <LI><a href="#[93]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;LaserTimer_Callback
@@ -2410,6 +2408,8 @@ Global Symbols
 <LI><a href="#[231]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ServiceDiodeFrame_Process
 <LI><a href="#[23a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SolidStateLaserWork_Process
 <LI><a href="#[1a6]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SoundOff
+<LI><a href="#[207]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;LampControlGPIOInit
+<LI><a href="#[1de]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_TIM_PeriodElapsedCallback
 <LI><a href="#[267]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;USART_SetModemControl
 <LI><a href="#[242]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SPI_Control
 </UL>
@@ -2463,9 +2463,9 @@ Global Symbols
 <P><STRONG><a name="[19a]"></a>HAL_NVIC_ClearPendingIRQ</STRONG> (Thumb, 30 bytes, Stack size 8 bytes, stm32f4xx_hal_cortex.o(i.HAL_NVIC_ClearPendingIRQ))
 <BR><BR>[Stack]<UL><LI>Max Depth = 8<LI>Call Chain = HAL_NVIC_ClearPendingIRQ
 </UL>
-<BR>[Called By]<UL><LI><a href="#[208]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;LampControlTIMInit
+<BR>[Called By]<UL><LI><a href="#[9a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;PowerControl
+<LI><a href="#[208]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;LampControlTIMInit
 <LI><a href="#[207]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;LampControlGPIOInit
-<LI><a href="#[9a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;PowerControl
 <LI><a href="#[59]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;DMA2_Stream7_IRQHandler
 <LI><a href="#[4c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;DMA2_Stream1_IRQHandler
 <LI><a href="#[58]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;DMA2_Stream6_IRQHandler
@@ -2482,9 +2482,9 @@ Global Symbols
 
 <P><STRONG><a name="[206]"></a>HAL_NVIC_EnableIRQ</STRONG> (Thumb, 32 bytes, Stack size 0 bytes, stm32f4xx_hal_cortex.o(i.HAL_NVIC_EnableIRQ))
 <BR><BR>[Called By]<UL><LI><a href="#[205]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Initialize_DGUS
+<LI><a href="#[9a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;PowerControl
 <LI><a href="#[208]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;LampControlTIMInit
 <LI><a href="#[207]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;LampControlGPIOInit
-<LI><a href="#[9a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;PowerControl
 </UL>
 
 <P><STRONG><a name="[1cc]"></a>HAL_NVIC_SetPriority</STRONG> (Thumb, 124 bytes, Stack size 40 bytes, stm32f4xx_hal_cortex.o(i.HAL_NVIC_SetPriority))
@@ -2592,16 +2592,16 @@ Global Symbols
 </UL>
 
 <P><STRONG><a name="[1a2]"></a>HAL_TIM_Base_Start_IT</STRONG> (Thumb, 30 bytes, Stack size 0 bytes, stm32f4xx_hal_tim.o(i.HAL_TIM_Base_Start_IT))
-<BR><BR>[Called By]<UL><LI><a href="#[1de]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_TIM_PeriodElapsedCallback
-<LI><a href="#[1dc]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_TIM_OC_DelayElapsedCallback
+<BR><BR>[Called By]<UL><LI><a href="#[1dc]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_TIM_OC_DelayElapsedCallback
 <LI><a href="#[22a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;LongPulseLaserWork_Process
 <LI><a href="#[1a0]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;DiodeControlPulseStart
 <LI><a href="#[23a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SolidStateLaserWork_Process
+<LI><a href="#[1de]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_TIM_PeriodElapsedCallback
 </UL>
 
 <P><STRONG><a name="[1ea]"></a>HAL_TIM_Base_Stop</STRONG> (Thumb, 56 bytes, Stack size 0 bytes, stm32f4xx_hal_tim.o(i.HAL_TIM_Base_Stop))
-<BR><BR>[Called By]<UL><LI><a href="#[1de]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_TIM_PeriodElapsedCallback
-<LI><a href="#[93]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;LaserTimer_Callback
+<BR><BR>[Called By]<UL><LI><a href="#[93]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;LaserTimer_Callback
+<LI><a href="#[1de]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_TIM_PeriodElapsedCallback
 </UL>
 
 <P><STRONG><a name="[1af]"></a>HAL_TIM_ConfigClockSource</STRONG> (Thumb, 306 bytes, Stack size 24 bytes, stm32f4xx_hal_tim.o(i.HAL_TIM_ConfigClockSource))
@@ -2624,10 +2624,10 @@ Global Symbols
 </UL>
 
 <P><STRONG><a name="[1da]"></a>HAL_TIM_IRQHandler</STRONG> (Thumb, 406 bytes, Stack size 8 bytes, stm32f4xx_hal_tim.o(i.HAL_TIM_IRQHandler))
-<BR><BR>[Stack]<UL><LI>Max Depth = 108<LI>Call Chain = HAL_TIM_IRQHandler &rArr; HAL_TIM_PeriodElapsedCallback &rArr; SoundOn &rArr; HAL_TIM_OC_Start_DMA &rArr; HAL_DMA_Start_IT &rArr; DMA_SetConfig
+<BR><BR>[Stack]<UL><LI>Max Depth = 108<LI>Call Chain = HAL_TIM_IRQHandler &rArr; HAL_TIM_OC_DelayElapsedCallback &rArr; SoundOn &rArr; HAL_TIM_OC_Start_DMA &rArr; HAL_DMA_Start_IT &rArr; DMA_SetConfig
 </UL>
-<BR>[Calls]<UL><LI><a href="#[1de]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_TIM_PeriodElapsedCallback
-<LI><a href="#[1dc]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_TIM_OC_DelayElapsedCallback
+<BR>[Calls]<UL><LI><a href="#[1dc]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_TIM_OC_DelayElapsedCallback
+<LI><a href="#[1de]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_TIM_PeriodElapsedCallback
 <LI><a href="#[1e0]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_TIM_TriggerCallback
 <LI><a href="#[1dd]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_TIM_PWM_PulseFinishedCallback
 <LI><a href="#[1db]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_TIM_IC_CaptureCallback
@@ -2656,9 +2656,9 @@ Global Symbols
 <BR><BR>[Stack]<UL><LI>Max Depth = 100<LI>Call Chain = HAL_TIM_OC_DelayElapsedCallback &rArr; SoundOn &rArr; HAL_TIM_OC_Start_DMA &rArr; HAL_DMA_Start_IT &rArr; DMA_SetConfig
 </UL>
 <BR>[Calls]<UL><LI><a href="#[1a5]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_GPIO_WritePin
-<LI><a href="#[1e6]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SolidStateLaserPulseInc
 <LI><a href="#[1a1]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SoundOn
 <LI><a href="#[1a2]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_TIM_Base_Start_IT
+<LI><a href="#[1e6]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SolidStateLaserPulseInc
 </UL>
 <BR>[Called By]<UL><LI><a href="#[1da]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_TIM_IRQHandler
 </UL>
@@ -2858,7 +2858,7 @@ Global Symbols
 <BR>[Called By]<UL><LI><a href="#[95]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
 </UL>
 
-<P><STRONG><a name="[1ff]"></a>Init_WiFi_Thread</STRONG> (Thumb, 236 bytes, Stack size 8 bytes, wifithread.o(i.Init_WiFi_Thread))
+<P><STRONG><a name="[1ff]"></a>Init_WiFi_Thread</STRONG> (Thumb, 270 bytes, Stack size 8 bytes, wifithread.o(i.Init_WiFi_Thread))
 <BR><BR>[Stack]<UL><LI>Max Depth = 80<LI>Call Chain = Init_WiFi_Thread &rArr; osThreadCreate &rArr; svcThreadCreate &rArr; rt_tsk_create &rArr; rt_init_context &rArr; rt_init_stack
 </UL>
 <BR>[Calls]<UL><LI><a href="#[1fe]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;osTimerStart
@@ -2875,9 +2875,9 @@ Global Symbols
 <P><STRONG><a name="[205]"></a>Initialize_DGUS</STRONG> (Thumb, 112 bytes, Stack size 40 bytes, dgus.o(i.Initialize_DGUS))
 <BR><BR>[Stack]<UL><LI>Max Depth = 88<LI>Call Chain = Initialize_DGUS &rArr; HAL_NVIC_SetPriority &rArr; __NVIC_SetPriority
 </UL>
-<BR>[Calls]<UL><LI><a href="#[206]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_NVIC_EnableIRQ
-<LI><a href="#[1f4]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_UART_Init
+<BR>[Calls]<UL><LI><a href="#[1f4]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_UART_Init
 <LI><a href="#[1cc]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_NVIC_SetPriority
+<LI><a href="#[206]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_NVIC_EnableIRQ
 <LI><a href="#[134]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_memclr4
 <LI><a href="#[145]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_memcpy4
 </UL>
@@ -2889,9 +2889,9 @@ Global Symbols
 </UL>
 <BR>[Calls]<UL><LI><a href="#[190]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_GPIO_Init
 <LI><a href="#[1a5]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_GPIO_WritePin
+<LI><a href="#[1cc]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_NVIC_SetPriority
 <LI><a href="#[206]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_NVIC_EnableIRQ
 <LI><a href="#[19a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_NVIC_ClearPendingIRQ
-<LI><a href="#[1cc]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_NVIC_SetPriority
 <LI><a href="#[134]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_memclr4
 </UL>
 <BR>[Called By]<UL><LI><a href="#[1cd]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;LampControlInit
@@ -2938,14 +2938,14 @@ Global Symbols
 <BR><BR>[Stack]<UL><LI>Max Depth = 228<LI>Call Chain = LampControlTIMInit &rArr; HAL_TIM_SlaveConfigSynchronization &rArr; TIM_SlaveTimer_SetConfig &rArr; TIM_TI2_ConfigInputStage
 </UL>
 <BR>[Calls]<UL><LI><a href="#[190]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_GPIO_Init
-<LI><a href="#[206]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_NVIC_EnableIRQ
-<LI><a href="#[19a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_NVIC_ClearPendingIRQ
 <LI><a href="#[1eb]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_TIM_SlaveConfigSynchronization
 <LI><a href="#[192]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_TIM_OC_Init
 <LI><a href="#[193]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_TIM_OC_ConfigChannel
 <LI><a href="#[1ae]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_TIM_Base_Init
 <LI><a href="#[20b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_TIMEx_MasterConfigSynchronization
 <LI><a href="#[1cc]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_NVIC_SetPriority
+<LI><a href="#[206]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_NVIC_EnableIRQ
+<LI><a href="#[19a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_NVIC_ClearPendingIRQ
 <LI><a href="#[134]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_memclr4
 <LI><a href="#[145]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_memcpy4
 </UL>
@@ -3512,11 +3512,11 @@ Global Symbols
 <LI><a href="#[1e8]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_TIM_OC_Start_DMA
 <LI><a href="#[134]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_memclr4
 </UL>
-<BR>[Called By]<UL><LI><a href="#[1de]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_TIM_PeriodElapsedCallback
-<LI><a href="#[1dc]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_TIM_OC_DelayElapsedCallback
+<BR>[Called By]<UL><LI><a href="#[1dc]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_TIM_OC_DelayElapsedCallback
 <LI><a href="#[22a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;LongPulseLaserWork_Process
 <LI><a href="#[1a0]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;DiodeControlPulseStart
 <LI><a href="#[23a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SolidStateLaserWork_Process
+<LI><a href="#[1de]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_TIM_PeriodElapsedCallback
 </UL>
 
 <P><STRONG><a name="[253]"></a>SpeakerDMA</STRONG> (Thumb, 120 bytes, Stack size 56 bytes, lasermisc.o(i.SpeakerDMA))
@@ -3583,21 +3583,21 @@ Global Symbols
 <BR>[Address Reference Count : 1]<UL><LI> startup_stm32f407xx.o(.text)
 </UL>
 <P><STRONG><a name="[2b]"></a>TIM1_BRK_TIM9_IRQHandler</STRONG> (Thumb, 10 bytes, Stack size 8 bytes, stm32f4xx_it.o(i.TIM1_BRK_TIM9_IRQHandler))
-<BR><BR>[Stack]<UL><LI>Max Depth = 116<LI>Call Chain = TIM1_BRK_TIM9_IRQHandler &rArr; HAL_TIM_IRQHandler &rArr; HAL_TIM_PeriodElapsedCallback &rArr; SoundOn &rArr; HAL_TIM_OC_Start_DMA &rArr; HAL_DMA_Start_IT &rArr; DMA_SetConfig
+<BR><BR>[Stack]<UL><LI>Max Depth = 116<LI>Call Chain = TIM1_BRK_TIM9_IRQHandler &rArr; HAL_TIM_IRQHandler &rArr; HAL_TIM_OC_DelayElapsedCallback &rArr; SoundOn &rArr; HAL_TIM_OC_Start_DMA &rArr; HAL_DMA_Start_IT &rArr; DMA_SetConfig
 </UL>
 <BR>[Calls]<UL><LI><a href="#[1da]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_TIM_IRQHandler
 </UL>
 <BR>[Address Reference Count : 1]<UL><LI> startup_stm32f407xx.o(RESET)
 </UL>
 <P><STRONG><a name="[2d]"></a>TIM1_TRG_COM_TIM11_IRQHandler</STRONG> (Thumb, 10 bytes, Stack size 8 bytes, stm32f4xx_it.o(i.TIM1_TRG_COM_TIM11_IRQHandler))
-<BR><BR>[Stack]<UL><LI>Max Depth = 116<LI>Call Chain = TIM1_TRG_COM_TIM11_IRQHandler &rArr; HAL_TIM_IRQHandler &rArr; HAL_TIM_PeriodElapsedCallback &rArr; SoundOn &rArr; HAL_TIM_OC_Start_DMA &rArr; HAL_DMA_Start_IT &rArr; DMA_SetConfig
+<BR><BR>[Stack]<UL><LI>Max Depth = 116<LI>Call Chain = TIM1_TRG_COM_TIM11_IRQHandler &rArr; HAL_TIM_IRQHandler &rArr; HAL_TIM_OC_DelayElapsedCallback &rArr; SoundOn &rArr; HAL_TIM_OC_Start_DMA &rArr; HAL_DMA_Start_IT &rArr; DMA_SetConfig
 </UL>
 <BR>[Calls]<UL><LI><a href="#[1da]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_TIM_IRQHandler
 </UL>
 <BR>[Address Reference Count : 1]<UL><LI> startup_stm32f407xx.o(RESET)
 </UL>
 <P><STRONG><a name="[2c]"></a>TIM1_UP_TIM10_IRQHandler</STRONG> (Thumb, 10 bytes, Stack size 8 bytes, stm32f4xx_it.o(i.TIM1_UP_TIM10_IRQHandler))
-<BR><BR>[Stack]<UL><LI>Max Depth = 116<LI>Call Chain = TIM1_UP_TIM10_IRQHandler &rArr; HAL_TIM_IRQHandler &rArr; HAL_TIM_PeriodElapsedCallback &rArr; SoundOn &rArr; HAL_TIM_OC_Start_DMA &rArr; HAL_DMA_Start_IT &rArr; DMA_SetConfig
+<BR><BR>[Stack]<UL><LI>Max Depth = 116<LI>Call Chain = TIM1_UP_TIM10_IRQHandler &rArr; HAL_TIM_IRQHandler &rArr; HAL_TIM_OC_DelayElapsedCallback &rArr; SoundOn &rArr; HAL_TIM_OC_Start_DMA &rArr; HAL_DMA_Start_IT &rArr; DMA_SetConfig
 </UL>
 <BR>[Calls]<UL><LI><a href="#[1da]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_TIM_IRQHandler
 </UL>
