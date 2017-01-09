@@ -60,6 +60,7 @@ extern uint16_t pic_id;
 extern bool g_peltier_en;
 extern bool prepare;
 extern bool RemoteControl;
+extern bool WiFiConnectionEstabilished;
 extern bool SolidStateLaser_en;
 extern bool DiodeLaser_en;
 extern bool DiodeLaserOnePulse_en;

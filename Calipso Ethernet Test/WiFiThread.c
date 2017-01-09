@@ -39,6 +39,8 @@ osMessageQId qid_WiFiCMDQueue;
  *      WiFi Module Local Variables
  *---------------------------------------------------------------------------*/
 char  ATRCV[BUFFER_SIZE];
+char  PHPSESSID[64];
+char  httpBuffer[512];
 char  token[256];
 char* tokenPtr[32];
 char  buffer_rx[256];
@@ -287,6 +289,7 @@ void WiFiThread (void const *argument) {
 				WiFi_State_CommandMode = false;
 			if (id == WIND_MSG_WIFIUP)
 			{
+				WiFiConnectionEstabilished = true;
 				ip_addr_updated = true;
 				memcpy(ip_addr, tokenPtr[3], strlen(tokenPtr[3])+1);
 			}
@@ -336,10 +339,10 @@ void AsyncSendAT(char* str)
 
 int16_t GetID()
 {
-	if (osSignalWait(WIFI_EVENT_RECEIVE_STRING, 1000).status != osEventTimeout)
+	while(osSignalWait(WIFI_EVENT_RECEIVE_STRING, 1000).status != osEventTimeout)
 	{
-		if (strcmp(strtok(buffer_rx, ":\n\r"), "ID") == 0)
-			return atol(strtok(NULL, ":\n\r"));
+		if (strcmp(strtok(buffer_rx, " :\n\r"), "ID") == 0)
+			return atol(strtok(NULL, " :\n\r"));
 	}
 	return -1;
 }
@@ -385,9 +388,56 @@ int16_t WaitForWINDCommands(uint16_t timeout, uint16_t argc, ...)
 	return -1;
 }
 
+bool parseHTTP(char* responseHTTP, bool (*header_callback)(char* name, char* value))
+{
+	char* header[16];
+	int pos = 0, i = 0;
+	header[pos++] = strtok(responseHTTP, "\r\n");
+
+	while (header[pos-1] != NULL)
+		header[pos++] = strtok(NULL, "\r\n");
+	
+	for (i = 0; i < pos; i++)
+	{
+		char* name = strtok(header[i], ":");
+		char* value = strtok(NULL, "\r\n");
+
+		if (header_callback(name, value))
+			return true;
+	}
+
+	return false;
+}
+
+bool cookie_handler(char* name, char* value)
+{
+	if (strcmp(name, "Set-Cookie") == 0)
+	{
+		char* context = NULL;
+		char* subcontext = NULL;
+		char* option = strtok(value, "; ");
+
+		do
+		{
+			char* name = strtok(option, "=");
+			char* value = strtok(NULL, ";= ");
+
+			if (strcmp(name, "PHPSESSID") == 0)
+			{ 
+				strcpy(PHPSESSID, value);
+				return true;
+			}
+
+			option = strtok(NULL, ";");
+		} while (option != NULL);
+	}
+
+	return false;
+}
+
 void WiFiThread_Idle()
 {
-	if (!WiFi_State_CommandMode)
+	/*if (!WiFi_State_CommandMode)
 	{
 		RemoteControl = true;
 		__SOLIDSTATELASER_HVON();
@@ -568,6 +618,83 @@ void WiFiThread_Idle()
 		}
 		// Wait for data mode input
 		WaitForWINDCommands(1, 1, (int)WIND_MSG_DATA_MODE);
+	}*/
+	
+	char str[256];
+	char log[256];
+	
+	if (WiFiConnectionEstabilished)
+	{
+		static bool authentification = false;
+		static bool authentification_start = true;
+		
+		if (!authentification && authentification_start)
+		{			
+			char* auth_request = "GET http://innolaser-service.ru:3000/device_auth.php?login=vlad&password=ovchin_1988 HTTP/1.1\r\nHost: innolaser-service.ru\r\n\r\n\r\n";
+			uint16_t len = strlen(auth_request);
+			
+			// Connect to the server
+			AsyncSendAT("AT+S.SOCKON=innolaser-service.ru,3000,t,ind\r\n");		uint16_t id = GetID();		WaitOK();
+			
+			// AT send command
+			sprintf(str, "AT+S.SOCKW=%d,%d\r\n", id, len);	SendAT(str);
+			
+			// Send HTTP request
+			Driver_USART3.Send(auth_request, len);					osSignalWait(WIFI_EVENT_SEND_COMPLETED, 1000);
+			
+			WaitForWINDCommands(10, 1, (int)WIND_MSG_PENDING_DATA);
+			len = atol(tokenPtr[4]);
+			
+			// Read response
+			sprintf(str, "AT+S.SOCKR=%d,%d\r\n", id, len);	AsyncSendAT(str);
+			
+			WaitForWINDCommands(10, 1, (int)WIND_MSG_SOCKET_CLOSED);
+			
+			char* response = &ATRCV[(frame_read + 1) & BUFFER_MASK];
+			
+			memcpy(httpBuffer, response, len);
+			
+			WaitOK();
+			
+			if (parseHTTP(httpBuffer, cookie_handler))
+				authentification = true;
+			
+			authentification_start = false;
+			
+			// Close socket
+			sprintf(str, "AT+S.SOCKC=%d\r\n", id);
+			SendAT(str);
+		}
+		else
+		{					
+			// Connect to the server
+			AsyncSendAT("AT+S.SOCKON=innolaser-service.ru,3000,t,ind\r\n");
+			uint16_t id = GetID();
+			WaitOK();
+			
+			sprintf(log, "GET http://innolaser-service.ru:3000/device_update.php?cooling_level=%d&working=%d&cooling=%d&peltier=%d&temperature=%.1f&frequency=%d&power=%d HTTP/1.1\r\nHost: innolaser-service.ru\r\nCookie: PHPSESSID=%s; path=/\r\n\r\n\r\n", 6, 1, 1, 1, temperature, 10, 100, PHPSESSID);
+			uint16_t len = strlen(log);
+			
+			// AT send command
+			sprintf(str, "AT+S.SOCKW=%d,%d\r\n", id, len);
+			SendAT(str);
+			
+			// Send HTTP GET
+			Driver_USART3.Send(log, len);		osSignalWait(WIFI_EVENT_SEND_COMPLETED, 1000);
+			
+			// Wait for pending data
+			WaitForWINDCommands(30, 1, (int)WIND_MSG_PENDING_DATA);
+			len = atol(tokenPtr[4]);
+			
+			// Read response
+			sprintf(str, "AT+S.SOCKR=%d,%d\r\n", id, len);	AsyncSendAT(str);
+			
+			WaitForWINDCommands(10, 1, (int)WIND_MSG_SOCKET_CLOSED);
+			
+			// Close socket
+			sprintf(str, "AT+S.SOCKC=%d\r\n", id);
+			SendAT(str);
+		}
 	}
 }
 
@@ -681,14 +808,18 @@ void WiFiThread_Link()
 		HAL_GPIO_WritePin(GPIOG, GPIO_PIN_2, GPIO_PIN_RESET);
 		osSignalSet(tid_MainThread, WIFI_EVENT_LINKCOMPLETE);
 		
-		SendAT("AT+S.SOCKD=32000,t\r\n");
+		// Listening on port 32000 using TCP
+		//SendAT("AT+S.SOCKD=32000,t\r\n");
+		WiFiConnectionEstabilished = true;
 	}
 }
 
 void UserWiFiThread (void const *argument) {
 	WiFi_State_ScanningMode = false;
+	WiFiConnectionEstabilished = false;
 	RemoteControl = false;
 	HAL_GPIO_WritePin(GPIOG, GPIO_PIN_2, GPIO_PIN_SET);
+	SendAT("AT+CFUN=1\r\n");
 	//if (!SendAT(AT)) return;
 
 	/*// Mini AP mode
@@ -724,8 +855,11 @@ void UserWiFiThread (void const *argument) {
 	AsyncSendAT("AT+CFUN=1\r\n");
 	
 	// Wait for link up
-	WaitForWINDCommands(10, 1, (int)WIND_MSG_WIFIUP);
-	HAL_GPIO_WritePin(GPIOG, GPIO_PIN_2, GPIO_PIN_RESET);*/
+	if (WaitForWINDCommands(10, 1, (int)WIND_MSG_WIFIUP) != -1)
+	{
+		WiFiConnectionEstabilished = true;
+		HAL_GPIO_WritePin(GPIOG, GPIO_PIN_2, GPIO_PIN_RESET);
+	}*/
 	
 	/*
 	// Connect to server
@@ -752,7 +886,7 @@ void UserWiFiThread (void const *argument) {
 	WaitOK();*/
 		
 	// Listening on port 32000 using TCP
-	SendAT("AT+S.SOCKD=32000,t\r\n");
+	//SendAT("AT+S.SOCKD=32000,t\r\n");
 	
 	// Wait for data mode input
 	//WaitForWINDCommands(10, 1, (int)WIND_MSG_DATA_MODE);

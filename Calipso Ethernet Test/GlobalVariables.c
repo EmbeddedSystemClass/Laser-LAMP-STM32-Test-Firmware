@@ -50,6 +50,7 @@ uint16_t pic_id = 0;
 bool g_peltier_en = false;
 bool prepare = false;   
 bool RemoteControl = false;
+bool WiFiConnectionEstabilished = false;
 bool LaserStarted = false;
 bool SolidStateLaser_en = false;
 bool DiodeLaser_en = false;
