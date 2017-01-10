@@ -474,7 +474,7 @@ void WiFiThread_Idle()
 			if (id < 0) return;
 			if (!WaitOK()) return;
 			
-			sprintf(log, "GET http://innolaser-service.ru:3000/device_update.php?cooling_level=%d&working=%d&cooling=%d&peltier=%d&temperature=%.1f&frequency=%d&power=%d HTTP/1.1\r\nHost: innolaser-service.ru\r\nCookie: PHPSESSID=%s; path=/\r\n\r\n\r\n", 6, 1, 1, 1, temperature, 10, 100, PHPSESSID);
+			sprintf(log, "GET http://innolaser-service.ru:3000/device_update.php?cooling_level=%d&working=%d&cooling=%d&peltier=%d&temperature=%.1f&frequency=%d&power=%d	HTTP/1.1\r\nHost: innolaser-service.ru\r\nCookie: PHPSESSID=%s; path=/\r\nPragma: no-cache\r\n\r\n\r\n", 6, 1, 1, 1, temperature, 10, 100, PHPSESSID);
 			uint16_t len = strlen(log);
 			
 			// AT send command
