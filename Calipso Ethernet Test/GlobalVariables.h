@@ -15,6 +15,21 @@
 
 #define DEBUG_SOLID_STATE_LASER
 
+extern int32_t LOGHASH[16];
+
+#define LOG_ID_TEMPERATURE	1
+#define LOG_ID_FLOW					2
+#define LOG_ID_COOLINGLEVEL	3
+#define LOG_ID_PELTIER			4
+#define LOG_ID_COOLINGFAN		5
+#define LOG_ID_COUNTER1			6
+#define LOG_ID_COUNTER2			7
+#define LOG_ID_COUNTER3			8
+#define LOG_ID_COUNTER4			9
+#define LOG_ID_FREQUENCY		10
+#define LOG_ID_POWER				11
+#define LOG_ID_DURATION			12
+
 //Date & time
 extern DWIN_TIMEDATE datetime;
 
@@ -88,24 +103,11 @@ extern DGUS_SOLIDSTATELASER frameData_SolidStateLaser;
 typedef struct LOG_EVENT_STRUCT
 {
 	DWIN_TIMEDATE time;
-	uint16_t cmd;
-	uint16_t pic_id;
-	
-	uint16_t isstart; // on/off
-	uint16_t laser_id;
-	uint16_t freq;
-	uint16_t duration;
-	uint16_t power;
-	
-	float32_t temperature;
-	uint16_t flow;
-	uint16_t cooling; // on/off
-	uint16_t pump; // on/off
-	uint16_t relays;
-	
-	uint32_t pulse_counter;
-	
-	uint16_t log_idx;
+	uint16_t cmd_type;
+	uint16_t cmd_id;
+	float32_t fvalue;
+	int32_t ivalue;
+	char data[256];
 } LOG_EVENT, *PLOG_EVENT;
 
 // Laser Diode Data Structures

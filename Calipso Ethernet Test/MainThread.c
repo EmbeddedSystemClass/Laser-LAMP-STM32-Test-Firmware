@@ -314,7 +314,6 @@ void MainThread (void const *argument) {
 	LongPulseLaserInput_Init(pic_id);
 	
 	GetDateTime(g_wDGUSTimeout, &datetime);
-	start_log(datetime);
 
   while (1) {
     ; // Insert thread code here...

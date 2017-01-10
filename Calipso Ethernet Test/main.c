@@ -184,6 +184,8 @@ int main(void)
 	HAL_Delay(3000); 											// Wait for display initialization
 	Init_Main_Thread();
 #endif
+	
+	start_log(datetime);
 
   /* Infinite loop */
   while (1)
@@ -204,17 +206,17 @@ int main(void)
 			}
 		}
 		
-		log_out(datetime, "Temperature:%.2f\r\n", temperature);
+		LOG_F(LOG_ID_TEMPERATURE, "Temperature:%.2f\r\n", temperature);
 		
 		if (temperature > temperature_cool_on)
 		{
-			log_out(datetime, "Cooling on\r\n");
+			LOG_I(LOG_ID_COOLINGFAN, "Cooling on\r\n", 1);
 			__MISC_RELAY1_ON();
 		}
 		
 		if (temperature < temperature_cool_off)
 		{
-			log_out(datetime, "Cooling off\r\n");
+			LOG_I(LOG_ID_COOLINGFAN, "Cooling off\r\n", 0);
 			__MISC_RELAY1_OFF();
 		}
 		

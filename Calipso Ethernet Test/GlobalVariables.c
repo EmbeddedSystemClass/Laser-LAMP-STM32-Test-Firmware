@@ -5,6 +5,8 @@
 //Date & time
 DWIN_TIMEDATE datetime = {0};
 
+int32_t LOGHASH[16];
+
 // Flash data
 PFLASH_GLOBAL_DATA global_flash_data = (PFLASH_GLOBAL_DATA)FLASH_LASERDATA_BASE;
 
