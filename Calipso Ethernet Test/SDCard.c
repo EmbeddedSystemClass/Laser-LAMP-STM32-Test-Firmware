@@ -10,10 +10,12 @@ FILE* flog;
 FILE* fwifilog;
 bool sdcard_ready = false;
 bool start_logging = false;
+bool start_slogging = false;
 bool start_wifilogging = false;
 
 /* Log os objects */
 void LogThread (void const *argument);
+void SLogThread (void const *argument);
 
 // Log
 osPoolDef(Log_Events_Pool, 16, LOG_EVENT);
@@ -25,9 +27,23 @@ osMessageQId qid_Log_Queue;
 osThreadId tid_LogThread;
 osThreadDef (LogThread, osPriorityNormal, 1, 0);
 
+// Service Log
+osPoolDef(SLog_Events_Pool, 16, LOG_EVENT);
+osPoolId pid_SLog_Events_Pool;
+
+osMessageQDef(SLog_Queue, 16, uint32_t);
+osMessageQId qid_SLog_Queue;
+
+osThreadId tid_SLogThread;
+osThreadDef (SLogThread, osPriorityNormal, 1, 0);
+
 bool log_out(DWIN_TIMEDATE date, char* data);
 bool log_out_f(DWIN_TIMEDATE date, char* format, float32_t value);
 bool log_out_i(DWIN_TIMEDATE date, char* format, int32_t value);
+
+bool slog_out(DWIN_TIMEDATE date, char* data);
+bool slog_out_f(DWIN_TIMEDATE date, char* format, float32_t value);
+bool slog_out_i(DWIN_TIMEDATE date, char* format, int32_t value);
 
 /*-----------------------------------------------------------------------------
  *        Main LOG thread
@@ -40,7 +56,7 @@ void LogThread (void const *argument)
 	
 	while (start_logging)
 	{
-		evt = osMessageGet(qid_Log_Queue, osWaitForever);	// wait for message
+		evt = osMessageGet(qid_Log_Queue, 1000);	// wait for message
     if (evt.status == osEventMessage) {
       rptr = evt.value.p;
 			
@@ -61,6 +77,51 @@ void LogThread (void const *argument)
 	}
 }
 
+void SLogThread (void const *argument)
+{
+	LOG_EVENT* rptr;
+	osEvent evt;
+	
+	while (start_slogging)
+	{
+		evt = osMessageGet(qid_SLog_Queue, 1000);	// wait for message
+    if (evt.status == osEventMessage) {
+      rptr = evt.value.p;
+			
+			switch (rptr->cmd_type)
+			{
+				case 0:	slog_out(rptr->time, rptr->data);								// Write event to file
+				break;
+				case 1:	slog_out_f(rptr->time, rptr->data, rptr->fvalue);	// Write event to file
+				break;
+				case 2:	slog_out_i(rptr->time, rptr->data, rptr->ivalue);	// Write event to file								
+				break;
+			}
+			
+      osPoolFree(pid_SLog_Events_Pool, rptr);					// free memory allocated for message
+		}
+		
+		osThreadYield ();
+	}
+}
+
+bool QueuePutSLog(LOG_EVENT event)
+{
+	LOG_EVENT* pevent;
+	
+	pevent = osPoolAlloc(pid_SLog_Events_Pool);
+	
+	if (pevent != NULL)
+	{
+		memcpy(pevent, &event, sizeof(event));
+		osMessagePut(qid_SLog_Queue, (uint32_t)pevent, osWaitForever);
+		
+		return true;
+	}
+	else
+		return false;
+}
+
 bool QueuePutLog(LOG_EVENT event)
 {
 	LOG_EVENT* pevent;
@@ -75,7 +136,7 @@ bool QueuePutLog(LOG_EVENT event)
 		return true;
 	}
 	else
-		return true;
+		return false;
 }
 
 bool LOG(uint16_t id, char* data)
@@ -129,6 +190,56 @@ bool LOG_I(uint16_t id, char* format, int32_t value)
 		event.ivalue = value;
 		memcpy(event.data, format, strlen(format)+1);
 		return QueuePutLog(event);
+	}
+	else
+		return false;
+}
+
+bool SLOG(char* data)
+{
+	LOG_EVENT event;
+	
+	if (sdcard_ready && start_slogging)
+	{
+		event.time = datetime;
+		event.cmd_type = 0;
+		event.cmd_id = 0;
+		memcpy(event.data, data, strlen(data)+1);
+		return QueuePutSLog(event);
+	}
+	else
+		return false;
+}
+
+bool SLOG_F(char* format, float32_t value)
+{
+	LOG_EVENT event;
+	
+	if (sdcard_ready && start_slogging)
+	{
+		event.time = datetime;
+		event.cmd_type = 1;
+		event.cmd_id = 0;
+		event.fvalue = value;
+		memcpy(event.data, format, strlen(format)+1);
+		return QueuePutSLog(event);
+	}
+	else
+		return false;
+}
+
+bool SLOG_I(char* format, int32_t value)
+{
+	LOG_EVENT event;
+	
+	if (sdcard_ready && start_slogging)
+	{
+		event.time = datetime;
+		event.cmd_type = 2;
+		event.cmd_id = 0;
+		event.ivalue = value;
+		memcpy(event.data, format, strlen(format)+1);
+		return QueuePutSLog(event);
 	}
 	else
 		return false;
@@ -234,6 +345,7 @@ bool start_log(DWIN_TIMEDATE date)
 		// Start logging
 		start_logging = true;
 		
+		// ********************* Create logging *****************************
 		// Create Log queue
 		qid_Log_Queue = osMessageCreate(osMessageQ(Log_Queue), NULL);
 		if (!qid_Log_Queue) return(-1);
@@ -244,6 +356,49 @@ bool start_log(DWIN_TIMEDATE date)
 		// Start logging thread
 		tid_LogThread = osThreadCreate (osThread(LogThread), NULL);
 		if (!tid_LogThread) return(-1);
+		
+		// ********************* Create service logging *********************
+		// Create SLog queue
+		qid_SLog_Queue = osMessageCreate(osMessageQ(SLog_Queue), NULL);
+		if (!qid_SLog_Queue) return(-1);
+			
+		// Create SLog Pool
+		pid_SLog_Events_Pool = osPoolCreate(osPool(SLog_Events_Pool));
+		
+		// Start service logging thread
+		tid_SLogThread = osThreadCreate (osThread(SLogThread), NULL);
+		if (!tid_SLogThread) return(-1);
+		
+		return true;
+	}
+	
+	return false;
+}
+
+bool start_service_log(DWIN_TIMEDATE date)
+{
+	if (sdcard_ready)
+	{
+		// Add event to log file
+		flog = fopen("service-log.txt", "ab");
+		if (flog == NULL) return false;
+		fprintf(flog, "20%02d:%02d:%02d\t%02d:%02d:%02d\tSystem start\n\r", date.year, date.month, date.day, date.hours, date.minutes, date.seconds);
+		fclose(flog);
+		
+		// Start logging
+		start_slogging = true;
+		
+		// ********************* Create service logging *********************
+		// Create SLog queue
+		qid_SLog_Queue = osMessageCreate(osMessageQ(SLog_Queue), NULL);
+		if (!qid_SLog_Queue) return(-1);
+			
+		// Create SLog Pool
+		pid_SLog_Events_Pool = osPoolCreate(osPool(SLog_Events_Pool));
+		
+		// Start service logging thread
+		tid_SLogThread = osThreadCreate (osThread(SLogThread), NULL);
+		if (!tid_SLogThread) return(-1);
 		
 		return true;
 	}
@@ -302,17 +457,51 @@ bool log_out_i(DWIN_TIMEDATE date, char* format, int32_t value)
 		return false;
 }
 
-bool start_wifi(DWIN_TIMEDATE date)
+bool slog_out(DWIN_TIMEDATE date, char* data)
 {
-	if (sdcard_ready)
+	if (sdcard_ready && start_logging)
 	{
-		fwifilog = fopen("wifi_log.txt", "ab");
-		if (fwifilog == NULL) return false;
-		fprintf(fwifilog, "\r20%02d:%02d:%02d\t%02d:%02d:%02d\tWifi start\n\r", date.year, date.month, date.day, date.hours, date.minutes, date.seconds);
-		fclose(fwifilog);
+		flog = fopen("service-log.txt", "ab");
+		if (flog == NULL) return false;
+		fprintf(flog, "20%02d:%02d:%02d\t%02d:%02d:%02d\t", date.year, date.month, date.day, date.hours, date.minutes, date.seconds);
 		
-		start_wifilogging = true;
+		fprintf(flog, data);
 		
+		fclose(flog);
+		return true;
+	}
+	else
+		return false;
+}
+
+bool slog_out_f(DWIN_TIMEDATE date, char* format, float32_t value)
+{
+	if (sdcard_ready && start_logging)
+	{
+		flog = fopen("service-log.txt", "ab");
+		if (flog == NULL) return false;
+		fprintf(flog, "20%02d:%02d:%02d\t%02d:%02d:%02d\t", date.year, date.month, date.day, date.hours, date.minutes, date.seconds);
+		
+		fprintf(flog, format, value);
+		
+		fclose(flog);
+		return true;
+	}
+	else
+		return false;
+}
+
+bool slog_out_i(DWIN_TIMEDATE date, char* format, int32_t value)
+{
+	if (sdcard_ready && start_logging)
+	{
+		flog = fopen("service-log.txt", "ab");
+		if (flog == NULL) return false;
+		fprintf(flog, "20%02d:%02d:%02d\t%02d:%02d:%02d\t", date.year, date.month, date.day, date.hours, date.minutes, date.seconds);
+		
+		fprintf(flog, format, value);
+		
+		fclose(flog);
 		return true;
 	}
 	else
@@ -321,9 +510,10 @@ bool start_wifi(DWIN_TIMEDATE date)
 
 bool log_wifi(DWIN_TIMEDATE date, char* str)
 {
-	if (sdcard_ready && start_wifilogging)
+	printf("20%02d:%02d:%02d\t%02d:%02d:%02d\t%s\n", date.year, date.month, date.day, date.hours, date.minutes, date.seconds, str);
+	if (sdcard_ready)
 	{
-		fwifilog = fopen("wifi_log.txt", "ab");
+		fwifilog = fopen("WiFi_LOG.txt", "ab");
 		if (fwifilog == NULL) return false;
 		fprintf(fwifilog, "20%02d:%02d:%02d\t%02d:%02d:%02d\t%s\n", date.year, date.month, date.day, date.hours, date.minutes, date.seconds, str);
 		

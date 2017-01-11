@@ -154,6 +154,8 @@ int main(void)
 	
 	init_filesystem();
 	
+	start_log(datetime);
+	
 	//HAL_Init();
 	//SystemClock_Config();
 	//SystemCoreClockUpdate();
@@ -184,8 +186,6 @@ int main(void)
 	HAL_Delay(3000); 											// Wait for display initialization
 	Init_Main_Thread();
 #endif
-	
-	start_log(datetime);
 
   /* Infinite loop */
   while (1)
