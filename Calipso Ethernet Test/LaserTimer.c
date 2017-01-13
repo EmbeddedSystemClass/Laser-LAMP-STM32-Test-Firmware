@@ -47,7 +47,7 @@ static void LaserTimer_Callback(void const *arg) {
 			{
 				LampControlPulseStop();
 				__MISC_LASERLED2_OFF();
-				__MISC_LASERLED_OFF();
+				//__MISC_LASERLED_OFF();
 			}
 		}
 		
@@ -59,7 +59,7 @@ static void LaserTimer_Callback(void const *arg) {
 			{
 				DiodeControlPulseStop();
 				__MISC_LASERLED2_OFF();
-				__MISC_LASERLED_OFF();
+				//__MISC_LASERLED_OFF();
 			}
 		}
 		

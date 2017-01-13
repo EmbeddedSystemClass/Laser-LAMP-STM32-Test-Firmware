@@ -3,7 +3,7 @@
 <title>Static Call Graph - [.\Objects\CalipsoEthernetTest.axf]</title></head>
 <body><HR>
 <H1>Static Call Graph for image .\Objects\CalipsoEthernetTest.axf</H1><HR>
-<BR><P>#&#060CALLGRAPH&#062# ARM Linker, 5060183: Last Updated: Wed Jan 11 18:14:48 2017
+<BR><P>#&#060CALLGRAPH&#062# ARM Linker, 5060183: Last Updated: Fri Jan 13 15:13:32 2017
 <BR><P>
 <H3>Maximum Stack Usage =       1416 bytes + Unknown(Functions without stacksize, Cycles, Untraceable Function Pointers)</H3><H3>
 Call chain for Maximum Stack Depth:</H3>
@@ -2007,7 +2007,7 @@ Global Symbols
 <LI><a href="#[22e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ServiceDiodeFrame_Process
 </UL>
 
-<P><STRONG><a name="[197]"></a>DiodeControlPulseStop</STRONG> (Thumb, 96 bytes, Stack size 8 bytes, solidstatelaser.o(i.DiodeControlPulseStop))
+<P><STRONG><a name="[197]"></a>DiodeControlPulseStop</STRONG> (Thumb, 98 bytes, Stack size 8 bytes, solidstatelaser.o(i.DiodeControlPulseStop))
 <BR><BR>[Stack]<UL><LI>Max Depth = 56<LI>Call Chain = DiodeControlPulseStop &rArr; SoundOff &rArr; HAL_GPIO_Init
 </UL>
 <BR>[Calls]<UL><LI><a href="#[199]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_GPIO_WritePin
@@ -2270,7 +2270,7 @@ Global Symbols
 <LI><a href="#[9d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Uninitialize
 </UL>
 
-<P><STRONG><a name="[1bb]"></a>HAL_GPIO_EXTI_Callback</STRONG> (Thumb, 160 bytes, Stack size 8 bytes, solidstatelaser.o(i.HAL_GPIO_EXTI_Callback))
+<P><STRONG><a name="[1bb]"></a>HAL_GPIO_EXTI_Callback</STRONG> (Thumb, 150 bytes, Stack size 8 bytes, solidstatelaser.o(i.HAL_GPIO_EXTI_Callback))
 <BR><BR>[Stack]<UL><LI>Max Depth = 8<LI>Call Chain = HAL_GPIO_EXTI_Callback
 </UL>
 <BR>[Calls]<UL><LI><a href="#[1ab]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_GPIO_ReadPin
@@ -6009,7 +6009,7 @@ Local Symbols
 <BR>[Called By]<UL><LI><a href="#[99]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
 </UL>
 
-<P><STRONG><a name="[95]"></a>LaserTimer_Callback</STRONG> (Thumb, 668 bytes, Stack size 8 bytes, lasertimer.o(i.LaserTimer_Callback))
+<P><STRONG><a name="[95]"></a>LaserTimer_Callback</STRONG> (Thumb, 646 bytes, Stack size 8 bytes, lasertimer.o(i.LaserTimer_Callback))
 <BR><BR>[Stack]<UL><LI>Max Depth = 108<LI>Call Chain = LaserTimer_Callback &rArr; DiodeControlPulseStart &rArr; SoundOn &rArr; HAL_TIM_OC_Start_DMA &rArr; HAL_DMA_Start_IT &rArr; DMA_SetConfig
 </UL>
 <BR>[Calls]<UL><LI><a href="#[197]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;DiodeControlPulseStop

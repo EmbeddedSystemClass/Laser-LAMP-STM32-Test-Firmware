@@ -24,7 +24,7 @@ void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin)
 				{
 					footswitch_on = false;
 					__MISC_LASERLED2_OFF();
-					__MISC_LASERLED_OFF();
+					//__MISC_LASERLED_OFF();
 				}
 			}
 			break;
@@ -519,7 +519,7 @@ void DiodeControlPulseStop(void)
 		TIM_CCxChannelCmd(hTIM9.Instance, TIM_CHANNEL_1, TIM_CCx_DISABLE);
 		__HAL_TIM_DISABLE(&hTIM9);
 		
-		__MISC_LASERLED_OFF();
+		__MISC_LASERLED2_OFF();
 		SoundOff();
 	}
 }
