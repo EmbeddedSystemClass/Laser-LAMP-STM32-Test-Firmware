@@ -477,25 +477,25 @@ void MelaninPreset(uint16_t melanin)
 	if (melanin < 10)
 	{
 		frameData_LaserDiode.phototype = 1;
-		freq = 3; duration = 75; energy = 21;
+		freq = 3; duration = 85; energy = 27;
 	}
 	else
 	if (melanin < 20)
 	{
 		frameData_LaserDiode.phototype = 2;
-		freq = 3; duration = 70; energy = 21;
+		freq = 3; duration = 80; energy = 27;
 	}
 	else
 	if (melanin < 35)
 	{
 		frameData_LaserDiode.phototype = 3;
-		freq = 3; duration = 70; energy = 21;
+		freq = 3; duration = 80; energy = 27;
 	}
 	else
 	if (melanin < 49)
 	{
 		frameData_LaserDiode.phototype = 4;
-		freq = 3; duration = 65; energy = 21;
+		freq = 3; duration = 75; energy = 24;
 	}
 	else
 	if (melanin < 72)
@@ -527,25 +527,25 @@ void PhototypePreset(uint16_t phototype)
 		case 1:
 		{
 			frameData_LaserDiode.melanin = 5;
-			freq = 3; duration = 75; energy = 21;
+			freq = 3; duration = 85; energy = 27;
 		}
 		break;
 		case 2:
 		{
 			frameData_LaserDiode.melanin = 14;
-			freq = 3; duration = 70; energy = 21;
+			freq = 3; duration = 80; energy = 27;
 		}
 		break;
 		case 3:
 		{
 			frameData_LaserDiode.melanin = 27;
-			freq = 3; duration = 70; energy = 21;
+			freq = 3; duration = 80; energy = 27;
 		}
 		break;
 		case 4:
 		{
 			frameData_LaserDiode.melanin = 41;
-			freq = 3; duration = 65; energy = 21;
+			freq = 3; duration = 75; energy = 24;
 		}
 		break;
 		case 5:

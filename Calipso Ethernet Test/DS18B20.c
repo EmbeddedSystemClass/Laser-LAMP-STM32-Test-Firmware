@@ -57,6 +57,7 @@ void DS18B20_USART_callback(uint32_t event)
  
     case ARM_USART_EVENT_RX_OVERFLOW:
     case ARM_USART_EVENT_TX_UNDERFLOW:
+			recv_complete = true;
 #ifdef DEBUG_BRK
          __breakpoint(0);  /* Error: Call debugger or replace with custom error handling */
 #endif
@@ -183,5 +184,5 @@ uint16_t DS18B20_ReadData(void)
      }
   }
 	
-	return tt;
+66	return tt;
 }
