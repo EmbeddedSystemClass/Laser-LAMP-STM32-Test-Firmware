@@ -3,10 +3,12 @@
 #include "rl_fs.h"
 #include <stdio.h>
 #include <stdarg.h>
+#include <string.h>
 
 #include "GlobalVariables.h"
 
 FILE* flog;
+FILE* ftable;
 FILE* fwifilog;
 bool sdcard_ready = false;
 bool start_logging = false;
@@ -37,13 +39,17 @@ osMessageQId qid_SLog_Queue;
 osThreadId tid_SLogThread;
 osThreadDef (SLogThread, osPriorityNormal, 1, 0);
 
+void SaveOffset();
 bool log_out(DWIN_TIMEDATE date, char* data);
 bool log_out_f(DWIN_TIMEDATE date, char* format, float32_t value);
 bool log_out_i(DWIN_TIMEDATE date, char* format, int32_t value);
+bool log_read(uint32_t offset);
 
 bool slog_out(DWIN_TIMEDATE date, char* data);
 bool slog_out_f(DWIN_TIMEDATE date, char* format, float32_t value);
 bool slog_out_i(DWIN_TIMEDATE date, char* format, int32_t value);
+
+LOG_ELEMENT log_table[12];
 
 /*-----------------------------------------------------------------------------
  *        Main LOG thread
@@ -56,7 +62,7 @@ void LogThread (void const *argument)
 	
 	while (start_logging)
 	{
-		evt = osMessageGet(qid_Log_Queue, 1000);	// wait for message
+		evt = osMessageGet(qid_Log_Queue, osWaitForever);	// wait for message
     if (evt.status == osEventMessage) {
       rptr = evt.value.p;
 			
@@ -67,6 +73,8 @@ void LogThread (void const *argument)
 				case 1:	log_out_f(rptr->time, rptr->data, rptr->fvalue);	// Write event to file
 				break;
 				case 2:	log_out_i(rptr->time, rptr->data, rptr->ivalue);	// Write event to file								
+				break;
+				case 3: log_read(rptr->ivalue);
 				break;
 			}
 			
@@ -84,7 +92,7 @@ void SLogThread (void const *argument)
 	
 	while (start_slogging)
 	{
-		evt = osMessageGet(qid_SLog_Queue, 1000);	// wait for message
+		evt = osMessageGet(qid_SLog_Queue, osWaitForever);	// wait for message
     if (evt.status == osEventMessage) {
       rptr = evt.value.p;
 			
@@ -189,6 +197,22 @@ bool LOG_I(uint16_t id, char* format, int32_t value)
 		event.cmd_id = id;
 		event.ivalue = value;
 		memcpy(event.data, format, strlen(format)+1);
+		return QueuePutLog(event);
+	}
+	else
+		return false;
+}
+
+bool LOG_UPDATE_TABLE(int32_t offset)
+{
+	LOG_EVENT event;
+	
+	if (sdcard_ready)
+	{
+		event.time = datetime;
+		event.cmd_type = 3;
+		event.cmd_id = 0;
+		event.ivalue = offset;
 		return QueuePutLog(event);
 	}
 	else
@@ -339,6 +363,7 @@ bool start_log(DWIN_TIMEDATE date)
 		// Add event to log file
 		flog = fopen("log.txt", "ab");
 		if (flog == NULL) return false;
+		SaveOffset();
 		fprintf(flog, "20%02d:%02d:%02d\t%02d:%02d:%02d\tSystem start\n\r", date.year, date.month, date.day, date.hours, date.minutes, date.seconds);
 		fclose(flog);
 		
@@ -406,12 +431,25 @@ bool start_service_log(DWIN_TIMEDATE date)
 	return false;
 }
 
+void SaveOffset()
+{
+	uint32_t offset = ftell(flog);
+	ftable = fopen("log_table.txt", "ab");
+	fwrite(&offset, sizeof(offset), 1, ftable);
+	fclose(ftable);
+	
+	/*// file size
+	fseek(flog, 0L, SEEK_END);
+	uint32_t size = ftell(flog);*/
+}
+
 bool log_out(DWIN_TIMEDATE date, char* data)
 {
 	if (sdcard_ready && start_logging)
 	{
-		flog = fopen("log.txt", "ab");
+		ftable = fopen("log.txt", "ab");
 		if (flog == NULL) return false;
+		SaveOffset();
 		fprintf(flog, "20%02d:%02d:%02d\t%02d:%02d:%02d\t", date.year, date.month, date.day, date.hours, date.minutes, date.seconds);
 		
 		fprintf(flog, data);
@@ -429,6 +467,7 @@ bool log_out_f(DWIN_TIMEDATE date, char* format, float32_t value)
 	{
 		flog = fopen("log.txt", "ab");
 		if (flog == NULL) return false;
+		SaveOffset();
 		fprintf(flog, "20%02d:%02d:%02d\t%02d:%02d:%02d\t", date.year, date.month, date.day, date.hours, date.minutes, date.seconds);
 		
 		fprintf(flog, format, value);
@@ -446,6 +485,7 @@ bool log_out_i(DWIN_TIMEDATE date, char* format, int32_t value)
 	{
 		flog = fopen("log.txt", "ab");
 		if (flog == NULL) return false;
+		SaveOffset();
 		fprintf(flog, "20%02d:%02d:%02d\t%02d:%02d:%02d\t", date.year, date.month, date.day, date.hours, date.minutes, date.seconds);
 		
 		fprintf(flog, format, value);
@@ -505,6 +545,57 @@ bool slog_out_i(DWIN_TIMEDATE date, char* format, int32_t value)
 		return true;
 	}
 	else
+		return false;
+}
+
+bool log_read(uint32_t offset)
+{
+	char str[256];
+	if (sdcard_ready && start_logging)
+	{
+		ftable = fopen("log_table.txt", "r");
+		
+		fseek(ftable, 0, SEEK_END);
+		uint32_t size = ftell(ftable);
+		long base = 0;
+		long offs = 0;
+		if (size > 32767*4)
+			base = size - 32767*4;
+		
+		long offset_index = base + offset * 4;
+		offset_index = (offset_index > (size - 4)) ? (size - 4) : offset_index;
+		fseek(ftable, offset_index, SEEK_SET);
+		fread(&offs, 4, 1, ftable);
+		
+		fclose(ftable);
+		
+		FILE* fp = fopen("log_table.txt", "r");
+		flog = fopen("log.txt", "r");
+		
+		fseek(flog, offs, SEEK_SET);
+		
+		uint16_t i = 0;
+		
+		while (i < 12)
+		{
+			if (!feof(flog))
+			{
+				char* log_str = fgets(str, 256, flog);
+				if (log_str)
+					memcpy(log_table[i].log_line, log_str, strlen(log_str)); // Log string
+				else
+					memcpy(log_table[i].log_line, "\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0", 64); // Empty string
+			}
+			else
+				memcpy(log_table[i].log_line, "\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0", 64); // Empty string
+			i++;
+		}
+		
+		fclose(flog);
+		fclose(fp);
+		return true;
+	}
+	else 
 		return false;
 }
 

@@ -51,6 +51,8 @@ extern void WiFiLinkFrame_Process(void);
 
 extern void CoolingServiceFrame_Process(uint16_t pic_id);
 
+extern void LogFrame_Process(uint16_t pic_id);
+
 int Init_Main_Thread (void) {
 
   tid_MainThread = osThreadCreate (osThread(MainThread), NULL);
@@ -468,6 +470,9 @@ void MainThread (void const *argument) {
 				UpdateLaserStatus();
 				break;
 				
+			case FRAME_PICID_LOGVIEW:
+				LogFrame_Process(pic_id);
+				break;
 			
 			case FRAME_PICID_WRONG_EMMITER:
 				osDelay(800);

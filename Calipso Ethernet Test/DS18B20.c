@@ -184,5 +184,5 @@ uint16_t DS18B20_ReadData(void)
      }
   }
 	
-66	return tt;
+	return tt;
 }

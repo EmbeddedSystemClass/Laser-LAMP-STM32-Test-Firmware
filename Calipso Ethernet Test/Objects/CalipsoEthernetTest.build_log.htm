@@ -27,14 +27,13 @@ Project File Date:  12/27/2016
 <h2>Output:</h2>
 *** Using Compiler 'V5.06 update 2 (build 183)', folder: 'C:\Keil_v5\ARM\ARMCC\Bin'
 Build target 'EthernetTest'
-compiling DS18B20.c...
-DS18B20.c(187): warning:  #174-D: expression has no effect
-DS18B20.c(187): error:  #65: expected a ";"
-DS18B20.c: 2 warnings, 1 error
- #940-D: missing return statement at end of non-void function "DS18B20_ReadData"
-  }
-compiling GlobalVariables.c...
-".\Objects\CalipsoEthernetTest.axf" - 1 Error(s), 1 Warning(s).
+compiling SDCard.c...
+SDCard.c(42): warning:  #1295-D: Deprecated declaration SaveOffset - give arg types
+  void SaveOffset();
+SDCard.c: 1 warning, 0 errors
+linking...
+Program Size: Code=93968 RO-data=4024 RW-data=2076 ZI-data=77908  
+".\Objects\CalipsoEthernetTest.axf" - 0 Error(s), 1 Warning(s).
 
 <h2>Software Packages used:</h2>
 
@@ -243,8 +242,7 @@ Package Vendor: Keil
 
    * Component: Keil::Device:STM32Cube HAL:SPI:1.5.0
       Source file:   Drivers\STM32F4xx_HAL_Driver\Src\stm32f4xx_hal_spi.c
-Target not created.
-Build Time Elapsed:  00:00:01
+Build Time Elapsed:  00:00:02
 </pre>
 </body>
 </html>

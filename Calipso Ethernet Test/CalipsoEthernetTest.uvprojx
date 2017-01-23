@@ -477,6 +477,11 @@
               <FileType>1</FileType>
               <FilePath>.\CoolingServiceFrame.c</FilePath>
             </File>
+            <File>
+              <FileName>LogFrame.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\LogFrame.c</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>

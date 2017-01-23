@@ -120,6 +120,9 @@ extern UART_HandleTypeDef huart1;
 #define FRAMEDATA_LOWFLOW												0x0F08
 #define FRAMEDATA_LOWREADY											0x0F09
 
+// Log menu
+#define FRAMEDATA_LOGOFFSET											0x0F0a
+
 /* ************************** DGUS PIC IDs ******************************** */
 
 #define FRAME_PICID_LOGO												0
@@ -169,6 +172,8 @@ extern UART_HandleTypeDef huart1;
 #define FRAME_PICID_SERVICECOOLING						  63			// Process
 
 #define FRAME_PICID_BASICSETTINGS							  64			// Process
+
+#define FRAME_PICID_LOGVIEW										  66			// Process
 
 #define IS_LASERDIODE(pic_id) (pic_id >= 19 && pic_id <= 32)
 #define IS_SOLIDSTATE(pic_id) (pic_id >= 37 && pic_id <= 42)
