@@ -17,6 +17,12 @@
 
 extern int32_t LOGHASH[16];
 
+#define PROCEDURE_TYPE_NO								0
+#define PROCEDURE_TYPE_LDPHOTOEPILATION	1
+#define PROCEDURE_TYPE_TATTOOREMOVE			2
+#define PROCEDURE_TYPE_VESSELREMOVE			3
+#define PROCEDURE_TYPE_OTHER						4
+
 #define LOG_ID_TEMPERATURE	1
 #define LOG_ID_FLOW					2
 #define LOG_ID_COOLINGLEVEL	3
@@ -29,6 +35,18 @@ extern int32_t LOGHASH[16];
 #define LOG_ID_FREQUENCY		10
 #define LOG_ID_POWER				11
 #define LOG_ID_DURATION			12
+
+// Data variables to publish
+extern char http_login[32];
+extern char http_password[32];
+extern bool g_working;
+extern bool g_cooling;
+extern bool g_peltier_en;
+extern uint16_t g_cooling_level;
+extern uint16_t g_procedure_type;
+extern float32_t g_frequency;
+extern uint16_t g_duration;
+extern uint16_t g_power;
 
 //Date & time
 extern DWIN_TIMEDATE datetime;

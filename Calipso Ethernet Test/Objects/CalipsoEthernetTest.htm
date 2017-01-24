@@ -3,9 +3,9 @@
 <title>Static Call Graph - [.\Objects\CalipsoEthernetTest.axf]</title></head>
 <body><HR>
 <H1>Static Call Graph for image .\Objects\CalipsoEthernetTest.axf</H1><HR>
-<BR><P>#&#060CALLGRAPH&#062# ARM Linker, 5060183: Last Updated: Mon Jan 23 17:14:40 2017
+<BR><P>#&#060CALLGRAPH&#062# ARM Linker, 5060183: Last Updated: Tue Jan 24 11:32:28 2017
 <BR><P>
-<H3>Maximum Stack Usage =       1416 bytes + Unknown(Functions without stacksize, Cycles, Untraceable Function Pointers)</H3><H3>
+<H3>Maximum Stack Usage =       1176 bytes + Unknown(Functions without stacksize, Cycles, Untraceable Function Pointers)</H3><H3>
 Call chain for Maximum Stack Depth:</H3>
 UserWiFiThread &rArr; WiFiThread_Idle &rArr; log_wifi &rArr; fopen &rArr; _freopen_locked &rArr; _sys_open &rArr; __sys_open &rArr; fat_open &rArr; path_create &rArr; frec_find &rArr; entry_pos_inc &rArr; alloc_table_read &rArr; cache_fat
 <P>
@@ -3016,7 +3016,7 @@ Global Symbols
 <BR>[Called By]<UL><LI><a href="#[90]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;MainThread
 </UL>
 
-<P><STRONG><a name="[211]"></a>LaserDiodeInput_Process</STRONG> (Thumb, 1382 bytes, Stack size 96 bytes, laserdiodeinputframe.o(i.LaserDiodeInput_Process))
+<P><STRONG><a name="[211]"></a>LaserDiodeInput_Process</STRONG> (Thumb, 1420 bytes, Stack size 96 bytes, laserdiodeinputframe.o(i.LaserDiodeInput_Process))
 <BR><BR>[Stack]<UL><LI>Max Depth = 208<LI>Call Chain = LaserDiodeInput_Process &rArr; PhototypePreset &rArr; LaserPreset &rArr; CalculateAllSteps &rArr; NormalizeStep
 </UL>
 <BR>[Calls]<UL><LI><a href="#[217]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SetPulseDuration_ms
@@ -3058,7 +3058,7 @@ Global Symbols
 <BR>[Called By]<UL><LI><a href="#[90]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;MainThread
 </UL>
 
-<P><STRONG><a name="[21f]"></a>LaserDiodeWork_Process</STRONG> (Thumb, 386 bytes, Stack size 48 bytes, laserdiodeworkframe.o(i.LaserDiodeWork_Process))
+<P><STRONG><a name="[21f]"></a>LaserDiodeWork_Process</STRONG> (Thumb, 398 bytes, Stack size 48 bytes, laserdiodeworkframe.o(i.LaserDiodeWork_Process))
 <BR><BR>[Stack]<UL><LI>Max Depth = 120<LI>Call Chain = LaserDiodeWork_Process &rArr; SetPicId &rArr; WriteRegister &rArr; HAL_UART_Transmit_ITMY
 </UL>
 <BR>[Calls]<UL><LI><a href="#[21a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;CoolOn
@@ -3815,7 +3815,7 @@ Global Symbols
 <BR>[Called By]<UL><LI><a href="#[b3]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;USART6_TX_DMA_Complete
 </UL>
 
-<P><STRONG><a name="[237]"></a>UpdateLaserState</STRONG> (Thumb, 460 bytes, Stack size 8 bytes, mainthread.o(i.UpdateLaserState))
+<P><STRONG><a name="[237]"></a>UpdateLaserState</STRONG> (Thumb, 472 bytes, Stack size 8 bytes, mainthread.o(i.UpdateLaserState))
 <BR><BR>[Stack]<UL><LI>Max Depth = 80<LI>Call Chain = UpdateLaserState &rArr; SetPicId &rArr; WriteRegister &rArr; HAL_UART_Transmit_ITMY
 </UL>
 <BR>[Calls]<UL><LI><a href="#[21c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SetPicId
@@ -3857,7 +3857,7 @@ Global Symbols
 <BR>[Address Reference Count : 1]<UL><LI> startup_stm32f407xx.o(RESET)
 </UL>
 <P><STRONG><a name="[94]"></a>UserWiFiThread</STRONG> (Thumb, 104 bytes, Stack size 16 bytes, wifithread.o(i.UserWiFiThread))
-<BR><BR>[Stack]<UL><LI>Max Depth = 1416 + Unknown Stack Size
+<BR><BR>[Stack]<UL><LI>Max Depth = 1176 + Unknown Stack Size
 <LI>Call Chain = UserWiFiThread &rArr; WiFiThread_Idle &rArr; log_wifi &rArr; fopen &rArr; _freopen_locked &rArr; _sys_open &rArr; __sys_open &rArr; fat_open &rArr; path_create &rArr; frec_find &rArr; entry_pos_inc &rArr; alloc_table_read &rArr; cache_fat
 </UL>
 <BR>[Calls]<UL><LI><a href="#[1a2]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_GPIO_WritePin
@@ -3924,8 +3924,8 @@ Global Symbols
 </UL>
 <BR>[Address Reference Count : 1]<UL><LI> wifithread.o(.constdata)
 </UL>
-<P><STRONG><a name="[27e]"></a>WiFiThread_Idle</STRONG> (Thumb, 766 bytes, Stack size 840 bytes, wifithread.o(i.WiFiThread_Idle))
-<BR><BR>[Stack]<UL><LI>Max Depth = 1400 + Unknown Stack Size
+<P><STRONG><a name="[27e]"></a>WiFiThread_Idle</STRONG> (Thumb, 816 bytes, Stack size 600 bytes, wifithread.o(i.WiFiThread_Idle))
+<BR><BR>[Stack]<UL><LI>Max Depth = 1160 + Unknown Stack Size
 <LI>Call Chain = WiFiThread_Idle &rArr; log_wifi &rArr; fopen &rArr; _freopen_locked &rArr; _sys_open &rArr; __sys_open &rArr; fat_open &rArr; path_create &rArr; frec_find &rArr; entry_pos_inc &rArr; alloc_table_read &rArr; cache_fat
 </UL>
 <BR>[Calls]<UL><LI><a href="#[284]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;log_wifi
@@ -4956,7 +4956,7 @@ Global Symbols
 <LI><a href="#[93]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;WiFiThread
 </UL>
 
-<P><STRONG><a name="[99]"></a>main</STRONG> (Thumb, 428 bytes, Stack size 24 bytes, main.o(i.main))
+<P><STRONG><a name="[99]"></a>main</STRONG> (Thumb, 440 bytes, Stack size 24 bytes, main.o(i.main))
 <BR><BR>[Stack]<UL><LI>Max Depth = 664 + Unknown Stack Size
 <LI>Call Chain = main &rArr; LOG_I &rArr; QueuePutLog &rArr; osMessagePut &rArr; isrMessagePut &rArr; isr_mbx_send &rArr; rt_psq_enq
 </UL>

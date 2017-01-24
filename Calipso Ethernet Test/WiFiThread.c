@@ -244,10 +244,10 @@ void WiFiThread (void const *argument) {
 		buffer_rx[pos] = '\0';
 		log_wifi(datetime, buffer_rx);
 		
-		if ((pos > 2) && ((str = strstr(buffer_rx, "OK")) != 0))
+		if ((pos >= 2) && ((str = strstr(buffer_rx, "OK")) != 0))
 			WiFi_OK_Received = true;
 		
-		if ((pos > 2) && ((str = strstr(buffer_rx, "ERROR")) != 0))
+		if ((pos >= 5) && ((str = strstr(buffer_rx, "ERROR")) != 0))
 			WiFi_ERROR_Received = true;
 		
 		str = buffer_rx;
@@ -465,9 +465,11 @@ bool cookie_handler(char* name, char* value)
 	return false;
 }
 
+char auth_request[256];
+char str[256];
+
 void WiFiThread_Idle()
 {	
-	char str[256];
 	char log[512];
 	static int16_t id = -1;
 	
@@ -478,7 +480,9 @@ void WiFiThread_Idle()
 		
 		if (!authentification && authentification_start)
 		{			
-			char* auth_request = "GET http://innolaser-service.ru:3000/device_auth.php?login=vlad&password=ovchin_1988 HTTP/1.1\r\nHost: innolaser-service.ru\r\nCache-Control: no-cache, no-store, max-age=0\r\n\r\n\r\n";
+			// = "GET http://innolaser-service.ru:3000/device_auth.php?login=vlad&password=ovchin_1988 HTTP/1.1\r\nHost: innolaser-service.ru\r\nCache-Control: no-cache, no-store, max-age=0\r\n\r\n\r\n";
+			
+			sprintf(auth_request, "GET http://innolaser-service.ru:3000/device_auth.php?login=%s&password=%s HTTP/1.1\r\nHost: innolaser-service.ru\r\nUser-Agent: Mozilla/5.0\r\nCache-Control: no-cache, no-store, max-age=0\r\n\r\n\r\n", http_login, http_password);
 			uint16_t len = strlen(auth_request);
 			
 			// Connect to the server
@@ -551,7 +555,8 @@ void WiFiThread_Idle()
 			sprintf(str, " ID response : %d", id);
 			log_wifi(datetime, str);
 			
-			sprintf(log, "GET http://innolaser-service.ru:3000/device_update.php?cooling_level=%d&working=%d&cooling=%d&peltier=%d&temperature=%.1f&flow=%.1f&frequency=%d&power=%d	HTTP/1.1\r\nHost: innolaser-service.ru\r\nCookie: PHPSESSID=%s; path=/\r\nPragma: no-cache\r\n\r\n\r\n", 6, 1, 1, 1, temperature, flow1, 10, 100, PHPSESSID);
+			sprintf(log, "GET http://innolaser-service.ru:3000/device_update.php?cooling_level=%d&working=%d&cooling=%d&peltier=%d&temperature=%.1f&flow=%.1f&frequency=%.1f&duration=%d&power=%d&proc_type=%d HTTP/1.1\r\nHost: innolaser-service.ru\r\nCookie: PHPSESSID=%s; path=/\r\nPragma: no-cache\r\n\r\n\r\n", 
+				g_cooling_level, ((g_working)?1:0), ((g_cooling)?1:0), ((g_peltier_en)?1:0), temperature, flow1, g_frequency, g_duration, g_power, g_procedure_type, PHPSESSID);
 			uint16_t len = strlen(log);
 			
 			// Send HTTP GET			

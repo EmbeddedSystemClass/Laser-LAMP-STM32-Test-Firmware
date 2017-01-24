@@ -31,6 +31,7 @@ void LaserDiodeWork_Process(uint16_t pic_id)
 		if ((Profile != PROFILE_SINGLE) && (Profile != PROFILE_FAST))
 			FlushesCount = 1000000;
 		DiodeLaser_en = true;
+		g_procedure_type = PROCEDURE_TYPE_LDPHOTOEPILATION;
 	}
 	else
 	{
@@ -40,6 +41,7 @@ void LaserDiodeWork_Process(uint16_t pic_id)
 	
 	// Control peltier cooling
 	CoolOn();
+	g_cooling_level = frameData_LaserDiode.cooling;
 	CoolSet((frameData_LaserDiode.cooling + 1) * 17);
 	
 	if (frameData_LaserDiode.buttons.onReadyBtn != 0)

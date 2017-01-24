@@ -212,12 +212,14 @@ int main(void)
 		{
 			LOG_I(LOG_ID_COOLINGFAN, "Cooling on\r\n", 1);
 			__MISC_RELAY1_ON();
+			g_cooling = true;
 		}
 		
 		if (temperature < temperature_cool_off)
 		{
 			LOG_I(LOG_ID_COOLINGFAN, "Cooling off\r\n", 0);
 			__MISC_RELAY1_OFF();
+			g_cooling = false;
 		}
 		
 		//osSignalSet(tid_WiFiThread, WIFI_EVENT_TEMPERATURE_UPDATE);

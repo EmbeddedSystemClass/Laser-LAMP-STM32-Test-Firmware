@@ -108,7 +108,7 @@ void SolidStateLaserOff()
 }
 
 void StopIfRunning(uint16_t pic_id)
-{
+{	
 	// If laser diode running
 	if (((pic_id >= 19) && (pic_id <= 32)) || (pic_id == FRAME_PICID_SERVICE_LASERDIODE))
 	{
@@ -156,9 +156,16 @@ void UpdateLaserState(uint16_t pic_id)
 			(pic_id == FRAME_PICID_REMOTECONTROL) ||
 			(pic_id == FRAME_PICID_SERVICE_SOLIDSTATELASER) ||
 			(pic_id == FRAME_PICID_SERVICE_LASERDIODE))
+	{
 		footswitch_en = true;
+		g_working = true;
+	}
 	else
+	{
 		footswitch_en = false;
+		g_working = false;
+		g_procedure_type = PROCEDURE_TYPE_NO;
+	}
 	
 	// Switch to Solid State Laser
 #ifdef OLD_STYLE_LASER_SW

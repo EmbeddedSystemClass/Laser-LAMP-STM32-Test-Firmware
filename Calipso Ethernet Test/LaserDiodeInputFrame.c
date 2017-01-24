@@ -245,6 +245,11 @@ void LaserDiodeInput_Process(uint16_t pic_id)
 	if (power > 500.0f) power = 500.0f;
 	SetDACValue(power * 9.5f / 500.0f);
 	
+	// Publish data to inet
+	g_duration = duration;
+	g_frequency = (float32_t) freq;
+	g_power = (uint16_t) power;
+	
 	// State - input data
 	if (frameData_LaserDiode.state != 0)
 	{

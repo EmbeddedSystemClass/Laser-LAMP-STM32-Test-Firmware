@@ -13,6 +13,18 @@ PFLASH_GLOBAL_DATA global_flash_data = (PFLASH_GLOBAL_DATA)FLASH_LASERDATA_BASE;
 // DGUS Control variables
 uint16_t g_wDGUSTimeout = 200;
 
+// Data variables to publish
+char http_login[32] = "LD0001";
+char http_password[32] = "2dyB0dCu";
+bool g_working = false;
+bool g_cooling = false;
+bool g_peltier_en = false;
+uint16_t g_cooling_level = 6;
+uint16_t g_procedure_type = 0; // No procedure
+float32_t g_frequency = 10.0f;
+uint16_t g_duration = 100;
+uint16_t g_power = 100;
+
 // Timer global variables
 int16_t m_wMillSec = 0;
 int16_t m_wSeconds = 10;
@@ -49,7 +61,6 @@ MENU_ID MenuID = MENU_ID_SOLIDSTATE;
 
 // Private variables
 uint16_t pic_id = 0;
-bool g_peltier_en = false;
 bool prepare = false;   
 bool RemoteControl = false;
 bool WiFiConnectionEstabilished = false;
