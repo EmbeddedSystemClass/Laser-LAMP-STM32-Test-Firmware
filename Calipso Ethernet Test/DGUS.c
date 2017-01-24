@@ -327,6 +327,7 @@ void GetDateTime(uint32_t timeout, DWIN_TIMEDATE* datetime)
 			datetime->hours   = bcd_decimal(pvalue->hours);
 			datetime->day     = bcd_decimal(pvalue->day);
 			datetime->week    = bcd_decimal(pvalue->week);
+			datetime->month		= bcd_decimal(pvalue->month);
 			datetime->year    = bcd_decimal(pvalue->year);
 		}
 }
