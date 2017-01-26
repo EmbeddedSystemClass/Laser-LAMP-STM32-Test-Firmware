@@ -722,7 +722,7 @@ void UserWiFiThread (void const *argument) {
 	
 	// Main command loop
   while (1) {
-		osEvent event = osMessageGet(qid_WiFiCMDQueue, 1000);
+		osEvent event = osMessageGet(qid_WiFiCMDQueue, 3000);
 		
 		if (event.status == osEventTimeout)
 			WiFiThread_Idle(); // Send data to the "innolaser-service.ru" server

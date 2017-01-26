@@ -168,6 +168,34 @@ void SpeakerDMA(void)
 	
 	//HAL_DMA_Start(&hdma_speaker, (uint32_t)&sine_sound[0], (uint32_t) &TIM3->CCR1, SOUND_BUFFER);
 }
+
+void NewSpeakerDMA(void)
+{
+	__DMA2_CLK_ENABLE();
+	
+	DMA_InitTypeDef speaker_dma = {0};
+	
+	speaker_dma.Channel = DMA_CHANNEL_6;
+	speaker_dma.Direction = DMA_MEMORY_TO_PERIPH;
+	speaker_dma.PeriphInc = DMA_PINC_DISABLE;
+	speaker_dma.MemInc = DMA_MINC_ENABLE;
+	speaker_dma.PeriphDataAlignment = DMA_PDATAALIGN_HALFWORD;
+	speaker_dma.MemDataAlignment = DMA_MDATAALIGN_HALFWORD;
+	speaker_dma.Mode = DMA_CIRCULAR;
+	speaker_dma.Priority = DMA_PRIORITY_LOW;
+	speaker_dma.FIFOMode = DMA_FIFOMODE_DISABLE;
+	speaker_dma.FIFOThreshold = DMA_FIFO_THRESHOLD_HALFFULL;
+	speaker_dma.MemBurst = DMA_MBURST_SINGLE;
+	speaker_dma.PeriphBurst = DMA_PBURST_SINGLE;
+	
+	hdma_speaker.Instance = DMA2_Stream1;
+	hdma_speaker.Init = speaker_dma;
+
+	HAL_DMA_Init(&hdma_speaker);
+	
+	//HAL_DMA_Start(&hdma_speaker, (uint32_t)&sine_sound[0], (uint32_t) &TIM3->CCR1, SOUND_BUFFER);
+}
+
 void SoundGhostOn(void);
 
 void SpeakerInit(void)

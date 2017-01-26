@@ -598,7 +598,7 @@
 //   </e>
 #define RTE_USART6_RX_DMA               1
 #define RTE_USART6_RX_DMA_NUMBER        2
-#define RTE_USART6_RX_DMA_STREAM        1
+#define RTE_USART6_RX_DMA_STREAM        2
 #define RTE_USART6_RX_DMA_CHANNEL       5
 #define RTE_USART6_RX_DMA_PRIORITY      0
 
