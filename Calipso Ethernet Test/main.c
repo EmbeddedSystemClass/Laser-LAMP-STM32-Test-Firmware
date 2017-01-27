@@ -150,11 +150,13 @@ int main(void)
 	Initialize_DGUS();
 #endif
 
+#ifdef NEW_SOUNDSCHEME
+	NewSpeakerInit();
+#else
 	SpeakerInit();
+#endif
 	
 	init_filesystem();
-	
-	start_log(datetime);
 	
 	//HAL_Init();
 	//SystemClock_Config();
@@ -183,8 +185,16 @@ int main(void)
 		temperature = t;
 	}
 	
+	NewSoundOn();
+	HAL_Delay(500);
+	NewSoundOff();
 	HAL_Delay(3000); 											// Wait for display initialization
+	
 	Init_Main_Thread();
+	
+	// Start logging
+	HAL_Delay(100);
+	start_log(datetime);
 #endif
 
   /* Infinite loop */

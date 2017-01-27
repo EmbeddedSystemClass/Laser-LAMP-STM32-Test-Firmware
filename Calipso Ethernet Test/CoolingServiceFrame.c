@@ -90,9 +90,9 @@ void CoolingServiceFrame_Process(uint16_t pic_id)
 	uint16_t ready;
 	if ((flowlow != 1) && (flowready == 1) && (overheating != 0) && (temperature < temperature_cool_on))
 		ready = 1; else ready = 0;
-	if (frameData_CoolingService.TemperatureReady != overheating) 
+	if (frameData_CoolingService.TemperatureReady != ready) 
 	{
-		frameData_CoolingService.TemperatureReady = overheating;
+		frameData_CoolingService.TemperatureReady = ready;
 		update = true;
 	}
 	

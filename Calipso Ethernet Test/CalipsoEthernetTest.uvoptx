@@ -207,8 +207,8 @@
           <Number>0</Number>
           <Type>0</Type>
           <LineNumber>115</LineNumber>
-          <EnabledFlag>1</EnabledFlag>
-          <Address>134267618</Address>
+          <EnabledFlag>0</EnabledFlag>
+          <Address>134268582</Address>
           <ByteObject>0</ByteObject>
           <HtxType>0</HtxType>
           <ManyObjects>0</ManyObjects>
@@ -223,8 +223,8 @@
           <Number>1</Number>
           <Type>0</Type>
           <LineNumber>284</LineNumber>
-          <EnabledFlag>1</EnabledFlag>
-          <Address>134303756</Address>
+          <EnabledFlag>0</EnabledFlag>
+          <Address>134304412</Address>
           <ByteObject>0</ByteObject>
           <HtxType>0</HtxType>
           <ManyObjects>0</ManyObjects>
@@ -239,8 +239,8 @@
           <Number>2</Number>
           <Type>0</Type>
           <LineNumber>143</LineNumber>
-          <EnabledFlag>1</EnabledFlag>
-          <Address>134267714</Address>
+          <EnabledFlag>0</EnabledFlag>
+          <Address>134268678</Address>
           <ByteObject>0</ByteObject>
           <HtxType>0</HtxType>
           <ManyObjects>0</ManyObjects>
@@ -255,8 +255,8 @@
           <Number>3</Number>
           <Type>0</Type>
           <LineNumber>688</LineNumber>
-          <EnabledFlag>1</EnabledFlag>
-          <Address>134281798</Address>
+          <EnabledFlag>0</EnabledFlag>
+          <Address>134282430</Address>
           <ByteObject>0</ByteObject>
           <HtxType>0</HtxType>
           <ManyObjects>0</ManyObjects>
@@ -271,8 +271,8 @@
           <Number>4</Number>
           <Type>0</Type>
           <LineNumber>97</LineNumber>
-          <EnabledFlag>1</EnabledFlag>
-          <Address>134279878</Address>
+          <EnabledFlag>0</EnabledFlag>
+          <Address>134280510</Address>
           <ByteObject>0</ByteObject>
           <HtxType>0</HtxType>
           <ManyObjects>0</ManyObjects>
@@ -487,6 +487,12 @@
       <Lin2Executable></Lin2Executable>
       <Lin2ConfigFile></Lin2ConfigFile>
       <bLin2Auto>0</bLin2Auto>
+      <SystemViewers>
+        <Entry>
+          <Name>System Viewer\GPIOE</Name>
+          <WinId>35905</WinId>
+        </Entry>
+      </SystemViewers>
       <DebugDescription>
         <Enable>1</Enable>
         <EnableLog>0</EnableLog>

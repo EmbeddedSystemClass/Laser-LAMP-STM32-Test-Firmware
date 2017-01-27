@@ -198,6 +198,72 @@ void NewSpeakerDMA(void)
 
 void SoundGhostOn(void);
 
+void NewSpeakerInit(void)
+{
+	__TIM1_CLK_ENABLE();
+	__GPIOE_CLK_ENABLE();
+	
+	GPIO_InitTypeDef speaker = {0};
+	
+	speaker.Pin   = GPIO_PIN_8 | GPIO_PIN_9; // PWM1
+	speaker.Mode  = GPIO_MODE_AF_PP;
+	speaker.Pull  = GPIO_NOPULL;
+	speaker.Speed = GPIO_SPEED_FREQ_HIGH;
+	speaker.Alternate = GPIO_AF1_TIM1;
+	
+	HAL_GPIO_Init(GPIOE, &speaker);
+	
+	speaker.Pin   = GPIO_PIN_14 | GPIO_PIN_11; //SD IR2104 control
+	speaker.Mode  = GPIO_MODE_OUTPUT_PP;
+	speaker.Alternate = 0;
+	
+	HAL_GPIO_Init(GPIOE, &speaker);
+	
+	TIM_Base_InitTypeDef tim1_init = {0};
+	tim1_init.Period = 1904; // 44100 kHz PWM
+	tim1_init.Prescaler = 0;
+	tim1_init.ClockDivision = TIM_CLOCKDIVISION_DIV1;
+	tim1_init.CounterMode = TIM_COUNTERMODE_UP;
+	tim1_init.RepetitionCounter = 0;
+	
+	TIM_OC_InitTypeDef tim1_oc_init = {0};
+	tim1_oc_init.OCMode = TIM_OCMODE_PWM1; //TIM_OCMODE_PWM1;
+	tim1_oc_init.Pulse = 0; // 0% duty cycle
+	tim1_oc_init.OCPolarity = TIM_OCPOLARITY_HIGH;
+	tim1_oc_init.OCNPolarity = TIM_OCNPOLARITY_HIGH;
+	tim1_oc_init.OCFastMode = TIM_OCFAST_ENABLE;
+	tim1_oc_init.OCIdleState = TIM_OCIDLESTATE_RESET;
+	tim1_oc_init.OCNIdleState = TIM_OCIDLESTATE_RESET;
+	
+	/*TIM_BreakDeadTimeConfigTypeDef tim1_brkdeadtime_init = {0};
+	tim1_brkdeadtime_init.OffStateRunMode = TIM_OSSR_ENABLE;
+	tim1_brkdeadtime_init.OffStateIDLEMode = TIM_OSSI_ENABLE;
+	tim1_brkdeadtime_init.LockLevel = TIM_LOCKLEVEL_1;
+	tim1_brkdeadtime_init.DeadTime = 117;
+	tim1_brkdeadtime_init.BreakState = TIM_BREAK_ENABLE;
+	tim1_brkdeadtime_init.BreakPolarity = TIM_BREAKPOLARITY_LOW;
+	tim1_brkdeadtime_init.AutomaticOutput = TIM_AUTOMATICOUTPUT_ENABLE;
+	
+	HAL_TIMEx_ConfigBreakDeadTime(&htim_speaker, &tim1_brkdeadtime_init);*/
+	
+	htim_speaker.Init = tim1_init;
+	htim_speaker.Instance = TIM1;
+	
+	HAL_TIM_OC_Init(&htim_speaker);
+	HAL_TIM_OC_ConfigChannel(&htim_speaker, &tim1_oc_init, TIM_CHANNEL_1);
+	
+	NewSpeakerDMA();
+	htim_speaker.hdma[TIM_DMA_ID_CC1] = &hdma_speaker;
+	
+	__MISC_SOUND_OFF(); // Sound Off
+	
+	/*SoundGhostOn();
+	
+	HAL_Delay(3000);*/
+	
+	SoundOff();
+}
+
 void SpeakerInit(void)
 {
 	__TIM3_CLK_ENABLE();
@@ -276,6 +342,17 @@ void SoundOn(void)
 	HAL_TIM_OC_Start_DMA(&htim_speaker, TIM_CHANNEL_1, (uint32_t*)&sine_sound_64[0], 64);
 }
 
+void NewSoundOn(void)
+{
+	__MISC_SOUND_ON();
+	
+	__HAL_DMA_SET_COUNTER(&hdma_speaker, 0);
+	
+	//HAL_TIM_OC_Start_DMA(&htim_speaker, TIM_CHANNEL_1, (uint32_t*)&sine_sound_64[0], 64);
+	TIM_CCxChannelCmd(htim_speaker.Instance, TIM_CHANNEL_1, TIM_CCx_ENABLE);
+	HAL_TIMEx_OCN_Start_DMA(&htim_speaker, TIM_CHANNEL_1, (uint32_t*)&sine_sound_64[0], 64);
+}
+
 void SoundOff(void)
 {
 	GPIO_InitTypeDef speaker = {0};
@@ -289,6 +366,14 @@ void SoundOff(void)
 	
 	HAL_GPIO_Init(GPIOA, &speaker);
 	HAL_GPIO_WritePin(GPIOA, GPIO_PIN_6, GPIO_PIN_SET);
+}
+
+void NewSoundOff(void)
+{
+	__MISC_SOUND_OFF();
+	
+	//HAL_TIM_OC_Stop_DMA(&htim_speaker, TIM_CHANNEL_1);
+	HAL_TIMEx_OCN_Stop_DMA(&htim_speaker, TIM_CHANNEL_1);
 }
 
 void CoolOn(void)

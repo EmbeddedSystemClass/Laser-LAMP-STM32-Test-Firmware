@@ -15,11 +15,11 @@
 
 void LogFrame_Process(uint16_t pic_id)
 {	
-	char str[256];
+	//char str[256];
 	uint16_t i = 0;
 	uint16_t log_offset = 0;
 	
-	bool update = false;
+	//bool update = false;
 	uint16_t* value;
 	ReadVariable(FRAMEDATA_LOGOFFSET, (void**)&value, 6);
 	if ((osSignalWait(DGUS_EVENT_SEND_COMPLETED, g_wDGUSTimeout).status != osEventTimeout) && (osSignalWait(DGUS_EVENT_RECEIVE_COMPLETED, g_wDGUSTimeout).status != osEventTimeout))

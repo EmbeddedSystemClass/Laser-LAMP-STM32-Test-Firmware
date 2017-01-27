@@ -47,6 +47,9 @@ typedef enum MENU_ID_ENUM {
 #define GPIO_PIN_ChargeModuleReady				GPIO_PIN_15 // PORT GPIOC
 #define GPIO_PIN_LaserDiodeFault					GPIO_PIN_13	// PORT GPIOF
 
+// Sound
+#define GPIO_PIN_SoundSD									GPIO_PIN_14 | GPIO_PIN_11	// PORT GPIOE
+
 // set outputs
 #define __MISC_RELAY1_ON()	HAL_GPIO_WritePin(GPIOB, MISC_GPIO_RELAY1, GPIO_PIN_SET)
 #define __MISC_RELAY2_ON()	HAL_GPIO_WritePin(GPIOB, MISC_GPIO_RELAY2, GPIO_PIN_SET)
@@ -67,6 +70,10 @@ typedef enum MENU_ID_ENUM {
 #define __MISC_LASERLED_OFF()		HAL_GPIO_WritePin(GPIOA, GPIO_PIN_LaserLED,         GPIO_PIN_RESET)
 #define __MISC_LASERLED2_OFF()	HAL_GPIO_WritePin(GPIOB, GPIO_PIN_LaserLED2,        GPIO_PIN_RESET)
 
+// Sound shutdown
+#define __MISC_SOUND_ON()		HAL_GPIO_WritePin(GPIOE, GPIO_PIN_SoundSD, GPIO_PIN_SET)
+#define __MISC_SOUND_OFF()	HAL_GPIO_WritePin(GPIOE, GPIO_PIN_SoundSD, GPIO_PIN_RESET)
+
 // get inputs
 #define __MISC_LASER_ID0()									HAL_GPIO_ReadPin(GPIOE, GPIO_PIN_Laser_ID0)
 #define __MISC_LASER_ID1()									HAL_GPIO_ReadPin(GPIOE, GPIO_PIN_Laser_ID1)
@@ -80,6 +87,7 @@ typedef enum MENU_ID_ENUM {
 #define __MISC_GETLASERDIODEFAULTSTATE()		HAL_GPIO_ReadPin(GPIOF, GPIO_PIN_LaserDiodeFault) == GPIO_PIN_RESET
 
 void SpeakerInit(void);
+void NewSpeakerInit(void);
 void FlowInit(void);
 void CoolInit(void);
 void CoolOn(void);
@@ -87,6 +95,8 @@ void CoolOff(void);
 void CoolSet(uint16_t cool);
 void SoundOn(void);
 void SoundOff(void);
+void NewSoundOn(void);
+void NewSoundOff(void);
 
 LASER_ID GetLaserID(void);
 
