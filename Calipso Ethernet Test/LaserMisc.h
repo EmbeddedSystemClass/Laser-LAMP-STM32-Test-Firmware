@@ -87,7 +87,7 @@ typedef enum MENU_ID_ENUM {
 #define __MISC_GETLASERDIODEFAULTSTATE()		HAL_GPIO_ReadPin(GPIOF, GPIO_PIN_LaserDiodeFault) == GPIO_PIN_RESET
 
 void SpeakerInit(void);
-void NewSpeakerInit(void);
+//void NewSpeakerInit(void);
 void FlowInit(void);
 void CoolInit(void);
 void CoolOn(void);
@@ -95,8 +95,8 @@ void CoolOff(void);
 void CoolSet(uint16_t cool);
 void SoundOn(void);
 void SoundOff(void);
-void NewSoundOn(void);
-void NewSoundOff(void);
+//void NewSoundOn(void);
+//void NewSoundOff(void);
 
 LASER_ID GetLaserID(void);
 
