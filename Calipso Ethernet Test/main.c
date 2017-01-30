@@ -150,8 +150,9 @@ int main(void)
 	Initialize_DGUS();
 #endif
 
-	//SpeakerInit();	
+	SpeakerInit();	
 	init_filesystem();
+	start_log(datetime);
 	
 	//HAL_Init();
 	//SystemClock_Config();
@@ -189,7 +190,6 @@ int main(void)
 	
 	// Start logging
 	HAL_Delay(100);
-	start_log(datetime);
 #endif
 
   /* Infinite loop */

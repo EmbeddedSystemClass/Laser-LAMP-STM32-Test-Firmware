@@ -43,9 +43,7 @@
 #define RTE_DEVICE_HAL_UART
 #define RTE_DEVICE_HAL_USART
 #define RTE_DEVICE_STARTUP_STM32F4XX    /* Device Startup for STM32F4 */
-#define RTE_Drivers_ETH_MAC0            /* Driver ETH_MAC0 */
 #define RTE_Drivers_MCI0                /* Driver MCI0 */
-#define RTE_Drivers_PHY_LAN8720         /* Driver PHY LAN8720 */
 #define RTE_Drivers_SPI1                /* Driver SPI1 */
         #define RTE_Drivers_SPI2                /* Driver SPI2 */
         #define RTE_Drivers_SPI3                /* Driver SPI3 */
