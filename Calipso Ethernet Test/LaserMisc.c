@@ -237,7 +237,7 @@ void SpeakerInit(void)
 	HAL_GPIO_Init(GPIOE, &speaker);
 	
 	TIM_Base_InitTypeDef tim1_init = {0};
-	tim1_init.Period = 1904; // 44100 kHz PWM
+	tim1_init.Period = 4096; // 44100 kHz PWM
 	tim1_init.Prescaler = 0;
 	tim1_init.ClockDivision = TIM_CLOCKDIVISION_DIV1;
 	tim1_init.CounterMode = TIM_COUNTERMODE_UP;

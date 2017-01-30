@@ -104,7 +104,7 @@ static void LaserTimer_Callback(void const *arg) {
 			m_wMillSec = 1000; // Every 10 ms
 			if (m_wSeconds > 0)	m_wSeconds--;
 		}
-		if (m_wMillSec > 0)	m_wMillSec-=10;
+		if (m_wMillSec > 0)	m_wMillSec -= 10;
 	}
 	
 	if (!g_peltier_en)
@@ -130,7 +130,7 @@ static void LaserTimer_Callback(void const *arg) {
 			}
 			m_wMillSec = 0; // Every 10 ms
 		}
-		if (m_wMillSec < 1000)	m_wMillSec += 10;
+		if (m_wMillSec < 1000)	m_wMillSec += 20;
 	}
 }
 
