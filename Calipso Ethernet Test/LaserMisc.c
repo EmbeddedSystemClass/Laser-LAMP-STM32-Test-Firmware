@@ -106,6 +106,68 @@ void FlowInit(void)
 	HAL_TIM_Base_Start(&htim_flow2);
 }
 
+#ifdef NEW_COOLSCHEME
+void CoolInit(void)
+{
+	__TIM3_CLK_ENABLE();
+	
+	GPIO_InitTypeDef cool = {0};
+	
+	cool.Pin   = GPIO_PIN_0 | GPIO_PIN_1; // PELTIER PWM
+	cool.Mode  = GPIO_MODE_AF_PP;
+	cool.Pull  = GPIO_NOPULL;
+	cool.Speed = GPIO_SPEED_FREQ_HIGH;
+	cool.Alternate = GPIO_AF2_TIM3;
+	
+	HAL_GPIO_Init(GPIOB, &cool);
+	
+	TIM_Base_InitTypeDef tim3_init = {0};
+	tim3_init.Period = 42000; // 1ms period
+	tim3_init.Prescaler = 3;
+	tim3_init.ClockDivision = TIM_CLOCKDIVISION_DIV1;
+	tim3_init.CounterMode = TIM_COUNTERMODE_UP;
+	tim3_init.RepetitionCounter = 0;
+	
+	TIM_OC_InitTypeDef tim3_oc_init = {0};
+	tim3_oc_init.OCMode = TIM_OCMODE_PWM2; //TIM_OCMODE_PWM1;
+	tim3_oc_init.Pulse = 0; // 50% duty cycle
+	tim3_oc_init.OCPolarity = TIM_OCPOLARITY_HIGH;
+	tim3_oc_init.OCFastMode = TIM_OCFAST_ENABLE;
+	
+	htim_cool.Init = tim3_init;
+	htim_cool.Instance = TIM3;
+	
+	HAL_TIM_OC_Init(&htim_cool);
+	HAL_TIM_OC_ConfigChannel(&htim_cool, &tim3_oc_init, TIM_CHANNEL_3);
+	HAL_TIM_OC_Start(&htim_cool, TIM_CHANNEL_3);
+	
+#ifdef NEW_DOUBLECOOLSCHEME
+	HAL_TIM_OC_ConfigChannel(&htim_cool, &tim3_oc_init, TIM_CHANNEL_3);
+	HAL_TIM_OC_Start(&htim_cool, TIM_CHANNEL_4);
+#endif
+}
+
+void CoolOn(void)
+{
+	g_peltier_en = true;
+	//HAL_TIM_OC_Start(&htim_cool, TIM_CHANNEL_3);
+}
+
+void CoolOff(void)
+{
+	g_peltier_en = false;
+	__HAL_TIM_SetCompare(&htim_cool, TIM_CHANNEL_3, 42000);
+	//HAL_TIM_OC_Stop(&htim_cool, TIM_CHANNEL_3);
+}
+
+void CoolSet(uint16_t cool)
+{
+	uint16_t duty_cycle = cool * 420;
+	if (duty_cycle > 42000) duty_cycle = 42000;
+	__HAL_TIM_SetCompare(&htim_cool, TIM_CHANNEL_3, 42000 - duty_cycle);
+}
+
+#else
 void CoolInit(void)
 {
 	__TIM2_CLK_ENABLE();
@@ -141,6 +203,28 @@ void CoolInit(void)
 	
 	HAL_TIM_OC_Start(&htim_cool, TIM_CHANNEL_1);
 }
+
+void CoolOn(void)
+{
+	g_peltier_en = true;
+	//HAL_TIM_OC_Start(&htim_cool, TIM_CHANNEL_1);
+}
+
+void CoolOff(void)
+{
+	g_peltier_en = false;
+	__HAL_TIM_SetCompare(&htim_cool, TIM_CHANNEL_1, 42000);
+	//HAL_TIM_OC_Stop(&htim_cool, TIM_CHANNEL_1);
+}
+
+void CoolSet(uint16_t cool)
+{
+	uint16_t duty_cycle = cool * 420;
+	if (duty_cycle > 42000) duty_cycle = 42000;
+	__HAL_TIM_SetCompare(&htim_cool, TIM_CHANNEL_1, 42000 - duty_cycle);
+}
+
+#endif
 
 void SpeakerDMA(void)
 {
@@ -378,26 +462,6 @@ void SoundOff(void)
 	HAL_GPIO_WritePin(GPIOA, GPIO_PIN_6, GPIO_PIN_SET);
 }
 #endif
-
-void CoolOn(void)
-{
-	g_peltier_en = true;
-	//HAL_TIM_OC_Start(&htim_cool, TIM_CHANNEL_1);
-}
-
-void CoolOff(void)
-{
-	g_peltier_en = false;
-	__HAL_TIM_SetCompare(&htim_cool, TIM_CHANNEL_1, 42000);
-	//HAL_TIM_OC_Stop(&htim_cool, TIM_CHANNEL_1);
-}
-
-void CoolSet(uint16_t cool)
-{
-	uint16_t duty_cycle = cool * 420;
-	if (duty_cycle > 42000) duty_cycle = 42000;
-	__HAL_TIM_SetCompare(&htim_cool, TIM_CHANNEL_1, 42000 - duty_cycle);
-}
 
 LASER_ID GetLaserID()
 {

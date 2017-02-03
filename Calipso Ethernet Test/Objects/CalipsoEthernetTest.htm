@@ -3,7 +3,7 @@
 <title>Static Call Graph - [.\Objects\CalipsoEthernetTest.axf]</title></head>
 <body><HR>
 <H1>Static Call Graph for image .\Objects\CalipsoEthernetTest.axf</H1><HR>
-<BR><P>#&#060CALLGRAPH&#062# ARM Linker, 5060183: Last Updated: Mon Jan 30 17:04:08 2017
+<BR><P>#&#060CALLGRAPH&#062# ARM Linker, 5060183: Last Updated: Fri Feb 03 17:11:03 2017
 <BR><P>
 <H3>Maximum Stack Usage =       1416 bytes + Unknown(Functions without stacksize, Cycles, Untraceable Function Pointers)</H3><H3>
 Call chain for Maximum Stack Depth:</H3>
@@ -1969,7 +1969,7 @@ Global Symbols
 <BR>[Called By]<UL><LI><a href="#[212]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;LaserDiodeInput_Process
 </UL>
 
-<P><STRONG><a name="[18e]"></a>CoolInit</STRONG> (Thumb, 170 bytes, Stack size 80 bytes, lasermisc.o(i.CoolInit))
+<P><STRONG><a name="[18e]"></a>CoolInit</STRONG> (Thumb, 190 bytes, Stack size 80 bytes, lasermisc.o(i.CoolInit))
 <BR><BR>[Stack]<UL><LI>Max Depth = 108<LI>Call Chain = CoolInit &rArr; HAL_TIM_OC_ConfigChannel &rArr; TIM_OC4_SetConfig
 </UL>
 <BR>[Calls]<UL><LI><a href="#[18d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_GPIO_Init
@@ -1993,7 +1993,7 @@ Global Symbols
 <LI><a href="#[22f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;LongPulseLaserInput_Process
 </UL>
 
-<P><STRONG><a name="[21f]"></a>CoolSet</STRONG> (Thumb, 42 bytes, Stack size 0 bytes, lasermisc.o(i.CoolSet))
+<P><STRONG><a name="[21f]"></a>CoolSet</STRONG> (Thumb, 40 bytes, Stack size 0 bytes, lasermisc.o(i.CoolSet))
 <BR><BR>[Called By]<UL><LI><a href="#[220]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;LaserDiodeWork_Process
 <LI><a href="#[21e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;LaserDiodePrepare_Process
 </UL>
@@ -6171,7 +6171,7 @@ Local Symbols
 <BR>[Called By]<UL><LI><a href="#[99]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
 </UL>
 
-<P><STRONG><a name="[95]"></a>LaserTimer_Callback</STRONG> (Thumb, 646 bytes, Stack size 8 bytes, lasertimer.o(i.LaserTimer_Callback))
+<P><STRONG><a name="[95]"></a>LaserTimer_Callback</STRONG> (Thumb, 662 bytes, Stack size 8 bytes, lasertimer.o(i.LaserTimer_Callback))
 <BR><BR>[Stack]<UL><LI>Max Depth = 92<LI>Call Chain = LaserTimer_Callback &rArr; DiodeControlPulseStart &rArr; SoundOn &rArr; HAL_TIMEx_OCN_Start_DMA &rArr; HAL_DMA_Start_IT &rArr; DMA_SetConfig
 </UL>
 <BR>[Calls]<UL><LI><a href="#[1a0]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;DiodeControlPulseStop
