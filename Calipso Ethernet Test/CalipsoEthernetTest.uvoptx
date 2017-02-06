@@ -208,7 +208,7 @@
           <Type>0</Type>
           <LineNumber>115</LineNumber>
           <EnabledFlag>0</EnabledFlag>
-          <Address>134267550</Address>
+          <Address>134267634</Address>
           <ByteObject>0</ByteObject>
           <HtxType>0</HtxType>
           <ManyObjects>0</ManyObjects>
@@ -224,7 +224,7 @@
           <Type>0</Type>
           <LineNumber>284</LineNumber>
           <EnabledFlag>0</EnabledFlag>
-          <Address>134303312</Address>
+          <Address>134303700</Address>
           <ByteObject>0</ByteObject>
           <HtxType>0</HtxType>
           <ManyObjects>0</ManyObjects>
@@ -240,7 +240,7 @@
           <Type>0</Type>
           <LineNumber>143</LineNumber>
           <EnabledFlag>0</EnabledFlag>
-          <Address>134267646</Address>
+          <Address>134267730</Address>
           <ByteObject>0</ByteObject>
           <HtxType>0</HtxType>
           <ManyObjects>0</ManyObjects>
@@ -254,25 +254,9 @@
         <Bp>
           <Number>3</Number>
           <Type>0</Type>
-          <LineNumber>688</LineNumber>
-          <EnabledFlag>0</EnabledFlag>
-          <Address>134281350</Address>
-          <ByteObject>0</ByteObject>
-          <HtxType>0</HtxType>
-          <ManyObjects>0</ManyObjects>
-          <SizeOfObject>0</SizeOfObject>
-          <BreakByAccess>0</BreakByAccess>
-          <BreakIfRCount>1</BreakIfRCount>
-          <Filename>.\WiFiThread.c</Filename>
-          <ExecCommand></ExecCommand>
-          <Expression>\\CalipsoEthernetTest\WiFiThread.c\688</Expression>
-        </Bp>
-        <Bp>
-          <Number>4</Number>
-          <Type>0</Type>
           <LineNumber>97</LineNumber>
           <EnabledFlag>0</EnabledFlag>
-          <Address>134279430</Address>
+          <Address>134279806</Address>
           <ByteObject>0</ByteObject>
           <HtxType>0</HtxType>
           <ManyObjects>0</ManyObjects>
@@ -282,6 +266,38 @@
           <Filename>.\WiFiScanningFrame.c</Filename>
           <ExecCommand></ExecCommand>
           <Expression>\\CalipsoEthernetTest\WiFiScanningFrame.c\97</Expression>
+        </Bp>
+        <Bp>
+          <Number>4</Number>
+          <Type>0</Type>
+          <LineNumber>680</LineNumber>
+          <EnabledFlag>1</EnabledFlag>
+          <Address>134281690</Address>
+          <ByteObject>0</ByteObject>
+          <HtxType>0</HtxType>
+          <ManyObjects>0</ManyObjects>
+          <SizeOfObject>0</SizeOfObject>
+          <BreakByAccess>0</BreakByAccess>
+          <BreakIfRCount>1</BreakIfRCount>
+          <Filename>.\WiFiThread.c</Filename>
+          <ExecCommand></ExecCommand>
+          <Expression>\\CalipsoEthernetTest\WiFiThread.c\680</Expression>
+        </Bp>
+        <Bp>
+          <Number>5</Number>
+          <Type>0</Type>
+          <LineNumber>569</LineNumber>
+          <EnabledFlag>1</EnabledFlag>
+          <Address>134247952</Address>
+          <ByteObject>0</ByteObject>
+          <HtxType>0</HtxType>
+          <ManyObjects>0</ManyObjects>
+          <SizeOfObject>0</SizeOfObject>
+          <BreakByAccess>0</BreakByAccess>
+          <BreakIfRCount>1</BreakIfRCount>
+          <Filename>.\DGUS.c</Filename>
+          <ExecCommand></ExecCommand>
+          <Expression>\\CalipsoEthernetTest\DGUS.c\569</Expression>
         </Bp>
       </Breakpoint>
       <WatchWindow1>
@@ -390,6 +406,16 @@
           <WinNumber>1</WinNumber>
           <ItemText>str_pass</ItemText>
         </Ww>
+        <Ww>
+          <count>21</count>
+          <WinNumber>1</WinNumber>
+          <ItemText>WiFi_NetworkSSID</ItemText>
+        </Ww>
+        <Ww>
+          <count>22</count>
+          <WinNumber>1</WinNumber>
+          <ItemText>WiFi_NetworkPassword</ItemText>
+        </Ww>
       </WatchWindow1>
       <WatchWindow2>
         <Ww>
@@ -466,7 +492,7 @@
         <viewmode>1</viewmode>
         <vrSel>0</vrSel>
         <aSym>0</aSym>
-        <aTbox>1</aTbox>
+        <aTbox>0</aTbox>
         <AscS1>0</AscS1>
         <AscS2>0</AscS2>
         <AscS3>0</AscS3>

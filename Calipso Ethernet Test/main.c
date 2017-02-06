@@ -211,6 +211,10 @@ int main(void)
 			}
 		}
 		
+		SoundOn();
+		HAL_Delay(500);
+		SoundOff();
+		
 		LOG_F(LOG_ID_TEMPERATURE, "Temperature:%.2f\r\n", temperature);
 		
 		if (temperature > temperature_cool_on)

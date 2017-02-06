@@ -681,18 +681,22 @@ void WiFiThread_Link()
 	
 	//Set WiFi SSID
 	sprintf(str_ssid, "AT+S.SSIDTXT=%s\r\n", WiFi_NetworkSSID);
+	//sprintf(str_ssid, "AT+S.SSIDTXT=ASUS\r\n");
 	SendAT(str_ssid);
 	
 	//Set WiFi network password
 	sprintf(str_pass, "AT+S.SCFG=wifi_wpa_psk_text,%s\r\n", WiFi_NetworkPassword);
+	//sprintf(str_pass, "AT+S.SCFG=wifi_wpa_psk_text, host1234\r\n");
 	SendAT(str_pass);
 	
 	//Save data & restart WiFi Module
 	SendAT("AT+S.SCFG=wifi_priv_mode,2\r\n");
 	SendAT("AT+S.SCFG=wifi_mode,1\r\n");
 	SendAT("AT+S.SCFG=ip_use_dhcp,1\r\n");
+	//SendAT("AT+S.SCFG=nv_wifi_macaddr, 00:80:E1:FF:C6:B3\r\n");
+	//SendAT("AT+S.SCFG=nv_wifi_macaddr, 00:80:E1:FF:C6:B4\r\n");
 	SendAT("AT&W\r\n");
-	SendAT("AT+CFUN=1\r\n");
+	//SendAT("AT+CFUN=1\r\n");
 	
 	// Restart WiFi
 	AsyncSendAT("AT+CFUN=1\r\n");
@@ -717,7 +721,7 @@ void UserWiFiThread (void const *argument) {
 	
 	// Reastart WiFi Module
 	HAL_GPIO_WritePin(GPIOG, GPIO_PIN_2, GPIO_PIN_SET);
-	//SendAT("AT&V\r\n");
+	SendAT("AT&V\r\n");
 	SendAT("AT+CFUN=1\r\n");
 	
 	// Main command loop
