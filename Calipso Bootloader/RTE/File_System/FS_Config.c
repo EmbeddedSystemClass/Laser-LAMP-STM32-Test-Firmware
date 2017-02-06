@@ -1,10 +1,10 @@
 /*------------------------------------------------------------------------------
  * MDK Middleware - Component ::File System
- * Copyright (c) 2004-2014 ARM Germany GmbH. All rights reserved.
+ * Copyright (c) 2004-2016 ARM Germany GmbH. All rights reserved.
  *------------------------------------------------------------------------------
  * Name:    FS_Config.c
  * Purpose: File System Configuration
- * Rev.:    V6.2
+ * Rev.:    V6.2.0
  *----------------------------------------------------------------------------*/
 
 //-------- <<< Use Configuration Wizard in Context Menu >>> --------------------

@@ -1,10 +1,10 @@
 /*------------------------------------------------------------------------------
  * MDK Middleware - Component ::File System:Drive
- * Copyright (c) 2004-2014 ARM Germany GmbH. All rights reserved.
+ * Copyright (c) 2004-2016 ARM Germany GmbH. All rights reserved.
  *------------------------------------------------------------------------------
  * Name:    FS_Config_MC_0.h
  * Purpose: File System Configuration for Memory Card Drive
- * Rev.:    V6.2
+ * Rev.:    V6.2.0
  *----------------------------------------------------------------------------*/
 
 //-------- <<< Use Configuration Wizard in Context Menu >>> --------------------
@@ -24,8 +24,6 @@
 //   <o>Memory Card Interface Mode <0=>Native <1=>SPI
 //   <i>Native uses a SD Bus with up to 8 data lines, CLK, and CMD
 //   <i>SPI uses 2 data lines (MOSI and MISO), SCLK and CS
-//   <i>When using SPI both Driver_SPI# and Driver_MCI# must be specified
-//   <i>since the MCI driver provides the control interface lines.
 #define MC0_SPI                 0
           
 //   <o>Drive Cache Size <0=>OFF <1=>1 KB <2=>2 KB <4=>4 KB

@@ -1,4 +1,4 @@
---cpu Cortex-M4.fp
+--cpu=Cortex-M4.fp
 ".\objects\main.o"
 ".\objects\stm32f4xx_it.o"
 ".\objects\stm32f4xx_hal_msp.o"
@@ -29,14 +29,14 @@
 ".\objects\lasermisc.o"
 ".\objects\sdcard.o"
 ".\objects\soundlib.o"
-"C:\Keil_v5\ARM\PACK\ARM\CMSIS\5.0.0-Beta4\CMSIS\Lib\ARM\arm_cortexM4lf_math.lib"
-"C:\Keil_v5\ARM\PACK\ARM\CMSIS\5.0.0-Beta4\CMSIS\RTOS\RTX\LIB\ARM\RTX_CM4.lib"
+"C:\Keil_v5\ARM\PACK\ARM\CMSIS\5.0.0\CMSIS\Lib\ARM\arm_cortexM4lf_math.lib"
+"C:\Keil_v5\ARM\PACK\ARM\CMSIS\5.0.0\CMSIS\RTOS\RTX\LIB\ARM\RTX_CM4.lib"
 ".\objects\rtx_conf_cm.o"
 ".\objects\mci_stm32f4xx.o"
 ".\objects\spi_stm32f4xx.o"
 ".\objects\usart_stm32f4xx.o"
-".\objects\eventrecorder.o"
 ".\objects\retarget_io.o"
+".\objects\eventrecorder.o"
 ".\objects\stm32f4xx_hal.o"
 ".\objects\stm32f4xx_hal_cortex.o"
 ".\objects\stm32f4xx_hal_dma.o"
@@ -55,7 +55,7 @@
 ".\objects\stm32f4xx_hal_usart.o"
 ".\objects\startup_stm32f407xx.o"
 ".\objects\system_stm32f4xx.o"
-"C:\Keil_v5\ARM\PACK\Keil\MDK-Middleware\7.1.0\FileSystem\Lib\ARM\FS_LFN_CM3_L.lib"
+"C:\Keil_v5\ARM\PACK\Keil\MDK-Middleware\7.3.0\FileSystem\Lib\ARM\FS_LFN_CM3_L.lib"
 ".\objects\fs_config.o"
 --strict --scatter ".\Objects\CalipsoEthernetTest.sct"
 --summary_stderr --info summarysizes --map --xref --callgraph --symbols
