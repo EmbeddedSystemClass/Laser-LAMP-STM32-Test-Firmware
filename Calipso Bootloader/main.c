@@ -72,14 +72,22 @@ uint32_t HAL_GetTick(void) {
 uint32_t flashSectorSizeTable[12] = {0x4000, 0x4000, 0x4000, 0x4000, 0x10000, 0x20000, 0x20000, 0x20000, 0x20000, 0x20000, 0x20000, 0x20000};
 uint32_t flashSectorAddrTable[13] = {0x08000000, 0x8004000, 0x08008000, 0x0800c000, 0x08010000, 0x08020000, 0x08040000, 0x08060000, 0x08080000, 0x080A0000, 0x080C0000, 0x080E0000, 0x08100000};
 bool     flashSectorIsCleared[12] = {0};
+extern osThreadId tid_MainThread;
+
+char FirmwareFileName[256];
+volatile char FirmwareVersion[16] = "V1.0";
+volatile uint16_t firmware_update_progress = 0;
 
 /* Private typedef -----------------------------------------------------------*/
 /* Private define ------------------------------------------------------------*/
 /* Private macro -------------------------------------------------------------*/
+#define ApplicationAddress 0x08010000
+
 /* Private variables ---------------------------------------------------------*/
 // Local variables
 uint16_t currentSector = 0;
 uint32_t baseAddr = 0x0000;
+uint32_t offsAddr = 0x0000;
 char buffer[256];
 char packet[16];
 bool end_of_file = false;
@@ -157,6 +165,131 @@ int GetSectorByAddr(uint32_t addr)
 	return -1;
 }
 
+void JumpToApp()
+{
+	typedef  void (*pFunction)(void);
+	pFunction Jump_To_Application;
+	uint32_t JumpAddress;
+	
+	// Deinitialize periph
+	HAL_DeInit();
+	osThreadTerminate(tid_MainThread); // Terminate main thread
+	
+	// Set interrupt vector table offset
+	__disable_irq();
+	SCB->VTOR = ApplicationAddress;
+	__enable_irq();
+	
+	// Jump to main application
+	if (((*(__IO uint32_t*)ApplicationAddress) & 0x2FFE0000 ) == 0x20000000)
+	{ 
+		JumpAddress = *(__IO uint32_t*) (ApplicationAddress + 4);
+		Jump_To_Application = (pFunction) JumpAddress;
+		__set_CONTROL(0); // Change PSP to MSP
+		__set_MSP(*(__IO uint32_t*) ApplicationAddress);
+		Jump_To_Application();
+	}
+}
+
+void UpdateFirmware()
+{	
+	if (sdcard_ready)
+	{
+		FILE* fp = fopen(FirmwareFileName, "r");
+		
+		fseek(fp, 0, SEEK_END);
+		uint32_t firmware_len = ftell(fp);
+		uint32_t current_size = 0;
+		fclose(fp);
+		
+		fp = fopen(FirmwareFileName, "r");
+		
+		slog_out(datetime, "Firmware update starting\r\n");
+		printf("Firmware update starting\r\n");
+		
+		// Read from hex file
+		while (!end_of_file)
+		{
+			uint32_t frame_size = 0;
+			
+			while (frame_size < flashSectorSizeTable[currentSector])
+			{
+				char* str = fgets(buffer, 256, fp);
+				
+				/*
+				slog_out(datetime, str);
+				printf(str);*/
+				
+				uint16_t sector = 0;
+				uint32_t addr = 0;
+				uint16_t tt = hextoint(&str[6+1], 2);
+				uint16_t size = 0;
+				uint16_t i = 0;
+				
+				switch (tt)
+				{
+					case 0x04:
+						baseAddr	= hextoint(&str[8+1], 4) << 16;
+						break;
+					case 0x00:
+						size			= hextoint(&str[0+1], 2);
+						offsAddr	= hextoint(&str[2+1], 4);
+						addr			= baseAddr | offsAddr;
+						sector 		= GetSectorByAddr(addr);
+						currentSector = sector;
+					
+						// Firmware address alias boot sections
+						if (addr < 0x08010000)
+						{
+							fclose(fp);
+							slog_out(datetime, "Firmware offset error\r\n");
+							printf("Firmware offset error\r\n");
+							JumpToApp();
+						}
+					
+						// Clear sector if needed
+						if (!flashSectorIsCleared[sector])
+						{
+							EraseSector(sector);
+							flashSectorIsCleared[sector] = true;
+						}
+					
+						// read data from string
+						for (i = 0; i < size; i++)
+							packet[i] = hextoint(&str[8+1+i*2], 2);
+						
+						while (HAL_FLASH_Unlock() != HAL_OK);
+						fmemcpy((void*)addr, (void*)packet, size);
+						HAL_FLASH_Lock();
+						
+						frame_size += size;
+						current_size += strlen(str);
+						firmware_update_progress = (current_size * 100) / firmware_len;
+						break;
+					case 0x05:
+						break;
+					case 0x01:
+						end_of_file = true;
+						break;
+				};
+				
+				if (end_of_file) break;
+			}
+			currentSector++;
+		}
+		fclose(fp);
+		
+		HAL_Delay(100);
+		
+		slog_out(datetime, "Firmware update complete\r\n");
+		printf("Firmware update complete\r\n");
+		
+		JumpToApp();
+	}
+	else
+		JumpToApp();
+}
+
 /* Private functions ---------------------------------------------------------*/
 /**
   * @brief  Main program
@@ -194,57 +327,51 @@ int main(void)
 
   /* Add your application code here
      */
-	HAL_Delay(3000);
+	uint32_t timer_start = HAL_GetTick();
 
 #ifdef RTE_CMSIS_RTOS                   // when using CMSIS RTOS
-  // create 'thread' functions that start executing,
-  // example: tid_name = osThreadCreate (osThread(name), NULL);
-
   osKernelStart();                      // start thread execution 
 	Init_Main_Thread();
 #endif
 
-	FILE* fp = fopen("CalipsoFirmwareV2REV1_0.hex", "r");
-	
-	// Read from hex file
-	while (!end_of_file)
+	// Check for firmware update
+	if (sdcard_ready)
 	{
-		uint32_t frame_size = 0;
-		
-		while (frame_size < flashSectorSizeTable[currentSector])
+		FILE* fp = fopen("FirmwareUpdate.txt", "r");
+		if (fp != 0)
 		{
-			char* str = fgets(buffer, 256, fp);
-			uint16_t tt = hextoint(&str[6+1], 2);
-			uint16_t size = 0;
-			uint16_t i = 0;
-			
-			switch (tt)
-			{
-				case 0x04:
-					baseAddr = hextoint(&str[8+1], 4) << 16;
-					break;
-				case 0x00:
-					size = hextoint(&str[0+1], 2);
-					for (i = 0; i < size; i++)
-						packet[i] = hextoint(&str[8+1+i*2], 2);
-					frame_size += size;
-					break;
-				case 0x05:
-					break;
-				case 0x01:
-					end_of_file = true;
-					break;
-			};
-			
-			if (end_of_file) break;
+			fgets((char*)FirmwareVersion, 16, fp);
+			fgets((char*)FirmwareFileName, 256, fp);
+			fclose(fp);
 		}
-		currentSector++;
+		else {
+			slog_out(datetime, "Firmware update is not available\r\n");
+			printf("Firmware update is not available\r\n");
+			JumpToApp();
+		}
 	}
-	fclose(fp);
+
+	// Check for SD card enabled
+	if (!sdcard_ready)
+	{
+		slog_out(datetime, "Firmware update is missing, start application\r\n");
+		printf("Firmware update is missing, start application\r\n");
+		JumpToApp();
+	}
 	
   /* Infinite loop */
   while (1)
   {
+		if ((HAL_GetTick() - timer_start) > 3000)
+			JumpToApp();
+		
+		if (pic_id == FRAME_PICID_BOOTFIRMWAREUPDATE)
+		{
+			UpdateFirmware();
+			
+			// Could not start main application
+			while (1);
+		}
   }
 }
 

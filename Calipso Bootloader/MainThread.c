@@ -49,21 +49,35 @@ int Init_Main_Thread (void) {
   return(0);
 }
 
+extern volatile uint16_t firmware_update_progress;
+extern volatile char FirmwareVersion[16];
+
 void MainThread (void const *argument) {	
+	uint16_t last_id = 0;
 	GetDateTime(g_wDGUSTimeout, &datetime);
 
   while (1) {
     ; // Insert thread code here...
+		
+		last_id = pic_id;
 		pic_id = GetPicId(g_wDGUSTimeout, pic_id);		
 		GetDateTime(g_wDGUSTimeout, &datetime);
 		
 		switch (pic_id)
 		{
+			case FRAME_PICID_BOOTMENU:
+			case FRAME_PICID_BOOTFIRMWAREUPDATE:
+				WriteVariableConvert16(FRAMEDATA_FIRMWAREUPDATE, (void*)&firmware_update_progress, sizeof(uint16_t));
+				osSignalWait(DGUS_EVENT_SEND_COMPLETED, g_wDGUSTimeout);
+			
+				WriteVariable(FRAMEDATA_FIRMWAREVERSION, (void*)FirmwareVersion, 16);
+				osSignalWait(DGUS_EVENT_SEND_COMPLETED, g_wDGUSTimeout);
+				break;
 			case FRAME_PICID_LOGO:
-				SetPicId(FRAME_PICID_MAINMENU, g_wDGUSTimeout);
+				SetPicId(FRAME_PICID_BOOTMENU, g_wDGUSTimeout);
 				break;
 			default:
-				SetPicId(FRAME_PICID_MAINMENU, g_wDGUSTimeout);
+				SetPicId(FRAME_PICID_BOOTMENU, g_wDGUSTimeout);
 				break;
 		}
 		

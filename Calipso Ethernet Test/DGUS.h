@@ -123,6 +123,9 @@ extern UART_HandleTypeDef huart1;
 // Log menu
 #define FRAMEDATA_LOGOFFSET											0x0F0a
 
+// Firmware update progress
+#define FRAMEDATA_FIRMWAREUPDATE								0x1000
+
 /* ************************** DGUS PIC IDs ******************************** */
 
 #define FRAME_PICID_LOGO												0

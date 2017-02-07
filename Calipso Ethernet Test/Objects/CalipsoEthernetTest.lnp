@@ -1,4 +1,4 @@
---cpu=Cortex-M4.fp
+--cpu Cortex-M4.fp
 ".\objects\main.o"
 ".\objects\stm32f4xx_it.o"
 ".\objects\stm32f4xx_hal_msp.o"
@@ -35,8 +35,8 @@
 ".\objects\mci_stm32f4xx.o"
 ".\objects\spi_stm32f4xx.o"
 ".\objects\usart_stm32f4xx.o"
-".\objects\retarget_io.o"
 ".\objects\eventrecorder.o"
+".\objects\retarget_io.o"
 ".\objects\stm32f4xx_hal.o"
 ".\objects\stm32f4xx_hal_cortex.o"
 ".\objects\stm32f4xx_hal_dma.o"

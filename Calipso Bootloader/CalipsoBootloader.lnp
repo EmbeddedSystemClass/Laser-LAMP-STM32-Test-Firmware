@@ -1,4 +1,4 @@
---cpu=Cortex-M4.fp
+--cpu Cortex-M4.fp
 ".\main.o"
 ".\stm32f4xx_hal_msp.o"
 ".\stm32f4xx_it.o"

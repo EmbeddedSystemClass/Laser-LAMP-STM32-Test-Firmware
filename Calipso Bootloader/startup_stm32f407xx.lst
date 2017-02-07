@@ -881,20 +881,19 @@ ARM Macro Assembler    Page 14
               00000200 
               00000000 
 Command Line: --debug --xref --diag_suppress=9931 --cpu=Cortex-M4.fp --apcs=int
-erwork --depend=.\startup_stm32f407xx.d -o.\startup_stm32f407xx.o -I"C:\Users\V
-ladislav&Maja\Documents\Laser-LAMP-STM32-Test-Firmware\Calipso Bootloader\RTE\C
-ompiler" -I"C:\Users\Vladislav&Maja\Documents\Laser-LAMP-STM32-Test-Firmware\Ca
-lipso Bootloader\RTE\Device\STM32F407ZGTx" -I"C:\Users\Vladislav&Maja\Documents
-\Laser-LAMP-STM32-Test-Firmware\Calipso Bootloader\RTE\_Calipso-Bootloader" -IC
-:\Keil_v5\ARM\PACK\ARM\CMSIS\5.0.0\CMSIS\Driver\Include -IC:\Keil_v5\ARM\PACK\A
-RM\CMSIS\5.0.0\CMSIS\Include -IC:\Keil_v5\ARM\PACK\ARM\CMSIS\5.0.0\CMSIS\RTOS\R
-TX\INC -IC:\Keil_v5\ARM\PACK\Keil\ARM_Compiler\1.2.0\Include -IC:\Keil_v5\ARM\P
-ACK\Keil\MDK-Middleware\7.3.0\FileSystem\Include -IC:\Keil_v5\ARM\PACK\Keil\STM
-32F4xx_DFP\2.10.0\Drivers\CMSIS\Device\ST\STM32F4xx\Include -IC:\Keil_v5\ARM\PA
-CK\Keil\STM32F4xx_DFP\2.10.0\Drivers\STM32F4xx_HAL_Driver\Inc --predefine="__RT
-X SETA 1" --predefine="__UVISION_VERSION SETA 522" --predefine="_RTE_ SETA 1" -
--predefine="STM32F407xx SETA 1" --list=.\startup_stm32f407xx.lst RTE\Device\STM
-32F407ZGTx\startup_stm32f407xx.s
+erwork --depend=.\startup_stm32f407xx.d -o.\startup_stm32f407xx.o -I"C:\Users\F
+xSlava\Documents\Laser-LAMP-STM32-Test-Firmware\Calipso Bootloader\RTE" -I"C:\U
+sers\FxSlava\Documents\Laser-LAMP-STM32-Test-Firmware\Calipso Bootloader\RTE\Co
+mpiler" -I"C:\Users\FxSlava\Documents\Laser-LAMP-STM32-Test-Firmware\Calipso Bo
+otloader\RTE\Device\STM32F407ZGTx" -IC:\Keil_v5\ARM\PACK\ARM\CMSIS\5.0.0\CMSIS\
+Driver\Include -IC:\Keil_v5\ARM\PACK\ARM\CMSIS\5.0.0\CMSIS\Include -IC:\Keil_v5
+\ARM\PACK\ARM\CMSIS\5.0.0\CMSIS\RTOS\RTX\INC -IC:\Keil_v5\ARM\PACK\Keil\ARM_Com
+piler\1.2.0\Include -IC:\Keil_v5\ARM\PACK\Keil\MDK-Middleware\7.3.0\FileSystem\
+Include -IC:\Keil_v5\ARM\PACK\Keil\STM32F4xx_DFP\2.10.0\Drivers\CMSIS\Device\ST
+\STM32F4xx\Include -IC:\Keil_v5\ARM\PACK\Keil\STM32F4xx_DFP\2.10.0\Drivers\STM3
+2F4xx_HAL_Driver\Inc --predefine="__RTX SETA 1" --predefine="__UVISION_VERSION 
+SETA 520" --predefine="_RTE_ SETA 1" --predefine="STM32F407xx SETA 1" --list=.\
+startup_stm32f407xx.lst RTE\Device\STM32F407ZGTx\startup_stm32f407xx.s
 
 
 

@@ -3,7 +3,7 @@
 <title>Static Call Graph - [.\Objects\CalipsoEthernetTest.axf]</title></head>
 <body><HR>
 <H1>Static Call Graph for image .\Objects\CalipsoEthernetTest.axf</H1><HR>
-<BR><P>#&#060CALLGRAPH&#062# ARM Linker, 5060422: Last Updated: Mon Feb 06 21:35:54 2017
+<BR><P>#&#060CALLGRAPH&#062# ARM Linker, 5060183: Last Updated: Tue Feb 07 16:34:54 2017
 <BR><P>
 <H3>Maximum Stack Usage =       1368 bytes + Unknown(Functions without stacksize, Cycles, Untraceable Function Pointers)</H3><H3>
 Call chain for Maximum Stack Depth:</H3>
@@ -886,7 +886,7 @@ Global Symbols
 <BR>[Called By]<UL><LI><a href="#[15a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;_printf_lcs_common
 </UL>
 
-<P><STRONG><a name="[e8]"></a>_printf_int_oct</STRONG> (Thumb, 72 bytes, Stack size 16 bytes, _printf_oct_int.o(.text))
+<P><STRONG><a name="[e8]"></a>_printf_int_oct</STRONG> (Thumb, 74 bytes, Stack size 16 bytes, _printf_oct_int.o(.text))
 <BR><BR>[Stack]<UL><LI>Max Depth = 64<LI>Call Chain = _printf_int_oct &rArr; _printf_int_common &rArr; _printf_post_padding
 </UL>
 <BR>[Calls]<UL><LI><a href="#[11b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;_printf_truncate_unsigned
@@ -2397,6 +2397,7 @@ Global Symbols
 <LI><a href="#[22f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;LongPulseLaserInput_Process
 <LI><a href="#[23b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ServiceDiodeFrame_Process
 <LI><a href="#[243]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SolidStateLaserWork_Process
+<LI><a href="#[a0]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ReadCD
 <LI><a href="#[1c4]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_GPIO_EXTI_Callback
 <LI><a href="#[26c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;USART_GetModemStatus
 </UL>
@@ -3695,7 +3696,7 @@ Global Symbols
 <BR>[Called By]<UL><LI><a href="#[99]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
 </UL>
 
-<P><STRONG><a name="[66]"></a>SystemInit</STRONG> (Thumb, 82 bytes, Stack size 0 bytes, system_stm32f4xx.o(i.SystemInit))
+<P><STRONG><a name="[66]"></a>SystemInit</STRONG> (Thumb, 80 bytes, Stack size 0 bytes, system_stm32f4xx.o(i.SystemInit))
 <BR>[Address Reference Count : 1]<UL><LI> startup_stm32f407xx.o(.text)
 </UL>
 <P><STRONG><a name="[2b]"></a>TIM1_BRK_TIM9_IRQHandler</STRONG> (Thumb, 10 bytes, Stack size 8 bytes, stm32f4xx_it.o(i.TIM1_BRK_TIM9_IRQHandler))
@@ -5030,7 +5031,7 @@ Global Symbols
 <LI><a href="#[93]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;WiFiThread
 </UL>
 
-<P><STRONG><a name="[99]"></a>main</STRONG> (Thumb, 450 bytes, Stack size 24 bytes, main.o(i.main))
+<P><STRONG><a name="[99]"></a>main</STRONG> (Thumb, 442 bytes, Stack size 24 bytes, main.o(i.main))
 <BR><BR>[Stack]<UL><LI>Max Depth = 664 + Unknown Stack Size
 <LI>Call Chain = main &rArr; LOG_I &rArr; QueuePutLog &rArr; osMessagePut &rArr; isrMessagePut &rArr; isr_mbx_send &rArr; rt_psq_enq
 </UL>
@@ -6322,7 +6323,7 @@ Local Symbols
 </UL>
 <BR>[Address Reference Count : 1]<UL><LI> mci_stm32f4xx.o(.constdata)
 </UL>
-<P><STRONG><a name="[9c]"></a>Initialize</STRONG> (Thumb, 402 bytes, Stack size 32 bytes, mci_stm32f4xx.o(i.Initialize))
+<P><STRONG><a name="[9c]"></a>Initialize</STRONG> (Thumb, 428 bytes, Stack size 32 bytes, mci_stm32f4xx.o(i.Initialize))
 <BR><BR>[Stack]<UL><LI>Max Depth = 56<LI>Call Chain = Initialize &rArr; HAL_GPIO_Init
 </UL>
 <BR>[Calls]<UL><LI><a href="#[18d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_GPIO_Init
@@ -6342,7 +6343,11 @@ Local Symbols
 </UL>
 <BR>[Address Reference Count : 1]<UL><LI> mci_stm32f4xx.o(.constdata)
 </UL>
-<P><STRONG><a name="[a0]"></a>ReadCD</STRONG> (Thumb, 20 bytes, Stack size 0 bytes, mci_stm32f4xx.o(i.ReadCD))
+<P><STRONG><a name="[a0]"></a>ReadCD</STRONG> (Thumb, 38 bytes, Stack size 8 bytes, mci_stm32f4xx.o(i.ReadCD))
+<BR><BR>[Stack]<UL><LI>Max Depth = 8<LI>Call Chain = ReadCD
+</UL>
+<BR>[Calls]<UL><LI><a href="#[1b4]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_GPIO_ReadPin
+</UL>
 <BR>[Address Reference Count : 1]<UL><LI> mci_stm32f4xx.o(.constdata)
 </UL>
 <P><STRONG><a name="[a1]"></a>ReadWP</STRONG> (Thumb, 20 bytes, Stack size 0 bytes, mci_stm32f4xx.o(i.ReadWP))
@@ -6362,7 +6367,7 @@ Local Symbols
 </UL>
 <BR>[Address Reference Count : 1]<UL><LI> mci_stm32f4xx.o(.constdata)
 </UL>
-<P><STRONG><a name="[9d]"></a>Uninitialize</STRONG> (Thumb, 40 bytes, Stack size 8 bytes, mci_stm32f4xx.o(i.Uninitialize))
+<P><STRONG><a name="[9d]"></a>Uninitialize</STRONG> (Thumb, 50 bytes, Stack size 8 bytes, mci_stm32f4xx.o(i.Uninitialize))
 <BR><BR>[Stack]<UL><LI>Max Depth = 28<LI>Call Chain = Uninitialize &rArr; HAL_GPIO_DeInit
 </UL>
 <BR>[Calls]<UL><LI><a href="#[25a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_GPIO_DeInit

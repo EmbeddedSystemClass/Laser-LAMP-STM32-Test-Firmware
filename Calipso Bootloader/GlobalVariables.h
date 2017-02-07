@@ -201,6 +201,8 @@ void ClearGlobalVariables(void);
 void LoadGlobalVariables(void);
 void StoreGlobalVariables(void);
 
+void fmemcpy(uint8_t* dst, uint8_t* src, uint16_t len);
+
 // Flash data
 extern PFLASH_GLOBAL_DATA global_flash_data;
 

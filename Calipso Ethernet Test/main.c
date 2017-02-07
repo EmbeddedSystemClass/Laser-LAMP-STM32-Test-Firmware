@@ -184,7 +184,7 @@ int main(void)
 	/*SoundOn();
 	HAL_Delay(500);
 	SoundOff();*/
-	HAL_Delay(3000); 											// Wait for display initialization
+	//HAL_Delay(3000); 										// Wait for display initialization
 	
 	Init_Main_Thread();
 	
