@@ -181,9 +181,9 @@ int main(void)
 		temperature = t;
 	}
 	
-	/*SoundOn();
+	SoundOn();
 	HAL_Delay(500);
-	SoundOff();*/
+	SoundOff();
 	//HAL_Delay(3000); 										// Wait for display initialization
 	
 	Init_Main_Thread();
@@ -211,9 +211,9 @@ int main(void)
 			}
 		}
 		
-		SoundOn();
+		/*SoundOn();
 		HAL_Delay(500);
-		SoundOff();
+		SoundOff();*/
 		
 		LOG_F(LOG_ID_TEMPERATURE, "Temperature:%.2f\r\n", temperature);
 		

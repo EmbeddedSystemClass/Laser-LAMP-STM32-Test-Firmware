@@ -68,16 +68,16 @@ static void LaserTimer_Callback(void const *arg) {
 				DiodeControlOnePulseStart();
 	}
 	
-		static int cnt = 0;
+	static int cnt = 0;
 	cnt++;
 	
 	// Flow measure
-	if (cnt > 100)
+	if (cnt > 10)
 	{
 		HAL_TIM_Base_Stop(&htim_flow1);
 		HAL_TIM_Base_Stop(&htim_flow2);
-		flow1 = (float32_t)(__HAL_TIM_GET_COUNTER(&htim_flow1)) * 600.0f / 1500.0f / 10.0f;
-		flow2 = (float32_t)(__HAL_TIM_GET_COUNTER(&htim_flow2)) * 600.0f / 1500.0f / 10.0f;
+		flow1 = (float32_t)(__HAL_TIM_GET_COUNTER(&htim_flow1)) * 600.0f / 1500.0f;
+		flow2 = (float32_t)(__HAL_TIM_GET_COUNTER(&htim_flow2)) * 600.0f / 1500.0f;
 		__HAL_TIM_SET_COUNTER(&htim_flow1, 0);
 		__HAL_TIM_SET_COUNTER(&htim_flow2, 0);
 		HAL_TIM_Base_Start(&htim_flow1);
