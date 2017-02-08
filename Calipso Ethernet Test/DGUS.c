@@ -128,7 +128,7 @@ void WriteRegister(uint8_t addr, void *data, uint8_t num)
 	dgus_buffer_tx[num + 5] = crc & 0xff;
 	dgus_buffer_tx[num + 6] = crc >> 8;
 	
-	osSignalClear(tid_MainThread, 0);
+	osSignalClear(tid_MainThread, DGUS_EVENT_RECEIVE_COMPLETED | DGUS_EVENT_SEND_COMPLETED);
 #ifdef USE_DGUS_DRIVER
 	DGUS_USART_Driver->Send(dgus_buffer_tx, num + 7);
 #else
@@ -165,7 +165,7 @@ void WriteVariable(uint16_t addr, void *data, uint8_t num)
 	dgus_buffer_tx[num + 6] = crc & 0xff;
 	dgus_buffer_tx[num + 7] = crc >> 8;
 	
-	osSignalClear(tid_MainThread, 0);
+	osSignalClear(tid_MainThread, DGUS_EVENT_RECEIVE_COMPLETED | DGUS_EVENT_SEND_COMPLETED);
 #ifdef USE_DGUS_DRIVER
 	DGUS_USART_Driver->Send(dgus_buffer_tx, num + 8);
 #else
@@ -203,7 +203,7 @@ void WriteVariableConvert16(uint16_t addr, void *data, uint8_t num)
 	dgus_buffer_tx[num + 6] = crc & 0xff;
 	dgus_buffer_tx[num + 7] = crc >> 8;
 	
-	osSignalClear(tid_MainThread, 0);
+	osSignalClear(tid_MainThread, DGUS_EVENT_RECEIVE_COMPLETED | DGUS_EVENT_SEND_COMPLETED);
 #ifdef USE_DGUS_DRIVER
 	DGUS_USART_Driver->Send(dgus_buffer_tx, num + 8);
 #else
@@ -237,7 +237,7 @@ void ReadRegister(uint8_t  addr, void **data, uint8_t num)
 	dgus_buffer_tx[6] = crc & 0xff;
 	dgus_buffer_tx[7] = crc >> 8;
 	
-	osSignalClear(tid_MainThread, 0);
+	osSignalClear(tid_MainThread, DGUS_EVENT_RECEIVE_COMPLETED | DGUS_EVENT_SEND_COMPLETED);
 #ifdef USE_DGUS_DRIVER
 	DGUS_USART_Driver->Send(dgus_buffer_tx, 8);
 	DGUS_USART_Driver->Receive(dgus_buffer_rx, num + 8);
@@ -277,7 +277,7 @@ void ReadVariable(uint16_t  addr, void **data, uint8_t num)
 	dgus_buffer_tx[7] = crc & 0xff;
 	dgus_buffer_tx[8] = crc >> 8;
 	
-	osSignalClear(tid_MainThread, 0);
+	osSignalClear(tid_MainThread, DGUS_EVENT_RECEIVE_COMPLETED | DGUS_EVENT_SEND_COMPLETED);
 #ifdef USE_DGUS_DRIVER
 	DGUS_USART_Driver->Send(dgus_buffer_tx, 9);
 	DGUS_USART_Driver->Receive(dgus_buffer_rx, num + 9);
@@ -288,7 +288,7 @@ void ReadVariable(uint16_t  addr, void **data, uint8_t num)
 	
 	*data = dgus_buffer_rx + 7;
 #else
-	osSignalClear(tid_MainThread, 0);
+	osSignalClear(tid_MainThread, DGUS_EVENT_RECEIVE_COMPLETED | DGUS_EVENT_SEND_COMPLETED);
 #ifdef USE_DGUS_DRIVER
 	DGUS_USART_Driver->Send(dgus_buffer_tx, 7);
 	DGUS_USART_Driver->Receive(dgus_buffer_rx, num + 7);
@@ -466,7 +466,7 @@ void WriteLaserDiodeDataConvert16(uint16_t addr, DGUS_LASERDIODE *data)
 	dgus_buffer_tx[num + 6] = crc & 0xff;
 	dgus_buffer_tx[num + 7] = crc >> 8;
 	
-	osSignalClear(tid_MainThread, 0);
+	osSignalClear(tid_MainThread, DGUS_EVENT_RECEIVE_COMPLETED | DGUS_EVENT_SEND_COMPLETED);
 #ifdef USE_DGUS_DRIVER
 	DGUS_USART_Driver->Send(dgus_buffer_tx, num + 8);
 #else
@@ -474,7 +474,7 @@ void WriteLaserDiodeDataConvert16(uint16_t addr, DGUS_LASERDIODE *data)
 #endif
 #else
 	
-	osSignalClear(tid_MainThread, 0);
+	osSignalClear(tid_MainThread, DGUS_EVENT_RECEIVE_COMPLETED | DGUS_EVENT_SEND_COMPLETED);
 #ifdef USE_DGUS_DRIVER
 	DGUS_USART_Driver->Send(dgus_buffer_tx, num + 6);
 #else
@@ -507,14 +507,14 @@ void WriteSolidStateLaserDataConvert16(uint16_t addr, DGUS_SOLIDSTATELASER *data
 	dgus_buffer_tx[num + 6] = crc & 0xff;
 	dgus_buffer_tx[num + 7] = crc >> 8;
 	
-	osSignalClear(tid_MainThread, 0);
+	osSignalClear(tid_MainThread, DGUS_EVENT_RECEIVE_COMPLETED | DGUS_EVENT_SEND_COMPLETED);
 #ifdef USE_DGUS_DRIVER
 	DGUS_USART_Driver->Send(dgus_buffer_tx, num + 8);
 #else
 	HAL_UART_Transmit_ITMY(&huart1, dgus_buffer_tx, num + 8);
 #endif
 #else	
-	osSignalClear(tid_MainThread, 0);
+	osSignalClear(tid_MainThread, DGUS_EVENT_RECEIVE_COMPLETED | DGUS_EVENT_SEND_COMPLETED);
 #ifdef USE_DGUS_DRIVER
 	DGUS_USART_Driver->Send(dgus_buffer_tx, num + 6);
 #else
@@ -547,14 +547,14 @@ void WriteWifiNetDataConvert16(uint16_t addr, DGUS_WIFISCANNINGLINE *data)
 	dgus_buffer_tx[num + 6] = crc & 0xff;
 	dgus_buffer_tx[num + 7] = crc >> 8;
 	
-	osSignalClear(tid_MainThread, 0);
+	osSignalClear(tid_MainThread, DGUS_EVENT_RECEIVE_COMPLETED | DGUS_EVENT_SEND_COMPLETED);
 #ifdef USE_DGUS_DRIVER
 	DGUS_USART_Driver->Send(dgus_buffer_tx, num + 8);
 #else
 	HAL_UART_Transmit_ITMY(&huart1, dgus_buffer_tx, num + 8);
 #endif
 #else	
-	osSignalClear(tid_MainThread, 0);
+	osSignalClear(tid_MainThread, DGUS_EVENT_RECEIVE_COMPLETED | DGUS_EVENT_SEND_COMPLETED);
 #ifdef USE_DGUS_DRIVER
 	DGUS_USART_Driver->Send(dgus_buffer_tx, num + 6);
 #else

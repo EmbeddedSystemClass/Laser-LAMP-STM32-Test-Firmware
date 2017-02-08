@@ -248,6 +248,11 @@ void USART1_IRQHandler(void)
 }
 #endif
 
+void PVD_IRQHandler(void)
+{
+	HAL_PWR_PVD_IRQHandler();
+}
+
 /**
   * @}
   */ 

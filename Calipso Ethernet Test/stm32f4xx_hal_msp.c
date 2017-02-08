@@ -48,6 +48,7 @@
 /* Includes ------------------------------------------------------------------*/
 #include "stm32f4xx_hal.h"
 #include "stm32f4xx_hal_gpio.h"
+#include "stm32f4xx_hal_pwr.h"
 #include "SolidStateLaser.h"
 #include "LaserMisc.h"
 
@@ -89,6 +90,19 @@ void HAL_MspInit(void)
 	__GPIOF_CLK_ENABLE();
 	__GPIOG_CLK_ENABLE();
 	__USART6_CLK_ENABLE();
+	
+	//  ************************* PVD    ******************************
+	__PWR_CLK_ENABLE();
+	
+	PWR_PVDTypeDef pwr1 = {0};
+	pwr1.Mode = PWR_PVD_MODE_NORMAL;
+	pwr1.PVDLevel = PWR_PVDLEVEL_6;
+	
+	HAL_PWR_ConfigPVD(&pwr1);
+	HAL_PWR_EnablePVD();
+	
+	HAL_NVIC_SetPriority(PVD_IRQn, 1, 0);
+	HAL_NVIC_EnableIRQ(PVD_IRQn);
 	
 	//  ************************* FLOW   ******************************
 	

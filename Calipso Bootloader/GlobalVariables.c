@@ -577,18 +577,40 @@ void LoadGlobalVariables(void)
 	memcpy((void*)&m_structLaserSettings, (void*)&global_flash_data->m_structLaserSettings, sizeof(m_structLaserSettings));
 }
 
+/*void fmemcpy(uint8_t* dst, uint8_t* src, uint16_t len)
+{
+	FLASH_WaitForLastOperation((uint32_t)50000U);
+	
+	uint16_t i = 0;
+	
+	// Write by words
+	for (i = 0; i < (len & 0xfffc); i += 4)
+		HAL_FLASH_Program(FLASH_TYPEPROGRAM_WORD, (uint32_t)dst + i, ((uint64_t*)&src)[i/4]);
+	
+	// Write by half words
+	if ((len & 0x2) != 0)
+	{
+		HAL_FLASH_Program(FLASH_TYPEPROGRAM_WORD, (uint32_t)dst + i, ((uint32_t*)&src)[i/2]);
+		i += 2;
+	}
+	
+	// Write by byte
+	if ((len & 0x1) != 0)
+		HAL_FLASH_Program(FLASH_TYPEPROGRAM_WORD, (uint32_t)dst + i, ((uint8_t*)&src)[i/2]);
+}*/
+
 void fmemcpy(uint8_t* dst, uint8_t* src, uint16_t len)
 {
 	FLASH_WaitForLastOperation((uint32_t)50000U);
 	
-	for (uint16_t i = 0; i < len; i++)
+	for (uint16_t i = 0; i < (len & 0xfffC); i += 4)
 	{
 		
 		CLEAR_BIT(FLASH->CR, FLASH_CR_PSIZE);
-		FLASH->CR |= FLASH_PSIZE_BYTE;
+		FLASH->CR |= FLASH_PSIZE_WORD;
 		FLASH->CR |= FLASH_CR_PG;
 		
-		dst[i] = src[i];
+		((uint32_t*)dst)[i/4] = ((uint32_t*)src)[i/4];
 		
 		FLASH_WaitForLastOperation((uint32_t)50000U);
 		FLASH->CR &= (~FLASH_CR_PG);

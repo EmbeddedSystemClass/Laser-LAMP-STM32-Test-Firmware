@@ -125,6 +125,7 @@ extern UART_HandleTypeDef huart1;
 
 // Firmware update progress
 #define FRAMEDATA_FIRMWAREUPDATE								0x1000
+#define FRAMEDATA_FIRMWAREVERSION								0x1010
 
 /* ************************** DGUS PIC IDs ******************************** */
 

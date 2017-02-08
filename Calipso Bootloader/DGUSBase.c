@@ -1,14 +1,11 @@
-#include "DGUS.h"
+#include "DGUSBase.h"
 #include <string.h>
-#include "Driver_USART.h"
 #include "GlobalVariables.h"
+#include "rtEventSystem.h"
 
 #include "stm32f4xx_hal_uart.h"
 #include <stdbool.h>
 
-#ifdef USE_DGUS_DRIVER
-ARM_DRIVER_USART* DGUS_USART_Driver;
-#endif
 extern osThreadId tid_MainThread;
 
 UART_HandleTypeDef huart1;
@@ -128,18 +125,11 @@ void WriteRegister(uint8_t addr, void *data, uint8_t num)
 	dgus_buffer_tx[num + 5] = crc & 0xff;
 	dgus_buffer_tx[num + 6] = crc >> 8;
 	
-	osSignalClear(tid_MainThread, 0);
-#ifdef USE_DGUS_DRIVER
-	DGUS_USART_Driver->Send(dgus_buffer_tx, num + 7);
-#else
+	rtSignalClear(DGUS_EVENT_SEND_COMPLETED | DGUS_EVENT_RECEIVE_COMPLETED);
 	HAL_UART_Transmit_ITMY(&huart1, dgus_buffer_tx, num + 7);
-#endif
 #else
-#ifdef USE_DGUS_DRIVER
-	DGUS_USART_Driver->Send(dgus_buffer_tx, num + 5);
-#else
+	rtSignalClear(DGUS_EVENT_SEND_COMPLETED | DGUS_EVENT_RECEIVE_COMPLETED);
 	HAL_UART_Transmit_ITMY(&huart1, dgus_buffer_tx, num + 5);
-#endif
 #endif
 }
 
@@ -165,19 +155,11 @@ void WriteVariable(uint16_t addr, void *data, uint8_t num)
 	dgus_buffer_tx[num + 6] = crc & 0xff;
 	dgus_buffer_tx[num + 7] = crc >> 8;
 	
-	osSignalClear(tid_MainThread, 0);
-#ifdef USE_DGUS_DRIVER
-	DGUS_USART_Driver->Send(dgus_buffer_tx, num + 8);
-#else
+	rtSignalClear(DGUS_EVENT_SEND_COMPLETED | DGUS_EVENT_RECEIVE_COMPLETED);
 	HAL_UART_Transmit_ITMY(&huart1, dgus_buffer_tx, num + 8);
-#endif
 #else
-	osSignalClear(tid_MainThread, 0);
-#ifdef USE_DGUS_DRIVER
-	DGUS_USART_Driver->Send(dgus_buffer_tx, num + 6);
-#else
+	rtSignalClear(DGUS_EVENT_SEND_COMPLETED | DGUS_EVENT_RECEIVE_COMPLETED);
 	HAL_UART_Transmit_ITMY(&huart1, dgus_buffer_tx, num + 6);
-#endif
 #endif
 }
 
@@ -203,19 +185,11 @@ void WriteVariableConvert16(uint16_t addr, void *data, uint8_t num)
 	dgus_buffer_tx[num + 6] = crc & 0xff;
 	dgus_buffer_tx[num + 7] = crc >> 8;
 	
-	osSignalClear(tid_MainThread, 0);
-#ifdef USE_DGUS_DRIVER
-	DGUS_USART_Driver->Send(dgus_buffer_tx, num + 8);
-#else
+	rtSignalClear(DGUS_EVENT_SEND_COMPLETED | DGUS_EVENT_RECEIVE_COMPLETED);
 	HAL_UART_Transmit_ITMY(&huart1, dgus_buffer_tx, num + 8);
-#endif
 #else
-	osSignalClear(tid_MainThread, 0);
-#ifdef USE_DGUS_DRIVER
-	DGUS_USART_Driver->Send(dgus_buffer_tx, num + 6);
-#else
+	rtSignalClear(DGUS_EVENT_SEND_COMPLETED | DGUS_EVENT_RECEIVE_COMPLETED);
 	HAL_UART_Transmit_ITMY(&huart1, dgus_buffer_tx, num + 6);
-#endif
 #endif
 }
 
@@ -237,24 +211,14 @@ void ReadRegister(uint8_t  addr, void **data, uint8_t num)
 	dgus_buffer_tx[6] = crc & 0xff;
 	dgus_buffer_tx[7] = crc >> 8;
 	
-	osSignalClear(tid_MainThread, 0);
-#ifdef USE_DGUS_DRIVER
-	DGUS_USART_Driver->Send(dgus_buffer_tx, 8);
-	DGUS_USART_Driver->Receive(dgus_buffer_rx, num + 8);
-#else
+	rtSignalClear(DGUS_EVENT_SEND_COMPLETED | DGUS_EVENT_RECEIVE_COMPLETED);
 	HAL_UART_Transmit_ITMY(&huart1, dgus_buffer_tx, 8);
 	HAL_UART_Receive_ITMY(&huart1, dgus_buffer_rx, num + 8);
-#endif
 
 #else
-	osSignalClear(tid_MainThread, 0);
-#ifdef USE_DGUS_DRIVER
-	DGUS_USART_Driver->Send(dgus_buffer_tx, 6);
-	DGUS_USART_Driver->Receive(dgus_buffer_rx, num + 6);
-#else
+	rtSignalClear(DGUS_EVENT_SEND_COMPLETED | DGUS_EVENT_RECEIVE_COMPLETED);
 	HAL_UART_Transmit_ITMY(&huart1, dgus_buffer_tx, 6);
 	HAL_UART_Receive_ITMY(&huart1, dgus_buffer_rx, num + 6);
-#endif
 #endif
 	*data = dgus_buffer_rx + 6;
 }
@@ -277,25 +241,15 @@ void ReadVariable(uint16_t  addr, void **data, uint8_t num)
 	dgus_buffer_tx[7] = crc & 0xff;
 	dgus_buffer_tx[8] = crc >> 8;
 	
-	osSignalClear(tid_MainThread, 0);
-#ifdef USE_DGUS_DRIVER
-	DGUS_USART_Driver->Send(dgus_buffer_tx, 9);
-	DGUS_USART_Driver->Receive(dgus_buffer_rx, num + 9);
-#else
+	rtSignalClear(DGUS_EVENT_SEND_COMPLETED | DGUS_EVENT_RECEIVE_COMPLETED);
 	HAL_UART_Transmit_ITMY(&huart1, dgus_buffer_tx, 9);
 	HAL_UART_Receive_ITMY(&huart1, dgus_buffer_rx, num + 9);
-#endif
 	
 	*data = dgus_buffer_rx + 7;
 #else
-	osSignalClear(tid_MainThread, 0);
-#ifdef USE_DGUS_DRIVER
-	DGUS_USART_Driver->Send(dgus_buffer_tx, 7);
-	DGUS_USART_Driver->Receive(dgus_buffer_rx, num + 7);
-#else
+	rtSignalClear(DGUS_EVENT_SEND_COMPLETED | DGUS_EVENT_RECEIVE_COMPLETED);
 	HAL_UART_Transmit_ITMY(&huart1, dgus_buffer_tx, 7);
 	HAL_UART_Receive_ITMY(&huart1, dgus_buffer_rx, num + 7);
-#endif
 	
 	*data = dgus_buffer_rx + 7;
 #endif
@@ -318,18 +272,17 @@ void GetDateTime(uint32_t timeout, DWIN_TIMEDATE* datetime)
 	DWIN_TIMEDATE* pvalue;
 	ReadRegister(0x20, (void**)&pvalue, 16);
 	
-	if (osSignalWait(DGUS_EVENT_SEND_COMPLETED, timeout).status != osEventTimeout)
-		if (osSignalWait(DGUS_EVENT_RECEIVE_COMPLETED, timeout).status != osEventTimeout)
-		{
-			//convert_array_w((uint16_t*)datetime, (uint16_t*)pvalue, 16);
-			datetime->seconds = bcd_decimal(pvalue->seconds);			
-			datetime->minutes = bcd_decimal(pvalue->minutes);
-			datetime->hours   = bcd_decimal(pvalue->hours);
-			datetime->day     = bcd_decimal(pvalue->day);
-			datetime->week    = bcd_decimal(pvalue->week);
-			datetime->month		= bcd_decimal(pvalue->month);
-			datetime->year    = bcd_decimal(pvalue->year);
-		}
+	if (rtSignalWait(DGUS_EVENT_SEND_COMPLETED | DGUS_EVENT_RECEIVE_COMPLETED, timeout))
+	{
+		//convert_array_w((uint16_t*)datetime, (uint16_t*)pvalue, 16);
+		datetime->seconds = bcd_decimal(pvalue->seconds);			
+		datetime->minutes = bcd_decimal(pvalue->minutes);
+		datetime->hours   = bcd_decimal(pvalue->hours);
+		datetime->day     = bcd_decimal(pvalue->day);
+		datetime->week    = bcd_decimal(pvalue->week);
+		datetime->month		= bcd_decimal(pvalue->month);
+		datetime->year    = bcd_decimal(pvalue->year);
+	}
 }
 
 uint16_t GetPicId(uint32_t timeout, uint16_t pic_id)
@@ -337,9 +290,8 @@ uint16_t GetPicId(uint32_t timeout, uint16_t pic_id)
 	uint16_t* pvalue;
 	ReadRegister(REGISTER_ADDR_PICID, (void**)&pvalue, 2);
 	
-	if (osSignalWait(DGUS_EVENT_SEND_COMPLETED, timeout).status != osEventTimeout)
-		if (osSignalWait(DGUS_EVENT_RECEIVE_COMPLETED, timeout).status != osEventTimeout)
-			return convert_w(*pvalue);
+	if (rtSignalWait(DGUS_EVENT_SEND_COMPLETED | DGUS_EVENT_RECEIVE_COMPLETED, timeout))
+		return convert_w(*pvalue);
 		
 	return pic_id;
 }
@@ -348,52 +300,17 @@ void SetPicId(uint16_t pic_id, uint16_t timeout)
 {
 	uint16_t value = convert_w(pic_id);
 	WriteRegister(REGISTER_ADDR_PICID, &value, sizeof(value));
-	osSignalWait(DGUS_EVENT_SEND_COMPLETED, timeout);
-}
-
-/* Private functions ---------------------------------------------------------*/
-void DWIN_USART_callback(uint32_t event)
-{
-    switch (event)
-    {
-    case ARM_USART_EVENT_RECEIVE_COMPLETE:  
-				/* Success: Wakeup Thread */
-				osSignalSet(tid_MainThread, DGUS_EVENT_RECEIVE_COMPLETED);
-        break;
-    case ARM_USART_EVENT_TRANSFER_COMPLETE:
-				/* Success: Wakeup Thread */
-				break;
-    case ARM_USART_EVENT_SEND_COMPLETE:
-				/* Success: Wakeup Thread */
-				osSignalSet(tid_MainThread, DGUS_EVENT_SEND_COMPLETED);
-				break;
-    case ARM_USART_EVENT_TX_COMPLETE:
-        /* Success: Wakeup Thread */
-        break;
- 
-    case ARM_USART_EVENT_RX_TIMEOUT:
-#ifdef DEBUG_BRK
-         __breakpoint(0);  /* Error: Call debugger or replace with custom error handling */
-#endif
-        break;
- 
-    case ARM_USART_EVENT_RX_OVERFLOW:
-    case ARM_USART_EVENT_TX_UNDERFLOW:
-#ifdef DEBUG_BRK
-         __breakpoint(0);  /* Error: Call debugger or replace with custom error handling */
-#endif
-        break;
-    }
+	rtSignalWait(DGUS_EVENT_SEND_COMPLETED, timeout);
 }
 
 void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart)
 {
-	osSignalSet(tid_MainThread, DGUS_EVENT_RECEIVE_COMPLETED);
+	rtSignalSet(DGUS_EVENT_RECEIVE_COMPLETED);
 }
 
 void HAL_UART_TxCpltCallback(UART_HandleTypeDef *huart)
 {
-	osSignalSet(tid_MainThread, DGUS_EVENT_SEND_COMPLETED);
+	rtSignalSet(DGUS_EVENT_SEND_COMPLETED);
 }
 
 void HAL_UART_ErrorCallback(UART_HandleTypeDef *huart)
@@ -466,20 +383,12 @@ void WriteLaserDiodeDataConvert16(uint16_t addr, DGUS_LASERDIODE *data)
 	dgus_buffer_tx[num + 6] = crc & 0xff;
 	dgus_buffer_tx[num + 7] = crc >> 8;
 	
-	osSignalClear(tid_MainThread, 0);
-#ifdef USE_DGUS_DRIVER
-	DGUS_USART_Driver->Send(dgus_buffer_tx, num + 8);
-#else
+	rtSignalClear(DGUS_EVENT_SEND_COMPLETED | DGUS_EVENT_RECEIVE_COMPLETED);
 	HAL_UART_Transmit_ITMY(&huart1, dgus_buffer_tx, num + 8);
-#endif
 #else
 	
-	osSignalClear(tid_MainThread, 0);
-#ifdef USE_DGUS_DRIVER
-	DGUS_USART_Driver->Send(dgus_buffer_tx, num + 6);
-#else
+	rtSignalClear(DGUS_EVENT_SEND_COMPLETED | DGUS_EVENT_RECEIVE_COMPLETED);
 	HAL_UART_Transmit_ITMY(&huart1, dgus_buffer_tx, num + 6);
-#endif
 #endif
 }
 
@@ -507,19 +416,11 @@ void WriteSolidStateLaserDataConvert16(uint16_t addr, DGUS_SOLIDSTATELASER *data
 	dgus_buffer_tx[num + 6] = crc & 0xff;
 	dgus_buffer_tx[num + 7] = crc >> 8;
 	
-	osSignalClear(tid_MainThread, 0);
-#ifdef USE_DGUS_DRIVER
-	DGUS_USART_Driver->Send(dgus_buffer_tx, num + 8);
-#else
+	rtSignalClear(DGUS_EVENT_SEND_COMPLETED | DGUS_EVENT_RECEIVE_COMPLETED);
 	HAL_UART_Transmit_ITMY(&huart1, dgus_buffer_tx, num + 8);
-#endif
 #else	
-	osSignalClear(tid_MainThread, 0);
-#ifdef USE_DGUS_DRIVER
-	DGUS_USART_Driver->Send(dgus_buffer_tx, num + 6);
-#else
+	rtSignalClear(DGUS_EVENT_SEND_COMPLETED | DGUS_EVENT_RECEIVE_COMPLETED);
 	HAL_UART_Transmit_ITMY(&huart1, dgus_buffer_tx, num + 6);
-#endif
 #endif
 }
 
@@ -547,19 +448,11 @@ void WriteWifiNetDataConvert16(uint16_t addr, DGUS_WIFISCANNINGLINE *data)
 	dgus_buffer_tx[num + 6] = crc & 0xff;
 	dgus_buffer_tx[num + 7] = crc >> 8;
 	
-	osSignalClear(tid_MainThread, 0);
-#ifdef USE_DGUS_DRIVER
-	DGUS_USART_Driver->Send(dgus_buffer_tx, num + 8);
-#else
+	rtSignalClear(DGUS_EVENT_SEND_COMPLETED | DGUS_EVENT_RECEIVE_COMPLETED);
 	HAL_UART_Transmit_ITMY(&huart1, dgus_buffer_tx, num + 8);
-#endif
 #else	
-	osSignalClear(tid_MainThread, 0);
-#ifdef USE_DGUS_DRIVER
-	DGUS_USART_Driver->Send(dgus_buffer_tx, num + 6);
-#else
+	rtSignalClear(DGUS_EVENT_SEND_COMPLETED | DGUS_EVENT_RECEIVE_COMPLETED);
 	HAL_UART_Transmit_ITMY(&huart1, dgus_buffer_tx, num + 6);
-#endif
 #endif
 }
 

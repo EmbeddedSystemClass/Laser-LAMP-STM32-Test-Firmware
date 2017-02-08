@@ -3,7 +3,7 @@
 .\sdcardbase.o: C:\Keil_v5\ARM\PACK\Keil\MDK-Middleware\7.3.0\FileSystem\Include\rl_fs.h
 .\sdcardbase.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdint.h
 .\sdcardbase.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdbool.h
-.\sdcardbase.o: DGUS.h
+.\sdcardbase.o: DGUSBase.h
 .\sdcardbase.o: C:\Keil_v5\ARM\PACK\Keil\STM32F4xx_DFP\2.10.0\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal.h
 .\sdcardbase.o: C:\Users\FxSlava\Documents\Laser-LAMP-STM32-Test-Firmware\Calipso Bootloader\RTE\Device\STM32F407ZGTx\stm32f4xx_hal_conf.h
 .\sdcardbase.o: C:\Users\FxSlava\Documents\Laser-LAMP-STM32-Test-Firmware\Calipso Bootloader\RTE\RTE_Components.h

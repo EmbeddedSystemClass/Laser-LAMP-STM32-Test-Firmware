@@ -44,7 +44,7 @@
 /* Includes ------------------------------------------------------------------*/
 #include "main.h"
 #include "stm32f4xx_it.h"
-#include "DGUS.h"
+#include "DGUSBase.h"
 
 #ifdef _RTE_
 #include "RTE_Components.h"             /* Component selection */

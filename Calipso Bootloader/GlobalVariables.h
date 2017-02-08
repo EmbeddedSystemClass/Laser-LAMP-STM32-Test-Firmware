@@ -7,7 +7,7 @@
 #include <math.h>
 #include "arm_math.h"
 
-#include "DGUS.h"
+#include "DGUSBase.h"
 
 //#include "LaserMisc.h"
 

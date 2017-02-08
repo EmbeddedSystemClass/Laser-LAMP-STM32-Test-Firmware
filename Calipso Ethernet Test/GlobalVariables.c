@@ -16,9 +16,9 @@ uint16_t g_wDGUSTimeout = 200;
 // Timer global variables
 int16_t m_wMillSec = 0;
 int16_t m_wSeconds = 0;
-int16_t m_wMinutes = 3;
+int16_t m_wMinutes = 0;
 int16_t m_wSetSec  = 0;
-int16_t m_wSetMin  = 3;
+int16_t m_wSetMin  = 0;
 
 // Cooling global variables
 float32_t temperature_cool_on = 26.5f;
@@ -28,7 +28,7 @@ float32_t temperature_overheat_solidstate = 32.0f;
 float32_t temperature_normal = 27.5f;
 
 // Flow global variable
-float32_t flow_low = 2.0f;
+float32_t flow_low = 0.0f;
 float32_t flow_normal = 4.0f;
 
 // Service menu password
@@ -656,18 +656,15 @@ void StoreGlobalVariables(void)
 	
 	while (HAL_FLASH_Unlock() != HAL_OK);
 	
-	/*HAL_FLASH_Program(FLASH_TYPEPROGRAM_WORD, FLASH_LASERDATA_BASE, frameData_LaserDiode.PulseCounter);
-	HAL_FLASH_Program(FLASH_TYPEPROGRAM_WORD, FLASH_LASERDATA_BASE + 4, frameData_SolidStateLaser.PulseCounter);*/
-	
 	// Copy presets
 	fmemcpy((void*)&global_flash_data->LaserDiodePulseCounter, (void*)&FlushesGlobalLD, sizeof(uint32_t));
 	fmemcpy((void*)&global_flash_data->SolidStatePulseCounter, (void*)&FlushesGlobalSS, sizeof(uint32_t));
 	fmemcpy((void*)&global_flash_data->SolidStatePulseCounter2, (void*)&FlushesGlobalSS2, sizeof(uint32_t));
 	fmemcpy((void*)&global_flash_data->LongPulsePulseCounter, (void*)&FlushesGlobalLP, sizeof(uint32_t));
 	
-	// Copy profile states
+	/*// Copy profile states
 	fmemcpy((void*)&global_flash_data->m_structLaserProfile, (void*)&m_structLaserProfile, sizeof(m_structLaserProfile));
-	fmemcpy((void*)&global_flash_data->m_structLaserSettings, (void*)&m_structLaserSettings, sizeof(m_structLaserSettings));
+	fmemcpy((void*)&global_flash_data->m_structLaserSettings, (void*)&m_structLaserSettings, sizeof(m_structLaserSettings));*/
 	
 	HAL_FLASH_Lock();
 }

@@ -34,9 +34,10 @@
 .\mainthread.o: C:\Keil_v5\ARM\PACK\ARM\CMSIS\5.0.0\CMSIS\Include\arm_math.h
 .\mainthread.o: C:\Keil_v5\ARM\PACK\ARM\CMSIS\5.0.0\CMSIS\Include\core_cm4.h
 .\mainthread.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\string.h
-.\mainthread.o: DGUS.h
+.\mainthread.o: DGUSBase.h
+.\mainthread.o: rtEventSystem.h
+.\mainthread.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdlib.h
 .\mainthread.o: C:\Keil_v5\ARM\PACK\ARM\CMSIS\5.0.0\CMSIS\Driver\Include\Driver_USART.h
 .\mainthread.o: C:\Keil_v5\ARM\PACK\ARM\CMSIS\5.0.0\CMSIS\Driver\Include\Driver_Common.h
 .\mainthread.o: SDCardBase.h
 .\mainthread.o: C:\Keil_v5\ARM\PACK\Keil\MDK-Middleware\7.3.0\FileSystem\Include\rl_fs.h
-.\mainthread.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdlib.h

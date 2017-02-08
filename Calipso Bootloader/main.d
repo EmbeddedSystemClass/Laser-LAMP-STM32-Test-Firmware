@@ -30,7 +30,7 @@
 .\main.o: SDCardBase.h
 .\main.o: C:\Keil_v5\ARM\PACK\Keil\MDK-Middleware\7.3.0\FileSystem\Include\rl_fs.h
 .\main.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdbool.h
-.\main.o: DGUS.h
+.\main.o: DGUSBase.h
 .\main.o: C:\Keil_v5\ARM\PACK\ARM\CMSIS\5.0.0\CMSIS\RTOS\RTX\INC\cmsis_os.h
 .\main.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stddef.h
 .\main.o: GlobalVariables.h
@@ -39,3 +39,5 @@
 .\main.o: C:\Keil_v5\ARM\PACK\ARM\CMSIS\5.0.0\CMSIS\Include\core_cm4.h
 .\main.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\string.h
 .\main.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdlib.h
+.\main.o: C:\Keil_v5\ARM\PACK\ARM\CMSIS\5.0.0\CMSIS\Driver\Include\Driver_MCI.h
+.\main.o: C:\Keil_v5\ARM\PACK\ARM\CMSIS\5.0.0\CMSIS\Driver\Include\Driver_Common.h

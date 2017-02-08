@@ -16,7 +16,6 @@
 //#define LASERIDCHECK_LASERDIODE
 //#define DEBUG_BRK
 #define CRC_CHECK
-//#define USE_DGUS_DRIVER
 #define DGUS_BAUDRATE	9600
 
 #define HEADER_WORD 0xAACC
@@ -413,8 +412,6 @@ void WriteVariableConvert16(uint16_t addr, void  *data, uint8_t num);
 void GetDateTime(uint32_t timeout, DWIN_TIMEDATE* datetime);
 uint16_t GetPicId(uint32_t timeout, uint16_t pic_id);
 void SetPicId(uint16_t pic_id, uint16_t timeout);
-
-void DWIN_USART_callback(uint32_t event);
 
 void Initialize_DGUS(void);
 

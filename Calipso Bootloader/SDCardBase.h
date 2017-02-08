@@ -2,7 +2,7 @@
 #define SDCARD_H
 
 #include "rl_fs.h"
-#include "DGUS.h"
+#include "DGUSBase.h"
 #include "GlobalVariables.h"
 
 extern bool sdcard_ready;

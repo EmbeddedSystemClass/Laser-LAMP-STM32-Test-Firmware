@@ -48,6 +48,7 @@
 
 #ifdef _RTE_
 #include "RTE_Components.h"             /* Component selection */
+#include "Driver_MCI.h"
 #endif
 #ifdef RTE_CMSIS_RTOS                   // when RTE component CMSIS RTOS is used
 #include "cmsis_os.h"                   // CMSIS RTOS header file
@@ -73,6 +74,7 @@ uint32_t flashSectorSizeTable[12] = {0x4000, 0x4000, 0x4000, 0x4000, 0x10000, 0x
 uint32_t flashSectorAddrTable[13] = {0x08000000, 0x8004000, 0x08008000, 0x0800c000, 0x08010000, 0x08020000, 0x08040000, 0x08060000, 0x08080000, 0x080A0000, 0x080C0000, 0x080E0000, 0x08100000};
 bool     flashSectorIsCleared[12] = {0};
 extern osThreadId tid_MainThread;
+extern ARM_DRIVER_MCI Driver_MCI0;
 
 char FirmwareFileName[256];
 volatile char FirmwareVersion[16] = "V1.0";
@@ -116,25 +118,6 @@ uint32_t hextoint(char* str, int num)
 	return result;
 }
 
-// Need to optimize
-/*void fmemcpy(uint8_t* dst, uint8_t* src, uint16_t len)
-{
-	FLASH_WaitForLastOperation((uint32_t)50000U);
-	
-	for (uint16_t i = 0; i < len; i++)
-	{
-		
-		CLEAR_BIT(FLASH->CR, FLASH_CR_PSIZE);
-		FLASH->CR |= FLASH_PSIZE_BYTE;
-		FLASH->CR |= FLASH_CR_PG;
-		
-		dst[i] = src[i];
-		
-		FLASH_WaitForLastOperation((uint32_t)50000U);
-		FLASH->CR &= (~FLASH_CR_PG);
-	}
-}*/
-
 uint32_t EraseSector(uint32_t sector)
 {
 	FLASH_EraseInitTypeDef flash_erase = {0};
@@ -173,6 +156,7 @@ void JumpToApp()
 	
 	// Deinitialize periph
 	HAL_DeInit();
+	Driver_MCI0.Uninitialize();
 	osThreadTerminate(tid_MainThread); // Terminate main thread
 	
 	// Set interrupt vector table offset
@@ -197,92 +181,95 @@ void UpdateFirmware()
 	{
 		FILE* fp = fopen(FirmwareFileName, "r");
 		
-		fseek(fp, 0, SEEK_END);
-		uint32_t firmware_len = ftell(fp);
-		uint32_t current_size = 0;
-		fclose(fp);
-		
-		fp = fopen(FirmwareFileName, "r");
-		
-		slog_out(datetime, "Firmware update starting\r\n");
-		printf("Firmware update starting\r\n");
-		
-		// Read from hex file
-		while (!end_of_file)
+		if (fp != 0)
 		{
-			uint32_t frame_size = 0;
+			fseek(fp, 0, SEEK_END);
+			uint32_t firmware_len = ftell(fp);
+			uint32_t current_size = 0;
+			fclose(fp);
 			
-			while (frame_size < flashSectorSizeTable[currentSector])
+			fp = fopen(FirmwareFileName, "r");
+			
+			slog_out(datetime, "Firmware update starting\r\n");
+			printf("Firmware update starting\r\n");
+			
+			// Read from hex file
+			while (!end_of_file)
 			{
-				char* str = fgets(buffer, 256, fp);
+				uint32_t frame_size = 0;
 				
-				/*
-				slog_out(datetime, str);
-				printf(str);*/
-				
-				uint16_t sector = 0;
-				uint32_t addr = 0;
-				uint16_t tt = hextoint(&str[6+1], 2);
-				uint16_t size = 0;
-				uint16_t i = 0;
-				
-				switch (tt)
+				while (frame_size < flashSectorSizeTable[currentSector])
 				{
-					case 0x04:
-						baseAddr	= hextoint(&str[8+1], 4) << 16;
-						break;
-					case 0x00:
-						size			= hextoint(&str[0+1], 2);
-						offsAddr	= hextoint(&str[2+1], 4);
-						addr			= baseAddr | offsAddr;
-						sector 		= GetSectorByAddr(addr);
-						currentSector = sector;
+					char* str = fgets(buffer, 256, fp);
 					
-						// Firmware address alias boot sections
-						if (addr < 0x08010000)
-						{
-							fclose(fp);
-							slog_out(datetime, "Firmware offset error\r\n");
-							printf("Firmware offset error\r\n");
-							JumpToApp();
-						}
+					/*
+					slog_out(datetime, str);
+					printf(str);*/
 					
-						// Clear sector if needed
-						if (!flashSectorIsCleared[sector])
-						{
-							EraseSector(sector);
-							flashSectorIsCleared[sector] = true;
-						}
+					uint16_t sector = 0;
+					uint32_t addr = 0;
+					uint16_t tt = hextoint(&str[6+1], 2);
+					uint16_t size = 0;
+					uint16_t i = 0;
 					
-						// read data from string
-						for (i = 0; i < size; i++)
-							packet[i] = hextoint(&str[8+1+i*2], 2);
+					switch (tt)
+					{
+						case 0x04:
+							baseAddr	= hextoint(&str[8+1], 4) << 16;
+							break;
+						case 0x00:
+							size			= hextoint(&str[0+1], 2);
+							offsAddr	= hextoint(&str[2+1], 4);
+							addr			= baseAddr | offsAddr;
+							sector 		= GetSectorByAddr(addr);
+							currentSector = sector;
 						
-						while (HAL_FLASH_Unlock() != HAL_OK);
-						fmemcpy((void*)addr, (void*)packet, size);
-						HAL_FLASH_Lock();
+							// Firmware address alias boot sections
+							if (addr < 0x08010000)
+							{
+								fclose(fp);
+								slog_out(datetime, "Firmware offset error\r\n");
+								printf("Firmware offset error\r\n");
+								JumpToApp();
+							}
 						
-						frame_size += size;
-						current_size += strlen(str);
-						firmware_update_progress = (current_size * 100) / firmware_len;
-						break;
-					case 0x05:
-						break;
-					case 0x01:
-						end_of_file = true;
-						break;
-				};
-				
-				if (end_of_file) break;
+							// Clear sector if needed
+							if (!flashSectorIsCleared[sector])
+							{
+								EraseSector(sector);
+								flashSectorIsCleared[sector] = true;
+							}
+						
+							// read data from string
+							for (i = 0; i < size; i++)
+								packet[i] = hextoint(&str[8+1+i*2], 2);
+							
+							while (HAL_FLASH_Unlock() != HAL_OK);
+							fmemcpy((void*)addr, (void*)packet, size);
+							HAL_FLASH_Lock();
+							
+							frame_size += size;
+							current_size += strlen(str);
+							firmware_update_progress = (current_size * 100) / firmware_len;
+							break;
+						case 0x05:
+							break;
+						case 0x01:
+							end_of_file = true;
+							break;
+					};
+					
+					if (end_of_file) break;
+				}
+				currentSector++;
 			}
-			currentSector++;
+			fclose(fp);
+			
+			HAL_Delay(100);
+			
+			slog_out(datetime, "Firmware update complete\r\n");
+			printf("Firmware update complete\r\n");
 		}
-		fclose(fp);
-		
-		HAL_Delay(100);
-		
-		slog_out(datetime, "Firmware update complete\r\n");
-		printf("Firmware update complete\r\n");
 		
 		JumpToApp();
 	}

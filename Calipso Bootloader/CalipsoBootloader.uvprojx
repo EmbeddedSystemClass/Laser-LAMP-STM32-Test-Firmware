@@ -398,11 +398,6 @@
           <GroupName>Periph</GroupName>
           <Files>
             <File>
-              <FileName>DGUS.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>.\DGUS.c</FilePath>
-            </File>
-            <File>
               <FileName>GlobalVariables.c</FileName>
               <FileType>1</FileType>
               <FilePath>.\GlobalVariables.c</FilePath>
@@ -416,6 +411,21 @@
               <FileName>SDCardBase.c</FileName>
               <FileType>1</FileType>
               <FilePath>.\SDCardBase.c</FilePath>
+            </File>
+            <File>
+              <FileName>DGUSBase.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\DGUSBase.c</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
+          <GroupName>RT</GroupName>
+          <Files>
+            <File>
+              <FileName>rtEventSystem.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\rtEventSystem.c</FilePath>
             </File>
           </Files>
         </Group>

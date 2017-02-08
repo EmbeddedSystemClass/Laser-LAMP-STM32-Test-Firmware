@@ -32,6 +32,6 @@
 .\globalvariables.o: C:\Keil_v5\ARM\PACK\ARM\CMSIS\5.0.0\CMSIS\Include\arm_math.h
 .\globalvariables.o: C:\Keil_v5\ARM\PACK\ARM\CMSIS\5.0.0\CMSIS\Include\core_cm4.h
 .\globalvariables.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\string.h
-.\globalvariables.o: DGUS.h
+.\globalvariables.o: DGUSBase.h
 .\globalvariables.o: C:\Keil_v5\ARM\PACK\ARM\CMSIS\5.0.0\CMSIS\RTOS\RTX\INC\cmsis_os.h
 .\globalvariables.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stddef.h
