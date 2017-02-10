@@ -3,7 +3,7 @@
 <title>Static Call Graph - [.\Objects\CalipsoEthernetTest.axf]</title></head>
 <body><HR>
 <H1>Static Call Graph for image .\Objects\CalipsoEthernetTest.axf</H1><HR>
-<BR><P>#&#060CALLGRAPH&#062# ARM Linker, 5060183: Last Updated: Wed Feb 08 17:22:03 2017
+<BR><P>#&#060CALLGRAPH&#062# ARM Linker, 5060183: Last Updated: Fri Feb 10 11:48:13 2017
 <BR><P>
 <H3>Maximum Stack Usage =       1368 bytes + Unknown(Functions without stacksize, Cycles, Untraceable Function Pointers)</H3><H3>
 Call chain for Maximum Stack Depth:</H3>
@@ -2744,8 +2744,8 @@ Global Symbols
 </UL>
 <BR>[Calls]<UL><LI><a href="#[19c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;TIM_CCxChannelCmd
 </UL>
-<BR>[Called By]<UL><LI><a href="#[210]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;LampControlPulseStart
-<LI><a href="#[18e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;CoolInit
+<BR>[Called By]<UL><LI><a href="#[18e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;CoolInit
+<LI><a href="#[210]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;LampControlPulseStart
 <LI><a href="#[19d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;DiodeControlPulseStart
 </UL>
 
@@ -2754,8 +2754,8 @@ Global Symbols
 </UL>
 <BR>[Calls]<UL><LI><a href="#[19c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;TIM_CCxChannelCmd
 </UL>
-<BR>[Called By]<UL><LI><a href="#[1a0]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;DiodeControlPulseStop
-<LI><a href="#[211]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;LampControlPulseStop
+<BR>[Called By]<UL><LI><a href="#[211]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;LampControlPulseStop
+<LI><a href="#[1a0]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;DiodeControlPulseStop
 </UL>
 
 <P><STRONG><a name="[1e3]"></a>HAL_TIM_PWM_PulseFinishedCallback</STRONG> (Thumb, 2 bytes, Stack size 0 bytes, stm32f4xx_hal_tim.o(i.HAL_TIM_PWM_PulseFinishedCallback))
@@ -2988,8 +2988,7 @@ Global Symbols
 <BR>[Calls]<UL><LI><a href="#[19c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;TIM_CCxChannelCmd
 <LI><a href="#[191]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_TIM_OC_Start
 </UL>
-<BR>[Called By]<UL><LI><a href="#[23e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ServiceFrame_Process
-<LI><a href="#[95]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;LaserTimer_Callback
+<BR>[Called By]<UL><LI><a href="#[95]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;LaserTimer_Callback
 </UL>
 
 <P><STRONG><a name="[211]"></a>LampControlPulseStop</STRONG> (Thumb, 86 bytes, Stack size 8 bytes, solidstatelaser.o(i.LampControlPulseStop))
@@ -3000,7 +2999,6 @@ Global Symbols
 <LI><a href="#[1a1]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_TIM_OC_Stop
 </UL>
 <BR>[Called By]<UL><LI><a href="#[246]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SolidStateLaserInput_Process
-<LI><a href="#[23e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ServiceFrame_Process
 <LI><a href="#[95]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;LaserTimer_Callback
 <LI><a href="#[265]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SolidStateLaserOff
 <LI><a href="#[239]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;LongPulseLaserWork_Process
@@ -3039,14 +3037,14 @@ Global Symbols
 <P><STRONG><a name="[216]"></a>LaserDiodeInput_Process</STRONG> (Thumb, 1382 bytes, Stack size 96 bytes, laserdiodeinputframe.o(i.LaserDiodeInput_Process))
 <BR><BR>[Stack]<UL><LI>Max Depth = 208<LI>Call Chain = LaserDiodeInput_Process &rArr; PhototypePreset &rArr; LaserPreset &rArr; CalculateAllSteps &rArr; NormalizeStep
 </UL>
-<BR>[Calls]<UL><LI><a href="#[21c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SetPulseDuration_ms
-<LI><a href="#[21f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;CoolOn
+<BR>[Calls]<UL><LI><a href="#[21f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;CoolOn
 <LI><a href="#[217]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;convert_laserdata
 <LI><a href="#[215]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;WriteLaserDiodeDataConvert16
 <LI><a href="#[1a0]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;DiodeControlPulseStop
 <LI><a href="#[221]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SetPicId
 <LI><a href="#[194]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;osSignalWait
 <LI><a href="#[21d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SetPulseFrequency
+<LI><a href="#[21c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SetPulseDuration_ms
 <LI><a href="#[21e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SetDACValue
 <LI><a href="#[193]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ReadVariable
 <LI><a href="#[21a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;UpdateLimits
@@ -3160,16 +3158,16 @@ Global Symbols
 <BR>[Calls]<UL><LI><a href="#[235]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;convert_laserdata_ss
 <LI><a href="#[232]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;WriteSolidStateLaserDataConvert16
 <LI><a href="#[234]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SolidStateLaserPulseReset
+<LI><a href="#[211]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;LampControlPulseStop
 <LI><a href="#[231]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;GetSolidStateSessionPulse
 <LI><a href="#[230]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;GetSolidStateGlobalPulse
-<LI><a href="#[21c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SetPulseDuration_ms
 <LI><a href="#[21f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;CoolOn
 <LI><a href="#[221]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SetPicId
 <LI><a href="#[194]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;osSignalWait
 <LI><a href="#[237]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SetPulseDuration_us
+<LI><a href="#[21c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SetPulseDuration_ms
 <LI><a href="#[21e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SetDACValue
 <LI><a href="#[193]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ReadVariable
-<LI><a href="#[211]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;LampControlPulseStop
 <LI><a href="#[1b4]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_GPIO_ReadPin
 <LI><a href="#[220]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;StoreGlobalVariables
 <LI><a href="#[1a2]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_GPIO_WritePin
@@ -3196,13 +3194,13 @@ Global Symbols
 </UL>
 <BR>[Calls]<UL><LI><a href="#[235]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;convert_laserdata_ss
 <LI><a href="#[232]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;WriteSolidStateLaserDataConvert16
+<LI><a href="#[211]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;LampControlPulseStop
 <LI><a href="#[231]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;GetSolidStateSessionPulse
 <LI><a href="#[230]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;GetSolidStateGlobalPulse
 <LI><a href="#[221]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SetPicId
 <LI><a href="#[194]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;osSignalWait
 <LI><a href="#[21e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SetDACValue
 <LI><a href="#[193]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ReadVariable
-<LI><a href="#[211]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;LampControlPulseStop
 <LI><a href="#[1b4]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_GPIO_ReadPin
 <LI><a href="#[220]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;StoreGlobalVariables
 <LI><a href="#[19e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SoundOn
@@ -3449,12 +3447,12 @@ Global Symbols
 <P><STRONG><a name="[23f]"></a>ServiceDiodeFrame_Process</STRONG> (Thumb, 392 bytes, Stack size 56 bytes, serviceframediodelaser.o(i.ServiceDiodeFrame_Process))
 <BR><BR>[Stack]<UL><LI>Max Depth = 140<LI>Call Chain = ServiceDiodeFrame_Process &rArr; DiodeControlPulseStart &rArr; SoundOn &rArr; HAL_TIMEx_OCN_Start_DMA &rArr; HAL_DMA_Start_IT &rArr; DMA_SetConfig
 </UL>
-<BR>[Calls]<UL><LI><a href="#[21c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SetPulseDuration_ms
-<LI><a href="#[1a0]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;DiodeControlPulseStop
+<BR>[Calls]<UL><LI><a href="#[1a0]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;DiodeControlPulseStop
 <LI><a href="#[194]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;osSignalWait
 <LI><a href="#[195]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;convert_array_w
 <LI><a href="#[196]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;WriteVariableConvert16
 <LI><a href="#[21d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SetPulseFrequency
+<LI><a href="#[21c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SetPulseDuration_ms
 <LI><a href="#[21e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SetDACValue
 <LI><a href="#[193]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ReadVariable
 <LI><a href="#[1b4]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_GPIO_ReadPin
@@ -3464,7 +3462,7 @@ Global Symbols
 <BR>[Called By]<UL><LI><a href="#[90]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;MainThread
 </UL>
 
-<P><STRONG><a name="[23e]"></a>ServiceFrame_Process</STRONG> (Thumb, 566 bytes, Stack size 64 bytes, serviceframe.o(i.ServiceFrame_Process))
+<P><STRONG><a name="[23e]"></a>ServiceFrame_Process</STRONG> (Thumb, 582 bytes, Stack size 64 bytes, serviceframe.o(i.ServiceFrame_Process))
 <BR><BR>[Stack]<UL><LI>Max Depth = 108<LI>Call Chain = ServiceFrame_Process &rArr; WriteVariableConvert16 &rArr; convert_array_w
 </UL>
 <BR>[Calls]<UL><LI><a href="#[194]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;osSignalWait
@@ -3472,10 +3470,9 @@ Global Symbols
 <LI><a href="#[196]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;WriteVariableConvert16
 <LI><a href="#[21d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SetPulseFrequency
 <LI><a href="#[237]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SetPulseDuration_us
+<LI><a href="#[21c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SetPulseDuration_ms
 <LI><a href="#[21e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SetDACValue
 <LI><a href="#[193]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ReadVariable
-<LI><a href="#[211]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;LampControlPulseStop
-<LI><a href="#[210]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;LampControlPulseStart
 <LI><a href="#[1b4]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_GPIO_ReadPin
 <LI><a href="#[1a2]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_GPIO_WritePin
 </UL>
@@ -3533,6 +3530,7 @@ Global Symbols
 
 <P><STRONG><a name="[21c]"></a>SetPulseDuration_ms</STRONG> (Thumb, 228 bytes, Stack size 0 bytes, solidstatelaser.o(i.SetPulseDuration_ms))
 <BR><BR>[Called By]<UL><LI><a href="#[216]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;LaserDiodeInput_Process
+<LI><a href="#[23e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ServiceFrame_Process
 <LI><a href="#[233]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;LongPulseLaserInput_Process
 <LI><a href="#[23f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ServiceDiodeFrame_Process
 </UL>
@@ -3576,6 +3574,7 @@ Global Symbols
 <BR>[Calls]<UL><LI><a href="#[235]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;convert_laserdata_ss
 <LI><a href="#[232]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;WriteSolidStateLaserDataConvert16
 <LI><a href="#[234]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SolidStateLaserPulseReset
+<LI><a href="#[211]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;LampControlPulseStop
 <LI><a href="#[231]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;GetSolidStateSessionPulse
 <LI><a href="#[230]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;GetSolidStateGlobalPulse
 <LI><a href="#[263]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SetLaserSettings
@@ -3585,7 +3584,6 @@ Global Symbols
 <LI><a href="#[21d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SetPulseFrequency
 <LI><a href="#[21e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SetDACValue
 <LI><a href="#[193]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ReadVariable
-<LI><a href="#[211]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;LampControlPulseStop
 <LI><a href="#[1b4]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_GPIO_ReadPin
 <LI><a href="#[220]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;StoreGlobalVariables
 <LI><a href="#[1a2]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_GPIO_WritePin
@@ -3630,13 +3628,13 @@ Global Symbols
 </UL>
 <BR>[Calls]<UL><LI><a href="#[235]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;convert_laserdata_ss
 <LI><a href="#[232]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;WriteSolidStateLaserDataConvert16
+<LI><a href="#[211]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;LampControlPulseStop
 <LI><a href="#[231]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;GetSolidStateSessionPulse
 <LI><a href="#[230]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;GetSolidStateGlobalPulse
 <LI><a href="#[221]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SetPicId
 <LI><a href="#[194]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;osSignalWait
 <LI><a href="#[21e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SetDACValue
 <LI><a href="#[193]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ReadVariable
-<LI><a href="#[211]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;LampControlPulseStop
 <LI><a href="#[1b4]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_GPIO_ReadPin
 <LI><a href="#[220]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;StoreGlobalVariables
 <LI><a href="#[19e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SoundOn
@@ -3653,8 +3651,8 @@ Global Symbols
 <BR>[Calls]<UL><LI><a href="#[1a2]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_GPIO_WritePin
 <LI><a href="#[1d9]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_TIMEx_OCN_Stop_DMA
 </UL>
-<BR>[Called By]<UL><LI><a href="#[1a0]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;DiodeControlPulseStop
-<LI><a href="#[211]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;LampControlPulseStop
+<BR>[Called By]<UL><LI><a href="#[211]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;LampControlPulseStop
+<LI><a href="#[1a0]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;DiodeControlPulseStop
 <LI><a href="#[266]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SpeakerInit
 <LI><a href="#[99]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
 <LI><a href="#[1e4]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_TIM_PeriodElapsedCallback
@@ -3758,10 +3756,10 @@ Global Symbols
 <P><STRONG><a name="[19c]"></a>TIM_CCxChannelCmd</STRONG> (Thumb, 28 bytes, Stack size 12 bytes, stm32f4xx_hal_tim.o(i.TIM_CCxChannelCmd))
 <BR><BR>[Stack]<UL><LI>Max Depth = 12<LI>Call Chain = TIM_CCxChannelCmd
 </UL>
-<BR>[Called By]<UL><LI><a href="#[1a0]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;DiodeControlPulseStop
-<LI><a href="#[211]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;LampControlPulseStop
-<LI><a href="#[210]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;LampControlPulseStart
+<BR>[Called By]<UL><LI><a href="#[211]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;LampControlPulseStop
+<LI><a href="#[1a0]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;DiodeControlPulseStop
 <LI><a href="#[19e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SoundOn
+<LI><a href="#[210]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;LampControlPulseStart
 <LI><a href="#[19b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;DiodeControlOnePulseStart
 <LI><a href="#[19d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;DiodeControlPulseStart
 <LI><a href="#[1a1]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_TIM_OC_Stop
@@ -6284,11 +6282,11 @@ Local Symbols
 <P><STRONG><a name="[95]"></a>LaserTimer_Callback</STRONG> (Thumb, 646 bytes, Stack size 8 bytes, lasertimer.o(i.LaserTimer_Callback))
 <BR><BR>[Stack]<UL><LI>Max Depth = 92<LI>Call Chain = LaserTimer_Callback &rArr; DiodeControlPulseStart &rArr; SoundOn &rArr; HAL_TIMEx_OCN_Start_DMA &rArr; HAL_DMA_Start_IT &rArr; DMA_SetConfig
 </UL>
-<BR>[Calls]<UL><LI><a href="#[1a0]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;DiodeControlPulseStop
-<LI><a href="#[211]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;LampControlPulseStop
-<LI><a href="#[210]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;LampControlPulseStart
+<BR>[Calls]<UL><LI><a href="#[211]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;LampControlPulseStop
+<LI><a href="#[1a0]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;DiodeControlPulseStop
 <LI><a href="#[1b4]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_GPIO_ReadPin
 <LI><a href="#[1a2]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_GPIO_WritePin
+<LI><a href="#[210]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;LampControlPulseStart
 <LI><a href="#[1ee]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_TIM_Base_Stop
 <LI><a href="#[1ad]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_TIM_Base_Start
 <LI><a href="#[19b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;DiodeControlOnePulseStart

@@ -11,6 +11,7 @@
 
 #define FRAMEDATA_SERVICE_BASE				0x0020
 #define FRAMEDATA_SERVICESTATE_BASE		0x002B
+#define FRAMEDATA_DURATIONMODE				0x0032
 
 typedef struct FRAMEDATA_SERVICE_STRUCT {
 	// control
@@ -34,6 +35,12 @@ typedef struct FRAMEDATA_SERVICE_STRUCT {
 	uint16_t OV;
 	uint16_t OVH;
 	uint16_t Fault;
+	
+	// Write only
+	uint16_t HV_monitor;
+	
+	// Read only
+	uint16_t duration_mod;
 } FRAMEDATA_SERVICE;
 
 typedef struct FRAMEDATA_SERVICESTATE_STRUCT {
@@ -72,8 +79,12 @@ void ServiceFrame_Process(uint16_t pic_id)
 	}
 	
 	if (frameData_Service.duration_set == 0x01) 
-	{	
-		SetPulseDuration_us(frameData_Service.duration_value-25);
+	{
+			
+		if (frameData_Service.duration_mod == 0)
+			SetPulseDuration_us(frameData_Service.duration_value-25);
+		else
+			SetPulseDuration_ms(frameData_Service.duration_value, frameData_Service.duration_value + 10);
 		frameData_Service.duration_set = 0x00;
 		update = true;
 	}
@@ -87,7 +98,7 @@ void ServiceFrame_Process(uint16_t pic_id)
 	
 	if (frameData_Service.btn_start == 0x01) 
 	{	
-		LampControlPulseStart();
+		//LampControlPulseStart();
 		frameData_Service.btn_start = 0x00;
 		SolidStateLaser_en = true;
 		update = true;
@@ -95,7 +106,7 @@ void ServiceFrame_Process(uint16_t pic_id)
 	
 	if (frameData_Service.btn_stop == 0x01) 
 	{	
-		LampControlPulseStop();
+		//LampControlPulseStop();
 		frameData_Service.btn_stop = 0x00;
 		SolidStateLaser_en = false;
 		update = true;

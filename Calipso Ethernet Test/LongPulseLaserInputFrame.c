@@ -63,8 +63,11 @@ uint16_t energy_tbl[VOLTAGES_NUM*SHORT_DURATIONS_NUM*3] =
 		400	,430		,470		,500		,550		,600		,650		,700};  //	28
 		
 
-uint16_t voltage_short[VOLTAGES_NUM] = {350, 360, 370, 380, 390, 400, 410, 420};
-uint16_t voltage_other[VOLTAGES_NUM] = {330, 340, 350, 360, 370, 380, 390, 400};
+/*uint16_t voltage_short[VOLTAGES_NUM] = {350, 360, 370, 380, 390, 400, 410, 420};
+uint16_t voltage_other[VOLTAGES_NUM] = {330, 340, 350, 360, 370, 380, 390, 400};*/
+		
+uint16_t voltage_short[VOLTAGES_NUM] = {320, 330, 340, 350, 360, 370, 380, 390};
+uint16_t voltage_other[VOLTAGES_NUM] = {300, 310, 320, 330, 340, 350, 360, 370};
 
 void LongPulseLaserInput_Init(uint16_t pic_id)
 {
