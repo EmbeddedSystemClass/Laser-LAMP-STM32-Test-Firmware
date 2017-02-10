@@ -719,9 +719,20 @@ void UserWiFiThread (void const *argument) {
 	// Start wifi logging
 	//start_wifi(datetime);
 	
+	//Set WiFi SSID
+	SendAT("AT+S.SSIDTXT=ASUS\r\n");
+	SendAT("AT+S.SCFG=wifi_wpa_psk_text,host1234\r\n");
+	SendAT("AT+S.SCFG=wifi_priv_mode,2\r\n");
+	SendAT("AT+S.SCFG=wifi_mode,1\r\n");
+	SendAT("AT+S.SCFG=ip_use_dhcp,1\r\n");
+	SendAT("AT&W\r\n");
+	
+	// Restart WiFi
+	AsyncSendAT("AT+CFUN=1\r\n");
+	
 	// Reastart WiFi Module
 	HAL_GPIO_WritePin(GPIOG, GPIO_PIN_2, GPIO_PIN_SET);
-	SendAT("AT&V\r\n");
+	//SendAT("AT&V\r\n");
 	SendAT("AT+CFUN=1\r\n");
 	
 	// Main command loop
