@@ -39,5 +39,6 @@
 .\main.o: C:\Keil_v5\ARM\PACK\ARM\CMSIS\5.0.0\CMSIS\Include\core_cm4.h
 .\main.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\string.h
 .\main.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdlib.h
+.\main.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\ctype.h
 .\main.o: C:\Keil_v5\ARM\PACK\ARM\CMSIS\5.0.0\CMSIS\Driver\Include\Driver_MCI.h
 .\main.o: C:\Keil_v5\ARM\PACK\ARM\CMSIS\5.0.0\CMSIS\Driver\Include\Driver_Common.h

@@ -162,7 +162,7 @@
 #define WIND_MSG_ASSOCIATION_TIMEOUT       77		//Indicates that the association process is timed out
 #define WIND_MSG_MIC_FAILURE               78		//Michael MIC error is detected by the local driver
 
-// AT command list
+/*// AT command list
 char AT                [] = "AT\r\n\0";
 char AT_CFUN           [] = "AT+CFUN\r\n\0";
 char AT_S_HELP         [] = "AT+S.HELP\r\n\0";
@@ -213,6 +213,6 @@ char AT_S_SETTIME      [] = "AT+S.SETTIME\r\n\0";
 char AT_S_RMPEER       [] = "AT+S.RMPEER\r\n\0";
 char AT_S_HTTPREQ      [] = "AT+S.HTTPREQ\r\n\0";
 char AT_S_FSR          [] = "AT+S.FSR\r\n\0";
-char AT_S_HTTPDFSWRITE [] = "AT+S.HTTPDFSWRITE \r\n\0";
+char AT_S_HTTPDFSWRITE [] = "AT+S.HTTPDFSWRITE \r\n\0";*/
 
 #endif

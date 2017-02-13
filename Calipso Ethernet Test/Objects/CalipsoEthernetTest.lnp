@@ -28,6 +28,7 @@
 ".\objects\ds18b20.o"
 ".\objects\lasermisc.o"
 ".\objects\sdcard.o"
+".\objects\wifidriver.o"
 ".\objects\soundlib.o"
 "C:\Keil_v5\ARM\PACK\ARM\CMSIS\5.0.0\CMSIS\Lib\ARM\arm_cortexM4lf_math.lib"
 "C:\Keil_v5\ARM\PACK\ARM\CMSIS\5.0.0\CMSIS\RTOS\RTX\LIB\ARM\RTX_CM4.lib"

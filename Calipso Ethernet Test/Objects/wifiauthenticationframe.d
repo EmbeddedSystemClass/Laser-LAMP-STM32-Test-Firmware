@@ -42,4 +42,5 @@
 .\objects\wifiauthenticationframe.o: C:\Keil_v5\ARM\PACK\ARM\CMSIS\5.0.0\CMSIS\Include\core_cm4.h
 .\objects\wifiauthenticationframe.o: LaserMisc.h
 .\objects\wifiauthenticationframe.o: WiFiThread.h
+.\objects\wifiauthenticationframe.o: WiFiDriver.h
 .\objects\wifiauthenticationframe.o: GlobalVariables.h

@@ -42,4 +42,5 @@
 .\objects\wifiscanningframe.o: C:\Keil_v5\ARM\PACK\ARM\CMSIS\5.0.0\CMSIS\Include\core_cm4.h
 .\objects\wifiscanningframe.o: LaserMisc.h
 .\objects\wifiscanningframe.o: WiFiThread.h
+.\objects\wifiscanningframe.o: WiFiDriver.h
 .\objects\wifiscanningframe.o: GlobalVariables.h

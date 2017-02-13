@@ -16,9 +16,9 @@ uint16_t g_wDGUSTimeout = 200;
 // Timer global variables
 int16_t m_wMillSec = 0;
 int16_t m_wSeconds = 0;
-int16_t m_wMinutes = 0;
+int16_t m_wMinutes = 3;
 int16_t m_wSetSec  = 0;
-int16_t m_wSetMin  = 0;
+int16_t m_wSetMin  = 3;
 
 // Cooling global variables
 float32_t temperature_cool_on = 26.5f;

@@ -537,6 +537,11 @@
               <FileType>1</FileType>
               <FilePath>.\SDCard.c</FilePath>
             </File>
+            <File>
+              <FileName>WiFiDriver.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\WiFiDriver.c</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
@@ -548,6 +553,9 @@
               <FilePath>.\SoundLib.c</FilePath>
             </File>
           </Files>
+        </Group>
+        <Group>
+          <GroupName>Lib</GroupName>
         </Group>
         <Group>
           <GroupName>::CMSIS</GroupName>

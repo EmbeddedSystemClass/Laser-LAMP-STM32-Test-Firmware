@@ -34,7 +34,6 @@
 .\objects\wifithread.o: C:\Keil_v5\ARM\PACK\ARM\CMSIS\5.0.0\CMSIS\Driver\Include\Driver_USART.h
 .\objects\wifithread.o: C:\Keil_v5\ARM\PACK\ARM\CMSIS\5.0.0\CMSIS\Driver\Include\Driver_Common.h
 .\objects\wifithread.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdbool.h
-.\objects\wifithread.o: SPWF01.h
 .\objects\wifithread.o: SDCard.h
 .\objects\wifithread.o: C:\Keil_v5\ARM\PACK\Keil\MDK-Middleware\7.3.0\FileSystem\Include\rl_fs.h
 .\objects\wifithread.o: DGUS.h
@@ -48,3 +47,5 @@
 .\objects\wifithread.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdlib.h
 .\objects\wifithread.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdarg.h
 .\objects\wifithread.o: WiFiThread.h
+.\objects\wifithread.o: WiFiDriver.h
+.\objects\wifithread.o: SPWF01.h

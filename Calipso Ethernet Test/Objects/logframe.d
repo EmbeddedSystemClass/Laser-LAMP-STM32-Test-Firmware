@@ -45,3 +45,4 @@
 .\objects\logframe.o: C:\Keil_v5\ARM\PACK\ARM\CMSIS\5.0.0\CMSIS\Driver\Include\Driver_Common.h
 .\objects\logframe.o: SolidStateLaser.h
 .\objects\logframe.o: WiFiThread.h
+.\objects\logframe.o: WiFiDriver.h
