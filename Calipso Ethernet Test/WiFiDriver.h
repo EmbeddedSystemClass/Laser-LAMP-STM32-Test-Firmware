@@ -26,19 +26,12 @@
 #define BUFFER_SIZE 32768
 #define BUFFER_MASK 0x7ff
 
-// WiFi AP scanning strucrure
-typedef struct WIFI_AP_STRUCT
+// Pending queue struct
+typedef struct WIFI_PENDING_STRUCT
 {
-	uint16_t	Channel;
-	char			SSID[32];
-	int16_t		RSSI;
-	bool wpa2;
-	bool wps;
-	uint16_t	live;
-} WIFI_AP, *PWIFI_AP;
-
-// WiFi AP scanning buffer
-extern PWIFI_AP WiFi_APs[16];
+	int16_t sock_id;
+	uint16_t data_len;
+} WIFI_PENDING_DATA, *PWIFI_PENDING_DATA;
 
 // WiFi global state variables
 extern bool WiFi_State_CommandMode;
@@ -48,10 +41,10 @@ extern bool WiFi_SocketClosed[8];
 extern bool WiFi_SocketConnected[8];
 extern bool WiFi_OK_Received;
 extern bool WiFi_ERROR_Received;
-extern bool WiFi_PendingData;
+extern bool WiFi_PendingData[8];
 
 // WiFi pending data size
-extern uint16_t WiFi_PendingDataSize;
+extern uint16_t WiFi_PendingDataSize[8];
 extern uint16_t WIFi_ConnectionTimeout;
 extern uint16_t WIFi_RequestTimeout;
 
@@ -68,8 +61,11 @@ int16_t GetID(uint32_t timeout); // Socket ID
 int16_t WaitForWINDCommands(uint16_t timeout, uint16_t argc, ...);
 
 // Socket
-int16_t	socket_connect(char* name, uint16_t port);
-void		socket_write	(uint16_t id, char* buffer, uint16_t len);
+int16_t		socket_connect			(char* name, uint16_t port);
+bool			socket_close				(uint16_t id);
+bool			socket_write				(uint16_t id, char* buffer, uint16_t len);
+bool			socket_read					(uint16_t id, char* buffer, uint16_t len);
+bool			socket_pending_data	(uint16_t *len, int16_t *id);
 
 // Initialize WiFi
 int Init_WiFiDriver_Thread (osThreadId userThread);

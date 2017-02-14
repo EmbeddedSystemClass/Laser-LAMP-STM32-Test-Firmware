@@ -29,17 +29,21 @@ bool WiFi_SocketConnected[8] = {false, false, false, false, false, false, false,
 //bool WiFi_ConnectionEstabilished[8] = {false, false, false, false, false, false, false, false};
 bool WiFi_OK_Received = false;
 bool WiFi_ERROR_Received = false;
-bool WiFi_PendingData = false;
+bool WiFi_PendingData[8] = {false, false, false, false, false, false, false, false};
 
-uint16_t WiFi_PendingDataSize = 0;
+uint16_t WiFi_PendingDataSize[8] = {0, 0, 0, 0, 0, 0, 0, 0};
+
+// RTOS Variables
+osMessageQId qid_WiFiPendingQueue;
+osMessageQDef(WiFiPendingQueue, 16, uint32_t);
+osPoolDef(WiFiPending_Events_Pool, 16, WIFI_PENDING_DATA);
+osPoolId pid_WiFiPending_Events_Pool;
 
 /*----------------------------------------------------------------------------
  *      WiFi Module Config Variables
  *---------------------------------------------------------------------------*/
 uint16_t WIFi_ConnectionTimeout = 15000;
 uint16_t WIFi_RequestTimeout = 15000;
-
-PWIFI_AP WiFi_APs[16];
 
 // RTOS Variables
 osThreadId tid_WiFiThread;
@@ -52,7 +56,7 @@ char  ATRCV[BUFFER_SIZE];
 char  token[256];
 char* tokenPtr[32];
 char  buffer_rx[256];
-char* buffer_tx;
+char	buffer_tx[256];
 uint32_t frame_offset;
 uint32_t frame_pos;
 uint32_t frame_read;
@@ -110,11 +114,33 @@ void WIFI_USART_callback(uint32_t event)
     }
 }
 
+bool QueuePutPendingRequest(WIFI_PENDING_DATA event)
+{
+	WIFI_PENDING_DATA* pevent;
+	
+	pevent = osPoolAlloc(pid_WiFiPending_Events_Pool);
+	
+	if (pevent != NULL)
+	{
+		memcpy(pevent, &event, sizeof(event));
+		osMessagePut(qid_WiFiPendingQueue, (uint32_t)pevent, osWaitForever);
+		
+		return true;
+	}
+	else
+		return false;
+}
+
 int Init_WiFiDriver_Thread (osThreadId userThread) {
 
 	tid_UserWiFiThread = userThread;
   tid_WiFiThread = osThreadCreate (osThread(WiFiThread), NULL);
   if (!tid_WiFiThread) return(-1);
+	
+	qid_WiFiPendingQueue = osMessageCreate(osMessageQ(WiFiPendingQueue), NULL);
+	if (!qid_WiFiPendingQueue) return(-1);
+	
+	pid_WiFiPending_Events_Pool = osPoolCreate(osPool(WiFiPending_Events_Pool));
 	
 	//Initialize the USART driver 
   Driver_USART3.Initialize(WIFI_USART_callback);
@@ -184,6 +210,8 @@ void WiFiThread (void const *argument) {
 	volatile uint16_t pos = 0;
 	uint16_t i;
 	char* str = NULL;
+	WIFI_PENDING_DATA pending_event;
+	
 	//start_slog(datetime);
 	Driver_USART3.Receive(ATRCV, FRAME_SIZE);
 	
@@ -241,8 +269,15 @@ void WiFiThread (void const *argument) {
 			
 			if (id == WIND_MSG_PENDING_DATA)
 			{
-				WiFi_PendingData = true;
-				WiFi_PendingDataSize = atol(tokenPtr[4]);
+				uint16_t socket_id = atol(tokenPtr[3]);
+				uint16_t pending_len = atol(tokenPtr[4]);
+				WiFi_PendingData[socket_id] = true;
+				WiFi_PendingDataSize[socket_id] = pending_len;
+				
+				pending_event.sock_id = socket_id;
+				pending_event.data_len = pending_len;
+				
+				QueuePutPendingRequest(pending_event);
 			}
 			
 			// if error occured
@@ -402,9 +437,51 @@ int16_t socket_connect(char* name, uint16_t port)
 	return id;
 }
 
-void socket_write(uint16_t id, char* buffer, uint16_t len)
+bool socket_close(uint16_t id)
 {
 	char str[256];
-	sprintf(str, "AT+S.SOCKW=%d,%d\r\n", id, len);	
-	AsyncSendAT(strcat(str, buffer));
+	sprintf(str, "AT+S.SOCKC=%d\r\n", id);
+	return SendAT(str);
+}
+
+bool socket_write(uint16_t id, char* buffer, uint16_t len)
+{
+	sprintf(buffer_tx, "AT+S.SOCKW=%d,%d\r\n", id, len);
+	
+	uint16_t index = strlen(buffer_tx);
+	
+	memcpy(&buffer_tx[index], buffer, len);
+	
+	WiFi_OK_Received = false;
+	WiFi_ERROR_Received = false;
+	
+	Driver_USART3.Send(buffer_tx, index + len);
+	
+	return WaitOK(WIFi_RequestTimeout);
+}
+
+bool socket_read (uint16_t id, char* buffer, uint16_t len)
+{
+	char str[256];
+	sprintf(str, "AT+S.SOCKR=%d,%d\r\n", id, len);
+	char* ptr = GetResponsePtr();
+	if (SendAT(str))
+	{
+		memcpy(buffer, ptr, len);
+		return true;
+	}
+	else
+		return false;
+}
+
+bool socket_pending_data(uint16_t *len, int16_t *id)
+{
+	if (WaitForWINDCommands(10, 1, (int)WIND_MSG_PENDING_DATA) > 0)
+	{
+		*id = atol(tokenPtr[3]);
+		*len = atol(tokenPtr[4]);
+		return true;
+	}
+	else
+		return false;
 }

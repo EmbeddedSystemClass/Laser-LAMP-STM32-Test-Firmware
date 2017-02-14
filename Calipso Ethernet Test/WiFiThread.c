@@ -38,6 +38,8 @@ osTimerDef (WiFiTimer, WiFiTimer_Callback);
 osThreadDef (CalipsoWiFiThread, osPriorityNormal, 1, 0);
 osMessageQDef(WiFiCMDQueue, 16, uint32_t);
 
+PWIFI_AP WiFi_APs[16];
+
 char WiFi_NetworkPassword[32];
 char WiFi_NetworkSSID[32];
 
@@ -108,7 +110,92 @@ bool cookie_handler(char* name, char* value)
 	return false;
 }
 
+bool parseFTP(char* str, uint16_t* resp_code, uint16_t* port)
+{
+	uint16_t len = strlen(str);
+	uint16_t bracket_idx = 0;
+	
+	while (str[bracket_idx] != '(' && bracket_idx < len) bracket_idx++;
+	
+	if (str[bracket_idx] == '(' && bracket_idx > 0)
+	{
+		char* h1 = strtok(&str[bracket_idx+1], " ,)");
+		char* h2 = strtok(NULL, " ,)");
+		char* h3 = strtok(NULL, " ,)");
+		char* h4 = strtok(NULL, " ,)");
+		char* p1 = strtok(NULL, " ,)");
+		char* p2 = strtok(NULL, " ,)");
+		
+		*port = atol(p1)*256 + atol(p2);
+	}
+	else 
+		return false;
+	
+	char* response_code = strtok(str, " ");
+	*resp_code = atol(response_code);
+	return true;
+}
+
 void WiFiThread_Idle()
+{
+	uint16_t len = 0;
+	uint16_t resp_code = 0;
+	uint16_t port = 0;
+	
+	if (WiFiConnectionEstabilished)
+	{
+		int16_t sock_id = socket_connect("innolaser-service.ru", 21);
+		int16_t recv_sock_id = -1;
+		
+		if (sock_id >= 0)
+		{			
+			int16_t resp_sock_id = -1;
+			int16_t resp_sock_id1 = -1;
+			int16_t resp_sock_id2 = -1;
+			uint16_t len1 = 0;
+			uint16_t len2 = 0;
+			
+			if (socket_pending_data(&len, &resp_sock_id))
+				socket_read(resp_sock_id, httpBuffer, len);
+			
+			socket_write(sock_id, "user ftpdevice\n", 16);
+			
+			if (socket_pending_data(&len, &resp_sock_id))
+				socket_read(resp_sock_id, httpBuffer, len);
+			
+			socket_write(sock_id, "pass xejQmMs2#4AN\n", 19);
+			
+			if (socket_pending_data(&len, &resp_sock_id))
+				socket_read(resp_sock_id, httpBuffer, len);
+			
+			socket_write(sock_id, "pasv\n", 6);
+			
+			if (socket_pending_data(&len, &resp_sock_id))
+				socket_read(resp_sock_id, httpBuffer, len);
+			
+			if (parseFTP(httpBuffer, &resp_code, &port) && resp_code == 227)
+			{
+				recv_sock_id = socket_connect("innolaser-service.ru", port);
+				
+				socket_write(sock_id, "retr /etc/crontab\n", 19);
+				
+				if (socket_pending_data(&len, &resp_sock_id))
+					socket_read(resp_sock_id, httpBuffer, len);
+				
+				socket_pending_data(&len1, &resp_sock_id1);
+				socket_pending_data(&len2, &resp_sock_id2);
+				
+				socket_read(resp_sock_id2, httpBuffer, len2);
+				socket_read(resp_sock_id1, httpBuffer, len1);
+			}
+		}
+		
+		//socket_close(recv_sock_id);
+		socket_close(sock_id);
+	}
+}
+
+void WiFiThread_PublishToServer()
 {	
 	char str[256];
 	char log[512];
@@ -198,7 +285,7 @@ void WiFiThread_Idle()
 			uint16_t len = strlen(log);
 			
 			// Send HTTP GET			
-			WiFi_PendingData = false;
+			WiFi_PendingData[0] = false;
 			sprintf(str, "AT+S.SOCKW=%d,%d\r", id, len);
 			log_wifi(datetime, "AT+S.SOCKW + HTTP GET REQUEST");
 			AsyncSendAT(strcat(str, log));
@@ -207,9 +294,9 @@ void WiFiThread_Idle()
 			if (WaitOK(WIFi_RequestTimeout))
 			{
 				// Wait for pending data
-				if (!WiFi_PendingData)
+				if (!WiFi_PendingData[0])
 					WaitForWINDCommands(30, 1, (int)WIND_MSG_PENDING_DATA);
-				len = WiFi_PendingDataSize;
+				len = WiFi_PendingDataSize[0];
 				sprintf(str, "Pending data : %d", len);
 				log_wifi(datetime, str);
 				
