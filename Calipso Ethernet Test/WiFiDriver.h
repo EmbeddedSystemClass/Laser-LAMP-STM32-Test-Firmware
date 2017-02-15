@@ -58,6 +58,7 @@ bool WaitOK(uint32_t timeout);
 void AsyncSendAT(char* str);
 char* GetResponsePtr(void);
 int16_t GetID(uint32_t timeout); // Socket ID
+int16_t GetDataLen(uint32_t timeout); // Socket pending data length
 int16_t WaitForWINDCommands(uint16_t timeout, uint16_t argc, ...);
 
 // Socket
@@ -65,7 +66,10 @@ int16_t		socket_connect			(char* name, uint16_t port);
 bool			socket_close				(uint16_t id);
 bool			socket_write				(uint16_t id, char* buffer, uint16_t len);
 bool			socket_read					(uint16_t id, char* buffer, uint16_t len);
-bool			socket_pending_data	(uint16_t *len, int16_t *id);
+bool 			socket_pending_data	(uint16_t *len, int16_t *id, uint32_t timeout);
+uint16_t	socket_qpending_data(int16_t id);
+
+//bool 			WaitPendingRequest	(WIFI_PENDING_DATA *data, uint32_t timeout);
 
 // Initialize WiFi
 int Init_WiFiDriver_Thread (osThreadId userThread);

@@ -44,7 +44,7 @@ char WiFi_NetworkPassword[32];
 char WiFi_NetworkSSID[32];
 
 char  PHPSESSID[64];
-char  httpBuffer[512];
+char  httpBuffer[2048];
 
 /* Private functions ---------------------------------------------------------*/	
 void WiFiTimer_Callback(void const *arg) 
@@ -150,48 +150,52 @@ void WiFiThread_Idle()
 		if (sock_id >= 0)
 		{			
 			int16_t resp_sock_id = -1;
-			int16_t resp_sock_id1 = -1;
-			int16_t resp_sock_id2 = -1;
-			uint16_t len1 = 0;
-			uint16_t len2 = 0;
 			
-			if (socket_pending_data(&len, &resp_sock_id))
+			if (socket_pending_data(&len, &resp_sock_id, 1000))
 				socket_read(resp_sock_id, httpBuffer, len);
 			
 			socket_write(sock_id, "user ftpdevice\n", 16);
 			
-			if (socket_pending_data(&len, &resp_sock_id))
+			if (socket_pending_data(&len, &resp_sock_id, 1000))
 				socket_read(resp_sock_id, httpBuffer, len);
 			
 			socket_write(sock_id, "pass xejQmMs2#4AN\n", 19);
 			
-			if (socket_pending_data(&len, &resp_sock_id))
+			if (socket_pending_data(&len, &resp_sock_id, 1000))
 				socket_read(resp_sock_id, httpBuffer, len);
 			
 			socket_write(sock_id, "pasv\n", 6);
 			
-			if (socket_pending_data(&len, &resp_sock_id))
+			if (socket_pending_data(&len, &resp_sock_id, 10000))
 				socket_read(resp_sock_id, httpBuffer, len);
 			
 			if (parseFTP(httpBuffer, &resp_code, &port) && resp_code == 227)
 			{
 				recv_sock_id = socket_connect("innolaser-service.ru", port);
 				
+				/*if (socket_pending_data(&len, &resp_sock_id, 1000))
+					socket_read(resp_sock_id, httpBuffer, len);*/
+				
 				socket_write(sock_id, "retr /etc/crontab\n", 19);
 				
-				if (socket_pending_data(&len, &resp_sock_id))
+				while (socket_pending_data(&len, &resp_sock_id, 1000))
 					socket_read(resp_sock_id, httpBuffer, len);
 				
-				socket_pending_data(&len1, &resp_sock_id1);
-				socket_pending_data(&len2, &resp_sock_id2);
+				len = socket_qpending_data(recv_sock_id);
+				if (len > 0)
+					socket_read(recv_sock_id, httpBuffer, len);
 				
-				socket_read(resp_sock_id2, httpBuffer, len2);
-				socket_read(resp_sock_id1, httpBuffer, len1);
+				socket_close(recv_sock_id);
 			}
-		}
+			
+			while (socket_pending_data(&len, &resp_sock_id, 1000))
+				socket_read(resp_sock_id, httpBuffer, len);
 		
-		//socket_close(recv_sock_id);
-		socket_close(sock_id);
+			len = socket_qpending_data(sock_id);
+			if (len > 0)
+				socket_read(sock_id, httpBuffer, len);
+			socket_close(sock_id);
+		}
 	}
 }
 

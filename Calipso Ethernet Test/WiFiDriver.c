@@ -131,6 +131,18 @@ bool QueuePutPendingRequest(WIFI_PENDING_DATA event)
 		return false;
 }
 
+bool WaitPendingRequest(WIFI_PENDING_DATA *data, uint32_t timeout)
+{
+	osEvent evt = osMessageGet(qid_WiFiPendingQueue, timeout);
+	if (evt.status == osEventMessage)
+	{
+		memcpy(data, evt.value.p, sizeof(WIFI_PENDING_DATA));
+		osPoolFree(pid_WiFiPending_Events_Pool, evt.value.p);
+		return true;
+	}
+	return false;
+}
+
 int Init_WiFiDriver_Thread (osThreadId userThread) {
 
 	tid_UserWiFiThread = userThread;
@@ -333,7 +345,7 @@ bool SendAT(char* str)
 	while (osSignalWait(WIFI_EVENT_RECEIVE_STRING, 1000).status != osEventTimeout)
 	{
 		if (WiFi_OK_Received) return true;
-		if (WiFi_ERROR_Received) return true;
+		if (WiFi_ERROR_Received) return false;
 		
 		if (strcmp(strtok(buffer_rx, ":\n\r"), "ERROR") == 0)
 			return false;
@@ -357,6 +369,16 @@ int16_t GetID(uint32_t timeout)
 	while(osSignalWait(WIFI_EVENT_RECEIVE_STRING, timeout).status != osEventTimeout)
 	{
 		if (strcmp(strtok(buffer_rx, " :\n\r"), "ID") == 0)
+			return atol(strtok(NULL, " :\n\r"));
+	}
+	return -1;
+}
+
+int16_t GetDataLen(uint32_t timeout)
+{
+	while(osSignalWait(WIFI_EVENT_RECEIVE_STRING, timeout).status != osEventTimeout)
+	{
+		if (strcmp(strtok(buffer_rx, " :\n\r"), "DATALEN") == 0)
 			return atol(strtok(NULL, " :\n\r"));
 	}
 	return -1;
@@ -440,7 +462,11 @@ int16_t socket_connect(char* name, uint16_t port)
 bool socket_close(uint16_t id)
 {
 	char str[256];
+	sprintf(str, "AT+S.SOCKC=%d", id);
+	log_wifi(datetime, str);
 	sprintf(str, "AT+S.SOCKC=%d\r\n", id);
+	WiFi_SocketConnected[id] = false;
+	WiFi_SocketClosed[id] = true;
 	return SendAT(str);
 }
 
@@ -463,6 +489,8 @@ bool socket_write(uint16_t id, char* buffer, uint16_t len)
 bool socket_read (uint16_t id, char* buffer, uint16_t len)
 {
 	char str[256];
+	sprintf(str, "AT+S.SOCKR=%d,%d", id, len);
+	log_wifi(datetime, str);
 	sprintf(str, "AT+S.SOCKR=%d,%d\r\n", id, len);
 	char* ptr = GetResponsePtr();
 	if (SendAT(str))
@@ -474,7 +502,7 @@ bool socket_read (uint16_t id, char* buffer, uint16_t len)
 		return false;
 }
 
-bool socket_pending_data(uint16_t *len, int16_t *id)
+/*bool socket_pending_data(uint16_t *len, int16_t *id)
 {
 	if (WaitForWINDCommands(10, 1, (int)WIND_MSG_PENDING_DATA) > 0)
 	{
@@ -484,4 +512,30 @@ bool socket_pending_data(uint16_t *len, int16_t *id)
 	}
 	else
 		return false;
+}*/
+
+bool socket_pending_data(uint16_t *len, int16_t *id, uint32_t timeout)
+{
+	WIFI_PENDING_DATA data;
+	bool result = WaitPendingRequest(&data, timeout);
+	
+	*len = data.data_len;
+	*id = data.sock_id;
+	
+	return result;
+}
+
+uint16_t socket_qpending_data(int16_t id)
+{
+	char str[256];
+	sprintf(str, "AT+S.SOCKQ=%d", id);
+	log_wifi(datetime, str);
+	sprintf(str, "AT+S.SOCKQ=%d\r\n", id);
+	AsyncSendAT(str);
+	
+	uint16_t len = GetDataLen(WIFi_ConnectionTimeout);
+		
+	if (WaitOK(WIFi_ConnectionTimeout)) return len; // Wait 3 seconds for connection
+	
+	return 0;
 }
