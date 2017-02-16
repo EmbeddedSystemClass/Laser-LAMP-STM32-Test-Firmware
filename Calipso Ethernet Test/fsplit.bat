@@ -1,0 +1,1 @@
+fsplit CalipsoFirmwareV2REV1_0.bin 32768
