@@ -98,8 +98,9 @@ void LongPulseLaserWork_Process(uint16_t pic_id)
 	}
 	else
 	{
-		simmer_off_cnt--;
-		if (simmer_off_cnt < 0) simmer_off_cnt = 0;
+		simmer_off_cnt = 0;
+		/*simmer_off_cnt--;
+		if (simmer_off_cnt < 0) simmer_off_cnt = 0;*/
 	}
 	if ((simmer_off_cnt > 5) && pic_id != 55 && pic_id != 53) 
 	{
