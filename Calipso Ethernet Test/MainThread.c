@@ -158,6 +158,7 @@ void UpdateLaserState(uint16_t pic_id)
 	if ((pic_id == FRAME_PICID_LASERDIODE_STARTED) || 
 			(pic_id == FRAME_PICID_SOLIDSTATE_WORK) ||
 			(pic_id == FRAME_PICID_LONGPULSE_WORK) ||
+			(pic_id == FRAME_PICID_FRACTLASER_WORK) ||
 			(pic_id == FRAME_PICID_REMOTECONTROL) ||
 			(pic_id == FRAME_PICID_SERVICE_SOLIDSTATELASER) ||
 			(pic_id == FRAME_PICID_SERVICE_LASERDIODE))

@@ -25,4 +25,14 @@ bool SLOG_F(char* format, float32_t value);
 bool SLOG_I(char* format, int32_t value);
 bool log_wifi(DWIN_TIMEDATE date, char* str);
 
+void log_LaserDiodeStart(float32_t freq, float32_t duration, float32_t energy, uint32_t counter);
+void log_LaserSSStart(float32_t freq, float32_t duration, float32_t energy, uint32_t counter);
+void log_LongPulseStart(float32_t freq, float32_t duration, float32_t energy, uint32_t counter);
+void log_FractLaserStart(float32_t freq, float32_t duration, float32_t energy, uint32_t counter);
+
+void log_LaserDiodeStop(uint32_t counter);
+void log_LaserSSStop(uint32_t counter);
+void log_LongPulseStop(uint32_t counter);
+void log_FractLaserStop(uint32_t counter);
+
 #endif

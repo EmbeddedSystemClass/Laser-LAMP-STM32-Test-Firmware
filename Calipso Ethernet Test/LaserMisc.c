@@ -465,6 +465,7 @@ void SoundOff(void)
 
 LASER_ID GetLaserID()
 {
+	//return LASER_ID_FRACTLASER;
 	if (__MISC_LASER_ID0() == GPIO_PIN_SET)
 	{
 		if (__MISC_LASER_ID1() == GPIO_PIN_SET)

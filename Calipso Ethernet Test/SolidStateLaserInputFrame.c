@@ -33,6 +33,9 @@ uint16_t SetLaserSettings(uint16_t energy_index)
 	
 	SetPulseDuration_us(duration);
 	
+	duration_publish = duration * 0.001;
+	energy_publish = energy * 0.001;
+	
 	chargingVoltage = (float32_t)(voltageClb);
 	programI = ((float32_t)(voltageClb) / 450.0f) * 10.0f;
 	
@@ -166,6 +169,7 @@ void SolidStateLaserInput_Process(uint16_t pic_id)
 	}
 	
 	SetPulseFrequency(frameData_SolidStateLaser.laserprofile.Frequency);
+	frequency_publish = frameData_SolidStateLaser.laserprofile.Frequency;
 	
 	//if (frameData_SolidStateLaser.mode != 0) energy = (uint16_t)((float32_t)(energy) * 1.15f);
 	

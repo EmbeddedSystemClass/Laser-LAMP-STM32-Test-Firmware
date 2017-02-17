@@ -42,3 +42,5 @@
 .\objects\laserdiodeworkframe.o: C:\Keil_v5\ARM\PACK\ARM\CMSIS\5.0.0\CMSIS\Include\core_cm4.h
 .\objects\laserdiodeworkframe.o: LaserMisc.h
 .\objects\laserdiodeworkframe.o: GlobalVariables.h
+.\objects\laserdiodeworkframe.o: SDCard.h
+.\objects\laserdiodeworkframe.o: C:\Keil_v5\ARM\PACK\Keil\MDK-Middleware\7.3.0\FileSystem\Include\rl_fs.h

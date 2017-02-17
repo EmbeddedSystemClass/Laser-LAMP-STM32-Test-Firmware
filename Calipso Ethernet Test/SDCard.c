@@ -39,7 +39,7 @@ osMessageQId qid_SLog_Queue;
 osThreadId tid_SLogThread;
 osThreadDef (SLogThread, osPriorityNormal, 1, 0);
 
-void SaveOffset();
+void SaveOffset(void);
 bool log_out(DWIN_TIMEDATE date, char* data);
 bool log_out_f(DWIN_TIMEDATE date, char* format, float32_t value);
 bool log_out_i(DWIN_TIMEDATE date, char* format, int32_t value);
@@ -613,4 +613,61 @@ bool log_wifi(DWIN_TIMEDATE date, char* str)
 	}
 	else
 		return false;
+}
+
+void log_LaserDiodeStart(float32_t freq, float32_t duration, float32_t energy, uint32_t counter)
+{
+	char str[256];
+	sprintf(str, "Laser diode session (freq: %.1fHz, duration: %.3fs, energy: %.3f, counter: %d)\n", freq, duration, energy, counter);
+	LOG(0, str);
+}
+
+void log_LaserSSStart(float32_t freq, float32_t duration, float32_t energy, uint32_t counter)
+{
+	char str[256];
+	sprintf(str, "Tattoo removal session (freq: %.1fHz, duration: %.3fms, energy: %.3f, counter: %d)\n", freq, duration, energy, counter);
+	LOG(0, str);
+}
+
+void log_LongPulseStart(float32_t freq, float32_t duration, float32_t energy, uint32_t counter)
+{
+	char str[256];
+	sprintf(str, "Long pulse session (freq: %.1fHz, duration: %.3fs, energy: %.3f, counter: %d)\n", freq, duration, energy, counter);
+	LOG(0, str);
+}
+
+void log_FractLaserStart(float32_t freq, float32_t duration, float32_t energy, uint32_t counter)
+{
+	char str[256];
+	sprintf(str, "Fractional laser session (freq: %.1fHz, duration: %.3fs, energy: %.3f, counter: %d)\n", freq, duration, energy, counter);
+	LOG(0, str);
+}
+
+
+void log_LaserDiodeStop(uint32_t counter)
+{
+	char str[256];
+	sprintf(str, "Laser diode session end (counter: %d).\n", counter);
+	LOG(0, str);
+}
+
+void log_LaserSSStop(uint32_t counter)
+{
+	char str[256];
+	sprintf(str, "Tattoo removal session end (counter: %d).\n", counter);
+	LOG(0, str);
+}
+
+void log_LongPulseStop(uint32_t counter)
+{
+	char str[256];
+	sprintf(str, "Long pulse session end (counter: %d).\n", counter);
+	LOG(0, str);
+}
+
+void log_FractLaserStop(uint32_t counter)
+{
+	char str[256];
+	sprintf(str, "Fractional laser session end (counter: %d).\n", counter);
+	LOG(0, str);
 }

@@ -28,6 +28,11 @@ float32_t temperature_overheat = 29.5f;
 float32_t temperature_overheat_solidstate = 32.0f;
 float32_t temperature_normal = 27.5f;
 
+// Publish data
+float32_t frequency_publish = 0.0f;
+float32_t duration_publish = 0.0f;
+float32_t energy_publish = 0.0f;
+
 // Flow global variable
 float32_t flow_low = 0.0f;
 float32_t flow_normal = 4.0f;

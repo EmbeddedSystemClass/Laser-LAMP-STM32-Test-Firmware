@@ -13,7 +13,7 @@
 
 #define FLASH_LASERDATA_BASE 0x080E0000
 
-//#define DEBUG_SOLID_STATE_LASER
+#define DEBUG_SOLID_STATE_LASER
 #define NEW_SOUNDSCHEME
 //#define NEW_COOLSCHEME
 #define NEW_DOUBLECOOLSCHEME
@@ -52,6 +52,11 @@ extern float32_t temperature_cool_off;
 extern float32_t temperature_overheat;
 extern float32_t temperature_overheat_solidstate;
 extern float32_t temperature_normal;
+
+// Publish data
+extern float32_t frequency_publish;
+extern float32_t duration_publish;
+extern float32_t energy_publish;
 
 // Flow global variable
 extern float32_t flow_low;

@@ -4,6 +4,7 @@
 #include "stm32f4xx_hal.h"
 #include "SolidStateLaser.h"
 #include "GlobalVariables.h"
+#include "SDCard.h"
 
 #include <math.h>
 #include "arm_math.h"
@@ -53,6 +54,8 @@ void LaserDiodeWork_Process(uint16_t pic_id)
 	
 	if (frameData_LaserDiode.buttons.onStartBtn != 0)
 	{
+		log_LaserDiodeStart(frequency_publish, duration_publish, energy_publish, FlushesGlobalLD);
+		
 		// On Start Pressed
 		frameData_LaserDiode.buttons.onStartBtn = 0;
 		new_pic_id = FRAME_PICID_LASERDIODE_STARTED;
@@ -62,6 +65,8 @@ void LaserDiodeWork_Process(uint16_t pic_id)
 	
 	if (frameData_LaserDiode.buttons.onStopBtn != 0)
 	{
+		log_LaserDiodeStop(FlushesGlobalLD);
+		
 		// On Stop Pressed
 		frameData_LaserDiode.buttons.onStopBtn = 0;
 		new_pic_id = FRAME_PICID_LASERDIODE_INPUT;
