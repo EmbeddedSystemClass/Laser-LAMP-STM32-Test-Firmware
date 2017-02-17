@@ -16,6 +16,17 @@ UART_HandleTypeDef huart ={0};
 #define OW_1    0xff
 #define OW_R    0xff
 
+bool WaitFlag(volatile bool *flag, uint32_t timeout)
+{
+	uint32_t start_tick = HAL_GetTick();
+	
+	while (!(*flag))
+		if ((start_tick - HAL_GetTick()) < timeout)
+			return false;
+		
+	return true;
+}
+
 /* DS18B20 Commands */
 const uint8_t convert_T[] = {
                 OW_0, OW_0, OW_1, OW_1, OW_0, OW_0, OW_1, OW_1, // 0xcc SKIP ROM
@@ -143,7 +154,7 @@ bool DS18B20_Reset(void)
 	recv_complete = false;
 	Driver_USART6.Send((void*)&data_out, 1);
 	Driver_USART6.Receive((void*)&data_in, 1);
-	while (!recv_complete);
+	WaitFlag(&recv_complete, 1000);//while (!recv_complete);
 	
 	/*Configure the USART to 9600 Bits/sec */
   Driver_USART6.Control(ARM_USART_MODE_ASYNCHRONOUS |
@@ -164,7 +175,7 @@ void DS18B20_StartConvertion(void)
 	recv_complete = false;
 	Driver_USART6.Send((void*)&convert_T, 16);
 	Driver_USART6.Receive((void*)&t_buffer, 16);
-	while (!recv_complete);
+	WaitFlag(&recv_complete, 1000);//while (!recv_complete);
 }
 
 uint16_t DS18B20_ReadData(void)
@@ -172,7 +183,7 @@ uint16_t DS18B20_ReadData(void)
 	recv_complete = false;
 	Driver_USART6.Receive((void*)&t_buffer, 32);
 	Driver_USART6.Send((void*)&read_scratch, 32);
-	while (!recv_complete);
+	WaitFlag(&recv_complete, 1000);//while (!recv_complete);
 	
 	uint16_t tt = 0;
 

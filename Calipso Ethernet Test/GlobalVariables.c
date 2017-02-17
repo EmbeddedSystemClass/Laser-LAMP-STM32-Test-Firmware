@@ -1,6 +1,7 @@
 #include "GlobalVariables.h"
 #include "stm32f4xx_hal_flash.h"
 #include <string.h>
+#include "SDCard.h"
 
 //Date & time
 DWIN_TIMEDATE datetime = {0};
@@ -69,12 +70,16 @@ uint32_t FlushesSessionSS2 = 0;
 uint32_t FlushesGlobalSS2 = 0;
 uint32_t FlushesSessionLP = 0;
 uint32_t FlushesGlobalLP = 0;
+uint32_t FlushesSessionFL = 0;
+uint32_t FlushesGlobalFL = 0;
 uint16_t switch_filter_threshold = 10;
 volatile uint16_t switch_filter = 0;
 volatile bool footswitch_en = false;
 volatile bool footswitch_on = false;
 DGUS_LASERDIODE frameData_LaserDiode;
 DGUS_SOLIDSTATELASER frameData_SolidStateLaser;
+DGUS_SOLIDSTATELASER frameData_FractLaser;
+PROFILE_FRACTLASER config_FractLaser = {{1,1,1}, {5,3,3}};
 
 uint16_t min(uint16_t x, uint16_t y) { return (x>y)?y:x; }
 uint16_t max(uint16_t x, uint16_t y) { return (x>y)?x:y; }
@@ -564,17 +569,70 @@ void PhototypePreset(uint16_t phototype)
 	LaserPreset(&freq, &duration, &energy, Profile);
 }
 
+static uint32_t _FlushesGlobalLD  = 0;
+static uint32_t _FlushesGlobalSS  = 0;
+static uint32_t _FlushesGlobalSS2 = 0;
+static uint32_t _FlushesGlobalLP  = 0;
+static uint32_t _FlushesGlobalFL  = 0;
+
+void LoadGlobalVariablesFromSD(FILE* fp)
+{
+	fscanf(fp, "Laser diode counter: %d\n", 			&FlushesGlobalLD );
+	fscanf(fp, "Tattoo removal 1 counter: %d\n",	&FlushesGlobalSS );
+	fscanf(fp, "Tattoo removal 2 counter: %d\n",	&FlushesGlobalSS2);
+	fscanf(fp, "Long pulse counter: %d\n",				&FlushesGlobalLP );
+	fscanf(fp, "Fractional laser counter: %d\n",	&FlushesGlobalFL );
+	_FlushesGlobalLD  = FlushesGlobalLD;
+	_FlushesGlobalSS  = FlushesGlobalSS;
+	_FlushesGlobalSS2 = FlushesGlobalSS2;
+	_FlushesGlobalLP  = FlushesGlobalLP;
+	_FlushesGlobalFL  = FlushesGlobalFL;
+}
+
+void StoreGlobalVariablesFromSD(FILE* fp)
+{
+	fprintf(fp, "Laser diode counter: %d\n", 			FlushesGlobalLD );
+	fprintf(fp, "Tattoo removal 1 counter: %d\n",	FlushesGlobalSS );
+	fprintf(fp, "Tattoo removal 2 counter: %d\n",	FlushesGlobalSS2);
+	fprintf(fp, "Long pulse counter: %d\n",				FlushesGlobalLP );
+	fprintf(fp, "Fractional laser counter: %d\n",	FlushesGlobalFL );
+	_FlushesGlobalLD  = FlushesGlobalLD;
+	_FlushesGlobalSS  = FlushesGlobalSS;
+	_FlushesGlobalSS2 = FlushesGlobalSS2;
+	_FlushesGlobalLP  = FlushesGlobalLP;
+	_FlushesGlobalFL  = FlushesGlobalFL;
+}
+
 void LoadGlobalVariables(void)
 {
-	// Copy counters
-	memcpy((void*)&FlushesGlobalLD, (void*)&global_flash_data->LaserDiodePulseCounter, sizeof(uint32_t));
-	memcpy((void*)&FlushesGlobalSS, (void*)&global_flash_data->SolidStatePulseCounter, sizeof(uint32_t));
-	memcpy((void*)&FlushesGlobalSS2,(void*)&global_flash_data->SolidStatePulseCounter2, sizeof(uint32_t));
-	memcpy((void*)&FlushesGlobalLP, (void*)&global_flash_data->LongPulsePulseCounter, sizeof(uint32_t));
-	
-	// Copy profile states
-	memcpy((void*)&m_structLaserProfile, (void*)&global_flash_data->m_structLaserProfile, sizeof(m_structLaserProfile));
-	memcpy((void*)&m_structLaserSettings, (void*)&global_flash_data->m_structLaserSettings, sizeof(m_structLaserSettings));
+	if (!sdcard_ready)
+	{
+		// Copy counters
+		memcpy((void*)&FlushesGlobalLD, (void*)&global_flash_data->LaserDiodePulseCounter, sizeof(uint32_t));
+		memcpy((void*)&FlushesGlobalSS, (void*)&global_flash_data->SolidStatePulseCounter, sizeof(uint32_t));
+		memcpy((void*)&FlushesGlobalSS2,(void*)&global_flash_data->SolidStatePulseCounter2, sizeof(uint32_t));
+		memcpy((void*)&FlushesGlobalLP, (void*)&global_flash_data->LongPulsePulseCounter, sizeof(uint32_t));
+		memcpy((void*)&FlushesGlobalFL, (void*)&global_flash_data->FractLaserPulseCounter, sizeof(uint32_t));
+		
+		// Copy profile states
+		memcpy((void*)&m_structLaserProfile, (void*)&global_flash_data->m_structLaserProfile, sizeof(m_structLaserProfile));
+		memcpy((void*)&m_structLaserSettings, (void*)&global_flash_data->m_structLaserSettings, sizeof(m_structLaserSettings));
+	}
+	else
+	{
+		FILE* fp = fopen("dump.txt", "r");
+		if (fp != NULL)
+		{
+			LoadGlobalVariablesFromSD(fp);
+			fclose(fp);
+		}
+		else
+		{
+			fp = fopen("dump.txt", "w");
+			StoreGlobalVariablesFromSD(fp);
+			fclose(fp);
+		}
+	}
 }
 
 void fmemcpy(uint8_t* dst, uint8_t* src, uint16_t len)
@@ -628,6 +686,7 @@ void ClearGlobalVariables(void)
 	fmemcpy((void*)&global_flash_data->SolidStatePulseCounter, (void*)&FlushesGlobalSS, sizeof(uint32_t));
 	fmemcpy((void*)&global_flash_data->SolidStatePulseCounter2, (void*)&FlushesGlobalSS2, sizeof(uint32_t));
 	fmemcpy((void*)&global_flash_data->LongPulsePulseCounter, (void*)&FlushesGlobalLP, sizeof(uint32_t));
+	fmemcpy((void*)&global_flash_data->FractLaserPulseCounter, (void*)&FlushesGlobalFL, sizeof(uint32_t));
 	
 	// Copy profile states
 	fmemcpy((void*)&global_flash_data->m_structLaserProfile, (void*)&m_structLaserProfile, sizeof(m_structLaserProfile));
@@ -638,33 +697,58 @@ void ClearGlobalVariables(void)
 
 void StoreGlobalVariables(void)
 {
-	FLASH_EraseInitTypeDef flash_erase = {0};
-	
-	flash_erase.TypeErase = FLASH_TYPEERASE_SECTORS;
-	flash_erase.Banks = FLASH_BANK_1;
-	flash_erase.Sector = FLASH_SECTOR_11;
-	flash_erase.NbSectors = 1;
-	flash_erase.VoltageRange = FLASH_VOLTAGE_RANGE_3;
-	
-	uint32_t sector_error = 0;
-	
-	while (HAL_FLASH_Unlock() != HAL_OK);
-	HAL_FLASHEx_Erase(&flash_erase, &sector_error);
-	
-	FLASH_WaitForLastOperation((uint32_t)50000U);
-	HAL_FLASH_Lock();
-	
-	while (HAL_FLASH_Unlock() != HAL_OK);
-	
-	// Copy presets
-	fmemcpy((void*)&global_flash_data->LaserDiodePulseCounter, (void*)&FlushesGlobalLD, sizeof(uint32_t));
-	fmemcpy((void*)&global_flash_data->SolidStatePulseCounter, (void*)&FlushesGlobalSS, sizeof(uint32_t));
-	fmemcpy((void*)&global_flash_data->SolidStatePulseCounter2, (void*)&FlushesGlobalSS2, sizeof(uint32_t));
-	fmemcpy((void*)&global_flash_data->LongPulsePulseCounter, (void*)&FlushesGlobalLP, sizeof(uint32_t));
-	
-	/*// Copy profile states
-	fmemcpy((void*)&global_flash_data->m_structLaserProfile, (void*)&m_structLaserProfile, sizeof(m_structLaserProfile));
-	fmemcpy((void*)&global_flash_data->m_structLaserSettings, (void*)&m_structLaserSettings, sizeof(m_structLaserSettings));*/
-	
-	HAL_FLASH_Lock();
+	if (!sdcard_ready)
+	{
+		FLASH_EraseInitTypeDef flash_erase = {0};
+		
+		flash_erase.TypeErase = FLASH_TYPEERASE_SECTORS;
+		flash_erase.Banks = FLASH_BANK_1;
+		flash_erase.Sector = FLASH_SECTOR_11;
+		flash_erase.NbSectors = 1;
+		flash_erase.VoltageRange = FLASH_VOLTAGE_RANGE_3;
+		
+		uint32_t sector_error = 0;
+		
+		while (HAL_FLASH_Unlock() != HAL_OK);
+		HAL_FLASHEx_Erase(&flash_erase, &sector_error);
+		
+		FLASH_WaitForLastOperation((uint32_t)50000U);
+		HAL_FLASH_Lock();
+		
+		while (HAL_FLASH_Unlock() != HAL_OK);
+		
+		// Copy presets
+		fmemcpy((void*)&global_flash_data->LaserDiodePulseCounter, (void*)&FlushesGlobalLD, sizeof(uint32_t));
+		fmemcpy((void*)&global_flash_data->SolidStatePulseCounter, (void*)&FlushesGlobalSS, sizeof(uint32_t));
+		fmemcpy((void*)&global_flash_data->SolidStatePulseCounter2, (void*)&FlushesGlobalSS2, sizeof(uint32_t));
+		fmemcpy((void*)&global_flash_data->LongPulsePulseCounter, (void*)&FlushesGlobalLP, sizeof(uint32_t));
+		fmemcpy((void*)&global_flash_data->FractLaserPulseCounter, (void*)&FlushesGlobalFL, sizeof(uint32_t));
+		
+		/*// Copy profile states
+		fmemcpy((void*)&global_flash_data->m_structLaserProfile, (void*)&m_structLaserProfile, sizeof(m_structLaserProfile));
+		fmemcpy((void*)&global_flash_data->m_structLaserSettings, (void*)&m_structLaserSettings, sizeof(m_structLaserSettings));*/
+		
+		HAL_FLASH_Lock();
+	}
+}
+
+void TryStoreGlobalVariables(void)
+{
+	if (sdcard_ready)
+	{
+		bool update = false;
+		
+		if (_FlushesGlobalLD  != FlushesGlobalLD ) update = true;
+		if (_FlushesGlobalSS  != FlushesGlobalSS ) update = true;
+		if (_FlushesGlobalSS2 != FlushesGlobalSS2) update = true;
+		if (_FlushesGlobalLP  != FlushesGlobalLP ) update = true;
+		if (_FlushesGlobalFL  != FlushesGlobalFL ) update = true;
+		
+		if (update)
+		{
+			FILE* fp = fopen("dump.txt", "w");
+			StoreGlobalVariablesFromSD(fp);
+			fclose(fp);
+		}
+	}
 }

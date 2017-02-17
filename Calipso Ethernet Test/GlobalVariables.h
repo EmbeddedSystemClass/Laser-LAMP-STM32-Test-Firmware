@@ -13,7 +13,7 @@
 
 #define FLASH_LASERDATA_BASE 0x080E0000
 
-#define DEBUG_SOLID_STATE_LASER
+//#define DEBUG_SOLID_STATE_LASER
 #define NEW_SOUNDSCHEME
 //#define NEW_COOLSCHEME
 #define NEW_DOUBLECOOLSCHEME
@@ -72,6 +72,14 @@ extern volatile float32_t CurrentMonitor;
 // Laser ID
 extern LASER_ID LaserID;
 extern MENU_ID MenuID;
+
+typedef struct PROFILE_FRACTLASER_STRUCT
+{
+	uint16_t mode_freq_min[3];
+	uint16_t mode_freq_max[3];
+	//uint16_t mode_energy_min[3];
+	//uint16_t mode_energy_max[3];
+} PROFILE_FRACTLASER, *PPROFILE_FRACTLASER;
                                               
 // Private variables
 extern uint16_t pic_id;
@@ -95,12 +103,16 @@ extern uint32_t FlushesSessionSS2;
 extern uint32_t FlushesGlobalSS2;
 extern uint32_t FlushesSessionLP;
 extern uint32_t FlushesGlobalLP;
+extern uint32_t FlushesSessionFL;
+extern uint32_t FlushesGlobalFL;
 extern volatile bool footswitch_en;
 extern volatile bool footswitch_on;
 extern volatile uint16_t switch_filter;
 extern uint16_t switch_filter_threshold;
 extern DGUS_LASERDIODE frameData_LaserDiode;
 extern DGUS_SOLIDSTATELASER frameData_SolidStateLaser;
+extern DGUS_SOLIDSTATELASER frameData_FractLaser;
+extern PROFILE_FRACTLASER config_FractLaser;
 
 // Log Structures
 typedef struct LOG_EVENT_STRUCT
@@ -157,6 +169,7 @@ typedef struct FLASH_GLOBAL_DATA_STRUCT
 	uint32_t SolidStatePulseCounter;
 	uint32_t SolidStatePulseCounter2;
 	uint32_t LongPulsePulseCounter;
+	uint32_t FractLaserPulseCounter;
 	
 	// GUI preset
 	DGUS_LASERPROFILE	m_structLaserProfile [5];
@@ -182,9 +195,12 @@ void LaserPreset(uint16_t *freq, uint16_t *duration, uint16_t *energy, APP_PROFI
 void MelaninPreset(uint16_t melanin);
 void PhototypePreset(uint16_t phototype);
 
+void LoadGlobalVariablesFromSD(FILE* fp);
+void StoreGlobalVariablesFromSD(FILE* fp);
 void ClearGlobalVariables(void);
 void LoadGlobalVariables(void);
 void StoreGlobalVariables(void);
+void TryStoreGlobalVariables(void);
 
 // Flash data
 extern PFLASH_GLOBAL_DATA global_flash_data;

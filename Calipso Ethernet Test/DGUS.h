@@ -179,6 +179,15 @@ extern UART_HandleTypeDef huart1;
 
 #define FRAME_PICID_LOGVIEW										  66			// Process
 
+#define FRAME_PICID_FRACTLASER_INPUT						73			// Process
+#define FRAME_PICID_FRACTLASER_SIMMERSTART			75
+#define FRAME_PICID_FRACTLASER_SIMMER						77			// Process
+#define FRAME_PICID_FRACTLASER_START						78			// Process
+#define FRAME_PICID_FRACTLASER_WORK							79			// Process
+#define FRAME_PICID_FRACTLASER_FLOWERROR				81			// Process
+#define FRAME_PICID_FRACTLASER_OVERHEATING			82			// Process
+#define FRAME_PICID_FRACTLASER_FAULT						83			// Process
+
 #define IS_LASERDIODE(pic_id) (pic_id >= 19 && pic_id <= 32)
 #define IS_SOLIDSTATE(pic_id) (pic_id >= 37 && pic_id <= 42)
 #define IS_LONGPULSE (pic_id) (pic_id >= 53 && pic_id <= 62)

@@ -85,6 +85,15 @@ static void LaserTimer_Callback(void const *arg) {
 		cnt = 0;
 	}
 	
+	static int cnt_store = 0;
+	cnt_store++;
+	
+	if (cnt_store > 1000)
+	{
+		TryStoreGlobalVariables();
+		cnt_store = 0;
+	}
+	
   // add user code here
 	if (g_peltier_en)
 	{

@@ -128,10 +128,6 @@ int main(void)
 	
 	HAL_Delay(10);
 	
-	// Load global variables from flash
-	//ClearGlobalVariables();
-	LoadGlobalVariables();
-	
 	if (GetLaserID() == LASER_ID_DIODELASER)
 		__MISC_RELAY3_ON();
 	else
@@ -152,6 +148,11 @@ int main(void)
 
 	SpeakerInit();	
 	init_filesystem();
+	
+	// Load global variables from flash
+	//ClearGlobalVariables();
+	LoadGlobalVariables();
+	
 	start_log(datetime);
 	
 	//HAL_Init();

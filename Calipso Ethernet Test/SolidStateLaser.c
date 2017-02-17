@@ -70,6 +70,10 @@ void SolidStateLaserPulseInc(LASER_ID laser_id)
 {
 	switch (laser_id)
 	{
+		case LASER_ID_FRACTLASER:
+			FlushesSessionFL++;
+			FlushesGlobalFL++;
+			break;
 		case LASER_ID_SOLIDSTATE:
 			FlushesSessionSS++;
 			FlushesGlobalSS++;
@@ -91,6 +95,8 @@ uint32_t GetSolidStateGlobalPulse(LASER_ID laser_id)
 {
 	switch (laser_id)
 	{
+		case LASER_ID_FRACTLASER:
+			return FlushesGlobalFL;
 		case LASER_ID_SOLIDSTATE:
 			return FlushesGlobalSS;
 		case LASER_ID_SOLIDSTATE2:
@@ -107,6 +113,8 @@ uint32_t GetSolidStateSessionPulse(LASER_ID laser_id)
 {
 	switch (laser_id)
 	{
+		case LASER_ID_FRACTLASER:
+			return FlushesSessionFL;
 		case LASER_ID_SOLIDSTATE:
 			return FlushesSessionSS;
 		case LASER_ID_SOLIDSTATE2:

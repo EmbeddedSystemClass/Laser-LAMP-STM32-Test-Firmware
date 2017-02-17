@@ -39,3 +39,5 @@
 .\objects\globalvariables.o: C:\Keil_v5\ARM\PACK\ARM\CMSIS\5.0.0\CMSIS\RTOS\RTX\INC\cmsis_os.h
 .\objects\globalvariables.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stddef.h
 .\objects\globalvariables.o: LaserMisc.h
+.\objects\globalvariables.o: SDCard.h
+.\objects\globalvariables.o: C:\Keil_v5\ARM\PACK\Keil\MDK-Middleware\7.3.0\FileSystem\Include\rl_fs.h

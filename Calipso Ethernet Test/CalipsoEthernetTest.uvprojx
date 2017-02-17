@@ -482,6 +482,21 @@
               <FileType>1</FileType>
               <FilePath>.\LogFrame.c</FilePath>
             </File>
+            <File>
+              <FileName>FractLaserInputFrame.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\FractLaserInputFrame.c</FilePath>
+            </File>
+            <File>
+              <FileName>FractLaserPrepareFrame.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\FractLaserPrepareFrame.c</FilePath>
+            </File>
+            <File>
+              <FileName>FractLaserWorkFrame.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\FractLaserWorkFrame.c</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>

@@ -44,6 +44,11 @@ extern void    LongPulseLaserInput_Process(uint16_t pic_id);
 extern void  LongPulseLaserPrepare_Process(uint16_t pic_id);
 extern void     LongPulseLaserWork_Process(uint16_t pic_id);
 
+extern void        FractLaserInput_Init   (uint16_t pic_id);
+extern void        FractLaserInput_Process(uint16_t pic_id);
+extern void      FractLaserPrepare_Process(uint16_t pic_id);
+extern void    			FractLaserWork_Process(uint16_t pic_id);
+
 extern void       WifiScanningFrame_Init   (uint16_t pic_id);
 extern void  		  WifiScanningFrame_Process(uint16_t pic_id);
 extern void WifiAuthenticationFrame_Process(uint16_t pic_id);
@@ -227,7 +232,7 @@ void UpdateLaserState(uint16_t pic_id)
 	}
 	
 	// Check for errors of solid state laser
-	if ((pic_id >= 35) && (pic_id <= 43))
+	if ((pic_id >= FRAME_PICID_SOLIDSTATE_INPUT) && (pic_id <= FRAME_PICID_SOLIDSTATE_WORK))
 	{
 		if (GetLaserID() == LASER_ID_SOLIDSTATE)
 			MenuID = MENU_ID_SOLIDSTATE;
@@ -254,6 +259,34 @@ void UpdateLaserState(uint16_t pic_id)
 		{
 			SolidStateLaserOff();
 			SetPicId(FRAME_PICID_SOLIDSTATE_FAULT, g_wDGUSTimeout);
+		}
+	}
+	
+	// Check for errors of fractional laser
+	if ((pic_id >= FRAME_PICID_FRACTLASER_INPUT) && (pic_id <= FRAME_PICID_FRACTLASER_WORK))
+	{		
+		if (GetLaserID() == LASER_ID_FRACTLASER)
+			MenuID = MENU_ID_FRACTLASER;
+		
+		// Check temperature
+		if (temperature > temperature_overheat_solidstate)
+		{
+			SolidStateLaserOff();
+			SetPicId(FRAME_PICID_FRACTLASER_OVERHEATING, g_wDGUSTimeout);
+		}
+		
+		// Check flow
+		if (flow1 < flow_low)
+		{
+			SolidStateLaserOff();
+			SetPicId(FRAME_PICID_FRACTLASER_FLOWERROR, g_wDGUSTimeout);
+		}
+		
+		// Fault check
+		if (__MISC_GETCHARGEMODULEFAULTSTATE())
+		{
+			SolidStateLaserOff();
+			SetPicId(FRAME_PICID_FRACTLASER_FAULT, g_wDGUSTimeout);
 		}
 	}
 	
@@ -314,6 +347,7 @@ void MainThread (void const *argument) {
 	LaserDiodeInput_Init(pic_id);
 	SolidStateLaserInput_Init(pic_id);
 	LongPulseLaserInput_Init(pic_id);
+	FractLaserInput_Init(pic_id);
 	
 	GetDateTime(g_wDGUSTimeout, &datetime);
 
@@ -438,7 +472,10 @@ void MainThread (void const *argument) {
 			case FRAME_PICID_LONGPULSE_INPUT:	
 				if (last_pic_id != pic_id && last_menu_id != MenuID)
 					LongPulseLaserInput_Init(pic_id);
-				LongPulseLaserInput_Process(pic_id);
+				if (GetLaserID() == LASER_ID_LONGPULSE)
+					LongPulseLaserInput_Process(pic_id);
+				else
+					SetPicId(FRAME_PICID_WRONG_EMMITER, g_wDGUSTimeout);
 				UpdateLaserStatus();
 				/*
 				if (GetLaserID() == LASER_ID_LONGPULSE)				
@@ -463,6 +500,30 @@ void MainThread (void const *argument) {
 			case FRAME_PICID_LONGPULSE_OVERHEATING:
 			case FRAME_PICID_LONGPULSE_FAULT:
 				LongPulseLaserPrepare_Process(pic_id);
+				UpdateLaserStatus();
+				break;
+			
+			// Fractional Laser
+			case FRAME_PICID_FRACTLASER_INPUT:	
+				if (last_pic_id != pic_id && last_menu_id != MenuID)
+					FractLaserInput_Init(pic_id);
+				if (GetLaserID() == LASER_ID_FRACTLASER)
+					FractLaserInput_Process(pic_id);
+				else
+					SetPicId(FRAME_PICID_WRONG_EMMITER, g_wDGUSTimeout);
+				UpdateLaserStatus();
+				break;
+			case FRAME_PICID_FRACTLASER_SIMMERSTART:
+			case FRAME_PICID_FRACTLASER_SIMMER:
+			case FRAME_PICID_FRACTLASER_START:
+			case FRAME_PICID_FRACTLASER_WORK:
+				FractLaserWork_Process(pic_id);
+				UpdateLaserStatus();
+				break;
+			case FRAME_PICID_FRACTLASER_FLOWERROR:
+			case FRAME_PICID_FRACTLASER_OVERHEATING:
+			case FRAME_PICID_FRACTLASER_FAULT:
+				FractLaserPrepare_Process(pic_id);
 				UpdateLaserStatus();
 				break;
 			
