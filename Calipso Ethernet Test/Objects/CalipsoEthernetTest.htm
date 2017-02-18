@@ -3,7 +3,7 @@
 <title>Static Call Graph - [.\Objects\CalipsoEthernetTest.axf]</title></head>
 <body><HR>
 <H1>Static Call Graph for image .\Objects\CalipsoEthernetTest.axf</H1><HR>
-<BR><P>#&#060CALLGRAPH&#062# ARM Linker, 5060183: Last Updated: Fri Feb 17 19:20:09 2017
+<BR><P>#&#060CALLGRAPH&#062# ARM Linker, 5060183: Last Updated: Sat Feb 18 11:14:58 2017
 <BR><P>
 <H3>Maximum Stack Usage =       1024 bytes + Unknown(Functions without stacksize, Cycles, Untraceable Function Pointers)</H3><H3>
 Call chain for Maximum Stack Depth:</H3>
@@ -4190,10 +4190,11 @@ Global Symbols
 </UL>
 <BR>[Address Reference Count : 1]<UL><LI> wifidriver.o(i.Init_WiFiDriver_Thread)
 </UL>
-<P><STRONG><a name="[1a9]"></a>WaitFlag</STRONG> (Thumb, 38 bytes, Stack size 16 bytes, ds18b20.o(i.WaitFlag))
+<P><STRONG><a name="[1a9]"></a>WaitFlag</STRONG> (Thumb, 42 bytes, Stack size 16 bytes, ds18b20.o(i.WaitFlag))
 <BR><BR>[Stack]<UL><LI>Max Depth = 16<LI>Call Chain = WaitFlag
 </UL>
 <BR>[Calls]<UL><LI><a href="#[1b9]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_GetTick
+<LI><a href="#[19a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;osThreadYield
 </UL>
 <BR>[Called By]<UL><LI><a href="#[1ac]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;DS18B20_StartConvertion
 <LI><a href="#[1aa]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;DS18B20_Reset
@@ -5736,6 +5737,7 @@ Global Symbols
 <LI><a href="#[93]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;MainThread
 <LI><a href="#[99]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SLogThread
 <LI><a href="#[98]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;LogThread
+<LI><a href="#[1a9]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;WaitFlag
 <LI><a href="#[9a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;WiFiThread
 </UL>
 

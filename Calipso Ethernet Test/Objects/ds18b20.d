@@ -38,3 +38,4 @@
 .\objects\ds18b20.o: C:\Keil_v5\ARM\PACK\ARM\CMSIS\5.0.0\CMSIS\Driver\Include\Driver_USART.h
 .\objects\ds18b20.o: C:\Keil_v5\ARM\PACK\ARM\CMSIS\5.0.0\CMSIS\Driver\Include\Driver_Common.h
 .\objects\ds18b20.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stddef.h
+.\objects\ds18b20.o: C:\Keil_v5\ARM\PACK\ARM\CMSIS\5.0.0\CMSIS\RTOS\RTX\INC\cmsis_os.h

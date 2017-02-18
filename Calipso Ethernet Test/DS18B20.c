@@ -3,6 +3,10 @@
 #include "stm32f4xx_hal_uart.h"
 #include <stdbool.h>
 
+#ifdef RTE_CMSIS_RTOS                   // when RTE component CMSIS RTOS is used
+#include "cmsis_os.h"                   // CMSIS RTOS header file
+#endif
+
 uint8_t t_buffer[32];
 volatile bool recv_complete;
 
@@ -20,9 +24,12 @@ bool WaitFlag(volatile bool *flag, uint32_t timeout)
 {
 	uint32_t start_tick = HAL_GetTick();
 	
-	while (!(*flag))
-		if ((start_tick - HAL_GetTick()) < timeout)
+	while (!(*flag));
+	{
+		if ((start_tick - HAL_GetTick()) > timeout)
 			return false;
+		osThreadYield();
+	}
 		
 	return true;
 }
