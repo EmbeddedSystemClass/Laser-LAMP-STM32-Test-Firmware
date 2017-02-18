@@ -472,7 +472,7 @@ bool socket_close(uint16_t id)
 
 bool socket_write(uint16_t id, char* buffer, uint16_t len)
 {
-	sprintf(buffer_tx, "AT+S.SOCKW=%d,%d\r\n", id, len);
+	sprintf(buffer_tx, "AT+S.SOCKW=%d,%d\r", id, len);
 	
 	uint16_t index = strlen(buffer_tx);
 	
@@ -483,7 +483,7 @@ bool socket_write(uint16_t id, char* buffer, uint16_t len)
 	
 	Driver_USART3.Send(buffer_tx, index + len);
 	
-	return WaitOK(WIFi_RequestTimeout);
+	return true;//WaitOK(WIFi_RequestTimeout);
 }
 
 bool socket_read (uint16_t id, char* buffer, uint16_t len)

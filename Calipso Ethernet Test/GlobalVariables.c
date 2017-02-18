@@ -34,7 +34,7 @@ float32_t duration_publish = 0.0f;
 float32_t energy_publish = 0.0f;
 
 // Flow global variable
-float32_t flow_low = 0.0f;
+float32_t flow_low = 2.0f;
 float32_t flow_normal = 4.0f;
 
 // Service menu password

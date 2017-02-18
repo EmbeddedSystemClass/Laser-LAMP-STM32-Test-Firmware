@@ -24,9 +24,9 @@ bool WaitFlag(volatile bool *flag, uint32_t timeout)
 {
 	uint32_t start_tick = HAL_GetTick();
 	
-	while (!(*flag));
+	while (!(*flag))
 	{
-		if ((start_tick - HAL_GetTick()) > timeout)
+		if ((HAL_GetTick() - start_tick) > timeout)
 			return false;
 		osThreadYield();
 	}

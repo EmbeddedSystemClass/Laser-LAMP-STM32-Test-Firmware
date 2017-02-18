@@ -154,17 +154,17 @@ void WiFiThread_Idle()
 			if (socket_pending_data(&len, &resp_sock_id, 1000))
 				socket_read(resp_sock_id, httpBuffer, len);
 			
-			socket_write(sock_id, "user ftpdevice\n", 16);
+			socket_write(sock_id, "user ftpdevice\n", 15);
 			
 			if (socket_pending_data(&len, &resp_sock_id, 1000))
 				socket_read(resp_sock_id, httpBuffer, len);
 			
-			socket_write(sock_id, "pass xejQmMs2#4AN\n", 19);
+			socket_write(sock_id, "pass xejQmMs2#4AN\n", 18);
 			
 			if (socket_pending_data(&len, &resp_sock_id, 1000))
 				socket_read(resp_sock_id, httpBuffer, len);
 			
-			socket_write(sock_id, "pasv\n", 6);
+			socket_write(sock_id, "pasv\n", 5);
 			
 			if (socket_pending_data(&len, &resp_sock_id, 10000))
 				socket_read(resp_sock_id, httpBuffer, len);
@@ -176,7 +176,7 @@ void WiFiThread_Idle()
 				/*if (socket_pending_data(&len, &resp_sock_id, 1000))
 					socket_read(resp_sock_id, httpBuffer, len);*/
 				
-				socket_write(sock_id, "retr /etc/crontab\n", 19);
+				socket_write(sock_id, "retr /etc/crontab\n", 18);
 				
 				while (socket_pending_data(&len, &resp_sock_id, 1000))
 					socket_read(resp_sock_id, httpBuffer, len);
@@ -200,6 +200,66 @@ void WiFiThread_Idle()
 }
 
 void WiFiThread_PublishToServer()
+{
+	char log[512];
+	uint16_t len = 0;
+	uint16_t resp_code = 0;
+	uint16_t port = 0;
+	int16_t sock_id = -1;
+	
+	if (WiFiConnectionEstabilished)
+	{
+		static bool authentification = false;
+		static bool authentification_start = true;
+		
+		if (!authentification && authentification_start)
+		{
+			char* auth_request = "GET http://innolaser-service.ru/service-api/device_auth.php?login=vlad&password=ovchin_1988 HTTP/1.1\r\nHost: innolaser-service.ru\r\nCache-Control: no-cache, no-store, max-age=0\r\n\r\n\r\n";
+			sock_id = socket_connect("innolaser-service.ru", 80);
+			
+			if (sock_id >= 0)
+			{
+				int16_t resp_sock_id = -1;
+				socket_write(sock_id, auth_request, strlen(auth_request));
+			
+				if (socket_pending_data(&len, &resp_sock_id, 10000))
+					socket_read(resp_sock_id, httpBuffer, len);
+				
+				if (parseHTTP(httpBuffer, cookie_handler))
+					authentification = true;
+				
+				authentification_start = false;
+				
+				len = socket_qpending_data(sock_id);
+				if (len > 0)
+					socket_read(sock_id, httpBuffer, len);
+				socket_close(sock_id);
+			}
+		}
+		else
+		{
+			sock_id = socket_connect("innolaser-service.ru", 80);
+			
+			if (sock_id >= 0)
+			{
+				int16_t resp_sock_id = -1;
+				sprintf(log, "GET http://innolaser-service.ru/service-api/device_update.php?temperature=%.1f&flow=%.1f	HTTP/1.1\r\nHost: innolaser-service.ru\r\nCookie: PHPSESSID=%s; path=/\r\nPragma: no-cache\r\n\r\n\r\n", temperature, flow1, PHPSESSID);
+				
+				socket_write(sock_id, log, strlen(log));
+				
+				if (socket_pending_data(&len, &resp_sock_id, 10000))
+					socket_read(resp_sock_id, httpBuffer, len);
+				
+				len = socket_qpending_data(sock_id);
+				if (len > 0)
+					socket_read(sock_id, httpBuffer, len);
+				socket_close(sock_id);
+			}
+		}
+	}
+}
+
+void WiFiThread_PublishToServer_()
 {	
 	char str[256];
 	char log[512];
@@ -212,13 +272,13 @@ void WiFiThread_PublishToServer()
 		
 		if (!authentification && authentification_start)
 		{			
-			char* auth_request = "GET http://innolaser-service.ru:3000/device_auth.php?login=vlad&password=ovchin_1988 HTTP/1.1\r\nHost: innolaser-service.ru\r\nCache-Control: no-cache, no-store, max-age=0\r\n\r\n\r\n";
+			char* auth_request = "GET http://innolaser-service.ru/service-api/device_auth.php?login=vlad&password=ovchin_1988 HTTP/1.1\r\nHost: innolaser-service.ru\r\nCache-Control: no-cache, no-store, max-age=0\r\n\r\n\r\n";
 			uint16_t len = strlen(auth_request);
 			
 			// Connect to the server
 			//if (!WiFi_SocketConnected)
 			{
-				AsyncSendAT("AT+S.SOCKON=innolaser-service.ru,3000,t,ind\r\n");		
+				AsyncSendAT("AT+S.SOCKON=innolaser-service.ru,80,t,ind\r\n");		
 				id = GetID(WIFi_ConnectionTimeout);		
 				if (id < 0) return;
 				if (!WaitOK(WIFi_ConnectionTimeout)) return; // Wait 3 seconds for connection
@@ -265,8 +325,8 @@ void WiFiThread_PublishToServer()
 			// Connect to the server
 			//if (!WiFi_SocketConnected)
 			{
-				log_wifi(datetime, "AT+S.SOCKON=innolaser-service.ru,3000,t,ind");
-				AsyncSendAT("AT+S.SOCKON=innolaser-service.ru,3000,t,ind\r\n");
+				log_wifi(datetime, "AT+S.SOCKON=innolaser-service.ru,80,t,ind");
+				AsyncSendAT("AT+S.SOCKON=innolaser-service.ru,80,t,ind\r\n");
 				id = GetID(WIFi_ConnectionTimeout);
 				if (id < 0) 
 				{
@@ -285,7 +345,7 @@ void WiFiThread_PublishToServer()
 			sprintf(str, " ID response : %d", id);
 			log_wifi(datetime, str);
 			
-			sprintf(log, "GET http://innolaser-service.ru:3000/device_update.php?cooling_level=%d&working=%d&cooling=%d&peltier=%d&temperature=%.1f&flow=%.1f&frequency=%d&power=%d	HTTP/1.1\r\nHost: innolaser-service.ru\r\nCookie: PHPSESSID=%s; path=/\r\nPragma: no-cache\r\n\r\n\r\n", 6, 1, 1, 1, temperature, flow1, 10, 100, PHPSESSID);
+			sprintf(log, "GET http://innolaser-service.ru/service-api/device_update.php?cooling_level=%d&working=%d&cooling=%d&peltier=%d&temperature=%.1f&flow=%.1f&frequency=%d&power=%d	HTTP/1.1\r\nHost: innolaser-service.ru\r\nCookie: PHPSESSID=%s; path=/\r\nPragma: no-cache\r\n\r\n\r\n", 6, 1, 1, 1, temperature, flow1, 10, 100, PHPSESSID);
 			uint16_t len = strlen(log);
 			
 			// Send HTTP GET			
@@ -450,7 +510,7 @@ void CalipsoWiFiThread (void const *argument) {
 	WiFiConnectionEstabilished = false;
 	RemoteControl = false;
 	
-	// Start wifi logging
+	/*// Start wifi logging
 	//start_wifi(datetime);
 	
 	//Set WiFi SSID
@@ -466,7 +526,7 @@ void CalipsoWiFiThread (void const *argument) {
 	
 	// Reastart WiFi Module
 	HAL_GPIO_WritePin(GPIOG, GPIO_PIN_2, GPIO_PIN_SET);
-	//SendAT("AT&V\r\n");
+	//SendAT("AT&V\r\n");*/
 	SendAT("AT+CFUN=1\r\n");
 	
 	// Main command loop
@@ -474,7 +534,7 @@ void CalipsoWiFiThread (void const *argument) {
 		osEvent event = osMessageGet(qid_WiFiCMDQueue, 3000);
 		
 		if (event.status == osEventTimeout)
-			WiFiThread_Idle(); // Send data to the "innolaser-service.ru" server
+			WiFiThread_PublishToServer(); // Send data to the "innolaser-service.ru" server
 		else
 		if (event.status == osEventMessage)
 		{
