@@ -57,6 +57,9 @@ extern float32_t temperature_normal;
 extern float32_t frequency_publish;
 extern float32_t duration_publish;
 extern float32_t energy_publish;
+extern bool g_peltier_en;
+extern bool g_cooling_en;
+extern uint16_t cooling_level;
 
 // Flow global variable
 extern float32_t flow_low;

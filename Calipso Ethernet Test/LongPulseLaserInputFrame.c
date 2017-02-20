@@ -183,6 +183,7 @@ void LongPulseLaserInput_Process(uint16_t pic_id)
 	}
 	
 	SetPulseFrequency_(frameData_SolidStateLaser.laserprofile.Frequency);
+	frequency_publish = frameData_SolidStateLaser.laserprofile.Frequency * 0.1f;
 	
 	bool update_val = false;
 	if (mode != frameData_SolidStateLaser.mode)		{ update = true; update_val = true; };
@@ -213,6 +214,8 @@ void LongPulseLaserInput_Process(uint16_t pic_id)
 			break;
 	}
 	
+	energy_publish = frameData_SolidStateLaser.lasersettings.Energy * 0.1f;
+	
 	if ((durationCnt != frameData_SolidStateLaser.laserprofile.DurationCnt) || update_val)
 	{
 			update = true;
@@ -228,9 +231,15 @@ void LongPulseLaserInput_Process(uint16_t pic_id)
 	_programI = ((float32_t)(voltage) / 450.0f) * 10.0f;
 	
 	if (frameData_SolidStateLaser.mode == 0)
+	{
 		SetPulseDuration_us(duration * 10);
+		duration_publish = duration * 10.0f * 0.000001f;
+	}
 	else
+	{
 		SetPulseDuration_ms(duration, duration * 2);
+		duration_publish = duration * 0.001f;
+	}
 
 	__SOLIDSTATELASER_DISCHARGEON();
 	

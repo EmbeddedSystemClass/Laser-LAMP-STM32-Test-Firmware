@@ -34,6 +34,9 @@ uint16_t SetLaserSettingsFract(uint16_t energy_index, uint16_t mode)
 	if (voltageClb >= 449)	voltageClb = 449;
 	uint16_t duration = modeFractDurationTable[index + mode * 10];
 	
+	duration_publish = duration * 0.001;
+	energy_publish = energy * 0.001;
+	
 	SetPulseDuration_us(duration);
 	
 	fract_chargingVoltage = (float32_t)(voltageClb);
@@ -121,6 +124,7 @@ void FractLaserInput_Process(uint16_t pic_id)
 	}
 	
 	SetPulseFrequency(frameData_FractLaser.laserprofile.Frequency);
+	frequency_publish = frameData_FractLaser.laserprofile.Frequency;
 	
 	//if (frameData_SolidStateLaser.mode != 0) energy = (uint16_t)((float32_t)(energy) * 1.15f);
 	

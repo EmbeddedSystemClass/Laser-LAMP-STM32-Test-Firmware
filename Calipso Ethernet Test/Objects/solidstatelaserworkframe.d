@@ -42,3 +42,5 @@
 .\objects\solidstatelaserworkframe.o: C:\Keil_v5\ARM\PACK\ARM\CMSIS\5.0.0\CMSIS\Include\core_cm4.h
 .\objects\solidstatelaserworkframe.o: LaserMisc.h
 .\objects\solidstatelaserworkframe.o: GlobalVariables.h
+.\objects\solidstatelaserworkframe.o: SDCard.h
+.\objects\solidstatelaserworkframe.o: C:\Keil_v5\ARM\PACK\Keil\MDK-Middleware\7.3.0\FileSystem\Include\rl_fs.h

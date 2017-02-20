@@ -32,6 +32,9 @@ float32_t temperature_normal = 27.5f;
 float32_t frequency_publish = 0.0f;
 float32_t duration_publish = 0.0f;
 float32_t energy_publish = 0.0f;
+uint16_t cooling_level = 6;
+bool g_peltier_en = false;
+bool g_cooling_en = false;
 
 // Flow global variable
 float32_t flow_low = 2.0f;
@@ -55,7 +58,6 @@ MENU_ID MenuID = MENU_ID_SOLIDSTATE;
 
 // Private variables
 uint16_t pic_id = 0;
-bool g_peltier_en = false;
 bool prepare = false;   
 bool RemoteControl = false;
 bool WiFiConnectionEstabilished = false;

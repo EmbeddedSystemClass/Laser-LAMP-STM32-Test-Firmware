@@ -258,6 +258,7 @@ void LaserDiodeInput_Process(uint16_t pic_id)
 	
 	// Control peltier cooling
 	CoolOn();
+	cooling_level = frameData_LaserDiode.cooling;
 	/*CoolSet((frameData_LaserDiode.cooling + 1) * 17);*/
 		
 	if (frameData_LaserDiode.buttons.onInputBtn != 0)

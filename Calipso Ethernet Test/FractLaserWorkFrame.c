@@ -5,6 +5,7 @@
 #include "SolidStateLaser.h"
 #include "GlobalVariables.h"
 #include "LaserMisc.h"
+#include "SDCard.h"
 
 #include <math.h>
 #include "arm_math.h"
@@ -107,7 +108,9 @@ void FractLaserWork_Process(uint16_t pic_id)
 	
 	// Start pressed
 	if (frameData_FractLaser.buttons.onStartBtn != 0)
-	{
+	{		
+		log_FractLaserStart(frequency_publish, duration_publish, energy_publish, GetSolidStateGlobalPulse(LaserID));
+		
 		// On Start Pressed
 		frameData_FractLaser.buttons.onStartBtn = 0;
 		
@@ -121,6 +124,8 @@ void FractLaserWork_Process(uint16_t pic_id)
 	
 	if (frameData_FractLaser.buttons.onStopBtn != 0)
 	{
+		log_FractLaserStop(GetSolidStateGlobalPulse(LaserID));
+		
 		// On Input Pressed
 		frameData_FractLaser.buttons.onStopBtn = 0;
 		

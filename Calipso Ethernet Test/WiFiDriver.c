@@ -29,6 +29,7 @@ bool WiFi_SocketConnected[8] = {false, false, false, false, false, false, false,
 //bool WiFi_ConnectionEstabilished[8] = {false, false, false, false, false, false, false, false};
 bool WiFi_OK_Received = false;
 bool WiFi_ERROR_Received = false;
+bool WiFi_Deauthentification = false;
 bool WiFi_PendingData[8] = {false, false, false, false, false, false, false, false};
 
 uint16_t WiFi_PendingDataSize[8] = {0, 0, 0, 0, 0, 0, 0, 0};
@@ -56,7 +57,7 @@ char  ATRCV[BUFFER_SIZE];
 char  token[256];
 char* tokenPtr[32];
 char  buffer_rx[256];
-char	buffer_tx[256];
+char	buffer_tx[512];
 uint32_t frame_offset;
 uint32_t frame_pos;
 uint32_t frame_read;
@@ -262,6 +263,7 @@ void WiFiThread (void const *argument) {
 			// Command/data mode
 			if (id == WIND_MSG_COMMAND_MODE)		WiFi_State_CommandMode = true;
 			if (id == WIND_MSG_DATA_MODE)				WiFi_State_CommandMode = false;
+			if (id == WIND_MSG_WIFI_DEATHENTIFICATION) WiFi_Deauthentification = true;
 			
 			// Connection estabilished
 			if (id == WIND_MSG_WIFIUP)

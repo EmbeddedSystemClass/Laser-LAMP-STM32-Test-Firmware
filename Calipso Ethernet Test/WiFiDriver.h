@@ -41,6 +41,7 @@ extern bool WiFi_SocketClosed[8];
 extern bool WiFi_SocketConnected[8];
 extern bool WiFi_OK_Received;
 extern bool WiFi_ERROR_Received;
+extern bool WiFi_Deauthentification;
 extern bool WiFi_PendingData[8];
 
 // WiFi pending data size
