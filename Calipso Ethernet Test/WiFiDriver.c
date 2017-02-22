@@ -57,7 +57,7 @@ osThreadId tid_UserWiFiThread;
 char  ATRCV[BUFFER_SIZE];
 char  token[256];
 char* tokenPtr[32];
-char  buffer_rx[256];
+char  buffer_rx[8192];
 char	buffer_tx[512];
 uint32_t frame_offset;
 uint32_t frame_pos;
@@ -540,8 +540,8 @@ bool socket_fread (uint16_t id, FILE* fp, uint16_t len)
 	sprintf(str, "AT+S.SOCKR=%d,%d", id, len);
 	log_wifi(datetime, str);
 	sprintf(str, "AT+S.SOCKR=%d,%d\r\n", id, len);
-	char* ptr;
-	if (RecvAT(str, &ptr))
+	char* ptr = &ATRCV[frame_read & BUFFER_MASK];//char* ptr;
+	if (SendAT(str)/*RecvAT(str, &ptr)*/)
 	{
 		fwrite((void*)ptr, 1, len, fp);
 		//WiFi_State_ReceiveFileMode = false;

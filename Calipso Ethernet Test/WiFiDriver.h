@@ -24,8 +24,8 @@
 #define WIFI_CMD_STARTLINKING					2
 
 #define FRAME_SIZE	64
-#define BUFFER_SIZE 32768+2048
-#define BUFFER_MASK 0x7ff
+#define BUFFER_SIZE 16384
+#define BUFFER_MASK 0x3fff
 
 // Pending queue struct
 typedef struct WIFI_PENDING_STRUCT
@@ -53,7 +53,7 @@ extern uint16_t WIFi_RequestTimeout;
 
 // WiFi Thread parsing buffers
 extern char* tokenPtr[32];
-extern char  buffer_rx[256];
+extern char  buffer_rx[8192];
 
 // WiFi API
 bool SendAT(char* str);

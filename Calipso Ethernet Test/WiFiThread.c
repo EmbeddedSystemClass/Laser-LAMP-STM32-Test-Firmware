@@ -140,8 +140,11 @@ void downloadFTP(FILE* fp, char* URI)
 {
 	char uri_str[256];
 	uint16_t len = 0;
+	uint16_t len0 = 0;
+	uint16_t len1 = 0;
 	uint16_t resp_code = 0;
 	uint16_t port = 0;
+	uint32_t foffset = 0;
 	
 	sprintf(uri_str, "retr %s\n", URI);
 	
@@ -180,20 +183,24 @@ void downloadFTP(FILE* fp, char* URI)
 				
 				osDelay(1000);
 				
-				while (socket_pending_data(&len, &resp_sock_id, 10000))
+				len0 = 0;
+				len1 = 0;
+				while (socket_pending_data(&len, &resp_sock_id, 1000))
 					if (resp_sock_id == recv_sock_id)
-						socket_fread(resp_sock_id, fp, len);
+						//socket_fread(resp_sock_id, fp, len);
+						len1 = len;
 					else
-						socket_read(resp_sock_id, httpBuffer, len);
+						//socket_read(resp_sock_id, httpBuffer, len);
+						len0 = len;
+					
+				fseek(fp, foffset, SEEK_SET);
+				socket_fread(recv_sock_id, fp, len1);
+				foffset += len1;
+				socket_read(sock_id, httpBuffer, len0);
 				
 				len = socket_qpending_data(recv_sock_id);
 				if (len > 0)
-				{
-					if (resp_sock_id == recv_sock_id)
-						socket_fread(resp_sock_id, fp, len);
-					else
-						socket_read(resp_sock_id, httpBuffer, len);
-				}
+					socket_fread(recv_sock_id, fp, len);
 				
 				socket_close(recv_sock_id);
 			}
@@ -212,14 +219,17 @@ void downloadFTP(FILE* fp, char* URI)
 void WiFiThread_Idle()
 {
 	static bool downloaded = false;
+	int i = 0;
 	
 	if (!downloaded && WiFiConnectionEstabilished)
 	{
 		FILE* fp = fopen("CalipsoFirmwareV2REV1_0.bin", "w");
-		downloadFTP(fp, "/var/www/html/Firmware/CalipsoV2REV1_0/CalipsoFirmwareV2REV1_0.bin.part0");
-		downloadFTP(fp, "/var/www/html/Firmware/CalipsoV2REV1_0/CalipsoFirmwareV2REV1_0.bin.part1");
-		downloadFTP(fp, "/var/www/html/Firmware/CalipsoV2REV1_0/CalipsoFirmwareV2REV1_0.bin.part2");
-		downloadFTP(fp, "/var/www/html/Firmware/CalipsoV2REV1_0/CalipsoFirmwareV2REV1_0.bin.part3");
+		
+		for (i = 0; i < 10; i++) //105
+		{
+			sprintf(httpBuffer, "/var/www/html/Firmware/CalipsoV2REV1_0/CalipsoFirmwareV2REV1_0.bin.part%d", i);
+			downloadFTP(fp, httpBuffer);
+		}
 		fclose(fp);
 		
 		downloaded = true;
