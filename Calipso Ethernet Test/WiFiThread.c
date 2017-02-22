@@ -136,11 +136,14 @@ bool parseFTP(char* str, uint16_t* resp_code, uint16_t* port)
 	return true;
 }
 
-void WiFiThread_Idle()
+void downloadFTP(FILE* fp, char* URI)
 {
+	char uri_str[256];
 	uint16_t len = 0;
 	uint16_t resp_code = 0;
 	uint16_t port = 0;
+	
+	sprintf(uri_str, "retr %s\n", URI);
 	
 	if (WiFiConnectionEstabilished)
 	{
@@ -173,17 +176,24 @@ void WiFiThread_Idle()
 			{
 				recv_sock_id = socket_connect("innolaser-service.ru", port);
 				
-				/*if (socket_pending_data(&len, &resp_sock_id, 1000))
-					socket_read(resp_sock_id, httpBuffer, len);*/
+				socket_write(sock_id, uri_str, strlen(uri_str)); // uri = "retr /etc/crontab\n", 18
 				
-				socket_write(sock_id, "retr /etc/crontab\n", 18);
+				osDelay(1000);
 				
-				while (socket_pending_data(&len, &resp_sock_id, 1000))
-					socket_read(resp_sock_id, httpBuffer, len);
+				while (socket_pending_data(&len, &resp_sock_id, 10000))
+					if (resp_sock_id == recv_sock_id)
+						socket_fread(resp_sock_id, fp, len);
+					else
+						socket_read(resp_sock_id, httpBuffer, len);
 				
 				len = socket_qpending_data(recv_sock_id);
 				if (len > 0)
-					socket_read(recv_sock_id, httpBuffer, len);
+				{
+					if (resp_sock_id == recv_sock_id)
+						socket_fread(resp_sock_id, fp, len);
+					else
+						socket_read(resp_sock_id, httpBuffer, len);
+				}
 				
 				socket_close(recv_sock_id);
 			}
@@ -196,6 +206,23 @@ void WiFiThread_Idle()
 				socket_read(sock_id, httpBuffer, len);
 			socket_close(sock_id);
 		}
+	}
+}
+
+void WiFiThread_Idle()
+{
+	static bool downloaded = false;
+	
+	if (!downloaded && WiFiConnectionEstabilished)
+	{
+		FILE* fp = fopen("CalipsoFirmwareV2REV1_0.bin", "w");
+		downloadFTP(fp, "/var/www/html/Firmware/CalipsoV2REV1_0/CalipsoFirmwareV2REV1_0.bin.part0");
+		downloadFTP(fp, "/var/www/html/Firmware/CalipsoV2REV1_0/CalipsoFirmwareV2REV1_0.bin.part1");
+		downloadFTP(fp, "/var/www/html/Firmware/CalipsoV2REV1_0/CalipsoFirmwareV2REV1_0.bin.part2");
+		downloadFTP(fp, "/var/www/html/Firmware/CalipsoV2REV1_0/CalipsoFirmwareV2REV1_0.bin.part3");
+		fclose(fp);
+		
+		downloaded = true;
 	}
 }
 
@@ -438,7 +465,7 @@ void CalipsoWiFiThread (void const *argument) {
 		osEvent event = osMessageGet(qid_WiFiCMDQueue, 3000);
 		
 		if (event.status == osEventTimeout)
-			WiFiThread_PublishToServer(); // Send data to the "innolaser-service.ru" server
+			WiFiThread_Idle(); //WiFiThread_PublishToServer(); // Send data to the "innolaser-service.ru" server
 		else
 		if (event.status == osEventMessage)
 		{

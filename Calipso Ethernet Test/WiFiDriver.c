@@ -22,6 +22,7 @@ extern ARM_DRIVER_USART Driver_USART3;
 /*----------------------------------------------------------------------------
  *      WiFi Module Global Variables
  *---------------------------------------------------------------------------*/
+//bool WiFi_State_ReceiveFileMode = false;
 bool WiFi_State_CommandMode = true;
 bool WiFi_State_ScanningMode = false;
 bool WiFi_SocketClosed[8] = {false, false, false, false, false, false, false, false};
@@ -231,7 +232,10 @@ void WiFiThread (void const *argument) {
   while (1) {
     ; // Insert thread code here...
 		pos = 0;
-		while (!GetStringFromWiFi(buffer_rx, (uint16_t*)&pos))
+		
+		//if (WiFi_State_ReceiveFileMode) continue;
+		
+		while (!GetStringFromWiFi(buffer_rx, (uint16_t*)&pos)/* && !WiFi_State_ReceiveFileMode*/)
 			osThreadYield ();
 		buffer_rx[pos] = '\0';
 		log_wifi(datetime, buffer_rx);
@@ -348,6 +352,32 @@ bool SendAT(char* str)
 	{
 		if (WiFi_OK_Received) return true;
 		if (WiFi_ERROR_Received) return false;
+		
+		if (strcmp(strtok(buffer_rx, ":\n\r"), "ERROR") == 0)
+			return false;
+		if (strcmp(buffer_rx, "OK") == 0)
+			return true;
+		osThreadYield (); // Wait "OK"
+	}
+	return false;
+}
+
+bool RecvAT(char* str, char** buffer_ptr)
+{
+	char* ptr;
+	WiFi_OK_Received = false;
+	WiFi_ERROR_Received = false;
+	
+	//WiFi_State_ReceiveFileMode = true;
+	Driver_USART3.Send(str, strlen(str));
+	*buffer_ptr = &ATRCV[(frame_read + 1) & BUFFER_MASK];
+	if (WiFi_OK_Received) return true;
+	if (WiFi_ERROR_Received) return true;
+	
+	while (osSignalWait(WIFI_EVENT_RECEIVE_STRING, 1000).status != osEventTimeout)
+	{
+		if (WiFi_OK_Received) return ptr;
+		if (WiFi_ERROR_Received) return ptr;
 		
 		if (strcmp(strtok(buffer_rx, ":\n\r"), "ERROR") == 0)
 			return false;
@@ -498,6 +528,23 @@ bool socket_read (uint16_t id, char* buffer, uint16_t len)
 	if (SendAT(str))
 	{
 		memcpy(buffer, ptr, len);
+		return true;
+	}
+	else
+		return false;
+}
+
+bool socket_fread (uint16_t id, FILE* fp, uint16_t len)
+{
+	char str[256];
+	sprintf(str, "AT+S.SOCKR=%d,%d", id, len);
+	log_wifi(datetime, str);
+	sprintf(str, "AT+S.SOCKR=%d,%d\r\n", id, len);
+	char* ptr;
+	if (RecvAT(str, &ptr))
+	{
+		fwrite((void*)ptr, 1, len, fp);
+		//WiFi_State_ReceiveFileMode = false;
 		return true;
 	}
 	else

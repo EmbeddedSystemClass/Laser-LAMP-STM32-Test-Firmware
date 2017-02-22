@@ -3,6 +3,7 @@
 
 #include <stdint.h>
 #include <stdbool.h>
+#include <stdio.h>
 #include "cmsis_os.h"
 
 #define WIFI_EVENT_RECEIVE_COMPLETED	0x004
@@ -23,7 +24,7 @@
 #define WIFI_CMD_STARTLINKING					2
 
 #define FRAME_SIZE	64
-#define BUFFER_SIZE 32768
+#define BUFFER_SIZE 32768+2048
 #define BUFFER_MASK 0x7ff
 
 // Pending queue struct
@@ -34,6 +35,7 @@ typedef struct WIFI_PENDING_STRUCT
 } WIFI_PENDING_DATA, *PWIFI_PENDING_DATA;
 
 // WiFi global state variables
+//extern bool WiFi_State_ReceiveFileMode;
 extern bool WiFi_State_CommandMode;
 extern bool WiFi_State_ScanningMode;
 //extern bool WiFi_ConnectionEstebilished[8];
@@ -55,6 +57,7 @@ extern char  buffer_rx[256];
 
 // WiFi API
 bool SendAT(char* str);
+bool RecvAT(char* str, char** buffer_ptr);
 bool WaitOK(uint32_t timeout);
 void AsyncSendAT(char* str);
 char* GetResponsePtr(void);
@@ -66,6 +69,7 @@ int16_t WaitForWINDCommands(uint16_t timeout, uint16_t argc, ...);
 int16_t		socket_connect			(char* name, uint16_t port);
 bool			socket_close				(uint16_t id);
 bool			socket_write				(uint16_t id, char* buffer, uint16_t len);
+bool      socket_fread        (uint16_t id, FILE* fp, uint16_t len);
 bool			socket_read					(uint16_t id, char* buffer, uint16_t len);
 bool 			socket_pending_data	(uint16_t *len, int16_t *id, uint32_t timeout);
 uint16_t	socket_qpending_data(int16_t id);
