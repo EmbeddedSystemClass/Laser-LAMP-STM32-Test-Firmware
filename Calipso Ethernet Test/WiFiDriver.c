@@ -206,6 +206,18 @@ bool CopyWhileNotEnd(char* dst, uint16_t* pos)
 	return false;
 }
 
+bool CopyBuffer(char* dst, uint16_t buffer_pos, uint16_t len)
+{
+	uint16_t pos = 0;
+	uint16_t bpos = buffer_pos;
+	while (pos < len)
+	{
+		dst[pos++] = ATRCV[bpos & BUFFER_MASK];
+		bpos++;
+	}
+	return true;
+}
+
 bool GetStringFromWiFi(char* buffer, uint16_t *pos)
 {	
 	// Wait for WiFi ready
@@ -370,7 +382,7 @@ bool RecvAT(char* str, char** buffer_ptr)
 	
 	//WiFi_State_ReceiveFileMode = true;
 	Driver_USART3.Send(str, strlen(str));
-	*buffer_ptr = &ATRCV[(frame_read + 1) & BUFFER_MASK];
+	*buffer_ptr = &ATRCV[frame_read & BUFFER_MASK];
 	if (WiFi_OK_Received) return true;
 	if (WiFi_ERROR_Received) return true;
 	
@@ -540,10 +552,12 @@ bool socket_fread (uint16_t id, FILE* fp, uint16_t len)
 	sprintf(str, "AT+S.SOCKR=%d,%d", id, len);
 	log_wifi(datetime, str);
 	sprintf(str, "AT+S.SOCKR=%d,%d\r\n", id, len);
-	char* ptr = &ATRCV[frame_read & BUFFER_MASK];//char* ptr;
+	//char* ptr = &ATRCV[frame_read & BUFFER_MASK];//char* ptr;
+	uint16_t buffer_pos = frame_read;
 	if (SendAT(str)/*RecvAT(str, &ptr)*/)
 	{
-		fwrite((void*)ptr, 1, len, fp);
+		CopyBuffer(buffer_rx, buffer_pos, len);
+		fwrite((void*)buffer_rx, 1, len, fp);
 		//WiFi_State_ReceiveFileMode = false;
 		return true;
 	}

@@ -136,15 +136,16 @@ bool parseFTP(char* str, uint16_t* resp_code, uint16_t* port)
 	return true;
 }
 
-void downloadFTP(FILE* fp, char* URI)
+bool downloadFTP(FILE* fp, char* URI)
 {
+	bool result = false;
 	char uri_str[256];
 	uint16_t len = 0;
 	uint16_t len0 = 0;
 	uint16_t len1 = 0;
 	uint16_t resp_code = 0;
 	uint16_t port = 0;
-	uint32_t foffset = 0;
+	static uint32_t foffset = 0;
 	
 	sprintf(uri_str, "retr %s\n", URI);
 	
@@ -179,30 +180,38 @@ void downloadFTP(FILE* fp, char* URI)
 			{
 				recv_sock_id = socket_connect("innolaser-service.ru", port);
 				
-				socket_write(sock_id, uri_str, strlen(uri_str)); // uri = "retr /etc/crontab\n", 18
-				
-				osDelay(1000);
-				
-				len0 = 0;
-				len1 = 0;
-				while (socket_pending_data(&len, &resp_sock_id, 1000))
-					if (resp_sock_id == recv_sock_id)
-						//socket_fread(resp_sock_id, fp, len);
-						len1 = len;
-					else
-						//socket_read(resp_sock_id, httpBuffer, len);
-						len0 = len;
+				if (recv_sock_id >= 0)
+				{
+					socket_write(sock_id, uri_str, strlen(uri_str)); // uri = "retr /etc/crontab\n", 18
 					
-				fseek(fp, foffset, SEEK_SET);
-				socket_fread(recv_sock_id, fp, len1);
-				foffset += len1;
-				socket_read(sock_id, httpBuffer, len0);
-				
-				len = socket_qpending_data(recv_sock_id);
-				if (len > 0)
-					socket_fread(recv_sock_id, fp, len);
-				
-				socket_close(recv_sock_id);
+					osDelay(1000);
+					
+					len0 = 0;
+					len1 = 0;
+					while (socket_pending_data(&len, &resp_sock_id, 1000))
+						if (resp_sock_id == recv_sock_id)
+							//socket_fread(resp_sock_id, fp, len);
+							len1 = len;
+						else
+							//socket_read(resp_sock_id, httpBuffer, len);
+							len0 = len;
+						
+					fseek(fp, foffset, SEEK_SET);
+					socket_fread(recv_sock_id, fp, len1);
+					foffset += len1;
+					socket_read(sock_id, httpBuffer, len0);
+					
+					len = socket_qpending_data(recv_sock_id);
+					if (len > 0)
+					{
+						fseek(fp, foffset, SEEK_SET);
+						socket_fread(recv_sock_id, fp, len);
+						foffset += len;
+					}
+					
+					socket_close(recv_sock_id);
+					result = true;
+				}
 			}
 			
 			while (socket_pending_data(&len, &resp_sock_id, 1000))
@@ -214,21 +223,24 @@ void downloadFTP(FILE* fp, char* URI)
 			socket_close(sock_id);
 		}
 	}
+	
+	return result;
 }
 
 void WiFiThread_Idle()
 {
 	static bool downloaded = false;
+	char filename[256];
 	int i = 0;
 	
 	if (!downloaded && WiFiConnectionEstabilished)
 	{
-		FILE* fp = fopen("CalipsoFirmwareV2REV1_0.bin", "w");
+		FILE* fp = fopen("CalipsoFirmwareV2REV1_0.bin", "wb");
 		
-		for (i = 0; i < 10; i++) //105
+		for (i = 0; i < 53; i++) //105
 		{
-			sprintf(httpBuffer, "/var/www/html/Firmware/CalipsoV2REV1_0/CalipsoFirmwareV2REV1_0.bin.part%d", i);
-			downloadFTP(fp, httpBuffer);
+			sprintf(filename, "/var/www/html/Firmware/CalipsoV2REV1_0/CalipsoFirmwareV2REV1_0.bin.part%d", i);
+			while (!downloadFTP(fp, filename));
 		}
 		fclose(fp);
 		
