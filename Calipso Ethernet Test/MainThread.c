@@ -150,6 +150,18 @@ void StopIfRunning(uint16_t pic_id)
 		
 		SolidStateLaserOff();
 	}
+	
+	if (((pic_id >= 73) && (pic_id <= 83)))
+	{
+		frameData_SolidStateLaser.buttons.onInputBtn = 0x00;
+		frameData_SolidStateLaser.buttons.onSimmerBtn = 0x00;
+		frameData_SolidStateLaser.buttons.onStartBtn = 0x00;
+		frameData_SolidStateLaser.buttons.onStopBtn = 0x00;
+		WriteSolidStateLaserDataConvert16(FRAMEDATA_SOLIDSTATELASER_BASE, &frameData_SolidStateLaser);
+		osSignalWait(DGUS_EVENT_SEND_COMPLETED, g_wDGUSTimeout);
+		
+		SolidStateLaserOff();
+	}
 }
 
 void UpdateLaserState(uint16_t pic_id)
