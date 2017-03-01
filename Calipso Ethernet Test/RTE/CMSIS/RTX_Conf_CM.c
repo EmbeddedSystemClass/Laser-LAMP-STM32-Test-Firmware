@@ -76,7 +76,7 @@
 //   <i> Defines the combined stack size for threads with user-provided stack size.
 //   <i> Default: 0
 #ifndef OS_PRIVSTKSIZE
- #define OS_PRIVSTKSIZE 2048       // this stack size value is in words
+ #define OS_PRIVSTKSIZE 4096       // this stack size value is in words
 #endif
  
 //   <q>Stack overflow checking
@@ -179,7 +179,7 @@
 //   <i> Number of concurrent active timer callback functions.
 //   <i> Default: 4
 #ifndef OS_TIMERCBQS
- #define OS_TIMERCBQS   4
+ #define OS_TIMERCBQS   16
 #endif
  
 // </e>

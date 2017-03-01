@@ -1,5 +1,5 @@
 .\objects\fs_config.o: RTE\File_System\FS_Config.c
-.\objects\fs_config.o: C:\Users\Vladislav&Maja\Documents\Laser-LAMP-STM32-Test-Firmware\Calipso Ethernet Test\RTE\_EthernetTest\RTE_Components.h
+.\objects\fs_config.o: C:\Users\FxSlava\Documents\Laser-LAMP-STM32-Test-Firmware\Calipso Ethernet Test\RTE\RTE_Components.h
 .\objects\fs_config.o: RTE\File_System\FS_Config_MC_0.h
 .\objects\fs_config.o: C:\Keil_v5\ARM\PACK\Keil\MDK-Middleware\7.3.0\FileSystem\Include\fs_config.h
 .\objects\fs_config.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\string.h
