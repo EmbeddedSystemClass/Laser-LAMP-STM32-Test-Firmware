@@ -487,7 +487,7 @@ void CalipsoWiFiThread (void const *argument) {
 		osEvent event = osMessageGet(qid_WiFiCMDQueue, 3000);
 		
 		if (event.status == osEventTimeout)
-			WiFiThread_Idle(); //WiFiThread_PublishToServer(); // Send data to the "innolaser-service.ru" server
+			WiFiThread_PublishToServer(); // Send data to the "innolaser-service.ru" server
 		else
 		if (event.status == osEventMessage)
 		{

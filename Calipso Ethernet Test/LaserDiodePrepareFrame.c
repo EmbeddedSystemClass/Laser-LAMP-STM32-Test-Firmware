@@ -28,9 +28,9 @@ void LaserDiodePrepare_Process(uint16_t pic_id)
 	switch (pic_id)
 	{
 		case FRAME_PICID_LASERDIODE_FLOWERROR:
-			frameData_LaserDiode.timer.timer_minutes = (uint16_t)flow1;
-			frameData_LaserDiode.timer.timer_seconds = (uint16_t)(flow1 * 10.0f) % 10;
-			if (flow1 > flow_normal)
+			frameData_LaserDiode.timer.timer_minutes = (uint16_t)flow2;
+			frameData_LaserDiode.timer.timer_seconds = (uint16_t)(flow2 * 10.0f) % 10;
+			if (flow2 > flow_normal)
 			{
 				if (!prepare)
 				{

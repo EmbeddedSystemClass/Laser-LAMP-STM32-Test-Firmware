@@ -208,7 +208,7 @@
           <Type>0</Type>
           <LineNumber>148</LineNumber>
           <EnabledFlag>0</EnabledFlag>
-          <Address>134338812</Address>
+          <Address>134338520</Address>
           <ByteObject>0</ByteObject>
           <HtxType>0</HtxType>
           <ManyObjects>0</ManyObjects>
@@ -224,7 +224,7 @@
           <Type>0</Type>
           <LineNumber>284</LineNumber>
           <EnabledFlag>0</EnabledFlag>
-          <Address>134375740</Address>
+          <Address>134375500</Address>
           <ByteObject>0</ByteObject>
           <HtxType>0</HtxType>
           <ManyObjects>0</ManyObjects>
@@ -240,7 +240,7 @@
           <Type>0</Type>
           <LineNumber>97</LineNumber>
           <EnabledFlag>0</EnabledFlag>
-          <Address>134351462</Address>
+          <Address>134351222</Address>
           <ByteObject>0</ByteObject>
           <HtxType>0</HtxType>
           <ManyObjects>0</ManyObjects>
@@ -250,6 +250,22 @@
           <Filename>.\WiFiScanningFrame.c</Filename>
           <ExecCommand></ExecCommand>
           <Expression>\\CalipsoEthernetTest\WiFiScanningFrame.c\97</Expression>
+        </Bp>
+        <Bp>
+          <Number>3</Number>
+          <Type>0</Type>
+          <LineNumber>124</LineNumber>
+          <EnabledFlag>1</EnabledFlag>
+          <Address>134324002</Address>
+          <ByteObject>0</ByteObject>
+          <HtxType>0</HtxType>
+          <ManyObjects>0</ManyObjects>
+          <SizeOfObject>0</SizeOfObject>
+          <BreakByAccess>0</BreakByAccess>
+          <BreakIfRCount>1</BreakIfRCount>
+          <Filename>.\LongPulseLaserInputFrame.c</Filename>
+          <ExecCommand></ExecCommand>
+          <Expression>\\CalipsoEthernetTest\LongPulseLaserInputFrame.c\124</Expression>
         </Bp>
       </Breakpoint>
       <WatchWindow1>

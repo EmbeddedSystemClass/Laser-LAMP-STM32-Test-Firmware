@@ -38,7 +38,7 @@ bool g_cooling_en = false;
 
 // Flow global variable
 float32_t flow_low = 2.0f;
-float32_t flow_normal = 4.0f;
+float32_t flow_normal = 3.5f;
 
 // Service menu password
 char password[6] = "78965\0";

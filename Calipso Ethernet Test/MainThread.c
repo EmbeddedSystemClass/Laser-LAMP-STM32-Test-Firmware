@@ -224,7 +224,7 @@ void UpdateLaserState(uint16_t pic_id)
 		}
 		
 		// Check flow
-		if (flow1 < flow_low)
+		if (flow2 < flow_low)
 		{
 			DiodeLaserOff();
 			SetPicId(FRAME_PICID_LASERDIODE_FLOWERROR, g_wDGUSTimeout);
@@ -338,16 +338,30 @@ void UpdateLaserStatus()
 {
 	laser_state.temperature = (uint16_t)(temperature * 10.0f);
 	
-	if (flow1 < flow_low)
-		laser_state.coolIcon = 1;
+	if ((pic_id >= 19) && (pic_id <= 32))
+	{
+		if (flow2 < flow_low)
+			laser_state.coolIcon = 1;
+		else
+		if (flow2 < flow_normal)
+			laser_state.coolIcon = 2;
+		else
+		//if (flow1 < 7)
+			laser_state.coolIcon = 3;
+	}
 	else
-	if (flow1 < flow_normal)
-		laser_state.coolIcon = 2;
-	else
-	//if (flow1 < 7)
-		laser_state.coolIcon = 3;
+	{
+		if (flow1 < flow_low)
+			laser_state.coolIcon = 1;
+		else
+		if (flow1 < flow_normal)
+			laser_state.coolIcon = 2;
+		else
+		//if (flow1 < 7)
+			laser_state.coolIcon = 3;
+	}
 	
-	laser_state.flow = flow1 * 10;
+	laser_state.flow = (flow1 + flow2) * 10;
 	
 	WriteVariableConvert16(FRAMEDATA_LASERSTATE_BASE, &laser_state, sizeof(laser_state));
 	osSignalWait(DGUS_EVENT_SEND_COMPLETED, g_wDGUSTimeout);

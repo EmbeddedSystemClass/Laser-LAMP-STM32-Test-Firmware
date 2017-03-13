@@ -406,6 +406,8 @@ int main(void)
   /* Add your application code here
      */
 	uint32_t timer_start = HAL_GetTick();
+	
+	HAL_Delay(1000);
 
 #ifdef RTE_CMSIS_RTOS                   // when using CMSIS RTOS
   osKernelStart();                      // start thread execution 
