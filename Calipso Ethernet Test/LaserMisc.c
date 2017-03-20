@@ -213,7 +213,7 @@ void CoolOn(void)
 void CoolOff(void)
 {
 	g_peltier_en = false;
-	__HAL_TIM_SetCompare(&htim_cool, TIM_CHANNEL_1, 42000);
+	__HAL_TIM_SetCompare(&htim_cool, TIM_CHANNEL_1, 0);
 	//HAL_TIM_OC_Stop(&htim_cool, TIM_CHANNEL_1);
 }
 
@@ -221,7 +221,7 @@ void CoolSet(uint16_t cool)
 {
 	uint16_t duty_cycle = cool * 420;
 	if (duty_cycle > 42000) duty_cycle = 42000;
-	__HAL_TIM_SetCompare(&htim_cool, TIM_CHANNEL_1, 42000 - duty_cycle);
+	__HAL_TIM_SetCompare(&htim_cool, TIM_CHANNEL_1, duty_cycle);
 }
 
 #endif
