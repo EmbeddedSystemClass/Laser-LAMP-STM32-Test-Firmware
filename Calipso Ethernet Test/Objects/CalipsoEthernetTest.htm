@@ -3,9 +3,9 @@
 <title>Static Call Graph - [.\Objects\CalipsoEthernetTest.axf]</title></head>
 <body><HR>
 <H1>Static Call Graph for image .\Objects\CalipsoEthernetTest.axf</H1><HR>
-<BR><P>#&#060CALLGRAPH&#062# ARM Linker, 5060422: Last Updated: Wed Mar 22 11:26:24 2017
+<BR><P>#&#060CALLGRAPH&#062# ARM Linker, 5060183: Last Updated: Wed Mar 22 12:49:01 2017
 <BR><P>
-<H3>Maximum Stack Usage =       1440 bytes + Unknown(Functions without stacksize, Cycles, Untraceable Function Pointers)</H3><H3>
+<H3>Maximum Stack Usage =       1488 bytes + Unknown(Functions without stacksize, Cycles, Untraceable Function Pointers)</H3><H3>
 Call chain for Maximum Stack Depth:</H3>
 CalipsoWiFiThread &rArr; WiFiThread_PublishToServer &rArr; socket_read &rArr; log_wifi &rArr; fopen &rArr; _freopen_locked &rArr; _sys_open &rArr; __sys_open &rArr; fat_open &rArr; path_create &rArr; frec_find &rArr; entry_pos_inc &rArr; alloc_table_read &rArr; cache_fat
 <P>
@@ -901,7 +901,7 @@ Global Symbols
 <BR>[Called By]<UL><LI><a href="#[162]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;_printf_lcs_common
 </UL>
 
-<P><STRONG><a name="[ec]"></a>_printf_int_oct</STRONG> (Thumb, 72 bytes, Stack size 16 bytes, _printf_oct_int.o(.text))
+<P><STRONG><a name="[ec]"></a>_printf_int_oct</STRONG> (Thumb, 74 bytes, Stack size 16 bytes, _printf_oct_int.o(.text))
 <BR><BR>[Stack]<UL><LI>Max Depth = 64<LI>Call Chain = _printf_int_oct &rArr; _printf_int_common &rArr; _printf_post_padding
 </UL>
 <BR>[Calls]<UL><LI><a href="#[120]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;_printf_int_common
@@ -2049,7 +2049,7 @@ Global Symbols
 </UL>
 
 <P><STRONG><a name="[97]"></a>CalipsoWiFiThread</STRONG> (Thumb, 212 bytes, Stack size 16 bytes, wifithread.o(i.CalipsoWiFiThread))
-<BR><BR>[Stack]<UL><LI>Max Depth = 1440 + Unknown Stack Size
+<BR><BR>[Stack]<UL><LI>Max Depth = 1488 + Unknown Stack Size
 <LI>Call Chain = CalipsoWiFiThread &rArr; WiFiThread_PublishToServer &rArr; socket_read &rArr; log_wifi &rArr; fopen &rArr; _freopen_locked &rArr; _sys_open &rArr; __sys_open &rArr; fat_open &rArr; path_create &rArr; frec_find &rArr; entry_pos_inc &rArr; alloc_table_read &rArr; cache_fat
 </UL>
 <BR>[Calls]<UL><LI><a href="#[195]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_GPIO_WritePin
@@ -4314,8 +4314,8 @@ Global Symbols
 <BR>[Called By]<UL><LI><a href="#[97]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;CalipsoWiFiThread
 </UL>
 
-<P><STRONG><a name="[19a]"></a>WiFiThread_PublishToServer</STRONG> (Thumb, 392 bytes, Stack size 616 bytes, wifithread.o(i.WiFiThread_PublishToServer))
-<BR><BR>[Stack]<UL><LI>Max Depth = 1424 + Unknown Stack Size
+<P><STRONG><a name="[19a]"></a>WiFiThread_PublishToServer</STRONG> (Thumb, 464 bytes, Stack size 664 bytes, wifithread.o(i.WiFiThread_PublishToServer))
+<BR><BR>[Stack]<UL><LI>Max Depth = 1472 + Unknown Stack Size
 <LI>Call Chain = WiFiThread_PublishToServer &rArr; socket_read &rArr; log_wifi &rArr; fopen &rArr; _freopen_locked &rArr; _sys_open &rArr; __sys_open &rArr; fat_open &rArr; path_create &rArr; frec_find &rArr; entry_pos_inc &rArr; alloc_table_read &rArr; cache_fat
 </UL>
 <BR>[Calls]<UL><LI><a href="#[2af]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;socket_write
