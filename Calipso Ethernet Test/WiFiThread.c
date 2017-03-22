@@ -261,7 +261,7 @@ void WiFiThread_PublishToServer()
 		
 		if (!authentification && authentification_start)
 		{
-			char* auth_request = "GET http://innolaser-service.ru/service-api/device_auth.php?login=vlad&password=ovchin_1988 HTTP/1.1\r\nHost: innolaser-service.ru\r\nCache-Control: no-cache, no-store, max-age=0\r\n\r\n\r\n";
+			char* auth_request = "GET http://innolaser-service.ru/service-api/device_auth.php?login=briansk&password=briansk15 HTTP/1.1\r\nHost: innolaser-service.ru\r\nCache-Control: no-cache, no-store, max-age=0\r\n\r\n\r\n";
 			sock_id = socket_connect("innolaser-service.ru", 80);
 			
 			if (sock_id >= 0)
@@ -291,8 +291,8 @@ void WiFiThread_PublishToServer()
 			{
 				int16_t resp_sock_id = -1;
 				//sprintf(log, "GET http://innolaser-service.ru/service-api/device_update.php?temperature=%.1f&flow=%.1f	HTTP/1.1\r\nHost: innolaser-service.ru\r\nCookie: PHPSESSID=%s; path=/\r\nPragma: no-cache\r\n\r\n\r\n", temperature, flow1, PHPSESSID);
-				sprintf(log, "GET http://innolaser-service.ru/service-api/device_update.php?cooling_level=%d&working=%d&cooling=%d&peltier=%d&temperature=%.1f&flow=%.1f&frequency=%f&power=%f	HTTP/1.1\r\nHost: innolaser-service.ru\r\nCookie: PHPSESSID=%s; path=/\r\nPragma: no-cache\r\n\r\n\r\n",
-								cooling_level, LaserStarted, g_cooling_en, g_peltier_en, temperature, flow1, frequency_publish, energy_publish, PHPSESSID);
+				sprintf(log, "GET http://innolaser-service.ru/service-api/device_update.php?cooling_level=%d&working=%d&cooling=%d&peltier=%d&temperature=%.1f&flow1=%.1f&flow2=%.1f&frequency=%f&duration=%f&power=%f&cntld=%d&cntss=%d&cntss2=%d&cntlp=%d&cntfl=%d	HTTP/1.1\r\nHost: innolaser-service.ru\r\nCookie: PHPSESSID=%s; path=/\r\nPragma: no-cache\r\n\r\n\r\n",
+								cooling_level, LaserStarted, g_cooling_en, g_peltier_en, temperature, flow1, flow2, frequency_publish, duration_publish, energy_publish, FlushesGlobalLD, FlushesGlobalSS, FlushesGlobalSS2, FlushesGlobalLP, FlushesGlobalFL, PHPSESSID);
 				
 				socket_write(sock_id, log, strlen(log));
 				

@@ -137,7 +137,7 @@ void HAL_TIM_OC_DelayElapsedCallback(TIM_HandleTypeDef *htim)
 			//__MISC_LASERLED_ON();
 			__MISC_LASERLED2_ON();
 			
-			if (Profile == PROFILE_SINGLE)
+			//if (Profile == PROFILE_SINGLE)
 			{
 				FlushesSessionLD++;
 				FlushesGlobalLD++;
@@ -188,11 +188,11 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
 		
 		if (DiodeLaser_en) 
 		{			
-			if (Profile != PROFILE_SINGLE)
+			/*if (Profile != PROFILE_SINGLE)
 			{
 				FlushesSessionLD++;
 				FlushesGlobalLD++;
-			}
+			}*/
 			
 			if (((FlushesSessionLD % FlushesCount) == 0) && (FlushesSessionLD > 0))
 			{
