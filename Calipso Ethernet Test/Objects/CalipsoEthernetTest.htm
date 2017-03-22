@@ -3,7 +3,7 @@
 <title>Static Call Graph - [.\Objects\CalipsoEthernetTest.axf]</title></head>
 <body><HR>
 <H1>Static Call Graph for image .\Objects\CalipsoEthernetTest.axf</H1><HR>
-<BR><P>#&#060CALLGRAPH&#062# ARM Linker, 5060422: Last Updated: Mon Mar 20 18:06:17 2017
+<BR><P>#&#060CALLGRAPH&#062# ARM Linker, 5060422: Last Updated: Tue Mar 21 19:24:04 2017
 <BR><P>
 <H3>Maximum Stack Usage =       1440 bytes + Unknown(Functions without stacksize, Cycles, Untraceable Function Pointers)</H3><H3>
 Call chain for Maximum Stack Depth:</H3>
@@ -2410,7 +2410,7 @@ Global Symbols
 <BR>[Called By]<UL><LI><a href="#[2ae]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;socket_connect
 </UL>
 
-<P><STRONG><a name="[1db]"></a>GetLaserID</STRONG> (Thumb, 54 bytes, Stack size 8 bytes, lasermisc.o(i.GetLaserID))
+<P><STRONG><a name="[1db]"></a>GetLaserID</STRONG> (Thumb, 52 bytes, Stack size 8 bytes, lasermisc.o(i.GetLaserID))
 <BR><BR>[Stack]<UL><LI>Max Depth = 8<LI>Call Chain = GetLaserID
 </UL>
 <BR>[Calls]<UL><LI><a href="#[1cc]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_GPIO_ReadPin
@@ -3496,7 +3496,7 @@ Global Symbols
 </UL>
 <BR>[Address Reference Count : 1]<UL><LI> spithread.o(i.Init_MainSPI_Thread)
 </UL>
-<P><STRONG><a name="[94]"></a>MainThread</STRONG> (Thumb, 924 bytes, Stack size 16 bytes, mainthread.o(i.MainThread))
+<P><STRONG><a name="[94]"></a>MainThread</STRONG> (Thumb, 944 bytes, Stack size 16 bytes, mainthread.o(i.MainThread))
 <BR><BR>[Stack]<UL><LI>Max Depth = 1032 + Unknown Stack Size
 <LI>Call Chain = MainThread &rArr; FractLaserWork_Process &rArr; log_FractLaserStart &rArr; LOG &rArr; QueuePutLog &rArr; osMessagePut &rArr; isrMessagePut &rArr; isr_mbx_send &rArr; rt_psq_enq
 </UL>
@@ -4054,7 +4054,7 @@ Global Symbols
 <BR>[Called By]<UL><LI><a href="#[9d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
 </UL>
 
-<P><STRONG><a name="[66]"></a>SystemInit</STRONG> (Thumb, 82 bytes, Stack size 0 bytes, system_stm32f4xx.o(i.SystemInit))
+<P><STRONG><a name="[66]"></a>SystemInit</STRONG> (Thumb, 80 bytes, Stack size 0 bytes, system_stm32f4xx.o(i.SystemInit))
 <BR>[Address Reference Count : 1]<UL><LI> startup_stm32f407xx.o(.text)
 </UL>
 <P><STRONG><a name="[2b]"></a>TIM1_BRK_TIM9_IRQHandler</STRONG> (Thumb, 10 bytes, Stack size 8 bytes, stm32f4xx_it.o(i.TIM1_BRK_TIM9_IRQHandler))
@@ -4182,7 +4182,7 @@ Global Symbols
 <BR>[Called By]<UL><LI><a href="#[b7]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;USART6_TX_DMA_Complete
 </UL>
 
-<P><STRONG><a name="[25d]"></a>UpdateLaserState</STRONG> (Thumb, 582 bytes, Stack size 8 bytes, mainthread.o(i.UpdateLaserState))
+<P><STRONG><a name="[25d]"></a>UpdateLaserState</STRONG> (Thumb, 588 bytes, Stack size 8 bytes, mainthread.o(i.UpdateLaserState))
 <BR><BR>[Stack]<UL><LI>Max Depth = 80<LI>Call Chain = UpdateLaserState &rArr; SetPicId &rArr; WriteRegister &rArr; HAL_UART_Transmit_ITMY
 </UL>
 <BR>[Calls]<UL><LI><a href="#[1d0]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SetPicId
@@ -5503,7 +5503,7 @@ Global Symbols
 <LI><a href="#[9b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;WiFiThread
 </UL>
 
-<P><STRONG><a name="[9d]"></a>main</STRONG> (Thumb, 456 bytes, Stack size 24 bytes, main.o(i.main))
+<P><STRONG><a name="[9d]"></a>main</STRONG> (Thumb, 498 bytes, Stack size 24 bytes, main.o(i.main))
 <BR><BR>[Stack]<UL><LI>Max Depth = 664 + Unknown Stack Size
 <LI>Call Chain = main &rArr; LOG_I &rArr; QueuePutLog &rArr; osMessagePut &rArr; isrMessagePut &rArr; isr_mbx_send &rArr; rt_psq_enq
 </UL>

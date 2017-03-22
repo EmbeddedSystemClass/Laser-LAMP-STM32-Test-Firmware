@@ -133,7 +133,7 @@ int main(void)
 	else
 		__MISC_RELAY3_OFF();
 	
-	if (GetLaserID() == LASER_ID_SOLIDSTATE)
+	if (GetLaserID() == LASER_ID_SOLIDSTATE || GetLaserID() == LASER_ID_SOLIDSTATE2 || GetLaserID() == LASER_ID_LONGPULSE || GetLaserID() == LASER_ID_FRACTLASER)
 		__MISC_RELAY2_ON();
 	else
 		__MISC_RELAY2_OFF();
@@ -183,7 +183,9 @@ int main(void)
 	}
 	
 	SoundOn();
+	__MISC_LASERLED_ON();
 	HAL_Delay(500);
+	__MISC_LASERLED_OFF();
 	SoundOff();
 	//HAL_Delay(3000); 										// Wait for display initialization
 	

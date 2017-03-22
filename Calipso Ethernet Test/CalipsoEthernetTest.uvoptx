@@ -207,41 +207,25 @@
         <Bp>
           <Number>0</Number>
           <Type>0</Type>
-          <LineNumber>148</LineNumber>
-          <EnabledFlag>0</EnabledFlag>
-          <Address>134273300</Address>
+          <LineNumber>756</LineNumber>
+          <EnabledFlag>1</EnabledFlag>
+          <Address>134341662</Address>
           <ByteObject>0</ByteObject>
           <HtxType>0</HtxType>
           <ManyObjects>0</ManyObjects>
           <SizeOfObject>0</SizeOfObject>
           <BreakByAccess>0</BreakByAccess>
           <BreakIfRCount>1</BreakIfRCount>
-          <Filename>.\SolidStateLaserWorkFrame.c</Filename>
+          <Filename>.\GlobalVariables.c</Filename>
           <ExecCommand></ExecCommand>
-          <Expression>\\CalipsoEthernetTest\SolidStateLaserWorkFrame.c\148</Expression>
+          <Expression>\\CalipsoEthernetTest\GlobalVariables.c\756</Expression>
         </Bp>
         <Bp>
           <Number>1</Number>
           <Type>0</Type>
-          <LineNumber>284</LineNumber>
-          <EnabledFlag>0</EnabledFlag>
-          <Address>134310376</Address>
-          <ByteObject>0</ByteObject>
-          <HtxType>0</HtxType>
-          <ManyObjects>0</ManyObjects>
-          <SizeOfObject>0</SizeOfObject>
-          <BreakByAccess>0</BreakByAccess>
-          <BreakIfRCount>1</BreakIfRCount>
-          <Filename>RTE\CMSIS\RTX_Conf_CM.c</Filename>
-          <ExecCommand></ExecCommand>
-          <Expression>\\CalipsoEthernetTest\RTE/CMSIS/RTX_Conf_CM.c\284</Expression>
-        </Bp>
-        <Bp>
-          <Number>2</Number>
-          <Type>0</Type>
           <LineNumber>97</LineNumber>
           <EnabledFlag>0</EnabledFlag>
-          <Address>134286210</Address>
+          <Address>134351318</Address>
           <ByteObject>0</ByteObject>
           <HtxType>0</HtxType>
           <ManyObjects>0</ManyObjects>
@@ -253,11 +237,11 @@
           <Expression>\\CalipsoEthernetTest\WiFiScanningFrame.c\97</Expression>
         </Bp>
         <Bp>
-          <Number>3</Number>
+          <Number>2</Number>
           <Type>0</Type>
           <LineNumber>124</LineNumber>
           <EnabledFlag>1</EnabledFlag>
-          <Address>134258568</Address>
+          <Address>134323836</Address>
           <ByteObject>0</ByteObject>
           <HtxType>0</HtxType>
           <ManyObjects>0</ManyObjects>
@@ -267,6 +251,38 @@
           <Filename>.\LongPulseLaserInputFrame.c</Filename>
           <ExecCommand></ExecCommand>
           <Expression>\\CalipsoEthernetTest\LongPulseLaserInputFrame.c\124</Expression>
+        </Bp>
+        <Bp>
+          <Number>3</Number>
+          <Type>0</Type>
+          <LineNumber>284</LineNumber>
+          <EnabledFlag>1</EnabledFlag>
+          <Address>134374912</Address>
+          <ByteObject>0</ByteObject>
+          <HtxType>0</HtxType>
+          <ManyObjects>0</ManyObjects>
+          <SizeOfObject>0</SizeOfObject>
+          <BreakByAccess>0</BreakByAccess>
+          <BreakIfRCount>1</BreakIfRCount>
+          <Filename>RTE\CMSIS\RTX_Conf_CM.c</Filename>
+          <ExecCommand></ExecCommand>
+          <Expression>\\CalipsoEthernetTest\RTE/CMSIS/RTX_Conf_CM.c\284</Expression>
+        </Bp>
+        <Bp>
+          <Number>4</Number>
+          <Type>0</Type>
+          <LineNumber>112</LineNumber>
+          <EnabledFlag>1</EnabledFlag>
+          <Address>134368596</Address>
+          <ByteObject>0</ByteObject>
+          <HtxType>0</HtxType>
+          <ManyObjects>0</ManyObjects>
+          <SizeOfObject>0</SizeOfObject>
+          <BreakByAccess>0</BreakByAccess>
+          <BreakIfRCount>1</BreakIfRCount>
+          <Filename>.\main.c</Filename>
+          <ExecCommand></ExecCommand>
+          <Expression>\\CalipsoEthernetTest\main.c\112</Expression>
         </Bp>
       </Breakpoint>
       <WatchWindow1>

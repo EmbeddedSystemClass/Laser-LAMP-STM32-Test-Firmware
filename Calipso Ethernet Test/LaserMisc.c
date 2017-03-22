@@ -465,7 +465,7 @@ void SoundOff(void)
 
 LASER_ID GetLaserID()
 {
-	//return LASER_ID_FRACTLASER;
+	//return LASER_ID_DIODELASER;
 	if (__MISC_LASER_ID0() == GPIO_PIN_SET)
 	{
 		if (__MISC_LASER_ID1() == GPIO_PIN_SET)
@@ -474,14 +474,14 @@ LASER_ID GetLaserID()
 		}
 		else
 		{
-			return LASER_ID_SOLIDSTATE;
+			return LASER_ID_DIODELASER;
 		}
 	}
 	else
 	{
 		if (__MISC_LASER_ID1() == GPIO_PIN_SET)
 		{
-			return LASER_ID_SOLIDSTATE2;
+			return LASER_ID_SOLIDSTATE;
 		}
 		else
 		{
