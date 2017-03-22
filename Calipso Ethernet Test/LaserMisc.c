@@ -470,7 +470,7 @@ LASER_ID GetLaserID()
 	{
 		if (__MISC_LASER_ID1() == GPIO_PIN_SET)
 		{			
-			return LASER_ID_LONGPULSE;
+			return LASER_ID_FRACTLASER;
 		}
 		else
 		{
@@ -485,7 +485,7 @@ LASER_ID GetLaserID()
 		}
 		else
 		{
-			return LASER_ID_FRACTLASER;
+			return LASER_ID_LONGPULSE;
 		}
 	}
 }
