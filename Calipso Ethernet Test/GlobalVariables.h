@@ -13,10 +13,10 @@
 
 #define FLASH_LASERDATA_BASE 0x080E0000
 
-#define DEBUG_SOLID_STATE_LASER
-#define NEW_SOUNDSCHEME
-//#define NEW_COOLSCHEME
-#define NEW_DOUBLECOOLSCHEME
+#define DEBUG_SOLID_STATE_LASER		// Turn off control scheme for solid state interface debug
+#define NEW_SOUNDSCHEME						// use class-D amplifier
+//#define NEW_COOLSCHEME					// amplified PWM by two mossfet channels
+#define NEW_DOUBLECOOLSCHEME			// Added second PWM channel
 
 extern int32_t LOGHASH[16];
 
