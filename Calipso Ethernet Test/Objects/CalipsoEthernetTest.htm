@@ -3,7 +3,7 @@
 <title>Static Call Graph - [.\Objects\CalipsoEthernetTest.axf]</title></head>
 <body><HR>
 <H1>Static Call Graph for image .\Objects\CalipsoEthernetTest.axf</H1><HR>
-<BR><P>#&#060CALLGRAPH&#062# ARM Linker, 5060183: Last Updated: Mon Mar 27 14:01:47 2017
+<BR><P>#&#060CALLGRAPH&#062# ARM Linker, 5060422: Last Updated: Mon Apr 24 14:52:52 2017
 <BR><P>
 <H3>Maximum Stack Usage =       1488 bytes + Unknown(Functions without stacksize, Cycles, Untraceable Function Pointers)</H3><H3>
 Call chain for Maximum Stack Depth:</H3>
@@ -901,7 +901,7 @@ Global Symbols
 <BR>[Called By]<UL><LI><a href="#[162]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;_printf_lcs_common
 </UL>
 
-<P><STRONG><a name="[ec]"></a>_printf_int_oct</STRONG> (Thumb, 74 bytes, Stack size 16 bytes, _printf_oct_int.o(.text))
+<P><STRONG><a name="[ec]"></a>_printf_int_oct</STRONG> (Thumb, 72 bytes, Stack size 16 bytes, _printf_oct_int.o(.text))
 <BR><BR>[Stack]<UL><LI>Max Depth = 64<LI>Call Chain = _printf_int_oct &rArr; _printf_int_common &rArr; _printf_post_padding
 </UL>
 <BR>[Calls]<UL><LI><a href="#[120]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;_printf_int_common
@@ -2293,7 +2293,7 @@ Global Symbols
 </UL>
 
 <P><STRONG><a name="[1be]"></a>FlowInit</STRONG> (Thumb, 204 bytes, Stack size 48 bytes, lasermisc.o(i.FlowInit))
-<BR><BR>[Stack]<UL><LI>Max Depth = 84<LI>Call Chain = FlowInit &rArr; HAL_TIM_ConfigClockSource &rArr; TIM_ETR_SetConfig
+<BR><BR>[Stack]<UL><LI>Max Depth = 84<LI>Call Chain = FlowInit &rArr; HAL_TIM_ConfigClockSource &rArr; TIM_TI2_ConfigInputStage
 </UL>
 <BR>[Calls]<UL><LI><a href="#[1c0]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_TIM_ConfigClockSource
 <LI><a href="#[1bf]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_TIM_Base_Init
@@ -2663,7 +2663,7 @@ Global Symbols
 </UL>
 
 <P><STRONG><a name="[1ec]"></a>HAL_Init</STRONG> (Thumb, 54 bytes, Stack size 8 bytes, stm32f4xx_hal.o(i.HAL_Init))
-<BR><BR>[Stack]<UL><LI>Max Depth = 484<LI>Call Chain = HAL_Init &rArr; HAL_MspInit &rArr; LampControlInit &rArr; LampControlTIMInit &rArr; HAL_TIM_SlaveConfigSynchronization &rArr; TIM_SlaveTimer_SetConfig &rArr; TIM_ETR_SetConfig
+<BR><BR>[Stack]<UL><LI>Max Depth = 484<LI>Call Chain = HAL_Init &rArr; HAL_MspInit &rArr; LampControlInit &rArr; LampControlTIMInit &rArr; HAL_TIM_SlaveConfigSynchronization &rArr; TIM_SlaveTimer_SetConfig &rArr; TIM_TI2_ConfigInputStage
 </UL>
 <BR>[Calls]<UL><LI><a href="#[1ef]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_MspInit
 <LI><a href="#[1ee]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_InitTick
@@ -2683,7 +2683,7 @@ Global Symbols
 </UL>
 
 <P><STRONG><a name="[1ef]"></a>HAL_MspInit</STRONG> (Thumb, 800 bytes, Stack size 240 bytes, stm32f4xx_hal_msp.o(i.HAL_MspInit))
-<BR><BR>[Stack]<UL><LI>Max Depth = 476<LI>Call Chain = HAL_MspInit &rArr; LampControlInit &rArr; LampControlTIMInit &rArr; HAL_TIM_SlaveConfigSynchronization &rArr; TIM_SlaveTimer_SetConfig &rArr; TIM_ETR_SetConfig
+<BR><BR>[Stack]<UL><LI>Max Depth = 476<LI>Call Chain = HAL_MspInit &rArr; LampControlInit &rArr; LampControlTIMInit &rArr; HAL_TIM_SlaveConfigSynchronization &rArr; TIM_SlaveTimer_SetConfig &rArr; TIM_TI2_ConfigInputStage
 </UL>
 <BR>[Calls]<UL><LI><a href="#[1f5]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;LampControlInit
 <LI><a href="#[1f3]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_PWR_EnablePVD
@@ -2884,12 +2884,12 @@ Global Symbols
 </UL>
 
 <P><STRONG><a name="[1c0]"></a>HAL_TIM_ConfigClockSource</STRONG> (Thumb, 306 bytes, Stack size 24 bytes, stm32f4xx_hal_tim.o(i.HAL_TIM_ConfigClockSource))
-<BR><BR>[Stack]<UL><LI>Max Depth = 36<LI>Call Chain = HAL_TIM_ConfigClockSource &rArr; TIM_ETR_SetConfig
+<BR><BR>[Stack]<UL><LI>Max Depth = 36<LI>Call Chain = HAL_TIM_ConfigClockSource &rArr; TIM_TI2_ConfigInputStage
 </UL>
-<BR>[Calls]<UL><LI><a href="#[203]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;TIM_ETR_SetConfig
-<LI><a href="#[206]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;TIM_TI2_ConfigInputStage
+<BR>[Calls]<UL><LI><a href="#[206]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;TIM_TI2_ConfigInputStage
 <LI><a href="#[204]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;TIM_TI1_ConfigInputStage
 <LI><a href="#[205]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;TIM_ITRx_SetConfig
+<LI><a href="#[203]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;TIM_ETR_SetConfig
 </UL>
 <BR>[Called By]<UL><LI><a href="#[1be]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;FlowInit
 </UL>
@@ -2994,7 +2994,7 @@ Global Symbols
 </UL>
 
 <P><STRONG><a name="[216]"></a>HAL_TIM_SlaveConfigSynchronization</STRONG> (Thumb, 86 bytes, Stack size 16 bytes, stm32f4xx_hal_tim.o(i.HAL_TIM_SlaveConfigSynchronization))
-<BR><BR>[Stack]<UL><LI>Max Depth = 52<LI>Call Chain = HAL_TIM_SlaveConfigSynchronization &rArr; TIM_SlaveTimer_SetConfig &rArr; TIM_ETR_SetConfig
+<BR><BR>[Stack]<UL><LI>Max Depth = 52<LI>Call Chain = HAL_TIM_SlaveConfigSynchronization &rArr; TIM_SlaveTimer_SetConfig &rArr; TIM_TI2_ConfigInputStage
 </UL>
 <BR>[Calls]<UL><LI><a href="#[217]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;TIM_SlaveTimer_SetConfig
 </UL>
@@ -3221,7 +3221,7 @@ Global Symbols
 </UL>
 
 <P><STRONG><a name="[1f5]"></a>LampControlInit</STRONG> (Thumb, 12 bytes, Stack size 8 bytes, solidstatelaser.o(i.LampControlInit))
-<BR><BR>[Stack]<UL><LI>Max Depth = 236<LI>Call Chain = LampControlInit &rArr; LampControlTIMInit &rArr; HAL_TIM_SlaveConfigSynchronization &rArr; TIM_SlaveTimer_SetConfig &rArr; TIM_ETR_SetConfig
+<BR><BR>[Stack]<UL><LI>Max Depth = 236<LI>Call Chain = LampControlInit &rArr; LampControlTIMInit &rArr; HAL_TIM_SlaveConfigSynchronization &rArr; TIM_SlaveTimer_SetConfig &rArr; TIM_TI2_ConfigInputStage
 </UL>
 <BR>[Calls]<UL><LI><a href="#[237]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;LampControlTIMInit
 <LI><a href="#[236]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;LampControlGPIOInit
@@ -3256,7 +3256,7 @@ Global Symbols
 </UL>
 
 <P><STRONG><a name="[237]"></a>LampControlTIMInit</STRONG> (Thumb, 536 bytes, Stack size 176 bytes, solidstatelaser.o(i.LampControlTIMInit))
-<BR><BR>[Stack]<UL><LI>Max Depth = 228<LI>Call Chain = LampControlTIMInit &rArr; HAL_TIM_SlaveConfigSynchronization &rArr; TIM_SlaveTimer_SetConfig &rArr; TIM_ETR_SetConfig
+<BR><BR>[Stack]<UL><LI>Max Depth = 228<LI>Call Chain = LampControlTIMInit &rArr; HAL_TIM_SlaveConfigSynchronization &rArr; TIM_SlaveTimer_SetConfig &rArr; TIM_TI2_ConfigInputStage
 </UL>
 <BR>[Calls]<UL><LI><a href="#[1f1]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_NVIC_SetPriority
 <LI><a href="#[1f4]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_NVIC_EnableIRQ
@@ -3417,7 +3417,7 @@ Global Symbols
 <BR>[Called By]<UL><LI><a href="#[94]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;MainThread
 </UL>
 
-<P><STRONG><a name="[255]"></a>LongPulseLaserInput_Process</STRONG> (Thumb, 1220 bytes, Stack size 72 bytes, longpulselaserinputframe.o(i.LongPulseLaserInput_Process))
+<P><STRONG><a name="[255]"></a>LongPulseLaserInput_Process</STRONG> (Thumb, 1224 bytes, Stack size 72 bytes, longpulselaserinputframe.o(i.LongPulseLaserInput_Process))
 <BR><BR>[Stack]<UL><LI>Max Depth = 144<LI>Call Chain = LongPulseLaserInput_Process &rArr; SetPicId &rArr; WriteRegister &rArr; HAL_UART_Transmit_ITMY
 </UL>
 <BR>[Calls]<UL><LI><a href="#[1cb]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;CoolOn
@@ -4192,7 +4192,7 @@ Global Symbols
 <BR>[Called By]<UL><LI><a href="#[94]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;MainThread
 </UL>
 
-<P><STRONG><a name="[262]"></a>UpdateLaserStatus</STRONG> (Thumb, 236 bytes, Stack size 16 bytes, mainthread.o(i.UpdateLaserStatus))
+<P><STRONG><a name="[262]"></a>UpdateLaserStatus</STRONG> (Thumb, 226 bytes, Stack size 16 bytes, mainthread.o(i.UpdateLaserStatus))
 <BR><BR>[Stack]<UL><LI>Max Depth = 60<LI>Call Chain = UpdateLaserStatus &rArr; WriteVariableConvert16 &rArr; convert_array_w
 </UL>
 <BR>[Calls]<UL><LI><a href="#[1a6]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;osSignalWait
@@ -6860,7 +6860,7 @@ Local Symbols
 <BR>[Called By]<UL><LI><a href="#[9d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
 </UL>
 
-<P><STRONG><a name="[98]"></a>LaserTimer_Callback</STRONG> (Thumb, 676 bytes, Stack size 8 bytes, lasertimer.o(i.LaserTimer_Callback))
+<P><STRONG><a name="[98]"></a>LaserTimer_Callback</STRONG> (Thumb, 688 bytes, Stack size 8 bytes, lasertimer.o(i.LaserTimer_Callback))
 <BR><BR>[Stack]<UL><LI>Max Depth = 488 + Unknown Stack Size
 <LI>Call Chain = LaserTimer_Callback &rArr; TryStoreGlobalVariables &rArr; fopen &rArr; _freopen_locked &rArr; _sys_open &rArr; __sys_open &rArr; fat_open &rArr; path_create &rArr; frec_find &rArr; entry_pos_inc &rArr; alloc_table_read &rArr; cache_fat
 </UL>
@@ -7548,11 +7548,11 @@ Local Symbols
 </UL>
 
 <P><STRONG><a name="[217]"></a>TIM_SlaveTimer_SetConfig</STRONG> (Thumb, 164 bytes, Stack size 24 bytes, stm32f4xx_hal_tim.o(i.TIM_SlaveTimer_SetConfig))
-<BR><BR>[Stack]<UL><LI>Max Depth = 36<LI>Call Chain = TIM_SlaveTimer_SetConfig &rArr; TIM_ETR_SetConfig
+<BR><BR>[Stack]<UL><LI>Max Depth = 36<LI>Call Chain = TIM_SlaveTimer_SetConfig &rArr; TIM_TI2_ConfigInputStage
 </UL>
-<BR>[Calls]<UL><LI><a href="#[203]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;TIM_ETR_SetConfig
-<LI><a href="#[206]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;TIM_TI2_ConfigInputStage
+<BR>[Calls]<UL><LI><a href="#[206]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;TIM_TI2_ConfigInputStage
 <LI><a href="#[204]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;TIM_TI1_ConfigInputStage
+<LI><a href="#[203]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;TIM_ETR_SetConfig
 </UL>
 <BR>[Called By]<UL><LI><a href="#[216]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_TIM_SlaveConfigSynchronization
 </UL>

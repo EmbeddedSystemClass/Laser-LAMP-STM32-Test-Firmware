@@ -223,12 +223,14 @@ void UpdateLaserState(uint16_t pic_id)
 			SetPicId(FRAME_PICID_LASERDIODE_TEMPERATUREOUT, g_wDGUSTimeout);
 		}
 		
+#ifdef FLOW_CHECK
 		// Check flow
 		if (flow2 < flow_low)
 		{
 			DiodeLaserOff();
 			SetPicId(FRAME_PICID_LASERDIODE_FLOWERROR, g_wDGUSTimeout);
 		}
+#endif
 		
 		// Check is working
 		if ((pic_id == FRAME_PICID_LASERDIODE_INPUT) || 
@@ -288,12 +290,14 @@ void UpdateLaserState(uint16_t pic_id)
 			SetPicId(FRAME_PICID_FRACTLASER_OVERHEATING, g_wDGUSTimeout);
 		}
 		
+#ifdef FLOW_CHECK
 		// Check flow
 		if (flow1 < flow_low)
 		{
 			SolidStateLaserOff();
 			SetPicId(FRAME_PICID_FRACTLASER_FLOWERROR, g_wDGUSTimeout);
 		}
+#endif
 		
 		// Fault check
 		if (__MISC_GETCHARGEMODULEFAULTSTATE())
@@ -315,12 +319,14 @@ void UpdateLaserState(uint16_t pic_id)
 			SetPicId(FRAME_PICID_LONGPULSE_OVERHEATING, g_wDGUSTimeout);
 		}
 		
+#ifdef FLOW_CHECK
 		// Check flow
 		if (flow1 < flow_low)
 		{
 			SolidStateLaserOff();
 			SetPicId(FRAME_PICID_LONGPULSE_FLOWERROR, g_wDGUSTimeout);
 		}
+#endif
 		
 		// Fault check
 		if (__MISC_GETCHARGEMODULEFAULTSTATE())
@@ -361,7 +367,8 @@ void UpdateLaserStatus()
 			laser_state.coolIcon = 3;
 	}
 	
-	laser_state.flow = (flow1 + flow2) * 10;
+	//laser_state.flow = (flow1 + flow2) * 10;
+	laser_state.flow = flow1 * 10;
 	
 	WriteVariableConvert16(FRAMEDATA_LASERSTATE_BASE, &laser_state, sizeof(laser_state));
 	osSignalWait(DGUS_EVENT_SEND_COMPLETED, g_wDGUSTimeout);

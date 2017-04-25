@@ -121,7 +121,7 @@ void MainSPI_Thread (void const *argument) {
 		SPIdrv->Receive((void*)&datainv, 1);
 		datain = datainv;
 		
-		VoltageMonitor = 10.0f * (float32_t)datain / 8192.0f;
+		VoltageMonitor = 10.0f * 1.0465f * (float32_t)datain / 8192.0f;
 		
 		while (wait);
 		wait = true;

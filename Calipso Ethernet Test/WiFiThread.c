@@ -261,7 +261,7 @@ void WiFiThread_PublishToServer()
 		
 		if (!authentification && authentification_start)
 		{
-			char* auth_request = "GET http://innolaser-service.ru/service-api/device_auth.php?login=briansk&password=briansk15 HTTP/1.1\r\nHost: innolaser-service.ru\r\nCache-Control: no-cache, no-store, max-age=0\r\n\r\n\r\n";
+			char* auth_request = "GET http://innolaser-service.ru/service-api/device_auth.php?login=laser1&password=host1234 HTTP/1.1\r\nHost: innolaser-service.ru\r\nCache-Control: no-cache, no-store, max-age=0\r\n\r\n\r\n";
 			sock_id = socket_connect("innolaser-service.ru", 80);
 			
 			if (sock_id >= 0)

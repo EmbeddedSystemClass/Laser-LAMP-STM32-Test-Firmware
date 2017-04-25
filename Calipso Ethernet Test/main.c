@@ -108,7 +108,6 @@ bool eneable_temp_sensor = true;
   * @retval None
   */
 int main(void)
-
 {
 
 #ifdef RTE_CMSIS_RTOS                   // when using CMSIS RTOS

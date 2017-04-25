@@ -40,7 +40,7 @@ uint16_t energy_tbl[VOLTAGES_SNUM*SHORT_DURATIONS_NUM + VOLTAGES_NUM*SHORT_DURAT
 		47	,52		,57		,62		,69		,76		,83		,90 ,  //	1800
 		50	,59		,68		,77		,84		,91		,98		,105,  //	2000
 			
-/*	220, 240,	 260,	 280,	 300,  320,	 340,	 360 - Voltages	*/
+/*	220	,230	,240	,250	,260	,270	,280	,290	,300	,310	,320	,330	,340	,350	,360 ,370 - Voltages	*/
 		5		,6		,8		,10		,11		,14		,16		,18		,20		,23		,25		,27		,30		,32		,35  ,38  ,  //	2
 		8		,10		,12		,15		,17		,20		,23		,26		,29		,32		,36		,39		,42		,45		,49  ,52  ,  //	3
 		10	,13		,16		,19		,22		,26		,29		,33		,37		,41		,45		,48		,51		,55		,59  ,64  ,  //	4
@@ -51,7 +51,8 @@ uint16_t energy_tbl[VOLTAGES_SNUM*SHORT_DURATIONS_NUM + VOLTAGES_NUM*SHORT_DURAT
 		30	,40		,49		,58		,68		,79		,91		,102	,114	,128	,143	,155	,168	,183	,198 ,217 ,  //	9
 		41	,54		,67		,80		,93		,109	,126	,143	,160	,179	,198	,216	,235	,256	,278 ,300 ,  //	10
     41	,54		,67		,80		,93		,109	,126	,143	,160	,179	,198	,216	,235	,256	,278 ,300 ,  //	--
-		
+
+/*	240 ,250	,260	,270	,280	,290	,300	,310	,320	,330	,340	,350	,360	,370	,380 ,390 - Voltages	*/
 		41	,54		,67		,80		,93		,109	,126	,143	,160	,179	,198	,216	,235	,256	,278 ,300	,  //	10
 		47	,62		,76		,92		,108	,126	,144	,162	,181	,202	,222	,244	,265	,289	,314 ,339	,  //	12
 		51	,67		,83		,100	,117	,137	,157	,178	,200	,223	,247	,270	,293	,320	,346 ,375	,  //	14
@@ -65,9 +66,8 @@ uint16_t energy_tbl[VOLTAGES_SNUM*SHORT_DURATIONS_NUM + VOLTAGES_NUM*SHORT_DURAT
 
 		
 uint16_t voltage_short[VOLTAGES_SNUM] = {320, 330, 340, 350, 360, 370, 380, 390};
-
-//uint16_t voltage_other[VOLTAGES_NUM] = {220, 240, 260, 280, 300, 320, 340, 360};
-uint16_t voltage_other[VOLTAGES_NUM] = {220, 230, 240, 250, 260, 270, 280, 290, 300, 310, 320, 330, 340, 350, 360, 370};
+uint16_t voltage_stdrt[VOLTAGES_NUM] = {220, 230, 240, 250, 260, 270, 280, 290, 300, 310, 320, 330, 340, 350, 360, 370};
+uint16_t voltage_long[VOLTAGES_NUM] = {240, 250, 260, 270, 280, 290, 300, 310, 320, 330, 340, 350, 360, 370, 380, 390};
 
 void LongPulseLaserInput_Init(uint16_t pic_id)
 {
@@ -213,7 +213,7 @@ void LongPulseLaserInput_Process(uint16_t pic_id)
 			duration = frameData_SolidStateLaser.lasersettings.EnergyInt;
 			frameData_SolidStateLaser.lasersettings.Energy = energy_tbl[frameData_SolidStateLaser.laserprofile.EnergyCnt + frameData_SolidStateLaser.laserprofile.DurationCnt*VOLTAGES_NUM + SHORT_DURATIONS_NUM*VOLTAGES_SNUM];
 		
-			voltage = voltage_other[frameData_SolidStateLaser.laserprofile.EnergyCnt];
+			voltage = voltage_stdrt[frameData_SolidStateLaser.laserprofile.EnergyCnt];
 			break;
 			
 		case 2:
@@ -221,7 +221,7 @@ void LongPulseLaserInput_Process(uint16_t pic_id)
 			duration = frameData_SolidStateLaser.lasersettings.EnergyInt;
 			frameData_SolidStateLaser.lasersettings.Energy = energy_tbl[frameData_SolidStateLaser.laserprofile.EnergyCnt + frameData_SolidStateLaser.laserprofile.DurationCnt*VOLTAGES_NUM + SHORT_DURATIONS_NUM*(VOLTAGES_NUM + VOLTAGES_SNUM)];
 		
-			voltage = voltage_other[frameData_SolidStateLaser.laserprofile.EnergyCnt];
+			voltage = voltage_long[frameData_SolidStateLaser.laserprofile.EnergyCnt];
 			break;
 	}
 	

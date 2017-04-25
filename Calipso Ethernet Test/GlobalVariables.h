@@ -17,6 +17,7 @@
 #define NEW_SOUNDSCHEME						// use class-D amplifier
 //#define NEW_COOLSCHEME					// amplified PWM by two mossfet channels
 #define NEW_DOUBLECOOLSCHEME			// Added second PWM channel
+#define FLOW_CHECK
 
 extern int32_t LOGHASH[16];
 
