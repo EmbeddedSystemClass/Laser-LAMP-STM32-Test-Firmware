@@ -46,6 +46,7 @@
 #include "stm32f4xx_it.h"
 #include "stm32f4xx_hal_tim.h"
 #include "DGUS.h"
+#include "CANBus.h"
 
 #ifdef _RTE_
 #include "RTE_Components.h"             /* Component selection */
@@ -251,6 +252,26 @@ void USART1_IRQHandler(void)
 void PVD_IRQHandler(void)
 {
 	HAL_PWR_PVD_IRQHandler();
+}
+
+void CAN1_TX_IRQHandler(void)
+{
+	HAL_CAN_IRQHandler(&hcan1);
+}
+
+void CAN1_RX0_IRQHandler(void)
+{
+	HAL_CAN_IRQHandler(&hcan1);
+}
+
+void CAN1_RX1_IRQHandler(void)
+{
+	HAL_CAN_IRQHandler(&hcan1);
+}
+
+void CAN1_SCE_IRQHandler(void)
+{
+	HAL_CAN_IRQHandler(&hcan1);
 }
 
 /**

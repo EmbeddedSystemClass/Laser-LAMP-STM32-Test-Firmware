@@ -1,4 +1,4 @@
-Component: ARM Compiler 5.06 update 2 (build 183) Tool: armlink [4d35b7]
+Component: ARM Compiler 5.06 update 4 (build 422) Tool: armlink [4d35d2]
 
 ==============================================================================
 
@@ -3760,33 +3760,33 @@ Image Symbol Table
     .bss                                     0x200004d4   Section      352  globalvariables.o(.bss)
     .bss                                     0x20000634   Section     2112  dgusbase.o(.bss)
     .bss                                     0x20000e74   Section      128  rteventsystem.o(.bss)
-    .bss                                     0x20000ef8   Section    30424  rtx_conf_cm.o(.bss)
-    std_libspace                             0x200081f0   Data         864  rtx_conf_cm.o(.bss)
-    std_libmutex                             0x20008550   Data         128  rtx_conf_cm.o(.bss)
-    .bss                                     0x200085d0   Section      224  mci_stm32f4xx.o(.bss)
-    hdma_sdio_rx                             0x200085d0   Data          96  mci_stm32f4xx.o(.bss)
-    hdma_sdio_tx                             0x20008630   Data          96  mci_stm32f4xx.o(.bss)
-    MCI                                      0x20008690   Data          32  mci_stm32f4xx.o(.bss)
-    .bss                                     0x200086b0   Section       32  stm32f4xx_hal_flash.o(.bss)
-    .bss                                     0x200086d0   Section     5476  fs_config.o(.bss)
-    fs_mc0_vol                               0x2000878c   Data         132  fs_config.o(.bss)
-    fs_mc0_mci                               0x20008810   Data          36  fs_config.o(.bss)
-    mc0_cache                                0x20008834   Data        5120  fs_config.o(.bss)
-    .bss                                     0x20009c34   Section       52  rt_task.o(.bss)
-    .bss                                     0x20009c68   Section       48  rt_list.o(.bss)
-    .bss                                     0x20009c98   Section       96  libspace.o(.bss)
-    .bss                                     0x20009cf8   Section       84  stdio_streams.o(.bss)
-    .bss                                     0x20009d4c   Section       84  stdio_streams.o(.bss)
-    .bss                                     0x20009da0   Section       84  stdio_streams.o(.bss)
-    .noinit                                  0x20009e00   Section     1188  eventrecorder.o(.noinit)
-    EventBuffer                              0x20009e00   Data        1024  eventrecorder.o(.noinit)
-    EventFilter                              0x2000a200   Data         128  eventrecorder.o(.noinit)
-    EventStatus                              0x2000a280   Data          36  eventrecorder.o(.noinit)
-    HEAP                                     0x2000a2a8   Section      512  startup_stm32f407xx.o(HEAP)
-    Heap_Mem                                 0x2000a2a8   Data         512  startup_stm32f407xx.o(HEAP)
-    STACK                                    0x2000a4a8   Section     1024  startup_stm32f407xx.o(STACK)
-    Stack_Mem                                0x2000a4a8   Data        1024  startup_stm32f407xx.o(STACK)
-    __initial_sp                             0x2000a8a8   Data           0  startup_stm32f407xx.o(STACK)
+    .bss                                     0x20000ef8   Section     8296  rtx_conf_cm.o(.bss)
+    std_libspace                             0x20002d00   Data         480  rtx_conf_cm.o(.bss)
+    std_libmutex                             0x20002ee0   Data         128  rtx_conf_cm.o(.bss)
+    .bss                                     0x20002f60   Section      224  mci_stm32f4xx.o(.bss)
+    hdma_sdio_rx                             0x20002f60   Data          96  mci_stm32f4xx.o(.bss)
+    hdma_sdio_tx                             0x20002fc0   Data          96  mci_stm32f4xx.o(.bss)
+    MCI                                      0x20003020   Data          32  mci_stm32f4xx.o(.bss)
+    .bss                                     0x20003040   Section       32  stm32f4xx_hal_flash.o(.bss)
+    .bss                                     0x20003060   Section     5476  fs_config.o(.bss)
+    fs_mc0_vol                               0x2000311c   Data         132  fs_config.o(.bss)
+    fs_mc0_mci                               0x200031a0   Data          36  fs_config.o(.bss)
+    mc0_cache                                0x200031c4   Data        5120  fs_config.o(.bss)
+    .bss                                     0x200045c4   Section       52  rt_task.o(.bss)
+    .bss                                     0x200045f8   Section       48  rt_list.o(.bss)
+    .bss                                     0x20004628   Section       96  libspace.o(.bss)
+    .bss                                     0x20004688   Section       84  stdio_streams.o(.bss)
+    .bss                                     0x200046dc   Section       84  stdio_streams.o(.bss)
+    .bss                                     0x20004730   Section       84  stdio_streams.o(.bss)
+    .noinit                                  0x200047c0   Section     1188  eventrecorder.o(.noinit)
+    EventBuffer                              0x200047c0   Data        1024  eventrecorder.o(.noinit)
+    EventFilter                              0x20004bc0   Data         128  eventrecorder.o(.noinit)
+    EventStatus                              0x20004c40   Data          36  eventrecorder.o(.noinit)
+    HEAP                                     0x20004c68   Section      512  startup_stm32f407xx.o(HEAP)
+    Heap_Mem                                 0x20004c68   Data         512  startup_stm32f407xx.o(HEAP)
+    STACK                                    0x20004e68   Section     1024  startup_stm32f407xx.o(STACK)
+    Stack_Mem                                0x20004e68   Data        1024  startup_stm32f407xx.o(STACK)
+    __initial_sp                             0x20005268   Data           0  startup_stm32f407xx.o(STACK)
 
     Global Symbols
 
@@ -4483,24 +4483,24 @@ Image Symbol Table
     dgus_buffer_tx                           0x20000674   Data        1024  dgusbase.o(.bss)
     dgus_buffer_rx                           0x20000a74   Data        1024  dgusbase.o(.bss)
     eventTimes                               0x20000e74   Data         128  rteventsystem.o(.bss)
-    mp_tcb                                   0x20000ef8   Data         480  rtx_conf_cm.o(.bss)
-    mp_stk                                   0x200010d8   Data        8208  rtx_conf_cm.o(.bss)
-    os_stack_mem                             0x200030e8   Data       20544  rtx_conf_cm.o(.bss)
-    os_fifo                                  0x20008128   Data         132  rtx_conf_cm.o(.bss)
-    os_active_TCB                            0x200081ac   Data          36  rtx_conf_cm.o(.bss)
-    os_messageQ_q_osTimerMessageQ            0x200081d0   Data          32  rtx_conf_cm.o(.bss)
-    pFlash                                   0x200086b0   Data          32  stm32f4xx_hal_flash.o(.bss)
-    fs_fat_fh                                0x200086d0   Data         144  fs_config.o(.bss)
-    fs_efs_fh                                0x20008760   Data          28  fs_config.o(.bss)
-    os_mutex_cb_fs_mc0_mtx_def               0x2000877c   Data          16  fs_config.o(.bss)
-    os_idle_TCB                              0x20009c34   Data          52  rt_task.o(.bss)
-    os_rdy                                   0x20009c68   Data          24  rt_list.o(.bss)
-    os_dly                                   0x20009c80   Data          24  rt_list.o(.bss)
-    __libspace_start                         0x20009c98   Data          96  libspace.o(.bss)
-    __stdin                                  0x20009cf8   Data          84  stdio_streams.o(.bss)
-    __temporary_stack_top$libspace           0x20009cf8   Data           0  libspace.o(.bss)
-    __stdout                                 0x20009d4c   Data          84  stdio_streams.o(.bss)
-    __stderr                                 0x20009da0   Data          84  stdio_streams.o(.bss)
+    mp_tcb                                   0x20000ef8   Data         272  rtx_conf_cm.o(.bss)
+    mp_stk                                   0x20001008   Data        2064  rtx_conf_cm.o(.bss)
+    os_stack_mem                             0x20001818   Data        5168  rtx_conf_cm.o(.bss)
+    os_fifo                                  0x20002c48   Data         132  rtx_conf_cm.o(.bss)
+    os_active_TCB                            0x20002ccc   Data          20  rtx_conf_cm.o(.bss)
+    os_messageQ_q_osTimerMessageQ            0x20002ce0   Data          32  rtx_conf_cm.o(.bss)
+    pFlash                                   0x20003040   Data          32  stm32f4xx_hal_flash.o(.bss)
+    fs_fat_fh                                0x20003060   Data         144  fs_config.o(.bss)
+    fs_efs_fh                                0x200030f0   Data          28  fs_config.o(.bss)
+    os_mutex_cb_fs_mc0_mtx_def               0x2000310c   Data          16  fs_config.o(.bss)
+    os_idle_TCB                              0x200045c4   Data          52  rt_task.o(.bss)
+    os_rdy                                   0x200045f8   Data          24  rt_list.o(.bss)
+    os_dly                                   0x20004610   Data          24  rt_list.o(.bss)
+    __libspace_start                         0x20004628   Data          96  libspace.o(.bss)
+    __stdin                                  0x20004688   Data          84  stdio_streams.o(.bss)
+    __temporary_stack_top$libspace           0x20004688   Data           0  libspace.o(.bss)
+    __stdout                                 0x200046dc   Data          84  stdio_streams.o(.bss)
+    __stderr                                 0x20004730   Data          84  stdio_streams.o(.bss)
 
 
 
@@ -5077,7 +5077,7 @@ Memory Map of the image
     0x0800b7d8   0x00000110   Data   RO         5073    locale$$data        c_w.l(lc_ctype_c.o)
 
 
-    Execution Region RW_IRAM1 (Base: 0x20000000, Size: 0x0000a8a8, Max: 0x00020000, ABSOLUTE, COMPRESSED[0x00000104])
+    Execution Region RW_IRAM1 (Base: 0x20000000, Size: 0x00005268, Max: 0x00020000, ABSOLUTE, COMPRESSED[0x00000104])
 
     Base Addr    Size         Type   Attr      Idx    E Section Name        Object
 
@@ -5112,21 +5112,21 @@ Memory Map of the image
     0x20000634   0x00000840   Zero   RW          605    .bss                dgusbase.o
     0x20000e74   0x00000080   Zero   RW          761    .bss                rteventsystem.o
     0x20000ef4   0x00000004   PAD
-    0x20000ef8   0x000076d8   Zero   RW          809    .bss                rtx_conf_cm.o
-    0x200085d0   0x000000e0   Zero   RW          881    .bss                mci_stm32f4xx.o
-    0x200086b0   0x00000020   Zero   RW         1666    .bss                stm32f4xx_hal_flash.o
-    0x200086d0   0x00001564   Zero   RW         2838    .bss                fs_config.o
-    0x20009c34   0x00000034   Zero   RW         3737    .bss                RTX_CM4.lib(rt_task.o)
-    0x20009c68   0x00000030   Zero   RW         4164    .bss                RTX_CM4.lib(rt_list.o)
-    0x20009c98   0x00000060   Zero   RW         4697    .bss                c_w.l(libspace.o)
-    0x20009cf8   0x00000054   Zero   RW         4798    .bss                c_w.l(stdio_streams.o)
-    0x20009d4c   0x00000054   Zero   RW         4799    .bss                c_w.l(stdio_streams.o)
-    0x20009da0   0x00000054   Zero   RW         4800    .bss                c_w.l(stdio_streams.o)
-    0x20009df4   0x0000000c   PAD
-    0x20009e00   0x000004a4   Zero   RW         1004    .noinit             eventrecorder.o
-    0x2000a2a4   0x00000004   PAD
-    0x2000a2a8   0x00000200   Zero   RW         2746    HEAP                startup_stm32f407xx.o
-    0x2000a4a8   0x00000400   Zero   RW         2745    STACK               startup_stm32f407xx.o
+    0x20000ef8   0x00002068   Zero   RW          809    .bss                rtx_conf_cm.o
+    0x20002f60   0x000000e0   Zero   RW          881    .bss                mci_stm32f4xx.o
+    0x20003040   0x00000020   Zero   RW         1666    .bss                stm32f4xx_hal_flash.o
+    0x20003060   0x00001564   Zero   RW         2838    .bss                fs_config.o
+    0x200045c4   0x00000034   Zero   RW         3737    .bss                RTX_CM4.lib(rt_task.o)
+    0x200045f8   0x00000030   Zero   RW         4164    .bss                RTX_CM4.lib(rt_list.o)
+    0x20004628   0x00000060   Zero   RW         4697    .bss                c_w.l(libspace.o)
+    0x20004688   0x00000054   Zero   RW         4798    .bss                c_w.l(stdio_streams.o)
+    0x200046dc   0x00000054   Zero   RW         4799    .bss                c_w.l(stdio_streams.o)
+    0x20004730   0x00000054   Zero   RW         4800    .bss                c_w.l(stdio_streams.o)
+    0x20004784   0x0000003c   PAD
+    0x200047c0   0x000004a4   Zero   RW         1004    .noinit             eventrecorder.o
+    0x20004c64   0x00000004   PAD
+    0x20004c68   0x00000200   Zero   RW         2746    HEAP                startup_stm32f407xx.o
+    0x20004e68   0x00000400   Zero   RW         2745    STACK               startup_stm32f407xx.o
 
 
 ==============================================================================
@@ -5136,32 +5136,32 @@ Image component sizes
 
       Code (inc. data)   RO Data    RW Data    ZI Data      Debug   Object Name
 
-      1100         52          0          0       2112      20497   dgusbase.o
-         0          0         24          0       1188       3888   eventrecorder.o
-       334         70         40          4       5476      30872   fs_config.o
-       124          4          0        441        352       6647   globalvariables.o
-      1970        420          0        129        540     343730   main.o
-       192         30         16          4          0       2177   mainthread.o
-      3372        248         60          0        224      17618   mci_stm32f4xx.o
-       584         40         23          4          0      13559   retarget_io.o
-       204         16          0          4        128       2821   rteventsystem.o
-       214         48        104         20      30424      10891   rtx_conf_cm.o
-       686        330          0         16          0       4884   sdcardbase.o
-        64         26        392          0       1536        896   startup_stm32f407xx.o
+      1100         52          0          0       2112      20621   dgusbase.o
+         0          0         24          0       1188       3920   eventrecorder.o
+       334         70         40          4       5476      31032   fs_config.o
+       124          4          0        441        352       6667   globalvariables.o
+      1970        420          0        129        540     343842   main.o
+       192         30         16          4          0       2197   mainthread.o
+      3372        248         60          0        224      17646   mci_stm32f4xx.o
+       584         40         23          4          0      13583   retarget_io.o
+       204         16          0          4        128       2845   rteventsystem.o
+       214         48        104         20       8296      10935   rtx_conf_cm.o
+       686        330          0         16          0       4912   sdcardbase.o
+        64         26        392          0       1536        900   startup_stm32f407xx.o
        206         18          0          0          0       4334   stm32f4xx_hal.o
        376         34          0          0          0      35796   stm32f4xx_hal_cortex.o
       1564         20          8          0          0       8243   stm32f4xx_hal_dma.o
        356         34          0          0         32       2918   stm32f4xx_hal_flash.o
        444         26          0          0          0       3518   stm32f4xx_hal_flash_ex.o
        896         94          0          0          0       2822   stm32f4xx_hal_gpio.o
-       168         20          0          0          0       1518   stm32f4xx_hal_msp.o
+       168         20          0          0          0       1530   stm32f4xx_hal_msp.o
       1668         70         16          0          0       6015   stm32f4xx_hal_rcc.o
       1658         12          0          0          0       7077   stm32f4xx_hal_uart.o
-        36          6          0          0          0       3357   stm32f4xx_it.o
-       292         40         16          4          0       2125   system_stm32f4xx.o
+        36          6          0          0          0       3389   stm32f4xx_it.o
+       292         40         16          4          0       2149   system_stm32f4xx.o
 
     ----------------------------------------------------------------------
-     16532       1658        732        632      42020     536203   Object Totals
+     16532       1658        732        632      19892     536891   Object Totals
          0          0         32          0          0          0   (incl. Generated)
         24          0          1          6          8          0   (incl. Padding)
 
@@ -5283,8 +5283,8 @@ Image component sizes
         10          0          0          0          0        116   fpinit.o
 
     ----------------------------------------------------------------------
-     28568       1306       1504         64        460     105580   Library Totals
-        60          0          3          5         12          0   (incl. Padding)
+     28568       1306       1504         64        508     105580   Library Totals
+        60          0          3          5         60          0   (incl. Padding)
 
     ----------------------------------------------------------------------
 
@@ -5296,7 +5296,7 @@ Image component sizes
         10          0          0          0          0        116   fz_wm.l
 
     ----------------------------------------------------------------------
-     28568       1306       1504         64        460     105580   Library Totals
+     28568       1306       1504         64        508     105580   Library Totals
 
     ----------------------------------------------------------------------
 
@@ -5305,14 +5305,14 @@ Image component sizes
 
       Code (inc. data)   RO Data    RW Data    ZI Data      Debug   
 
-     45100       2964       2236        696      42480     607627   Grand Totals
-     45100       2964       2236        260      42480     607627   ELF Image Totals (compressed)
+     45100       2964       2236        696      20400     608315   Grand Totals
+     45100       2964       2236        260      20400     608315   ELF Image Totals (compressed)
      45100       2964       2236        260          0          0   ROM Totals
 
 ==============================================================================
 
     Total RO  Size (Code + RO Data)                47336 (  46.23kB)
-    Total RW  Size (RW Data + ZI Data)             43176 (  42.16kB)
+    Total RW  Size (RW Data + ZI Data)             21096 (  20.60kB)
     Total ROM Size (Code + RO Data + RW Data)      47596 (  46.48kB)
 
 ==============================================================================

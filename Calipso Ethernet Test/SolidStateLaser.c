@@ -128,6 +128,8 @@ uint32_t GetSolidStateSessionPulse(LASER_ID laser_id)
 	return 0;
 }
 
+bool first_flush = true;
+
 void HAL_TIM_OC_DelayElapsedCallback(TIM_HandleTypeDef *htim)
 {
 	if (htim == &hTIM9)
@@ -138,9 +140,11 @@ void HAL_TIM_OC_DelayElapsedCallback(TIM_HandleTypeDef *htim)
 			__MISC_LASERLED2_ON();
 			
 			//if (Profile == PROFILE_SINGLE)
+			if (first_flush)
 			{
 				FlushesSessionLD++;
 				FlushesGlobalLD++;
+				first_flush = false;
 			}
 			
 		}
@@ -152,7 +156,11 @@ void HAL_TIM_OC_DelayElapsedCallback(TIM_HandleTypeDef *htim)
 			/*uint32_t count = convert_d(frameData_SolidStateLaser.PulseCounter);
 			count++;
 			frameData_SolidStateLaser.PulseCounter = convert_d(count);*/
-			SolidStateLaserPulseInc(LaserID);
+			if (first_flush)
+			{
+				SolidStateLaserPulseInc(LaserID);
+				first_flush = false;
+			}
 			
 			SoundOn();
 			__HAL_TIM_SET_AUTORELOAD(&hTIM11, 2100);
@@ -183,16 +191,17 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
 	}
 	
 	if (htim == &hTIM10)
-	{
-		Flushes++;
-		
+	{		
 		if (DiodeLaser_en) 
-		{			
-			/*if (Profile != PROFILE_SINGLE)
+		{
+			Flushes++;
+			
+			if (Profile != PROFILE_SINGLE)
+			if (/*Flushes != 0*/!first_flush)
 			{
 				FlushesSessionLD++;
 				FlushesGlobalLD++;
-			}*/
+			}
 			
 			if (((FlushesSessionLD % FlushesCount) == 0) && (FlushesSessionLD > 0))
 			{
@@ -217,10 +226,12 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
 				}
 			}
 		}
+		
+		if (SolidStateLaser_en)
+			if (!first_flush)
+				SolidStateLaserPulseInc(LaserID);
 		/*if (SolidStateLaser_en) 
-		{
-			SolidStateLaserPulseInc(LaserID);
-			
+		{			
 			SoundOn();
 			__HAL_TIM_SET_AUTORELOAD(&hTIM11, 2100);
 			HAL_TIM_Base_Start_IT(&hTIM11);
@@ -412,9 +423,10 @@ void LampControlPulseStart(void)
 		LaserStarted = true;
 		
 		//__MISC_LASERLED_ON();
-		
+	
 		Flushes = 0;
 		subFlushes = 0;
+		first_flush = true;
 		
 		__HAL_TIM_SET_COUNTER(&hTIM10, 0);
 		__HAL_TIM_SET_COUNTER(&hTIM9, 0);
@@ -443,6 +455,7 @@ void DiodeControlPulseStart(void)
 		
 		Flushes = 0;
 		subFlushes = 0;
+		first_flush = true;
 		
 		__HAL_TIM_SET_COUNTER(&hTIM10, 0);
 		__HAL_TIM_SET_COUNTER(&hTIM9, 0);
@@ -482,6 +495,9 @@ void DiodeControlOnePulseStart(void)
 	if (!LaserStarted)
 	{
 		LaserStarted = true;
+		Flushes = 0;
+		subFlushes = 0;
+		first_flush = true;
 		
 		__HAL_TIM_SET_COUNTER(&hTIM9, 0);
 		
@@ -501,6 +517,7 @@ void LampControlPulseStop(void)
 	if (LaserStarted)
 	{
 		LaserStarted = false;
+		first_flush = true;
 		
 		// Start frequency counter
 		HAL_TIM_OC_Stop(&hTIM10, TIM_CHANNEL_1);
@@ -519,6 +536,7 @@ void DiodeControlPulseStop(void)
 	if (LaserStarted)
 	{
 		LaserStarted = false;
+		first_flush = true;
 		
 		// Start frequency counter
 		HAL_TIM_OC_Stop(&hTIM10, TIM_CHANNEL_1);

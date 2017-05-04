@@ -63,11 +63,48 @@ uint16_t energy_tbl[VOLTAGES_SNUM*SHORT_DURATIONS_NUM + VOLTAGES_NUM*SHORT_DURAT
 		61	,80		,100	,122	,145	,168	,192	,218	,244	,272	,300	,329	,358	,390	,422 ,455	,  //	20
 		61	,80		,100	,122	,145	,168	,192	,218	,244	,272	,300	,329	,358	,390	,422 ,455	,  //	20
 		61	,80		,100	,122	,145	,168	,192	,218	,244	,272	,300	,329	,358	,390	,422 ,455};	 //	20
+	
+uint16_t voltage_tbl[VOLTAGES_SNUM*SHORT_DURATIONS_NUM + VOLTAGES_NUM*SHORT_DURATIONS_NUM*2] = 
+/*	350, 360,	 370,	 380,	 390,  400,	 410,	 420 - Voltages	*/
+	{	350, 360,	 370,	 380,	 390,  400,	 410,	 420,  //	200
+		350, 360,	 370,	 380,	 390,  400,	 410,	 420,  //	400
+		350, 360,	 370,	 380,	 390,  400,	 410,	 420,  //	600
+		350, 360,	 370,	 380,	 390,  400,	 410,	 420,  //	800
+		350, 360,	 370,	 380,	 390,  400,	 410,	 420,  //	1000
+		350, 360,	 370,	 380,	 390,  400,	 410,	 420,  //	1200
+		350, 360,	 370,	 380,	 390,  400,	 410,	 420,  //	1400
+		350, 360,	 370,	 380,	 390,  400,	 410,	 420,  //	1600
+		350, 360,	 370,	 380,	 390,  400,	 410,	 420,  //	1800
+		350, 360,	 370,	 380,	 390,  400,	 410,	 420,  //	2000
+			
+/*	220	,230	,240	,250	,260	,270	,280	,290	,300	,310	,320	,330	,340	,350	,360 ,370 - Voltages	*/
+		220	,230	,240	,250	,260	,270	,280	,290	,300	,310	,320	,330	,340	,350	,360 ,370 ,  //	2
+		220	,230	,240	,250	,260	,270	,280	,290	,300	,310	,320	,330	,340	,350	,360 ,370 ,  //	3
+		220	,230	,240	,250	,260	,270	,280	,290	,300	,310	,320	,330	,340	,350	,360 ,370 ,  //	4
+		220	,230	,240	,250	,260	,270	,280	,290	,300	,310	,320	,330	,340	,350	,360 ,370 ,  //	5
+		220	,230	,240	,250	,260	,270	,280	,290	,300	,310	,320	,330	,340	,350	,360 ,370 ,  //	6
+		220	,230	,240	,250	,260	,270	,280	,290	,300	,310	,320	,330	,340	,350	,360 ,370 ,  //	7
+		220	,230	,240	,250	,260	,270	,280	,290	,300	,310	,320	,330	,340	,350	,360 ,370 ,  //	8
+		220	,230	,240	,250	,260	,270	,280	,290	,300	,310	,320	,330	,340	,350	,360 ,370 ,  //	9
+		250 ,260	,270	,280	,290	,300	,310	,320	,330	,340	,350	,360	,370	,380	,390 ,400 ,  //	10 -- Calibrated for Long Pulse 10 ms
+    250 ,260	,270	,280	,290	,300	,310	,320	,330	,340	,350	,360	,370	,380	,390 ,400 ,  //	--
+
+/*	250 ,260	,270	,280	,290	,300	,310	,320	,330	,340	,350	,360	,370	,380	,390 ,400 - Voltages	*/
+		250 ,260	,270	,280	,290	,300	,310	,320	,330	,340	,350	,360	,370	,380	,390 ,400	,  //	10
+		250 ,260	,270	,280	,290	,300	,310	,320	,330	,340	,350	,360	,370	,380	,390 ,400	,  //	12
+		250 ,260	,270	,280	,290	,300	,310	,320	,330	,340	,350	,360	,370	,380	,390 ,400	,  //	14
+		250 ,260	,270	,280	,290	,300	,310	,320	,330	,340	,350	,360	,370	,380	,390 ,400	,  //	16
+		250 ,260	,270	,280	,290	,300	,310	,320	,330	,340	,350	,360	,370	,380	,390 ,400 ,  //	18
+		250 ,260	,270	,280	,290	,300	,310	,320	,330	,340	,350	,360	,370	,380	,390 ,400	,  //	20
+		250 ,260	,270	,280	,290	,300	,310	,320	,330	,340	,350	,360	,370	,380	,390 ,400	,  //	20
+		250 ,260	,270	,280	,290	,300	,310	,320	,330	,340	,350	,360	,370	,380	,390 ,400	,  //	20
+		250 ,260	,270	,280	,290	,300	,310	,320	,330	,340	,350	,360	,370	,380	,390 ,400	,  //	20
+		250 ,260	,270	,280	,290	,300	,310	,320	,330	,340	,350	,360	,370	,380	,390 ,400};	 //	20
 
 		
-uint16_t voltage_short[VOLTAGES_SNUM] = {320, 330, 340, 350, 360, 370, 380, 390};
+/*uint16_t voltage_short[VOLTAGES_SNUM] = {320, 330, 340, 350, 360, 370, 380, 390};
 uint16_t voltage_stdrt[VOLTAGES_NUM] = {220, 230, 240, 250, 260, 270, 280, 290, 300, 310, 320, 330, 340, 350, 360, 370};
-uint16_t voltage_long[VOLTAGES_NUM] = {240, 250, 260, 270, 280, 290, 300, 310, 320, 330, 340, 350, 360, 370, 380, 390};
+uint16_t voltage_long[VOLTAGES_NUM] = {250, 260, 270, 280, 290, 300, 310, 320, 330, 340, 350, 360, 370, 380, 390, 400};*/
 
 void LongPulseLaserInput_Init(uint16_t pic_id)
 {
@@ -205,7 +242,8 @@ void LongPulseLaserInput_Process(uint16_t pic_id)
 			duration = frameData_SolidStateLaser.lasersettings.EnergyInt;
 			frameData_SolidStateLaser.lasersettings.Energy = energy_tbl[frameData_SolidStateLaser.laserprofile.EnergyCnt + frameData_SolidStateLaser.laserprofile.DurationCnt*VOLTAGES_SNUM];
 		
-			voltage = voltage_short[frameData_SolidStateLaser.laserprofile.EnergyCnt];
+			voltage = voltage_tbl[frameData_SolidStateLaser.laserprofile.EnergyCnt + frameData_SolidStateLaser.laserprofile.DurationCnt*VOLTAGES_SNUM];
+			//voltage_short[frameData_SolidStateLaser.laserprofile.EnergyCnt];
 			break;
 			
 		case 1:
@@ -213,7 +251,8 @@ void LongPulseLaserInput_Process(uint16_t pic_id)
 			duration = frameData_SolidStateLaser.lasersettings.EnergyInt;
 			frameData_SolidStateLaser.lasersettings.Energy = energy_tbl[frameData_SolidStateLaser.laserprofile.EnergyCnt + frameData_SolidStateLaser.laserprofile.DurationCnt*VOLTAGES_NUM + SHORT_DURATIONS_NUM*VOLTAGES_SNUM];
 		
-			voltage = voltage_stdrt[frameData_SolidStateLaser.laserprofile.EnergyCnt];
+			//voltage = voltage_stdrt[frameData_SolidStateLaser.laserprofile.EnergyCnt];
+			voltage = voltage_tbl[frameData_SolidStateLaser.laserprofile.EnergyCnt + frameData_SolidStateLaser.laserprofile.DurationCnt*VOLTAGES_NUM + SHORT_DURATIONS_NUM*VOLTAGES_SNUM];
 			break;
 			
 		case 2:
@@ -221,7 +260,8 @@ void LongPulseLaserInput_Process(uint16_t pic_id)
 			duration = frameData_SolidStateLaser.lasersettings.EnergyInt;
 			frameData_SolidStateLaser.lasersettings.Energy = energy_tbl[frameData_SolidStateLaser.laserprofile.EnergyCnt + frameData_SolidStateLaser.laserprofile.DurationCnt*VOLTAGES_NUM + SHORT_DURATIONS_NUM*(VOLTAGES_NUM + VOLTAGES_SNUM)];
 		
-			voltage = voltage_long[frameData_SolidStateLaser.laserprofile.EnergyCnt];
+			//voltage = voltage_long[frameData_SolidStateLaser.laserprofile.EnergyCnt];
+			voltage = voltage_tbl[frameData_SolidStateLaser.laserprofile.EnergyCnt + frameData_SolidStateLaser.laserprofile.DurationCnt*VOLTAGES_NUM + SHORT_DURATIONS_NUM*(VOLTAGES_NUM + VOLTAGES_SNUM)];
 			break;
 	}
 	
@@ -303,8 +343,18 @@ void LongPulseLaserInput_Process(uint16_t pic_id)
 		StoreGlobalVariables();
 	}
 	
+	static int16_t simmer_off_cnt = 0;
 #ifdef DEBUG_SOLID_STATE_LASER
-	if (!(__MISC_GETSIMMERSENSOR()) && pic_id != 55 && pic_id != 53) 
+	if (!(__MISC_GETSIMMERSENSOR()))
+	{
+		simmer_off_cnt++;
+		if (simmer_off_cnt > 10) simmer_off_cnt = 10;
+	}
+	else
+	{
+		simmer_off_cnt = 0;
+	}
+	if ((simmer_off_cnt > 5) && pic_id != 55 && pic_id != 53) 
 	{
 		new_pic_id = FRAME_PICID_LONGPULSE_SIMMERSTART;
 		
