@@ -2,6 +2,7 @@
 #include "stm32f4xx_hal_flash.h"
 #include <string.h>
 #include "SDCard.h"
+#include "CANBus.h"
 
 //Date & time
 DWIN_TIMEDATE datetime = {0};
@@ -46,6 +47,10 @@ char ip_addr[16] = "\0";
 bool ip_addr_updated = false;
 
 // Global State Variables
+volatile float32_t temperature_slot0 = 0.0f;
+volatile float32_t temperature_slot1 = 0.0f;
+volatile int8_t slot0_id;
+volatile int8_t slot1_id;
 volatile float32_t temperature = 0;
 volatile float32_t flow1 = 9.0f;
 volatile float32_t flow2 = 9.0f;
@@ -622,6 +627,16 @@ void StoreGlobalVariablesFromSD(FILE* fp)
 
 void LoadGlobalVariables(void)
 {
+#ifdef CAN_SUPPORT
+	uint8_t len = 4;
+	if (!CANReadRegister(SLOT_ID_0, CAN_MESSAGE_TYPE_REGISTER_ID, (uint8_t*)&slot0_id, &len))
+		slot0_id = -1;
+	if (!CANReadRegister(SLOT_ID_1, CAN_MESSAGE_TYPE_REGISTER_ID, (uint8_t*)&slot1_id, &len))
+		slot1_id = -1;
+	
+	if (slot0_id > 0)
+		CANReadRegister(SLOT_ID_0, CAN_MESSAGE_TYPE_REGISTER_CNT, (uint8_t*)&FlushesGlobalLD, &len);
+#else
 	if (!sdcard_ready)
 	{
 		// Copy counters
@@ -650,6 +665,7 @@ void LoadGlobalVariables(void)
 			fclose(fp);
 		}
 	}
+#endif
 }
 
 void fmemcpy(uint8_t* dst, uint8_t* src, uint16_t len)

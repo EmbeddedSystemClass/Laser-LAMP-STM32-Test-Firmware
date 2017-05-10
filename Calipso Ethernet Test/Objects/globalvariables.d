@@ -42,3 +42,4 @@
 .\objects\globalvariables.o: LaserMisc.h
 .\objects\globalvariables.o: SDCard.h
 .\objects\globalvariables.o: C:\Keil_v5\ARM\PACK\Keil\MDK-Middleware\7.3.0\FileSystem\Include\rl_fs.h
+.\objects\globalvariables.o: CANBus.h

@@ -42,3 +42,4 @@
 .\objects\spithread.o: GlobalVariables.h
 .\objects\spithread.o: DGUS.h
 .\objects\spithread.o: LaserMisc.h
+.\objects\spithread.o: CANBus.h

@@ -3,6 +3,7 @@
 #include "stm32f4xx_hal_rcc.h"
 #include "stm32f4xx_hal_can.h"
 #include "stm32f4xx_hal_gpio.h"
+#include <string.h>
 
 CAN_HandleTypeDef hcan1;
 static CanTxMsgTypeDef        TxMessage;
@@ -55,7 +56,7 @@ void HAL_CAN_MspInit(CAN_HandleTypeDef* hcan)
 	HAL_CAN_ConfigFilter(&hcan1, &canFilter);
 }
 
-void Init_CAN()
+void Init_CAN(void)
 {
 	__HAL_RCC_CAN1_CLK_ENABLE();
 	__HAL_RCC_GPIOD_CLK_ENABLE();
@@ -77,4 +78,57 @@ void Init_CAN()
     //Error_Handler();
 		printf("CAN1 Initialization failed.\n");
   }
+}
+
+bool CANSendCommand(uint8_t dev_addr, uint8_t cmd, uint8_t *data, uint8_t length)
+{
+	TxMessage.StdId = 0x00;
+	TxMessage.ExtId = CAN_MESSAGE_TYPE_CMD_mask | (cmd & CAN_MESSAGE_TYPE_COMMANDID_mask) | (dev_addr << 8);
+	TxMessage.IDE = CAN_ID_EXT;
+	TxMessage.RTR = CAN_RTR_DATA;
+	
+	memcpy((void*)TxMessage.Data, (void*)data, length);
+	TxMessage.DLC = length;
+	
+	if (HAL_CAN_Transmit(&hcan1, 5) == HAL_OK)
+		return true;
+	return false;
+}
+
+bool CANWriteRegister(uint8_t dev_addr, uint8_t reg_addr, uint8_t *data, uint8_t length)
+{
+	TxMessage.StdId = 0x00;
+	TxMessage.ExtId = CAN_MESSAGE_TYPE_RW_mask | (reg_addr & CAN_MESSAGE_TYPE_REGISTERID_mask) | (dev_addr << 8);
+	TxMessage.IDE = CAN_ID_EXT;
+	TxMessage.RTR = CAN_RTR_DATA;
+	
+	memcpy((void*)TxMessage.Data, (void*)data, length);
+	TxMessage.DLC = length;
+	
+	if (HAL_CAN_Transmit(&hcan1, 5) == HAL_OK)
+		return true;
+	return false;
+}
+
+bool CANReadRegister(uint8_t dev_addr, uint8_t reg_addr, uint8_t *data, uint8_t *length)
+{
+	TxMessage.StdId = 0x00;
+	TxMessage.ExtId = (reg_addr & CAN_MESSAGE_TYPE_REGISTERID_mask) | (dev_addr << 8);
+	TxMessage.IDE = CAN_ID_EXT;
+	TxMessage.RTR = CAN_RTR_DATA;
+	TxMessage.DLC = 0;
+	
+	memcpy((void*)TxMessage.Data, (void*)data, *length);
+	
+	if (HAL_CAN_Transmit(&hcan1, 5) == HAL_OK)
+	{
+		HAL_Delay(100);
+		if (HAL_CAN_Receive(&hcan1, CAN_FIFO0, 5) == HAL_OK)
+		{
+			*length = RxMessage.DLC;
+			memcpy((void*)data, (void*)RxMessage.Data, *length);
+			return true;
+		}
+	}
+	return false;
 }

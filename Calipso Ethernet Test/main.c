@@ -169,7 +169,6 @@ int main(void)
 	Init_WiFi_Thread();
 	Init_DS18B20();
 	Init_Timers();
-	Init_CAN();
 	
 	if (DS18B20_Reset())
 		DS18B20_StartConvertion();

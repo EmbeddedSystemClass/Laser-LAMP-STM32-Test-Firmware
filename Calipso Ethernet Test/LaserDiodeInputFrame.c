@@ -243,7 +243,7 @@ void LaserDiodeInput_Process(uint16_t pic_id)
 	SetPulseFrequency(freq);
 	power = ((float32_t)energy * 1440.0f) / (float32_t)(duration);
 	if (power > 500.0f) power = 500.0f;
-	SetDACValue(power * 1.0f / 500.0f);
+	SetDACValue(power * 10.0f / 500.0f);
 	
 	frequency_publish = freq;
 	duration_publish = duration * 0.001f;

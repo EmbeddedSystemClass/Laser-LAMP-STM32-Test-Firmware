@@ -11,6 +11,7 @@
 #include "arm_math.h"
 
 #include "GlobalVariables.h"
+#include "CANBus.h"
 
 #define GPIO_PIN_VoltageMonitor_nCS	GPIO_PIN_0 // PORT GPIOG
 #define GPIO_PIN_CurrentMonitor_nCS GPIO_PIN_1 // PORT GPIOG
@@ -110,6 +111,7 @@ void MainSPI_Thread (void const *argument) {
 	ARM_DRIVER_SPI* SPIdrv = &Driver_SPI2;
 	
 	volatile uint16_t datain;
+	uint8_t len = 0;
 		
   while (1) {
 		
@@ -139,6 +141,13 @@ void MainSPI_Thread (void const *argument) {
 		while (wait);
 		wait = true;
 		adc2_cs = false;
+		
+		len = 4;
+		if (slot0_id > 0)
+			CANReadRegister(SLOT_ID_0, CAN_MESSAGE_TYPE_REGISTER_TEMPERATURE, (uint8_t*)&temperature_slot0, &len);
+		len = 4;
+		if (slot1_id > 0)
+			CANReadRegister(SLOT_ID_1, CAN_MESSAGE_TYPE_REGISTER_TEMPERATURE, (uint8_t*)&temperature_slot1, &len);
 		
     osThreadYield ();
   }

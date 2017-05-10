@@ -11,6 +11,7 @@
 .\objects\canbus.o: C:\Keil_v5\ARM\PACK\Keil\STM32F4xx_DFP\2.10.0\Drivers\CMSIS\Device\ST\STM32F4xx\Include\system_stm32f4xx.h
 .\objects\canbus.o: C:\Keil_v5\ARM\PACK\Keil\STM32F4xx_DFP\2.10.0\Drivers\STM32F4xx_HAL_Driver\Inc\Legacy/stm32_hal_legacy.h
 .\objects\canbus.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdio.h
+.\objects\canbus.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdbool.h
 .\objects\canbus.o: C:\Keil_v5\ARM\PACK\Keil\STM32F4xx_DFP\2.10.0\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal.h
 .\objects\canbus.o: C:\Users\PCB-Designer\Documents\Laser-LAMP-STM32-Test-Firmware\Calipso Ethernet Test\RTE\Device\STM32F407ZGTx\stm32f4xx_hal_conf.h
 .\objects\canbus.o: C:\Users\PCB-Designer\Documents\Laser-LAMP-STM32-Test-Firmware\Calipso Ethernet Test\RTE\_EthernetTest\RTE_Components.h
@@ -31,3 +32,4 @@
 .\objects\canbus.o: C:\Keil_v5\ARM\PACK\Keil\STM32F4xx_DFP\2.10.0\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_tim_ex.h
 .\objects\canbus.o: C:\Keil_v5\ARM\PACK\Keil\STM32F4xx_DFP\2.10.0\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_uart.h
 .\objects\canbus.o: C:\Keil_v5\ARM\PACK\Keil\STM32F4xx_DFP\2.10.0\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_usart.h
+.\objects\canbus.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\string.h

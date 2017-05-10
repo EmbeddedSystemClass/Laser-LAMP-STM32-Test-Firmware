@@ -51,6 +51,7 @@
 #include "stm32f4xx_hal_pwr.h"
 #include "SolidStateLaser.h"
 #include "LaserMisc.h"
+#include "CANBus.h"
 
 /** @addtogroup STM32F4xx_HAL_Driver
   * @{
@@ -247,6 +248,7 @@ void HAL_MspInit(void)
 	LampControlInit();
 	FlowInit();
 	CoolInit();
+	Init_CAN();
 }
 
 /**

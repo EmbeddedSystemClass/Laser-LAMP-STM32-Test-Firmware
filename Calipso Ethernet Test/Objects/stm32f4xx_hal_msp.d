@@ -36,3 +36,5 @@
 .\objects\stm32f4xx_hal_msp.o: C:\Keil_v5\ARM\PACK\ARM\CMSIS\5.0.0\CMSIS\Include\core_cm4.h
 .\objects\stm32f4xx_hal_msp.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\string.h
 .\objects\stm32f4xx_hal_msp.o: LaserMisc.h
+.\objects\stm32f4xx_hal_msp.o: CANBus.h
+.\objects\stm32f4xx_hal_msp.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdbool.h

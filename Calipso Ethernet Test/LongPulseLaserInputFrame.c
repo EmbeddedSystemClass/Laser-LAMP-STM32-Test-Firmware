@@ -108,10 +108,11 @@ uint16_t voltage_long[VOLTAGES_NUM] = {250, 260, 270, 280, 290, 300, 310, 320, 3
 
 void LongPulseLaserInput_Init(uint16_t pic_id)
 {
+	frameData_SolidStateLaser.laserprofile.DurationCnt = 0;
 	frameData_SolidStateLaser.laserprofile.Frequency = 10;
 	frameData_SolidStateLaser.laserprofile.EnergyCnt = 0;
 	frameData_SolidStateLaser.lasersettings.EnergyInt = duration_short[frameData_SolidStateLaser.laserprofile.DurationCnt];
-	frameData_SolidStateLaser.lasersettings.Energy = energy_tbl[frameData_SolidStateLaser.laserprofile.EnergyCnt + frameData_SolidStateLaser.laserprofile.DurationCnt*VOLTAGES_NUM];
+	frameData_SolidStateLaser.lasersettings.Energy = energy_tbl[frameData_SolidStateLaser.laserprofile.EnergyCnt + frameData_SolidStateLaser.laserprofile.DurationCnt*VOLTAGES_SNUM];
 	frameData_SolidStateLaser.mode = 0;
 	frameData_SolidStateLaser.state = 0;
 	frameData_SolidStateLaser.connector = 0;

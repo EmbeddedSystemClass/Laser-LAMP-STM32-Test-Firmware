@@ -18,6 +18,7 @@
 //#define NEW_COOLSCHEME					// amplified PWM by two mossfet channels
 #define NEW_DOUBLECOOLSCHEME			// Added second PWM channel
 #define FLOW_CHECK
+#define CAN_SUPPORT
 
 extern int32_t LOGHASH[16];
 
@@ -72,6 +73,10 @@ extern char ip_addr[16];
 extern bool ip_addr_updated;
 
 // Global state variables
+extern volatile float32_t temperature_slot0;
+extern volatile float32_t temperature_slot1;
+extern volatile int8_t slot0_id;
+extern volatile int8_t slot1_id;
 extern volatile float32_t temperature;
 extern volatile float32_t flow1;
 extern volatile float32_t flow2;
