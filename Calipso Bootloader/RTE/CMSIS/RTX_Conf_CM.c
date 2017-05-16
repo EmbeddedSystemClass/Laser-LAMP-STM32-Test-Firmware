@@ -76,7 +76,7 @@
 //   <i> Defines the combined stack size for threads with user-provided stack size.
 //   <i> Default: 0
 #ifndef OS_PRIVSTKSIZE
- #define OS_PRIVSTKSIZE 512       // this stack size value is in words
+ #define OS_PRIVSTKSIZE 1024       // this stack size value is in words
 #endif
  
 //   <q>Stack overflow checking
@@ -90,7 +90,7 @@
 //   <i> Initialize thread stack with watermark pattern for analyzing stack usage (current/maximum) in System and Thread Viewer.
 //   <i> Enabling this option increases significantly the execution time of osThreadCreate.
 #ifndef OS_STKINIT
-#define OS_STKINIT      1
+#define OS_STKINIT      0
 #endif
  
 //   <o>Processor mode for thread execution 

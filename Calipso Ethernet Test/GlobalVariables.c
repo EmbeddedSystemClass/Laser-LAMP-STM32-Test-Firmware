@@ -14,6 +14,7 @@ PFLASH_GLOBAL_DATA global_flash_data = (PFLASH_GLOBAL_DATA)FLASH_LASERDATA_BASE;
 
 // DGUS Control variables
 uint16_t g_wDGUSTimeout = 200;
+uint16_t g_wCANTimeout = 5000;
 
 // Timer global variables
 int16_t m_wMillSec = 0;
@@ -38,7 +39,7 @@ bool g_peltier_en = false;
 bool g_cooling_en = false;
 
 // Flow global variable
-float32_t flow_low = 1.0f;
+float32_t flow_low = 0.0f;
 float32_t flow_normal = 2.0f;
 
 // Service menu password
@@ -627,15 +628,21 @@ void StoreGlobalVariablesFromSD(FILE* fp)
 
 void LoadGlobalVariables(void)
 {
+	int8_t ids[2];
+	
 #ifdef CAN_SUPPORT
 	uint8_t len = 4;
 	if (!CANReadRegister(SLOT_ID_0, CAN_MESSAGE_TYPE_REGISTER_ID, (uint8_t*)&slot0_id, &len))
 		slot0_id = -1;
+	//CANReadRegisterMultiply(SLOT_ID_0, CAN_MESSAGE_TYPE_REGISTER_ID, (uint8_t*)ids, &len, 2);
+		
 	if (!CANReadRegister(SLOT_ID_1, CAN_MESSAGE_TYPE_REGISTER_ID, (uint8_t*)&slot1_id, &len))
 		slot1_id = -1;
 	
 	if (slot0_id > 0)
 		CANReadRegister(SLOT_ID_0, CAN_MESSAGE_TYPE_REGISTER_CNT, (uint8_t*)&FlushesGlobalLD, &len);
+	if (slot1_id > 0)
+		CANReadRegister(SLOT_ID_1, CAN_MESSAGE_TYPE_REGISTER_CNT, (uint8_t*)&FlushesGlobalSS, &len);
 #else
 	if (!sdcard_ready)
 	{

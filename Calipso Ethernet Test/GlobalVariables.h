@@ -40,6 +40,7 @@ extern DWIN_TIMEDATE datetime;
 
 // DGUS control variables
 extern uint16_t g_wDGUSTimeout;
+extern uint16_t g_wCANTimeout;
 
 // Timer control variables
 extern int16_t m_wMillSec;

@@ -232,13 +232,13 @@ void UpdateLaserState(uint16_t pic_id)
 		}
 #endif
 		
-		// Check is working
+		/*// Check is working
 		if ((pic_id == FRAME_PICID_LASERDIODE_INPUT) || 
 			  (pic_id == FRAME_PICID_LASERDIODE_PHOTOTYPE))
 		{
 			// Peltier off
 			CoolOff();
-		}
+		}*/
 	}
 	else
 	{

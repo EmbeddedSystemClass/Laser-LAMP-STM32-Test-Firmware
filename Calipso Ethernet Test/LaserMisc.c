@@ -183,8 +183,8 @@ void CoolInit(void)
 	HAL_GPIO_Init(GPIOA, &cool);
 	
 	TIM_Base_InitTypeDef tim2_init = {0};
-	tim2_init.Period = 42000; // 1ms period
-	tim2_init.Prescaler = 3;
+	tim2_init.Period = 4200; // 1ms period
+	tim2_init.Prescaler = 0;
 	tim2_init.ClockDivision = TIM_CLOCKDIVISION_DIV1;
 	tim2_init.CounterMode = TIM_COUNTERMODE_UP;
 	tim2_init.RepetitionCounter = 0;
@@ -213,15 +213,15 @@ void CoolOn(void)
 void CoolOff(void)
 {
 	g_peltier_en = false;
-	__HAL_TIM_SetCompare(&htim_cool, TIM_CHANNEL_1, 42000);
+	__HAL_TIM_SetCompare(&htim_cool, TIM_CHANNEL_1, 4200);
 	//HAL_TIM_OC_Stop(&htim_cool, TIM_CHANNEL_1);
 }
 
 void CoolSet(uint16_t cool)
 {
-	uint16_t duty_cycle = cool * 420;
-	if (duty_cycle > 42000) duty_cycle = 42000;
-	__HAL_TIM_SetCompare(&htim_cool, TIM_CHANNEL_1, 42000 - duty_cycle);
+	uint16_t duty_cycle = cool * 42;
+	if (duty_cycle > 4200) duty_cycle = 4200;
+	__HAL_TIM_SetCompare(&htim_cool, TIM_CHANNEL_1, 4200 - duty_cycle);
 }
 
 #endif

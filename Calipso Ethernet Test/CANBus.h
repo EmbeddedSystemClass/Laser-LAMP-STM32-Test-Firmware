@@ -47,5 +47,6 @@ void Init_CAN(void);
 bool CANSendCommand(uint8_t dev_addr, uint8_t cmd, uint8_t *data, uint8_t length);
 bool CANWriteRegister(uint8_t dev_addr, uint8_t reg_addr, uint8_t *data, uint8_t length);
 bool CANReadRegister(uint8_t dev_addr, uint8_t reg_addr, uint8_t *data, uint8_t *length);
+bool CANReadRegisterMultiply(uint8_t dev_addr, uint8_t reg_addr, uint8_t *data, uint8_t *length, uint8_t dev_num);
 
 #endif

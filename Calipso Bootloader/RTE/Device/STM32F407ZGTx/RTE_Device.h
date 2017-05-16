@@ -1815,7 +1815,7 @@
 //     <o3> Bit <0-15>
 //     <i>  Selects Port Bit
 //   </e>
-#define RTE_SDIO_CD_PIN_EN              0
+#define RTE_SDIO_CD_PIN_EN              1
 #define RTE_SDIO_CD_ACTIVE              0
 #define RTE_SDIO_CD_PORT                GPIO_PORT(7)
 #define RTE_SDIO_CD_PIN                 15

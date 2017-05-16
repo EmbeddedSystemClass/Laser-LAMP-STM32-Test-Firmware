@@ -3,6 +3,7 @@
 #include "stm32f4xx_hal_rcc.h"
 #include "stm32f4xx_hal_can.h"
 #include "stm32f4xx_hal_gpio.h"
+#include "GlobalVariables.h"
 #include <string.h>
 
 CAN_HandleTypeDef hcan1;
@@ -45,10 +46,10 @@ void HAL_CAN_MspInit(CAN_HandleTypeDef* hcan)
 	canFilter.FilterNumber = 0;
 	canFilter.FilterMode = CAN_FILTERMODE_IDMASK;
 	canFilter.FilterScale = CAN_FILTERSCALE_32BIT;
-	canFilter.FilterIdHigh = 0x0000 << 5;
-	canFilter.FilterIdLow = 0x0000;
-	canFilter.FilterMaskIdHigh = 0x0000 << 5;
-	canFilter.FilterMaskIdLow = 0x0000;
+	canFilter.FilterIdHigh = 0x00000000 << 13;
+	canFilter.FilterIdLow = (0x00000000 << 3) | CAN_ID_EXT;
+	canFilter.FilterMaskIdHigh = 0x00000000 << 13;
+	canFilter.FilterMaskIdLow = (0x00000000 << 3) | CAN_ID_EXT;
 	canFilter.FilterFIFOAssignment = CAN_FIFO0;
 	canFilter.FilterActivation = ENABLE;
 	canFilter.BankNumber = 0;
@@ -90,7 +91,7 @@ bool CANSendCommand(uint8_t dev_addr, uint8_t cmd, uint8_t *data, uint8_t length
 	memcpy((void*)TxMessage.Data, (void*)data, length);
 	TxMessage.DLC = length;
 	
-	if (HAL_CAN_Transmit(&hcan1, 5) == HAL_OK)
+	if (HAL_CAN_Transmit(&hcan1, g_wCANTimeout) == HAL_OK)
 		return true;
 	return false;
 }
@@ -105,7 +106,7 @@ bool CANWriteRegister(uint8_t dev_addr, uint8_t reg_addr, uint8_t *data, uint8_t
 	memcpy((void*)TxMessage.Data, (void*)data, length);
 	TxMessage.DLC = length;
 	
-	if (HAL_CAN_Transmit(&hcan1, 5) == HAL_OK)
+	if (HAL_CAN_Transmit(&hcan1, g_wCANTimeout) == HAL_OK)
 		return true;
 	return false;
 }
@@ -120,15 +121,41 @@ bool CANReadRegister(uint8_t dev_addr, uint8_t reg_addr, uint8_t *data, uint8_t 
 	
 	memcpy((void*)TxMessage.Data, (void*)data, *length);
 	
-	if (HAL_CAN_Transmit(&hcan1, 5) == HAL_OK)
+	if (HAL_CAN_Transmit(&hcan1, g_wCANTimeout) == HAL_OK)
 	{
-		HAL_Delay(100);
-		if (HAL_CAN_Receive(&hcan1, CAN_FIFO0, 5) == HAL_OK)
+		//HAL_Delay(100);
+		if (HAL_CAN_Receive(&hcan1, CAN_FIFO0, g_wCANTimeout) == HAL_OK)
 		{
 			*length = RxMessage.DLC;
 			memcpy((void*)data, (void*)RxMessage.Data, *length);
 			return true;
 		}
+	}
+	return false;
+}
+
+bool CANReadRegisterMultiply(uint8_t dev_addr, uint8_t reg_addr, uint8_t *data, uint8_t *length, uint8_t dev_num)
+{
+	uint8_t i = 0;
+	TxMessage.StdId = 0x00;
+	TxMessage.ExtId = (reg_addr & CAN_MESSAGE_TYPE_REGISTERID_mask) | (dev_addr << 8);
+	TxMessage.IDE = CAN_ID_EXT;
+	TxMessage.RTR = CAN_RTR_DATA;
+	TxMessage.DLC = 0;
+	
+	memcpy((void*)TxMessage.Data, (void*)data, *length);
+	
+	if (HAL_CAN_Transmit(&hcan1, g_wCANTimeout) == HAL_OK)
+	{
+		//HAL_Delay(100);
+		for (i = 0; i < dev_num; i++)
+			if (HAL_CAN_Receive(&hcan1, CAN_FIFO0, g_wCANTimeout) == HAL_OK)
+			{
+				*length = RxMessage.DLC;
+				memcpy((void*)&data[i], (void*)RxMessage.Data, *length);
+			}
+			else 
+				data[i] = -1;
 	}
 	return false;
 }

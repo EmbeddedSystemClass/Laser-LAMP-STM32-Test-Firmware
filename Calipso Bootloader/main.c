@@ -396,12 +396,12 @@ int main(void)
   SystemClock_Config();
 	SystemCoreClockUpdate();
 	
-	/* Init File System of SD */
-	init_filesystem();
-	
 #ifndef USE_DGUS_DRIVER
 	Initialize_DGUS();
 #endif
+
+	/* Init File System of SD */
+	init_filesystem();
 
   /* Add your application code here
      */

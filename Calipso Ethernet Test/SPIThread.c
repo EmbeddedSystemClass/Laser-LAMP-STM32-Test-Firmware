@@ -143,10 +143,10 @@ void MainSPI_Thread (void const *argument) {
 		adc2_cs = false;
 		
 		len = 4;
-		if (slot0_id > 0)
+		//if (slot0_id > 0)
 			CANReadRegister(SLOT_ID_0, CAN_MESSAGE_TYPE_REGISTER_TEMPERATURE, (uint8_t*)&temperature_slot0, &len);
-		len = 4;
-		if (slot1_id > 0)
+		len = 4;		
+		//if (slot1_id > 0)
 			CANReadRegister(SLOT_ID_1, CAN_MESSAGE_TYPE_REGISTER_TEMPERATURE, (uint8_t*)&temperature_slot1, &len);
 		
     osThreadYield ();
