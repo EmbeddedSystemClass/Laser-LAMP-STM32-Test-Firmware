@@ -442,7 +442,7 @@ int main(void)
   /* Infinite loop */
   while (1)
   {
-		if ((HAL_GetTick() - timer_start) > 3000)
+		if ((HAL_GetTick() - timer_start) > 1000)
 			JumpToApp();
 		
 		if (pic_id == FRAME_PICID_BOOTFIRMWAREUPDATE)

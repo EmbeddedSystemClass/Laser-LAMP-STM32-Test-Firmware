@@ -5,7 +5,7 @@
 .\retarget_io.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdlib.h
 .\retarget_io.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\assert.h
 .\retarget_io.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\rt_sys.h
-.\retarget_io.o: C:\Users\FxSlava\Documents\Laser-LAMP-STM32-Test-Firmware\Calipso Bootloader\RTE\RTE_Components.h
+.\retarget_io.o: C:\Users\PCB-Designer\Documents\Laser-LAMP-STM32-Test-Firmware\Calipso Bootloader\RTE\_Calipso-Bootloader\RTE_Components.h
 .\retarget_io.o: C:\Keil_v5\ARM\PACK\Keil\MDK-Middleware\7.3.0\FileSystem\Include\rl_fs_lib.h
 .\retarget_io.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdarg.h
 .\retarget_io.o: C:\Keil_v5\ARM\PACK\ARM\CMSIS\5.0.0\CMSIS\Driver\Include\Driver_MCI.h
