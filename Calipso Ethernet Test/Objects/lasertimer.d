@@ -27,6 +27,8 @@
 .\objects\lasertimer.o: C:\Keil_v5\ARM\PACK\Keil\STM32F4xx_DFP\2.10.0\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_flash.h
 .\objects\lasertimer.o: C:\Keil_v5\ARM\PACK\Keil\STM32F4xx_DFP\2.10.0\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_flash_ex.h
 .\objects\lasertimer.o: C:\Keil_v5\ARM\PACK\Keil\STM32F4xx_DFP\2.10.0\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_flash_ramfunc.h
+.\objects\lasertimer.o: C:\Keil_v5\ARM\PACK\Keil\STM32F4xx_DFP\2.10.0\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_i2c.h
+.\objects\lasertimer.o: C:\Keil_v5\ARM\PACK\Keil\STM32F4xx_DFP\2.10.0\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_i2c_ex.h
 .\objects\lasertimer.o: C:\Keil_v5\ARM\PACK\Keil\STM32F4xx_DFP\2.10.0\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_pwr.h
 .\objects\lasertimer.o: C:\Keil_v5\ARM\PACK\Keil\STM32F4xx_DFP\2.10.0\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_pwr_ex.h
 .\objects\lasertimer.o: C:\Keil_v5\ARM\PACK\Keil\STM32F4xx_DFP\2.10.0\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_spi.h
@@ -40,4 +42,6 @@
 .\objects\lasertimer.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\string.h
 .\objects\lasertimer.o: DGUS.h
 .\objects\lasertimer.o: LaserMisc.h
+.\objects\lasertimer.o: LaserDiodeGUIPreset.h
+.\objects\lasertimer.o: GlobalVariables.h
 .\objects\lasertimer.o: SolidStateLaser.h

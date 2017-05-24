@@ -25,6 +25,8 @@
 .\objects\wifithread.o: C:\Keil_v5\ARM\PACK\Keil\STM32F4xx_DFP\2.10.0\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_flash.h
 .\objects\wifithread.o: C:\Keil_v5\ARM\PACK\Keil\STM32F4xx_DFP\2.10.0\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_flash_ex.h
 .\objects\wifithread.o: C:\Keil_v5\ARM\PACK\Keil\STM32F4xx_DFP\2.10.0\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_flash_ramfunc.h
+.\objects\wifithread.o: C:\Keil_v5\ARM\PACK\Keil\STM32F4xx_DFP\2.10.0\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_i2c.h
+.\objects\wifithread.o: C:\Keil_v5\ARM\PACK\Keil\STM32F4xx_DFP\2.10.0\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_i2c_ex.h
 .\objects\wifithread.o: C:\Keil_v5\ARM\PACK\Keil\STM32F4xx_DFP\2.10.0\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_pwr.h
 .\objects\wifithread.o: C:\Keil_v5\ARM\PACK\Keil\STM32F4xx_DFP\2.10.0\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_pwr_ex.h
 .\objects\wifithread.o: C:\Keil_v5\ARM\PACK\Keil\STM32F4xx_DFP\2.10.0\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_spi.h
@@ -44,6 +46,8 @@
 .\objects\wifithread.o: C:\Keil_v5\ARM\PACK\ARM\CMSIS\5.0.0\CMSIS\Include\core_cm4.h
 .\objects\wifithread.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\string.h
 .\objects\wifithread.o: LaserMisc.h
+.\objects\wifithread.o: LaserDiodeGUIPreset.h
+.\objects\wifithread.o: GlobalVariables.h
 .\objects\wifithread.o: SolidStateLaser.h
 .\objects\wifithread.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdlib.h
 .\objects\wifithread.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdarg.h

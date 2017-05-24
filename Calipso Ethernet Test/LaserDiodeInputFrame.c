@@ -6,6 +6,7 @@
 #include "SolidStateLaser.h"
 #include "GlobalVariables.h" 
 #include "LaserMisc.h"
+#include "LaserDiodeGUIPreset.h"
 
 #include <math.h>
 #include "arm_math.h"
@@ -269,7 +270,12 @@ void LaserDiodeInput_Process(uint16_t pic_id)
 		prepare = true; // Start prepare timer
 		update = true;
 		
+#ifdef LDPREPARETIMER_ENABLE
 		new_pic_id = FRAME_PICID_LASERDIODE_PREPARETIMER;
+#else
+		frameData_LaserDiode.state = 1;
+		new_pic_id = FRAME_PICID_LASERDIODE_READY;
+#endif
 	}
 	
 	if (frameData_LaserDiode.buttons.onCancelBtn != 0)

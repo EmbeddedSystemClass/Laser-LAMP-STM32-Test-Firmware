@@ -91,7 +91,7 @@ static void LaserTimer_Callback(void const *arg) {
 	static int cnt_store = 0;
 	cnt_store++;
 	
-	if (cnt_store > 1000)
+	if (cnt_store > 100)
 	{
 		TryStoreGlobalVariables();
 		cnt_store = 0;

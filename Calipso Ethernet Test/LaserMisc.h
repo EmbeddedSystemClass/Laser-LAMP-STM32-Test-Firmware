@@ -5,23 +5,6 @@
 #include <math.h>
 #include "arm_math.h"
 
-typedef enum LASER_ID_ENUM {
-	LASER_ID_FRACTLASER  = 0x00,
-	LASER_ID_SOLIDSTATE  = 0x01,
-	LASER_ID_SOLIDSTATE2 = 0x02,
-	LASER_ID_LONGPULSE   = 0x03,
-	LASER_ID_DIODELASER  = 0x05
-} LASER_ID;
-
-typedef enum MENU_ID_ENUM {
-	MENU_ID_FRACTLASER  = 0x00,
-	MENU_ID_SOLIDSTATE  = 0x01,
-	MENU_ID_SOLIDSTATE2 = 0x02,
-	MENU_ID_LONGPULSE   = 0x03,
-	MENU_ID_MENU  		  = 0x04,
-	MENU_ID_DIODELASER  = 0x00
-} MENU_ID;
-
 // Relays
 #define MISC_GPIO_RELAY1									GPIO_PIN_4	// relay 1
 #define MISC_GPIO_RELAY2									GPIO_PIN_5	// relay 2
@@ -99,7 +82,5 @@ void SoundOn(void);
 void SoundOff(void);
 //void NewSoundOn(void);
 //void NewSoundOff(void);
-
-LASER_ID GetLaserID(void);
 
 #endif

@@ -25,6 +25,8 @@
 .\objects\solidstatelaserworkframe.o: C:\Keil_v5\ARM\PACK\Keil\STM32F4xx_DFP\2.10.0\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_flash.h
 .\objects\solidstatelaserworkframe.o: C:\Keil_v5\ARM\PACK\Keil\STM32F4xx_DFP\2.10.0\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_flash_ex.h
 .\objects\solidstatelaserworkframe.o: C:\Keil_v5\ARM\PACK\Keil\STM32F4xx_DFP\2.10.0\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_flash_ramfunc.h
+.\objects\solidstatelaserworkframe.o: C:\Keil_v5\ARM\PACK\Keil\STM32F4xx_DFP\2.10.0\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_i2c.h
+.\objects\solidstatelaserworkframe.o: C:\Keil_v5\ARM\PACK\Keil\STM32F4xx_DFP\2.10.0\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_i2c_ex.h
 .\objects\solidstatelaserworkframe.o: C:\Keil_v5\ARM\PACK\Keil\STM32F4xx_DFP\2.10.0\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_pwr.h
 .\objects\solidstatelaserworkframe.o: C:\Keil_v5\ARM\PACK\Keil\STM32F4xx_DFP\2.10.0\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_pwr_ex.h
 .\objects\solidstatelaserworkframe.o: C:\Keil_v5\ARM\PACK\Keil\STM32F4xx_DFP\2.10.0\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_spi.h
@@ -42,6 +44,8 @@
 .\objects\solidstatelaserworkframe.o: C:\Keil_v5\ARM\PACK\ARM\CMSIS\5.0.0\CMSIS\Include\arm_math.h
 .\objects\solidstatelaserworkframe.o: C:\Keil_v5\ARM\PACK\ARM\CMSIS\5.0.0\CMSIS\Include\core_cm4.h
 .\objects\solidstatelaserworkframe.o: LaserMisc.h
+.\objects\solidstatelaserworkframe.o: GlobalVariables.h
+.\objects\solidstatelaserworkframe.o: LaserDiodeGUIPreset.h
 .\objects\solidstatelaserworkframe.o: GlobalVariables.h
 .\objects\solidstatelaserworkframe.o: SDCard.h
 .\objects\solidstatelaserworkframe.o: C:\Keil_v5\ARM\PACK\Keil\MDK-Middleware\7.3.0\FileSystem\Include\rl_fs.h

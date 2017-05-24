@@ -49,9 +49,11 @@
 #include "stm32f4xx_hal.h"
 #include "stm32f4xx_hal_gpio.h"
 #include "stm32f4xx_hal_pwr.h"
+#include "stm32f4xx_hal_i2c.h"
 #include "SolidStateLaser.h"
 #include "LaserMisc.h"
 #include "CANBus.h"
+#include "I2CBus.h"
 
 /** @addtogroup STM32F4xx_HAL_Driver
   * @{
@@ -245,10 +247,12 @@ void HAL_MspInit(void)
 	
 	HAL_GPIO_Init(GPIOB, &gpio_B);
 	
+	//  ************************* TWI Init						 **********************
 	LampControlInit();
 	FlowInit();
 	CoolInit();
 	Init_CAN();
+	Init_I2C();
 }
 
 /**

@@ -39,10 +39,5 @@ void SetPulseDuration_ms(uint16_t duration, uint16_t period);
 void SetPulseFrequency(float32_t frequency);
 void SetPulseFrequency_(float32_t frequency);
 
-void SolidStateLaserPulseReset(LASER_ID laser_id);
-void SolidStateLaserPulseInc(LASER_ID laser_id);
-uint32_t GetSolidStateGlobalPulse(LASER_ID laser_id);
-uint32_t GetSolidStateSessionPulse(LASER_ID laser_id);
-
 
 #endif

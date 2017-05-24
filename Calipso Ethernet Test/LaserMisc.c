@@ -462,30 +462,3 @@ void SoundOff(void)
 	HAL_GPIO_WritePin(GPIOA, GPIO_PIN_6, GPIO_PIN_SET);
 }
 #endif
-
-LASER_ID GetLaserID()
-{
-	//return LASER_ID_FRACTLASER;
-	if (__MISC_LASER_ID0() == GPIO_PIN_SET)
-	{
-		if (__MISC_LASER_ID1() == GPIO_PIN_SET)
-		{			
-			return LASER_ID_LONGPULSE;
-		}
-		else
-		{
-			return LASER_ID_SOLIDSTATE;
-		}
-	}
-	else
-	{
-		if (__MISC_LASER_ID1() == GPIO_PIN_SET)
-		{
-			return LASER_ID_SOLIDSTATE2;
-		}
-		else
-		{
-			return LASER_ID_FRACTLASER;
-		}
-	}
-}

@@ -50,6 +50,7 @@
 #include "SDCard.h"
 #include "WiFiThread.h"
 #include "CANBus.h"
+#include "I2CBus.h"
 
 #include <math.h>
 #include "arm_math.h"
@@ -172,7 +173,7 @@ int main(void)
 	
 	if (DS18B20_Reset())
 		DS18B20_StartConvertion();
-		
+	
 	HAL_Delay(750); // delay 750 ms
 		
 	if (DS18B20_Reset())

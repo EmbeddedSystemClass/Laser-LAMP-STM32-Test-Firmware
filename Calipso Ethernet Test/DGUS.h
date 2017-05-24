@@ -4,6 +4,7 @@
 #include <stdint.h>
 #include "stm32f4xx_hal.h"
 #include "stm32f4xx_hal_uart.h"
+//#include "GlobalVariables.h"
 
 #ifdef _RTE_
 #include "RTE_Components.h"             /* Component selection */
@@ -12,9 +13,6 @@
 #include "cmsis_os.h"                   // CMSIS RTOS header file
 #endif
 
-//#define OLD_STYLE_LASER_SW
-//#define LASERIDCHECK_LASERDIODE
-//#define DEBUG_BRK
 #define CRC_CHECK
 //#define USE_DGUS_DRIVER
 #define DGUS_BAUDRATE	9600

@@ -258,7 +258,6 @@ void WiFiThread_PublishToServer()
 	{
 		static bool authentification = false;
 		static bool authentification_start = true;
-		static bool connected = false;
 		
 		if (!authentification && authentification_start)
 		{

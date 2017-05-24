@@ -10,6 +10,7 @@
 #include "DGUS.h"
 
 #include "LaserMisc.h"
+#include "LaserDiodeGUIPreset.h"
 
 #define FLASH_LASERDATA_BASE 0x080E0000
 
@@ -17,8 +18,13 @@
 #define NEW_SOUNDSCHEME						// use class-D amplifier
 //#define NEW_COOLSCHEME					// amplified PWM by two mossfet channels
 #define NEW_DOUBLECOOLSCHEME			// Added second PWM channel
-#define FLOW_CHECK
-#define CAN_SUPPORT
+//#define OLD_STYLE_LASER_SW			// One connector combine configuration
+//#define LASERIDCHECK_LASERDIODE // Laser diode enable check
+//#define LDPREPARETIMER_ENABLE		// Enable prepare timer for Laser Diode
+//#define DEBUG_BRK								// Enable error breakpoints
+//#define FLOW_CHECK							// Enable flow check
+//#define CAN_SUPPORT							// CAN support enable
+#define USE_EMBEDDED_EEPROM				// Calipso EEPROM
 
 extern int32_t LOGHASH[16];
 
@@ -34,6 +40,44 @@ extern int32_t LOGHASH[16];
 #define LOG_ID_FREQUENCY		10
 #define LOG_ID_POWER				11
 #define LOG_ID_DURATION			12
+
+// CAN ID for emmiters
+#define LASER_CAN_ID_DIODELASER		0x01
+#define LASER_CAN_ID_SOLIDSTATE		0x81
+#define LASER_CAN_ID_SOLIDSTATE2	0x84 // reserved
+#define LASER_CAN_ID_LONGPULSE		0x82
+#define LASER_CAN_ID_FRACTIONAL		0x83
+
+// Base emmiter types
+#define LASER_ID_MASK_DIODELASER	0x00000001
+#define LASER_ID_MASK_SOLIDSTATE	0x00000002
+#define LASER_ID_MASK_SOLIDSTATE2	0x00000004
+#define LASER_ID_MASK_LONGPULSE		0x00000008
+#define LASER_ID_MASK_FRACTIONAL	0x00000010
+
+// Reserved bits
+#define LASER_ID_MASK_LASERTYPE1	0x00000020
+#define LASER_ID_MASK_LASERTYPE2	0x00000040
+#define LASER_ID_MASK_LASERTYPE3	0x00000080
+#define LASER_ID_MASK_LASERTYPE4	0x00000100
+
+typedef enum LASER_ID_ENUM {
+	LASER_ID_FRACTLASER  = 0x00,
+	LASER_ID_SOLIDSTATE  = 0x01,
+	LASER_ID_SOLIDSTATE2 = 0x02,
+	LASER_ID_LONGPULSE   = 0x03,
+	LASER_ID_DIODELASER  = 0x04,
+	LASER_ID_UNKNOWN     = 0xff
+} LASER_ID;
+
+typedef enum MENU_ID_ENUM {
+	MENU_ID_FRACTLASER   = 0x00,
+	MENU_ID_SOLIDSTATE   = 0x01,
+	MENU_ID_SOLIDSTATE2  = 0x02,
+	MENU_ID_LONGPULSE    = 0x03,
+	MENU_ID_MENU  		   = 0x04,
+	MENU_ID_DIODELASER   = 0x05
+} MENU_ID;
 
 //Date & time
 extern DWIN_TIMEDATE datetime;
@@ -75,8 +119,10 @@ extern bool ip_addr_updated;
 // Global state variables
 extern volatile float32_t temperature_slot0;
 extern volatile float32_t temperature_slot1;
-extern volatile int8_t slot0_id;
-extern volatile int8_t slot1_id;
+extern volatile int8_t slot0_can_id;
+extern volatile int8_t slot1_can_id;
+extern volatile LASER_ID slot0_id;
+extern volatile LASER_ID slot1_id;
 extern volatile float32_t temperature;
 extern volatile float32_t flow1;
 extern volatile float32_t flow2;
@@ -107,8 +153,8 @@ extern bool DiodeLaserOnePulse_en;
 extern bool LaserStarted;
 extern uint16_t subFlushes;
 extern uint16_t subFlushesCount;
-extern uint32_t Flushes;
-extern uint32_t FlushesCount;
+extern uint32_t Flushes;				//?
+extern uint32_t FlushesCount;		//?
 extern uint32_t FlushesSessionLD;
 extern uint32_t FlushesGlobalLD;
 extern uint32_t FlushesSessionSS;
@@ -141,41 +187,6 @@ typedef struct LOG_EVENT_STRUCT
 
 // Laser Diode Data Structures
 
-typedef struct GUI_PRESET_STRUCT
-{
-	// Limits
-	uint16_t m_wMaxEnergy;
-	uint16_t m_wMinEnergy;
-	uint16_t m_wMaxDuration;
-	uint16_t m_wMinDuration;
-	uint16_t m_wMaxFreq;
-	uint16_t m_wMinFreq;
-
-	// Helper control
-	int16_t m_wEnergyStep;
-	int16_t m_wEnergyNumSteps;
-	uint16_t m_wDurationStep;
-	uint16_t m_wDurationNumSteps;	
-	
-	// Helper status
-	bool updateDuration;
-	bool updateEnergy;
-} GUI_PRESET;
-
-typedef enum APP_PROFILE_ENUM
-{
-	PROFILE_FAST		= 3,
-	PROFILE_MEDIUM	= 2,
-	PROFILE_SLOW		= 1,
-	PROFILE_SINGLE	= 0,
-} APP_PROFILE, *PAPP_PROFILE;
-
-// Laser Diode Global Variables
-extern APP_PROFILE Profile;
-extern GUI_PRESET pstGUI[5];
-extern volatile DGUS_LASERPROFILE	m_structLaserProfile [5];
-extern volatile DGUS_LASERSETTINGS	m_structLaserSettings[5];
-
 typedef struct FLASH_GLOBAL_DATA_STRUCT
 {
 	// Laser counters presed
@@ -185,29 +196,13 @@ typedef struct FLASH_GLOBAL_DATA_STRUCT
 	uint32_t LongPulsePulseCounter;
 	uint32_t FractLaserPulseCounter;
 	
-	// GUI preset
+	/*// GUI preset
 	DGUS_LASERPROFILE	m_structLaserProfile [5];
-	DGUS_LASERSETTINGS m_structLaserSettings[5];
+	DGUS_LASERSETTINGS m_structLaserSettings[5];*/
 } FLASH_GLOBAL_DATA, *PFLASH_GLOBAL_DATA;
 
-void NormalizeStep(uint16_t *min, uint16_t *max, uint16_t *step, uint16_t threshold_numsteps, uint16_t step_tbl[]);
-
-// Old laser code for laser diode
-	// Work with all limits
-void UpdateLimits(uint16_t  freq, uint16_t  duration, uint16_t  energy, APP_PROFILE mode);
-bool CheckLimits (uint16_t *freq, uint16_t *duration, uint16_t *energy, APP_PROFILE mode);
-	// Calculate steps
-void CalculateDurationSteps(uint16_t *freq, uint16_t *duration, APP_PROFILE Profile);
-void CalculateEnergySteps  (uint16_t *freq, uint16_t *energy,   APP_PROFILE Profile);
-void CalculateAllSteps     (uint16_t *freq, uint16_t *duration, APP_PROFILE mode);
-	// Extended modes
-bool FreqLimits(uint16_t *freq, APP_PROFILE mode);
-bool CheckLimitsFastMode(uint16_t *freq, uint16_t *duration, uint16_t *energy);
-
-void LaserPreset(uint16_t *freq, uint16_t *duration, uint16_t *energy, APP_PROFILE mode);
-
-void MelaninPreset(uint16_t melanin);
-void PhototypePreset(uint16_t phototype);
+uint16_t min(uint16_t x, uint16_t y);
+uint16_t max(uint16_t x, uint16_t y);
 
 void LoadGlobalVariablesFromSD(FILE* fp);
 void StoreGlobalVariablesFromSD(FILE* fp);
@@ -215,6 +210,17 @@ void ClearGlobalVariables(void);
 void LoadGlobalVariables(void);
 void StoreGlobalVariables(void);
 void TryStoreGlobalVariables(void);
+
+void SolidStateLaserPulseReset(LASER_ID laser_id);
+void SolidStateLaserPulseInc(LASER_ID laser_id);
+uint32_t GetSolidStateGlobalPulse(LASER_ID laser_id);
+uint32_t GetSolidStateSessionPulse(LASER_ID laser_id);
+
+LASER_ID GetLaserID(void);
+bool CheckEmmiter(LASER_ID laser_id);
+LASER_ID IdentifyEmmiter(uint8_t id);
+void CANDeviceReadCounter(uint8_t slot_id, uint8_t id);
+void CANDeviceWriteCounter(LASER_ID laser_id, uint8_t laser_can_id);
 
 // Flash data
 extern PFLASH_GLOBAL_DATA global_flash_data;
