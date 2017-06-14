@@ -138,7 +138,7 @@ void LongPulseLaserWork_Process(uint16_t pic_id)
 	// Start pressed
 	if (frameData_SolidStateLaser.buttons.onStartBtn != 0)
 	{
-		log_LongPulseStart(frequency_publish, duration_publish, energy_publish, GetSolidStateGlobalPulse(LaserID));
+		log_LongPulseStart(frequency_publish, duration_publish, energy_publish, GetSolidStateGlobalPulse(slot1_id));
 		
 		// On Start Pressed
 		frameData_SolidStateLaser.buttons.onStartBtn = 0;
@@ -153,7 +153,7 @@ void LongPulseLaserWork_Process(uint16_t pic_id)
 	
 	if (frameData_SolidStateLaser.buttons.onStopBtn != 0)
 	{
-		log_LongPulseStop(GetSolidStateGlobalPulse(LaserID));
+		log_LongPulseStop(GetSolidStateGlobalPulse(slot1_id));
 		
 		// On Input Pressed
 		frameData_SolidStateLaser.buttons.onStopBtn = 0;
@@ -190,10 +190,10 @@ void LongPulseLaserWork_Process(uint16_t pic_id)
 	if (state != frameData_SolidStateLaser.state)
 		update = true;
 	
-	if (frameData_SolidStateLaser.PulseCounter != GetSolidStateGlobalPulse(LaserID))
+	if (frameData_SolidStateLaser.PulseCounter != GetSolidStateGlobalPulse(slot1_id))
 	{
-		frameData_SolidStateLaser.PulseCounter = GetSolidStateGlobalPulse(LaserID);
-		frameData_SolidStateLaser.SessionPulseCounter = GetSolidStateSessionPulse(LaserID);
+		frameData_SolidStateLaser.PulseCounter = GetSolidStateGlobalPulse(slot1_id);
+		frameData_SolidStateLaser.SessionPulseCounter = GetSolidStateSessionPulse(slot1_id);
 		update = true;
 	}
 	

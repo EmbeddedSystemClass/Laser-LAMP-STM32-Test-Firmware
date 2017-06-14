@@ -116,8 +116,8 @@ void LongPulseLaserInput_Init(uint16_t pic_id)
 	frameData_SolidStateLaser.mode = 0;
 	frameData_SolidStateLaser.state = 0;
 	frameData_SolidStateLaser.connector = 0;
-	frameData_SolidStateLaser.PulseCounter = GetSolidStateGlobalPulse(LaserID);
-	frameData_SolidStateLaser.SessionPulseCounter = GetSolidStateSessionPulse(LaserID);;
+	frameData_SolidStateLaser.PulseCounter = GetSolidStateGlobalPulse(slot1_id);
+	frameData_SolidStateLaser.SessionPulseCounter = GetSolidStateSessionPulse(slot1_id);;
 	
 	// Reset button states
 	frameData_SolidStateLaser.buttons.onInputBtn = 0;
@@ -135,7 +135,7 @@ void LongPulseLaserInput_Process(uint16_t pic_id)
 	uint16_t new_pic_id = pic_id;
 	
 	// Reset session flushes
-	SolidStateLaserPulseReset(LaserID);
+	SolidStateLaserPulseReset(slot1_id);
 	
 	//uint16_t frequency = frameData_SolidStateLaser.laserprofile.Frequency;
 	uint16_t durationCnt = frameData_SolidStateLaser.laserprofile.DurationCnt;
@@ -377,10 +377,10 @@ void LongPulseLaserInput_Process(uint16_t pic_id)
 	if (state != frameData_SolidStateLaser.state)
 		update = true;
 	
-	if (frameData_SolidStateLaser.PulseCounter != GetSolidStateGlobalPulse(LaserID))
+	if (frameData_SolidStateLaser.PulseCounter != GetSolidStateGlobalPulse(slot1_id))
 	{
-		frameData_SolidStateLaser.PulseCounter = GetSolidStateGlobalPulse(LaserID);
-		frameData_SolidStateLaser.SessionPulseCounter = GetSolidStateSessionPulse(LaserID);;
+		frameData_SolidStateLaser.PulseCounter = GetSolidStateGlobalPulse(slot1_id);
+		frameData_SolidStateLaser.SessionPulseCounter = GetSolidStateSessionPulse(slot1_id);;
 		update = true;
 	}
 	

@@ -57,8 +57,8 @@ void FractLaserInput_Init(uint16_t pic_id)
 	frameData_FractLaser.mode = 0;
 	frameData_FractLaser.state = 0;
 	frameData_FractLaser.connector = 0;
-	frameData_FractLaser.PulseCounter = GetSolidStateGlobalPulse(LaserID);//FlushesGlobalSS;
-	frameData_FractLaser.SessionPulseCounter = GetSolidStateSessionPulse(LaserID);//FlushesSessionSS;
+	frameData_FractLaser.PulseCounter = GetSolidStateGlobalPulse(slot1_id);//FlushesGlobalSS;
+	frameData_FractLaser.SessionPulseCounter = GetSolidStateSessionPulse(slot1_id);//FlushesSessionSS;
 	
 	// Reset button states
 	frameData_FractLaser.buttons.onInputBtn = 0;
@@ -76,7 +76,7 @@ void FractLaserInput_Process(uint16_t pic_id)
 	uint16_t new_pic_id = pic_id;
 	
 	// Reset session flushes
-	SolidStateLaserPulseReset(LaserID);
+	SolidStateLaserPulseReset(slot1_id);
 	
 	//uint16_t frequency = frameData_SolidStateLaser.laserprofile.Frequency;
 	uint16_t energyCnt = frameData_FractLaser.laserprofile.EnergyCnt;
@@ -188,10 +188,10 @@ void FractLaserInput_Process(uint16_t pic_id)
 	if (state != frameData_FractLaser.state)
 		update = true;
 	
-	if (frameData_FractLaser.PulseCounter != GetSolidStateGlobalPulse(LaserID))
+	if (frameData_FractLaser.PulseCounter != GetSolidStateGlobalPulse(slot1_id))
 	{
-		frameData_FractLaser.PulseCounter = GetSolidStateGlobalPulse(LaserID);
-		frameData_FractLaser.SessionPulseCounter = GetSolidStateSessionPulse(LaserID);
+		frameData_FractLaser.PulseCounter = GetSolidStateGlobalPulse(slot1_id);
+		frameData_FractLaser.SessionPulseCounter = GetSolidStateSessionPulse(slot1_id);
 		update = true;
 	}
 	

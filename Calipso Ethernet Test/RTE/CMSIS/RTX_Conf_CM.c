@@ -33,7 +33,8 @@
  *---------------------------------------------------------------------------*/
  
 #include "cmsis_os.h"
- 
+#include "stm32f4xx_hal.h"
+
 
 /*----------------------------------------------------------------------------
  *      RTX User configuration part BEGIN
@@ -90,7 +91,7 @@
 //   <i> Initialize thread stack with watermark pattern for analyzing stack usage (current/maximum) in System and Thread Viewer.
 //   <i> Enabling this option increases significantly the execution time of osThreadCreate.
 #ifndef OS_STKINIT
-#define OS_STKINIT      0
+#define OS_STKINIT      1
 #endif
  
 //   <o>Processor mode for thread execution 
@@ -275,6 +276,10 @@ void os_tick_irqack (void) {
 #define OS_ERROR_TIMER_OVF      4
  
 extern osThreadId svcThreadGetId (void);
+extern void DiodeLaserOff();
+extern void SolidStateLaserOff();
+extern void SoundOn(void);
+extern void SoundOff(void);
  
 /// \brief Called when a runtime error is detected
 /// \param[in]   error_code   actual error code that has been detected
@@ -285,19 +290,28 @@ void os_error (uint32_t error_code) {
     case OS_ERROR_STACK_OVF:
       /* Stack overflow detected for the currently running task. */
       /* Thread can be identified by calling svcThreadGetId().   */
+			//__breakpoint(0);
       break;
     case OS_ERROR_FIFO_OVF:
       /* ISR FIFO Queue buffer overflow detected. */
+			//__breakpoint(0);
       break;
     case OS_ERROR_MBX_OVF:
       /* Mailbox overflow detected. */
+			//__breakpoint(0);
       break;
     case OS_ERROR_TIMER_OVF:
       /* User Timer Callback Queue overflow detected. */
+			//__breakpoint(0);
       break;
     default:
       break;
   }
+	SoundOff();	
+	DiodeLaserOff();
+	SolidStateLaserOff();
+	
+	SoundOn();	
   for (;;);
 }
  

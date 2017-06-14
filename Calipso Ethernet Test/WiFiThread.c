@@ -291,7 +291,7 @@ void WiFiThread_PublishToServer()
 			{
 				int16_t resp_sock_id = -1;
 				//sprintf(log, "GET http://innolaser-service.ru/service-api/device_update.php?temperature=%.1f&flow=%.1f	HTTP/1.1\r\nHost: innolaser-service.ru\r\nCookie: PHPSESSID=%s; path=/\r\nPragma: no-cache\r\n\r\n\r\n", temperature, flow1, PHPSESSID);
-				sprintf(log, "GET http://innolaser-service.ru/service-api/device_update.php?cooling_level=%d&working=%d&cooling=%d&peltier=%d&temperature=%.1f&flow1=%.1f&flow2=%.1f&frequency=%f&duration=%f&power=%f&cntld=%d&cntss=%d&cntss2=%d&cntlp=%d&cntfl=%d	HTTP/1.1\r\nHost: innolaser-service.ru\r\nConnection: keep-alive\r\nCookie: PHPSESSID=%s; path=/\r\nPragma: no-cache\r\n\r\n\r\n",
+				sprintf(log, "GET http://innolaser-service.ru/service-api/device_update.php?cooling_level=%d&working=%d&cooling=%d&peltier=%d&temperature=%.1f&flow1=%.1f&flow2=%.1f&frequency=%f&duration=%f&power=%f&cntld=%d&cntss=%d&cntss2=%d&cntlp=%d&cntfl=%d HTTP/1.1\r\nHost: innolaser-service.ru\r\nConnection: keep-alive\r\nCookie: PHPSESSID=%s; path=/\r\nPragma: no-cache\r\n\r\n\r\n",
 								cooling_level, LaserStarted, g_cooling_en, g_peltier_en, temperature, flow1, flow2, frequency_publish, duration_publish, energy_publish, FlushesGlobalLD, FlushesGlobalSS, FlushesGlobalSS2, FlushesGlobalLP, FlushesGlobalFL, PHPSESSID);
 				
 				socket_write(sock_id, log, strlen(log));
@@ -451,7 +451,15 @@ void CalipsoWiFiThread (void const *argument) {
 	WiFiConnectionEstabilished = false;
 	RemoteControl = false;
 	
-	// Reastart WiFi Module
+	// Restart WiFi Module
+	//Set WiFi SSID
+	SendAT("AT+S.SSIDTXT=ASUS\r\n");
+	SendAT("AT+S.SCFG=wifi_wpa_psk_text,host1234\r\n");
+	SendAT("AT+S.SCFG=wifi_priv_mode,2\r\n");
+	SendAT("AT+S.SCFG=wifi_mode,1\r\n");
+	SendAT("AT+S.SCFG=ip_use_dhcp,1\r\n");
+	SendAT("AT&W\r\n");
+	
 	HAL_GPIO_WritePin(GPIOG, GPIO_PIN_2, GPIO_PIN_SET);
 	//SendAT("AT&V\r\n");
 	SendAT("AT+CFUN=1\r\n");

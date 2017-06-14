@@ -78,7 +78,7 @@ void HAL_TIM_OC_DelayElapsedCallback(TIM_HandleTypeDef *htim)
 			frameData_SolidStateLaser.PulseCounter = convert_d(count);*/
 			if (first_flush)
 			{
-				SolidStateLaserPulseInc(LaserID);
+				SolidStateLaserPulseInc(slot1_id);
 				first_flush = false;
 			}
 			
@@ -149,7 +149,7 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
 		
 		if (SolidStateLaser_en)
 			if (!first_flush)
-				SolidStateLaserPulseInc(LaserID);
+				SolidStateLaserPulseInc(slot1_id);
 		/*if (SolidStateLaser_en) 
 		{			
 			SoundOn();

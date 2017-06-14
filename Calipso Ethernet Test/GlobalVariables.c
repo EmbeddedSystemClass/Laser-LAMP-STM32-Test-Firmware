@@ -61,7 +61,7 @@ volatile float32_t VoltageMonitor = 0.0f;
 volatile float32_t CurrentMonitor = 0.0f;
 
 // Laser ID
-LASER_ID LaserID = LASER_ID_SOLIDSTATE;
+//LASER_ID LaserID = LASER_ID_SOLIDSTATE;
 MENU_ID MenuID = MENU_ID_SOLIDSTATE;
 
 // Private variables
@@ -139,12 +139,18 @@ void LoadGlobalVariables(void)
 #ifdef CAN_SUPPORT
 	uint8_t len = 4;
 	if (!CANReadRegister(SLOT_ID_0, CAN_MESSAGE_TYPE_REGISTER_ID, (uint8_t*)&slot0_can_id, &len))
+	{
 		slot0_can_id = -1;
+		slot0_id = LASER_ID_NOTCONNECTED;
+	}
 	else
 		slot0_id = IdentifyEmmiter(slot0_can_id);
 	
 	if (!CANReadRegister(SLOT_ID_1, CAN_MESSAGE_TYPE_REGISTER_ID, (uint8_t*)&slot1_can_id, &len))
+	{
 		slot1_can_id = -1;
+		slot1_id = LASER_ID_NOTCONNECTED;
+	}
 	else
 		slot1_id = IdentifyEmmiter(slot1_can_id);
 	
@@ -266,11 +272,11 @@ void ClearGlobalVariables(void)
 void StoreGlobalVariables(void)
 {
 #ifdef USE_EMBEDDED_EEPROM
-		if (_FlushesGlobalLD  == FlushesGlobalLD ) {LoadCounterFromEEPROM(&FlushesGlobalLD,  EEPROM_LASERDIODE_CNT_MEM_ADDRESS);	_FlushesGlobalLD  = FlushesGlobalLD; }
-		if (_FlushesGlobalSS  == FlushesGlobalSS ) {LoadCounterFromEEPROM(&FlushesGlobalSS,  EEPROM_SOLIDSTATE_CNT_MEM_ADDRESS);	_FlushesGlobalSS  = FlushesGlobalSS; }
-		if (_FlushesGlobalSS2 == FlushesGlobalSS2) {LoadCounterFromEEPROM(&FlushesGlobalSS2, EEPROM_SOLIDSTATE2_CNT_MEM_ADDRESS);	_FlushesGlobalSS2 = FlushesGlobalSS2;	}
-		if (_FlushesGlobalLP  == FlushesGlobalLP ) {LoadCounterFromEEPROM(&FlushesGlobalLP,  EEPROM_LONGPULSE_CNT_MEM_ADDRESS);		_FlushesGlobalLP  = FlushesGlobalLP; }
-		if (_FlushesGlobalFL  == FlushesGlobalFL ) {LoadCounterFromEEPROM(&FlushesGlobalFL,  EEPROM_FRACTIONAL_CNT_MEM_ADDRESS);	_FlushesGlobalFL  = FlushesGlobalFL; }
+		if (_FlushesGlobalLD  != FlushesGlobalLD ) {StoreCounterToEEPROM(&FlushesGlobalLD,  EEPROM_LASERDIODE_CNT_MEM_ADDRESS);	_FlushesGlobalLD  = FlushesGlobalLD; }
+		if (_FlushesGlobalSS  != FlushesGlobalSS ) {StoreCounterToEEPROM(&FlushesGlobalSS,  EEPROM_SOLIDSTATE_CNT_MEM_ADDRESS);	_FlushesGlobalSS  = FlushesGlobalSS; }
+		if (_FlushesGlobalSS2 != FlushesGlobalSS2) {StoreCounterToEEPROM(&FlushesGlobalSS2, EEPROM_SOLIDSTATE2_CNT_MEM_ADDRESS);_FlushesGlobalSS2 = FlushesGlobalSS2;	}
+		if (_FlushesGlobalLP  != FlushesGlobalLP ) {StoreCounterToEEPROM(&FlushesGlobalLP,  EEPROM_LONGPULSE_CNT_MEM_ADDRESS);	_FlushesGlobalLP  = FlushesGlobalLP; }
+		if (_FlushesGlobalFL  != FlushesGlobalFL ) {StoreCounterToEEPROM(&FlushesGlobalFL,  EEPROM_FRACTIONAL_CNT_MEM_ADDRESS);	_FlushesGlobalFL  = FlushesGlobalFL; }
 #else
 	if (!sdcard_ready)
 	{
@@ -360,11 +366,11 @@ void TryStoreGlobalVariables(void)
 	CANDeviceWriteCounter(slot1_id, SLOT_ID_1);
 #else
 #ifdef USE_EMBEDDED_EEPROM
-		if (_FlushesGlobalLD  == FlushesGlobalLD ) {LoadCounterFromEEPROM(&FlushesGlobalLD,  EEPROM_LASERDIODE_CNT_MEM_ADDRESS);	_FlushesGlobalLD  = FlushesGlobalLD; }
-		if (_FlushesGlobalSS  == FlushesGlobalSS ) {LoadCounterFromEEPROM(&FlushesGlobalSS,  EEPROM_SOLIDSTATE_CNT_MEM_ADDRESS);	_FlushesGlobalSS  = FlushesGlobalSS; }
-		if (_FlushesGlobalSS2 == FlushesGlobalSS2) {LoadCounterFromEEPROM(&FlushesGlobalSS2, EEPROM_SOLIDSTATE2_CNT_MEM_ADDRESS);	_FlushesGlobalSS2 = FlushesGlobalSS2;	}
-		if (_FlushesGlobalLP  == FlushesGlobalLP ) {LoadCounterFromEEPROM(&FlushesGlobalLP,  EEPROM_LONGPULSE_CNT_MEM_ADDRESS);		_FlushesGlobalLP  = FlushesGlobalLP; }
-		if (_FlushesGlobalFL  == FlushesGlobalFL ) {LoadCounterFromEEPROM(&FlushesGlobalFL,  EEPROM_FRACTIONAL_CNT_MEM_ADDRESS);	_FlushesGlobalFL  = FlushesGlobalFL; }
+		if (_FlushesGlobalLD  != FlushesGlobalLD ) {StoreCounterToEEPROM(&FlushesGlobalLD,  EEPROM_LASERDIODE_CNT_MEM_ADDRESS);		_FlushesGlobalLD  = FlushesGlobalLD; }
+		if (_FlushesGlobalSS  != FlushesGlobalSS ) {StoreCounterToEEPROM(&FlushesGlobalSS,  EEPROM_SOLIDSTATE_CNT_MEM_ADDRESS);		_FlushesGlobalSS  = FlushesGlobalSS; }
+		if (_FlushesGlobalSS2 != FlushesGlobalSS2) {StoreCounterToEEPROM(&FlushesGlobalSS2, EEPROM_SOLIDSTATE2_CNT_MEM_ADDRESS);	_FlushesGlobalSS2 = FlushesGlobalSS2;	}
+		if (_FlushesGlobalLP  != FlushesGlobalLP ) {StoreCounterToEEPROM(&FlushesGlobalLP,  EEPROM_LONGPULSE_CNT_MEM_ADDRESS);		_FlushesGlobalLP  = FlushesGlobalLP; }
+		if (_FlushesGlobalFL  != FlushesGlobalFL ) {StoreCounterToEEPROM(&FlushesGlobalFL,  EEPROM_FRACTIONAL_CNT_MEM_ADDRESS);		_FlushesGlobalFL  = FlushesGlobalFL; }
 #else
 	if (sdcard_ready)
 	{

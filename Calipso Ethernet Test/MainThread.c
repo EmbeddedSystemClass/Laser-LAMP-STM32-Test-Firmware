@@ -395,7 +395,7 @@ void MainThread (void const *argument) {
 		last_menu_id = MenuID;
 		UpdateLaserState(pic_id);
 		
-		LaserID = GetLaserID();
+		//LaserID = GetLaserID();
 		
 		// GUI Frames process
 		switch (pic_id)

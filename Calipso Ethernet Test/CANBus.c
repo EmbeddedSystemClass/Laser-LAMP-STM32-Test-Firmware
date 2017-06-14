@@ -120,10 +120,10 @@ bool CANReadRegister(uint8_t dev_addr, uint8_t reg_addr, uint8_t *data, uint8_t 
 	
 	memcpy((void*)TxMessage.Data, (void*)data, *length);
 	
-	if (HAL_CAN_Transmit(&hcan1, 10) == HAL_OK)
+	if (HAL_CAN_Transmit(&hcan1, 1000) == HAL_OK)
 	{
 		HAL_Delay(100);
-		if (HAL_CAN_Receive(&hcan1, CAN_FIFO0, 10) == HAL_OK)
+		if (HAL_CAN_Receive(&hcan1, CAN_FIFO0, 1000) == HAL_OK)
 		{
 			*length = RxMessage.DLC;
 			memcpy((void*)data, (void*)RxMessage.Data, *length);

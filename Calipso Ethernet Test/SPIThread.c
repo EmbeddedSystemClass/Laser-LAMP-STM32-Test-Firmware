@@ -149,6 +149,8 @@ void MainSPI_Thread (void const *argument) {
 		len = 4;
 		if (slot1_can_id != -1)
 			CANReadRegister(SLOT_ID_1, CAN_MESSAGE_TYPE_REGISTER_TEMPERATURE, (uint8_t*)&temperature_slot1, &len);
+		
+		osDelay(500);
 #endif
 		
     osThreadYield ();

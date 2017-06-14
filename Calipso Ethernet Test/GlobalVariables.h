@@ -19,12 +19,12 @@
 //#define NEW_COOLSCHEME					// amplified PWM by two mossfet channels
 #define NEW_DOUBLECOOLSCHEME			// Added second PWM channel
 //#define OLD_STYLE_LASER_SW			// One connector combine configuration
-//#define LASERIDCHECK_LASERDIODE // Laser diode enable check
-//#define LDPREPARETIMER_ENABLE		// Enable prepare timer for Laser Diode
+#define LASERIDCHECK_LASERDIODE 	// Laser diode enable check
+#define LDPREPARETIMER_ENABLE			// Enable prepare timer for Laser Diode
 //#define DEBUG_BRK								// Enable error breakpoints
-//#define FLOW_CHECK							// Enable flow check
-//#define CAN_SUPPORT							// CAN support enable
-#define USE_EMBEDDED_EEPROM				// Calipso EEPROM
+#define FLOW_CHECK								// Enable flow check
+#define CAN_SUPPORT								// CAN support enable
+//#define USE_EMBEDDED_EEPROM			// Calipso EEPROM
 
 extern int32_t LOGHASH[16];
 
@@ -62,12 +62,13 @@ extern int32_t LOGHASH[16];
 #define LASER_ID_MASK_LASERTYPE4	0x00000100
 
 typedef enum LASER_ID_ENUM {
-	LASER_ID_FRACTLASER  = 0x00,
-	LASER_ID_SOLIDSTATE  = 0x01,
-	LASER_ID_SOLIDSTATE2 = 0x02,
-	LASER_ID_LONGPULSE   = 0x03,
-	LASER_ID_DIODELASER  = 0x04,
-	LASER_ID_UNKNOWN     = 0xff
+	LASER_ID_FRACTLASER   = 0x00,
+	LASER_ID_SOLIDSTATE   = 0x01,
+	LASER_ID_SOLIDSTATE2  = 0x02,
+	LASER_ID_LONGPULSE    = 0x03,
+	LASER_ID_DIODELASER   = 0x04,
+	LASER_ID_UNKNOWN      = 0xff,
+	LASER_ID_NOTCONNECTED = 0x77
 } LASER_ID;
 
 typedef enum MENU_ID_ENUM {
@@ -130,7 +131,7 @@ extern volatile float32_t VoltageMonitor;
 extern volatile float32_t CurrentMonitor;
 
 // Laser ID
-extern LASER_ID LaserID;
+//extern LASER_ID LaserID;
 extern MENU_ID MenuID;
 
 typedef struct PROFILE_FRACTLASER_STRUCT
