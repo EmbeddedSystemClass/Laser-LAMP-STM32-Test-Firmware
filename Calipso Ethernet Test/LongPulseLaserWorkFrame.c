@@ -90,8 +90,8 @@ void LongPulseLaserWork_Process(uint16_t pic_id)
 		update = true;
 	}
 	
-#ifdef DEBUG_SOLID_STATE_LASER
 	static int16_t simmer_off_cnt = 0;
+#ifdef DEBUG_SOLID_STATE_LASER
 	if (!(__MISC_GETSIMMERSENSOR()))
 	{
 		simmer_off_cnt++;
@@ -100,8 +100,6 @@ void LongPulseLaserWork_Process(uint16_t pic_id)
 	else
 	{
 		simmer_off_cnt = 0;
-		/*simmer_off_cnt--;
-		if (simmer_off_cnt < 0) simmer_off_cnt = 0;*/
 	}
 	if ((simmer_off_cnt > 5) && pic_id != 55 && pic_id != 53) 
 	{
@@ -128,7 +126,7 @@ void LongPulseLaserWork_Process(uint16_t pic_id)
 		frameData_SolidStateLaser.state = 2;
 		
 #ifdef DEBUG_SOLID_STATE_LASER
-		if (__MISC_GETSIMMERSENSOR()) 
+		if (/*__MISC_GETSIMMERSENSOR()*/simmer_off_cnt < 5) 
 #endif
 		{
 			frameData_SolidStateLaser.state = 3;

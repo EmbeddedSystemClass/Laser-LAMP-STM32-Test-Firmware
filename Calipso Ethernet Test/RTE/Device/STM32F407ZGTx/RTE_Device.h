@@ -1873,10 +1873,10 @@
 
 // <e> CAN1 (Controller Area Network 1) [Driver_CAN1]
 // <i> Configuration settings for Driver_CAN1 in component ::CMSIS Driver:CAN
-#define RTE_CAN1                        0
+#define RTE_CAN1                        1
 
 //   <o> CAN1_RX Pin <0=>PA11 <1=>PB8 <2=>PD0 <3=>PI9 <4=>PG0
-#define RTE_CAN1_RX_PORT_ID             0
+#define RTE_CAN1_RX_PORT_ID             2
 #if    (RTE_CAN1_RX_PORT_ID == 0)
 #define RTE_CAN1_RX_PORT                GPIOA
 #define RTE_CAN1_RX_BIT                 GPIO_PIN_11
@@ -1897,7 +1897,7 @@
 #endif
 
 //   <o> CAN1_TX Pin <0=>PA12 <1=>PB9 <2=>PD1 <3=>PH13 <4=>PG1
-#define RTE_CAN1_TX_PORT_ID             0
+#define RTE_CAN1_TX_PORT_ID             2
 #if    (RTE_CAN1_TX_PORT_ID == 0)
 #define RTE_CAN1_TX_PORT                GPIOA
 #define RTE_CAN1_TX_BIT                 GPIO_PIN_12
