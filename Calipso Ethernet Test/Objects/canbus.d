@@ -12,8 +12,8 @@
 .\objects\canbus.o: C:\Keil_v5\ARM\PACK\Keil\STM32F4xx_DFP\2.10.0\Drivers\STM32F4xx_HAL_Driver\Inc\Legacy/stm32_hal_legacy.h
 .\objects\canbus.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdio.h
 .\objects\canbus.o: C:\Keil_v5\ARM\PACK\Keil\STM32F4xx_DFP\2.10.0\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal.h
-.\objects\canbus.o: C:\Users\PCB-Designer\Documents\Laser-LAMP-STM32-Test-Firmware\Calipso Ethernet Test\RTE\Device\STM32F407ZGTx\stm32f4xx_hal_conf.h
-.\objects\canbus.o: C:\Users\PCB-Designer\Documents\Laser-LAMP-STM32-Test-Firmware\Calipso Ethernet Test\RTE\_EthernetTest\RTE_Components.h
+.\objects\canbus.o: C:\Users\Vladislav&Maja\Documents\Laser-LAMP-STM32-Test-Firmware\Calipso Ethernet Test\RTE\Device\STM32F407ZGTx\stm32f4xx_hal_conf.h
+.\objects\canbus.o: C:\Users\Vladislav&Maja\Documents\Laser-LAMP-STM32-Test-Firmware\Calipso Ethernet Test\RTE\_EthernetTest\RTE_Components.h
 .\objects\canbus.o: C:\Keil_v5\ARM\PACK\Keil\STM32F4xx_DFP\2.10.0\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_rcc.h
 .\objects\canbus.o: C:\Keil_v5\ARM\PACK\Keil\STM32F4xx_DFP\2.10.0\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_rcc_ex.h
 .\objects\canbus.o: C:\Keil_v5\ARM\PACK\Keil\STM32F4xx_DFP\2.10.0\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_gpio.h
