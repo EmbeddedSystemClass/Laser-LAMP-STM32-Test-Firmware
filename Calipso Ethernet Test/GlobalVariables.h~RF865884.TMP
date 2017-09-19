@@ -23,7 +23,7 @@
 #define LDPREPARETIMER_ENABLE			// Enable prepare timer for Laser Diode
 //#define DEBUG_BRK								// Enable error breakpoints
 #define FLOW_CHECK								// Enable flow check
-#define CAN_SUPPORT								// CAN support enable
+//#define CAN_SUPPORT								// CAN support enable
 //#define USE_EMBEDDED_EEPROM			// Calipso EEPROM
 
 extern int32_t LOGHASH[16];
@@ -130,17 +130,6 @@ extern volatile float32_t flow2;
 extern volatile float32_t VoltageMonitor;
 extern volatile float32_t CurrentMonitor;
 
-typedef struct UUID_struct
-{
-	uint16_t X;
-	uint16_t Y;
-	uint8_t WAF_NUM;
-	char LOT_NUM[7];
-} UUID;
-
-
-extern volatile UUID slot0_can_uid;
-extern volatile UUID slot1_can_uid;
 // Laser ID
 //extern LASER_ID LaserID;
 extern MENU_ID MenuID;

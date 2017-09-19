@@ -451,6 +451,9 @@ void MainThread (void const *argument) {
 			case FRAME_PICID_LASERDIODE_PHOTOTYPE:
 				UpdateLaserStatus();
 				break;
+			case FRAME_PICID_LASERDIODE_PHOTOTYPE+1:
+				SetPicId(FRAME_PICID_LASERDIODE_PHOTOTYPE, 1000);
+				break;
 			
 			// WiFi features
 			case FRAME_PICID_SERVICE_WIFISCANNINGINIT:

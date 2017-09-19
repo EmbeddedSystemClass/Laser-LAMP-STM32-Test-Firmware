@@ -60,6 +60,9 @@ volatile float32_t flow2 = 9.0f;
 volatile float32_t VoltageMonitor = 0.0f;
 volatile float32_t CurrentMonitor = 0.0f;
 
+volatile UUID slot0_can_uid;
+volatile UUID slot1_can_uid;
+
 // Laser ID
 //LASER_ID LaserID = LASER_ID_SOLIDSTATE;
 MENU_ID MenuID = MENU_ID_SOLIDSTATE;
@@ -136,8 +139,11 @@ void StoreGlobalVariablesFromSD(FILE* fp)
 
 void LoadGlobalVariables(void)
 {
+	slot1_id = GetLaserID();
 #ifdef CAN_SUPPORT
-	uint8_t len = 4;
+	uint8_t len = 4;	
+	//CANReadRegister(SLOT_ID_1, CAN_MESSAGE_TYPE_REGISTER_UID, (uint8_t*)slot1_can_uid, &len);
+	
 	if (!CANReadRegister(SLOT_ID_0, CAN_MESSAGE_TYPE_REGISTER_ID, (uint8_t*)&slot0_can_id, &len))
 	{
 		slot0_can_id = -1;

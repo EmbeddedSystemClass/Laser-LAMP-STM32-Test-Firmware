@@ -54,3 +54,4 @@
 .\objects\main.o: WiFiDriver.h
 .\objects\main.o: CANBus.h
 .\objects\main.o: I2CBus.h
+.\objects\main.o: SolidStateLaser.h
