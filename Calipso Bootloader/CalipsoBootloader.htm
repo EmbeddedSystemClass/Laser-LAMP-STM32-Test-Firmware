@@ -3,7 +3,7 @@
 <title>Static Call Graph - [.\CalipsoBootloader.axf]</title></head>
 <body><HR>
 <H1>Static Call Graph for image .\CalipsoBootloader.axf</H1><HR>
-<BR><P>#&#060CALLGRAPH&#062# ARM Linker, 5060422: Last Updated: Wed Apr 26 10:20:16 2017
+<BR><P>#&#060CALLGRAPH&#062# ARM Linker, 5060183: Last Updated: Wed Nov 01 14:49:05 2017
 <BR><P>
 <H3>Maximum Stack Usage =        864 bytes + Unknown(Functions without stacksize, Cycles, Untraceable Function Pointers)</H3><H3>
 Call chain for Maximum Stack Depth:</H3>
@@ -1586,8 +1586,7 @@ Global Symbols
 </UL>
 <BR>[Calls]<UL><LI><a href="#[11d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_GetTick
 </UL>
-<BR>[Called By]<UL><LI><a href="#[81]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
-<LI><a href="#[164]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;UpdateFirmwareFromHex
+<BR>[Called By]<UL><LI><a href="#[164]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;UpdateFirmwareFromHex
 <LI><a href="#[165]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;UpdateFirmwareFromBin
 </UL>
 
@@ -2802,7 +2801,7 @@ Global Symbols
 <BR>[Called By]<UL><LI><a href="#[1e1]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;isrMessagePut
 </UL>
 
-<P><STRONG><a name="[81]"></a>main</STRONG> (Thumb, 210 bytes, Stack size 24 bytes, main.o(i.main))
+<P><STRONG><a name="[81]"></a>main</STRONG> (Thumb, 206 bytes, Stack size 24 bytes, main.o(i.main))
 <BR><BR>[Stack]<UL><LI>Max Depth = 864 + Unknown Stack Size
 <LI>Call Chain = main &rArr; UpdateFirmware &rArr; UpdateFirmwareFromHex &rArr; slog_out &rArr; fopen &rArr; _freopen_locked &rArr; _sys_open &rArr; __sys_open &rArr; fat_open &rArr; path_create &rArr; frec_find &rArr; entry_pos_inc &rArr; alloc_table_read &rArr; cache_fat
 </UL>
@@ -2814,7 +2813,6 @@ Global Symbols
 <LI><a href="#[14f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Initialize_DGUS
 <LI><a href="#[14d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Init_Main_Thread
 <LI><a href="#[131]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_Init
-<LI><a href="#[12d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_Delay
 <LI><a href="#[161]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;UpdateFirmware
 <LI><a href="#[151]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;JumpToApp
 <LI><a href="#[11d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_GetTick

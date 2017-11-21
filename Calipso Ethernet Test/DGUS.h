@@ -186,9 +186,28 @@ extern UART_HandleTypeDef huart1;
 #define FRAME_PICID_FRACTLASER_OVERHEATING			82			// Process
 #define FRAME_PICID_FRACTLASER_FAULT						83			// Process
 
+#define FRAME_PICID_IPL_IGNITION								84			// Process
+#define FRAME_PICID_IPL_IGNITION_PROCESS				86			// Process
+#define FRAME_PICID_IPL_INPUT										87			// Process
+#define FRAME_PICID_IPL_BATTERY_CHARGING				89			// Process
+#define FRAME_PICID_IPL_COOLING_TIMER						90			// Process
+#define FRAME_PICID_IPL_START										91			// Process
+#define FRAME_PICID_IPL_WORK										93			// Process
+#define FRAME_PICID_IPL_FLOWERROR								95			// Process
+#define FRAME_PICID_IPL_PCA10_FAULT							96			// Process
+#define FRAME_PICID_IPL_PDD_FAULT								97			// Process
+#define FRAME_PICID_IPL_OVERHEATING							98			// Process
+
+#define FRAME_PICID_MAINMENU_QSW								100			// Process
+#define FRAME_PICID_MAINMENU_LONGPULSE					102			// Process
+#define FRAME_PICID_MAINMENU_FRACTLASER					104			// Process
+#define FRAME_PICID_MAINMENU_IPL								106			// Process
+
 #define IS_LASERDIODE(pic_id) (pic_id >= 19 && pic_id <= 32)
 #define IS_SOLIDSTATE(pic_id) (pic_id >= 37 && pic_id <= 42)
 #define IS_LONGPULSE (pic_id) (pic_id >= 53 && pic_id <= 62)
+#define IS_FRACTLASER(pic_id) (pic_id >= 73 && pic_id <= 83)
+#define IS_IPL       (pic_id) (pic_id >= 84 && pic_id <= 97)
 
 /* ************************** WIFI SCANNING DATA ************************** */
 
@@ -233,11 +252,13 @@ typedef struct __attribute__((__packed__)) DGUS_SSLASERSETTINGS_STRUCT
 } DGUS_SSLASERSETTINGS, *PDGUS_SSLASERSETTINGS;
 
 typedef struct __attribute__((__packed__)) DGUS_LASERDIODE_CONTROLBTN_STRUCT {
-	uint16_t onInputBtn;	// on input  pressed (1) else (0)
-	uint16_t onReadyBtn;	// on ready  pressed (1) else (0)
-	uint16_t onStartBtn;	// on start  pressed (1) else (0)
-	uint16_t onStopBtn;		// on stop   pressed (1) else (0)
-	uint16_t onCancelBtn;	// on cancel pressed (1) else (0)
+	uint16_t onInputBtn;		// on input  pressed (1) else (0)
+	uint16_t onReadyBtn;		// on ready  pressed (1) else (0)
+	uint16_t onStartBtn;		// on start  pressed (1) else (0)
+	uint16_t onStopBtn;			// on stop   pressed (1) else (0)
+	uint16_t onCancelBtn;		// on cancel pressed (1) else (0)
+	uint16_t onIgnitionBtn;	// on cancel pressed (1) else (0)
+	uint16_t onRestartBtn;	// on cancel pressed (1) else (0)
 } DGUS_LASERDIODE_CONTROLBTN, *PDGUS_LASERDIODE_CONTROLBTN;
 
 typedef struct __attribute__((__packed__)) DGUS_LASERDIODE_STATE_STRUCT {

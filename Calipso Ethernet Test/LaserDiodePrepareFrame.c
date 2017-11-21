@@ -99,3 +99,68 @@ void LaserDiodePrepare_Process(uint16_t pic_id)
 	if (/*pic_id != new_pic_id &&*/ update)
 		SetPicId(new_pic_id, g_wDGUSTimeout);
 }
+
+void _DiodeLaserOff()
+{
+	// Diode Laser Off
+	footswitch_en = false;
+	DiodeLaser_en = false;
+	DiodeControlPulseStop();
+	osDelay(100);
+	__MISC_LASERDIODE_OFF();
+	osDelay(100);
+	CoolOff();
+}
+
+void LaserDiodeErrorCheck_Process(uint16_t pic_id)
+{
+	// Check for error state of diode laser
+	if ((pic_id >= FRAME_PICID_LASERDIODE_INPUT) && (pic_id <= FRAME_PICID_LASERDIODE_PHOTOTYPE))
+	{
+		MenuID = MENU_ID_DIODELASER;
+		
+		// Check temperature
+		if (temperature > temperature_overheat)
+		{
+			_DiodeLaserOff();
+			SetPicId(FRAME_PICID_LASERDIODE_TEMPERATUREOUT, g_wDGUSTimeout);
+		}
+		
+#ifdef FLOW_CHECK
+		// Check flow
+		if (flow2 < flow_low)
+		{
+			_DiodeLaserOff();
+			SetPicId(FRAME_PICID_LASERDIODE_FLOWERROR, g_wDGUSTimeout);
+		}
+#endif
+		
+		// Check is working
+		if ((pic_id == FRAME_PICID_LASERDIODE_INPUT) || 
+			  (pic_id == FRAME_PICID_LASERDIODE_PHOTOTYPE))
+		{
+			// Peltier off
+			CoolOff();
+		}
+	}
+}
+
+void LaserDiodeStopIfWork(uint16_t pic_id)
+{
+	// If laser diode running
+	if (((pic_id >= FRAME_PICID_LASERDIODE_INPUT) && (pic_id <= FRAME_PICID_LASERDIODE_PHOTOTYPE)) || (pic_id == FRAME_PICID_SERVICE_LASERDIODE))
+	{
+		frameData_LaserDiode.buttons.onCancelBtn = 0x00;
+		frameData_LaserDiode.buttons.onIgnitionBtn = 0x00;
+		frameData_LaserDiode.buttons.onInputBtn = 0x00;
+		frameData_LaserDiode.buttons.onReadyBtn = 0x00;
+		frameData_LaserDiode.buttons.onRestartBtn = 0x00;
+		frameData_LaserDiode.buttons.onStartBtn = 0x00;
+		frameData_LaserDiode.buttons.onStopBtn = 0x00;
+		WriteLaserDiodeDataConvert16(FRAMEDATA_LASERDIODE_BASE, &frameData_LaserDiode);
+		osSignalWait(DGUS_EVENT_SEND_COMPLETED, g_wDGUSTimeout);
+		
+		CoolOff();
+		_DiodeLaserOff();
+	}
+}

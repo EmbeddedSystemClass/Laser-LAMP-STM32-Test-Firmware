@@ -19,10 +19,12 @@
 //#define NEW_COOLSCHEME					// amplified PWM by two mossfet channels
 #define NEW_DOUBLECOOLSCHEME			// Added second PWM channel
 //#define OLD_STYLE_LASER_SW			// One connector combine configuration
-#define LASERIDCHECK_LASERDIODE 	// Laser diode enable check
-#define LDPREPARETIMER_ENABLE			// Enable prepare timer for Laser Diode
+//#define LASERIDCHECK_LASERDIODE 	// Laser diode enable check
+//#define LASERIDCHECK_IPL				 	// IPL enable check
+#define MAINMENU_IPL				 			// IPL enable check
+//#define LDPREPARETIMER_ENABLE			// Enable prepare timer for Laser Diode
 //#define DEBUG_BRK								// Enable error breakpoints
-#define FLOW_CHECK								// Enable flow check
+//#define FLOW_CHECK								// Enable flow check
 #define CAN_SUPPORT								// CAN support enable
 //#define USE_EMBEDDED_EEPROM			// Calipso EEPROM
 
@@ -37,9 +39,11 @@ extern int32_t LOGHASH[16];
 #define LOG_ID_COUNTER2			7
 #define LOG_ID_COUNTER3			8
 #define LOG_ID_COUNTER4			9
-#define LOG_ID_FREQUENCY		10
-#define LOG_ID_POWER				11
-#define LOG_ID_DURATION			12
+#define LOG_ID_COUNTER5			10
+#define LOG_ID_COUNTER6			11
+#define LOG_ID_FREQUENCY		12
+#define LOG_ID_POWER				13
+#define LOG_ID_DURATION			14
 
 // CAN ID for emmiters
 #define LASER_CAN_ID_DIODELASER		0x01
@@ -47,6 +51,9 @@ extern int32_t LOGHASH[16];
 #define LASER_CAN_ID_SOLIDSTATE2	0x84 // reserved
 #define LASER_CAN_ID_LONGPULSE		0x82
 #define LASER_CAN_ID_FRACTIONAL		0x83
+#define LASER_CAN_ID_IPL					0x85
+#define LASER_CAN_ID_1340NM				0x86
+
 
 // Base emmiter types
 #define LASER_ID_MASK_DIODELASER	0x00000001
@@ -54,12 +61,9 @@ extern int32_t LOGHASH[16];
 #define LASER_ID_MASK_SOLIDSTATE2	0x00000004
 #define LASER_ID_MASK_LONGPULSE		0x00000008
 #define LASER_ID_MASK_FRACTIONAL	0x00000010
+#define LASER_ID_MASK_IPL					0x00000020
+#define LASER_ID_MASK_1340NM			0x00000040
 
-// Reserved bits
-#define LASER_ID_MASK_LASERTYPE1	0x00000020
-#define LASER_ID_MASK_LASERTYPE2	0x00000040
-#define LASER_ID_MASK_LASERTYPE3	0x00000080
-#define LASER_ID_MASK_LASERTYPE4	0x00000100
 
 typedef enum LASER_ID_ENUM {
 	LASER_ID_FRACTLASER   = 0x00,
@@ -67,6 +71,8 @@ typedef enum LASER_ID_ENUM {
 	LASER_ID_SOLIDSTATE2  = 0x02,
 	LASER_ID_LONGPULSE    = 0x03,
 	LASER_ID_DIODELASER   = 0x04,
+	LASER_ID_IPL				  = 0x05,
+	LASER_ID_1340NM			  = 0x06,
 	LASER_ID_UNKNOWN      = 0xff,
 	LASER_ID_NOTCONNECTED = 0x77
 } LASER_ID;
@@ -77,7 +83,9 @@ typedef enum MENU_ID_ENUM {
 	MENU_ID_SOLIDSTATE2  = 0x02,
 	MENU_ID_LONGPULSE    = 0x03,
 	MENU_ID_MENU  		   = 0x04,
-	MENU_ID_DIODELASER   = 0x05
+	MENU_ID_DIODELASER   = 0x05,
+	MENU_ID_IPL          = 0x06,
+	MENU_ID_1340NM       = 0x07
 } MENU_ID;
 
 //Date & time
@@ -130,6 +138,17 @@ extern volatile float32_t flow2;
 extern volatile float32_t VoltageMonitor;
 extern volatile float32_t CurrentMonitor;
 
+typedef struct UUID_struct
+{
+	uint16_t X;
+	uint16_t Y;
+	uint8_t WAF_NUM;
+	char LOT_NUM[7];
+} UUID;
+
+
+extern volatile UUID slot0_can_uid;
+extern volatile UUID slot1_can_uid;
 // Laser ID
 //extern LASER_ID LaserID;
 extern MENU_ID MenuID;
@@ -143,6 +162,7 @@ typedef struct PROFILE_FRACTLASER_STRUCT
 } PROFILE_FRACTLASER, *PPROFILE_FRACTLASER;
                                               
 // Private variables
+extern uint32_t LaserSet;
 extern uint16_t pic_id;
 extern bool g_peltier_en;
 extern bool prepare;
@@ -166,6 +186,10 @@ extern uint32_t FlushesSessionLP;
 extern uint32_t FlushesGlobalLP;
 extern uint32_t FlushesSessionFL;
 extern uint32_t FlushesGlobalFL;
+extern uint32_t FlushesSessionIPL;
+extern uint32_t FlushesGlobalIPL;
+extern uint32_t FlushesSession1340nm;
+extern uint32_t FlushesGlobal1340nm;
 extern volatile bool footswitch_en;
 extern volatile bool footswitch_on;
 extern volatile uint16_t switch_filter;
@@ -196,6 +220,8 @@ typedef struct FLASH_GLOBAL_DATA_STRUCT
 	uint32_t SolidStatePulseCounter2;
 	uint32_t LongPulsePulseCounter;
 	uint32_t FractLaserPulseCounter;
+	uint32_t IPLLaserPulseCounter;
+	uint32_t Laser1340nmPulseCounter;
 	
 	/*// GUI preset
 	DGUS_LASERPROFILE	m_structLaserProfile [5];
@@ -219,7 +245,7 @@ uint32_t GetSolidStateSessionPulse(LASER_ID laser_id);
 
 LASER_ID GetLaserID(void);
 bool CheckEmmiter(LASER_ID laser_id);
-LASER_ID IdentifyEmmiter(uint8_t id);
+LASER_ID IdentifyEmmiter(uint8_t id, uint32_t *laser_set);
 void CANDeviceReadCounter(uint8_t slot_id, uint8_t id);
 void CANDeviceWriteCounter(LASER_ID laser_id, uint8_t laser_can_id);
 

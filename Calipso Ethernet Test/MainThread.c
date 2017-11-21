@@ -24,40 +24,84 @@ void MainThread (void const *argument);                             // thread fu
 osThreadId tid_MainThread;                                          // thread id
 osThreadDef (MainThread, osPriorityNormal, 1, 0);                   // thread object
 
+void DiodeLaserOff()
+{
+	// Diode Laser Off
+	footswitch_en = false;
+	DiodeLaser_en = false;
+	DiodeControlPulseStop();
+	osDelay(100);
+	__MISC_LASERDIODE_OFF();
+	osDelay(100);
+	CoolOff();
+}
+
+void SolidStateLaserOff()
+{
+	// Solid State Laser Off
+	footswitch_en = false;
+	SolidStateLaser_en = false;
+	LampControlPulseStop();
+	osDelay(100);
+	__SOLIDSTATELASER_SIMMEROFF();
+	osDelay(100);
+	__SOLIDSTATELASER_HVOFF();
+	osDelay(100);
+	__SOLIDSTATELASER_DISCHARGEON();
+}
+
 //----------------------------- GUI FRAMES ----------------------------------
-extern void     PasswordFrame_Process(uint16_t pic_id);
-extern void      ServiceFrame_Process(uint16_t pic_id);
-extern void ServiceDiodeFrame_Process(uint16_t pic_id);
+extern void           PasswordFrame_Process(uint16_t pic_id); // Service menu
+extern void            ServiceFrame_Process(uint16_t pic_id);
+extern void       ServiceDiodeFrame_Process(uint16_t pic_id);
+            
+extern void         LaserDiodeInput_Init   (uint16_t pic_id); // Diode laser
+extern void         LaserDiodeInput_Process(uint16_t pic_id);
+extern void       LaserDiodePrepare_Process(uint16_t pic_id);
+extern void          LaserDiodeWork_Process(uint16_t pic_id);
+extern void  	LaserDiodeErrorCheck_Process(uint16_t pic_id);
+            
+extern void    SolidStateLaserInput_Init   (uint16_t pic_id); // Nd YAG Qsw 1064nm
+extern void    SolidStateLaserInput_Process(uint16_t pic_id);
+extern void  SolidStateLaserPrepare_Process(uint16_t pic_id);
+extern void     SolidStateLaserWork_Process(uint16_t pic_id);
+extern void  	SolidStateErrorCheck_Process(uint16_t pic_id);
+            
+extern void     LongPulseLaserInput_Init   (uint16_t pic_id); // Long Pulse (Nd YAG 1064nm)
+extern void     LongPulseLaserInput_Process(uint16_t pic_id);
+extern void   LongPulseLaserPrepare_Process(uint16_t pic_id);
+extern void      LongPulseLaserWork_Process(uint16_t pic_id);
+extern void     LongPulseErrorCheck_Process(uint16_t pic_id);
+            
+extern void         FractLaserInput_Init   (uint16_t pic_id); // Nd YAG 1440
+extern void         FractLaserInput_Process(uint16_t pic_id);
+extern void       FractLaserPrepare_Process(uint16_t pic_id);
+extern void     			FractLaserWork_Process(uint16_t pic_id);
+extern void    FractLaserErrorCheck_Process(uint16_t pic_id);
+            
+extern void                   IPLInput_Init(uint16_t pic_id); // IPL menu
+extern void                IPLInput_Process(uint16_t pic_id);
+extern void              IPLPrepare_Process(uint16_t pic_id);
+extern void                 IPLWork_Process(uint16_t pic_id);
+extern void           IPLErrorCheck_Process(uint16_t pic_id);
 
-extern void   LaserDiodeInput_Init   (uint16_t pic_id);
-extern void   LaserDiodeInput_Process(uint16_t pic_id);
-extern void LaserDiodePrepare_Process(uint16_t pic_id);
-extern void    LaserDiodeWork_Process(uint16_t pic_id);
-
-extern void   SolidStateLaserInput_Init   (uint16_t pic_id);
-extern void   SolidStateLaserInput_Process(uint16_t pic_id);
-extern void SolidStateLaserPrepare_Process(uint16_t pic_id);
-extern void    SolidStateLaserWork_Process(uint16_t pic_id);
-
-extern void    LongPulseLaserInput_Init   (uint16_t pic_id);
-extern void    LongPulseLaserInput_Process(uint16_t pic_id);
-extern void  LongPulseLaserPrepare_Process(uint16_t pic_id);
-extern void     LongPulseLaserWork_Process(uint16_t pic_id);
-
-extern void        FractLaserInput_Init   (uint16_t pic_id);
-extern void        FractLaserInput_Process(uint16_t pic_id);
-extern void      FractLaserPrepare_Process(uint16_t pic_id);
-extern void    			FractLaserWork_Process(uint16_t pic_id);
-
-extern void       WifiScanningFrame_Init   (uint16_t pic_id);
+extern void       WifiScanningFrame_Init   (uint16_t pic_id); // WiFi scanning menu
 extern void  		  WifiScanningFrame_Process(uint16_t pic_id);
 extern void WifiAuthenticationFrame_Process(uint16_t pic_id);
 extern void WiFiLinkFrame_Process(void);
 
-extern void CoolingServiceFrame_Process(uint16_t pic_id);
+//----------------------------- GUI Preset Frames ---------------------------
+extern void            LaserDiodeStopIfWork(uint16_t pic_id);
+extern void             LongPulseStopIfWork(uint16_t pic_id);
+extern void            SolidStateStopIfWork(uint16_t pic_id);
+extern void            FractLaserStopIfWork(uint16_t pic_id);
+extern void                   IPLStopIfWork(uint16_t pic_id);
 
+//----------------------------- GUI Basic settings --------------------------
+extern void CoolingServiceFrame_Process(uint16_t pic_id);
 extern void LogFrame_Process(uint16_t pic_id);
 
+/* USART Driver Initialization */
 int Init_Main_Thread (void) {
 
   tid_MainThread = osThreadCreate (osThread(MainThread), NULL);
@@ -87,83 +131,17 @@ int Init_Main_Thread (void) {
   return(0);
 }
 
-void DiodeLaserOff()
-{
-	// Diode Laser Off
-	footswitch_en = false;
-	DiodeLaser_en = false;
-	DiodeControlPulseStop();
-	osDelay(100);
-	__MISC_LASERDIODE_OFF();
-	osDelay(100);
-}
-
-void SolidStateLaserOff()
-{
-	// Solid State Laser Off
-	footswitch_en = false;
-	SolidStateLaser_en = false;
-	LampControlPulseStop();
-	osDelay(100);
-	__SOLIDSTATELASER_SIMMEROFF();
-	osDelay(100);
-	__SOLIDSTATELASER_HVOFF();
-	osDelay(100);
-	__SOLIDSTATELASER_DISCHARGEON();
-}
-
+// Preset GUI frames when exit to main menu
 void StopIfRunning(uint16_t pic_id)
-{
-	// If laser diode running
-	if (((pic_id >= 19) && (pic_id <= 32)) || (pic_id == FRAME_PICID_SERVICE_LASERDIODE))
-	{
-		frameData_LaserDiode.buttons.onInputBtn = 0x00;
-		frameData_LaserDiode.buttons.onReadyBtn = 0x00;
-		frameData_LaserDiode.buttons.onStartBtn = 0x00;
-		frameData_LaserDiode.buttons.onStopBtn  = 0x00;
-		WriteLaserDiodeDataConvert16(FRAMEDATA_LASERDIODE_BASE, &frameData_LaserDiode);
-		osSignalWait(DGUS_EVENT_SEND_COMPLETED, g_wDGUSTimeout);
-		
-		DiodeLaserOff();
-	}
-	
-	if (((pic_id >= 35) && (pic_id <= 43)) || (pic_id == FRAME_PICID_SERVICE_SOLIDSTATELASER) || (pic_id == FRAME_PICID_REMOTECONTROL))
-	{
-		frameData_SolidStateLaser.buttons.onInputBtn = 0x00;
-		frameData_SolidStateLaser.buttons.onSimmerBtn = 0x00;
-		frameData_SolidStateLaser.buttons.onStartBtn = 0x00;
-		frameData_SolidStateLaser.buttons.onStopBtn = 0x00;
-		WriteSolidStateLaserDataConvert16(FRAMEDATA_SOLIDSTATELASER_BASE, &frameData_SolidStateLaser);
-		osSignalWait(DGUS_EVENT_SEND_COMPLETED, g_wDGUSTimeout);
-		
-		SolidStateLaserOff();
-	}
-	
-	if (((pic_id >= 51) && (pic_id <= 62)))
-	{
-		frameData_SolidStateLaser.buttons.onInputBtn = 0x00;
-		frameData_SolidStateLaser.buttons.onSimmerBtn = 0x00;
-		frameData_SolidStateLaser.buttons.onStartBtn = 0x00;
-		frameData_SolidStateLaser.buttons.onStopBtn = 0x00;
-		WriteSolidStateLaserDataConvert16(FRAMEDATA_SOLIDSTATELASER_BASE, &frameData_SolidStateLaser);
-		osSignalWait(DGUS_EVENT_SEND_COMPLETED, g_wDGUSTimeout);
-		
-		SolidStateLaserOff();
-	}
-	
-	if (((pic_id >= 73) && (pic_id <= 83)))
-	{
-		frameData_SolidStateLaser.buttons.onInputBtn = 0x00;
-		frameData_SolidStateLaser.buttons.onSimmerBtn = 0x00;
-		frameData_SolidStateLaser.buttons.onStartBtn = 0x00;
-		frameData_SolidStateLaser.buttons.onStopBtn = 0x00;
-		WriteSolidStateLaserDataConvert16(FRAMEDATA_SOLIDSTATELASER_BASE, &frameData_SolidStateLaser);
-		osSignalWait(DGUS_EVENT_SEND_COMPLETED, g_wDGUSTimeout);
-		
-		SolidStateLaserOff();
-	}
+{		
+	LaserDiodeStopIfWork(pic_id);
+	LongPulseStopIfWork(pic_id);
+	SolidStateStopIfWork(pic_id);
+	FractLaserStopIfWork(pic_id);
+	IPLStopIfWork(pic_id);	
 }
 
+// Error checking process, enable or disable main laser control
 void UpdateLaserState(uint16_t pic_id)
 {
 	// Enable footswitch when work
@@ -173,11 +151,13 @@ void UpdateLaserState(uint16_t pic_id)
 			(pic_id == FRAME_PICID_FRACTLASER_WORK) ||
 			(pic_id == FRAME_PICID_REMOTECONTROL) ||
 			(pic_id == FRAME_PICID_SERVICE_SOLIDSTATELASER) ||
-			(pic_id == FRAME_PICID_SERVICE_LASERDIODE))
-		footswitch_en = true;
+			(pic_id == FRAME_PICID_SERVICE_LASERDIODE) ||
+			(pic_id == FRAME_PICID_IPL_WORK))
+		footswitch_en = true;  // Enable laser control
 	else
-		footswitch_en = false;
+		footswitch_en = false; // Disable lase control
 	
+	// Laser connector switch
 #ifdef OLD_STYLE_LASER_SW
 	// Switch to Solid State Laser
 	if ((pic_id == FRAME_PICID_SERVICE_SOLIDSTATELASER) || 
@@ -203,7 +183,7 @@ void UpdateLaserState(uint16_t pic_id)
 	else
 		__MISC_RELAY3_OFF();
 	
-	if (GetLaserID() == LASER_ID_SOLIDSTATE || GetLaserID() == LASER_ID_SOLIDSTATE2 || GetLaserID() == LASER_ID_LONGPULSE)
+	if (GetLaserID() == LASER_ID_SOLIDSTATE || GetLaserID() == LASER_ID_SOLIDSTATE2 || GetLaserID() == LASER_ID_LONGPULSE || GetLaserID() == LASER_ID_IPL || GetLaserID() == LASER_ID_1340NM)
 		__MISC_RELAY2_ON();
 	else
 		__MISC_RELAY2_OFF();
@@ -211,132 +191,12 @@ void UpdateLaserState(uint16_t pic_id)
 	
 	MenuID = MENU_ID_MENU;
 	
-	// Check for error state of diode laser
-	if ((pic_id >= 19) && (pic_id <= 32))
-	{
-		//MenuID = MENU_ID_DIODELASER;
-		
-		// Check temperature
-		if (temperature > temperature_overheat)
-		{
-			DiodeLaserOff();
-			SetPicId(FRAME_PICID_LASERDIODE_TEMPERATUREOUT, g_wDGUSTimeout);
-		}
-		
-#ifdef FLOW_CHECK
-		// Check flow
-		if (flow2 < flow_low)
-		{
-			DiodeLaserOff();
-			SetPicId(FRAME_PICID_LASERDIODE_FLOWERROR, g_wDGUSTimeout);
-		}
-#endif
-		
-		// Check is working
-		if ((pic_id == FRAME_PICID_LASERDIODE_INPUT) || 
-			  (pic_id == FRAME_PICID_LASERDIODE_PHOTOTYPE))
-		{
-			// Peltier off
-			CoolOff();
-		}
-	}
-	else
-	{
-		// Peltier off
-		CoolOff();
-	}
-	
-	// Check for errors of solid state laser
-	if ((pic_id >= FRAME_PICID_SOLIDSTATE_INPUT) && (pic_id <= FRAME_PICID_SOLIDSTATE_WORK))
-	{
-		if (CheckEmmiter(LASER_ID_SOLIDSTATE))
-			MenuID = MENU_ID_SOLIDSTATE;
-		
-		if (CheckEmmiter(LASER_ID_SOLIDSTATE2))
-			MenuID = MENU_ID_SOLIDSTATE2;
-		
-		// Check temperature
-		if (temperature > temperature_overheat_solidstate)
-		{
-			SolidStateLaserOff();
-			SetPicId(FRAME_PICID_SOLIDSTATE_OVERHEATING, g_wDGUSTimeout);
-		}
-		
-#ifdef FLOW_CHECK
-		// Check flow
-		if (flow1 < flow_low)
-		{
-			SolidStateLaserOff();
-			SetPicId(FRAME_PICID_SOLIDSTATE_FLOWERROR, g_wDGUSTimeout);
-		}
-#endif
-		
-		// Fault check
-		if (__MISC_GETCHARGEMODULEFAULTSTATE())
-		{
-			SolidStateLaserOff();
-			SetPicId(FRAME_PICID_SOLIDSTATE_FAULT, g_wDGUSTimeout);
-		}
-	}
-	
-	// Check for errors of fractional laser
-	if ((pic_id >= FRAME_PICID_FRACTLASER_INPUT) && (pic_id <= FRAME_PICID_FRACTLASER_WORK))
-	{		
-		if (GetLaserID() == LASER_ID_FRACTLASER)
-			MenuID = MENU_ID_FRACTLASER;
-		
-		// Check temperature
-		if (temperature > temperature_overheat_solidstate)
-		{
-			SolidStateLaserOff();
-			SetPicId(FRAME_PICID_FRACTLASER_OVERHEATING, g_wDGUSTimeout);
-		}
-		
-#ifdef FLOW_CHECK
-		// Check flow
-		if (flow1 < flow_low)
-		{
-			SolidStateLaserOff();
-			SetPicId(FRAME_PICID_FRACTLASER_FLOWERROR, g_wDGUSTimeout);
-		}
-#endif
-		
-		// Fault check
-		if (__MISC_GETCHARGEMODULEFAULTSTATE())
-		{
-			SolidStateLaserOff();
-			SetPicId(FRAME_PICID_FRACTLASER_FAULT, g_wDGUSTimeout);
-		}
-	}
-	
-	// Check for errors of solid state laser long pulse
-	if ((pic_id >= 51) && (pic_id <= 58))
-	{
-		MenuID = MENU_ID_LONGPULSE;
-		
-		// Check temperature
-		if (temperature > temperature_overheat_solidstate)
-		{
-			SolidStateLaserOff();
-			SetPicId(FRAME_PICID_LONGPULSE_OVERHEATING, g_wDGUSTimeout);
-		}
-		
-#ifdef FLOW_CHECK
-		// Check flow
-		if (flow1 < flow_low)
-		{
-			SolidStateLaserOff();
-			SetPicId(FRAME_PICID_LONGPULSE_FLOWERROR, g_wDGUSTimeout);
-		}
-#endif
-		
-		// Fault check
-		if (__MISC_GETCHARGEMODULEFAULTSTATE())
-		{
-			SolidStateLaserOff();
-			SetPicId(FRAME_PICID_LONGPULSE_FAULT, g_wDGUSTimeout);
-		}
-	}
+	//Error checking and update MenuID
+	LaserDiodeErrorCheck_Process(pic_id);
+	SolidStateErrorCheck_Process(pic_id);
+	LongPulseErrorCheck_Process(pic_id);
+	FractLaserErrorCheck_Process(pic_id);
+	IPLErrorCheck_Process(pic_id);
 }
 
 DGUS_LASERDIODE_STATE laser_state;
@@ -346,7 +206,7 @@ void UpdateLaserStatus()
 {
 	laser_state.temperature = (uint16_t)(temperature * 10.0f);
 	
-	if ((pic_id >= 19) && (pic_id <= 32))
+	if ((pic_id >= FRAME_PICID_LASERDIODE_INPUT) && (pic_id <= FRAME_PICID_LASERDIODE_PHOTOTYPE))
 	{
 		if (flow2 < flow_low)
 			laser_state.coolIcon = 1;
@@ -384,6 +244,7 @@ void MainThread (void const *argument) {
 	SolidStateLaserInput_Init(pic_id);
 	LongPulseLaserInput_Init(pic_id);
 	FractLaserInput_Init(pic_id);
+	IPLInput_Init(pic_id);
 	
 	GetDateTime(g_wDGUSTimeout, &datetime);
 
@@ -394,8 +255,6 @@ void MainThread (void const *argument) {
 		
 		last_menu_id = MenuID;
 		UpdateLaserState(pic_id);
-		
-		//LaserID = GetLaserID();
 		
 		// GUI Frames process
 		switch (pic_id)
@@ -451,6 +310,9 @@ void MainThread (void const *argument) {
 			case FRAME_PICID_LASERDIODE_PHOTOTYPE:
 				UpdateLaserStatus();
 				break;
+			case FRAME_PICID_LASERDIODE_PHOTOTYPE+1:
+				SetPicId(FRAME_PICID_LASERDIODE_PHOTOTYPE, 1000);
+				break;
 			
 			// WiFi features
 			case FRAME_PICID_SERVICE_WIFISCANNINGINIT:
@@ -467,7 +329,58 @@ void MainThread (void const *argument) {
 				break;
 			
 			// App idle user state
+			case FRAME_PICID_MAINMENU_IPL:
+				if (ip_addr_updated)
+				{
+					WriteVariable(FRAMEDATA_WIFIUP_IPADDR, ip_addr, 16);
+					osSignalWait(DGUS_EVENT_SEND_COMPLETED, g_wDGUSTimeout);
+					ip_addr_updated = false;
+				}
+#ifndef MAINMENU_IPL
+				if ((LaserSet & LASER_ID_MASK_IPL) == 0)	SetPicId(FRAME_PICID_MAINMENU, g_wDGUSTimeout);
+#endif
+				StopIfRunning(last_pic_id);
+				break;
+			case FRAME_PICID_MAINMENU_QSW:
+				if (ip_addr_updated)
+				{
+					WriteVariable(FRAMEDATA_WIFIUP_IPADDR, ip_addr, 16);
+					osSignalWait(DGUS_EVENT_SEND_COMPLETED, g_wDGUSTimeout);
+					ip_addr_updated = false;
+				}
+				if ((LaserSet & LASER_ID_MASK_SOLIDSTATE) == 0)	SetPicId(FRAME_PICID_MAINMENU, g_wDGUSTimeout);
+				StopIfRunning(last_pic_id);
+				break;
+			case FRAME_PICID_MAINMENU_LONGPULSE:
+				if (ip_addr_updated)
+				{
+					WriteVariable(FRAMEDATA_WIFIUP_IPADDR, ip_addr, 16);
+					osSignalWait(DGUS_EVENT_SEND_COMPLETED, g_wDGUSTimeout);
+					ip_addr_updated = false;
+				}
+				if ((LaserSet & LASER_ID_MASK_LONGPULSE) == 0)	SetPicId(FRAME_PICID_MAINMENU, g_wDGUSTimeout);
+				StopIfRunning(last_pic_id);
+				break;
+			case FRAME_PICID_MAINMENU_FRACTLASER:
+				if (ip_addr_updated)
+				{
+					WriteVariable(FRAMEDATA_WIFIUP_IPADDR, ip_addr, 16);
+					osSignalWait(DGUS_EVENT_SEND_COMPLETED, g_wDGUSTimeout);
+					ip_addr_updated = false;
+				}
+				if ((LaserSet & LASER_ID_MASK_FRACTIONAL) == 0)	SetPicId(FRAME_PICID_MAINMENU, g_wDGUSTimeout);
+				StopIfRunning(last_pic_id);
+				break;
 			case FRAME_PICID_MAINMENU:
+#ifdef MAINMENU_IPL
+				SetPicId(FRAME_PICID_MAINMENU_IPL, g_wDGUSTimeout);
+#else
+				if (LaserSet & LASER_ID_MASK_SOLIDSTATE)	SetPicId(FRAME_PICID_MAINMENU_QSW, g_wDGUSTimeout);
+				if (LaserSet & LASER_ID_MASK_SOLIDSTATE2)	SetPicId(FRAME_PICID_MAINMENU_QSW, g_wDGUSTimeout);
+				if (LaserSet & LASER_ID_MASK_LONGPULSE)		SetPicId(FRAME_PICID_MAINMENU_LONGPULSE, g_wDGUSTimeout);
+				if (LaserSet & LASER_ID_MASK_FRACTIONAL)	SetPicId(FRAME_PICID_MAINMENU_FRACTLASER, g_wDGUSTimeout);
+				if (LaserSet & LASER_ID_MASK_IPL)					SetPicId(FRAME_PICID_MAINMENU_IPL, g_wDGUSTimeout);
+#endif
 				if (ip_addr_updated)
 				{
 					WriteVariable(FRAMEDATA_WIFIUP_IPADDR, ip_addr, 16);
@@ -475,6 +388,7 @@ void MainThread (void const *argument) {
 					ip_addr_updated = false;
 				}
 				StopIfRunning(last_pic_id);
+				break;
 			case FRAME_PICID_SERVICE:
 			case FRAME_PICID_LANGMENU:
 				// nothing to do
@@ -555,6 +469,44 @@ void MainThread (void const *argument) {
 			case FRAME_PICID_FRACTLASER_OVERHEATING:
 			case FRAME_PICID_FRACTLASER_FAULT:
 				FractLaserPrepare_Process(pic_id);
+				UpdateLaserStatus();
+				break;
+			
+			// IPL menu
+			case FRAME_PICID_IPL_IGNITION:
+			case FRAME_PICID_IPL_IGNITION_PROCESS:
+			case FRAME_PICID_IPL_INPUT:
+#ifdef LASERIDCHECK_IPL
+				if (last_pic_id != pic_id && last_menu_id != MenuID)
+					IPLInput_Init(pic_id);
+				if (CheckEmmiter(LASER_ID_IPL))
+					IPLInput_Process(pic_id);
+				else
+					SetPicId(FRAME_PICID_WRONG_EMMITER, g_wDGUSTimeout);
+#else
+				if (last_pic_id != pic_id && last_menu_id != MenuID)
+					IPLInput_Init(pic_id);
+				IPLInput_Process(pic_id);
+#endif
+				
+				UpdateLaserStatus();
+				break;
+			case FRAME_PICID_IPL_BATTERY_CHARGING:
+			case FRAME_PICID_IPL_COOLING_TIMER:
+				IPLPrepare_Process(pic_id);
+				UpdateLaserStatus();
+				break;
+			case FRAME_PICID_IPL_START:
+			case FRAME_PICID_IPL_WORK:
+				IPLWork_Process(pic_id);
+				UpdateLaserStatus();
+				break;
+			case FRAME_PICID_IPL_FLOWERROR:
+			case FRAME_PICID_IPL_PCA10_FAULT:
+			case FRAME_PICID_IPL_PDD_FAULT:
+			case FRAME_PICID_IPL_OVERHEATING:
+				IPLWork_Process(pic_id);
+				//IPLError_Process(pic_id);
 				UpdateLaserStatus();
 				break;
 			

@@ -5,8 +5,8 @@
 .\mainthread.o: GlobalVariables.h
 .\mainthread.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdbool.h
 .\mainthread.o: C:\Keil_v5\ARM\PACK\Keil\STM32F4xx_DFP\2.10.0\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal.h
-.\mainthread.o: C:\Users\PCB-Designer\Documents\Laser-LAMP-STM32-Test-Firmware\Calipso Bootloader\RTE\Device\STM32F407ZGTx\stm32f4xx_hal_conf.h
-.\mainthread.o: C:\Users\PCB-Designer\Documents\Laser-LAMP-STM32-Test-Firmware\Calipso Bootloader\RTE\_Calipso-Bootloader\RTE_Components.h
+.\mainthread.o: C:\Users\FxSlava\Documents\Laser-LAMP-STM32-Test-Firmware\Calipso Bootloader\RTE\Device\STM32F407ZGTx\stm32f4xx_hal_conf.h
+.\mainthread.o: C:\Users\FxSlava\Documents\Laser-LAMP-STM32-Test-Firmware\Calipso Bootloader\RTE\RTE_Components.h
 .\mainthread.o: C:\Keil_v5\ARM\PACK\Keil\STM32F4xx_DFP\2.10.0\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_rcc.h
 .\mainthread.o: C:\Keil_v5\ARM\PACK\Keil\STM32F4xx_DFP\2.10.0\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_def.h
 .\mainthread.o: C:\Keil_v5\ARM\PACK\Keil\STM32F4xx_DFP\2.10.0\Drivers\CMSIS\Device\ST\STM32F4xx\Include\stm32f4xx.h

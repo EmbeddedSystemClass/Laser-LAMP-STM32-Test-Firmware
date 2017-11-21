@@ -1,4 +1,4 @@
---cpu=Cortex-M4.fp
+--cpu Cortex-M4.fp
 ".\objects\main.o"
 ".\objects\stm32f4xx_it.o"
 ".\objects\stm32f4xx_hal_msp.o"
@@ -23,6 +23,9 @@
 ".\objects\fractlaserprepareframe.o"
 ".\objects\fractlaserworkframe.o"
 ".\objects\laserdiodeguipreset.o"
+".\objects\iplinputframe.o"
+".\objects\iplprepareframe.o"
+".\objects\iplworkframe.o"
 ".\objects\mainthread.o"
 ".\objects\spithread.o"
 ".\objects\wifithread.o"

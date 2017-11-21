@@ -14,6 +14,8 @@ void data_16()
 	fopen_s(&fp, "laser.txt", "w");
 	int Size = dwDataSize / 2;
 
+	unsigned short* tmp_data = new unsigned short[Size];
+
 	fprintf(fp, "const uint16_t sound_seample[%d] = {\n", Size);
 	for (int i = 0; i < Size / 16; i++)
 	{
@@ -25,16 +27,22 @@ void data_16()
 
 	fclose(fp);
 
-	fopen_s(&fp, "data.txt", "w");
+	fopen_s(&fp, "chewy_roar.bin", "w");
 	for (int i = 0; i < Size; i++)
 	{
-		fprintf(fp, "%d\n", (32768 + pData[i]) >> 8);
+		//fprintf(fp, "%d\n", (32768 + pData[i]) >> 8);
+		tmp_data[i] = (32768 + pData[i]) >> 8;
 	}
+
+	fwrite((void*)tmp_data, 2, (size_t)Size, fp);
+
+	fclose(fp);
 }
 
 void data_8()
 {
 	unsigned char* pdata = (unsigned char*)pData;
+	unsigned short* tmp_data = new unsigned short[dwDataSize];
 
 	FILE* fp;
 	fopen_s(&fp, "laser.txt", "w");
@@ -44,25 +52,31 @@ void data_8()
 	for (int i = 0; i < Size / 16; i++)
 	{
 		for (int j = 0; j < 16; j++)
-			fprintf(fp, "\t%d,", pdata[i * 16 + j] * 8);
+			fprintf(fp, "\t%d,", pdata[i * 16 + j]);
 		fprintf(fp, "\n");
 	}
 	fprintf(fp, "};\n");
 
 	fclose(fp);
 
-	fopen_s(&fp, "data.txt", "w");
+	fopen_s(&fp, "data.txt", "wb");
+
 	for (int i = 0; i < Size; i++)
 	{
-		fprintf(fp, "%d\n", pdata[i]);
+		//fprintf(fp, "%d\n", pdata[i]);
+		tmp_data[i] = pdata[i];
 	}
+
+	fwrite((void*)tmp_data, 2, (size_t)dwDataSize, fp);
+
+	fclose(fp);
 }
 
 void main(void)
 {
 	setlocale(LC_ALL, "Russian"); //Локаль
 	
-	ifstream file("ghost.wav", ios::beg | ios::in | ios::binary); //Наша wav'ка
+	ifstream file("chewy_roar.wav", ios::beg | ios::in | ios::binary); //Наша wav'ка
 	if (!file) cout << "Не удалось открыть файл" << endl;
 
 
@@ -126,7 +140,7 @@ void main(void)
 	file.read((char*)pData, dwDataSize); //Прочитаем в нее все звуковые данные
 	file.close(); //Закроем файл, он нам уже не нужен, у нас есть pData
 
-	data_8();
+	data_16();
 
 	FILE* fp = 0;
 	fopen_s(&fp, "wave.txt", "w");

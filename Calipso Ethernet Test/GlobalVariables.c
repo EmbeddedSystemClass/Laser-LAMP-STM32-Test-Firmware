@@ -88,6 +88,10 @@ uint32_t FlushesSessionLP = 0;
 uint32_t FlushesGlobalLP = 0;
 uint32_t FlushesSessionFL = 0;
 uint32_t FlushesGlobalFL = 0;
+uint32_t FlushesSessionIPL = 0;
+uint32_t FlushesGlobalIPL = 0;
+uint32_t FlushesSession1340nm = 0;
+uint32_t FlushesGlobal1340nm = 0;
 uint16_t switch_filter_threshold = 10;
 volatile uint16_t switch_filter = 0;
 volatile bool footswitch_en = false;
@@ -105,6 +109,8 @@ static uint32_t _FlushesGlobalSS  = 0;
 static uint32_t _FlushesGlobalSS2 = 0;
 static uint32_t _FlushesGlobalLP  = 0;
 static uint32_t _FlushesGlobalFL  = 0;
+static uint32_t _FlushesGlobalIPL  = 0;
+static uint32_t _FlushesGlobal1340nm  = 0;
 
 void LoadGlobalVariablesFromSD(FILE* fp)
 {
@@ -113,11 +119,15 @@ void LoadGlobalVariablesFromSD(FILE* fp)
 	fscanf(fp, "Tattoo removal 2 counter: %d\n",	&FlushesGlobalSS2);
 	fscanf(fp, "Long pulse counter: %d\n",				&FlushesGlobalLP );
 	fscanf(fp, "Fractional laser counter: %d\n",	&FlushesGlobalFL );
+	fscanf(fp, "IPL counter: %d\n",								&FlushesGlobalIPL );
+	fscanf(fp, "1340nm counter: %d\n",						&FlushesGlobal1340nm );
 	_FlushesGlobalLD  = FlushesGlobalLD;
 	_FlushesGlobalSS  = FlushesGlobalSS;
 	_FlushesGlobalSS2 = FlushesGlobalSS2;
 	_FlushesGlobalLP  = FlushesGlobalLP;
 	_FlushesGlobalFL  = FlushesGlobalFL;
+	_FlushesGlobalIPL = FlushesGlobalIPL;
+	_FlushesGlobal1340nm  = FlushesGlobal1340nm;
 }
 
 void StoreGlobalVariablesFromSD(FILE* fp)
@@ -127,24 +137,31 @@ void StoreGlobalVariablesFromSD(FILE* fp)
 	fprintf(fp, "Tattoo removal 2 counter: %d\n",	FlushesGlobalSS2);
 	fprintf(fp, "Long pulse counter: %d\n",				FlushesGlobalLP );
 	fprintf(fp, "Fractional laser counter: %d\n",	FlushesGlobalFL );
+	fprintf(fp, "IPL counter: %d\n",							FlushesGlobalIPL );
+	fprintf(fp, "1340nm counter: %d\n",						FlushesGlobal1340nm );
 	_FlushesGlobalLD  = FlushesGlobalLD;
 	_FlushesGlobalSS  = FlushesGlobalSS;
 	_FlushesGlobalSS2 = FlushesGlobalSS2;
 	_FlushesGlobalLP  = FlushesGlobalLP;
 	_FlushesGlobalFL  = FlushesGlobalFL;
+	_FlushesGlobalIPL = FlushesGlobalIPL;
+	_FlushesGlobal1340nm  = FlushesGlobal1340nm;
 }
 
 void LoadGlobalVariables(void)
 {
+	slot1_id = GetLaserID();
 #ifdef CAN_SUPPORT
-	uint8_t len = 4;
+	uint8_t len = 4;	
+	//CANReadRegister(SLOT_ID_1, CAN_MESSAGE_TYPE_REGISTER_UID, (uint8_t*)slot1_can_uid, &len);
+	
 	if (!CANReadRegister(SLOT_ID_0, CAN_MESSAGE_TYPE_REGISTER_ID, (uint8_t*)&slot0_can_id, &len))
 	{
 		slot0_can_id = -1;
 		slot0_id = LASER_ID_NOTCONNECTED;
 	}
 	else
-		slot0_id = IdentifyEmmiter(slot0_can_id);
+		slot0_id = IdentifyEmmiter(slot0_can_id, &LaserSet);
 	
 	if (!CANReadRegister(SLOT_ID_1, CAN_MESSAGE_TYPE_REGISTER_ID, (uint8_t*)&slot1_can_id, &len))
 	{
@@ -152,7 +169,7 @@ void LoadGlobalVariables(void)
 		slot1_id = LASER_ID_NOTCONNECTED;
 	}
 	else
-		slot1_id = IdentifyEmmiter(slot1_can_id);
+		slot1_id = IdentifyEmmiter(slot1_can_id, &LaserSet);
 	
 	CANDeviceReadCounter(SLOT_ID_0, slot0_can_id);
 	CANDeviceReadCounter(SLOT_ID_1, slot1_can_id);
@@ -163,6 +180,8 @@ void LoadGlobalVariables(void)
 		LoadCounterFromEEPROM(&FlushesGlobalSS2, EEPROM_SOLIDSTATE2_CNT_MEM_ADDRESS);	_FlushesGlobalSS2 = FlushesGlobalSS2;
 		LoadCounterFromEEPROM(&FlushesGlobalLP,  EEPROM_LONGPULSE_CNT_MEM_ADDRESS);		_FlushesGlobalLP  = FlushesGlobalLP;
 		LoadCounterFromEEPROM(&FlushesGlobalFL,  EEPROM_FRACTIONAL_CNT_MEM_ADDRESS);	_FlushesGlobalFL  = FlushesGlobalFL;
+		//LoadCounterFromEEPROM(&FlushesGlobalIPL,  EEPROM_IPL_CNT_MEM_ADDRESS);		_FlushesGlobalIPL  = FlushesGlobalIPL;
+		//LoadCounterFromEEPROM(&FlushesGlobal1340nm,  EEPROM_1340_CNT_MEM_ADDRESS);	_FlushesGlobal340nm  = FlushesGlobal1340nm;
 #else
 	if (!sdcard_ready)
 	{
@@ -172,6 +191,8 @@ void LoadGlobalVariables(void)
 		memcpy((void*)&FlushesGlobalSS2,(void*)&global_flash_data->SolidStatePulseCounter2, sizeof(uint32_t));
 		memcpy((void*)&FlushesGlobalLP, (void*)&global_flash_data->LongPulsePulseCounter, sizeof(uint32_t));
 		memcpy((void*)&FlushesGlobalFL, (void*)&global_flash_data->FractLaserPulseCounter, sizeof(uint32_t));
+		memcpy((void*)&FlushesGlobalIPL, (void*)&global_flash_data->IPLLaserPulseCounter, sizeof(uint32_t));
+		memcpy((void*)&FlushesGlobal1340nm, (void*)&global_flash_data->Laser1340nmPulseCounter, sizeof(uint32_t));
 		
 		// Copy profile states
 		//memcpy((void*)&m_structLaserProfile, (void*)&global_flash_data->m_structLaserProfile, sizeof(m_structLaserProfile));
@@ -222,11 +243,15 @@ void ClearGlobalVariables(void)
 	FlushesGlobalSS2 = 0;
 	FlushesGlobalLP  = 0;
 	FlushesGlobalFL  = 0;
+	FlushesGlobalIPL  = 0;
+	FlushesGlobal1340nm  = 0;
 	StoreCounterToEEPROM(&FlushesGlobalLD,  EEPROM_LASERDIODE_CNT_MEM_ADDRESS);		_FlushesGlobalLD  = FlushesGlobalLD;
 	StoreCounterToEEPROM(&FlushesGlobalSS,  EEPROM_SOLIDSTATE_CNT_MEM_ADDRESS);		_FlushesGlobalSS  = FlushesGlobalSS;
 	StoreCounterToEEPROM(&FlushesGlobalSS2, EEPROM_SOLIDSTATE2_CNT_MEM_ADDRESS);	_FlushesGlobalSS2 = FlushesGlobalSS2;
 	StoreCounterToEEPROM(&FlushesGlobalLP,  EEPROM_LONGPULSE_CNT_MEM_ADDRESS);		_FlushesGlobalLP  = FlushesGlobalLP;
 	StoreCounterToEEPROM(&FlushesGlobalFL,  EEPROM_FRACTIONAL_CNT_MEM_ADDRESS);		_FlushesGlobalFL  = FlushesGlobalFL;
+	//StoreCounterToEEPROM(&FlushesGlobalIPL,  EEPROM_IPL_CNT_MEM_ADDRESS);		_FlushesGlobalIPL  = FlushesGlobalIPL;
+	//StoreCounterToEEPROM(&FlushesGlobal1340nm,  EEPROM_1340_CNT_MEM_ADDRESS);		_FlushesGlobal1340nm  = FlushesGlobal1340nm;
 #else
 	FLASH_EraseInitTypeDef flash_erase = {0};
 	
@@ -253,13 +278,16 @@ void ClearGlobalVariables(void)
 	FlushesGlobalSS = 0;
 	FlushesGlobalSS2 = 0;
 	FlushesGlobalLP = 0;
+	FlushesGlobalIPL = 0;
+	FlushesGlobal1340nm = 0;
 	
 	// Copy presets
 	fmemcpy((void*)&global_flash_data->LaserDiodePulseCounter, (void*)&FlushesGlobalLD, sizeof(uint32_t));
 	fmemcpy((void*)&global_flash_data->SolidStatePulseCounter, (void*)&FlushesGlobalSS, sizeof(uint32_t));
 	fmemcpy((void*)&global_flash_data->SolidStatePulseCounter2, (void*)&FlushesGlobalSS2, sizeof(uint32_t));
 	fmemcpy((void*)&global_flash_data->LongPulsePulseCounter, (void*)&FlushesGlobalLP, sizeof(uint32_t));
-	fmemcpy((void*)&global_flash_data->FractLaserPulseCounter, (void*)&FlushesGlobalFL, sizeof(uint32_t));
+	fmemcpy((void*)&global_flash_data->IPLLaserPulseCounter, (void*)&FlushesGlobalIPL, sizeof(uint32_t));
+	fmemcpy((void*)&global_flash_data->Laser1340nmPulseCounter, (void*)&FlushesGlobal1340nm, sizeof(uint32_t));
 	
 	// Copy profile states
 	//fmemcpy((void*)&global_flash_data->m_structLaserProfile, (void*)&m_structLaserProfile, sizeof(m_structLaserProfile));
@@ -303,6 +331,7 @@ void StoreGlobalVariables(void)
 		fmemcpy((void*)&global_flash_data->SolidStatePulseCounter, (void*)&FlushesGlobalSS, sizeof(uint32_t));
 		fmemcpy((void*)&global_flash_data->SolidStatePulseCounter2, (void*)&FlushesGlobalSS2, sizeof(uint32_t));
 		fmemcpy((void*)&global_flash_data->LongPulsePulseCounter, (void*)&FlushesGlobalLP, sizeof(uint32_t));
+		fmemcpy((void*)&global_flash_data->FractLaserPulseCounter, (void*)&FlushesGlobalFL, sizeof(uint32_t));
 		fmemcpy((void*)&global_flash_data->FractLaserPulseCounter, (void*)&FlushesGlobalFL, sizeof(uint32_t));
 		
 		/*// Copy profile states
@@ -354,7 +383,23 @@ void CANDeviceWriteCounter(LASER_ID laser_id, uint8_t laser_can_id)
 				_FlushesGlobalLD  = FlushesGlobalLD;
 			}
 			break;
+		case LASER_ID_IPL:
+			if (_FlushesGlobalIPL  != FlushesGlobalIPL )
+			{
+				CANWriteRegister(laser_can_id, CAN_MESSAGE_TYPE_REGISTER_CNT, (uint8_t*)&FlushesGlobalIPL, len);
+				_FlushesGlobalIPL  = FlushesGlobalIPL;
+			}
+			break;
+		case LASER_ID_1340NM:
+			if (_FlushesGlobal1340nm  != FlushesGlobal1340nm )
+			{
+				CANWriteRegister(laser_can_id, CAN_MESSAGE_TYPE_REGISTER_CNT, (uint8_t*)&FlushesGlobal1340nm, len);
+				_FlushesGlobal1340nm  = FlushesGlobal1340nm;
+			}
+			break;
 		case LASER_ID_UNKNOWN:
+			break;
+		case LASER_ID_NOTCONNECTED:
 			break;
 	}
 }
@@ -371,6 +416,8 @@ void TryStoreGlobalVariables(void)
 		if (_FlushesGlobalSS2 != FlushesGlobalSS2) {StoreCounterToEEPROM(&FlushesGlobalSS2, EEPROM_SOLIDSTATE2_CNT_MEM_ADDRESS);	_FlushesGlobalSS2 = FlushesGlobalSS2;	}
 		if (_FlushesGlobalLP  != FlushesGlobalLP ) {StoreCounterToEEPROM(&FlushesGlobalLP,  EEPROM_LONGPULSE_CNT_MEM_ADDRESS);		_FlushesGlobalLP  = FlushesGlobalLP; }
 		if (_FlushesGlobalFL  != FlushesGlobalFL ) {StoreCounterToEEPROM(&FlushesGlobalFL,  EEPROM_FRACTIONAL_CNT_MEM_ADDRESS);		_FlushesGlobalFL  = FlushesGlobalFL; }
+		//if (_FlushesGlobalIPL  != FlushesGlobalIPL ) {StoreCounterToEEPROM(&FlushesGlobalIPL,  EEPROM_IPL_CNT_MEM_ADDRESS);		_FlushesGlobalIPL  = FlushesGlobalIPL; }
+		//if (_FlushesGlobal1340nm  != FlushesGlobal1340nm ) {StoreCounterToEEPROM(&FlushesGlobal1340nm,  EEPROM_1340_CNT_MEM_ADDRESS);		_FlushesGlobal1340nm  = FlushesGlobal1340nm; }
 #else
 	if (sdcard_ready)
 	{
@@ -380,6 +427,8 @@ void TryStoreGlobalVariables(void)
 		if (_FlushesGlobalSS2 != FlushesGlobalSS2) update = true;
 		if (_FlushesGlobalLP  != FlushesGlobalLP ) update = true;
 		if (_FlushesGlobalFL  != FlushesGlobalFL ) update = true;
+		if (_FlushesGlobalIPL != FlushesGlobalIPL) update = true;
+		if (_FlushesGlobal1340nm != FlushesGlobal1340nm) update = true;
 		
 		if (update)
 		{
@@ -408,9 +457,17 @@ void SolidStateLaserPulseReset(LASER_ID laser_id)
 		case LASER_ID_LONGPULSE:
 			FlushesSessionLP = 0;
 			break;
+		case LASER_ID_IPL:
+			FlushesSessionIPL = 0;
+			break;
+		case LASER_ID_1340NM:
+			FlushesSession1340nm = 0;
+			break;
 		case LASER_ID_DIODELASER:
 			break;
 		case LASER_ID_UNKNOWN:
+			break;
+		case LASER_ID_NOTCONNECTED:
 			break;
 	}		
 }
@@ -435,9 +492,19 @@ void SolidStateLaserPulseInc(LASER_ID laser_id)
 			FlushesSessionLP++;
 			FlushesGlobalLP++;
 			break;
+		case LASER_ID_IPL:
+			FlushesSessionIPL++;
+			FlushesGlobalIPL++;
+			break;
+		case LASER_ID_1340NM:
+			FlushesSession1340nm++;
+			FlushesGlobal1340nm++;
+			break;
 		case LASER_ID_DIODELASER:
 			break;
 		case LASER_ID_UNKNOWN:
+			break;
+		case LASER_ID_NOTCONNECTED:
 			break;
 	}		
 }
@@ -456,8 +523,14 @@ uint32_t GetSolidStateGlobalPulse(LASER_ID laser_id)
 			return FlushesGlobalLP;
 		case LASER_ID_DIODELASER:
 			return FlushesGlobalLD;
+		case LASER_ID_IPL:
+			return FlushesGlobalIPL;
+		case LASER_ID_1340NM:
+			return FlushesGlobal1340nm;
 		case LASER_ID_UNKNOWN:
-			return -1;
+			return 0xff;
+		case LASER_ID_NOTCONNECTED:
+			return 0xff;
 	}		
 	return 0;
 }
@@ -475,15 +548,22 @@ uint32_t GetSolidStateSessionPulse(LASER_ID laser_id)
 			return FlushesSessionLP;
 		case LASER_ID_DIODELASER:
 			return FlushesSessionLD;
+		case LASER_ID_IPL:
+			return FlushesSessionIPL;
+		case LASER_ID_1340NM:
+			return FlushesSession1340nm;
 		case LASER_ID_UNKNOWN:
-			return -1;
+			return 0xff;
+		case LASER_ID_NOTCONNECTED:
+			return 0xff;
 	}	
 	return 0;
 }
 
 LASER_ID GetLaserID()
 {
-	//return LASER_ID_FRACTLASER;
+	return LASER_ID_FRACTLASER;
+	/*
 	if (__MISC_LASER_ID0() == GPIO_PIN_SET)
 	{
 		if (__MISC_LASER_ID1() == GPIO_PIN_SET)
@@ -506,6 +586,7 @@ LASER_ID GetLaserID()
 			return LASER_ID_FRACTLASER;
 		}
 	}
+	*/
 }
 
 bool CheckEmmiter(LASER_ID laser_id)
@@ -523,7 +604,13 @@ bool CheckEmmiter(LASER_ID laser_id)
 			return ((LaserSet & LASER_ID_MASK_LONGPULSE)   != 0);
 		case LASER_ID_DIODELASER:
 			return ((LaserSet & LASER_ID_MASK_DIODELASER)  != 0);
+		case LASER_ID_IPL:
+			return ((LaserSet & LASER_ID_MASK_IPL)  != 0);
+		case LASER_ID_1340NM:
+			return ((LaserSet & LASER_ID_MASK_1340NM)  != 0);
 		case LASER_ID_UNKNOWN:
+			return false;
+		case LASER_ID_NOTCONNECTED:
 			return false;
 		//default:
 		//	return false;
@@ -535,20 +622,22 @@ bool CheckEmmiter(LASER_ID laser_id)
 #endif
 }
 
-LASER_ID IdentifyEmmiter(uint8_t id)
+LASER_ID IdentifyEmmiter(uint8_t id, uint32_t *laser_set)
 {
-	if (id == (uint8_t)LASER_CAN_ID_DIODELASER	) { LaserSet |= LASER_ID_MASK_DIODELASER;  return LASER_ID_DIODELASER;  };
-	if (id == (uint8_t)LASER_CAN_ID_SOLIDSTATE	) { LaserSet |= LASER_ID_MASK_SOLIDSTATE;  return LASER_ID_SOLIDSTATE;  };
-	if (id == (uint8_t)LASER_CAN_ID_SOLIDSTATE2 ) { LaserSet |= LASER_ID_MASK_SOLIDSTATE2; return LASER_ID_SOLIDSTATE2; };
-	if (id == (uint8_t)LASER_CAN_ID_LONGPULSE	  ) { LaserSet |= LASER_ID_MASK_LONGPULSE;   return LASER_ID_LONGPULSE;   };
-	if (id == (uint8_t)LASER_CAN_ID_FRACTIONAL	) { LaserSet |= LASER_ID_MASK_FRACTIONAL;  return LASER_ID_FRACTLASER;  };
+	if (id == (uint8_t)LASER_CAN_ID_DIODELASER	) { *laser_set |= LASER_ID_MASK_DIODELASER;  return LASER_ID_DIODELASER;  };
+	if (id == (uint8_t)LASER_CAN_ID_SOLIDSTATE	) { *laser_set |= LASER_ID_MASK_SOLIDSTATE;  return LASER_ID_SOLIDSTATE;  };
+	if (id == (uint8_t)LASER_CAN_ID_SOLIDSTATE2 ) { *laser_set |= LASER_ID_MASK_SOLIDSTATE2; return LASER_ID_SOLIDSTATE2; };
+	if (id == (uint8_t)LASER_CAN_ID_LONGPULSE	  ) { *laser_set |= LASER_ID_MASK_LONGPULSE;   return LASER_ID_LONGPULSE;   };
+	if (id == (uint8_t)LASER_CAN_ID_FRACTIONAL	) { *laser_set |= LASER_ID_MASK_FRACTIONAL;  return LASER_ID_FRACTLASER;  };
+	if (id == (uint8_t)LASER_CAN_ID_IPL					) { *laser_set |= LASER_ID_MASK_IPL;				 return LASER_ID_IPL;  				};
+	if (id == (uint8_t)LASER_CAN_ID_1340NM			) { *laser_set |= LASER_ID_MASK_1340NM;			 return LASER_ID_1340NM;  		};
 	return LASER_ID_UNKNOWN;
 }
 
 void CANDeviceReadCounter(uint8_t slot_id, uint8_t id)
 {
 	uint8_t len = 4;
-	switch (IdentifyEmmiter(id))
+	switch (IdentifyEmmiter(id, &LaserSet))
 	{
 		case LASER_ID_FRACTLASER:
 			CANReadRegister(slot_id, CAN_MESSAGE_TYPE_REGISTER_CNT, (uint8_t*)&FlushesGlobalFL, &len);
@@ -570,7 +659,17 @@ void CANDeviceReadCounter(uint8_t slot_id, uint8_t id)
 			CANReadRegister(slot_id, CAN_MESSAGE_TYPE_REGISTER_CNT, (uint8_t*)&FlushesGlobalLD, &len);
 			_FlushesGlobalLD = FlushesGlobalLD;
 			break;
+		case LASER_ID_IPL:
+			CANReadRegister(slot_id, CAN_MESSAGE_TYPE_REGISTER_CNT, (uint8_t*)&FlushesGlobalIPL, &len);
+			_FlushesGlobalIPL = FlushesGlobalIPL;
+			break;
+		case LASER_ID_1340NM:
+			CANReadRegister(slot_id, CAN_MESSAGE_TYPE_REGISTER_CNT, (uint8_t*)&FlushesGlobal1340nm, &len);
+			_FlushesGlobal1340nm = FlushesGlobal1340nm;
+			break;
 		case LASER_ID_UNKNOWN:
+			break;
+		case LASER_ID_NOTCONNECTED:
 			break;
 	}
 }

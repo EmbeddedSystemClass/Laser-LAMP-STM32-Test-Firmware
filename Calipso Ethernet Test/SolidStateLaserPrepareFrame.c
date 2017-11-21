@@ -54,3 +54,68 @@ void SolidStateLaserPrepare_Process(uint16_t pic_id)
 	if (pic_id != new_pic_id && update)
 		SetPicId(new_pic_id, g_wDGUSTimeout);
 }
+
+void _SolidStateLaserOff()
+{
+	// Solid State Laser Off
+	footswitch_en = false;
+	SolidStateLaser_en = false;
+	LampControlPulseStop();
+	osDelay(100);
+	__SOLIDSTATELASER_SIMMEROFF();
+	osDelay(100);
+	__SOLIDSTATELASER_HVOFF();
+	osDelay(100);
+	__SOLIDSTATELASER_DISCHARGEON();
+}
+
+void SolidStateErrorCheck_Process(uint16_t pic_id)
+{
+	// Check for errors of solid state laser
+	if ((pic_id >= FRAME_PICID_SOLIDSTATE_INPUT) && (pic_id <= FRAME_PICID_SOLIDSTATE_WORK))
+	{
+		if (CheckEmmiter(LASER_ID_SOLIDSTATE))
+			MenuID = MENU_ID_SOLIDSTATE;
+		
+		if (CheckEmmiter(LASER_ID_SOLIDSTATE2))
+			MenuID = MENU_ID_SOLIDSTATE2;
+		
+		// Check temperature
+		if (temperature > temperature_overheat_solidstate)
+		{
+			_SolidStateLaserOff();
+			SetPicId(FRAME_PICID_SOLIDSTATE_OVERHEATING, g_wDGUSTimeout);
+		}
+		
+#ifdef FLOW_CHECK
+		// Check flow
+		if (flow1 < flow_low)
+		{
+			_SolidStateLaserOff();
+			SetPicId(FRAME_PICID_SOLIDSTATE_FLOWERROR, g_wDGUSTimeout);
+		}
+#endif
+		
+		// Fault check
+		if (__MISC_GETCHARGEMODULEFAULTSTATE())
+		{
+			_SolidStateLaserOff();
+			SetPicId(FRAME_PICID_SOLIDSTATE_FAULT, g_wDGUSTimeout);
+		}
+	}
+}
+
+void SolidStateStopIfWork(uint16_t pic_id)
+{
+	if (((pic_id >= FRAME_PICID_SOLIDSTATE_INPUT) && (pic_id <= FRAME_PICID_SOLIDSTATE_FAULT)) || (pic_id == FRAME_PICID_SERVICE_SOLIDSTATELASER) || (pic_id == FRAME_PICID_REMOTECONTROL))
+	{
+		frameData_SolidStateLaser.buttons.onInputBtn = 0x00;
+		frameData_SolidStateLaser.buttons.onSimmerBtn = 0x00;
+		frameData_SolidStateLaser.buttons.onStartBtn = 0x00;
+		frameData_SolidStateLaser.buttons.onStopBtn = 0x00;
+		WriteSolidStateLaserDataConvert16(FRAMEDATA_SOLIDSTATELASER_BASE, &frameData_SolidStateLaser);
+		osSignalWait(DGUS_EVENT_SEND_COMPLETED, g_wDGUSTimeout);
+		
+		_SolidStateLaserOff();
+	}
+}

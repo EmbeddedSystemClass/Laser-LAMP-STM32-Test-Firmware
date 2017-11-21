@@ -31,11 +31,13 @@
 #define RTE_Compiler_IO_TTY             /* Compiler I/O: TTY */
           #define RTE_Compiler_IO_TTY_BKPT        /* Compiler I/O: TTY Breakpoint */
 #define RTE_DEVICE_FRAMEWORK_CLASSIC
+#define RTE_DEVICE_HAL_CAN
 #define RTE_DEVICE_HAL_COMMON
 #define RTE_DEVICE_HAL_CORTEX
 #define RTE_DEVICE_HAL_DMA
 #define RTE_DEVICE_HAL_FLASH
 #define RTE_DEVICE_HAL_GPIO
+#define RTE_DEVICE_HAL_I2C
 #define RTE_DEVICE_HAL_PWR
 #define RTE_DEVICE_HAL_RCC
 #define RTE_DEVICE_HAL_SPI
