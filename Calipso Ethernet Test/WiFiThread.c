@@ -261,7 +261,7 @@ void WiFiThread_PublishToServer()
 		
 		if (!authentification && authentification_start)
 		{
-			char* auth_request = "GET http://innolaser-service.ru/service-api/device_auth.php?login=laser3&password=host1234 HTTP/1.1\r\nHost: innolaser-service.ru\r\nConnection: keep-alive\r\nCache-Control: no-cache, no-store, max-age=0\r\n\r\n\r\n";
+			char* auth_request = "GET http://innolaser-service.ru/service-api/device_auth.php?login=kazan&password=host1234 HTTP/1.1\r\nHost: innolaser-service.ru\r\nConnection: keep-alive\r\nCache-Control: no-cache, no-store, max-age=0\r\n\r\n\r\n";
 			sock_id = socket_connect("innolaser-service.ru", 80);
 			
 			if (sock_id >= 0)
@@ -451,14 +451,14 @@ void CalipsoWiFiThread (void const *argument) {
 	WiFiConnectionEstabilished = false;
 	RemoteControl = false;
 	
-	// Restart WiFi Module
+	/*// Restart WiFi Module
 	//Set WiFi SSID
 	SendAT("AT+S.SSIDTXT=ASUS\r\n");
 	SendAT("AT+S.SCFG=wifi_wpa_psk_text,host1234\r\n");
 	SendAT("AT+S.SCFG=wifi_priv_mode,2\r\n");
 	SendAT("AT+S.SCFG=wifi_mode,1\r\n");
 	SendAT("AT+S.SCFG=ip_use_dhcp,1\r\n");
-	SendAT("AT&W\r\n");
+	SendAT("AT&W\r\n");*/
 	
 	HAL_GPIO_WritePin(GPIOG, GPIO_PIN_2, GPIO_PIN_SET);
 	//SendAT("AT&V\r\n");

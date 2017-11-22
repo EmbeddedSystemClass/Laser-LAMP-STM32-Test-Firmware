@@ -7,8 +7,8 @@
 .\objects\spi_stm32f4xx.o: C:\Keil_v5\ARM\PACK\ARM\CMSIS\5.0.0\CMSIS\Driver\Include\Driver_Common.h
 .\objects\spi_stm32f4xx.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stddef.h
 .\objects\spi_stm32f4xx.o: C:\Keil_v5\ARM\PACK\Keil\STM32F4xx_DFP\2.10.0\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal.h
-.\objects\spi_stm32f4xx.o: C:\Users\FxSlava\Documents\Laser-LAMP-STM32-Test-Firmware\Calipso Ethernet Test\RTE\Device\STM32F407ZGTx\stm32f4xx_hal_conf.h
-.\objects\spi_stm32f4xx.o: C:\Users\FxSlava\Documents\Laser-LAMP-STM32-Test-Firmware\Calipso Ethernet Test\RTE\RTE_Components.h
+.\objects\spi_stm32f4xx.o: C:\Users\PCB-Designer\Documents\Laser-LAMP-STM32-Test-Firmware\Calipso Ethernet Test\RTE\Device\STM32F407ZGTx\stm32f4xx_hal_conf.h
+.\objects\spi_stm32f4xx.o: C:\Users\PCB-Designer\Documents\Laser-LAMP-STM32-Test-Firmware\Calipso Ethernet Test\RTE\_EthernetTest\RTE_Components.h
 .\objects\spi_stm32f4xx.o: C:\Keil_v5\ARM\PACK\Keil\STM32F4xx_DFP\2.10.0\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_rcc.h
 .\objects\spi_stm32f4xx.o: C:\Keil_v5\ARM\PACK\Keil\STM32F4xx_DFP\2.10.0\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_def.h
 .\objects\spi_stm32f4xx.o: C:\Keil_v5\ARM\PACK\Keil\STM32F4xx_DFP\2.10.0\Drivers\CMSIS\Device\ST\STM32F4xx\Include\stm32f4xx.h
@@ -38,4 +38,4 @@
 .\objects\spi_stm32f4xx.o: C:\Keil_v5\ARM\PACK\Keil\STM32F4xx_DFP\2.10.0\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_tim_ex.h
 .\objects\spi_stm32f4xx.o: C:\Keil_v5\ARM\PACK\Keil\STM32F4xx_DFP\2.10.0\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_uart.h
 .\objects\spi_stm32f4xx.o: C:\Keil_v5\ARM\PACK\Keil\STM32F4xx_DFP\2.10.0\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_usart.h
-.\objects\spi_stm32f4xx.o: C:\Users\FxSlava\Documents\Laser-LAMP-STM32-Test-Firmware\Calipso Ethernet Test\RTE\Device\STM32F407ZGTx\RTE_Device.h
+.\objects\spi_stm32f4xx.o: C:\Users\PCB-Designer\Documents\Laser-LAMP-STM32-Test-Firmware\Calipso Ethernet Test\RTE\Device\STM32F407ZGTx\RTE_Device.h

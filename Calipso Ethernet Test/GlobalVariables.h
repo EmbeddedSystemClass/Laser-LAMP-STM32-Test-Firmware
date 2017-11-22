@@ -19,9 +19,9 @@
 //#define NEW_COOLSCHEME					// amplified PWM by two mossfet channels
 #define NEW_DOUBLECOOLSCHEME			// Added second PWM channel
 //#define OLD_STYLE_LASER_SW			// One connector combine configuration
-//#define LASERIDCHECK_LASERDIODE 	// Laser diode enable check
-//#define LASERIDCHECK_IPL				 	// IPL enable check
-#define MAINMENU_IPL				 			// IPL enable check
+#define LASERIDCHECK_LASERDIODE 	// Laser diode enable check
+#define LASERIDCHECK_IPL				 	// IPL enable check
+//#define MAINMENU_IPL				 			// IPL enable check
 //#define LDPREPARETIMER_ENABLE			// Enable prepare timer for Laser Diode
 //#define DEBUG_BRK								// Enable error breakpoints
 //#define FLOW_CHECK								// Enable flow check

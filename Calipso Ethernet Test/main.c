@@ -104,6 +104,84 @@ float32_t absf(float32_t x)
 
 bool eneable_temp_sensor = true;
 
+bool CheckSimmer()
+{
+	int16_t simmer_off_cnt = 0;
+	
+	uint32_t t = HAL_GetTick();
+	while ((HAL_GetTick() - t) < 500)
+	{
+		if ((__MISC_GETSIMMERSENSOR()))
+		{
+			simmer_off_cnt++;
+			if (simmer_off_cnt > 10) simmer_off_cnt = 10;
+		}
+		else
+		{
+			if (simmer_off_cnt != 0)
+				simmer_off_cnt--;
+		}
+		
+		HAL_Delay(10);
+	}
+		
+	return simmer_off_cnt > 5;
+}
+
+#include "SolidStateLaser.h"
+
+void TestSimmer()
+{
+	FILE* fp = fopen("test.txt", "w");
+	
+	fprintf(fp, "#\tcnt\n");
+	for(int i = 0; i < 40; i++)
+	{
+		uint16_t cnt = 0;
+		for(int j = 0; j < 10; j++)
+		{
+			__SOLIDSTATELASER_SIMMERON();
+			if (CheckSimmer()) 
+			{
+				cnt++;
+				SoundOn();
+				HAL_Delay(250);
+				SoundOff();
+			}
+			else
+				HAL_Delay(250);
+			
+			__SOLIDSTATELASER_SIMMEROFF();
+			
+			HAL_Delay(250);
+		}
+			
+		fprintf(fp, "%d\t%d\n", i, cnt);
+	}
+	
+	fclose(fp);
+}
+
+void TestEmmiterController()
+{
+	uint8_t len = 0;
+	uint32_t counter = 0;
+	uint32_t counter_cmp = 0;
+	for (counter = 0; counter < 1000; counter++)
+	{
+		CANWriteRegister(SLOT_ID_1, CAN_MESSAGE_TYPE_REGISTER_CNT, (uint8_t*)&counter, 4);
+		HAL_Delay(100);
+		CANReadRegister(SLOT_ID_1, CAN_MESSAGE_TYPE_REGISTER_CNT, (uint8_t*)&counter_cmp, &len);
+		
+		if (counter != counter_cmp)
+		{
+			SoundOn();
+			HAL_Delay(100);
+			SoundOff();
+		}
+	}
+}
+
 /**
   * @brief  Main program
   * @param  None
@@ -150,8 +228,16 @@ int main(void)
 	SpeakerInit();	
 	init_filesystem();
 	
+	/*FlushesGlobalLD = 32;
+	FlushesGlobalLP = 7;
+	FlushesGlobalFL = 0;
+	FlushesGlobalSS = 7;
+	FlushesGlobalSS2 = 0;
+	StoreGlobalVariables();*/
+	
 	// Load global variables from flash
 	//ClearGlobalVariables();
+	//TestEmmiterController();
 	LoadGlobalVariables();
 	
 	start_log(datetime);
@@ -182,6 +268,8 @@ int main(void)
 		float32_t t = tt * 0.0625f;
 		temperature = t;
 	}
+	
+	//TestSimmer();
 	
 	SoundOn();
 	HAL_Delay(500);

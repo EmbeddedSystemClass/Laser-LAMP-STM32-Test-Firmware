@@ -37,45 +37,29 @@ void IPLWork_Process(uint16_t pic_id)
 		// On Start Pressed
 		frameData_LaserDiode.buttons.onStartBtn = 0;
 		
-		__MISC_LASERLED_ON();
-		
+		SolidStateLaser_en = true;
 		new_pic_id = FRAME_PICID_IPL_WORK;
 		
 		update = true;
 	}
 	
-	if (frameData_LaserDiode.buttons.onStopBtn != 0)
-	{		
-		// On Input Pressed
-		frameData_LaserDiode.buttons.onStopBtn = 0;
-		
-		__MISC_LASERLED_OFF();
-		
-		SolidStateLaser_en = false;
-		LampControlPulseStop();
-		__SOLIDSTATELASER_HVOFF();
-		__SOLIDSTATELASER_SIMMEROFF();
-		SetDACValue(0.0f);
-		frameData_FractLaser.state = 0;
-		new_pic_id = FRAME_PICID_IPL_INPUT;
-		update = true;
-		StoreGlobalVariables();
-	}
-	
-	if (frameData_LaserDiode.buttons.onCancelBtn != 0)
+	if (frameData_LaserDiode.buttons.onCancelBtn != 0 || frameData_LaserDiode.buttons.onStopBtn != 0)
 	{
 		// On Input Pressed
 		frameData_LaserDiode.buttons.onCancelBtn = 0;
+		frameData_LaserDiode.buttons.onStopBtn = 0;
+		new_pic_id = FRAME_PICID_IPL_IGNITION;
+		update = true;
 		
 		SolidStateLaser_en = false;
 		LampControlPulseStop();
-		__SOLIDSTATELASER_HVOFF();
+		
 		__SOLIDSTATELASER_SIMMEROFF();
+		__SOLIDSTATELASER_HVOFF();
+		__SOLIDSTATELASER_DISCHARGEON();
 		SetDACValue(0.0f);
-		frameData_FractLaser.state = 0;
-		new_pic_id = FRAME_PICID_IPL_INPUT;
-		update = true;
-		StoreGlobalVariables();
+	
+		//StoreGlobalVariables();
 	}
 	
 	// Update IPL counter

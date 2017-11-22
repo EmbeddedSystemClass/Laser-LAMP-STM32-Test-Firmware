@@ -60,6 +60,9 @@ volatile float32_t flow2 = 9.0f;
 volatile float32_t VoltageMonitor = 0.0f;
 volatile float32_t CurrentMonitor = 0.0f;
 
+volatile UUID slot0_can_uid;
+volatile UUID slot1_can_uid;
+
 // Laser ID
 //LASER_ID LaserID = LASER_ID_SOLIDSTATE;
 MENU_ID MenuID = MENU_ID_SOLIDSTATE;

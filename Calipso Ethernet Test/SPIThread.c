@@ -143,6 +143,38 @@ void MainSPI_Thread (void const *argument) {
 		adc2_cs = false;
 		
 #ifdef CAN_SUPPORT
+		uint32_t laser_set = 0;
+		uint8_t len = 4;	
+		/*if (!CANReadRegister(SLOT_ID_0, CAN_MESSAGE_TYPE_REGISTER_ID, (uint8_t*)&slot0_can_id, &len))
+		{
+			slot0_can_id = -1;
+			slot0_id = LASER_ID_NOTCONNECTED;
+			memset((void*)&slot0_can_uid, 0, sizeof(slot0_can_uid));
+		}
+		else
+		{
+			CANReadRegister(SLOT_ID_0, CAN_MESSAGE_TYPE_REGISTER_UID1, (uint8_t*)&((uint32_t*)&slot0_can_uid)[0], &len);
+			CANReadRegister(SLOT_ID_0, CAN_MESSAGE_TYPE_REGISTER_UID2, (uint8_t*)&((uint32_t*)&slot0_can_uid)[1], &len);
+			CANReadRegister(SLOT_ID_0, CAN_MESSAGE_TYPE_REGISTER_UID3, (uint8_t*)&((uint32_t*)&slot0_can_uid)[2], &len);
+			slot0_id = IdentifyEmmiter(slot0_can_id, &laser_set);
+		}
+		
+		if (!CANReadRegister(SLOT_ID_1, CAN_MESSAGE_TYPE_REGISTER_ID, (uint8_t*)&slot1_can_id, &len))
+		{
+			slot1_can_id = -1;
+			slot1_id = LASER_ID_NOTCONNECTED;
+			memset((void*)&slot1_can_uid, 0, sizeof(slot0_can_uid));
+		}
+		else
+		{
+			CANReadRegister(SLOT_ID_1, CAN_MESSAGE_TYPE_REGISTER_UID1, (uint8_t*)&((uint32_t*)&slot1_can_uid)[0], &len);
+			CANReadRegister(SLOT_ID_1, CAN_MESSAGE_TYPE_REGISTER_UID2, (uint8_t*)&((uint32_t*)&slot1_can_uid)[1], &len);
+			CANReadRegister(SLOT_ID_1, CAN_MESSAGE_TYPE_REGISTER_UID3, (uint8_t*)&((uint32_t*)&slot1_can_uid)[2], &len);
+			slot1_id = IdentifyEmmiter(slot1_can_id, &laser_set);
+		}
+		LaserSet = laser_set;*/
+	
+	
 		len = 4;
 		if (slot0_can_id != -1)
 			CANReadRegister(SLOT_ID_0, CAN_MESSAGE_TYPE_REGISTER_TEMPERATURE, (uint8_t*)&temperature_slot0, &len);

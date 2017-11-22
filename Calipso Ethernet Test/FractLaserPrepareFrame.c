@@ -70,7 +70,7 @@ void FractLaserErrorCheck_Process(uint16_t pic_id)
 {
 	// Check for errors of fractional laser
 	if ((pic_id >= FRAME_PICID_FRACTLASER_INPUT) && (pic_id <= FRAME_PICID_FRACTLASER_WORK))
-	{		
+	{				
 		if (GetLaserID() == LASER_ID_FRACTLASER)
 			MenuID = MENU_ID_FRACTLASER;
 		

@@ -8,6 +8,7 @@
 
 // Calypso System Global Configuration and Variables
 #include "GlobalVariables.h"
+#include "IPL_Energy_Table.h"
 
 #include <math.h>
 #include "arm_math.h"
@@ -20,25 +21,25 @@
 
 // Duration num
 #define IPL_SINGLE_MIN_DURATION	0
-#define IPL_SINGLE_MAX_DURATION	9
+#define IPL_SINGLE_MAX_DURATION	IPL_DURATIONS_NUM-1
 #define IPL_SLOW_MIN_DURATION		0
-#define IPL_SLOW_MAX_DURATION		9
+#define IPL_SLOW_MAX_DURATION		IPL_DURATIONS_NUM-1
 #define IPL_DOUBLE_MIN_DURATION	0
-#define IPL_DOUBLE_MAX_DURATION	9
+#define IPL_DOUBLE_MAX_DURATION	IPL_DURATIONS_NUM-1
 
 // Energy num
 #define IPL_SINGLE_MIN_ENERGY		0
-#define IPL_SINGLE_MAX_ENERGY		9
+#define IPL_SINGLE_MAX_ENERGY		IPL_VOLTAGES_NUM-1
 #define IPL_SLOW_MIN_ENERGY			0
-#define IPL_SLOW_MAX_ENERGY			9
+#define IPL_SLOW_MAX_ENERGY			IPL_VOLTAGES_NUM-1
 #define IPL_DOUBLE_MIN_ENERGY		0
-#define IPL_DOUBLE_MAX_ENERGY		9
+#define IPL_DOUBLE_MAX_ENERGY		IPL_VOLTAGES_NUM-1
 
 static void _StopIPL(void);
 static void _PrepareIPL(void);
 static void _IgnitionIPL(void);
-static bool _IgnitionIPLState(void);
 
+extern bool IgnitionIPLState(void);
 extern void SetDACValue(float32_t value);
 
 DGUS_LASERPROFILE localIPLProfiles[3];
@@ -239,9 +240,19 @@ void IPLInput_Process(uint16_t pic_id)
 	update |= _IPL_duration_correct(frameData_LaserDiode.mode, &frameData_LaserDiode.laserprofile.DurationCnt);
 	update |= _IPL_energy_correct(frameData_LaserDiode.mode, &frameData_LaserDiode.laserprofile.EnergyCnt);
 	
+	// Calculate energy, voltage and duration
+	uint16_t duration_id = frameData_LaserDiode.laserprofile.DurationCnt;
+	uint16_t voltage_id  = frameData_LaserDiode.laserprofile.EnergyCnt;
+	uint16_t energy      = GetIPLEnergy(voltage_id, duration_id);
+	uint16_t duration    = global_IPL_Duration_Table[duration_id];
+	uint16_t voltage     = global_IPL_Voltage_Table [voltage_id];
+	SetDACValue(voltage / 45.0f); // 450 - 0 to 10 - 0 range conversion
+	SetPulseDuration_ms(duration/subFlushesCount, duration * 2);
+	SetPulseFrequency(frameData_LaserDiode.laserprofile.Frequency);
+	
 	// calculate duration and energy
-	frameData_LaserDiode.lasersettings.Duration = frameData_LaserDiode.laserprofile.DurationCnt;
-	frameData_LaserDiode.lasersettings.Energy = frameData_LaserDiode.laserprofile.EnergyCnt;
+	frameData_LaserDiode.lasersettings.Duration = duration;
+	frameData_LaserDiode.lasersettings.Energy = energy;
 	
 	// Publish data to server
 	frequency_publish = frameData_LaserDiode.laserprofile.Frequency;
@@ -258,18 +269,29 @@ void IPLInput_Process(uint16_t pic_id)
 		update = true;
 	}
 	
+	// if ignition coplete, jump to FRAME_PICID_IPL_INPUT
 	if (pic_id == FRAME_PICID_IPL_IGNITION_PROCESS)
 	{
-		if (_IgnitionIPLState())
+		if (IgnitionIPLState())
 		{
 			new_pic_id = FRAME_PICID_IPL_INPUT;
 			update = true;
 		}
 	}
 	
+	// if ignition lost, return to FRAME_PICID_IPL_IGNITION
+	if (pic_id == FRAME_PICID_IPL_INPUT)
+	{
+		if (!IgnitionIPLState())
+		{
+			new_pic_id = FRAME_PICID_IPL_IGNITION;
+			update = true;
+		}
+	}
+	
 	if (frameData_LaserDiode.buttons.onInputBtn != 0)
 	{					
-		// Reset Input Button
+		// On Input Pressed
 		_PrepareIPL();
 		
 		frameData_LaserDiode.buttons.onInputBtn = 0;
@@ -279,7 +301,7 @@ void IPLInput_Process(uint16_t pic_id)
 	
 	if (frameData_LaserDiode.buttons.onCancelBtn != 0)
 	{
-		// On Input Pressed
+		// On Cancel Pressed
 		_StopIPL();
 		
 		frameData_LaserDiode.buttons.onCancelBtn = 0;
@@ -333,9 +355,4 @@ void _IgnitionIPL(void)
 	__SOLIDSTATELASER_DISCHARGEON();
 	__SOLIDSTATELASER_HVOFF();
 	__SOLIDSTATELASER_SIMMERON();
-}
-
-bool _IgnitionIPLState(void)
-{
-	return true;
 }
