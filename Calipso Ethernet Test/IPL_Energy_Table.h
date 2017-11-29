@@ -3,8 +3,8 @@
 
 #include <stdint.h>
 
-#define IPL_VOLTAGES_NUM	7
-#define IPL_DURATIONS_NUM	20
+#define IPL_VOLTAGES_NUM	11
+#define IPL_DURATIONS_NUM	26
 
 extern uint16_t global_IPL_Duration_Table[IPL_DURATIONS_NUM];
 extern uint16_t global_IPL_Voltage_Table [IPL_VOLTAGES_NUM];

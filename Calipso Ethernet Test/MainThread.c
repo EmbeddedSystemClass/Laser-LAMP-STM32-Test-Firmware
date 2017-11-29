@@ -368,7 +368,8 @@ void MainThread (void const *argument) {
 					osSignalWait(DGUS_EVENT_SEND_COMPLETED, g_wDGUSTimeout);
 					ip_addr_updated = false;
 				}
-				if ((LaserSet & LASER_ID_MASK_FRACTIONAL) == 0)	SetPicId(FRAME_PICID_MAINMENU, g_wDGUSTimeout);
+				if (((LaserSet & LASER_ID_MASK_FRACTIONAL) == 0) && ((LaserSet & LASER_ID_MASK_1340NM) == 0) && ((LaserSet & LASER_ID_MASK_2940NM) == 0))
+					SetPicId(FRAME_PICID_MAINMENU, g_wDGUSTimeout);
 				StopIfRunning(last_pic_id);
 				break;
 			case FRAME_PICID_MAINMENU:
@@ -379,6 +380,8 @@ void MainThread (void const *argument) {
 				if (LaserSet & LASER_ID_MASK_SOLIDSTATE2)	SetPicId(FRAME_PICID_MAINMENU_QSW, g_wDGUSTimeout);
 				if (LaserSet & LASER_ID_MASK_LONGPULSE)		SetPicId(FRAME_PICID_MAINMENU_LONGPULSE, g_wDGUSTimeout);
 				if (LaserSet & LASER_ID_MASK_FRACTIONAL)	SetPicId(FRAME_PICID_MAINMENU_FRACTLASER, g_wDGUSTimeout);
+				if (LaserSet & LASER_ID_MASK_1340NM)			SetPicId(FRAME_PICID_MAINMENU_FRACTLASER, g_wDGUSTimeout);
+				if (LaserSet & LASER_ID_MASK_2940NM)			SetPicId(FRAME_PICID_MAINMENU_FRACTLASER, g_wDGUSTimeout);
 				if (LaserSet & LASER_ID_MASK_IPL)					SetPicId(FRAME_PICID_MAINMENU_IPL, g_wDGUSTimeout);
 #endif
 				if (ip_addr_updated)
@@ -452,7 +455,7 @@ void MainThread (void const *argument) {
 			case FRAME_PICID_FRACTLASER_INPUT:	
 				if (last_pic_id != pic_id && last_menu_id != MenuID)
 					FractLaserInput_Init(pic_id);
-				if (CheckEmmiter(LASER_ID_FRACTLASER))
+				if (CheckEmmiter(LASER_ID_FRACTLASER) || CheckEmmiter(LASER_ID_1340NM) || CheckEmmiter(LASER_ID_2940NM))
 					FractLaserInput_Process(pic_id);
 				else
 					SetPicId(FRAME_PICID_WRONG_EMMITER, g_wDGUSTimeout);

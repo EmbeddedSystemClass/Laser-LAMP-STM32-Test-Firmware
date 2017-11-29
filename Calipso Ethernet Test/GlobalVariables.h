@@ -53,6 +53,7 @@ extern int32_t LOGHASH[16];
 #define LASER_CAN_ID_FRACTIONAL		0x83
 #define LASER_CAN_ID_IPL					0x85
 #define LASER_CAN_ID_1340NM				0x86
+#define LASER_CAN_ID_2940NM				0x8a
 
 
 // Base emmiter types
@@ -63,6 +64,7 @@ extern int32_t LOGHASH[16];
 #define LASER_ID_MASK_FRACTIONAL	0x00000010
 #define LASER_ID_MASK_IPL					0x00000020
 #define LASER_ID_MASK_1340NM			0x00000040
+#define LASER_ID_MASK_2940NM			0x00000080
 
 
 typedef enum LASER_ID_ENUM {
@@ -73,6 +75,7 @@ typedef enum LASER_ID_ENUM {
 	LASER_ID_DIODELASER   = 0x04,
 	LASER_ID_IPL				  = 0x05,
 	LASER_ID_1340NM			  = 0x06,
+	LASER_ID_2940NM			  = 0x07,
 	LASER_ID_UNKNOWN      = 0xff,
 	LASER_ID_NOTCONNECTED = 0x77
 } LASER_ID;
@@ -85,7 +88,8 @@ typedef enum MENU_ID_ENUM {
 	MENU_ID_MENU  		   = 0x04,
 	MENU_ID_DIODELASER   = 0x05,
 	MENU_ID_IPL          = 0x06,
-	MENU_ID_1340NM       = 0x07
+	MENU_ID_1340NM       = 0x07,
+	MENU_ID_2940NM			 = 0x08
 } MENU_ID;
 
 //Date & time
@@ -222,6 +226,7 @@ typedef struct FLASH_GLOBAL_DATA_STRUCT
 	uint32_t FractLaserPulseCounter;
 	uint32_t IPLLaserPulseCounter;
 	uint32_t Laser1340nmPulseCounter;
+	uint32_t Laser2940nmPulseCounter;
 	
 	/*// GUI preset
 	DGUS_LASERPROFILE	m_structLaserProfile [5];

@@ -1,4 +1,4 @@
---cpu=Cortex-M4.fp
+--cpu Cortex-M4.fp
 ".\objects\main.o"
 ".\objects\stm32f4xx_it.o"
 ".\objects\stm32f4xx_hal_msp.o"
@@ -26,7 +26,6 @@
 ".\objects\iplinputframe.o"
 ".\objects\iplprepareframe.o"
 ".\objects\iplworkframe.o"
-".\objects\ipl_energy_table.o"
 ".\objects\mainthread.o"
 ".\objects\spithread.o"
 ".\objects\wifithread.o"
@@ -40,6 +39,8 @@
 ".\objects\canbus.o"
 ".\objects\i2cbus.o"
 ".\objects\soundlib.o"
+".\objects\ipl_energy_table.o"
+".\objects\erb_energy_table.o"
 "C:\Keil_v5\ARM\PACK\ARM\CMSIS\5.0.0\CMSIS\Lib\ARM\arm_cortexM4lf_math.lib"
 "C:\Keil_v5\ARM\PACK\ARM\CMSIS\5.0.0\CMSIS\RTOS\RTX\LIB\ARM\RTX_CM4.lib"
 ".\objects\rtx_conf_cm.o"
