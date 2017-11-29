@@ -259,6 +259,10 @@ void IPLInput_Process(uint16_t pic_id)
 	duration_publish = frameData_LaserDiode.lasersettings.Duration;
 	energy_publish = frameData_LaserDiode.lasersettings.Energy;
 	
+	// check single mode
+	if (mode == 0) Profile = PROFILE_SINGLE; // Set single mode
+	else 					 Profile = PROFILE_MEDIUM;
+	
 	// Process buttons
 	if (frameData_LaserDiode.buttons.onIgnitionBtn != 0)
 	{

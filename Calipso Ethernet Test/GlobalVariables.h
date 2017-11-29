@@ -22,9 +22,9 @@
 #define LASERIDCHECK_LASERDIODE 	// Laser diode enable check
 #define LASERIDCHECK_IPL				 	// IPL enable check
 //#define MAINMENU_IPL				 			// IPL enable check
-//#define LDPREPARETIMER_ENABLE			// Enable prepare timer for Laser Diode
+#define LDPREPARETIMER_ENABLE			// Enable prepare timer for Laser Diode
 //#define DEBUG_BRK								// Enable error breakpoints
-//#define FLOW_CHECK								// Enable flow check
+#define FLOW_CHECK								// Enable flow check
 #define CAN_SUPPORT								// CAN support enable
 //#define USE_EMBEDDED_EEPROM			// Calipso EEPROM
 

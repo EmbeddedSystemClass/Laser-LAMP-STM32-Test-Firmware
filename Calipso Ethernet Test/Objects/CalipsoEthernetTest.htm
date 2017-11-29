@@ -3,7 +3,7 @@
 <title>Static Call Graph - [.\Objects\CalipsoEthernetTest.axf]</title></head>
 <body><HR>
 <H1>Static Call Graph for image .\Objects\CalipsoEthernetTest.axf</H1><HR>
-<BR><P>#&#060CALLGRAPH&#062# ARM Linker, 5060422: Last Updated: Wed Nov 22 16:23:23 2017
+<BR><P>#&#060CALLGRAPH&#062# ARM Linker, 5060422: Last Updated: Tue Nov 28 11:36:23 2017
 <BR><P>
 <H3>Maximum Stack Usage =       1456 bytes + Unknown(Functions without stacksize, Cycles, Untraceable Function Pointers)</H3><H3>
 Call chain for Maximum Stack Depth:</H3>
@@ -1138,10 +1138,7 @@ Global Symbols
 </UL>
 
 <P><STRONG><a name="[179]"></a>__aeabi_memcpy</STRONG> (Thumb, 0 bytes, Stack size 0 bytes, rt_memcpy_v6.o(.text))
-<BR><BR>[Called By]<UL><LI><a href="#[304]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;fat_write
-<LI><a href="#[2fe]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;fat_read
-<LI><a href="#[374]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;mc_control_lock
-<LI><a href="#[268]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;LOG_I
+<BR><BR>[Called By]<UL><LI><a href="#[268]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;LOG_I
 <LI><a href="#[267]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;LOG_F
 <LI><a href="#[18c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;CANWriteRegister
 <LI><a href="#[18a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;CANReadRegister
@@ -1165,6 +1162,9 @@ Global Symbols
 <LI><a href="#[315]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;read_sector
 <LI><a href="#[338]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;read_cache
 <LI><a href="#[33e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;path_create
+<LI><a href="#[304]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;fat_write
+<LI><a href="#[2fe]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;fat_read
+<LI><a href="#[374]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;mc_control_lock
 <LI><a href="#[17a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;fwrite
 <LI><a href="#[177]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;fread
 </UL>
@@ -1203,20 +1203,20 @@ Global Symbols
 <P><STRONG><a name="[145]"></a>__aeabi_memset</STRONG> (Thumb, 16 bytes, Stack size 0 bytes, aeabi_memset.o(.text))
 <BR><BR>[Calls]<UL><LI><a href="#[146]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;_memset
 </UL>
-<BR>[Called By]<UL><LI><a href="#[32b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;fat_format
-<LI><a href="#[98]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;WiFiThread
+<BR>[Called By]<UL><LI><a href="#[98]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;WiFiThread
+<LI><a href="#[32b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;fat_format
 </UL>
 
 <P><STRONG><a name="[262]"></a>__aeabi_memclr</STRONG> (Thumb, 0 bytes, Stack size 0 bytes, rt_memclr.o(.text))
-<BR><BR>[Called By]<UL><LI><a href="#[301]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;fat_seek
-<LI><a href="#[32b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;fat_format
-<LI><a href="#[260]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Init_WiFi_Thread
+<BR><BR>[Called By]<UL><LI><a href="#[260]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Init_WiFi_Thread
 <LI><a href="#[93]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;WiFiTimer_Callback
 <LI><a href="#[32d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;mbr_write
 <LI><a href="#[32f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;label_write
 <LI><a href="#[32a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;fsinfo_write
 <LI><a href="#[319]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;clear_clus
 <LI><a href="#[316]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;bs_write
+<LI><a href="#[301]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;fat_seek
+<LI><a href="#[32b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;fat_format
 </UL>
 
 <P><STRONG><a name="[147]"></a>__rt_memclr</STRONG> (Thumb, 68 bytes, Stack size 0 bytes, rt_memclr.o(.text), UNUSED)
@@ -1230,10 +1230,7 @@ Global Symbols
 <P><STRONG><a name="[131]"></a>__aeabi_memclr4</STRONG> (Thumb, 0 bytes, Stack size 4 bytes, rt_memclr_w.o(.text))
 <BR><BR>[Stack]<UL><LI>Max Depth = 4<LI>Call Chain = __aeabi_memclr4
 </UL>
-<BR>[Called By]<UL><LI><a href="#[2f9]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;fat_handle_get
-<LI><a href="#[374]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;mc_control_lock
-<LI><a href="#[336]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;fat_mount
-<LI><a href="#[1d9]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;StoreGlobalVariables
+<BR>[Called By]<UL><LI><a href="#[1d9]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;StoreGlobalVariables
 <LI><a href="#[1c5]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;FlowInit
 <LI><a href="#[1a7]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;CoolInit
 <LI><a href="#[20e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_MspInit
@@ -1248,6 +1245,9 @@ Global Symbols
 <LI><a href="#[9d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Initialize
 <LI><a href="#[13b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;fopen
 <LI><a href="#[12d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;_fclose_internal
+<LI><a href="#[2f9]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;fat_handle_get
+<LI><a href="#[374]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;mc_control_lock
+<LI><a href="#[336]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;fat_mount
 <LI><a href="#[fc]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;_initio
 </UL>
 
@@ -2303,7 +2303,7 @@ Global Symbols
 <BR>[Called By]<UL><LI><a href="#[20e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_MspInit
 </UL>
 
-<P><STRONG><a name="[1c9]"></a>FractLaserErrorCheck_Process</STRONG> (Thumb, 86 bytes, Stack size 8 bytes, fractlaserprepareframe.o(i.FractLaserErrorCheck_Process))
+<P><STRONG><a name="[1c9]"></a>FractLaserErrorCheck_Process</STRONG> (Thumb, 120 bytes, Stack size 8 bytes, fractlaserprepareframe.o(i.FractLaserErrorCheck_Process))
 <BR><BR>[Stack]<UL><LI>Max Depth = 48<LI>Call Chain = FractLaserErrorCheck_Process &rArr; _FractLaserOff &rArr; LampControlPulseStop &rArr; SoundOff &rArr; HAL_TIMEx_OCN_Stop_DMA &rArr; TIM_CCxNChannelCmd
 </UL>
 <BR>[Calls]<UL><LI><a href="#[1a4]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_GPIO_ReadPin
@@ -3296,7 +3296,7 @@ Global Symbols
 </UL>
 <BR>[Address Reference Count : 1]<UL><LI> startup_stm32f407xx.o(RESET)
 </UL>
-<P><STRONG><a name="[247]"></a>IPLErrorCheck_Process</STRONG> (Thumb, 100 bytes, Stack size 16 bytes, iplprepareframe.o(i.IPLErrorCheck_Process))
+<P><STRONG><a name="[247]"></a>IPLErrorCheck_Process</STRONG> (Thumb, 136 bytes, Stack size 16 bytes, iplprepareframe.o(i.IPLErrorCheck_Process))
 <BR><BR>[Stack]<UL><LI>Max Depth = 56<LI>Call Chain = IPLErrorCheck_Process &rArr; SetPicId &rArr; WriteRegister
 </UL>
 <BR>[Calls]<UL><LI><a href="#[1a4]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_GPIO_ReadPin
@@ -3318,7 +3318,7 @@ Global Symbols
 <BR>[Called By]<UL><LI><a href="#[91]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;MainThread
 </UL>
 
-<P><STRONG><a name="[24c]"></a>IPLInput_Process</STRONG> (Thumb, 622 bytes, Stack size 48 bytes, iplinputframe.o(i.IPLInput_Process))
+<P><STRONG><a name="[24c]"></a>IPLInput_Process</STRONG> (Thumb, 638 bytes, Stack size 48 bytes, iplinputframe.o(i.IPLInput_Process))
 <BR><BR>[Stack]<UL><LI>Max Depth = 128<LI>Call Chain = IPLInput_Process &rArr; StoreGlobalVariables &rArr; HAL_FLASHEx_Erase &rArr; FLASH_WaitForLastOperation
 </UL>
 <BR>[Calls]<UL><LI><a href="#[1ad]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;osSignalWait
@@ -3621,8 +3621,8 @@ Global Symbols
 <BR>[Called By]<UL><LI><a href="#[212]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;LampControlInit
 </UL>
 
-<P><STRONG><a name="[26e]"></a>LaserDiodeErrorCheck_Process</STRONG> (Thumb, 70 bytes, Stack size 8 bytes, laserdiodeprepareframe.o(i.LaserDiodeErrorCheck_Process))
-<BR><BR>[Stack]<UL><LI>Max Depth = 48<LI>Call Chain = LaserDiodeErrorCheck_Process &rArr; _DiodeLaserOff &rArr; DiodeControlPulseStop &rArr; SoundOff &rArr; HAL_TIMEx_OCN_Stop_DMA &rArr; TIM_CCxNChannelCmd
+<P><STRONG><a name="[26e]"></a>LaserDiodeErrorCheck_Process</STRONG> (Thumb, 104 bytes, Stack size 16 bytes, laserdiodeprepareframe.o(i.LaserDiodeErrorCheck_Process))
+<BR><BR>[Stack]<UL><LI>Max Depth = 56<LI>Call Chain = LaserDiodeErrorCheck_Process &rArr; _DiodeLaserOff &rArr; DiodeControlPulseStop &rArr; SoundOff &rArr; HAL_TIMEx_OCN_Stop_DMA &rArr; TIM_CCxNChannelCmd
 </UL>
 <BR>[Calls]<UL><LI><a href="#[1c0]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;CoolOff
 <LI><a href="#[26f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;_DiodeLaserOff
@@ -3641,7 +3641,7 @@ Global Symbols
 <BR>[Called By]<UL><LI><a href="#[91]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;MainThread
 </UL>
 
-<P><STRONG><a name="[272]"></a>LaserDiodeInput_Process</STRONG> (Thumb, 964 bytes, Stack size 72 bytes, laserdiodeinputframe.o(i.LaserDiodeInput_Process))
+<P><STRONG><a name="[272]"></a>LaserDiodeInput_Process</STRONG> (Thumb, 962 bytes, Stack size 72 bytes, laserdiodeinputframe.o(i.LaserDiodeInput_Process))
 <BR><BR>[Stack]<UL><LI>Max Depth = 220<LI>Call Chain = LaserDiodeInput_Process &rArr; PhototypePreset &rArr; LaserPreset &rArr; CalculateAllSteps &rArr; NormalizeStep
 </UL>
 <BR>[Calls]<UL><LI><a href="#[1ad]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;osSignalWait
@@ -3763,7 +3763,7 @@ Global Symbols
 </UL>
 <BR>[Address Reference Count : 1]<UL><LI> sdcard.o(.constdata)
 </UL>
-<P><STRONG><a name="[285]"></a>LongPulseErrorCheck_Process</STRONG> (Thumb, 80 bytes, Stack size 8 bytes, longpulselaserprepareframe.o(i.LongPulseErrorCheck_Process))
+<P><STRONG><a name="[285]"></a>LongPulseErrorCheck_Process</STRONG> (Thumb, 114 bytes, Stack size 8 bytes, longpulselaserprepareframe.o(i.LongPulseErrorCheck_Process))
 <BR><BR>[Stack]<UL><LI>Max Depth = 48<LI>Call Chain = LongPulseErrorCheck_Process &rArr; _LongPulseLaserOff &rArr; LampControlPulseStop &rArr; SoundOff &rArr; HAL_TIMEx_OCN_Stop_DMA &rArr; TIM_CCxNChannelCmd
 </UL>
 <BR>[Calls]<UL><LI><a href="#[1a4]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_GPIO_ReadPin
@@ -4290,7 +4290,7 @@ Global Symbols
 <BR>[Called By]<UL><LI><a href="#[1e7]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;GetStringFromWiFi
 </UL>
 
-<P><STRONG><a name="[2bf]"></a>SolidStateErrorCheck_Process</STRONG> (Thumb, 100 bytes, Stack size 8 bytes, solidstatelaserprepareframe.o(i.SolidStateErrorCheck_Process))
+<P><STRONG><a name="[2bf]"></a>SolidStateErrorCheck_Process</STRONG> (Thumb, 134 bytes, Stack size 8 bytes, solidstatelaserprepareframe.o(i.SolidStateErrorCheck_Process))
 <BR><BR>[Stack]<UL><LI>Max Depth = 48<LI>Call Chain = SolidStateErrorCheck_Process &rArr; _SolidStateLaserOff &rArr; LampControlPulseStop &rArr; SoundOff &rArr; HAL_TIMEx_OCN_Stop_DMA &rArr; TIM_CCxNChannelCmd
 </UL>
 <BR>[Calls]<UL><LI><a href="#[296]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;CheckEmmiter
@@ -4614,7 +4614,7 @@ Global Symbols
 </UL>
 
 <P><STRONG><a name="[292]"></a>UpdateLaserState</STRONG> (Thumb, 164 bytes, Stack size 16 bytes, mainthread.o(i.UpdateLaserState))
-<BR><BR>[Stack]<UL><LI>Max Depth = 72<LI>Call Chain = UpdateLaserState &rArr; IPLErrorCheck_Process &rArr; SetPicId &rArr; WriteRegister
+<BR><BR>[Stack]<UL><LI>Max Depth = 72<LI>Call Chain = UpdateLaserState &rArr; LaserDiodeErrorCheck_Process &rArr; _DiodeLaserOff &rArr; DiodeControlPulseStop &rArr; SoundOff &rArr; HAL_TIMEx_OCN_Stop_DMA &rArr; TIM_CCxNChannelCmd
 </UL>
 <BR>[Calls]<UL><LI><a href="#[19a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_GPIO_WritePin
 <LI><a href="#[1ca]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;GetLaserID
@@ -5015,10 +5015,10 @@ Global Symbols
 <P><STRONG><a name="[2ef]"></a>__sys_close</STRONG> (Thumb, 102 bytes, Stack size 24 bytes, fs_sys.o(i.__sys_close))
 <BR><BR>[Stack]<UL><LI>Max Depth = 112<LI>Call Chain = __sys_close &rArr; fat_close &rArr; fsinfo_write &rArr; write_cache &rArr; write_sector
 </UL>
-<BR>[Calls]<UL><LI><a href="#[2f1]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;fat_close
-<LI><a href="#[2f3]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;fs_mutex_release
+<BR>[Calls]<UL><LI><a href="#[2f3]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;fs_mutex_release
 <LI><a href="#[2f0]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;fs_mutex_acquire
 <LI><a href="#[2f2]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;efs_close
+<LI><a href="#[2f1]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;fat_close
 </UL>
 <BR>[Called By]<UL><LI><a href="#[12f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;_sys_close
 </UL>
@@ -5026,10 +5026,10 @@ Global Symbols
 <P><STRONG><a name="[2f4]"></a>__sys_flen</STRONG> (Thumb, 92 bytes, Stack size 16 bytes, fs_sys.o(i.__sys_flen))
 <BR><BR>[Stack]<UL><LI>Max Depth = 24<LI>Call Chain = __sys_flen &rArr; fs_mutex_release
 </UL>
-<BR>[Calls]<UL><LI><a href="#[2f5]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;fat_flen
-<LI><a href="#[2f3]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;fs_mutex_release
+<BR>[Calls]<UL><LI><a href="#[2f3]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;fs_mutex_release
 <LI><a href="#[2f0]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;fs_mutex_acquire
 <LI><a href="#[2f6]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;efs_flen
+<LI><a href="#[2f5]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;fat_flen
 </UL>
 <BR>[Called By]<UL><LI><a href="#[129]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;_sys_flen
 </UL>
@@ -5037,13 +5037,13 @@ Global Symbols
 <P><STRONG><a name="[2f7]"></a>__sys_open</STRONG> (Thumb, 136 bytes, Stack size 32 bytes, fs_sys.o(i.__sys_open))
 <BR><BR>[Stack]<UL><LI>Max Depth = 392<LI>Call Chain = __sys_open &rArr; fat_open &rArr; path_create &rArr; frec_find &rArr; entry_pos_inc &rArr; alloc_table_read &rArr; cache_fat
 </UL>
-<BR>[Calls]<UL><LI><a href="#[2fa]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;fat_open
-<LI><a href="#[2f9]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;fat_handle_get
-<LI><a href="#[2f8]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;fs_drive_id
-<LI><a href="#[2f3]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;fs_mutex_release
+<BR>[Calls]<UL><LI><a href="#[2f3]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;fs_mutex_release
 <LI><a href="#[2f0]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;fs_mutex_acquire
 <LI><a href="#[2fc]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;efs_open
 <LI><a href="#[2fb]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;efs_handle_get
+<LI><a href="#[2fa]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;fat_open
+<LI><a href="#[2f9]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;fat_handle_get
+<LI><a href="#[2f8]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;fs_drive_id
 </UL>
 <BR>[Called By]<UL><LI><a href="#[139]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;_sys_open
 </UL>
@@ -5051,10 +5051,10 @@ Global Symbols
 <P><STRONG><a name="[2fd]"></a>__sys_read</STRONG> (Thumb, 126 bytes, Stack size 24 bytes, fs_sys.o(i.__sys_read))
 <BR><BR>[Stack]<UL><LI>Max Depth = 96<LI>Call Chain = __sys_read &rArr; fat_read &rArr; alloc_table_read &rArr; cache_fat
 </UL>
-<BR>[Calls]<UL><LI><a href="#[2fe]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;fat_read
-<LI><a href="#[2f3]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;fs_mutex_release
+<BR>[Calls]<UL><LI><a href="#[2f3]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;fs_mutex_release
 <LI><a href="#[2f0]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;fs_mutex_acquire
 <LI><a href="#[2ff]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;efs_read
+<LI><a href="#[2fe]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;fat_read
 </UL>
 <BR>[Called By]<UL><LI><a href="#[16e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;_sys_read
 </UL>
@@ -5062,10 +5062,10 @@ Global Symbols
 <P><STRONG><a name="[300]"></a>__sys_seek</STRONG> (Thumb, 102 bytes, Stack size 24 bytes, fs_sys.o(i.__sys_seek))
 <BR><BR>[Stack]<UL><LI>Max Depth = 144<LI>Call Chain = __sys_seek &rArr; fat_seek &rArr; alloc_clus &rArr; alloc_table_write &rArr; cache_fat
 </UL>
-<BR>[Calls]<UL><LI><a href="#[301]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;fat_seek
-<LI><a href="#[2f3]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;fs_mutex_release
+<BR>[Calls]<UL><LI><a href="#[2f3]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;fs_mutex_release
 <LI><a href="#[2f0]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;fs_mutex_acquire
 <LI><a href="#[302]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;efs_seek
+<LI><a href="#[301]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;fat_seek
 </UL>
 <BR>[Called By]<UL><LI><a href="#[15f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;_sys_seek
 </UL>
@@ -5073,10 +5073,10 @@ Global Symbols
 <P><STRONG><a name="[303]"></a>__sys_write</STRONG> (Thumb, 112 bytes, Stack size 24 bytes, fs_sys.o(i.__sys_write))
 <BR><BR>[Stack]<UL><LI>Max Depth = 152<LI>Call Chain = __sys_write &rArr; fat_write &rArr; alloc_clus &rArr; alloc_table_write &rArr; cache_fat
 </UL>
-<BR>[Calls]<UL><LI><a href="#[304]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;fat_write
-<LI><a href="#[2f3]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;fs_mutex_release
+<BR>[Calls]<UL><LI><a href="#[2f3]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;fs_mutex_release
 <LI><a href="#[2f0]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;fs_mutex_acquire
 <LI><a href="#[305]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;efs_write
+<LI><a href="#[304]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;fat_write
 </UL>
 <BR>[Called By]<UL><LI><a href="#[160]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;_sys_write
 </UL>
@@ -5092,8 +5092,8 @@ Global Symbols
 <P><STRONG><a name="[3b2]"></a>_init_box</STRONG> (Thumb, 70 bytes, Stack size 8 bytes, rt_membox.o(i._init_box))
 <BR><BR>[Stack]<UL><LI>Max Depth = 8<LI>Call Chain = _init_box
 </UL>
-<BR>[Called By]<UL><LI><a href="#[3b0]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;rt_sys_init
-<LI><a href="#[83]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;svcPoolCreate
+<BR>[Called By]<UL><LI><a href="#[83]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;svcPoolCreate
+<LI><a href="#[3b0]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;rt_sys_init
 </UL>
 
 <P><STRONG><a name="[121]"></a>_is_digit</STRONG> (Thumb, 14 bytes, Stack size 0 bytes, __printf_wp.o(i._is_digit))
@@ -5369,11 +5369,11 @@ Global Symbols
 </UL>
 
 <P><STRONG><a name="[332]"></a>elink_cmd</STRONG> (Thumb, 4 bytes, Stack size 0 bytes, fs_config.o(i.elink_cmd))
-<BR><BR>[Called By]<UL><LI><a href="#[336]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;fat_mount
-<LI><a href="#[32b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;fat_format
-<LI><a href="#[33e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;path_create
+<BR><BR>[Called By]<UL><LI><a href="#[33e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;path_create
 <LI><a href="#[34c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;frec_find
 <LI><a href="#[349]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;frec_allocate
+<LI><a href="#[336]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;fat_mount
+<LI><a href="#[32b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;fat_format
 </UL>
 
 <P><STRONG><a name="[395]"></a>elink_dir</STRONG> (Thumb, 4 bytes, Stack size 0 bytes, fs_config.o(i.elink_dir))
@@ -5469,8 +5469,7 @@ Global Symbols
 <P><STRONG><a name="[336]"></a>fat_mount</STRONG> (Thumb, 484 bytes, Stack size 32 bytes, fs_fat.o(i.fat_mount))
 <BR><BR>[Stack]<UL><LI>Max Depth = 80<LI>Call Chain = fat_mount &rArr; fsinfo_write &rArr; write_cache &rArr; write_sector
 </UL>
-<BR>[Calls]<UL><LI><a href="#[311]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;get_u32
-<LI><a href="#[331]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;fat_jour_init
+<BR>[Calls]<UL><LI><a href="#[331]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;fat_jour_init
 <LI><a href="#[332]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;elink_cmd
 <LI><a href="#[131]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_memclr4
 <LI><a href="#[329]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;fat_vol_chk
@@ -5481,6 +5480,7 @@ Global Symbols
 <LI><a href="#[337]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;fsinfo_read
 <LI><a href="#[314]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;bs_read
 <LI><a href="#[310]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;get_u16
+<LI><a href="#[311]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;get_u32
 </UL>
 <BR>[Called By]<UL><LI><a href="#[347]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;fmount
 </UL>
@@ -5488,8 +5488,7 @@ Global Symbols
 <P><STRONG><a name="[2fa]"></a>fat_open</STRONG> (Thumb, 448 bytes, Stack size 72 bytes, fs_fat.o(i.fat_open))
 <BR><BR>[Stack]<UL><LI>Max Depth = 360<LI>Call Chain = fat_open &rArr; path_create &rArr; frec_find &rArr; entry_pos_inc &rArr; alloc_table_read &rArr; cache_fat
 </UL>
-<BR>[Calls]<UL><LI><a href="#[311]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;get_u32
-<LI><a href="#[322]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;fs_get_time
+<BR>[Calls]<UL><LI><a href="#[322]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;fs_get_time
 <LI><a href="#[339]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;path_validate
 <LI><a href="#[329]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;fat_vol_chk
 <LI><a href="#[33d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;unlink_clus
@@ -5505,6 +5504,7 @@ Global Symbols
 <LI><a href="#[325]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;entry_flush
 <LI><a href="#[312]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;set_u16
 <LI><a href="#[310]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;get_u16
+<LI><a href="#[311]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;get_u32
 </UL>
 <BR>[Called By]<UL><LI><a href="#[2f7]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__sys_open
 </UL>
@@ -5541,10 +5541,10 @@ Global Symbols
 <P><STRONG><a name="[340]"></a>fat_vol</STRONG> (Thumb, 82 bytes, Stack size 16 bytes, fs_fat.o(i.fat_vol))
 <BR><BR>[Stack]<UL><LI>Max Depth = 112<LI>Call Chain = fat_vol &rArr; label_read &rArr; entry_pos_inc &rArr; alloc_table_read &rArr; cache_fat
 </UL>
-<BR>[Calls]<UL><LI><a href="#[311]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;get_u32
-<LI><a href="#[329]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;fat_vol_chk
+<BR>[Calls]<UL><LI><a href="#[329]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;fat_vol_chk
 <LI><a href="#[315]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;read_sector
 <LI><a href="#[341]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;label_read
+<LI><a href="#[311]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;get_u32
 </UL>
 <BR>[Called By]<UL><LI><a href="#[31e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;fvol
 </UL>
@@ -5581,11 +5581,11 @@ Global Symbols
 <BR><BR>[Stack]<UL><LI>Max Depth = 136 + Unknown Stack Size
 <LI>Call Chain = fformat &rArr; fat_format &rArr; label_write &rArr; write_cache &rArr; write_sector
 </UL>
-<BR>[Calls]<UL><LI><a href="#[2f8]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;fs_drive_id
-<LI><a href="#[32b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;fat_format
-<LI><a href="#[2f3]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;fs_mutex_release
+<BR>[Calls]<UL><LI><a href="#[2f3]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;fs_mutex_release
 <LI><a href="#[2f0]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;fs_mutex_acquire
 <LI><a href="#[342]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;efs_format
+<LI><a href="#[2f8]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;fs_drive_id
+<LI><a href="#[32b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;fat_format
 </UL>
 <BR>[Called By]<UL><LI><a href="#[31c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;cmd_format
 </UL>
@@ -5602,14 +5602,14 @@ Global Symbols
 <P><STRONG><a name="[343]"></a>finit</STRONG> (Thumb, 108 bytes, Stack size 16 bytes, fs_mapi.o(i.finit))
 <BR><BR>[Stack]<UL><LI>Max Depth = 40<LI>Call Chain = finit &rArr; fs_component_init
 </UL>
-<BR>[Calls]<UL><LI><a href="#[311]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;get_u32
-<LI><a href="#[2f8]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;fs_drive_id
-<LI><a href="#[334]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;fat_init
-<LI><a href="#[344]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;fs_component_init
-<LI><a href="#[2f3]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;fs_mutex_release
+<BR>[Calls]<UL><LI><a href="#[2f3]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;fs_mutex_release
 <LI><a href="#[2f0]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;fs_mutex_acquire
 <LI><a href="#[345]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;fs_config
 <LI><a href="#[346]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;efs_init
+<LI><a href="#[311]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;get_u32
+<LI><a href="#[2f8]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;fs_drive_id
+<LI><a href="#[334]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;fat_init
+<LI><a href="#[344]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;fs_component_init
 </UL>
 <BR>[Called By]<UL><LI><a href="#[35e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;init_filesystem
 </UL>
@@ -5625,11 +5625,11 @@ Global Symbols
 <P><STRONG><a name="[347]"></a>fmount</STRONG> (Thumb, 78 bytes, Stack size 16 bytes, fs_mapi.o(i.fmount))
 <BR><BR>[Stack]<UL><LI>Max Depth = 96<LI>Call Chain = fmount &rArr; fat_mount &rArr; fsinfo_write &rArr; write_cache &rArr; write_sector
 </UL>
-<BR>[Calls]<UL><LI><a href="#[2f8]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;fs_drive_id
-<LI><a href="#[336]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;fat_mount
-<LI><a href="#[2f3]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;fs_mutex_release
+<BR>[Calls]<UL><LI><a href="#[2f3]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;fs_mutex_release
 <LI><a href="#[2f0]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;fs_mutex_acquire
 <LI><a href="#[348]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;efs_mount
+<LI><a href="#[2f8]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;fs_drive_id
+<LI><a href="#[336]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;fat_mount
 </UL>
 <BR>[Called By]<UL><LI><a href="#[35e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;init_filesystem
 </UL>
@@ -5644,8 +5644,8 @@ Global Symbols
 <P><STRONG><a name="[344]"></a>fs_component_init</STRONG> (Thumb, 130 bytes, Stack size 24 bytes, fs_mapi.o(i.fs_component_init))
 <BR><BR>[Stack]<UL><LI>Max Depth = 24<LI>Call Chain = fs_component_init
 </UL>
-<BR>[Calls]<UL><LI><a href="#[356]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;fs_set_cdrive
-<LI><a href="#[355]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;fs_get_rtos_tick_freq
+<BR>[Calls]<UL><LI><a href="#[355]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;fs_get_rtos_tick_freq
+<LI><a href="#[356]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;fs_set_cdrive
 </UL>
 <BR>[Called By]<UL><LI><a href="#[343]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;finit
 </UL>
@@ -5689,11 +5689,11 @@ Global Symbols
 </UL>
 
 <P><STRONG><a name="[322]"></a>fs_get_time</STRONG> (Thumb, 26 bytes, Stack size 0 bytes, fs_time.o(i.fs_get_time))
-<BR><BR>[Called By]<UL><LI><a href="#[2fa]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;fat_open
-<LI><a href="#[2f1]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;fat_close
-<LI><a href="#[32f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;label_write
+<BR><BR>[Called By]<UL><LI><a href="#[32f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;label_write
 <LI><a href="#[328]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;create_sfn_entry
 <LI><a href="#[320]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;create_dot_entries
+<LI><a href="#[2fa]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;fat_open
+<LI><a href="#[2f1]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;fat_close
 </UL>
 
 <P><STRONG><a name="[388]"></a>fs_mc_lock_unlock</STRONG> (Thumb, 4 bytes, Stack size 0 bytes, fs_mc_mci.o(i.fs_mc_lock_unlock))
@@ -5751,11 +5751,11 @@ Global Symbols
 </UL>
 <BR>[Calls]<UL><LI><a href="#[1bf]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;osDelay
 </UL>
-<BR>[Called By]<UL><LI><a href="#[382]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;mci_card_power
+<BR>[Called By]<UL><LI><a href="#[36f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;mc_mci_Init
+<LI><a href="#[382]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;mci_card_power
 <LI><a href="#[38b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;mc_select_bus_width
 <LI><a href="#[384]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;mc_native_init
 <LI><a href="#[378]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;mc_control_sleep
-<LI><a href="#[36f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;mc_mci_Init
 </UL>
 
 <P><STRONG><a name="[318]"></a>fsj_write</STRONG> (Thumb, 4 bytes, Stack size 0 bytes, fs_config.o(i.fsj_write))
@@ -5766,32 +5766,32 @@ Global Symbols
 <P><STRONG><a name="[31e]"></a>fvol</STRONG> (Thumb, 78 bytes, Stack size 24 bytes, fs_mapi.o(i.fvol))
 <BR><BR>[Stack]<UL><LI>Max Depth = 136<LI>Call Chain = fvol &rArr; fat_vol &rArr; label_read &rArr; entry_pos_inc &rArr; alloc_table_read &rArr; cache_fat
 </UL>
-<BR>[Calls]<UL><LI><a href="#[2f8]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;fs_drive_id
-<LI><a href="#[340]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;fat_vol
-<LI><a href="#[2f3]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;fs_mutex_release
+<BR>[Calls]<UL><LI><a href="#[2f3]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;fs_mutex_release
 <LI><a href="#[2f0]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;fs_mutex_acquire
+<LI><a href="#[2f8]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;fs_drive_id
+<LI><a href="#[340]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;fat_vol
 </UL>
 <BR>[Called By]<UL><LI><a href="#[31c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;cmd_format
 </UL>
 
 <P><STRONG><a name="[310]"></a>get_u16</STRONG> (Thumb, 10 bytes, Stack size 0 bytes, fs_common.o(i.get_u16))
-<BR><BR>[Called By]<UL><LI><a href="#[2fa]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;fat_open
-<LI><a href="#[2f1]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;fat_close
-<LI><a href="#[336]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;fat_mount
-<LI><a href="#[33b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;path_open
+<BR><BR>[Called By]<UL><LI><a href="#[33b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;path_open
 <LI><a href="#[314]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;bs_read
 <LI><a href="#[30d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;alloc_table_write
 <LI><a href="#[30b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;alloc_table_read
+<LI><a href="#[2fa]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;fat_open
+<LI><a href="#[2f1]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;fat_close
+<LI><a href="#[336]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;fat_mount
 </UL>
 
 <P><STRONG><a name="[311]"></a>get_u32</STRONG> (Thumb, 22 bytes, Stack size 0 bytes, fs_common.o(i.get_u32))
-<BR><BR>[Called By]<UL><LI><a href="#[2fa]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;fat_open
-<LI><a href="#[340]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;fat_vol
-<LI><a href="#[336]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;fat_mount
-<LI><a href="#[343]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;finit
+<BR><BR>[Called By]<UL><LI><a href="#[343]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;finit
 <LI><a href="#[337]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;fsinfo_read
 <LI><a href="#[314]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;bs_read
 <LI><a href="#[30b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;alloc_table_read
+<LI><a href="#[2fa]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;fat_open
+<LI><a href="#[340]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;fat_vol
+<LI><a href="#[336]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;fat_mount
 </UL>
 
 <P><STRONG><a name="[35e]"></a>init_filesystem</STRONG> (Thumb, 74 bytes, Stack size 16 bytes, sdcard.o(i.init_filesystem))
@@ -5820,15 +5820,15 @@ Global Symbols
 <BR>[Calls]<UL><LI><a href="#[362]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;rt_mbx_check
 <LI><a href="#[363]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;isr_mbx_send
 </UL>
-<BR>[Called By]<UL><LI><a href="#[3b6]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;sysTimerTick
-<LI><a href="#[2a3]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;osMessagePut
+<BR>[Called By]<UL><LI><a href="#[2a3]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;osMessagePut
+<LI><a href="#[3b6]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;sysTimerTick
 </UL>
 
 <P><STRONG><a name="[364]"></a>isrSignalSet</STRONG> (Thumb, 36 bytes, Stack size 16 bytes, rt_cmsis.o(i.isrSignalSet))
 <BR><BR>[Stack]<UL><LI>Max Depth = 100<LI>Call Chain = isrSignalSet &rArr; isr_evt_set &rArr; rt_psq_enq &rArr; os_error &rArr; SoundOn &rArr; HAL_TIMEx_OCN_Start_DMA &rArr; HAL_DMA_Start_IT &rArr; DMA_SetConfig
 </UL>
-<BR>[Calls]<UL><LI><a href="#[366]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;isr_evt_set
-<LI><a href="#[365]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;rt_tid2ptcb
+<BR>[Calls]<UL><LI><a href="#[365]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;rt_tid2ptcb
+<LI><a href="#[366]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;isr_evt_set
 </UL>
 <BR>[Called By]<UL><LI><a href="#[19d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;osSignalSet
 </UL>
@@ -6057,7 +6057,8 @@ Global Symbols
 <P><STRONG><a name="[36e]"></a>mc_mci_DevCtrl</STRONG> (Thumb, 390 bytes, Stack size 40 bytes, fs_mc_mci.o(i.mc_mci_DevCtrl))
 <BR><BR>[Stack]<UL><LI>Max Depth = 256<LI>Call Chain = mc_mci_DevCtrl &rArr; mc_mci_Init &rArr; mc_native_init &rArr; mc_control_lock &rArr; mc_set_block_len &rArr; mc_wfe
 </UL>
-<BR>[Calls]<UL><LI><a href="#[376]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;mc_wfe
+<BR>[Calls]<UL><LI><a href="#[36f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;mc_mci_Init
+<LI><a href="#[376]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;mc_wfe
 <LI><a href="#[375]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;mc_set_block_len
 <LI><a href="#[37d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;mc_select_tran_state
 <LI><a href="#[37b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;mc_select_deselect
@@ -6065,7 +6066,6 @@ Global Symbols
 <LI><a href="#[378]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;mc_control_sleep
 <LI><a href="#[374]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;mc_control_lock
 <LI><a href="#[37c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;fill_cid
-<LI><a href="#[36f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;mc_mci_Init
 </UL>
 <BR>[Called By]<UL><LI><a href="#[d7]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;mc0_DevCtrl
 </UL>
@@ -6079,14 +6079,14 @@ Global Symbols
 <P><STRONG><a name="[36f]"></a>mc_mci_Init</STRONG> (Thumb, 220 bytes, Stack size 16 bytes, fs_mc_mci.o(i.mc_mci_Init))
 <BR><BR>[Stack]<UL><LI>Max Depth = 216<LI>Call Chain = mc_mci_Init &rArr; mc_native_init &rArr; mc_control_lock &rArr; mc_set_block_len &rArr; mc_wfe
 </UL>
-<BR>[Calls]<UL><LI><a href="#[383]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;mci_idle_clock
+<BR>[Calls]<UL><LI><a href="#[35d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;fs_set_rtos_delay
+<LI><a href="#[383]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;mci_idle_clock
 <LI><a href="#[380]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;mci_data_timeout
 <LI><a href="#[382]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;mci_card_power
 <LI><a href="#[37e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;mci_bus_width
 <LI><a href="#[37f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;mci_bus_speed_mode
 <LI><a href="#[381]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;mci_bus_speed
 <LI><a href="#[384]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;mc_native_init
-<LI><a href="#[35d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;fs_set_rtos_delay
 </UL>
 <BR>[Called By]<UL><LI><a href="#[36e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;mc_mci_DevCtrl
 <LI><a href="#[d2]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;mc0_Init
@@ -6133,7 +6133,10 @@ Global Symbols
 <BR>[Calls]<UL><LI><a href="#[38a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;fs_get_sys_tick_us
 <LI><a href="#[358]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;fs_get_sys_tick
 </UL>
-<BR>[Called By]<UL><LI><a href="#[38c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;mc_switch_func
+<BR>[Called By]<UL><LI><a href="#[373]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;mc_mci_WriteSector
+<LI><a href="#[371]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;mc_mci_ReadSector
+<LI><a href="#[36e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;mc_mci_DevCtrl
+<LI><a href="#[38c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;mc_switch_func
 <LI><a href="#[389]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;mc_switch
 <LI><a href="#[385]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;mc_stop_transmission
 <LI><a href="#[379]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;mc_sleep_awake
@@ -6144,9 +6147,6 @@ Global Symbols
 <LI><a href="#[384]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;mc_native_init
 <LI><a href="#[37a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;mc_enable_acmd
 <LI><a href="#[374]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;mc_control_lock
-<LI><a href="#[373]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;mc_mci_WriteSector
-<LI><a href="#[371]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;mc_mci_ReadSector
-<LI><a href="#[36e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;mc_mci_DevCtrl
 </UL>
 
 <P><STRONG><a name="[197]"></a>min</STRONG> (Thumb, 8 bytes, Stack size 0 bytes, globalvariables.o(i.min))
@@ -6251,8 +6251,8 @@ Global Symbols
 <P><STRONG><a name="[261]"></a>osPoolCAlloc</STRONG> (Thumb, 48 bytes, Stack size 16 bytes, rt_cmsis.o(i.osPoolCAlloc))
 <BR><BR>[Stack]<UL><LI>Max Depth = 16<LI>Call Chain = osPoolCAlloc
 </UL>
-<BR>[Calls]<UL><LI><a href="#[82]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;sysPoolAlloc
-<LI><a href="#[390]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;rt_clr_box
+<BR>[Calls]<UL><LI><a href="#[390]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;rt_clr_box
+<LI><a href="#[82]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;sysPoolAlloc
 </UL>
 <BR>[Called By]<UL><LI><a href="#[260]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Init_WiFi_Thread
 </UL>
@@ -6483,11 +6483,11 @@ Global Symbols
 <LI><a href="#[399]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;rt_switch_req
 <LI><a href="#[398]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;rt_get_first
 </UL>
-<BR>[Called By]<UL><LI><a href="#[3aa]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;rt_mbx_wait
+<BR>[Called By]<UL><LI><a href="#[75]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;rt_mut_wait
+<LI><a href="#[3aa]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;rt_mbx_wait
 <LI><a href="#[3a9]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;rt_mbx_send
 <LI><a href="#[3a4]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;rt_evt_wait
 <LI><a href="#[39f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;rt_dly_wait
-<LI><a href="#[75]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;rt_mut_wait
 </UL>
 
 <P><STRONG><a name="[39a]"></a>rt_chk_robin</STRONG> (Thumb, 60 bytes, Stack size 8 bytes, rt_robin.o(i.rt_chk_robin))
@@ -6515,13 +6515,13 @@ Global Symbols
 <LI><a href="#[39b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;rt_put_prio
 <LI><a href="#[398]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;rt_get_first
 </UL>
-<BR>[Called By]<UL><LI><a href="#[3bd]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;rt_tsk_prio
+<BR>[Called By]<UL><LI><a href="#[76]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;rt_mut_release
+<LI><a href="#[3bd]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;rt_tsk_prio
 <LI><a href="#[3b9]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;rt_tsk_delete
 <LI><a href="#[3b7]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;rt_tsk_create
 <LI><a href="#[3aa]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;rt_mbx_wait
 <LI><a href="#[3a9]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;rt_mbx_send
 <LI><a href="#[3a3]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;rt_evt_set
-<LI><a href="#[76]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;rt_mut_release
 </UL>
 
 <P><STRONG><a name="[39f]"></a>rt_dly_wait</STRONG> (Thumb, 6 bytes, Stack size 0 bytes, rt_time.o(i.rt_dly_wait))
@@ -6576,7 +6576,8 @@ Global Symbols
 </UL>
 
 <P><STRONG><a name="[398]"></a>rt_get_first</STRONG> (Thumb, 40 bytes, Stack size 0 bytes, rt_list.o(i.rt_get_first))
-<BR><BR>[Called By]<UL><LI><a href="#[3ac]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;rt_sem_psh
+<BR><BR>[Called By]<UL><LI><a href="#[76]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;rt_mut_release
+<LI><a href="#[3ac]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;rt_sem_psh
 <LI><a href="#[3a7]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;rt_mbx_psh
 <LI><a href="#[39a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;rt_chk_robin
 <LI><a href="#[110]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;rt_systick
@@ -6587,7 +6588,6 @@ Global Symbols
 <LI><a href="#[3a9]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;rt_mbx_send
 <LI><a href="#[39d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;rt_dispatch
 <LI><a href="#[396]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;rt_block
-<LI><a href="#[76]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;rt_mut_release
 </UL>
 
 <P><STRONG><a name="[3bc]"></a>rt_get_same_rdy_prio</STRONG> (Thumb, 26 bytes, Stack size 0 bytes, rt_list.o(i.rt_get_same_rdy_prio))
@@ -6619,13 +6619,13 @@ Global Symbols
 <P><STRONG><a name="[3a7]"></a>rt_mbx_psh</STRONG> (Thumb, 236 bytes, Stack size 24 bytes, rt_mailbox.o(i.rt_mbx_psh))
 <BR><BR>[Stack]<UL><LI>Max Depth = 84<LI>Call Chain = rt_mbx_psh &rArr; os_error &rArr; SoundOn &rArr; HAL_TIMEx_OCN_Start_DMA &rArr; HAL_DMA_Start_IT &rArr; DMA_SetConfig
 </UL>
-<BR>[Calls]<UL><LI><a href="#[3a2]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;rt_ret_val2
+<BR>[Calls]<UL><LI><a href="#[392]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;os_error
+<LI><a href="#[3a2]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;rt_ret_val2
 <LI><a href="#[3a1]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;rt_rmv_dly
 <LI><a href="#[3a8]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;rt_ret_val
 <LI><a href="#[39b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;rt_put_prio
 <LI><a href="#[398]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;rt_get_first
 <LI><a href="#[64]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;rt_alloc_box
-<LI><a href="#[392]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;os_error
 </UL>
 <BR>[Called By]<UL><LI><a href="#[10f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;rt_pop_req
 </UL>
@@ -6723,7 +6723,9 @@ Global Symbols
 <P><STRONG><a name="[39b]"></a>rt_put_prio</STRONG> (Thumb, 54 bytes, Stack size 12 bytes, rt_list.o(i.rt_put_prio))
 <BR><BR>[Stack]<UL><LI>Max Depth = 12<LI>Call Chain = rt_put_prio
 </UL>
-<BR>[Called By]<UL><LI><a href="#[3ac]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;rt_sem_psh
+<BR>[Called By]<UL><LI><a href="#[75]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;rt_mut_wait
+<LI><a href="#[76]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;rt_mut_release
+<LI><a href="#[3ac]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;rt_sem_psh
 <LI><a href="#[3a7]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;rt_mbx_psh
 <LI><a href="#[3a0]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;rt_evt_psh
 <LI><a href="#[39c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;rt_dec_dly
@@ -6735,8 +6737,6 @@ Global Symbols
 <LI><a href="#[3aa]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;rt_mbx_wait
 <LI><a href="#[3a9]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;rt_mbx_send
 <LI><a href="#[39d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;rt_dispatch
-<LI><a href="#[75]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;rt_mut_wait
-<LI><a href="#[76]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;rt_mut_release
 </UL>
 
 <P><STRONG><a name="[39e]"></a>rt_put_rdy_first</STRONG> (Thumb, 14 bytes, Stack size 0 bytes, rt_list.o(i.rt_put_rdy_first))
@@ -6751,8 +6751,8 @@ Global Symbols
 <BR>[Calls]<UL><LI><a href="#[3ad]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;rt_rmv_list
 <LI><a href="#[39b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;rt_put_prio
 </UL>
-<BR>[Called By]<UL><LI><a href="#[3bd]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;rt_tsk_prio
-<LI><a href="#[75]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;rt_mut_wait
+<BR>[Called By]<UL><LI><a href="#[75]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;rt_mut_wait
+<LI><a href="#[3bd]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;rt_tsk_prio
 </UL>
 
 <P><STRONG><a name="[3a8]"></a>rt_ret_val</STRONG> (Thumb, 12 bytes, Stack size 8 bytes, hal_cm.o(i.rt_ret_val))
@@ -6760,11 +6760,11 @@ Global Symbols
 </UL>
 <BR>[Calls]<UL><LI><a href="#[3ae]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;rt_ret_regs
 </UL>
-<BR>[Called By]<UL><LI><a href="#[3ac]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;rt_sem_psh
+<BR>[Called By]<UL><LI><a href="#[76]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;rt_mut_release
+<LI><a href="#[3ac]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;rt_sem_psh
 <LI><a href="#[3a7]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;rt_mbx_psh
 <LI><a href="#[3b9]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;rt_tsk_delete
 <LI><a href="#[3aa]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;rt_mbx_wait
-<LI><a href="#[76]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;rt_mut_release
 </UL>
 
 <P><STRONG><a name="[3a2]"></a>rt_ret_val2</STRONG> (Thumb, 16 bytes, Stack size 16 bytes, hal_cm.o(i.rt_ret_val2))
@@ -6781,14 +6781,14 @@ Global Symbols
 <P><STRONG><a name="[3a1]"></a>rt_rmv_dly</STRONG> (Thumb, 40 bytes, Stack size 8 bytes, rt_list.o(i.rt_rmv_dly))
 <BR><BR>[Stack]<UL><LI>Max Depth = 8<LI>Call Chain = rt_rmv_dly
 </UL>
-<BR>[Called By]<UL><LI><a href="#[3ac]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;rt_sem_psh
+<BR>[Called By]<UL><LI><a href="#[76]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;rt_mut_release
+<LI><a href="#[3ac]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;rt_sem_psh
 <LI><a href="#[3a7]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;rt_mbx_psh
 <LI><a href="#[3a0]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;rt_evt_psh
 <LI><a href="#[3b9]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;rt_tsk_delete
 <LI><a href="#[3aa]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;rt_mbx_wait
 <LI><a href="#[3a9]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;rt_mbx_send
 <LI><a href="#[3a3]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;rt_evt_set
-<LI><a href="#[76]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;rt_mut_release
 </UL>
 
 <P><STRONG><a name="[3ad]"></a>rt_rmv_list</STRONG> (Thumb, 44 bytes, Stack size 0 bytes, rt_list.o(i.rt_rmv_list))
@@ -6910,29 +6910,29 @@ Global Symbols
 </UL>
 
 <P><STRONG><a name="[306]"></a>rt_tsk_self</STRONG> (Thumb, 12 bytes, Stack size 0 bytes, rt_task.o(i.rt_tsk_self))
-<BR><BR>[Called By]<UL><LI><a href="#[89]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;svcThreadGetId
-<LI><a href="#[149]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__user_perthread_libspace
+<BR><BR>[Called By]<UL><LI><a href="#[149]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__user_perthread_libspace
+<LI><a href="#[89]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;svcThreadGetId
 </UL>
 
 <P><STRONG><a name="[312]"></a>set_u16</STRONG> (Thumb, 8 bytes, Stack size 0 bytes, fs_common.o(i.set_u16))
-<BR><BR>[Called By]<UL><LI><a href="#[2fa]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;fat_open
-<LI><a href="#[2f1]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;fat_close
-<LI><a href="#[32d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;mbr_write
+<BR><BR>[Called By]<UL><LI><a href="#[32d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;mbr_write
 <LI><a href="#[32f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;label_write
 <LI><a href="#[32a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;fsinfo_write
 <LI><a href="#[328]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;create_sfn_entry
 <LI><a href="#[320]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;create_dot_entries
 <LI><a href="#[316]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;bs_write
 <LI><a href="#[30d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;alloc_table_write
+<LI><a href="#[2fa]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;fat_open
+<LI><a href="#[2f1]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;fat_close
 </UL>
 
 <P><STRONG><a name="[313]"></a>set_u32</STRONG> (Thumb, 16 bytes, Stack size 0 bytes, fs_common.o(i.set_u32))
-<BR><BR>[Called By]<UL><LI><a href="#[2f1]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;fat_close
-<LI><a href="#[32b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;fat_format
-<LI><a href="#[32d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;mbr_write
+<BR><BR>[Called By]<UL><LI><a href="#[32d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;mbr_write
 <LI><a href="#[32a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;fsinfo_write
 <LI><a href="#[316]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;bs_write
 <LI><a href="#[30d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;alloc_table_write
+<LI><a href="#[2f1]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;fat_close
+<LI><a href="#[32b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;fat_format
 </UL>
 
 <P><STRONG><a name="[2a9]"></a>slog_out</STRONG> (Thumb, 86 bytes, Stack size 40 bytes, sdcard.o(i.slog_out))
@@ -7057,18 +7057,18 @@ Global Symbols
 <P><STRONG><a name="[78]"></a>svcDelay</STRONG> (Thumb, 18 bytes, Stack size 8 bytes, rt_cmsis.o(i.svcDelay))
 <BR><BR>[Stack]<UL><LI>Max Depth = 32<LI>Call Chain = svcDelay &rArr; rt_dly_wait &rArr; rt_block &rArr; rt_put_dly
 </UL>
-<BR>[Calls]<UL><LI><a href="#[39f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;rt_dly_wait
-<LI><a href="#[3bf]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;rt_ms2tick
+<BR>[Calls]<UL><LI><a href="#[3bf]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;rt_ms2tick
+<LI><a href="#[39f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;rt_dly_wait
 </UL>
 <BR>[Address Reference Count : 1]<UL><LI> rt_cmsis.o(i.osDelay)
 </UL>
 <P><STRONG><a name="[79]"></a>svcKernelInitialize</STRONG> (Thumb, 80 bytes, Stack size 8 bytes, rt_cmsis.o(i.svcKernelInitialize))
 <BR><BR>[Stack]<UL><LI>Max Depth = 80<LI>Call Chain = svcKernelInitialize &rArr; svcThreadCreate &rArr; rt_tsk_create &rArr; rt_init_context &rArr; rt_init_stack
 </UL>
-<BR>[Calls]<UL><LI><a href="#[3b0]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;rt_sys_init
+<BR>[Calls]<UL><LI><a href="#[7c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;svcMessageCreate
+<LI><a href="#[3b0]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;rt_sys_init
 <LI><a href="#[3c0]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;rt_init_mem
 <LI><a href="#[88]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;svcThreadCreate
-<LI><a href="#[7c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;svcMessageCreate
 </UL>
 <BR>[Called By]<UL><LI><a href="#[10b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;osKernelInitialize
 </UL>
@@ -7103,16 +7103,16 @@ Global Symbols
 <P><STRONG><a name="[7d]"></a>svcMessageGet</STRONG> (Thumb, 58 bytes, Stack size 24 bytes, rt_cmsis.o(i.svcMessageGet))
 <BR><BR>[Stack]<UL><LI>Max Depth = 68<LI>Call Chain = svcMessageGet &rArr; rt_mbx_wait &rArr; rt_dispatch &rArr; rt_put_prio
 </UL>
-<BR>[Calls]<UL><LI><a href="#[3aa]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;rt_mbx_wait
-<LI><a href="#[3bf]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;rt_ms2tick
+<BR>[Calls]<UL><LI><a href="#[3bf]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;rt_ms2tick
+<LI><a href="#[3aa]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;rt_mbx_wait
 </UL>
 <BR>[Address Reference Count : 1]<UL><LI> rt_cmsis.o(i.osMessageGet)
 </UL>
 <P><STRONG><a name="[7e]"></a>svcMessagePut</STRONG> (Thumb, 54 bytes, Stack size 16 bytes, rt_cmsis.o(i.svcMessagePut))
 <BR><BR>[Stack]<UL><LI>Max Depth = 60<LI>Call Chain = svcMessagePut &rArr; rt_mbx_send &rArr; rt_dispatch &rArr; rt_put_prio
 </UL>
-<BR>[Calls]<UL><LI><a href="#[3a9]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;rt_mbx_send
-<LI><a href="#[3bf]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;rt_ms2tick
+<BR>[Calls]<UL><LI><a href="#[3bf]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;rt_ms2tick
+<LI><a href="#[3a9]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;rt_mbx_send
 </UL>
 <BR>[Address Reference Count : 1]<UL><LI> rt_cmsis.o(i.osMessagePut)
 </UL>
@@ -7154,24 +7154,24 @@ Global Symbols
 <P><STRONG><a name="[85]"></a>svcSignalClear</STRONG> (Thumb, 36 bytes, Stack size 16 bytes, rt_cmsis.o(i.svcSignalClear))
 <BR><BR>[Stack]<UL><LI>Max Depth = 16<LI>Call Chain = svcSignalClear
 </UL>
-<BR>[Calls]<UL><LI><a href="#[3c5]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;rt_evt_clr
-<LI><a href="#[365]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;rt_tid2ptcb
+<BR>[Calls]<UL><LI><a href="#[365]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;rt_tid2ptcb
+<LI><a href="#[3c5]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;rt_evt_clr
 </UL>
 <BR>[Address Reference Count : 1]<UL><LI> rt_cmsis.o(i.osSignalClear)
 </UL>
 <P><STRONG><a name="[86]"></a>svcSignalSet</STRONG> (Thumb, 36 bytes, Stack size 16 bytes, rt_cmsis.o(i.svcSignalSet))
 <BR><BR>[Stack]<UL><LI>Max Depth = 52<LI>Call Chain = svcSignalSet &rArr; rt_evt_set &rArr; rt_dispatch &rArr; rt_put_prio
 </UL>
-<BR>[Calls]<UL><LI><a href="#[3a3]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;rt_evt_set
-<LI><a href="#[365]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;rt_tid2ptcb
+<BR>[Calls]<UL><LI><a href="#[365]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;rt_tid2ptcb
+<LI><a href="#[3a3]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;rt_evt_set
 </UL>
 <BR>[Address Reference Count : 1]<UL><LI> rt_cmsis.o(i.osSignalSet)
 </UL>
 <P><STRONG><a name="[87]"></a>svcSignalWait</STRONG> (Thumb, 80 bytes, Stack size 16 bytes, rt_cmsis.o(i.svcSignalWait))
 <BR><BR>[Stack]<UL><LI>Max Depth = 56<LI>Call Chain = svcSignalWait &rArr; rt_evt_wait &rArr; rt_block &rArr; rt_put_dly
 </UL>
-<BR>[Calls]<UL><LI><a href="#[3a4]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;rt_evt_wait
-<LI><a href="#[3bf]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;rt_ms2tick
+<BR>[Calls]<UL><LI><a href="#[3bf]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;rt_ms2tick
+<LI><a href="#[3a4]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;rt_evt_wait
 </UL>
 <BR>[Address Reference Count : 1]<UL><LI> rt_cmsis.o(i.osSignalWait)
 </UL>
@@ -7197,9 +7197,9 @@ Global Symbols
 <P><STRONG><a name="[8a]"></a>svcThreadTerminate</STRONG> (Thumb, 50 bytes, Stack size 8 bytes, rt_cmsis.o(i.svcThreadTerminate))
 <BR><BR>[Stack]<UL><LI>Max Depth = 108<LI>Call Chain = svcThreadTerminate &rArr; rt_tsk_delete &rArr; rt_stk_check &rArr; os_error &rArr; SoundOn &rArr; HAL_TIMEx_OCN_Start_DMA &rArr; HAL_DMA_Start_IT &rArr; DMA_SetConfig
 </UL>
-<BR>[Calls]<UL><LI><a href="#[3b9]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;rt_tsk_delete
+<BR>[Calls]<UL><LI><a href="#[365]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;rt_tid2ptcb
+<LI><a href="#[3b9]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;rt_tsk_delete
 <LI><a href="#[3c7]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;rt_free_mem
-<LI><a href="#[365]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;rt_tid2ptcb
 </UL>
 <BR>[Address Reference Count : 1]<UL><LI> rt_cmsis.o(i.osThreadExit)
 </UL>
@@ -8214,25 +8214,25 @@ Local Symbols
 </UL>
 
 <P><STRONG><a name="[3c4]"></a>rt_id2obj</STRONG> (Thumb, 8 bytes, Stack size 0 bytes, rt_cmsis.o(i.rt_id2obj))
-<BR><BR>[Called By]<UL><LI><a href="#[8e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;svcTimerStart
-<LI><a href="#[8c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;svcTimerCall
-<LI><a href="#[81]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;svcMutexWait
+<BR><BR>[Called By]<UL><LI><a href="#[81]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;svcMutexWait
 <LI><a href="#[80]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;svcMutexRelease
+<LI><a href="#[8e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;svcTimerStart
+<LI><a href="#[8c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;svcTimerCall
 </UL>
 
 <P><STRONG><a name="[3bf]"></a>rt_ms2tick</STRONG> (Thumb, 58 bytes, Stack size 0 bytes, rt_cmsis.o(i.rt_ms2tick))
-<BR><BR>[Called By]<UL><LI><a href="#[87]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;svcSignalWait
-<LI><a href="#[81]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;svcMutexWait
+<BR><BR>[Called By]<UL><LI><a href="#[81]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;svcMutexWait
 <LI><a href="#[7e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;svcMessagePut
 <LI><a href="#[7d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;svcMessageGet
 <LI><a href="#[78]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;svcDelay
+<LI><a href="#[87]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;svcSignalWait
 </UL>
 
 <P><STRONG><a name="[365]"></a>rt_tid2ptcb</STRONG> (Thumb, 18 bytes, Stack size 0 bytes, rt_cmsis.o(i.rt_tid2ptcb))
-<BR><BR>[Called By]<UL><LI><a href="#[8a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;svcThreadTerminate
-<LI><a href="#[86]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;svcSignalSet
-<LI><a href="#[85]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;svcSignalClear
+<BR><BR>[Called By]<UL><LI><a href="#[85]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;svcSignalClear
 <LI><a href="#[364]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;isrSignalSet
+<LI><a href="#[8a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;svcThreadTerminate
+<LI><a href="#[86]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;svcSignalSet
 </UL>
 
 <P><STRONG><a name="[3c9]"></a>rt_timer_insert</STRONG> (Thumb, 48 bytes, Stack size 12 bytes, rt_cmsis.o(i.rt_timer_insert))
@@ -8257,8 +8257,8 @@ Local Symbols
 </UL>
 
 <P><STRONG><a name="[37c]"></a>fill_cid</STRONG> (Thumb, 118 bytes, Stack size 0 bytes, fs_mc_mci.o(i.fill_cid))
-<BR><BR>[Called By]<UL><LI><a href="#[384]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;mc_native_init
-<LI><a href="#[36e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;mc_mci_DevCtrl
+<BR><BR>[Called By]<UL><LI><a href="#[36e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;mc_mci_DevCtrl
+<LI><a href="#[384]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;mc_native_init
 </UL>
 
 <P><STRONG><a name="[387]"></a>get_block_number</STRONG> (Thumb, 160 bytes, Stack size 12 bytes, fs_mc_mci.o(i.get_block_number))
@@ -8270,22 +8270,22 @@ Local Symbols
 <P><STRONG><a name="[374]"></a>mc_control_lock</STRONG> (Thumb, 246 bytes, Stack size 64 bytes, fs_mc_mci.o(i.mc_control_lock))
 <BR><BR>[Stack]<UL><LI>Max Depth = 104<LI>Call Chain = mc_control_lock &rArr; mc_set_block_len &rArr; mc_wfe
 </UL>
-<BR>[Calls]<UL><LI><a href="#[376]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;mc_wfe
+<BR>[Calls]<UL><LI><a href="#[131]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_memclr4
+<LI><a href="#[179]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_memcpy
+<LI><a href="#[376]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;mc_wfe
 <LI><a href="#[375]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;mc_set_block_len
 <LI><a href="#[377]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;mc_read_status
-<LI><a href="#[131]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_memclr4
-<LI><a href="#[179]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_memcpy
 </UL>
-<BR>[Called By]<UL><LI><a href="#[384]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;mc_native_init
-<LI><a href="#[36e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;mc_mci_DevCtrl
+<BR>[Called By]<UL><LI><a href="#[36e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;mc_mci_DevCtrl
+<LI><a href="#[384]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;mc_native_init
 </UL>
 
 <P><STRONG><a name="[378]"></a>mc_control_sleep</STRONG> (Thumb, 132 bytes, Stack size 16 bytes, fs_mc_mci.o(i.mc_control_sleep))
 <BR><BR>[Stack]<UL><LI>Max Depth = 56<LI>Call Chain = mc_control_sleep &rArr; mc_sleep_awake &rArr; mc_wfe
 </UL>
-<BR>[Calls]<UL><LI><a href="#[379]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;mc_sleep_awake
+<BR>[Calls]<UL><LI><a href="#[35d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;fs_set_rtos_delay
+<LI><a href="#[379]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;mc_sleep_awake
 <LI><a href="#[377]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;mc_read_status
-<LI><a href="#[35d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;fs_set_rtos_delay
 </UL>
 <BR>[Called By]<UL><LI><a href="#[36e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;mc_mci_DevCtrl
 </UL>
@@ -8302,7 +8302,10 @@ Local Symbols
 <P><STRONG><a name="[384]"></a>mc_native_init</STRONG> (Thumb, 1106 bytes, Stack size 96 bytes, fs_mc_mci.o(i.mc_native_init))
 <BR><BR>[Stack]<UL><LI>Max Depth = 200<LI>Call Chain = mc_native_init &rArr; mc_control_lock &rArr; mc_set_block_len &rArr; mc_wfe
 </UL>
-<BR>[Calls]<UL><LI><a href="#[388]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;fs_mc_lock_unlock
+<BR>[Calls]<UL><LI><a href="#[35d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;fs_set_rtos_delay
+<LI><a href="#[38a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;fs_get_sys_tick_us
+<LI><a href="#[358]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;fs_get_sys_tick
+<LI><a href="#[388]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;fs_mc_lock_unlock
 <LI><a href="#[376]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;mc_wfe
 <LI><a href="#[383]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;mci_idle_clock
 <LI><a href="#[380]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;mci_data_timeout
@@ -8319,9 +8322,6 @@ Local Symbols
 <LI><a href="#[374]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;mc_control_lock
 <LI><a href="#[387]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;get_block_number
 <LI><a href="#[37c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;fill_cid
-<LI><a href="#[35d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;fs_set_rtos_delay
-<LI><a href="#[38a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;fs_get_sys_tick_us
-<LI><a href="#[358]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;fs_get_sys_tick
 </UL>
 <BR>[Called By]<UL><LI><a href="#[36f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;mc_mci_Init
 </UL>
@@ -8331,26 +8331,26 @@ Local Symbols
 </UL>
 <BR>[Calls]<UL><LI><a href="#[376]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;mc_wfe
 </UL>
-<BR>[Called By]<UL><LI><a href="#[37d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;mc_select_tran_state
+<BR>[Called By]<UL><LI><a href="#[373]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;mc_mci_WriteSector
+<LI><a href="#[36e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;mc_mci_DevCtrl
+<LI><a href="#[37d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;mc_select_tran_state
 <LI><a href="#[38b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;mc_select_bus_width
 <LI><a href="#[384]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;mc_native_init
 <LI><a href="#[378]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;mc_control_sleep
 <LI><a href="#[374]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;mc_control_lock
-<LI><a href="#[373]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;mc_mci_WriteSector
-<LI><a href="#[36e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;mc_mci_DevCtrl
 </UL>
 
 <P><STRONG><a name="[38b]"></a>mc_select_bus_width</STRONG> (Thumb, 214 bytes, Stack size 32 bytes, fs_mc_mci.o(i.mc_select_bus_width))
 <BR><BR>[Stack]<UL><LI>Max Depth = 72<LI>Call Chain = mc_select_bus_width &rArr; mc_switch &rArr; mc_wfe
 </UL>
-<BR>[Calls]<UL><LI><a href="#[376]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;mc_wfe
+<BR>[Calls]<UL><LI><a href="#[35d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;fs_set_rtos_delay
+<LI><a href="#[38a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;fs_get_sys_tick_us
+<LI><a href="#[358]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;fs_get_sys_tick
+<LI><a href="#[376]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;mc_wfe
 <LI><a href="#[37e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;mci_bus_width
 <LI><a href="#[389]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;mc_switch
 <LI><a href="#[377]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;mc_read_status
 <LI><a href="#[37a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;mc_enable_acmd
-<LI><a href="#[35d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;fs_set_rtos_delay
-<LI><a href="#[38a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;fs_get_sys_tick_us
-<LI><a href="#[358]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;fs_get_sys_tick
 </UL>
 <BR>[Called By]<UL><LI><a href="#[384]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;mc_native_init
 </UL>
@@ -8360,21 +8360,21 @@ Local Symbols
 </UL>
 <BR>[Calls]<UL><LI><a href="#[376]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;mc_wfe
 </UL>
-<BR>[Called By]<UL><LI><a href="#[37d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;mc_select_tran_state
-<LI><a href="#[384]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;mc_native_init
-<LI><a href="#[373]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;mc_mci_WriteSector
+<BR>[Called By]<UL><LI><a href="#[373]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;mc_mci_WriteSector
 <LI><a href="#[371]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;mc_mci_ReadSector
 <LI><a href="#[36e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;mc_mci_DevCtrl
+<LI><a href="#[37d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;mc_select_tran_state
+<LI><a href="#[384]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;mc_native_init
 </UL>
 
 <P><STRONG><a name="[37d]"></a>mc_select_tran_state</STRONG> (Thumb, 164 bytes, Stack size 32 bytes, fs_mc_mci.o(i.mc_select_tran_state))
 <BR><BR>[Stack]<UL><LI>Max Depth = 72<LI>Call Chain = mc_select_tran_state &rArr; mc_stop_transmission &rArr; mc_wfe
 </UL>
-<BR>[Calls]<UL><LI><a href="#[385]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;mc_stop_transmission
+<BR>[Calls]<UL><LI><a href="#[38a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;fs_get_sys_tick_us
+<LI><a href="#[358]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;fs_get_sys_tick
+<LI><a href="#[385]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;mc_stop_transmission
 <LI><a href="#[37b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;mc_select_deselect
 <LI><a href="#[377]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;mc_read_status
-<LI><a href="#[38a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;fs_get_sys_tick_us
-<LI><a href="#[358]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;fs_get_sys_tick
 </UL>
 <BR>[Called By]<UL><LI><a href="#[373]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;mc_mci_WriteSector
 <LI><a href="#[371]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;mc_mci_ReadSector
@@ -8386,9 +8386,9 @@ Local Symbols
 </UL>
 <BR>[Calls]<UL><LI><a href="#[376]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;mc_wfe
 </UL>
-<BR>[Called By]<UL><LI><a href="#[384]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;mc_native_init
+<BR>[Called By]<UL><LI><a href="#[36e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;mc_mci_DevCtrl
+<LI><a href="#[384]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;mc_native_init
 <LI><a href="#[374]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;mc_control_lock
-<LI><a href="#[36e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;mc_mci_DevCtrl
 </UL>
 
 <P><STRONG><a name="[379]"></a>mc_sleep_awake</STRONG> (Thumb, 58 bytes, Stack size 16 bytes, fs_mc_mci.o(i.mc_sleep_awake))
@@ -8404,9 +8404,9 @@ Local Symbols
 </UL>
 <BR>[Calls]<UL><LI><a href="#[376]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;mc_wfe
 </UL>
-<BR>[Called By]<UL><LI><a href="#[37d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;mc_select_tran_state
-<LI><a href="#[373]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;mc_mci_WriteSector
+<BR>[Called By]<UL><LI><a href="#[373]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;mc_mci_WriteSector
 <LI><a href="#[371]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;mc_mci_ReadSector
+<LI><a href="#[37d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;mc_select_tran_state
 </UL>
 
 <P><STRONG><a name="[389]"></a>mc_switch</STRONG> (Thumb, 56 bytes, Stack size 16 bytes, fs_mc_mci.o(i.mc_switch))
@@ -8427,22 +8427,22 @@ Local Symbols
 </UL>
 
 <P><STRONG><a name="[381]"></a>mci_bus_speed</STRONG> (Thumb, 10 bytes, Stack size 0 bytes, fs_mc_mci.o(i.mci_bus_speed))
-<BR><BR>[Called By]<UL><LI><a href="#[384]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;mc_native_init
-<LI><a href="#[36f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;mc_mci_Init
+<BR><BR>[Called By]<UL><LI><a href="#[36f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;mc_mci_Init
+<LI><a href="#[384]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;mc_native_init
 </UL>
 
 <P><STRONG><a name="[37f]"></a>mci_bus_speed_mode</STRONG> (Thumb, 22 bytes, Stack size 8 bytes, fs_mc_mci.o(i.mci_bus_speed_mode))
 <BR><BR>[Stack]<UL><LI>Max Depth = 8<LI>Call Chain = mci_bus_speed_mode
 </UL>
-<BR>[Called By]<UL><LI><a href="#[384]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;mc_native_init
-<LI><a href="#[36f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;mc_mci_Init
+<BR>[Called By]<UL><LI><a href="#[36f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;mc_mci_Init
+<LI><a href="#[384]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;mc_native_init
 </UL>
 
 <P><STRONG><a name="[37e]"></a>mci_bus_width</STRONG> (Thumb, 22 bytes, Stack size 8 bytes, fs_mc_mci.o(i.mci_bus_width))
 <BR><BR>[Stack]<UL><LI>Max Depth = 8<LI>Call Chain = mci_bus_width
 </UL>
-<BR>[Called By]<UL><LI><a href="#[38b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;mc_select_bus_width
-<LI><a href="#[36f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;mc_mci_Init
+<BR>[Called By]<UL><LI><a href="#[36f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;mc_mci_Init
+<LI><a href="#[38b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;mc_select_bus_width
 </UL>
 
 <P><STRONG><a name="[382]"></a>mci_card_power</STRONG> (Thumb, 62 bytes, Stack size 8 bytes, fs_mc_mci.o(i.mci_card_power))
@@ -8463,15 +8463,15 @@ Local Symbols
 <P><STRONG><a name="[380]"></a>mci_data_timeout</STRONG> (Thumb, 30 bytes, Stack size 8 bytes, fs_mc_mci.o(i.mci_data_timeout))
 <BR><BR>[Stack]<UL><LI>Max Depth = 8<LI>Call Chain = mci_data_timeout
 </UL>
-<BR>[Called By]<UL><LI><a href="#[384]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;mc_native_init
-<LI><a href="#[36f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;mc_mci_Init
+<BR>[Called By]<UL><LI><a href="#[36f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;mc_mci_Init
+<LI><a href="#[384]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;mc_native_init
 </UL>
 
 <P><STRONG><a name="[383]"></a>mci_idle_clock</STRONG> (Thumb, 22 bytes, Stack size 8 bytes, fs_mc_mci.o(i.mci_idle_clock))
 <BR><BR>[Stack]<UL><LI>Max Depth = 8<LI>Call Chain = mci_idle_clock
 </UL>
-<BR>[Called By]<UL><LI><a href="#[384]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;mc_native_init
-<LI><a href="#[36f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;mc_mci_Init
+<BR>[Called By]<UL><LI><a href="#[36f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;mc_mci_Init
+<LI><a href="#[384]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;mc_native_init
 </UL>
 
 <P><STRONG><a name="[3ae]"></a>rt_ret_regs</STRONG> (Thumb, 16 bytes, Stack size 0 bytes, hal_cm.o(i.rt_ret_regs))
@@ -8486,26 +8486,26 @@ Local Symbols
 <LI><a href="#[30d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;alloc_table_write
 <LI><a href="#[30b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;alloc_table_read
 </UL>
-<BR>[Called By]<UL><LI><a href="#[304]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;fat_write
-<LI><a href="#[301]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;fat_seek
-<LI><a href="#[33e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;path_create
+<BR>[Called By]<UL><LI><a href="#[33e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;path_create
 <LI><a href="#[349]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;frec_allocate
+<LI><a href="#[304]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;fat_write
+<LI><a href="#[301]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;fat_seek
 </UL>
 
 <P><STRONG><a name="[30b]"></a>alloc_table_read</STRONG> (Thumb, 154 bytes, Stack size 24 bytes, fs_fat.o(i.alloc_table_read))
 <BR><BR>[Stack]<UL><LI>Max Depth = 40<LI>Call Chain = alloc_table_read &rArr; cache_fat
 </UL>
-<BR>[Calls]<UL><LI><a href="#[311]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;get_u32
-<LI><a href="#[30e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;get_fat_sect
+<BR>[Calls]<UL><LI><a href="#[30e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;get_fat_sect
 <LI><a href="#[30f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;cache_fat
 <LI><a href="#[310]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;get_u16
+<LI><a href="#[311]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;get_u32
 </UL>
-<BR>[Called By]<UL><LI><a href="#[304]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;fat_write
-<LI><a href="#[301]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;fat_seek
-<LI><a href="#[2fe]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;fat_read
-<LI><a href="#[33d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;unlink_clus
+<BR>[Called By]<UL><LI><a href="#[33d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;unlink_clus
 <LI><a href="#[327]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;entry_pos_inc
 <LI><a href="#[30a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;alloc_clus
+<LI><a href="#[304]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;fat_write
+<LI><a href="#[301]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;fat_seek
+<LI><a href="#[2fe]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;fat_read
 </UL>
 
 <P><STRONG><a name="[30d]"></a>alloc_table_write</STRONG> (Thumb, 220 bytes, Stack size 32 bytes, fs_fat.o(i.alloc_table_write))
@@ -8525,9 +8525,9 @@ Local Symbols
 <P><STRONG><a name="[314]"></a>bs_read</STRONG> (Thumb, 180 bytes, Stack size 8 bytes, fs_fat.o(i.bs_read))
 <BR><BR>[Stack]<UL><LI>Max Depth = 24<LI>Call Chain = bs_read &rArr; read_sector
 </UL>
-<BR>[Calls]<UL><LI><a href="#[311]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;get_u32
-<LI><a href="#[315]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;read_sector
+<BR>[Calls]<UL><LI><a href="#[315]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;read_sector
 <LI><a href="#[310]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;get_u16
+<LI><a href="#[311]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;get_u32
 </UL>
 <BR>[Called By]<UL><LI><a href="#[336]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;fat_mount
 </UL>
@@ -8548,9 +8548,9 @@ Local Symbols
 </UL>
 <BR>[Calls]<UL><LI><a href="#[318]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;fsj_write
 </UL>
-<BR>[Called By]<UL><LI><a href="#[2f1]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;fat_close
-<LI><a href="#[30d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;alloc_table_write
+<BR>[Called By]<UL><LI><a href="#[30d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;alloc_table_write
 <LI><a href="#[30b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;alloc_table_read
+<LI><a href="#[2f1]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;fat_close
 </UL>
 
 <P><STRONG><a name="[38e]"></a>char_validate</STRONG> (Thumb, 96 bytes, Stack size 0 bytes, fs_fat.o(i.char_validate))
@@ -8566,18 +8566,18 @@ Local Symbols
 <LI><a href="#[31b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;write_cache
 <LI><a href="#[31a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;clus_to_sect
 </UL>
-<BR>[Called By]<UL><LI><a href="#[301]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;fat_seek
-<LI><a href="#[33e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;path_create
+<BR>[Called By]<UL><LI><a href="#[33e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;path_create
 <LI><a href="#[349]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;frec_allocate
+<LI><a href="#[301]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;fat_seek
 </UL>
 
 <P><STRONG><a name="[31a]"></a>clus_to_sect</STRONG> (Thumb, 36 bytes, Stack size 0 bytes, fs_fat.o(i.clus_to_sect))
-<BR><BR>[Called By]<UL><LI><a href="#[304]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;fat_write
-<LI><a href="#[301]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;fat_seek
-<LI><a href="#[2fe]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;fat_read
-<LI><a href="#[321]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;entry_read
+<BR><BR>[Called By]<UL><LI><a href="#[321]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;entry_read
 <LI><a href="#[325]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;entry_flush
 <LI><a href="#[319]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;clear_clus
+<LI><a href="#[304]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;fat_write
+<LI><a href="#[301]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;fat_seek
+<LI><a href="#[2fe]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;fat_read
 </UL>
 
 <P><STRONG><a name="[320]"></a>create_dot_entries</STRONG> (Thumb, 200 bytes, Stack size 48 bytes, fs_fat.o(i.create_dot_entries))
@@ -8623,11 +8623,11 @@ Local Symbols
 <BR>[Calls]<UL><LI><a href="#[317]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;write_sector
 <LI><a href="#[31a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;clus_to_sect
 </UL>
-<BR>[Called By]<UL><LI><a href="#[2fa]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;fat_open
-<LI><a href="#[2f1]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;fat_close
-<LI><a href="#[328]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;create_sfn_entry
+<BR>[Called By]<UL><LI><a href="#[328]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;create_sfn_entry
 <LI><a href="#[326]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;create_lfn_entry
 <LI><a href="#[320]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;create_dot_entries
+<LI><a href="#[2fa]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;fat_open
+<LI><a href="#[2f1]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;fat_close
 </UL>
 
 <P><STRONG><a name="[34a]"></a>entry_pos_comp</STRONG> (Thumb, 28 bytes, Stack size 0 bytes, fs_fat.o(i.entry_pos_comp))
@@ -8641,12 +8641,12 @@ Local Symbols
 <BR>[Calls]<UL><LI><a href="#[30c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;get_EOC
 <LI><a href="#[30b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;alloc_table_read
 </UL>
-<BR>[Called By]<UL><LI><a href="#[2fa]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;fat_open
-<LI><a href="#[341]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;label_read
+<BR>[Called By]<UL><LI><a href="#[341]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;label_read
 <LI><a href="#[352]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;frec_find_elink
 <LI><a href="#[34c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;frec_find
 <LI><a href="#[349]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;frec_allocate
 <LI><a href="#[326]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;create_lfn_entry
+<LI><a href="#[2fa]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;fat_open
 </UL>
 
 <P><STRONG><a name="[321]"></a>entry_read</STRONG> (Thumb, 68 bytes, Stack size 16 bytes, fs_fat.o(i.entry_read))
@@ -8655,15 +8655,15 @@ Local Symbols
 <BR>[Calls]<UL><LI><a href="#[315]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;read_sector
 <LI><a href="#[31a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;clus_to_sect
 </UL>
-<BR>[Called By]<UL><LI><a href="#[2fa]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;fat_open
-<LI><a href="#[2f1]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;fat_close
-<LI><a href="#[341]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;label_read
+<BR>[Called By]<UL><LI><a href="#[341]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;label_read
 <LI><a href="#[352]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;frec_find_elink
 <LI><a href="#[34c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;frec_find
 <LI><a href="#[349]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;frec_allocate
 <LI><a href="#[328]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;create_sfn_entry
 <LI><a href="#[326]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;create_lfn_entry
 <LI><a href="#[320]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;create_dot_entries
+<LI><a href="#[2fa]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;fat_open
+<LI><a href="#[2f1]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;fat_close
 </UL>
 
 <P><STRONG><a name="[34b]"></a>entry_type</STRONG> (Thumb, 46 bytes, Stack size 0 bytes, fs_fat.o(i.entry_type))
@@ -8693,19 +8693,19 @@ Local Symbols
 </UL>
 
 <P><STRONG><a name="[324]"></a>format_date</STRONG> (Thumb, 44 bytes, Stack size 0 bytes, fs_fat.o(i.format_date))
-<BR><BR>[Called By]<UL><LI><a href="#[2fa]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;fat_open
-<LI><a href="#[2f1]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;fat_close
-<LI><a href="#[32f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;label_write
+<BR><BR>[Called By]<UL><LI><a href="#[32f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;label_write
 <LI><a href="#[328]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;create_sfn_entry
 <LI><a href="#[320]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;create_dot_entries
+<LI><a href="#[2fa]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;fat_open
+<LI><a href="#[2f1]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;fat_close
 </UL>
 
 <P><STRONG><a name="[323]"></a>format_time</STRONG> (Thumb, 46 bytes, Stack size 0 bytes, fs_fat.o(i.format_time))
-<BR><BR>[Called By]<UL><LI><a href="#[2fa]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;fat_open
-<LI><a href="#[2f1]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;fat_close
-<LI><a href="#[32f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;label_write
+<BR><BR>[Called By]<UL><LI><a href="#[32f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;label_write
 <LI><a href="#[328]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;create_sfn_entry
 <LI><a href="#[320]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;create_dot_entries
+<LI><a href="#[2fa]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;fat_open
+<LI><a href="#[2f1]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;fat_close
 </UL>
 
 <P><STRONG><a name="[349]"></a>frec_allocate</STRONG> (Thumb, 170 bytes, Stack size 40 bytes, fs_fat.o(i.frec_allocate))
@@ -8757,8 +8757,8 @@ Local Symbols
 <P><STRONG><a name="[337]"></a>fsinfo_read</STRONG> (Thumb, 110 bytes, Stack size 8 bytes, fs_fat.o(i.fsinfo_read))
 <BR><BR>[Stack]<UL><LI>Max Depth = 24<LI>Call Chain = fsinfo_read &rArr; read_sector
 </UL>
-<BR>[Calls]<UL><LI><a href="#[311]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;get_u32
-<LI><a href="#[315]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;read_sector
+<BR>[Calls]<UL><LI><a href="#[315]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;read_sector
+<LI><a href="#[311]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;get_u32
 </UL>
 <BR>[Called By]<UL><LI><a href="#[336]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;fat_mount
 </UL>
@@ -8778,10 +8778,10 @@ Local Symbols
 </UL>
 
 <P><STRONG><a name="[30c]"></a>get_EOC</STRONG> (Thumb, 34 bytes, Stack size 0 bytes, fs_fat.o(i.get_EOC))
-<BR><BR>[Called By]<UL><LI><a href="#[301]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;fat_seek
-<LI><a href="#[33d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;unlink_clus
+<BR><BR>[Called By]<UL><LI><a href="#[33d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;unlink_clus
 <LI><a href="#[327]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;entry_pos_inc
 <LI><a href="#[30a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;alloc_clus
+<LI><a href="#[301]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;fat_seek
 </UL>
 
 <P><STRONG><a name="[30e]"></a>get_fat_sect</STRONG> (Thumb, 50 bytes, Stack size 0 bytes, fs_fat.o(i.get_fat_sect))
@@ -8790,10 +8790,10 @@ Local Symbols
 </UL>
 
 <P><STRONG><a name="[333]"></a>get_root_clus</STRONG> (Thumb, 16 bytes, Stack size 0 bytes, fs_fat.o(i.get_root_clus))
-<BR><BR>[Called By]<UL><LI><a href="#[336]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;fat_mount
-<LI><a href="#[32b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;fat_format
-<LI><a href="#[33a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;path_init
+<BR><BR>[Called By]<UL><LI><a href="#[33a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;path_init
 <LI><a href="#[341]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;label_read
+<LI><a href="#[336]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;fat_mount
+<LI><a href="#[32b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;fat_format
 </UL>
 
 <P><STRONG><a name="[341]"></a>label_read</STRONG> (Thumb, 106 bytes, Stack size 32 bytes, fs_fat.o(i.label_read))
@@ -8825,9 +8825,9 @@ Local Symbols
 </UL>
 <BR>[Calls]<UL><LI><a href="#[30d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;alloc_table_write
 </UL>
-<BR>[Called By]<UL><LI><a href="#[304]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;fat_write
+<BR>[Called By]<UL><LI><a href="#[349]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;frec_allocate
+<LI><a href="#[304]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;fat_write
 <LI><a href="#[301]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;fat_seek
-<LI><a href="#[349]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;frec_allocate
 </UL>
 
 <P><STRONG><a name="[34d]"></a>long_ent_hash</STRONG> (Thumb, 34 bytes, Stack size 32 bytes, fs_fat.o(i.long_ent_hash))
@@ -8953,14 +8953,14 @@ Local Symbols
 </UL>
 <BR>[Calls]<UL><LI><a href="#[179]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_memcpy
 </UL>
-<BR>[Called By]<UL><LI><a href="#[304]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;fat_write
-<LI><a href="#[301]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;fat_seek
-<LI><a href="#[340]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;fat_vol
-<LI><a href="#[336]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;fat_mount
-<LI><a href="#[338]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;read_cache
+<BR>[Called By]<UL><LI><a href="#[338]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;read_cache
 <LI><a href="#[337]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;fsinfo_read
 <LI><a href="#[321]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;entry_read
 <LI><a href="#[314]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;bs_read
+<LI><a href="#[304]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;fat_write
+<LI><a href="#[301]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;fat_seek
+<LI><a href="#[340]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;fat_vol
+<LI><a href="#[336]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;fat_mount
 </UL>
 
 <P><STRONG><a name="[34f]"></a>sfn_extract</STRONG> (Thumb, 72 bytes, Stack size 8 bytes, fs_fat.o(i.sfn_extract))
@@ -9001,13 +9001,13 @@ Local Symbols
 <BR>[Calls]<UL><LI><a href="#[179]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_memcpy
 <LI><a href="#[317]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;write_sector
 </UL>
-<BR>[Called By]<UL><LI><a href="#[304]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;fat_write
+<BR>[Called By]<UL><LI><a href="#[32f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;label_write
+<LI><a href="#[32a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;fsinfo_write
+<LI><a href="#[319]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;clear_clus
+<LI><a href="#[304]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;fat_write
 <LI><a href="#[301]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;fat_seek
 <LI><a href="#[2f1]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;fat_close
 <LI><a href="#[32b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;fat_format
-<LI><a href="#[32f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;label_write
-<LI><a href="#[32a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;fsinfo_write
-<LI><a href="#[319]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;clear_clus
 </UL>
 
 <P><STRONG><a name="[317]"></a>write_sector</STRONG> (Thumb, 48 bytes, Stack size 16 bytes, fs_fat.o(i.write_sector))
