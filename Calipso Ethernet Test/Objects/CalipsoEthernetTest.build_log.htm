@@ -27,8 +27,21 @@ Project File Date:  11/29/2017
 <h2>Output:</h2>
 *** Using Compiler 'V5.06 update 2 (build 183)', folder: 'C:\Keil_v5\ARM\ARMCC\Bin'
 Build target 'EthernetTest'
+compiling IPLInputFrame.c...
+IPL_Energy_Table.h(15): warning:  #1-D: last line of file ends without a newline
+  #endif
+IPLInputFrame.c(52): warning:  #940-D: missing return statement at end of non-void function "Min"
+  }
+IPLInputFrame.c(59): warning:  #940-D: missing return statement at end of non-void function "Max"
+  }
+IPLInputFrame.c(249): warning:  #177-D: variable "frequency" was declared but never referenced
+  	uint16_t frequency		= frameData_SolidStateLaser.laserprofile.Frequency;
+IPLInputFrame.c: 4 warnings, 0 errors
+linking...
+Program Size: Code=96744 RO-data=4244 RW-data=3696 ZI-data=87768  
+FromELF: creating hex file...
 After Build - User command #1: C:\Keil_v5\\ARM\ARMCC\bin\fromelf.exe --bin --output=CalipsoFirmwareV2REV1_0.bin .\Objects\CalipsoEthernetTest.axf
-".\Objects\CalipsoEthernetTest.axf" - 0 Error(s), 0 Warning(s).
+".\Objects\CalipsoEthernetTest.axf" - 0 Error(s), 4 Warning(s).
 
 <h2>Software Packages used:</h2>
 
@@ -231,7 +244,7 @@ Package Vendor: Keil
 
    * Component: Keil::CMSIS Driver:SPI:2.8
       Source file:   CMSIS\Driver\SPI_STM32F4xx.c
-Build Time Elapsed:  00:00:01
+Build Time Elapsed:  00:00:02
 </pre>
 </body>
 </html>
