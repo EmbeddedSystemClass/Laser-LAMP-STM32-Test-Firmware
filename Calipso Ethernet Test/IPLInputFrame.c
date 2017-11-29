@@ -199,6 +199,44 @@ void IPLInput_Init(uint16_t pic_id)
 	DiodeLaser_en = false;
 }
 
+uint16_t getPhototypeFromMelanin(uint16_t melanin)
+{	
+	if (melanin < 10)
+	{
+		frameData_LaserDiode.phototype = 1;
+		return 1;
+	}
+	else
+	if (melanin < 20)
+	{
+		frameData_LaserDiode.phototype = 2;
+		return 2;
+	}
+	else
+	if (melanin < 35)
+	{
+		frameData_LaserDiode.phototype = 3;
+		return 3;
+	}
+	else
+	if (melanin < 49)
+	{
+		frameData_LaserDiode.phototype = 4;
+		return 4;
+	}
+	else
+	if (melanin < 72)
+	{
+		frameData_LaserDiode.phototype = 5;
+		return 5;
+	}
+	else
+	{
+		frameData_LaserDiode.phototype = 6;
+		return 6;
+	}
+}
+
 void IPLInput_Process(uint16_t pic_id)
 {
 	volatile bool update = false;
@@ -212,6 +250,8 @@ void IPLInput_Process(uint16_t pic_id)
 	uint16_t energyCnt 		= frameData_LaserDiode.laserprofile.EnergyCnt;
 	uint16_t durationCnt	= frameData_LaserDiode.laserprofile.DurationCnt;
 	uint16_t mode 				= frameData_LaserDiode.mode;
+	uint16_t melanin			= frameData_LaserDiode.melanin;
+	uint16_t phototype		= frameData_LaserDiode.phototype;
 	
 	DGUS_LASERDIODE* value;
 	ReadVariable(FRAMEDATA_LASERDIODE_BASE, (void**)&value, sizeof(DGUS_LASERDIODE));
@@ -231,6 +271,59 @@ void IPLInput_Process(uint16_t pic_id)
 	if (mode 				!= frameData_LaserDiode.mode)											update = true;
 	if (energyCnt 	!= frameData_LaserDiode.laserprofile.EnergyCnt)		update = true;
 	if (durationCnt != frameData_LaserDiode.laserprofile.DurationCnt)	update = true;
+	if (melanin		  != frameData_LaserDiode.melanin)
+	{
+		// melanin preset
+		frameData_LaserDiode.phototype = getPhototypeFromMelanin(frameData_LaserDiode.melanin);
+		switch (frameData_LaserDiode.phototype)
+		{
+			case 1:
+			case 2:
+				frameData_LaserDiode.laserprofile.EnergyCnt = 9;
+				frameData_LaserDiode.laserprofile.DurationCnt = 1;
+				break;
+			case 3:
+			case 4:
+				frameData_LaserDiode.laserprofile.EnergyCnt = 0;
+				frameData_LaserDiode.laserprofile.DurationCnt = 3;
+				break;
+			case 5:
+			case 6:
+				frameData_LaserDiode.laserprofile.EnergyCnt = 0;
+				frameData_LaserDiode.laserprofile.DurationCnt = 4;
+				break;
+		}
+		update = true;
+	}
+	if (phototype != frameData_LaserDiode.phototype)
+	{
+		// melanin preset
+		switch (frameData_LaserDiode.phototype)
+		{
+			case 1:
+				frameData_LaserDiode.melanin = 5;
+			case 2:
+				frameData_LaserDiode.melanin = 14;
+				frameData_LaserDiode.laserprofile.EnergyCnt = 9;
+				frameData_LaserDiode.laserprofile.DurationCnt = 1;
+				break;
+			case 3:
+				frameData_LaserDiode.melanin = 27;
+			case 4:
+				frameData_LaserDiode.melanin = 41;
+				frameData_LaserDiode.laserprofile.EnergyCnt = 0;
+				frameData_LaserDiode.laserprofile.DurationCnt = 3;
+				break;
+			case 5:
+				frameData_LaserDiode.melanin = 61;
+			case 6:
+				frameData_LaserDiode.melanin = 85;
+				frameData_LaserDiode.laserprofile.EnergyCnt = 0;
+				frameData_LaserDiode.laserprofile.DurationCnt = 4;
+				break;
+		}
+		update = true;
+	}
 	
 	// Set initial state of laser system
 	CoolOn();
