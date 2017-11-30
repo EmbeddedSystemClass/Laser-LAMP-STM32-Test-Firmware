@@ -10,6 +10,10 @@ TIM_HandleTypeDef hTIM9;
 TIM_HandleTypeDef hTIM10;
 TIM_HandleTypeDef hTIM11; // Sound timer
 
+#define TIM_SOUND_DURATION	hTIM11
+#define TIM_PULSE_FREQ_PER	hTIM10
+#define TIM_PULSE_DURATION	hTIM9
+
 void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin)
 {
 	switch (GPIO_Pin)
@@ -52,30 +56,24 @@ bool first_flush = true;
 
 void HAL_TIM_OC_DelayElapsedCallback(TIM_HandleTypeDef *htim)
 {
-	if (htim == &hTIM9)
+	if (htim == &TIM_PULSE_DURATION)
 	{
 		if (DiodeLaser_en) 
 		{
-			//__MISC_LASERLED_ON();
 			__MISC_LASERLED2_ON();
 			
-			//if (Profile == PROFILE_SINGLE)
 			if (first_flush)
 			{
 				FlushesSessionLD++;
 				FlushesGlobalLD++;
 				first_flush = false;
 			}
-			
 		}
 		else 
 			__MISC_LASERLED2_OFF();
 		
 		if (SolidStateLaser_en) 
 		{
-			/*uint32_t count = convert_d(frameData_SolidStateLaser.PulseCounter);
-			count++;
-			frameData_SolidStateLaser.PulseCounter = convert_d(count);*/
 			if (first_flush)
 			{
 				SolidStateLaserPulseInc(slot1_id);
@@ -83,41 +81,35 @@ void HAL_TIM_OC_DelayElapsedCallback(TIM_HandleTypeDef *htim)
 			}
 			
 			SoundOn();
-			__HAL_TIM_SET_AUTORELOAD(&hTIM11, 2100);
-			HAL_TIM_Base_Start_IT(&hTIM11);
+			__HAL_TIM_SET_AUTORELOAD(&TIM_SOUND_DURATION, 2100);
+			HAL_TIM_Base_Start_IT(&TIM_SOUND_DURATION);
 		}
 	}
 }
 
 void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
 {
-	//__HAL_TIM_DISABLE(&hTIM9);
-	if (htim == &hTIM9)
+	if (htim == &TIM_PULSE_DURATION)
 	{
 		if (DiodeLaser_en) 
-		{
-			//__MISC_LASERLED_OFF();
 			__MISC_LASERLED2_OFF();
-		}
-		//SoundOff();
 		
 		subFlushes++;
 		if (subFlushes == subFlushesCount)
 		{
-			hTIM9.Instance->CR1 &= ~(TIM_CR1_CEN);
-			__HAL_TIM_SET_COUNTER(&hTIM9, 0);
+			TIM_PULSE_DURATION.Instance->CR1 &= ~(TIM_CR1_CEN);
+			__HAL_TIM_SET_COUNTER(&TIM_PULSE_DURATION, 0);
 			subFlushes = 0;
 		}
 	}
 	
-	if (htim == &hTIM10)
+	if (htim == &TIM_PULSE_FREQ_PER)
 	{		
 		if (DiodeLaser_en) 
 		{
 			Flushes++;
 			
-			if (Profile != PROFILE_SINGLE)
-			if (/*Flushes != 0*/!first_flush)
+			if ((Profile != PROFILE_SINGLE) && (!first_flush))
 			{
 				FlushesSessionLD++;
 				FlushesGlobalLD++;
@@ -125,52 +117,49 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
 			
 			if (((FlushesSessionLD % FlushesCount) == 0) && (FlushesSessionLD > 0))
 			{
-				hTIM10.Instance->CR1 &= ~(TIM_CR1_CEN);
-				__HAL_TIM_SET_COUNTER(&hTIM10, 0);
+				TIM_PULSE_FREQ_PER.Instance->CR1 &= ~(TIM_CR1_CEN);
+				__HAL_TIM_SET_COUNTER(&TIM_PULSE_FREQ_PER, 0);
 				Flushes = 0;
 				if (Profile != PROFILE_SINGLE)
 				{
 					SoundOn();
-					__HAL_TIM_SET_AUTORELOAD(&hTIM11, 42000);
-					HAL_TIM_Base_Start_IT(&hTIM11);
+					__HAL_TIM_SET_AUTORELOAD(&TIM_SOUND_DURATION, 42000);
+					HAL_TIM_Base_Start_IT(&TIM_SOUND_DURATION);
 				}
-				//LaserStarted = false;
 			}
 			else
 			{
 				if (Profile != PROFILE_SINGLE)
 				{
 					SoundOn();
-					__HAL_TIM_SET_AUTORELOAD(&hTIM11, 2041);//2100); // 0.05
-					HAL_TIM_Base_Start_IT(&hTIM11);
+					__HAL_TIM_SET_AUTORELOAD(&TIM_SOUND_DURATION, 2041);//2100); // 0.05
+					HAL_TIM_Base_Start_IT(&TIM_SOUND_DURATION);
 				}
 			}
 		}
 		
 		if (SolidStateLaser_en)
+		{
 			if (!first_flush)
 				SolidStateLaserPulseInc(slot1_id);
-		/*if (SolidStateLaser_en) 
-		{			
+			
+			/*
 			SoundOn();
-			__HAL_TIM_SET_AUTORELOAD(&hTIM11, 2100);
-			HAL_TIM_Base_Start_IT(&hTIM11);
-		}*/
+			__HAL_TIM_SET_AUTORELOAD(&TIM_SOUND_DURATION, 2100);
+			HAL_TIM_Base_Start_IT(&TIM_SOUND_DURATION);*/
+		}
 		
 		if (Flushes == FlushesCount)
 		{
-			hTIM10.Instance->CR1 &= ~(TIM_CR1_CEN);
-			__HAL_TIM_SET_COUNTER(&hTIM10, 0);
+			TIM_PULSE_FREQ_PER.Instance->CR1 &= ~(TIM_CR1_CEN);
+			__HAL_TIM_SET_COUNTER(&TIM_PULSE_FREQ_PER, 0);
 			Flushes = 0;
-			//LaserStarted = false;
 		}
 	}
-	//HAL_TIM_OC_Stop_IT(&hTIM9, TIM_CHANNEL_2);
-	//__HAL_TIM_DISABLE_IT(&hTIM9, TIM_IT_UPDATE);
 	
-	if (htim == &hTIM11)
+	if (htim == &TIM_SOUND_DURATION)
 	{
-		HAL_TIM_Base_Stop(&hTIM11);
+		HAL_TIM_Base_Stop(&TIM_SOUND_DURATION);
 		SoundOff();
 	}
 }
@@ -255,10 +244,10 @@ void LampControlTIMInit(void)
 	tim11_init.CounterMode = TIM_COUNTERMODE_UP;
 	tim11_init.RepetitionCounter = 0;
 	
-	hTIM11.Init = tim11_init;
-	hTIM11.Instance = TIM11;
+	TIM_SOUND_DURATION.Init = tim11_init;
+	TIM_SOUND_DURATION.Instance = TIM11;
 	
-	HAL_TIM_Base_Init(&hTIM11);
+	HAL_TIM_Base_Init(&TIM_SOUND_DURATION);
 	
 	HAL_NVIC_SetPriority(TIM1_TRG_COM_TIM11_IRQn, 0, 1);
 	HAL_NVIC_ClearPendingIRQ(TIM1_TRG_COM_TIM11_IRQn);
@@ -279,16 +268,16 @@ void LampControlTIMInit(void)
 	tim10_oc_init.OCPolarity = TIM_OCPOLARITY_HIGH;
 	tim10_oc_init.OCFastMode = TIM_OCFAST_ENABLE;
 	
-	hTIM10.Init = tim10_init;
-	hTIM10.Instance = TIM10;
+	TIM_PULSE_FREQ_PER.Init = tim10_init;
+	TIM_PULSE_FREQ_PER.Instance = TIM10;
 	
 	TIM_MasterConfigTypeDef tim10_master_init = {0};
 	tim10_master_init.MasterOutputTrigger = TIM_TRGO_OC1;
 	tim10_master_init.MasterSlaveMode = TIM_MASTERSLAVEMODE_ENABLE;
 	
-	HAL_TIM_OC_Init(&hTIM10);
-	HAL_TIM_OC_ConfigChannel(&hTIM10, &tim10_oc_init, TIM_CHANNEL_1);
-	HAL_TIMEx_MasterConfigSynchronization(&hTIM10, &tim10_master_init); 
+	HAL_TIM_OC_Init(&TIM_PULSE_FREQ_PER);
+	HAL_TIM_OC_ConfigChannel(&TIM_PULSE_FREQ_PER, &tim10_oc_init, TIM_CHANNEL_1);
+	HAL_TIMEx_MasterConfigSynchronization(&TIM_PULSE_FREQ_PER, &tim10_master_init); 
 	
 	HAL_NVIC_SetPriority(TIM1_UP_TIM10_IRQn, 0, 1);
 	HAL_NVIC_ClearPendingIRQ(TIM1_UP_TIM10_IRQn);
@@ -315,13 +304,13 @@ void LampControlTIMInit(void)
 	tim9_slave_init.TriggerPolarity = TIM_TRIGGERPOLARITY_NONINVERTED;
 	tim9_slave_init.TriggerPrescaler = TIM_TRIGGERPRESCALER_DIV1;
 	
-	hTIM9.Init = tim9_init;
-	hTIM9.Instance = TIM9;
+	TIM_PULSE_DURATION.Init = tim9_init;
+	TIM_PULSE_DURATION.Instance = TIM9;
 	
-	HAL_TIM_OC_Init(&hTIM9);
-	HAL_TIM_OC_ConfigChannel(&hTIM9, &tim9_oc_init, TIM_CHANNEL_1);
-	HAL_TIM_OC_ConfigChannel(&hTIM9, &tim9_oc_init, TIM_CHANNEL_2);
-	HAL_TIM_SlaveConfigSynchronization(&hTIM9, &tim9_slave_init);
+	HAL_TIM_OC_Init(&TIM_PULSE_DURATION);
+	HAL_TIM_OC_ConfigChannel(&TIM_PULSE_DURATION, &tim9_oc_init, TIM_CHANNEL_1);
+	HAL_TIM_OC_ConfigChannel(&TIM_PULSE_DURATION, &tim9_oc_init, TIM_CHANNEL_2);
+	HAL_TIM_SlaveConfigSynchronization(&TIM_PULSE_DURATION, &tim9_slave_init);
 	
 	HAL_NVIC_SetPriority(TIM1_BRK_TIM9_IRQn, 0, 1);
 	HAL_NVIC_ClearPendingIRQ(TIM1_BRK_TIM9_IRQn);
@@ -348,22 +337,22 @@ void LampControlPulseStart(void)
 		subFlushes = 0;
 		first_flush = true;
 		
-		__HAL_TIM_SET_COUNTER(&hTIM10, 0);
-		__HAL_TIM_SET_COUNTER(&hTIM9, 0);
+		__HAL_TIM_SET_COUNTER(&TIM_PULSE_FREQ_PER, 0);
+		__HAL_TIM_SET_COUNTER(&TIM_PULSE_DURATION, 0);
 		
 		// Start frequency counter
-		HAL_TIM_OC_Start(&hTIM10, TIM_CHANNEL_1);
-		__HAL_TIM_ENABLE_IT(&hTIM10, TIM_IT_UPDATE);
+		HAL_TIM_OC_Start(&TIM_PULSE_FREQ_PER, TIM_CHANNEL_1);
+		__HAL_TIM_ENABLE_IT(&TIM_PULSE_FREQ_PER, TIM_IT_UPDATE);
 		
-		//HAL_TIM_OC_Start_IT(&hTIM9, TIM_CHANNEL_2);
-		__HAL_TIM_ENABLE_IT(&hTIM9, TIM_IT_UPDATE);
-		__HAL_TIM_ENABLE_IT(&hTIM9, TIM_IT_CC2);
+		//HAL_TIM_OC_Start_IT(&TIM_PULSE_DURATION, TIM_CHANNEL_2);
+		__HAL_TIM_ENABLE_IT(&TIM_PULSE_DURATION, TIM_IT_UPDATE);
+		__HAL_TIM_ENABLE_IT(&TIM_PULSE_DURATION, TIM_IT_CC2);
 	
 		/* Enable the Peripheral */
-		//__HAL_TIM_ENABLE(&hTIM9);
+		//__HAL_TIM_ENABLE(&TIM_PULSE_DURATION);
 		
 		/* Enable the Output compare channel */
-		TIM_CCxChannelCmd(hTIM9.Instance, TIM_CHANNEL_2, TIM_CCx_ENABLE);
+		TIM_CCxChannelCmd(TIM_PULSE_DURATION.Instance, TIM_CHANNEL_2, TIM_CCx_ENABLE);
 	}
 }
 
@@ -377,35 +366,35 @@ void DiodeControlPulseStart(void)
 		subFlushes = 0;
 		first_flush = true;
 		
-		__HAL_TIM_SET_COUNTER(&hTIM10, 0);
-		__HAL_TIM_SET_COUNTER(&hTIM9, 0);
+		__HAL_TIM_SET_COUNTER(&TIM_PULSE_FREQ_PER, 0);
+		__HAL_TIM_SET_COUNTER(&TIM_PULSE_DURATION, 0);
 		
 		// Start frequency counter
-		HAL_TIM_OC_Start(&hTIM10, TIM_CHANNEL_1);
-		__HAL_TIM_ENABLE_IT(&hTIM10, TIM_IT_UPDATE);
+		HAL_TIM_OC_Start(&TIM_PULSE_FREQ_PER, TIM_CHANNEL_1);
+		__HAL_TIM_ENABLE_IT(&TIM_PULSE_FREQ_PER, TIM_IT_UPDATE);
 		
-		//HAL_TIM_OC_Start_IT(&hTIM9, TIM_CHANNEL_2);
-		__HAL_TIM_ENABLE_IT(&hTIM9, TIM_IT_UPDATE);
-		__HAL_TIM_ENABLE_IT(&hTIM9, TIM_IT_CC1);
+		//HAL_TIM_OC_Start_IT(&TIM_PULSE_DURATION, TIM_CHANNEL_2);
+		__HAL_TIM_ENABLE_IT(&TIM_PULSE_DURATION, TIM_IT_UPDATE);
+		__HAL_TIM_ENABLE_IT(&TIM_PULSE_DURATION, TIM_IT_CC1);
 		
 		if (Profile == PROFILE_SINGLE)
 		{
 			SoundOn();
-			__HAL_TIM_SET_AUTORELOAD(&hTIM11, 4200);
-			HAL_TIM_Base_Start_IT(&hTIM11);
+			__HAL_TIM_SET_AUTORELOAD(&TIM_SOUND_DURATION, 4200);
+			HAL_TIM_Base_Start_IT(&TIM_SOUND_DURATION);
 		}
 		else
 		{
 			SoundOn();
-			__HAL_TIM_SET_AUTORELOAD(&hTIM11, 2100);
-			HAL_TIM_Base_Start_IT(&hTIM11);
+			__HAL_TIM_SET_AUTORELOAD(&TIM_SOUND_DURATION, 2100);
+			HAL_TIM_Base_Start_IT(&TIM_SOUND_DURATION);
 		}
 	
 		/* Enable the Peripheral */
-		//__HAL_TIM_ENABLE(&hTIM9);
+		//__HAL_TIM_ENABLE(&TIM_PULSE_DURATION);
 		
 		/* Enable the Output compare channel */
-		TIM_CCxChannelCmd(hTIM9.Instance, TIM_CHANNEL_1, TIM_CCx_ENABLE);
+		TIM_CCxChannelCmd(TIM_PULSE_DURATION.Instance, TIM_CHANNEL_1, TIM_CCx_ENABLE);
 	}
 }
 
@@ -419,16 +408,16 @@ void DiodeControlOnePulseStart(void)
 		subFlushes = 0;
 		first_flush = true;
 		
-		__HAL_TIM_SET_COUNTER(&hTIM9, 0);
+		__HAL_TIM_SET_COUNTER(&TIM_PULSE_DURATION, 0);
 		
-		//HAL_TIM_OC_Start_IT(&hTIM9, TIM_CHANNEL_2);
-		__HAL_TIM_ENABLE_IT(&hTIM9, TIM_IT_UPDATE);
+		//HAL_TIM_OC_Start_IT(&TIM_PULSE_DURATION, TIM_CHANNEL_2);
+		__HAL_TIM_ENABLE_IT(&TIM_PULSE_DURATION, TIM_IT_UPDATE);
 	
 		/* Enable the Peripheral */
-		//__HAL_TIM_ENABLE(&hTIM9);
+		//__HAL_TIM_ENABLE(&TIM_PULSE_DURATION);
 		
 		/* Enable the Output compare channel */
-		TIM_CCxChannelCmd(hTIM9.Instance, TIM_CHANNEL_1, TIM_CCx_ENABLE);
+		TIM_CCxChannelCmd(TIM_PULSE_DURATION.Instance, TIM_CHANNEL_1, TIM_CCx_ENABLE);
 	}
 }
 
@@ -440,11 +429,11 @@ void LampControlPulseStop(void)
 		first_flush = true;
 		
 		// Start frequency counter
-		HAL_TIM_OC_Stop(&hTIM10, TIM_CHANNEL_1);
+		HAL_TIM_OC_Stop(&TIM_PULSE_FREQ_PER, TIM_CHANNEL_1);
 		
 		/* Disable the Output compare channel */
-		TIM_CCxChannelCmd(hTIM9.Instance, TIM_CHANNEL_2, TIM_CCx_DISABLE);
-		__HAL_TIM_DISABLE(&hTIM9);
+		TIM_CCxChannelCmd(TIM_PULSE_DURATION.Instance, TIM_CHANNEL_2, TIM_CCx_DISABLE);
+		__HAL_TIM_DISABLE(&TIM_PULSE_DURATION);
 		
 		//__MISC_LASERLED_OFF();
 		SoundOff();
@@ -459,11 +448,11 @@ void DiodeControlPulseStop(void)
 		first_flush = true;
 		
 		// Start frequency counter
-		HAL_TIM_OC_Stop(&hTIM10, TIM_CHANNEL_1);
+		HAL_TIM_OC_Stop(&TIM_PULSE_FREQ_PER, TIM_CHANNEL_1);
 		
 		/* Disable the Output compare channel */
-		TIM_CCxChannelCmd(hTIM9.Instance, TIM_CHANNEL_1, TIM_CCx_DISABLE);
-		__HAL_TIM_DISABLE(&hTIM9);
+		TIM_CCxChannelCmd(TIM_PULSE_DURATION.Instance, TIM_CHANNEL_1, TIM_CCx_DISABLE);
+		__HAL_TIM_DISABLE(&TIM_PULSE_DURATION);
 		
 		__MISC_LASERLED2_OFF();
 		SoundOff();
@@ -472,59 +461,59 @@ void DiodeControlPulseStop(void)
 
 void SetPulseDuration_us(uint16_t duration)
 {	
-	if (LaserStarted) __HAL_TIM_DISABLE(&hTIM9);
-	if (LaserStarted) __HAL_TIM_DISABLE(&hTIM10);
-	__HAL_TIM_SET_PRESCALER(&hTIM9, 16-1);
-	__HAL_TIM_SET_COUNTER(&hTIM9, 0);
-	__HAL_TIM_SET_AUTORELOAD(&hTIM9, duration * 21); // 50% duty cycle
-	//__HAL_TIM_URS_ENABLE(&hTIM9);
-	hTIM9.Instance->EGR |= TIM_EGR_UG;
-	__HAL_TIM_SET_COMPARE(&hTIM9, TIM_CHANNEL_1, (duration * 21)/2);
-	__HAL_TIM_SET_COMPARE(&hTIM9, TIM_CHANNEL_2, (duration * 21)/2);
-	if (LaserStarted) __HAL_TIM_ENABLE(&hTIM9);
-	if (LaserStarted) __HAL_TIM_ENABLE(&hTIM10);
+	if (LaserStarted) __HAL_TIM_DISABLE(&TIM_PULSE_DURATION);
+	if (LaserStarted) __HAL_TIM_DISABLE(&TIM_PULSE_FREQ_PER);
+	__HAL_TIM_SET_PRESCALER(&TIM_PULSE_DURATION, 16-1);
+	__HAL_TIM_SET_COUNTER(&TIM_PULSE_DURATION, 0);
+	__HAL_TIM_SET_AUTORELOAD(&TIM_PULSE_DURATION, duration * 21); // 50% duty cycle
+	//__HAL_TIM_URS_ENABLE(&TIM_PULSE_DURATION);
+	TIM_PULSE_DURATION.Instance->EGR |= TIM_EGR_UG;
+	__HAL_TIM_SET_COMPARE(&TIM_PULSE_DURATION, TIM_CHANNEL_1, (duration * 21)/2);
+	__HAL_TIM_SET_COMPARE(&TIM_PULSE_DURATION, TIM_CHANNEL_2, (duration * 21)/2);
+	if (LaserStarted) __HAL_TIM_ENABLE(&TIM_PULSE_DURATION);
+	if (LaserStarted) __HAL_TIM_ENABLE(&TIM_PULSE_FREQ_PER);
 }
 
 void SetPulseDuration_ms(uint16_t duration, uint16_t period)
 {	
-	if (LaserStarted) __HAL_TIM_DISABLE(&hTIM9);
-	if (LaserStarted) __HAL_TIM_DISABLE(&hTIM10);
-	__HAL_TIM_SET_PRESCALER(&hTIM9, 4000-1);
-	__HAL_TIM_SET_COUNTER(&hTIM9, 0);
-	__HAL_TIM_SET_AUTORELOAD(&hTIM9, period * 42); // 50% duty cycle
-	//__HAL_TIM_URS_ENABLE(&hTIM9);
-	hTIM9.Instance->EGR |= TIM_EGR_UG;
-	__HAL_TIM_SET_COMPARE(&hTIM9, TIM_CHANNEL_1, (period-duration) * 42);
-	__HAL_TIM_SET_COMPARE(&hTIM9, TIM_CHANNEL_2, (period-duration) * 42);
-	if (LaserStarted) __HAL_TIM_ENABLE(&hTIM9);
-	if (LaserStarted) __HAL_TIM_ENABLE(&hTIM10);
+	if (LaserStarted) __HAL_TIM_DISABLE(&TIM_PULSE_DURATION);
+	if (LaserStarted) __HAL_TIM_DISABLE(&TIM_PULSE_FREQ_PER);
+	__HAL_TIM_SET_PRESCALER(&TIM_PULSE_DURATION, 4000-1);
+	__HAL_TIM_SET_COUNTER(&TIM_PULSE_DURATION, 0);
+	__HAL_TIM_SET_AUTORELOAD(&TIM_PULSE_DURATION, period * 42); // 50% duty cycle
+	//__HAL_TIM_URS_ENABLE(&TIM_PULSE_DURATION);
+	TIM_PULSE_DURATION.Instance->EGR |= TIM_EGR_UG;
+	__HAL_TIM_SET_COMPARE(&TIM_PULSE_DURATION, TIM_CHANNEL_1, (period-duration) * 42);
+	__HAL_TIM_SET_COMPARE(&TIM_PULSE_DURATION, TIM_CHANNEL_2, (period-duration) * 42);
+	if (LaserStarted) __HAL_TIM_ENABLE(&TIM_PULSE_DURATION);
+	if (LaserStarted) __HAL_TIM_ENABLE(&TIM_PULSE_FREQ_PER);
 }
 
 void SetPulseFrequency(float32_t frequency)
 {
 	uint16_t period = 42000.0f / frequency;
 	
-	if (LaserStarted) __HAL_TIM_DISABLE(&hTIM10);
-	if (LaserStarted) __HAL_TIM_DISABLE(&hTIM9);
-	__HAL_TIM_SET_PRESCALER(&hTIM10, 3999);
-	__HAL_TIM_SET_COUNTER(&hTIM10, 0);
-	__HAL_TIM_SET_AUTORELOAD(&hTIM10, period);
-	hTIM10.Instance->EGR |= TIM_EGR_UG;
-	if (LaserStarted) __HAL_TIM_ENABLE(&hTIM10);
-	if (LaserStarted) __HAL_TIM_ENABLE(&hTIM9);
+	if (LaserStarted) __HAL_TIM_DISABLE(&TIM_PULSE_FREQ_PER);
+	if (LaserStarted) __HAL_TIM_DISABLE(&TIM_PULSE_DURATION);
+	__HAL_TIM_SET_PRESCALER(&TIM_PULSE_FREQ_PER, 3999);
+	__HAL_TIM_SET_COUNTER(&TIM_PULSE_FREQ_PER, 0);
+	__HAL_TIM_SET_AUTORELOAD(&TIM_PULSE_FREQ_PER, period);
+	TIM_PULSE_FREQ_PER.Instance->EGR |= TIM_EGR_UG;
+	if (LaserStarted) __HAL_TIM_ENABLE(&TIM_PULSE_FREQ_PER);
+	if (LaserStarted) __HAL_TIM_ENABLE(&TIM_PULSE_DURATION);
 }
 
 void SetPulseFrequency_(float32_t frequency)
 {
 	uint16_t period = 42000.0f / frequency; // 10s period
 	
-	if (LaserStarted) __HAL_TIM_DISABLE(&hTIM10);
-	if (LaserStarted) __HAL_TIM_DISABLE(&hTIM10);
-	__HAL_TIM_SET_PRESCALER(&hTIM10, 39999);
-	__HAL_TIM_SET_COUNTER(&hTIM10, 0);
-	__HAL_TIM_SET_AUTORELOAD(&hTIM10, period);
-	hTIM10.Instance->EGR |= TIM_EGR_UG;
-	if (LaserStarted) __HAL_TIM_ENABLE(&hTIM10);
-	if (LaserStarted) __HAL_TIM_ENABLE(&hTIM9);
+	if (LaserStarted) __HAL_TIM_DISABLE(&TIM_PULSE_FREQ_PER);
+	if (LaserStarted) __HAL_TIM_DISABLE(&TIM_PULSE_FREQ_PER);
+	__HAL_TIM_SET_PRESCALER(&TIM_PULSE_FREQ_PER, 39999);
+	__HAL_TIM_SET_COUNTER(&TIM_PULSE_FREQ_PER, 0);
+	__HAL_TIM_SET_AUTORELOAD(&TIM_PULSE_FREQ_PER, period);
+	TIM_PULSE_FREQ_PER.Instance->EGR |= TIM_EGR_UG;
+	if (LaserStarted) __HAL_TIM_ENABLE(&TIM_PULSE_FREQ_PER);
+	if (LaserStarted) __HAL_TIM_ENABLE(&TIM_PULSE_DURATION);
 }
 
