@@ -302,6 +302,9 @@ void IPLInput_Process(uint16_t pic_id)
 		{
 			case 1:
 				frameData_LaserDiode.melanin = 5;
+				frameData_LaserDiode.laserprofile.EnergyCnt = 12;
+				frameData_LaserDiode.laserprofile.DurationCnt = 1;
+				break;
 			case 2:
 				frameData_LaserDiode.melanin = 14;
 				frameData_LaserDiode.laserprofile.EnergyCnt = 12;
@@ -309,6 +312,9 @@ void IPLInput_Process(uint16_t pic_id)
 				break;
 			case 3:
 				frameData_LaserDiode.melanin = 27;
+				frameData_LaserDiode.laserprofile.EnergyCnt = 0;
+				frameData_LaserDiode.laserprofile.DurationCnt = 3;
+				break;
 			case 4:
 				frameData_LaserDiode.melanin = 41;
 				frameData_LaserDiode.laserprofile.EnergyCnt = 0;
@@ -316,6 +322,9 @@ void IPLInput_Process(uint16_t pic_id)
 				break;
 			case 5:
 				frameData_LaserDiode.melanin = 61;
+				frameData_LaserDiode.laserprofile.EnergyCnt = 0;
+				frameData_LaserDiode.laserprofile.DurationCnt = 4;
+				break;
 			case 6:
 				frameData_LaserDiode.melanin = 85;
 				frameData_LaserDiode.laserprofile.EnergyCnt = 0;

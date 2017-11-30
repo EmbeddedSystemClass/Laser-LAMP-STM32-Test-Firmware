@@ -53,7 +53,7 @@ extern int32_t LOGHASH[16];
 #define LASER_CAN_ID_FRACTIONAL		0x83
 #define LASER_CAN_ID_IPL					0x85
 #define LASER_CAN_ID_1340NM				0x86
-#define LASER_CAN_ID_2940NM				0x8a
+#define LASER_CAN_ID_2940NM				0x87
 
 
 // Base emmiter types
