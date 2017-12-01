@@ -3,7 +3,7 @@
 
 #include <stdint.h>
 
-#define ERB_VOLTAGES_NUM	6
+#define ERB_VOLTAGES_NUM	11
 
 extern uint16_t global_Erb_Duration_Table[3 * ERB_VOLTAGES_NUM];
 extern uint16_t global_Erb_Voltage_Table[3 * ERB_VOLTAGES_NUM];
