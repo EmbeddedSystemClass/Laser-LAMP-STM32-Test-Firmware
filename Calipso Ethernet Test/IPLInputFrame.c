@@ -350,7 +350,10 @@ void IPLInput_Process(uint16_t pic_id)
 	uint16_t voltage     = global_IPL_Voltage_Table [voltage_id];
 	SetDACValue(voltage / 45.0f); // 450 - 0 to 10 - 0 range conversion
 	SetPulseDuration_ms(duration/subFlushesCount, duration * 2);
-	SetPulseFrequency(frameData_LaserDiode.laserprofile.Frequency);
+	if (mode == 0)
+		SetPulseFrequency_(1);
+	else
+		SetPulseFrequency(frameData_LaserDiode.laserprofile.Frequency);
 	
 	// calculate duration and energy
 	frameData_LaserDiode.lasersettings.Duration = duration;
@@ -361,9 +364,16 @@ void IPLInput_Process(uint16_t pic_id)
 	duration_publish = frameData_LaserDiode.lasersettings.Duration;
 	energy_publish = frameData_LaserDiode.lasersettings.Energy;
 	
-	// check single mode
-	if (mode == 0) Profile = PROFILE_SINGLE; // Set single mode
-	else 					 Profile = PROFILE_MEDIUM;
+	if (mode == 2)
+	{
+		SetPulseDuration_ms(duration/2, duration/2 + 50);
+		subFlushesCount = 2;
+	}
+	else
+	{
+		SetPulseDuration_ms(duration, duration * 2);
+		subFlushesCount = 1;
+	}
 	
 	// Process buttons
 	if (frameData_LaserDiode.buttons.onIgnitionBtn != 0)
