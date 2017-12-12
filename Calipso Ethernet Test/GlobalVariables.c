@@ -708,12 +708,13 @@ void CANDeviceReadCounter(uint8_t slot_id, uint8_t id)
 			_FlushesGlobal1340nm = FlushesGlobal1340nm;
 			break;
 		case LASER_ID_2940NM:
-			CANReadRegister(slot_id, CAN_MESSAGE_TYPE_REGISTER_CNT, (uint8_t*)&FlushesGlobal1340nm, &len);
+			CANReadRegister(slot_id, CAN_MESSAGE_TYPE_REGISTER_CNT, (uint8_t*)&FlushesGlobal2940nm, &len);
 			_FlushesGlobal2940nm = FlushesGlobal2940nm;
 			break;
 		case LASER_ID_UNKNOWN:
 			break;
 		case LASER_ID_NOTCONNECTED:
 			break;
+		
 	}
 }

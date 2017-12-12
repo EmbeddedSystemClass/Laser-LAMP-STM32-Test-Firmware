@@ -202,6 +202,8 @@ void CoolInit(void)
 	HAL_TIM_OC_ConfigChannel(&htim_cool, &tim2_oc_init, TIM_CHANNEL_1);
 	
 	HAL_TIM_OC_Start(&htim_cool, TIM_CHANNEL_1);
+	
+	CoolOff();
 }
 
 void CoolOn(void)
