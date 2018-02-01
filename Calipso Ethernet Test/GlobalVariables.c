@@ -407,7 +407,7 @@ void CANDeviceWriteCounter(LASER_ID laser_id, uint8_t laser_can_id)
 				_FlushesGlobalIPL  = FlushesGlobalIPL;
 			}
 			break;
-		case LASER_ID_1340NM:
+		case LASER_ID_1440NM:
 			if (_FlushesGlobal1340nm  != FlushesGlobal1340nm )
 			{
 				CANWriteRegister(laser_can_id, CAN_MESSAGE_TYPE_REGISTER_CNT, (uint8_t*)&FlushesGlobal1340nm, len);
@@ -486,7 +486,7 @@ void SolidStateLaserPulseReset(LASER_ID laser_id)
 		case LASER_ID_IPL:
 			FlushesSessionIPL = 0;
 			break;
-		case LASER_ID_1340NM:
+		case LASER_ID_1440NM:
 			FlushesSession1340nm = 0;
 			break;
 		case LASER_ID_2940NM:
@@ -525,7 +525,7 @@ void SolidStateLaserPulseInc(LASER_ID laser_id)
 			FlushesSessionIPL++;
 			FlushesGlobalIPL++;
 			break;
-		case LASER_ID_1340NM:
+		case LASER_ID_1440NM:
 			FlushesSession1340nm++;
 			FlushesGlobal1340nm++;
 			break;
@@ -558,7 +558,7 @@ uint32_t GetSolidStateGlobalPulse(LASER_ID laser_id)
 			return FlushesGlobalLD;
 		case LASER_ID_IPL:
 			return FlushesGlobalIPL;
-		case LASER_ID_1340NM:
+		case LASER_ID_1440NM:
 			return FlushesGlobal1340nm;
 		case LASER_ID_2940NM:
 			return FlushesGlobal2940nm;
@@ -585,7 +585,7 @@ uint32_t GetSolidStateSessionPulse(LASER_ID laser_id)
 			return FlushesSessionLD;
 		case LASER_ID_IPL:
 			return FlushesSessionIPL;
-		case LASER_ID_1340NM:
+		case LASER_ID_1440NM:
 			return FlushesSession1340nm;
 		case LASER_ID_2940NM:
 			return FlushesSession2940nm;
@@ -643,8 +643,8 @@ bool CheckEmmiter(LASER_ID laser_id)
 			return ((LaserSet & LASER_ID_MASK_DIODELASER)  != 0);
 		case LASER_ID_IPL:
 			return ((LaserSet & LASER_ID_MASK_IPL)  != 0);
-		case LASER_ID_1340NM:
-			return ((LaserSet & LASER_ID_MASK_1340NM)  != 0);
+		case LASER_ID_1440NM:
+			return ((LaserSet & LASER_ID_MASK_1440NM)  != 0);
 		case LASER_ID_2940NM:
 			return ((LaserSet & LASER_ID_MASK_2940NM)  != 0);
 		case LASER_ID_UNKNOWN:
@@ -669,7 +669,7 @@ LASER_ID IdentifyEmmiter(uint8_t id, uint32_t *laser_set)
 	if (id == (uint8_t)LASER_CAN_ID_LONGPULSE	  ) { *laser_set |= LASER_ID_MASK_LONGPULSE;   return LASER_ID_LONGPULSE;   };
 	if (id == (uint8_t)LASER_CAN_ID_FRACTIONAL	) { *laser_set |= LASER_ID_MASK_FRACTIONAL;  return LASER_ID_FRACTLASER;  };
 	if (id == (uint8_t)LASER_CAN_ID_IPL					) { *laser_set |= LASER_ID_MASK_IPL;				 return LASER_ID_IPL;  				};
-	if (id == (uint8_t)LASER_CAN_ID_1340NM			) { *laser_set |= LASER_ID_MASK_1340NM;			 return LASER_ID_1340NM;  		};
+	if (id == (uint8_t)LASER_CAN_ID_1440NM			) { *laser_set |= LASER_ID_MASK_1440NM;			 return LASER_ID_1440NM;  		};
 	if (id == (uint8_t)LASER_CAN_ID_2940NM			) { *laser_set |= LASER_ID_MASK_2940NM;			 return LASER_ID_2940NM;  		};
 	return LASER_ID_UNKNOWN;
 }
@@ -703,7 +703,7 @@ void CANDeviceReadCounter(uint8_t slot_id, uint8_t id)
 			CANReadRegister(slot_id, CAN_MESSAGE_TYPE_REGISTER_CNT, (uint8_t*)&FlushesGlobalIPL, &len);
 			_FlushesGlobalIPL = FlushesGlobalIPL;
 			break;
-		case LASER_ID_1340NM:
+		case LASER_ID_1440NM:
 			CANReadRegister(slot_id, CAN_MESSAGE_TYPE_REGISTER_CNT, (uint8_t*)&FlushesGlobal1340nm, &len);
 			_FlushesGlobal1340nm = FlushesGlobal1340nm;
 			break;

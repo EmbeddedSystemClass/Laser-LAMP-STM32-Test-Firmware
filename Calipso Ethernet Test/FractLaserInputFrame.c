@@ -34,7 +34,7 @@ uint16_t SetLaserSettingsFract(uint16_t energy_index, uint16_t mode)
 	uint16_t voltageClb = 0;
 	uint16_t duration = 0;
 	
-	if (slot1_id == LASER_ID_1340NM)
+	if (slot1_id == LASER_ID_1440NM)
 	{
 		if (index > (FRACT_NUM_ENERGY-1)) index = FRACT_NUM_ENERGY-1;
 		
@@ -152,7 +152,7 @@ void FractLaserInput_Process(uint16_t pic_id)
 	
 	if (energyCnt != frameData_FractLaser.laserprofile.EnergyCnt)
 	{
-		if ((slot1_id == LASER_ID_1340NM) && (frameData_FractLaser.laserprofile.EnergyCnt > (FRACT_NUM_ENERGY-1))) 
+		if ((slot1_id == LASER_ID_1440NM) && (frameData_FractLaser.laserprofile.EnergyCnt > (FRACT_NUM_ENERGY-1))) 
 			frameData_FractLaser.laserprofile.EnergyCnt = FRACT_NUM_ENERGY-1;
 		if ((slot1_id == LASER_ID_2940NM) && (frameData_FractLaser.laserprofile.EnergyCnt > (ERB_VOLTAGES_NUM-1))) 
 			frameData_FractLaser.laserprofile.EnergyCnt = ERB_VOLTAGES_NUM-1;

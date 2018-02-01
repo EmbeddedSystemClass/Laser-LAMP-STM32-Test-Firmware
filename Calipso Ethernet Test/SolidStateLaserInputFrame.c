@@ -8,6 +8,7 @@
 
 #include <math.h>
 #include "arm_math.h"
+//C27
 														
 uint16_t modeDurationTable[10] = {200, 200, 200, 200, 300, 300, 400, 500, 500, 500};
 uint16_t modeVoltageTable[10] = {410, 415, 420, 430, 415, 435, 420, 415, 425, 440};
