@@ -47,3 +47,4 @@
 .\objects\longpulselaserinputframe.o: GlobalVariables.h
 .\objects\longpulselaserinputframe.o: LaserDiodeGUIPreset.h
 .\objects\longpulselaserinputframe.o: GlobalVariables.h
+.\objects\longpulselaserinputframe.o: .\EnergyTables\LP_Energy_Table.h

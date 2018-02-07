@@ -6,21 +6,10 @@
 #include "GlobalVariables.h"
 #include "LaserMisc.h"
 #include "Erb_Energy_Table.h"
+#include "Fract_Energy_Table.h"
 
 #include <math.h>
 #include "arm_math.h"
-
-#define FRACT_NUM_ENERGY 10
-														
-uint16_t modeFractDurationTable[3 * FRACT_NUM_ENERGY] = { 500,  500,  500,  500,  500,  500,  500,  500,  500,  500,
-																												 1000, 1000, 1000, 1000, 1000, 1000, 1000, 1000, 1000, 1000,
-																												 2000, 2000, 2000, 2000, 2000, 2000, 2000, 2000, 2000, 2000};
-uint16_t modeFractVoltageTable [3 * FRACT_NUM_ENERGY] = { 260,  280,  300,  320,  340,  360,  380,  400,  420,  440,
-																													260,  280,  300,  320,  340,  360,  380,  400,  420,  440,
-																													260,  280,  300,  320,  340,  360,  380,  400,  420,  440};
-uint16_t modeFractEnergyTable  [3 * FRACT_NUM_ENERGY] = { 120,	201,	504,	637,	920, 1243, 1590, 2138, 2325, 2707,
-																													512,	965, 1474, 2053, 2661, 3392, 4048, 4800, 5392, 6160,
-																												 1088, 1923, 2387, 3920, 4464, 5568, 6672, 7792, 8896, 9984};
 
 extern void SetDACValue(float32_t value);
 														 
@@ -34,15 +23,25 @@ uint16_t SetLaserSettingsFract(uint16_t energy_index, uint16_t mode)
 	uint16_t voltageClb = 0;
 	uint16_t duration = 0;
 	
-	if (slot1_id == LASER_ID_1440NM)
+	if (slot1_id == LASER_ID_FRACTLASER)
 	{
-		if (index > (FRACT_NUM_ENERGY-1)) index = FRACT_NUM_ENERGY-1;
+		if (index > (FRACT1440NM_NUM_ENERGY-1)) index = FRACT1440NM_NUM_ENERGY-1;
 		
-		energy = 0.6 * modeFractEnergyTable[index + mode * FRACT_NUM_ENERGY];
-		voltageClb = modeFractVoltageTable[index + mode * FRACT_NUM_ENERGY];// + (FlushesGlobalSS / 100000);
+		energy = 0.6 * modeFract1440nmEnergyTable[index + mode * FRACT1440NM_NUM_ENERGY];
+		voltageClb = modeFract1440nmVoltageTable[index + mode * FRACT1440NM_NUM_ENERGY];// + (FlushesGlobalSS / 100000);
 		if (voltageClb >= 449)	voltageClb = 449;
-		duration = modeFractDurationTable[index + mode * FRACT_NUM_ENERGY];
+		duration = modeFract1440nmDurationTable[index + mode * FRACT1440NM_NUM_ENERGY];
 	}
+	if (slot1_id == LASER_ID_1340NM)
+	{
+		if (index > (FRACT1340NM_NUM_ENERGY-1)) index = FRACT1340NM_NUM_ENERGY-1;
+		
+		energy = modeFract1340nmEnergyTable[index + mode * FRACT1340NM_NUM_ENERGY];
+		voltageClb = modeFract1340nmVoltageTable[index + mode * FRACT1340NM_NUM_ENERGY];// + (FlushesGlobalSS / 100000);
+		if (voltageClb >= 449)	voltageClb = 449;
+		duration = modeFract1440nmDurationTable[index + mode * FRACT1340NM_NUM_ENERGY];
+	}
+	
 	if (slot1_id == LASER_ID_2940NM)
 	{
 		if (index > (ERB_VOLTAGES_NUM-1)) index = ERB_VOLTAGES_NUM-1;
@@ -152,8 +151,10 @@ void FractLaserInput_Process(uint16_t pic_id)
 	
 	if (energyCnt != frameData_FractLaser.laserprofile.EnergyCnt)
 	{
-		if ((slot1_id == LASER_ID_1440NM) && (frameData_FractLaser.laserprofile.EnergyCnt > (FRACT_NUM_ENERGY-1))) 
-			frameData_FractLaser.laserprofile.EnergyCnt = FRACT_NUM_ENERGY-1;
+		if ((slot1_id == LASER_ID_FRACTLASER) && (frameData_FractLaser.laserprofile.EnergyCnt > (FRACT1440NM_NUM_ENERGY-1))) 
+			frameData_FractLaser.laserprofile.EnergyCnt = FRACT1440NM_NUM_ENERGY-1;
+		if ((slot1_id == LASER_ID_1340NM) && (frameData_FractLaser.laserprofile.EnergyCnt > (FRACT1340NM_NUM_ENERGY-1))) 
+			frameData_FractLaser.laserprofile.EnergyCnt = FRACT1340NM_NUM_ENERGY-1;
 		if ((slot1_id == LASER_ID_2940NM) && (frameData_FractLaser.laserprofile.EnergyCnt > (ERB_VOLTAGES_NUM-1))) 
 			frameData_FractLaser.laserprofile.EnergyCnt = ERB_VOLTAGES_NUM-1;
 		update = true;

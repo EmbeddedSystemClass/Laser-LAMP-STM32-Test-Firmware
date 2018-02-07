@@ -47,4 +47,5 @@
 .\objects\fractlaserinputframe.o: GlobalVariables.h
 .\objects\fractlaserinputframe.o: LaserDiodeGUIPreset.h
 .\objects\fractlaserinputframe.o: GlobalVariables.h
-.\objects\fractlaserinputframe.o: Erb_Energy_Table.h
+.\objects\fractlaserinputframe.o: .\EnergyTables\Erb_Energy_Table.h
+.\objects\fractlaserinputframe.o: .\EnergyTables\Fract_Energy_Table.h

@@ -49,4 +49,4 @@
 .\objects\iplinputframe.o: LaserDiodeGUIPreset.h
 .\objects\iplinputframe.o: GlobalVariables.h
 .\objects\iplinputframe.o: SolidStateLaser.h
-.\objects\iplinputframe.o: IPL_Energy_Table.h
+.\objects\iplinputframe.o: .\EnergyTables\IPL_Energy_Table.h
