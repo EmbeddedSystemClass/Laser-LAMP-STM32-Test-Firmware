@@ -33,7 +33,7 @@ void DiodeLaserOff()
 	osDelay(100);
 	__MISC_LASERDIODE_OFF();
 	osDelay(100);
-	CoolOff();
+	CoolOff1();
 }
 
 void SolidStateLaserOff()
@@ -43,11 +43,11 @@ void SolidStateLaserOff()
 	SolidStateLaser_en = false;
 	LampControlPulseStop();
 	osDelay(100);
-	__SOLIDSTATELASER_SIMMEROFF();
+	NBU1012_SimmerOff();
 	osDelay(100);
-	__SOLIDSTATELASER_HVOFF();
+	PCA10_HVOff();
 	osDelay(100);
-	__SOLIDSTATELASER_DISCHARGEON();
+	NBU1012_DischargeOn();
 }
 
 //----------------------------- GUI FRAMES ----------------------------------
@@ -245,6 +245,10 @@ void MainThread (void const *argument) {
 	LongPulseLaserInput_Init(pic_id);
 	FractLaserInput_Init(pic_id);
 	IPLInput_Init(pic_id);
+	
+	StopIfRunning(pic_id);
+	CoolOff1();
+	CoolOff2();
 	
 	GetDateTime(g_wDGUSTimeout, &datetime);
 
@@ -508,8 +512,7 @@ void MainThread (void const *argument) {
 			case FRAME_PICID_IPL_PCA10_FAULT:
 			case FRAME_PICID_IPL_PDD_FAULT:
 			case FRAME_PICID_IPL_OVERHEATING:
-				IPLWork_Process(pic_id);
-				//IPLError_Process(pic_id);
+				IPLPrepare_Process(pic_id);
 				UpdateLaserStatus();
 				break;
 			
@@ -548,6 +551,11 @@ void MainThread (void const *argument) {
 			}
 		
 		last_pic_id = pic_id;
+			
+#ifdef PCA10_ADAPTER_SUPPORT
+		uint8_t len = 2;
+		CAN2ReadRegister(SLOT_ID_1, CAN_MESSAGE_TYPE_REGISTER_STATUS, (uint8_t*)&pca10_adapter_status, &len);
+#endif
 		
     osThreadYield ();                                           // suspend thread
   }
