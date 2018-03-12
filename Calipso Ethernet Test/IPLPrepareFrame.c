@@ -52,7 +52,7 @@ void IPLPrepare_Process(uint16_t pic_id)
 			}
 			break;
 		case FRAME_PICID_IPL_COOLING_TIMER:
-			CoolSet2((frameData_LaserDiode.cooling + 1) * 17);
+			CoolSet((frameData_LaserDiode.cooling + 1) * 17);
 			frameData_LaserDiode.timer.timer_minutes = m_wMinutes;
 			frameData_LaserDiode.timer.timer_seconds = m_wSeconds;
 			if (!prepare)
@@ -101,9 +101,9 @@ void IPLPrepare_Process(uint16_t pic_id)
 		SolidStateLaser_en = false;
 		LampControlPulseStop();
 		
-		__MISC_SOLIDSTATELASER_SIMMEROFF();
-		__MISC_SOLIDSTATELASER_HVOFF();
-		__MISC_SOLIDSTATELASER_DISCHARGEON();
+		__SOLIDSTATELASER_SIMMEROFF();
+		__SOLIDSTATELASER_HVOFF();
+		__SOLIDSTATELASER_DISCHARGEON();
 		SetDACValue(0.0f);
 	
 		StoreGlobalVariables();
@@ -136,12 +136,12 @@ void _IPLOff()
 	SolidStateLaser_en = false;
 	LampControlPulseStop();
 	osDelay(100);
-	__MISC_SOLIDSTATELASER_SIMMEROFF();
+	__SOLIDSTATELASER_SIMMEROFF();
 	osDelay(100);
-	__MISC_SOLIDSTATELASER_HVOFF();
+	__SOLIDSTATELASER_HVOFF();
 	osDelay(100);
-	__MISC_SOLIDSTATELASER_DISCHARGEON();
-	CoolOff2();
+	__SOLIDSTATELASER_DISCHARGEON();
+	CoolOff();
 }
 
 void IPLErrorCheck_Process(uint16_t pic_id)
@@ -196,7 +196,7 @@ void IPLStopIfWork(uint16_t pic_id)
 		WriteSolidStateLaserDataConvert16(FRAMEDATA_SOLIDSTATELASER_BASE, &frameData_SolidStateLaser);
 		osSignalWait(DGUS_EVENT_SEND_COMPLETED, g_wDGUSTimeout);
 		
-		CoolOff2();
+		CoolOff();
 		_IPLOff();
 	}
 }

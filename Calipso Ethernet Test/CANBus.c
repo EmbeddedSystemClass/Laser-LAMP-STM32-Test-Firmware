@@ -5,6 +5,8 @@
 #include "stm32f4xx_hal_gpio.h"
 #include <string.h>
 
+#define HAL_CAN_TIMEOUT				1000
+
 CAN_HandleTypeDef hcan1;
 static CanTxMsgTypeDef        TxMessage;
 static CanRxMsgTypeDef        RxMessage;
@@ -90,7 +92,7 @@ bool CANSendCommand(uint8_t dev_addr, uint8_t cmd, uint8_t *data, uint8_t length
 	memcpy((void*)TxMessage.Data, (void*)data, length);
 	TxMessage.DLC = length;
 	
-	if (HAL_CAN_Transmit(&hcan1, 5) == HAL_OK)
+	if (HAL_CAN_Transmit(&hcan1, HAL_CAN_TIMEOUT) == HAL_OK)
 		return true;
 	return false;
 }
@@ -105,7 +107,7 @@ bool CANWriteRegister(uint8_t dev_addr, uint8_t reg_addr, uint8_t *data, uint8_t
 	memcpy((void*)TxMessage.Data, (void*)data, length);
 	TxMessage.DLC = length;
 	
-	if (HAL_CAN_Transmit(&hcan1, 5) == HAL_OK)
+	if (HAL_CAN_Transmit(&hcan1, HAL_CAN_TIMEOUT) == HAL_OK)
 		return true;
 	return false;
 }
@@ -120,10 +122,10 @@ bool CANReadRegister(uint8_t dev_addr, uint8_t reg_addr, uint8_t *data, uint8_t 
 	
 	memcpy((void*)TxMessage.Data, (void*)data, *length);
 	
-	if (HAL_CAN_Transmit(&hcan1, 100) == HAL_OK)
+	if (HAL_CAN_Transmit(&hcan1, HAL_CAN_TIMEOUT) == HAL_OK)
 	{
 		HAL_Delay(100);
-		if (HAL_CAN_Receive(&hcan1, CAN_FIFO0, 100) == HAL_OK)
+		if (HAL_CAN_Receive(&hcan1, CAN_FIFO0, HAL_CAN_TIMEOUT) == HAL_OK)
 		{
 			*length = RxMessage.DLC;
 			memcpy((void*)data, (void*)RxMessage.Data, *length);

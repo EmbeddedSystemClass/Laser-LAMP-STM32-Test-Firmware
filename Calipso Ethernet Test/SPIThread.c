@@ -145,7 +145,7 @@ void MainSPI_Thread (void const *argument) {
 #ifdef CAN_SUPPORT
 		uint32_t laser_set = 0;
 		uint8_t len = 4;	
-		/*if (!CANReadRegister(SLOT_ID_0, CAN_MESSAGE_TYPE_REGISTER_ID, (uint8_t*)&slot0_can_id, &len))
+		if (!CANReadRegister(SLOT_ID_0, CAN_MESSAGE_TYPE_REGISTER_ID, (uint8_t*)&slot0_can_id, &len))
 		{
 			slot0_can_id = -1;
 			slot0_id = LASER_ID_NOTCONNECTED;
@@ -172,15 +172,15 @@ void MainSPI_Thread (void const *argument) {
 			CANReadRegister(SLOT_ID_1, CAN_MESSAGE_TYPE_REGISTER_UID3, (uint8_t*)&((uint32_t*)&slot1_can_uid)[2], &len);
 			slot1_id = IdentifyEmmiter(slot1_can_id, &laser_set);
 		}
-		LaserSet = laser_set;*/
+		LaserSet = laser_set;
 	
 	
-		len = 4;
+		/*len = 4;
 		if (slot0_can_id != -1)
 			CANReadRegister(SLOT_ID_0, CAN_MESSAGE_TYPE_REGISTER_TEMPERATURE, (uint8_t*)&temperature_slot0, &len);
 		len = 4;
 		if (slot1_can_id != -1)
-			CANReadRegister(SLOT_ID_1, CAN_MESSAGE_TYPE_REGISTER_TEMPERATURE, (uint8_t*)&temperature_slot1, &len);
+			CANReadRegister(SLOT_ID_1, CAN_MESSAGE_TYPE_REGISTER_TEMPERATURE, (uint8_t*)&temperature_slot1, &len);*/
 		
 		osDelay(500);
 #endif

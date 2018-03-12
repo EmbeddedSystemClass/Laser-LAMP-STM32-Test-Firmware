@@ -18,6 +18,7 @@ uint16_t modeVoltageTable[10] = {410, 415, 420, 430, 415, 435, 420, 415, 425, 44
 uint16_t modeEnergyTable[10] = {180, 230, 270, 598, 822, 1100, 1265, 1457, 1644, 1868};
 
 extern void SetDACValue(float32_t value);
+extern float SSVoltageTrim(float voltage, uint32_t counter);
 														 
 float32_t programI = 0.0f;
 float32_t chargingVoltage = 0.0f;
@@ -28,7 +29,9 @@ uint16_t SetLaserSettings(uint16_t energy_index)
 	if (index > 9) index = 9;
 	
 	uint16_t energy = modeEnergyTable[index];
-	uint16_t voltageClb = modeVoltageTable[index] + (FlushesGlobalSS / 100000);
+	uint16_t voltageClb;
+	if (slot1_id == LASER_ID_SOLIDSTATE)
+		voltageClb = (uint16_t)SSVoltageTrim((float)modeVoltageTable[index], FlushesGlobalSS);
 	if (voltageClb >= 449)	voltageClb = 449;
 	uint16_t duration = modeDurationTable[index];
 	

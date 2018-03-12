@@ -33,7 +33,7 @@ void DiodeLaserOff()
 	osDelay(100);
 	__MISC_LASERDIODE_OFF();
 	osDelay(100);
-	CoolOff1();
+	CoolOff();
 }
 
 void SolidStateLaserOff()
@@ -43,11 +43,11 @@ void SolidStateLaserOff()
 	SolidStateLaser_en = false;
 	LampControlPulseStop();
 	osDelay(100);
-	NBU1012_SimmerOff();
+	__SOLIDSTATELASER_SIMMEROFF();
 	osDelay(100);
-	PCA10_HVOff();
+	__SOLIDSTATELASER_HVOFF();
 	osDelay(100);
-	NBU1012_DischargeOn();
+	__SOLIDSTATELASER_DISCHARGEON();
 }
 
 //----------------------------- GUI FRAMES ----------------------------------
@@ -247,8 +247,7 @@ void MainThread (void const *argument) {
 	IPLInput_Init(pic_id);
 	
 	StopIfRunning(pic_id);
-	CoolOff1();
-	CoolOff2();
+	CoolOff();
 	
 	GetDateTime(g_wDGUSTimeout, &datetime);
 

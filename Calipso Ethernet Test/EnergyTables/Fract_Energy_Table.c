@@ -21,3 +21,8 @@ uint16_t modeFract1340nmVoltageTable [3 * FRACT1340NM_NUM_ENERGY] = {	320,  340,
 uint16_t modeFract1340nmEnergyTable  [3 * FRACT1340NM_NUM_ENERGY] = { 1100,	1190,	1280,	1320,	1360, 1390, 1500,
 																																			1100,	1250, 1400, 1600, 1700, 1800, 2000,
 																																		  1750,	2100, 2400, 2600, 2800, 3300, 3400};
+
+float FractVoltageTrim(float voltage, uint32_t counter)
+{
+	return voltage + (float)((uint32_t)counter / 50000);
+}

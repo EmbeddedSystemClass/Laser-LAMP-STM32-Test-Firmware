@@ -78,3 +78,7 @@ uint16_t voltage_tbl[VOLTAGES_SNUM*SHORT_DURATIONS_NUM + VOLTAGES_NUM*SHORT_DURA
 		250 ,260	,270	,280	,290	,300	,310	,320	,330	,340	,350	,360	,370	,380	,390 ,400	,  //	20
 		250 ,260	,270	,280	,290	,300	,310	,320	,330	,340	,350	,360	,370	,380	,390 ,400};	 //	20
 	
+float LPVoltageTrim(float voltage, uint32_t counter)
+{
+	return voltage + (float)((uint32_t)counter / 50000);
+}		

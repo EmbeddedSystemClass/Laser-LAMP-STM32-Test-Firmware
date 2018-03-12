@@ -40,3 +40,8 @@ uint16_t GetIPLEnergy(uint16_t voltage_id, uint16_t duration_id)
 {
 	return global_IPL_Energy_Table[voltage_id + duration_id*IPL_VOLTAGES_NUM];
 }
+
+float IPLVoltageTrim(float voltage, uint32_t counter)
+{
+	return voltage + (float)((uint32_t)counter / 50000);
+}

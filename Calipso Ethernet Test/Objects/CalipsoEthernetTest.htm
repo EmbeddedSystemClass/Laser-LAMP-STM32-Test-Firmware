@@ -3,7 +3,7 @@
 <title>Static Call Graph - [.\Objects\CalipsoEthernetTest.axf]</title></head>
 <body><HR>
 <H1>Static Call Graph for image .\Objects\CalipsoEthernetTest.axf</H1><HR>
-<BR><P>#&#060CALLGRAPH&#062# ARM Linker, 5060183: Last Updated: Wed Feb 07 15:15:15 2018
+<BR><P>#&#060CALLGRAPH&#062# ARM Linker, 5060183: Last Updated: Tue Mar 06 15:43:58 2018
 <BR><P>
 <H3>Maximum Stack Usage =       1456 bytes + Unknown(Functions without stacksize, Cycles, Untraceable Function Pointers)</H3><H3>
 Call chain for Maximum Stack Depth:</H3>
@@ -1144,9 +1144,9 @@ Global Symbols
 <LI><a href="#[18a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;CANReadRegister
 <LI><a href="#[9a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
 <LI><a href="#[26b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;LOG_UPDATE_TABLE
-<LI><a href="#[29b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;WifiAuthenticationFrame_Process
+<LI><a href="#[29c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;WifiAuthenticationFrame_Process
 <LI><a href="#[281]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;WriteVariable
-<LI><a href="#[29a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;WifiScanningFrame_Process
+<LI><a href="#[29b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;WifiScanningFrame_Process
 <LI><a href="#[2ed]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;convert_wifinetdata
 <LI><a href="#[2bf]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;WriteRegister
 <LI><a href="#[2e5]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;socket_write
@@ -1260,7 +1260,7 @@ Global Symbols
 </UL>
 
 <P><STRONG><a name="[1e0]"></a>strcmp</STRONG> (Thumb, 128 bytes, Stack size 0 bytes, strcmpv7m.o(.text))
-<BR><BR>[Called By]<UL><LI><a href="#[294]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;PasswordFrame_Process
+<BR><BR>[Called By]<UL><LI><a href="#[295]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;PasswordFrame_Process
 <LI><a href="#[19b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SendAT
 <LI><a href="#[74]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;cookie_handler
 <LI><a href="#[1a0]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;WiFiThread_Scan
@@ -1977,7 +1977,7 @@ Global Symbols
 <BR>[Called By]<UL><LI><a href="#[27e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;TryStoreGlobalVariables
 </UL>
 
-<P><STRONG><a name="[18a]"></a>CANReadRegister</STRONG> (Thumb, 102 bytes, Stack size 16 bytes, canbus.o(i.CANReadRegister))
+<P><STRONG><a name="[18a]"></a>CANReadRegister</STRONG> (Thumb, 108 bytes, Stack size 16 bytes, canbus.o(i.CANReadRegister))
 <BR><BR>[Stack]<UL><LI>Max Depth = 56<LI>Call Chain = CANReadRegister &rArr; HAL_CAN_Transmit
 </UL>
 <BR>[Calls]<UL><LI><a href="#[18e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_Delay
@@ -1990,7 +1990,7 @@ Global Symbols
 <LI><a href="#[92]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;MainSPI_Thread
 </UL>
 
-<P><STRONG><a name="[18c]"></a>CANWriteRegister</STRONG> (Thumb, 66 bytes, Stack size 16 bytes, canbus.o(i.CANWriteRegister))
+<P><STRONG><a name="[18c]"></a>CANWriteRegister</STRONG> (Thumb, 68 bytes, Stack size 16 bytes, canbus.o(i.CANWriteRegister))
 <BR><BR>[Stack]<UL><LI>Max Depth = 56<LI>Call Chain = CANWriteRegister &rArr; HAL_CAN_Transmit
 </UL>
 <BR>[Calls]<UL><LI><a href="#[18d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_CAN_Transmit
@@ -2050,7 +2050,7 @@ Global Symbols
 <BR>[Called By]<UL><LI><a href="#[256]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;IPLPrepare_Process
 </UL>
 
-<P><STRONG><a name="[297]"></a>CheckEmmiter</STRONG> (Thumb, 82 bytes, Stack size 0 bytes, globalvariables.o(i.CheckEmmiter))
+<P><STRONG><a name="[298]"></a>CheckEmmiter</STRONG> (Thumb, 82 bytes, Stack size 0 bytes, globalvariables.o(i.CheckEmmiter))
 <BR><BR>[Called By]<UL><LI><a href="#[2c0]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SolidStateErrorCheck_Process
 <LI><a href="#[91]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;MainThread
 </UL>
@@ -2090,6 +2090,7 @@ Global Symbols
 <LI><a href="#[271]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;_DiodeLaserOff
 <LI><a href="#[27a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;LaserDiodeStopIfWork
 <LI><a href="#[270]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;LaserDiodeErrorCheck_Process
+<LI><a href="#[91]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;MainThread
 <LI><a href="#[1bf]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;DiodeLaserOff
 <LI><a href="#[249]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;_IPLOff
 <LI><a href="#[258]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;IPLStopIfWork
@@ -2206,7 +2207,7 @@ Global Symbols
 <LI><a href="#[1b8]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;TIM_CCxChannelCmd
 <LI><a href="#[1aa]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_TIM_OC_Start
 </UL>
-<BR>[Called By]<UL><LI><a href="#[296]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ServiceDiodeFrame_Process
+<BR>[Called By]<UL><LI><a href="#[297]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ServiceDiodeFrame_Process
 <LI><a href="#[95]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;LaserTimer_Callback
 </UL>
 
@@ -2218,7 +2219,7 @@ Global Symbols
 <LI><a href="#[1b8]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;TIM_CCxChannelCmd
 <LI><a href="#[1bd]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_TIM_OC_Stop
 </UL>
-<BR>[Called By]<UL><LI><a href="#[296]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ServiceDiodeFrame_Process
+<BR>[Called By]<UL><LI><a href="#[297]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ServiceDiodeFrame_Process
 <LI><a href="#[27b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;LaserDiodeWork_Process
 <LI><a href="#[274]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;LaserDiodeInput_Process
 <LI><a href="#[271]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;_DiodeLaserOff
@@ -2313,7 +2314,7 @@ Global Symbols
 <LI><a href="#[1ca]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;GetLaserID
 <LI><a href="#[1cb]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;_FractLaserOff
 </UL>
-<BR>[Called By]<UL><LI><a href="#[293]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;UpdateLaserState
+<BR>[Called By]<UL><LI><a href="#[294]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;UpdateLaserState
 </UL>
 
 <P><STRONG><a name="[1cd]"></a>FractLaserInput_Init</STRONG> (Thumb, 100 bytes, Stack size 16 bytes, fractlaserinputframe.o(i.FractLaserInput_Init))
@@ -2370,7 +2371,7 @@ Global Symbols
 <LI><a href="#[1cb]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;_FractLaserOff
 <LI><a href="#[1d1]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;WriteSolidStateLaserDataConvert16
 </UL>
-<BR>[Called By]<UL><LI><a href="#[29d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;StopIfRunning
+<BR>[Called By]<UL><LI><a href="#[293]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;StopIfRunning
 </UL>
 
 <P><STRONG><a name="[1dc]"></a>FractLaserWork_Process</STRONG> (Thumb, 636 bytes, Stack size 56 bytes, fractlaserworkframe.o(i.FractLaserWork_Process))
@@ -2437,7 +2438,7 @@ Global Symbols
 <P><STRONG><a name="[1ca]"></a>GetLaserID</STRONG> (Thumb, 4 bytes, Stack size 0 bytes, globalvariables.o(i.GetLaserID))
 <BR><BR>[Called By]<UL><LI><a href="#[9a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
 <LI><a href="#[1c9]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;FractLaserErrorCheck_Process
-<LI><a href="#[293]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;UpdateLaserState
+<LI><a href="#[294]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;UpdateLaserState
 </UL>
 
 <P><STRONG><a name="[1e5]"></a>GetPicId</STRONG> (Thumb, 54 bytes, Stack size 16 bytes, dgus.o(i.GetPicId))
@@ -2697,14 +2698,14 @@ Global Symbols
 </UL>
 
 <P><STRONG><a name="[1a4]"></a>HAL_GPIO_ReadPin</STRONG> (Thumb, 10 bytes, Stack size 0 bytes, stm32f4xx_hal_gpio.o(i.HAL_GPIO_ReadPin))
-<BR><BR>[Called By]<UL><LI><a href="#[295]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ServiceFrame_Process
+<BR><BR>[Called By]<UL><LI><a href="#[296]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ServiceFrame_Process
 <LI><a href="#[1dc]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;FractLaserWork_Process
 <LI><a href="#[1c9]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;FractLaserErrorCheck_Process
 <LI><a href="#[1d2]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;FractLaserInput_Process
 <LI><a href="#[28d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;LongPulseLaserWork_Process
 <LI><a href="#[287]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;LongPulseErrorCheck_Process
 <LI><a href="#[28a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;LongPulseLaserInput_Process
-<LI><a href="#[296]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ServiceDiodeFrame_Process
+<LI><a href="#[297]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ServiceDiodeFrame_Process
 <LI><a href="#[29f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SolidStateLaserWork_Process
 <LI><a href="#[2c0]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SolidStateErrorCheck_Process
 <LI><a href="#[29e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SolidStateLaserInput_Process
@@ -2719,7 +2720,7 @@ Global Symbols
 
 <P><STRONG><a name="[19a]"></a>HAL_GPIO_WritePin</STRONG> (Thumb, 10 bytes, Stack size 0 bytes, stm32f4xx_hal_gpio.o(i.HAL_GPIO_WritePin))
 <BR><BR>[Called By]<UL><LI><a href="#[1d7]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SetDACValue
-<LI><a href="#[295]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ServiceFrame_Process
+<LI><a href="#[296]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ServiceFrame_Process
 <LI><a href="#[20e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_MspInit
 <LI><a href="#[2c6]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SpeakerInit
 <LI><a href="#[1ba]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SoundOn
@@ -2731,7 +2732,7 @@ Global Symbols
 <LI><a href="#[28d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;LongPulseLaserWork_Process
 <LI><a href="#[288]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;_LongPulseLaserOff
 <LI><a href="#[28a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;LongPulseLaserInput_Process
-<LI><a href="#[296]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ServiceDiodeFrame_Process
+<LI><a href="#[297]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ServiceDiodeFrame_Process
 <LI><a href="#[29f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SolidStateLaserWork_Process
 <LI><a href="#[2c1]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;_SolidStateLaserOff
 <LI><a href="#[29e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SolidStateLaserInput_Process
@@ -2749,7 +2750,7 @@ Global Symbols
 <LI><a href="#[94]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;CalipsoWiFiThread
 <LI><a href="#[71]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;MainSPI_callback
 <LI><a href="#[92]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;MainSPI_Thread
-<LI><a href="#[293]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;UpdateLaserState
+<LI><a href="#[294]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;UpdateLaserState
 <LI><a href="#[2c2]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SolidStateLaserOff
 <LI><a href="#[1bf]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;DiodeLaserOff
 <LI><a href="#[259]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;IPLWork_Process
@@ -3306,7 +3307,7 @@ Global Symbols
 <LI><a href="#[249]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;_IPLOff
 <LI><a href="#[248]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ProcessIPLSimmerSensor
 </UL>
-<BR>[Called By]<UL><LI><a href="#[293]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;UpdateLaserState
+<BR>[Called By]<UL><LI><a href="#[294]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;UpdateLaserState
 </UL>
 
 <P><STRONG><a name="[24a]"></a>IPLInput_Init</STRONG> (Thumb, 154 bytes, Stack size 16 bytes, iplinputframe.o(i.IPLInput_Init))
@@ -3349,7 +3350,7 @@ Global Symbols
 <BR>[Called By]<UL><LI><a href="#[91]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;MainThread
 </UL>
 
-<P><STRONG><a name="[256]"></a>IPLPrepare_Process</STRONG> (Thumb, 428 bytes, Stack size 48 bytes, iplprepareframe.o(i.IPLPrepare_Process))
+<P><STRONG><a name="[256]"></a>IPLPrepare_Process</STRONG> (Thumb, 478 bytes, Stack size 48 bytes, iplprepareframe.o(i.IPLPrepare_Process))
 <BR><BR>[Stack]<UL><LI>Max Depth = 128<LI>Call Chain = IPLPrepare_Process &rArr; StoreGlobalVariables &rArr; HAL_FLASHEx_Erase &rArr; FLASH_WaitForLastOperation
 </UL>
 <BR>[Calls]<UL><LI><a href="#[1cc]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SetPicId
@@ -3378,7 +3379,7 @@ Global Symbols
 <LI><a href="#[1ab]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;CoolOff
 <LI><a href="#[249]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;_IPLOff
 </UL>
-<BR>[Called By]<UL><LI><a href="#[29d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;StopIfRunning
+<BR>[Called By]<UL><LI><a href="#[293]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;StopIfRunning
 </UL>
 
 <P><STRONG><a name="[259]"></a>IPLWork_Process</STRONG> (Thumb, 228 bytes, Stack size 40 bytes, iplworkframe.o(i.IPLWork_Process))
@@ -3409,6 +3410,7 @@ Global Symbols
 <P><STRONG><a name="[189]"></a>IdentifyEmmiter</STRONG> (Thumb, 132 bytes, Stack size 0 bytes, globalvariables.o(i.IdentifyEmmiter))
 <BR><BR>[Called By]<UL><LI><a href="#[188]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;CANDeviceReadCounter
 <LI><a href="#[27f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;LoadGlobalVariables
+<LI><a href="#[92]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;MainSPI_Thread
 </UL>
 
 <P><STRONG><a name="[255]"></a>IgnitionIPLState</STRONG> (Thumb, 16 bytes, Stack size 0 bytes, iplprepareframe.o(i.IgnitionIPLState))
@@ -3632,7 +3634,7 @@ Global Symbols
 <LI><a href="#[1ab]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;CoolOff
 <LI><a href="#[271]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;_DiodeLaserOff
 </UL>
-<BR>[Called By]<UL><LI><a href="#[293]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;UpdateLaserState
+<BR>[Called By]<UL><LI><a href="#[294]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;UpdateLaserState
 </UL>
 
 <P><STRONG><a name="[272]"></a>LaserDiodeInput_Init</STRONG> (Thumb, 252 bytes, Stack size 32 bytes, laserdiodeinputframe.o(i.LaserDiodeInput_Init))
@@ -3695,7 +3697,7 @@ Global Symbols
 <LI><a href="#[1ab]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;CoolOff
 <LI><a href="#[271]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;_DiodeLaserOff
 </UL>
-<BR>[Called By]<UL><LI><a href="#[29d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;StopIfRunning
+<BR>[Called By]<UL><LI><a href="#[293]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;StopIfRunning
 </UL>
 
 <P><STRONG><a name="[27b]"></a>LaserDiodeWork_Process</STRONG> (Thumb, 380 bytes, Stack size 48 bytes, laserdiodeworkframe.o(i.LaserDiodeWork_Process))
@@ -3774,7 +3776,7 @@ Global Symbols
 <LI><a href="#[1a4]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_GPIO_ReadPin
 <LI><a href="#[288]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;_LongPulseLaserOff
 </UL>
-<BR>[Called By]<UL><LI><a href="#[293]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;UpdateLaserState
+<BR>[Called By]<UL><LI><a href="#[294]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;UpdateLaserState
 </UL>
 
 <P><STRONG><a name="[289]"></a>LongPulseLaserInput_Init</STRONG> (Thumb, 82 bytes, Stack size 16 bytes, longpulselaserinputframe.o(i.LongPulseLaserInput_Init))
@@ -3857,13 +3859,14 @@ Global Symbols
 <LI><a href="#[288]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;_LongPulseLaserOff
 <LI><a href="#[1d1]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;WriteSolidStateLaserDataConvert16
 </UL>
-<BR>[Called By]<UL><LI><a href="#[29d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;StopIfRunning
+<BR>[Called By]<UL><LI><a href="#[293]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;StopIfRunning
 </UL>
 
-<P><STRONG><a name="[92]"></a>MainSPI_Thread</STRONG> (Thumb, 238 bytes, Stack size 24 bytes, spithread.o(i.MainSPI_Thread))
+<P><STRONG><a name="[92]"></a>MainSPI_Thread</STRONG> (Thumb, 390 bytes, Stack size 24 bytes, spithread.o(i.MainSPI_Thread))
 <BR><BR>[Stack]<UL><LI>Max Depth = 80<LI>Call Chain = MainSPI_Thread &rArr; CANReadRegister &rArr; HAL_CAN_Transmit
 </UL>
-<BR>[Calls]<UL><LI><a href="#[19a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_GPIO_WritePin
+<BR>[Calls]<UL><LI><a href="#[189]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;IdentifyEmmiter
+<LI><a href="#[19a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_GPIO_WritePin
 <LI><a href="#[18a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;CANReadRegister
 <LI><a href="#[1c0]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;osDelay
 <LI><a href="#[1a2]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;osThreadYield
@@ -3877,15 +3880,15 @@ Global Symbols
 </UL>
 <BR>[Address Reference Count : 1]<UL><LI> spithread.o(i.Init_MainSPI_Thread)
 </UL>
-<P><STRONG><a name="[91]"></a>MainThread</STRONG> (Thumb, 980 bytes, Stack size 0 bytes, mainthread.o(i.MainThread))
+<P><STRONG><a name="[91]"></a>MainThread</STRONG> (Thumb, 1024 bytes, Stack size 0 bytes, mainthread.o(i.MainThread))
 <BR><BR>[Stack]<UL><LI>Max Depth = 1068 + Unknown Stack Size
 <LI>Call Chain = MainThread &rArr; FractLaserWork_Process &rArr; log_FractLaserStart &rArr; LOG &rArr; QueuePutLog &rArr; osMessagePut &rArr; isrMessagePut &rArr; isr_mbx_send &rArr; rt_psq_enq &rArr; os_error &rArr; SoundOn &rArr; HAL_TIMEx_OCN_Start_DMA &rArr; HAL_DMA_Start_IT &rArr; DMA_SetConfig
 </UL>
 <BR>[Calls]<UL><LI><a href="#[1cc]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SetPicId
-<LI><a href="#[294]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;PasswordFrame_Process
+<LI><a href="#[295]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;PasswordFrame_Process
 <LI><a href="#[1ae]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;osSignalWait
-<LI><a href="#[295]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ServiceFrame_Process
-<LI><a href="#[297]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;CheckEmmiter
+<LI><a href="#[296]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ServiceFrame_Process
+<LI><a href="#[298]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;CheckEmmiter
 <LI><a href="#[1dc]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;FractLaserWork_Process
 <LI><a href="#[1da]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;FractLaserPrepare_Process
 <LI><a href="#[1d2]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;FractLaserInput_Process
@@ -3896,12 +3899,12 @@ Global Symbols
 <LI><a href="#[28c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;LongPulseLaserPrepare_Process
 <LI><a href="#[28a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;LongPulseLaserInput_Process
 <LI><a href="#[289]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;LongPulseLaserInput_Init
-<LI><a href="#[29b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;WifiAuthenticationFrame_Process
+<LI><a href="#[29c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;WifiAuthenticationFrame_Process
 <LI><a href="#[281]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;WriteVariable
-<LI><a href="#[29a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;WifiScanningFrame_Process
-<LI><a href="#[299]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;WifiScanningFrame_Init
-<LI><a href="#[29c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;WiFiLinkFrame_Process
-<LI><a href="#[296]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ServiceDiodeFrame_Process
+<LI><a href="#[29b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;WifiScanningFrame_Process
+<LI><a href="#[29a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;WifiScanningFrame_Init
+<LI><a href="#[29d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;WiFiLinkFrame_Process
+<LI><a href="#[297]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ServiceDiodeFrame_Process
 <LI><a href="#[29f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SolidStateLaserWork_Process
 <LI><a href="#[2a0]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SolidStateLaserPrepare_Process
 <LI><a href="#[29e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SolidStateLaserInput_Process
@@ -3910,13 +3913,14 @@ Global Symbols
 <LI><a href="#[274]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;LaserDiodeInput_Process
 <LI><a href="#[272]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;LaserDiodeInput_Init
 <LI><a href="#[1c0]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;osDelay
+<LI><a href="#[1ab]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;CoolOff
 <LI><a href="#[279]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;LaserDiodePrepare_Process
 <LI><a href="#[1a2]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;osThreadYield
 <LI><a href="#[1e5]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;GetPicId
 <LI><a href="#[1e1]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;GetDateTime
-<LI><a href="#[298]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;UpdateLaserStatus
-<LI><a href="#[293]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;UpdateLaserState
-<LI><a href="#[29d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;StopIfRunning
+<LI><a href="#[299]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;UpdateLaserStatus
+<LI><a href="#[294]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;UpdateLaserState
+<LI><a href="#[293]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;StopIfRunning
 <LI><a href="#[259]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;IPLWork_Process
 <LI><a href="#[256]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;IPLPrepare_Process
 <LI><a href="#[24c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;IPLInput_Process
@@ -3979,7 +3983,7 @@ Global Symbols
 </UL>
 <BR>[Address Reference Count : 1]<UL><LI> startup_stm32f407xx.o(RESET)
 </UL>
-<P><STRONG><a name="[294]"></a>PasswordFrame_Process</STRONG> (Thumb, 74 bytes, Stack size 16 bytes, passwordframe.o(i.PasswordFrame_Process))
+<P><STRONG><a name="[295]"></a>PasswordFrame_Process</STRONG> (Thumb, 74 bytes, Stack size 16 bytes, passwordframe.o(i.PasswordFrame_Process))
 <BR><BR>[Stack]<UL><LI>Max Depth = 56<LI>Call Chain = PasswordFrame_Process &rArr; SetPicId &rArr; WriteRegister
 </UL>
 <BR>[Calls]<UL><LI><a href="#[1cc]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SetPicId
@@ -4053,8 +4057,8 @@ Global Symbols
 <LI><a href="#[2a8]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_UART_Transmit_ITMY
 <LI><a href="#[2a9]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_UART_Receive_ITMY
 </UL>
-<BR>[Called By]<UL><LI><a href="#[294]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;PasswordFrame_Process
-<LI><a href="#[295]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ServiceFrame_Process
+<BR>[Called By]<UL><LI><a href="#[295]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;PasswordFrame_Process
+<LI><a href="#[296]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ServiceFrame_Process
 <LI><a href="#[1dc]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;FractLaserWork_Process
 <LI><a href="#[1da]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;FractLaserPrepare_Process
 <LI><a href="#[1d2]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;FractLaserInput_Process
@@ -4063,9 +4067,9 @@ Global Symbols
 <LI><a href="#[28d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;LongPulseLaserWork_Process
 <LI><a href="#[28c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;LongPulseLaserPrepare_Process
 <LI><a href="#[28a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;LongPulseLaserInput_Process
-<LI><a href="#[29b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;WifiAuthenticationFrame_Process
-<LI><a href="#[29a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;WifiScanningFrame_Process
-<LI><a href="#[296]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ServiceDiodeFrame_Process
+<LI><a href="#[29c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;WifiAuthenticationFrame_Process
+<LI><a href="#[29b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;WifiScanningFrame_Process
+<LI><a href="#[297]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ServiceDiodeFrame_Process
 <LI><a href="#[29f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SolidStateLaserWork_Process
 <LI><a href="#[2a0]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SolidStateLaserPrepare_Process
 <LI><a href="#[29e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SolidStateLaserInput_Process
@@ -4137,7 +4141,7 @@ Global Symbols
 <LI><a href="#[94]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;CalipsoWiFiThread
 </UL>
 
-<P><STRONG><a name="[296]"></a>ServiceDiodeFrame_Process</STRONG> (Thumb, 314 bytes, Stack size 48 bytes, serviceframediodelaser.o(i.ServiceDiodeFrame_Process))
+<P><STRONG><a name="[297]"></a>ServiceDiodeFrame_Process</STRONG> (Thumb, 314 bytes, Stack size 48 bytes, serviceframediodelaser.o(i.ServiceDiodeFrame_Process))
 <BR><BR>[Stack]<UL><LI>Max Depth = 124<LI>Call Chain = ServiceDiodeFrame_Process &rArr; DiodeControlPulseStart &rArr; SoundOn &rArr; HAL_TIMEx_OCN_Start_DMA &rArr; HAL_DMA_Start_IT &rArr; DMA_SetConfig
 </UL>
 <BR>[Calls]<UL><LI><a href="#[1ae]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;osSignalWait
@@ -4155,7 +4159,7 @@ Global Symbols
 <BR>[Called By]<UL><LI><a href="#[91]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;MainThread
 </UL>
 
-<P><STRONG><a name="[295]"></a>ServiceFrame_Process</STRONG> (Thumb, 514 bytes, Stack size 56 bytes, serviceframe.o(i.ServiceFrame_Process))
+<P><STRONG><a name="[296]"></a>ServiceFrame_Process</STRONG> (Thumb, 514 bytes, Stack size 56 bytes, serviceframe.o(i.ServiceFrame_Process))
 <BR><BR>[Stack]<UL><LI>Max Depth = 92<LI>Call Chain = ServiceFrame_Process &rArr; WriteVariableConvert16 &rArr; convert_array_w
 </UL>
 <BR>[Calls]<UL><LI><a href="#[1ae]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;osSignalWait
@@ -4177,12 +4181,12 @@ Global Symbols
 </UL>
 <BR>[Calls]<UL><LI><a href="#[19a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_GPIO_WritePin
 </UL>
-<BR>[Called By]<UL><LI><a href="#[295]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ServiceFrame_Process
+<BR>[Called By]<UL><LI><a href="#[296]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ServiceFrame_Process
 <LI><a href="#[1dc]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;FractLaserWork_Process
 <LI><a href="#[1d2]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;FractLaserInput_Process
 <LI><a href="#[28d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;LongPulseLaserWork_Process
 <LI><a href="#[28a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;LongPulseLaserInput_Process
-<LI><a href="#[296]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ServiceDiodeFrame_Process
+<LI><a href="#[297]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ServiceDiodeFrame_Process
 <LI><a href="#[29f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SolidStateLaserWork_Process
 <LI><a href="#[29e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SolidStateLaserInput_Process
 <LI><a href="#[27b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;LaserDiodeWork_Process
@@ -4193,7 +4197,7 @@ Global Symbols
 <LI><a href="#[24c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;IPLInput_Process
 </UL>
 
-<P><STRONG><a name="[2ba]"></a>SetLaserSettings</STRONG> (Thumb, 196 bytes, Stack size 24 bytes, solidstatelaserinputframe.o(i.SetLaserSettings))
+<P><STRONG><a name="[2ba]"></a>SetLaserSettings</STRONG> (Thumb, 198 bytes, Stack size 24 bytes, solidstatelaserinputframe.o(i.SetLaserSettings))
 <BR><BR>[Stack]<UL><LI>Max Depth = 56<LI>Call Chain = SetLaserSettings &rArr; __aeabi_dmul
 </UL>
 <BR>[Calls]<UL><LI><a href="#[28b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SetPulseDuration_us
@@ -4225,7 +4229,7 @@ Global Symbols
 <LI><a href="#[1e6]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;convert_w
 <LI><a href="#[2bf]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;WriteRegister
 </UL>
-<BR>[Called By]<UL><LI><a href="#[294]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;PasswordFrame_Process
+<BR>[Called By]<UL><LI><a href="#[295]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;PasswordFrame_Process
 <LI><a href="#[1dc]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;FractLaserWork_Process
 <LI><a href="#[1da]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;FractLaserPrepare_Process
 <LI><a href="#[1c9]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;FractLaserErrorCheck_Process
@@ -4234,9 +4238,9 @@ Global Symbols
 <LI><a href="#[28c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;LongPulseLaserPrepare_Process
 <LI><a href="#[287]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;LongPulseErrorCheck_Process
 <LI><a href="#[28a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;LongPulseLaserInput_Process
-<LI><a href="#[29a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;WifiScanningFrame_Process
-<LI><a href="#[299]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;WifiScanningFrame_Init
-<LI><a href="#[29c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;WiFiLinkFrame_Process
+<LI><a href="#[29b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;WifiScanningFrame_Process
+<LI><a href="#[29a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;WifiScanningFrame_Init
+<LI><a href="#[29d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;WiFiLinkFrame_Process
 <LI><a href="#[29f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SolidStateLaserWork_Process
 <LI><a href="#[2a0]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SolidStateLaserPrepare_Process
 <LI><a href="#[2c0]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SolidStateErrorCheck_Process
@@ -4255,9 +4259,9 @@ Global Symbols
 <P><STRONG><a name="[253]"></a>SetPulseDuration_ms</STRONG> (Thumb, 158 bytes, Stack size 20 bytes, solidstatelaser.o(i.SetPulseDuration_ms))
 <BR><BR>[Stack]<UL><LI>Max Depth = 20<LI>Call Chain = SetPulseDuration_ms
 </UL>
-<BR>[Called By]<UL><LI><a href="#[295]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ServiceFrame_Process
+<BR>[Called By]<UL><LI><a href="#[296]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ServiceFrame_Process
 <LI><a href="#[28a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;LongPulseLaserInput_Process
-<LI><a href="#[296]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ServiceDiodeFrame_Process
+<LI><a href="#[297]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ServiceDiodeFrame_Process
 <LI><a href="#[274]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;LaserDiodeInput_Process
 <LI><a href="#[24c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;IPLInput_Process
 </UL>
@@ -4265,7 +4269,7 @@ Global Symbols
 <P><STRONG><a name="[28b]"></a>SetPulseDuration_us</STRONG> (Thumb, 138 bytes, Stack size 20 bytes, solidstatelaser.o(i.SetPulseDuration_us))
 <BR><BR>[Stack]<UL><LI>Max Depth = 20<LI>Call Chain = SetPulseDuration_us
 </UL>
-<BR>[Called By]<UL><LI><a href="#[295]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ServiceFrame_Process
+<BR>[Called By]<UL><LI><a href="#[296]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ServiceFrame_Process
 <LI><a href="#[1ce]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SetLaserSettingsFract
 <LI><a href="#[28a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;LongPulseLaserInput_Process
 <LI><a href="#[2ba]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SetLaserSettings
@@ -4274,9 +4278,9 @@ Global Symbols
 <P><STRONG><a name="[1d5]"></a>SetPulseFrequency</STRONG> (Thumb, 140 bytes, Stack size 20 bytes, solidstatelaser.o(i.SetPulseFrequency))
 <BR><BR>[Stack]<UL><LI>Max Depth = 20<LI>Call Chain = SetPulseFrequency
 </UL>
-<BR>[Called By]<UL><LI><a href="#[295]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ServiceFrame_Process
+<BR>[Called By]<UL><LI><a href="#[296]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ServiceFrame_Process
 <LI><a href="#[1d2]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;FractLaserInput_Process
-<LI><a href="#[296]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ServiceDiodeFrame_Process
+<LI><a href="#[297]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ServiceDiodeFrame_Process
 <LI><a href="#[29e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SolidStateLaserInput_Process
 <LI><a href="#[274]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;LaserDiodeInput_Process
 <LI><a href="#[24c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;IPLInput_Process
@@ -4299,11 +4303,11 @@ Global Symbols
 <BR><BR>[Stack]<UL><LI>Max Depth = 48<LI>Call Chain = SolidStateErrorCheck_Process &rArr; SetPicId &rArr; WriteRegister
 </UL>
 <BR>[Calls]<UL><LI><a href="#[1cc]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SetPicId
-<LI><a href="#[297]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;CheckEmmiter
+<LI><a href="#[298]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;CheckEmmiter
 <LI><a href="#[1a4]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_GPIO_ReadPin
 <LI><a href="#[2c1]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;_SolidStateLaserOff
 </UL>
-<BR>[Called By]<UL><LI><a href="#[293]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;UpdateLaserState
+<BR>[Called By]<UL><LI><a href="#[294]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;UpdateLaserState
 </UL>
 
 <P><STRONG><a name="[292]"></a>SolidStateLaserInput_Init</STRONG> (Thumb, 102 bytes, Stack size 16 bytes, solidstatelaserinputframe.o(i.SolidStateLaserInput_Init))
@@ -4407,7 +4411,7 @@ Global Symbols
 <LI><a href="#[2c1]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;_SolidStateLaserOff
 <LI><a href="#[1d1]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;WriteSolidStateLaserDataConvert16
 </UL>
-<BR>[Called By]<UL><LI><a href="#[29d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;StopIfRunning
+<BR>[Called By]<UL><LI><a href="#[293]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;StopIfRunning
 </UL>
 
 <P><STRONG><a name="[1be]"></a>SoundOff</STRONG> (Thumb, 26 bytes, Stack size 8 bytes, lasermisc.o(i.SoundOff))
@@ -4456,7 +4460,7 @@ Global Symbols
 <BR>[Called By]<UL><LI><a href="#[9a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
 </UL>
 
-<P><STRONG><a name="[29d]"></a>StopIfRunning</STRONG> (Thumb, 36 bytes, Stack size 8 bytes, mainthread.o(i.StopIfRunning))
+<P><STRONG><a name="[293]"></a>StopIfRunning</STRONG> (Thumb, 36 bytes, Stack size 8 bytes, mainthread.o(i.StopIfRunning))
 <BR><BR>[Stack]<UL><LI>Max Depth = 64<LI>Call Chain = StopIfRunning &rArr; FractLaserStopIfWork &rArr; WriteSolidStateLaserDataConvert16 &rArr; convert_laserdata_ss &rArr; convert_array_w
 </UL>
 <BR>[Calls]<UL><LI><a href="#[1db]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;FractLaserStopIfWork
@@ -4618,7 +4622,7 @@ Global Symbols
 <BR><BR>[Called By]<UL><LI><a href="#[b5]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;USART6_TX_DMA_Complete
 </UL>
 
-<P><STRONG><a name="[293]"></a>UpdateLaserState</STRONG> (Thumb, 164 bytes, Stack size 16 bytes, mainthread.o(i.UpdateLaserState))
+<P><STRONG><a name="[294]"></a>UpdateLaserState</STRONG> (Thumb, 164 bytes, Stack size 16 bytes, mainthread.o(i.UpdateLaserState))
 <BR><BR>[Stack]<UL><LI>Max Depth = 72<LI>Call Chain = UpdateLaserState &rArr; LaserDiodeErrorCheck_Process &rArr; SetPicId &rArr; WriteRegister
 </UL>
 <BR>[Calls]<UL><LI><a href="#[19a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_GPIO_WritePin
@@ -4632,7 +4636,7 @@ Global Symbols
 <BR>[Called By]<UL><LI><a href="#[91]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;MainThread
 </UL>
 
-<P><STRONG><a name="[298]"></a>UpdateLaserStatus</STRONG> (Thumb, 160 bytes, Stack size 16 bytes, mainthread.o(i.UpdateLaserStatus))
+<P><STRONG><a name="[299]"></a>UpdateLaserStatus</STRONG> (Thumb, 160 bytes, Stack size 16 bytes, mainthread.o(i.UpdateLaserStatus))
 <BR><BR>[Stack]<UL><LI>Max Depth = 52<LI>Call Chain = UpdateLaserStatus &rArr; WriteVariableConvert16 &rArr; convert_array_w
 </UL>
 <BR>[Calls]<UL><LI><a href="#[1ae]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;osSignalWait
@@ -4708,7 +4712,7 @@ Global Symbols
 <BR>[Called By]<UL><LI><a href="#[2e6]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;socket_pending_data
 </UL>
 
-<P><STRONG><a name="[29c]"></a>WiFiLinkFrame_Process</STRONG> (Thumb, 56 bytes, Stack size 8 bytes, wifiscanningframe.o(i.WiFiLinkFrame_Process))
+<P><STRONG><a name="[29d]"></a>WiFiLinkFrame_Process</STRONG> (Thumb, 56 bytes, Stack size 8 bytes, wifiscanningframe.o(i.WiFiLinkFrame_Process))
 <BR><BR>[Stack]<UL><LI>Max Depth = 108<LI>Call Chain = WiFiLinkFrame_Process &rArr; osMessagePut &rArr; isrMessagePut &rArr; isr_mbx_send &rArr; rt_psq_enq &rArr; os_error &rArr; SoundOn &rArr; HAL_TIMEx_OCN_Start_DMA &rArr; HAL_DMA_Start_IT &rArr; DMA_SetConfig
 </UL>
 <BR>[Calls]<UL><LI><a href="#[1cc]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SetPicId
@@ -4791,7 +4795,7 @@ Global Symbols
 </UL>
 <BR>[Address Reference Count : 1]<UL><LI> wifithread.o(.constdata)
 </UL>
-<P><STRONG><a name="[29b]"></a>WifiAuthenticationFrame_Process</STRONG> (Thumb, 74 bytes, Stack size 16 bytes, wifiauthenticationframe.o(i.WifiAuthenticationFrame_Process))
+<P><STRONG><a name="[29c]"></a>WifiAuthenticationFrame_Process</STRONG> (Thumb, 74 bytes, Stack size 16 bytes, wifiauthenticationframe.o(i.WifiAuthenticationFrame_Process))
 <BR><BR>[Stack]<UL><LI>Max Depth = 40<LI>Call Chain = WifiAuthenticationFrame_Process &rArr; ReadVariable
 </UL>
 <BR>[Calls]<UL><LI><a href="#[1ae]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;osSignalWait
@@ -4801,7 +4805,7 @@ Global Symbols
 <BR>[Called By]<UL><LI><a href="#[91]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;MainThread
 </UL>
 
-<P><STRONG><a name="[299]"></a>WifiScanningFrame_Init</STRONG> (Thumb, 42 bytes, Stack size 8 bytes, wifiscanningframe.o(i.WifiScanningFrame_Init))
+<P><STRONG><a name="[29a]"></a>WifiScanningFrame_Init</STRONG> (Thumb, 42 bytes, Stack size 8 bytes, wifiscanningframe.o(i.WifiScanningFrame_Init))
 <BR><BR>[Stack]<UL><LI>Max Depth = 48<LI>Call Chain = WifiScanningFrame_Init &rArr; SetPicId &rArr; WriteRegister
 </UL>
 <BR>[Calls]<UL><LI><a href="#[1cc]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SetPicId
@@ -4811,7 +4815,7 @@ Global Symbols
 <BR>[Called By]<UL><LI><a href="#[91]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;MainThread
 </UL>
 
-<P><STRONG><a name="[29a]"></a>WifiScanningFrame_Process</STRONG> (Thumb, 304 bytes, Stack size 40 bytes, wifiscanningframe.o(i.WifiScanningFrame_Process))
+<P><STRONG><a name="[29b]"></a>WifiScanningFrame_Process</STRONG> (Thumb, 304 bytes, Stack size 40 bytes, wifiscanningframe.o(i.WifiScanningFrame_Process))
 <BR><BR>[Stack]<UL><LI>Max Depth = 140<LI>Call Chain = WifiScanningFrame_Process &rArr; osMessagePut &rArr; isrMessagePut &rArr; isr_mbx_send &rArr; rt_psq_enq &rArr; os_error &rArr; SoundOn &rArr; HAL_TIMEx_OCN_Start_DMA &rArr; HAL_DMA_Start_IT &rArr; DMA_SetConfig
 </UL>
 <BR>[Calls]<UL><LI><a href="#[1cc]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SetPicId
@@ -4896,7 +4900,7 @@ Global Symbols
 <LI><a href="#[179]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_memcpy
 </UL>
 <BR>[Called By]<UL><LI><a href="#[280]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;LogFrame_Process
-<LI><a href="#[29a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;WifiScanningFrame_Process
+<LI><a href="#[29b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;WifiScanningFrame_Process
 <LI><a href="#[91]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;MainThread
 </UL>
 
@@ -4909,12 +4913,12 @@ Global Symbols
 <LI><a href="#[2a6]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;crc16_update
 <LI><a href="#[2a8]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_UART_Transmit_ITMY
 </UL>
-<BR>[Called By]<UL><LI><a href="#[295]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ServiceFrame_Process
+<BR>[Called By]<UL><LI><a href="#[296]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ServiceFrame_Process
 <LI><a href="#[1ac]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;CoolingServiceFrame_Process
-<LI><a href="#[29a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;WifiScanningFrame_Process
-<LI><a href="#[299]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;WifiScanningFrame_Init
-<LI><a href="#[296]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ServiceDiodeFrame_Process
-<LI><a href="#[298]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;UpdateLaserStatus
+<LI><a href="#[29b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;WifiScanningFrame_Process
+<LI><a href="#[29a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;WifiScanningFrame_Init
+<LI><a href="#[297]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ServiceDiodeFrame_Process
+<LI><a href="#[299]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;UpdateLaserStatus
 </UL>
 
 <P><STRONG><a name="[2ec]"></a>WriteWifiNetDataConvert16</STRONG> (Thumb, 112 bytes, Stack size 24 bytes, dgus.o(i.WriteWifiNetDataConvert16))
@@ -4926,7 +4930,7 @@ Global Symbols
 <LI><a href="#[2ed]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;convert_wifinetdata
 <LI><a href="#[2a8]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_UART_Transmit_ITMY
 </UL>
-<BR>[Called By]<UL><LI><a href="#[29a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;WifiScanningFrame_Process
+<BR>[Called By]<UL><LI><a href="#[29b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;WifiScanningFrame_Process
 </UL>
 
 <P><STRONG><a name="[271]"></a>_DiodeLaserOff</STRONG> (Thumb, 48 bytes, Stack size 8 bytes, laserdiodeprepareframe.o(i._DiodeLaserOff))
@@ -5231,9 +5235,9 @@ Global Symbols
 <BR>[Calls]<UL><LI><a href="#[1e6]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;convert_w
 </UL>
 <BR>[Called By]<UL><LI><a href="#[1b0]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;WriteVariableConvert16
-<LI><a href="#[295]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ServiceFrame_Process
+<LI><a href="#[296]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ServiceFrame_Process
 <LI><a href="#[1ac]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;CoolingServiceFrame_Process
-<LI><a href="#[296]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ServiceDiodeFrame_Process
+<LI><a href="#[297]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ServiceDiodeFrame_Process
 <LI><a href="#[1d4]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;convert_laserdata_ss
 <LI><a href="#[24d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;convert_laserdata
 </UL>
@@ -5279,7 +5283,7 @@ Global Symbols
 <LI><a href="#[280]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;LogFrame_Process
 <LI><a href="#[2ec]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;WriteWifiNetDataConvert16
 <LI><a href="#[281]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;WriteVariable
-<LI><a href="#[29a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;WifiScanningFrame_Process
+<LI><a href="#[29b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;WifiScanningFrame_Process
 <LI><a href="#[1d4]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;convert_laserdata_ss
 <LI><a href="#[1d1]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;WriteSolidStateLaserDataConvert16
 <LI><a href="#[24d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;convert_laserdata
@@ -6228,8 +6232,8 @@ Global Symbols
 </UL>
 <BR>[Calls]<UL><LI><a href="#[362]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;isrMessagePut
 </UL>
-<BR>[Called By]<UL><LI><a href="#[29a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;WifiScanningFrame_Process
-<LI><a href="#[29c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;WiFiLinkFrame_Process
+<BR>[Called By]<UL><LI><a href="#[29b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;WifiScanningFrame_Process
+<LI><a href="#[29d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;WiFiLinkFrame_Process
 <LI><a href="#[2a5]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;QueuePutPendingRequest
 <LI><a href="#[268]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;QueuePutLog
 </UL>
@@ -6313,8 +6317,8 @@ Global Symbols
 
 <P><STRONG><a name="[1ae]"></a>osSignalWait</STRONG> (Thumb, 18 bytes, Stack size 0 bytes, rt_cmsis.o(i.osSignalWait))
 <BR><BR>[Called By]<UL><LI><a href="#[1cc]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SetPicId
-<LI><a href="#[294]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;PasswordFrame_Process
-<LI><a href="#[295]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ServiceFrame_Process
+<LI><a href="#[295]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;PasswordFrame_Process
+<LI><a href="#[296]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ServiceFrame_Process
 <LI><a href="#[1dc]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;FractLaserWork_Process
 <LI><a href="#[1db]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;FractLaserStopIfWork
 <LI><a href="#[1da]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;FractLaserPrepare_Process
@@ -6327,11 +6331,11 @@ Global Symbols
 <LI><a href="#[28c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;LongPulseLaserPrepare_Process
 <LI><a href="#[28a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;LongPulseLaserInput_Process
 <LI><a href="#[289]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;LongPulseLaserInput_Init
-<LI><a href="#[29b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;WifiAuthenticationFrame_Process
-<LI><a href="#[29a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;WifiScanningFrame_Process
-<LI><a href="#[299]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;WifiScanningFrame_Init
-<LI><a href="#[29c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;WiFiLinkFrame_Process
-<LI><a href="#[296]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ServiceDiodeFrame_Process
+<LI><a href="#[29c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;WifiAuthenticationFrame_Process
+<LI><a href="#[29b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;WifiScanningFrame_Process
+<LI><a href="#[29a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;WifiScanningFrame_Init
+<LI><a href="#[29d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;WiFiLinkFrame_Process
+<LI><a href="#[297]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ServiceDiodeFrame_Process
 <LI><a href="#[29f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SolidStateLaserWork_Process
 <LI><a href="#[2c5]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SolidStateStopIfWork
 <LI><a href="#[2a0]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SolidStateLaserPrepare_Process
@@ -6347,7 +6351,7 @@ Global Symbols
 <LI><a href="#[1a0]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;WiFiThread_Scan
 <LI><a href="#[1e5]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;GetPicId
 <LI><a href="#[1e1]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;GetDateTime
-<LI><a href="#[298]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;UpdateLaserStatus
+<LI><a href="#[299]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;UpdateLaserStatus
 <LI><a href="#[91]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;MainThread
 <LI><a href="#[259]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;IPLWork_Process
 <LI><a href="#[258]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;IPLStopIfWork
