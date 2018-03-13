@@ -12,6 +12,7 @@
 
 extern void SetDACValue(float32_t value);
 extern TIM_HandleTypeDef hTIM11;
+extern uint32_t simmer_start_time;
 
 void LongPulseLaserWork_Process(uint16_t pic_id)
 {
@@ -135,6 +136,21 @@ void LongPulseLaserWork_Process(uint16_t pic_id)
 			new_pic_id = FRAME_PICID_LONGPULSE_INPUT;
 			update = true;
 		}
+		
+#ifdef DEBUG_SOLID_STATE_LASER
+		// Simmer timer start
+		if (pic_id == FRAME_PICID_LONGPULSE_SIMMERSTART)
+			simmer_start_time = HAL_GetTick();
+		
+		// Simmer timeout
+		if (!(__MISC_GETSIMMERSENSOR()) && ((HAL_GetTick() - simmer_start_time) > 10000) && (pic_id == FRAME_PICID_LONGPULSE_SIMMER))
+		{
+			frameData_SolidStateLaser.state = 0;
+			new_pic_id = FRAME_PICID_LONGPULSE_SIMMERSTART;
+			simmer_start_time = HAL_GetTick();
+			update = true;
+		}
+#endif
 	}
 	
 	// Start pressed

@@ -15,6 +15,7 @@
 #define VOLTAGES_SNUM 8
 #define VOLTAGES_NUM 16//8
 
+extern uint32_t simmer_start_time;
 extern void SetDACValue(float32_t value);
 
 float32_t _programI;
@@ -307,6 +308,7 @@ void LongPulseLaserInput_Process(uint16_t pic_id)
 	if (!(__MISC_GETSIMMERSENSOR()) && pic_id != 55 && pic_id != 53) 
 	{
 		new_pic_id = FRAME_PICID_LONGPULSE_SIMMERSTART;
+		simmer_start_time = HAL_GetTick();
 		
 		// Solid State Laser Off
 		footswitch_en = false;

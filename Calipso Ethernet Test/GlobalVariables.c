@@ -13,6 +13,7 @@ PFLASH_GLOBAL_DATA global_flash_data = (PFLASH_GLOBAL_DATA)FLASH_LASERDATA_BASE;
 
 // DGUS Control variables
 uint16_t g_wDGUSTimeout = 200;
+uint32_t simmer_start_time = 0;
 
 // Timer global variables
 int16_t m_wMillSec = 0;

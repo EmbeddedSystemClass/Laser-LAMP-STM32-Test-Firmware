@@ -3,7 +3,7 @@
 <title>Static Call Graph - [.\Objects\CalipsoEthernetTest.axf]</title></head>
 <body><HR>
 <H1>Static Call Graph for image .\Objects\CalipsoEthernetTest.axf</H1><HR>
-<BR><P>#&#060CALLGRAPH&#062# ARM Linker, 5060422: Last Updated: Mon Apr 24 14:52:52 2017
+<BR><P>#&#060CALLGRAPH&#062# ARM Linker, 5060183: Last Updated: Tue Mar 13 10:30:37 2018
 <BR><P>
 <H3>Maximum Stack Usage =       1488 bytes + Unknown(Functions without stacksize, Cycles, Untraceable Function Pointers)</H3><H3>
 Call chain for Maximum Stack Depth:</H3>
@@ -901,7 +901,7 @@ Global Symbols
 <BR>[Called By]<UL><LI><a href="#[162]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;_printf_lcs_common
 </UL>
 
-<P><STRONG><a name="[ec]"></a>_printf_int_oct</STRONG> (Thumb, 72 bytes, Stack size 16 bytes, _printf_oct_int.o(.text))
+<P><STRONG><a name="[ec]"></a>_printf_int_oct</STRONG> (Thumb, 74 bytes, Stack size 16 bytes, _printf_oct_int.o(.text))
 <BR><BR>[Stack]<UL><LI>Max Depth = 64<LI>Call Chain = _printf_int_oct &rArr; _printf_int_common &rArr; _printf_post_padding
 </UL>
 <BR>[Calls]<UL><LI><a href="#[120]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;_printf_int_common
@@ -2657,6 +2657,8 @@ Global Symbols
 <LI><a href="#[1fd]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_RCC_OscConfig
 <LI><a href="#[1fa]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_RCC_ClockConfig
 <LI><a href="#[1ae]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_Delay
+<LI><a href="#[259]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;LongPulseLaserWork_Process
+<LI><a href="#[255]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;LongPulseLaserInput_Process
 <LI><a href="#[1e3]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_DMA_Init
 <LI><a href="#[1ac]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;WaitFlag
 <LI><a href="#[18c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_DMA_Abort
@@ -2775,9 +2777,9 @@ Global Symbols
 </UL>
 
 <P><STRONG><a name="[1fc]"></a>HAL_RCC_GetHCLKFreq</STRONG> (Thumb, 6 bytes, Stack size 0 bytes, stm32f4xx_hal_rcc.o(i.HAL_RCC_GetHCLKFreq))
-<BR><BR>[Called By]<UL><LI><a href="#[b9]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_RCC_GetPCLK2Freq
-<LI><a href="#[ab]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_RCC_GetPCLK1Freq
+<BR><BR>[Called By]<UL><LI><a href="#[ab]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_RCC_GetPCLK1Freq
 <LI><a href="#[a6]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SendCommand
+<LI><a href="#[b9]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_RCC_GetPCLK2Freq
 </UL>
 
 <P><STRONG><a name="[ab]"></a>HAL_RCC_GetPCLK1Freq</STRONG> (Thumb, 36 bytes, Stack size 4 bytes, stm32f4xx_hal_rcc.o(i.HAL_RCC_GetPCLK1Freq))
@@ -3024,7 +3026,7 @@ Global Symbols
 </UL>
 
 <P><STRONG><a name="[21f]"></a>HAL_UART_Init</STRONG> (Thumb, 114 bytes, Stack size 8 bytes, stm32f4xx_hal_uart.o(i.HAL_UART_Init))
-<BR><BR>[Stack]<UL><LI>Max Depth = 36<LI>Call Chain = HAL_UART_Init &rArr; UART_SetConfig &rArr; HAL_RCC_GetPCLK2Freq
+<BR><BR>[Stack]<UL><LI>Max Depth = 36<LI>Call Chain = HAL_UART_Init &rArr; UART_SetConfig &rArr; HAL_RCC_GetPCLK1Freq
 </UL>
 <BR>[Calls]<UL><LI><a href="#[220]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_UART_MspInit
 <LI><a href="#[221]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;UART_SetConfig
@@ -3417,7 +3419,7 @@ Global Symbols
 <BR>[Called By]<UL><LI><a href="#[94]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;MainThread
 </UL>
 
-<P><STRONG><a name="[255]"></a>LongPulseLaserInput_Process</STRONG> (Thumb, 1224 bytes, Stack size 72 bytes, longpulselaserinputframe.o(i.LongPulseLaserInput_Process))
+<P><STRONG><a name="[255]"></a>LongPulseLaserInput_Process</STRONG> (Thumb, 1236 bytes, Stack size 72 bytes, longpulselaserinputframe.o(i.LongPulseLaserInput_Process))
 <BR><BR>[Stack]<UL><LI>Max Depth = 144<LI>Call Chain = LongPulseLaserInput_Process &rArr; SetPicId &rArr; WriteRegister &rArr; HAL_UART_Transmit_ITMY
 </UL>
 <BR>[Calls]<UL><LI><a href="#[1cb]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;CoolOn
@@ -3430,6 +3432,7 @@ Global Symbols
 <LI><a href="#[1cc]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_GPIO_ReadPin
 <LI><a href="#[1cf]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;StoreGlobalVariables
 <LI><a href="#[195]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_GPIO_WritePin
+<LI><a href="#[1bc]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_GetTick
 <LI><a href="#[256]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SetPulseFrequency_
 <LI><a href="#[1b9]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;osDelay
 <LI><a href="#[1c9]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;convert_laserdata_ss
@@ -3454,7 +3457,7 @@ Global Symbols
 <BR>[Called By]<UL><LI><a href="#[94]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;MainThread
 </UL>
 
-<P><STRONG><a name="[259]"></a>LongPulseLaserWork_Process</STRONG> (Thumb, 790 bytes, Stack size 56 bytes, longpulselaserworkframe.o(i.LongPulseLaserWork_Process))
+<P><STRONG><a name="[259]"></a>LongPulseLaserWork_Process</STRONG> (Thumb, 852 bytes, Stack size 56 bytes, longpulselaserworkframe.o(i.LongPulseLaserWork_Process))
 <BR><BR>[Stack]<UL><LI>Max Depth = 1016 + Unknown Stack Size
 <LI>Call Chain = LongPulseLaserWork_Process &rArr; log_LongPulseStart &rArr; LOG &rArr; QueuePutLog &rArr; osMessagePut &rArr; isrMessagePut &rArr; isr_mbx_send &rArr; rt_psq_enq
 </UL>
@@ -3466,6 +3469,7 @@ Global Symbols
 <LI><a href="#[1cf]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;StoreGlobalVariables
 <LI><a href="#[1b3]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SoundOn
 <LI><a href="#[195]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_GPIO_WritePin
+<LI><a href="#[1bc]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_GetTick
 <LI><a href="#[25b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;log_LongPulseStop
 <LI><a href="#[25a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;log_LongPulseStart
 <LI><a href="#[1b9]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;osDelay
@@ -7606,10 +7610,10 @@ Local Symbols
 </UL>
 
 <P><STRONG><a name="[221]"></a>UART_SetConfig</STRONG> (Thumb, 864 bytes, Stack size 24 bytes, stm32f4xx_hal_uart.o(i.UART_SetConfig))
-<BR><BR>[Stack]<UL><LI>Max Depth = 28<LI>Call Chain = UART_SetConfig &rArr; HAL_RCC_GetPCLK2Freq
+<BR><BR>[Stack]<UL><LI>Max Depth = 28<LI>Call Chain = UART_SetConfig &rArr; HAL_RCC_GetPCLK1Freq
 </UL>
-<BR>[Calls]<UL><LI><a href="#[b9]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_RCC_GetPCLK2Freq
-<LI><a href="#[ab]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_RCC_GetPCLK1Freq
+<BR>[Calls]<UL><LI><a href="#[ab]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_RCC_GetPCLK1Freq
+<LI><a href="#[b9]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_RCC_GetPCLK2Freq
 </UL>
 <BR>[Called By]<UL><LI><a href="#[21f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_UART_Init
 </UL>
