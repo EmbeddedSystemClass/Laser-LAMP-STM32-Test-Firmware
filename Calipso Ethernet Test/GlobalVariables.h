@@ -4,6 +4,7 @@
 #include <stdbool.h>
 #include <stdint.h>
 #include "stm32f4xx_hal.h"
+#include "stm32f4xx_hal_iwdg.h"
 #include <math.h>
 #include "arm_math.h"
 
@@ -20,6 +21,8 @@
 #define FLOW_CHECK
 
 extern int32_t LOGHASH[16];
+
+extern IWDG_HandleTypeDef hiwdg;
 
 #define LOG_ID_TEMPERATURE	1
 #define LOG_ID_FLOW					2

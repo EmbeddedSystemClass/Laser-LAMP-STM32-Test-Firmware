@@ -30,6 +30,7 @@ void LongPulseLaserWork_Process(uint16_t pic_id)
 	else 
 	{
 		timeout_cnt++;
+		HAL_IWDG_Refresh(&hiwdg);
 		if (timeout_cnt > 2)
 		{
 			timeout_cnt = 0;

@@ -1,10 +1,13 @@
 #include "GlobalVariables.h"
 #include "stm32f4xx_hal_flash.h"
+#include "stm32f4xx_hal_iwdg.h"
 #include <string.h>
 #include "SDCard.h"
 
 //Date & time
 DWIN_TIMEDATE datetime = {0};
+
+IWDG_HandleTypeDef hiwdg;
 
 int32_t LOGHASH[16];
 

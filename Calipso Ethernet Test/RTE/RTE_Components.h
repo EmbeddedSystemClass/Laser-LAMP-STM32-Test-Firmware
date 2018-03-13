@@ -10,7 +10,11 @@
 #ifndef RTE_COMPONENTS_H
 #define RTE_COMPONENTS_H
 
-#define CMSIS_device_header		"stm32f4xx.h"
+
+/*
+ * Define the Device Header File: 
+ */
+#define CMSIS_device_header "stm32f4xx.h"
 
 #define RTE_CMSIS_RTOS                  /* CMSIS-RTOS */
         #define RTE_CMSIS_RTOS_RTX              /* CMSIS-RTOS Keil RTX */
@@ -32,6 +36,7 @@
 #define RTE_DEVICE_HAL_DMA
 #define RTE_DEVICE_HAL_FLASH
 #define RTE_DEVICE_HAL_GPIO
+#define RTE_DEVICE_HAL_IWDG
 #define RTE_DEVICE_HAL_PWR
 #define RTE_DEVICE_HAL_RCC
 #define RTE_DEVICE_HAL_SPI

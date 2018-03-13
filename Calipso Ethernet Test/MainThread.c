@@ -597,6 +597,7 @@ void MainThread (void const *argument) {
 		
 		last_pic_id = pic_id;
 		
+		HAL_IWDG_Refresh(&hiwdg);
     osThreadYield ();                                           // suspend thread
   }
 }
