@@ -1,5 +1,5 @@
 .\fs_config.o: RTE\File_System\FS_Config.c
-.\fs_config.o: C:\Users\FxSlava\Documents\Laser-LAMP-STM32-Test-Firmware\Calipso Bootloader\RTE\RTE_Components.h
+.\fs_config.o: C:\Users\Service\Documents\Laser-LAMP-STM32-Test-Firmware\Calipso Bootloader\RTE\RTE_Components.h
 .\fs_config.o: RTE\File_System\FS_Config_MC_0.h
 .\fs_config.o: C:\Keil_v5\ARM\PACK\Keil\MDK-Middleware\7.3.0\FileSystem\Include\fs_config.h
 .\fs_config.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\string.h

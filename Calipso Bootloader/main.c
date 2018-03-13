@@ -362,6 +362,8 @@ void UpdateFirmware()
 		if (strcmp(extn, "BIN") == 0)
 			UpdateFirmwareFromBin();
 		
+		HAL_Delay(1000);
+		
 		JumpToApp();
 	}
 	else
