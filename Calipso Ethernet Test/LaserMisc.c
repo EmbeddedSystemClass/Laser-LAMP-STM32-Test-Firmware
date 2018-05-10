@@ -142,7 +142,7 @@ void CoolInit(void)
 	HAL_TIM_OC_Start(&htim_cool, TIM_CHANNEL_3);
 	
 #ifdef NEW_DOUBLECOOLSCHEME
-	HAL_TIM_OC_ConfigChannel(&htim_cool, &tim3_oc_init, TIM_CHANNEL_3);
+	HAL_TIM_OC_ConfigChannel(&htim_cool, &tim3_oc_init, TIM_CHANNEL_4);
 	HAL_TIM_OC_Start(&htim_cool, TIM_CHANNEL_4);
 #endif
 }
@@ -150,21 +150,21 @@ void CoolInit(void)
 void CoolOn(void)
 {
 	g_peltier_en = true;
-	//HAL_TIM_OC_Start(&htim_cool, TIM_CHANNEL_3);
+	//HAL_TIM_OC_Start(&htim_cool, TIM_CHANNEL_4);
 }
 
 void CoolOff(void)
 {
 	g_peltier_en = false;
-	__HAL_TIM_SetCompare(&htim_cool, TIM_CHANNEL_3, 42000);
-	//HAL_TIM_OC_Stop(&htim_cool, TIM_CHANNEL_3);
+	__HAL_TIM_SetCompare(&htim_cool, TIM_CHANNEL_4, 42000);
+	//HAL_TIM_OC_Stop(&htim_cool, TIM_CHANNEL_4);
 }
 
 void CoolSet(uint16_t cool)
 {
 	uint16_t duty_cycle = cool * 420;
 	if (duty_cycle > 42000) duty_cycle = 42000;
-	__HAL_TIM_SetCompare(&htim_cool, TIM_CHANNEL_3, 42000 - duty_cycle);
+	__HAL_TIM_SetCompare(&htim_cool, TIM_CHANNEL_4, 42000 - duty_cycle);
 }
 
 #else

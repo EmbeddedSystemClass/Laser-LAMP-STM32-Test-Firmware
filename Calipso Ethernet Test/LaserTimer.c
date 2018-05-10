@@ -76,8 +76,8 @@ static void LaserTimer_Callback(void const *arg) {
 	{
 		HAL_TIM_Base_Stop(&htim_flow1);
 		HAL_TIM_Base_Stop(&htim_flow2);
-		flow1 = (float32_t)(__HAL_TIM_GET_COUNTER(&htim_flow1)) * 600.0f / 1500.0f;
-		flow2 = (float32_t)(__HAL_TIM_GET_COUNTER(&htim_flow2)) * 600.0f / 1500.0f;
+		flow1 = (float32_t)(__HAL_TIM_GET_COUNTER(&htim_flow1)) * 600.0f / 2500.0f;
+		flow2 = (float32_t)(__HAL_TIM_GET_COUNTER(&htim_flow2)) * 600.0f / 2500.0f;
 		//flow1 = (float32_t)(__HAL_TIM_GET_COUNTER(&htim_flow1)) * 1800.0f / 3000.0f;
 		//flow2 = (float32_t)(__HAL_TIM_GET_COUNTER(&htim_flow2)) * 1800.0f / 3000.0f;
 		flow2 = flow1;

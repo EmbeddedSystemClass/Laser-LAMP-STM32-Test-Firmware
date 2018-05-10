@@ -16,7 +16,7 @@
 
 #define DEBUG_SOLID_STATE_LASER		// Turn off control scheme for solid state interface debug
 #define NEW_SOUNDSCHEME						// use class-D amplifier
-//#define NEW_COOLSCHEME					// amplified PWM by two mossfet channels
+#define NEW_COOLSCHEME						// amplified PWM by two mossfet channels
 #define NEW_DOUBLECOOLSCHEME			// Added second PWM channel
 //#define OLD_STYLE_LASER_SW			// One connector combine configuration
 #define LASERIDCHECK_LASERDIODE 	// Laser diode enable check
